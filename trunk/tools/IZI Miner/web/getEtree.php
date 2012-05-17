@@ -19,45 +19,24 @@ $data = str_replace("\\\"", "\"", $data);
 $serializer = new SerializeRulesETree(FAPath);
 
 if (!DEV_MODE) { // SewebarConnect
-    /*
-    // LM data init
-    $cookie = dirname(__FILE__) . '/temp/cookie_'.session_id();
-    if (!file_exists ($cookie)) {
-    	$requestData = array('content' => file_get_contents('../data/barboraForLMImport.pmml'));
-    	
-    	$ch = curl_init();
-    	curl_setopt($ch, CURLOPT_URL, 'http://lmcloud.vse.cz/SewebarConnect/Import.ashx');
-    	curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    	curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    	curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
-    	curl_setopt($ch, CURLOPT_VERBOSE, false);
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    	curl_setopt($ch, CURLOPT_POST, true);
-    	
-    	$response = curl_exec($ch);
-    	$info = curl_getinfo($ch);
-    	curl_close($ch);
-    }
-    
-    $requestData = array('content' => $serializer->serializeRules($data));
+    $id = $_GET['id_dm'];
+    $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => 'ETreeMiner.Task.Template.PMML');
     
     // save LM task
     $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
     $LM_import = new DOMDocument('1.0', 'UTF-8');
-    $LM_import->loadXML($requestData['content'], LIBXML_NOBLANKS);
+    $LM_import->loadXML($requestData['query'], LIBXML_NOBLANKS);
     $LM_import->save($LM_import_path);
     
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://lmcloud.vse.cz/SewebarConnect/TaskPooler.ashx");
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw');
     curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     
     // ziskani vysledku tasku z LISpMiner-a
-    echo $response = curl_exec($ch);
+    $response = curl_exec($ch);
     $info = curl_getinfo($ch);
     curl_close($ch);
     
@@ -66,11 +45,6 @@ if (!DEV_MODE) { // SewebarConnect
     $LM_export = new DOMDocument('1.0', 'UTF-8');
     $LM_export->loadXML($response, LIBXML_NOBLANKS);
     $LM_export->save($LM_export_path);
-    */
-    
-    sleep(3);
-    echo '{"Repayment":1,"Amount":0.61,"Duration":0.51,"Age":0.5,"Salary":0.19}';
-    die;
 } else { // localhost dev env
     $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
     $LM_import = new DOMDocument('1.0', 'UTF-8');
