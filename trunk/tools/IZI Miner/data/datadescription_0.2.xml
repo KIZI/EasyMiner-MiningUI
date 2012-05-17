@@ -1,0 +1,147 @@
+<?xml-model href="http://sewebar.vse.cz/schemas/DataDescription0_2.xsd" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<data:DataDescription xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://keg.vse.cz/ns/datadescription0_2 http://sewebar.vse.cz/schemas/DataDescription0_2.xsd"
+    xmlns:data="http://keg.vse.cz/ns/datadescription0_2">
+    <Dictionary sourceDictType="TransformationDictionary" sourceFormat="PMML" default="true"
+        completeness="All" id="bkef" sourceName="Loans">
+        <Identifier name="Metabase">LM LMBarbora.mdb MB</Identifier>
+        <Field dataType="string">
+            <Name>Age</Name>
+            <Interval closure="closedOpen" leftMargin="21" rightMargin="31" />
+            <Interval closure="closedOpen" leftMargin="31" rightMargin="41" />
+            <Interval closure="closedOpen" leftMargin="41" rightMargin="51" />
+            <Interval closure="closedOpen" leftMargin="51" rightMargin="61" />
+            <Interval closure="closedOpen" leftMargin="61" rightMargin="71" />
+        </Field>
+        <Field dataType="string">
+            <Name>District</Name>
+            <Category>Benesov</Category>
+            <Category>Beroun</Category>
+            <Category>Blansko</Category>
+            <Category>Breclav</Category>
+            <Category>Brno</Category>
+            <Category>Brno - venkov</Category>
+            <Category>Bruntal</Category>
+            <Category>Ceska Lipa</Category>
+            <Category>Ceske Budejovice</Category>
+            <Category>Cesky Krumlov</Category>
+            <Category>Decin</Category>
+            <Category>Domazlice</Category>
+            <Category>Frydek - Mistek</Category>
+            <Category>Havlickuv Brod</Category>
+            <Category>Hodonin</Category>
+            <Category>Hradec Kralove</Category>
+            <Category>Cheb</Category>
+            <Category>Chomutov</Category>
+            <Category>Chrudim</Category>
+            <Category>Jablonec n. Nisou</Category>
+            <Category>Jesenik</Category>
+            <Category>Jicin</Category>
+            <Category>Jihlava</Category>
+            <Category>Jindrichuv Hradec</Category>
+            <Category>Karlovy Vary</Category>
+            <Category>Karvina</Category>
+            <Category>Kladno</Category>
+            <Category>Klatovy</Category>
+            <Category>Kolin</Category>
+            <Category>Kromeriz</Category>
+            <Category>Kutna Hora</Category>
+            <Category>Liberec</Category>
+            <Category>Litomerice</Category>
+            <Category>Louny</Category>
+            <Category>Melnik</Category>
+            <Category>Mlada Boleslav</Category>
+            <Category>Most</Category>
+            <Category>Nachod</Category>
+            <Category>Novy Jicin</Category>
+            <Category>Nymburk</Category>
+            <Category>Olomouc</Category>
+            <Category>Opava</Category>
+            <Category>Ostrava - mesto</Category>
+            <Category>Pardubice</Category>
+            <Category>Pelhrimov</Category>
+            <Category>Pisek</Category>
+            <Category>Plzen</Category>
+            <Category>Plzen - jih</Category>
+            <Category>Plzen - sever</Category>
+            <Category>Praha</Category>
+            <Category>Praha - vychod</Category>
+            <Category>Praha - zapad</Category>
+            <Category>Prachatice</Category>
+            <Category>Prerov</Category>
+            <Category>Pribram</Category>
+            <Category>Prostejov</Category>
+            <Category>Rakovnik</Category>
+            <Category>Rokycany</Category>
+            <Category>Rychnov nad Kneznou</Category>
+            <Category>Semily</Category>
+            <Category>Sokolov</Category>
+            <Category>Strakonice</Category>
+            <Category>Sumperk</Category>
+            <Category>Svitavy</Category>
+            <Category>Tabor</Category>
+            <Category>Tachov</Category>
+            <Category>Teplice</Category>
+            <Category>Trebic</Category>
+            <Category>Trutnov</Category>
+            <Category>Uherske Hradiste</Category>
+            <Category>Usti nad Labem</Category>
+            <Category>Usti nad Orlici</Category>
+            <Category>Vsetin</Category>
+            <Category>Vyskov</Category>
+            <Category>Zdar nad Sazavou</Category>
+            <Category>Zlin</Category>
+            <Category>Znojmo</Category>
+        </Field>
+        <Field dataType="string">
+            <Name>Quality</Name>
+            <Category>good</Category>
+            <Category>bad</Category>
+        </Field>
+        <Field>
+            <Name>Salary</Name>
+            <Category>low</Category>
+            <Category>avg</Category>
+            <Category>high</Category>
+        </Field>        
+        <Field dataType="string">
+            <Name>Sex</Name>
+            <Category>M</Category>
+            <Category>F</Category>
+        </Field>
+    
+        <Field dataType="string">
+            <Name>Amount</Name>
+            <Category>&lt; 20</Category>
+            <Category>&lt;20;50)</Category>
+            <Category>&lt;50;100)</Category>
+            <Category>&lt;100;250)</Category>
+            <Category>&lt;250;500)</Category>
+            <Category>&gt;= 500</Category>
+        </Field>
+        
+        <Field dataType="string">
+            <Name>Duration</Name>
+            <Category>1 year</Category>
+            <Category>2 years</Category>
+            <Category>3 years</Category>
+            <Category>4 years</Category>
+            <Category>5 years</Category>
+        </Field>
+        
+        <Field dataType="string">
+            <Name>Repayment</Name>
+            <Interval closure="openClosed" leftMargin="0" rightMargin="1"/>
+            <Interval closure="openClosed" leftMargin="1" rightMargin="2"/>
+            <Interval closure="openClosed" leftMargin="2" rightMargin="3"/>
+            <Interval closure="openClosed" leftMargin="3" rightMargin="4"/>
+            <Interval closure="openClosed" leftMargin="4" rightMargin="5"/>
+            <Interval closure="openClosed" leftMargin="5" rightMargin="6"/>
+            <Interval closure="openClosed" leftMargin="6" rightMargin="7"/>
+            <Interval closure="openClosed" leftMargin="7" rightMargin="8"/>
+            <Interval closure="openClosed" leftMargin="8" rightMargin="9"/>
+            <Interval closure="openClosed" leftMargin="9" rightMargin="10"/>
+        </Field>
+        
+    </Dictionary>
+</data:DataDescription>

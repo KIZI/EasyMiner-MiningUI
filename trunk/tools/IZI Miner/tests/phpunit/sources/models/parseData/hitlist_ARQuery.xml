@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ar:ARBuilder xmlns:ar="http://keg.vse.cz/ns/arbuilder0_2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dd="http://keg.vse.cz/ns/datadescription0_2"
+    xsi:schemaLocation="http://keg.vse.cz/ns/arbuilder0_2 http://sewebar.vse.cz/schemas/ARBuilder0_2.xsd"
+    xmlns:guha="http://keg.vse.cz/ns/GUHA0.1rev1">
+    <DataDescription>
+        <Dictionary sourceDictType="TransformationDictionary" sourceFormat="PMML" default="true"
+            completeness="All" id="bkef" sourceName="Loans">
+
+            <Field dataType="string">
+                <Name>Age_in_years</Name>
+                <Category>21</Category>
+                <Category>22</Category>
+                <Category>23</Category>
+                <Category>24</Category>
+
+                <Category>25</Category>
+                <Category>26</Category>
+                <Category>27</Category>
+                <Category>28</Category>
+                <Category>29</Category>
+                <Category>30</Category>
+
+                <Category>31</Category>
+                <Category>32</Category>
+                <Category>33</Category>
+                <Category>34</Category>
+                <Category>35</Category>
+                <Category>36</Category>
+
+                <Category>37</Category>
+                <Category>38</Category>
+                <Category>39</Category>
+                <Category>40</Category>
+                <Category>41</Category>
+                <Category>42</Category>
+
+                <Category>43</Category>
+                <Category>44</Category>
+                <Category>45</Category>
+                <Category>46</Category>
+                <Category>47</Category>
+                <Category>48</Category>
+
+                <Category>49</Category>
+                <Category>50</Category>
+                <Category>51</Category>
+                <Category>52</Category>
+                <Category>53</Category>
+                <Category>54</Category>
+
+                <Category>55</Category>
+                <Category>56</Category>
+                <Category>57</Category>
+                <Category>58</Category>
+                <Category>59</Category>
+                <Category>60</Category>
+
+                <Category>61</Category>
+                <Category>62</Category>
+                <Category>63</Category>
+                <Category>64</Category>
+                <Category>65</Category>
+                <Category>66</Category>
+
+                <Category>67</Category>
+            </Field>
+            <Field dataType="string">
+                <Name>District</Name>
+                <Category>Benesov</Category>
+                <Category>Beroun</Category>
+                <Category>Blansko</Category>
+
+                <Category>Breclav</Category>
+                <Category>Brno</Category>
+                <Category>Brno - venkov</Category>
+                <Category>Bruntal</Category>
+                <Category>Ceska Lipa</Category>
+                <Category>Ceske Budejovice</Category>
+
+                <Category>Cesky Krumlov</Category>
+                <Category>Decin</Category>
+                <Category>Domazlice</Category>
+                <Category>Frydek - Mistek</Category>
+                <Category>Havlickuv Brod</Category>
+                <Category>Hodonin</Category>
+
+                <Category>Hradec Kralove</Category>
+                <Category>Cheb</Category>
+                <Category>Chomutov</Category>
+                <Category>Chrudim</Category>
+                <Category>Jablonec n. Nisou</Category>
+                <Category>Jesenik</Category>
+
+                <Category>Jicin</Category>
+                <Category>Jihlava</Category>
+                <Category>Jindrichuv Hradec</Category>
+                <Category>Karlovy Vary</Category>
+                <Category>Karvina</Category>
+                <Category>Kladno</Category>
+
+                <Category>Klatovy</Category>
+                <Category>Kolin</Category>
+                <Category>Kromeriz</Category>
+                <Category>Kutna Hora</Category>
+                <Category>Liberec</Category>
+                <Category>Litomerice</Category>
+
+                <Category>Louny</Category>
+                <Category>Melnik</Category>
+                <Category>Mlada Boleslav</Category>
+                <Category>Most</Category>
+                <Category>Nachod</Category>
+                <Category>Novy Jicin</Category>
+
+                <Category>Nymburk</Category>
+                <Category>Olomouc</Category>
+                <Category>Opava</Category>
+                <Category>Ostrava - mesto</Category>
+                <Category>Pardubice</Category>
+                <Category>Pelhrimov</Category>
+
+                <Category>Pisek</Category>
+                <Category>Plzen</Category>
+                <Category>Plzen - jih</Category>
+                <Category>Plzen - sever</Category>
+                <Category>Praha</Category>
+                <Category>Praha - vychod</Category>
+
+                <Category>Praha - zapad</Category>
+                <Category>Prachatice</Category>
+                <Category>Prerov</Category>
+                <Category>Pribram</Category>
+                <Category>Prostejov</Category>
+                <Category>Rakovnik</Category>
+
+                <Category>Rokycany</Category>
+                <Category>Rychnov nad Kneznou</Category>
+                <Category>Semily</Category>
+                <Category>Sokolov</Category>
+                <Category>Strakonice</Category>
+                <Category>Sumperk</Category>
+
+                <Category>Svitavy</Category>
+                <Category>Tabor</Category>
+                <Category>Tachov</Category>
+                <Category>Teplice</Category>
+                <Category>Trebic</Category>
+                <Category>Trutnov</Category>
+
+                <Category>Uherske Hradiste</Category>
+                <Category>Usti nad Labem</Category>
+                <Category>Usti nad Orlici</Category>
+                <Category>Vsetin</Category>
+                <Category>Vyskov</Category>
+                <Category>Zdar nad Sazavou</Category>
+
+                <Category>Zlin</Category>
+                <Category>Znojmo</Category>
+            </Field>
+            <Field dataType="string">
+                <Name>Quality</Name>
+                <Category>good</Category>
+                <Category>bad</Category>
+
+            </Field>
+            <Field>
+                <Name>Salary</Name>
+                <Category>low</Category>
+                <Category>avg</Category>
+                <Category>high</Category>
+            </Field>
+
+        </Dictionary>
+    </DataDescription>
+    <ARQuery>
+        <MaxResults>2</MaxResults>
+        <BBASettings>
+            <BBASetting id="1">
+                <Text>District</Text>
+                <Name>District</Name>
+                <FieldRef>District</FieldRef>
+                <Coefficient>
+                    <Type>One category</Type>
+                    <Category>Benesov</Category>
+                </Coefficient>
+            </BBASetting>
+            <BBASetting id="3">
+                <Text>Quality</Text>
+                <Name>Quality</Name>
+                <FieldRef>Quality</FieldRef>
+                <Coefficient>
+                    <Type>One category</Type>
+                    <Category>good</Category>
+                </Coefficient>
+            </BBASetting>
+        </BBASettings>
+        <DBASettings>
+            <DBASetting type="Literal" id="4">
+                <BASettingRef>3</BASettingRef>
+                <LiteralSign>Positive</LiteralSign>
+            </DBASetting>
+            <DBASetting type="Conjunction" id="5">
+                <BASettingRef>1</BASettingRef>
+            </DBASetting>
+            <DBASetting type="Conjunction" id="6">
+                <BASettingRef>4</BASettingRef>
+            </DBASetting>
+        </DBASettings>
+        <AntecedentSetting>5</AntecedentSetting>
+        <ConsequentSetting>6</ConsequentSetting>
+        <InterestMeasureSetting>
+            <InterestMeasureThreshold id="2">
+                <InterestMeasure>Confidence</InterestMeasure>
+                <Threshold>0.5</Threshold>
+                <CompareType>Greater than or equal</CompareType>
+            </InterestMeasureThreshold>
+            <InterestMeasureThreshold id="7">
+                <InterestMeasure>Support</InterestMeasure>
+                <Threshold>0.1</Threshold>
+                <CompareType>Greater than or equal</CompareType>
+            </InterestMeasureThreshold>
+        </InterestMeasureSetting>
+    </ARQuery>
+</ar:ARBuilder>

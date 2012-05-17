@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="test1.html">Blank active rule</a></td></tr>
+<tr><td><a href="test2.html">Add IM - interval</a></td></tr>
+<tr><td><a href="test39.html">Add IM - enumeration</a></td></tr>
+<tr><td><a href="test3.html">Drag IM knot</a></td></tr>
+<tr><td><a href="test4.html">Remove IM</a></td></tr>
+<tr><td><a href="test5.html">Close add IM window</a></td></tr>
+<tr><td><a href="test8.html">Add IM window autocomplete</a></td></tr>
+<tr><td><a href="test6.html">2x Add IM - supported combination</a></td></tr>
+<tr><td><a href="test7.html">Hide add IM button</a></td></tr>
+<tr><td><a href="test10.html">Add attribute</a></td></tr>
+<tr><td><a href="test13.html">Add coefficient - One category</a></td></tr>
+<tr><td><a href="test15.html">Edit coefficient - One category</a></td></tr>
+<tr><td><a href="test14.html">Add coefficient - Subset</a></td></tr>
+<tr><td><a href="test16.html">Edit coefficient - Subset</a></td></tr>
+<tr><td><a href="test11.html">Close add coefficient window</a></td></tr>
+<tr><td><a href="test17.html">Edit connective</a></td></tr>
+<tr><td><a href="test19.html">Add attribute & Remove attribute</a></td></tr>
+<tr><td><a href="test18.html">Open edit connective window & Close</a></td></tr>
+<tr><td><a href="test28.html">Change cedent sign</a></td></tr>
+<tr><td><a href="test31.html">Move attribute between cedents</a></td></tr>
+<tr><td><a href="test30.html">Change attribute sign</a></td></tr>
+<tr><td><a href="test32.html">Add field</a></td></tr>
+<tr><td><a href="test33.html">Add field group</a></td></tr>
+<tr><td><a href="test35.html">Group attributes confirm</a></td></tr>
+<tr><td><a href="test37.html">BUG: Proper number of cedents 1</a></td></tr>
+<tr><td><a href="test38.html">BUG: Proper number of cedents 2</a></td></tr>
+<tr><td><a href="../4ft/test15.html">BUG: Drag add IM knob (category)</a></td></tr>
+<tr><td><a href="../4ft/test16.html">BUG: Add wildcard coefficient</a></td></tr>
+</tbody></table>
+</body>
+</html>
