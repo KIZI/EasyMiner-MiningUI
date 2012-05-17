@@ -25,13 +25,13 @@ if (!DEV_MODE) { // SewebarConnect
     // save LM task
     $LM_import_path = './temp/4ft_task_'.date('md_His').'.pmml';
     $LM_import = new DOMDocument('1.0', 'UTF-8');
-    $LM_import->loadXML($data['content'], LIBXML_NOBLANKS);
+    $LM_import->loadXML($requestData['query'], LIBXML_NOBLANKS);
     $LM_import->save($LM_import_path);
     
     // run task
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($data));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
