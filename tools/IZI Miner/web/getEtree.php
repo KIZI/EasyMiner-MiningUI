@@ -28,6 +28,7 @@ if (!DEV_MODE) { // SewebarConnect
     $LM_import->loadXML($requestData['query'], LIBXML_NOBLANKS);
     $LM_import->save($LM_import_path);
     
+    // run task
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw');
     curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
@@ -35,7 +36,6 @@ if (!DEV_MODE) { // SewebarConnect
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     
-    // ziskani vysledku tasku z LISpMiner-a
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
     curl_close($ch);

@@ -19,8 +19,8 @@ $data = str_replace("\\\"", "\"", $data);
 $serializer = new SerializeRulesTaskSetting();
 
 if (!DEV_MODE) { // SewebarConnect
-    $id = 'iXWkAKcPW0eJsmezU_3PSQ';
-    $data = array('guid' => $id, 'content' => $serializer->serializeRules($data));
+    $id = $_GET['id_dm'];
+    $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
     // save LM task
     $LM_import_path = './temp/4ft_task_'.date('md_His').'.pmml';
