@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result milisecs="1057.0">
+	<SearchResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="http://sewebar.vse.cz/schemas/SearchResult0_2.xsd">
+		<Metadata>
+			<SearchTimestamp>2011-10-04T21:10:03</SearchTimestamp>
+			<LastIndexUpdate>2011-05-30T09:00:00</LastIndexUpdate>
+			<SearchAlgorithm>xquery</SearchAlgorithm>
+			<SearchAlgorithmVersion>xquery 3/4/2011</SearchAlgorithmVersion>
+		</Metadata>
+		<Statistics>
+			<ExecutionTime>382</ExecutionTime>
+			<DocumentsSearched>84</DocumentsSearched>
+			<RulesSearched>39550</RulesSearched>
+		</Statistics>
+		<DataDescription>
+			<Dictionary id="DataDictionary" completeness="ReferencedFromPatterns"
+				default="true" sourceDictType="DataDictionary" sourceFormat="PMML">
+				<Field id="f1">
+					<Name>Sex</Name>
+					<Category>Yes</Category>
+				</Field>
+				<Field id="f2">
+					<Name>Salary</Name>
+					<Interval rightMargin="12541" closure="closedClosed"
+						leftMargin="9624"></Interval>
+				</Field>
+				<Field id="f3">
+					<Name>District</Name>
+					<Category>Praha</Category>
+				</Field>
+				<Field id="f4">
+					<Name>status</Name>
+					<Category>A</Category>
+					<Category>C</Category>
+				</Field>
+				<Field id="f8">
+					<Name>Age</Name>
+					<Category>34</Category>
+					<Category>47</Category>
+					<Category>56</Category>
+					<Category>66</Category>
+				</Field>
+			</Dictionary>
+			<Dictionary id="TransformationDictionary" completeness="ReferencedFromPatterns"
+				default="true" sourceDictType="DiscretizationHint" sourceFormat="PMML">
+				<Field id="f1">
+					<Name>Sex</Name>
+					<Category>F</Category>
+				</Field>
+				<Field id="f2">
+					<Name>Salary</Name>
+					<Category>high</Category>
+				</Field>
+				<Field id="f3">
+					<Name>District</Name>
+					<Category>Praha</Category>
+				</Field>
+				<Field id="f4">
+					<Name>Quality</Name>
+					<Category>good</Category>
+				</Field>
+				<Field id="f8">
+					<Name>Age</Name>
+					<Category>34</Category>
+					<Category>47</Category>
+					<Category>56</Category>
+					<Category>66</Category>
+				</Field>
+			</Dictionary>
+			<DictionaryMapping>
+				<FieldMapping>
+					<AppliesTo>
+						<FieldRef id="f1" dictID="DataDictionary"></FieldRef>
+						<FieldRef id="f1" dictID="TransformationDictionary"></FieldRef>
+					</AppliesTo>
+					<ValueMappings>
+						<ValueMapping>
+							<Field id="f1" dictID="DataDictionary">
+								<CatRef>Yes</CatRef>
+							</Field>
+							<Field id="f1" dictID="TransformationDictionary">
+								<CatRef>F</CatRef>
+							</Field>
+						</ValueMapping>
+					</ValueMappings>
+				</FieldMapping>
+				<FieldMapping>
+					<AppliesTo>
+						<FieldRef id="f2" dictID="DataDictionary"></FieldRef>
+						<FieldRef id="f2" dictID="TransformationDictionary"></FieldRef>
+					</AppliesTo>
+					<IntervalMapping>
+						<Field>
+							<Interval rightMargin="12541" closure="closedClosed"
+								leftMargin="9624"></Interval>
+						</Field>
+						<Field>
+							<CatRef>high</CatRef>
+						</Field>
+					</IntervalMapping>
+				</FieldMapping>
+				<FieldMapping>
+					<AppliesTo>
+						<FieldRef id="f3" dictID="DataDictionary"></FieldRef>
+						<FieldRef id="f3" dictID="TransformationDictionary"></FieldRef>
+					</AppliesTo>
+					<ValueMappings>
+						<ValueMapping>
+							<Field id="f3" dictID="DataDictionary">
+								<CatRef>Praha</CatRef>
+							</Field>
+							<Field id="f3" dictID="TransformationDictionary">
+								<CatRef>Praha</CatRef>
+							</Field>
+						</ValueMapping>
+					</ValueMappings>
+				</FieldMapping>
+				<FieldMapping>
+					<AppliesTo>
+						<FieldRef id="f4" dictID="DataDictionary"></FieldRef>
+						<FieldRef id="f4" dictID="TransformationDictionary"></FieldRef>
+					</AppliesTo>
+					<ValueMappings>
+						<ValueMapping>
+							<Field id="f4" dictID="DataDictionary">
+								<CatRef>A</CatRef>
+							</Field>
+							<Field id="f4" dictID="TransformationDictionary">
+								<CatRef>good</CatRef>
+							</Field>
+						</ValueMapping>
+						<ValueMapping>
+							<Field id="f4" dictID="DataDictionary">
+								<CatRef>C</CatRef>
+							</Field>
+							<Field id="f4" dictID="TransformationDictionary">
+								<CatRef>good</CatRef>
+							</Field>
+						</ValueMapping>
+					</ValueMappings>
+				</FieldMapping>
+				<FieldMapping>
+					<AppliesTo>
+						<FieldRef id="f8" dictID="DataDictionary"></FieldRef>
+						<FieldRef id="f8" dictID="TransformationDictionary"></FieldRef>
+					</AppliesTo>
+					<ValueMappings>
+						<ValueMapping>
+							<Field id="f8" dictID="DataDictionary">
+								<CatRef>34</CatRef>
+							</Field>
+							<Field id="f8" dictID="TransformationDictionary">
+								<CatRef>34</CatRef>
+							</Field>
+						</ValueMapping>
+						<ValueMapping>
+							<Field id="f8" dictID="DataDictionary">
+								<CatRef>47</CatRef>
+							</Field>
+							<Field id="f8" dictID="TransformationDictionary">
+								<CatRef>47</CatRef>
+							</Field>
+						</ValueMapping>
+						<ValueMapping>
+							<Field id="f8" dictID="DataDictionary">
+								<CatRef>56</CatRef>
+							</Field>
+							<Field id="f8" dictID="TransformationDictionary">
+								<CatRef>56</CatRef>
+							</Field>
+						</ValueMapping>
+						<ValueMapping>
+							<Field id="f8" dictID="DataDictionary">
+								<CatRef>66</CatRef>
+							</Field>
+							<Field id="f8" dictID="TransformationDictionary">
+								<CatRef>66</CatRef>
+							</Field>
+						</ValueMapping>
+					</ValueMappings>
+				</FieldMapping>
+			</DictionaryMapping>
+		</DataDescription>
+		<Hits>
+			<BBA id="BBA_FTLiteralI_570">
+				<Text>Sex(F)</Text>
+				<FieldRef>Sex</FieldRef>
+				<CatRef>F</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_571">
+				<Text>Salary(high)</Text>
+				<FieldRef>Salary</FieldRef>
+				<CatRef>high</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_572">
+				<Text>District(Praha)</Text>
+				<FieldRef>District</FieldRef>
+				<CatRef>Praha</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_573">
+				<Text>Quality(good)</Text>
+				<FieldRef>Quality</FieldRef>
+				<CatRef>good</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_574">
+				<Text>Sex(F)</Text>
+				<FieldRef>Sex</FieldRef>
+				<CatRef>F</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_575">
+				<Text>Salary(high)</Text>
+				<FieldRef>Salary</FieldRef>
+				<CatRef>high</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_576">
+				<Text>District(Praha)</Text>
+				<FieldRef>District</FieldRef>
+				<CatRef>Praha</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_577">
+				<Text>Age(34)</Text>
+				<FieldRef>Age</FieldRef>
+				<CatRef>34</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_578">
+				<Text>Quality(good)</Text>
+				<FieldRef>Quality</FieldRef>
+				<CatRef>good</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_579">
+				<Text>Sex(F)</Text>
+				<FieldRef>Sex</FieldRef>
+				<CatRef>F</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_580">
+				<Text>Salary(high)</Text>
+				<FieldRef>Salary</FieldRef>
+				<CatRef>high</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_581">
+				<Text>District(Praha)</Text>
+				<FieldRef>District</FieldRef>
+				<CatRef>Praha</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_582">
+				<Text>Age(47)</Text>
+				<FieldRef>Age</FieldRef>
+				<CatRef>47</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_583">
+				<Text>Quality(good)</Text>
+				<FieldRef>Quality</FieldRef>
+				<CatRef>good</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_584">
+				<Text>Sex(F)</Text>
+				<FieldRef>Sex</FieldRef>
+				<CatRef>F</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_585">
+				<Text>Salary(high)</Text>
+				<FieldRef>Salary</FieldRef>
+				<CatRef>high</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_586">
+				<Text>District(Praha)</Text>
+				<FieldRef>District</FieldRef>
+				<CatRef>Praha</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_587">
+				<Text>Age(56)</Text>
+				<FieldRef>Age</FieldRef>
+				<CatRef>56</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_588">
+				<Text>Quality(good)</Text>
+				<FieldRef>Quality</FieldRef>
+				<CatRef>good</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_589">
+				<Text>Sex(F)</Text>
+				<FieldRef>Sex</FieldRef>
+				<CatRef>F</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_590">
+				<Text>Salary(high)</Text>
+				<FieldRef>Salary</FieldRef>
+				<CatRef>high</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_591">
+				<Text>District(Praha)</Text>
+				<FieldRef>District</FieldRef>
+				<CatRef>Praha</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_592">
+				<Text>Age(66)</Text>
+				<FieldRef>Age</FieldRef>
+				<CatRef>66</CatRef>
+			</BBA>
+			<BBA id="BBA_FTLiteralI_593">
+				<Text>Quality(good)</Text>
+				<FieldRef>Quality</FieldRef>
+				<CatRef>good</CatRef>
+			</BBA>
+			<DBA id="ante_001" connective="Conjunction">
+				<BARef>ante_001_001</BARef>
+			</DBA>
+			<DBA id="ante_001_001" connective="Conjunction">
+				<BARef>ante_001_001_001</BARef>
+				<BARef>ante_001_001_002</BARef>
+				<BARef>ante_001_001_003</BARef>
+			</DBA>
+			<DBA id="ante_001_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_570</BARef>
+			</DBA>
+			<DBA id="ante_001_001_002" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_571</BARef>
+			</DBA>
+			<DBA id="ante_001_001_003" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_572</BARef>
+			</DBA>
+			<DBA id="cons_001" connective="Conjunction">
+				<BARef>cons_001_001</BARef>
+			</DBA>
+			<DBA id="cons_001_001" connective="Conjunction">
+				<BARef>cons_001_001_001</BARef>
+			</DBA>
+			<DBA id="cons_001_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_573</BARef>
+			</DBA>
+			<DBA id="ante_002" connective="Conjunction">
+				<BARef>ante_002_001</BARef>
+			</DBA>
+			<DBA id="ante_002_001" connective="Conjunction">
+				<BARef>ante_002_001_001</BARef>
+				<BARef>ante_002_001_002</BARef>
+				<BARef>ante_002_001_003</BARef>
+				<BARef>ante_002_001_004</BARef>
+			</DBA>
+			<DBA id="ante_002_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_574</BARef>
+			</DBA>
+			<DBA id="ante_002_001_002" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_575</BARef>
+			</DBA>
+			<DBA id="ante_002_001_003" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_576</BARef>
+			</DBA>
+			<DBA id="ante_002_001_004" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_577</BARef>
+			</DBA>
+			<DBA id="cons_002" connective="Conjunction">
+				<BARef>cons_002_001</BARef>
+			</DBA>
+			<DBA id="cons_002_001" connective="Conjunction">
+				<BARef>cons_002_001_001</BARef>
+			</DBA>
+			<DBA id="cons_002_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_578</BARef>
+			</DBA>
+			<DBA id="ante_003" connective="Conjunction">
+				<BARef>ante_003_001</BARef>
+			</DBA>
+			<DBA id="ante_003_001" connective="Conjunction">
+				<BARef>ante_003_001_001</BARef>
+				<BARef>ante_003_001_002</BARef>
+				<BARef>ante_003_001_003</BARef>
+				<BARef>ante_003_001_004</BARef>
+			</DBA>
+			<DBA id="ante_003_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_579</BARef>
+			</DBA>
+			<DBA id="ante_003_001_002" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_580</BARef>
+			</DBA>
+			<DBA id="ante_003_001_003" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_581</BARef>
+			</DBA>
+			<DBA id="ante_003_001_004" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_582</BARef>
+			</DBA>
+			<DBA id="cons_003" connective="Conjunction">
+				<BARef>cons_003_001</BARef>
+			</DBA>
+			<DBA id="cons_003_001" connective="Conjunction">
+				<BARef>cons_003_001_001</BARef>
+			</DBA>
+			<DBA id="cons_003_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_583</BARef>
+			</DBA>
+			<DBA id="ante_004" connective="Conjunction">
+				<BARef>ante_004_001</BARef>
+			</DBA>
+			<DBA id="ante_004_001" connective="Conjunction">
+				<BARef>ante_004_001_001</BARef>
+				<BARef>ante_004_001_002</BARef>
+				<BARef>ante_004_001_003</BARef>
+				<BARef>ante_004_001_004</BARef>
+			</DBA>
+			<DBA id="ante_004_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_584</BARef>
+			</DBA>
+			<DBA id="ante_004_001_002" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_585</BARef>
+			</DBA>
+			<DBA id="ante_004_001_003" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_586</BARef>
+			</DBA>
+			<DBA id="ante_004_001_004" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_587</BARef>
+			</DBA>
+			<DBA id="cons_004" connective="Conjunction">
+				<BARef>cons_004_001</BARef>
+			</DBA>
+			<DBA id="cons_004_001" connective="Conjunction">
+				<BARef>cons_004_001_001</BARef>
+			</DBA>
+			<DBA id="cons_004_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_588</BARef>
+			</DBA>
+			<DBA id="ante_005" connective="Conjunction">
+				<BARef>ante_005_001</BARef>
+			</DBA>
+			<DBA id="ante_005_001" connective="Conjunction">
+				<BARef>ante_005_001_001</BARef>
+				<BARef>ante_005_001_002</BARef>
+				<BARef>ante_005_001_003</BARef>
+				<BARef>ante_005_001_004</BARef>
+			</DBA>
+			<DBA id="ante_005_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_589</BARef>
+			</DBA>
+			<DBA id="ante_005_001_002" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_590</BARef>
+			</DBA>
+			<DBA id="ante_005_001_003" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_591</BARef>
+			</DBA>
+			<DBA id="ante_005_001_004" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_592</BARef>
+			</DBA>
+			<DBA id="cons_005" connective="Conjunction">
+				<BARef>cons_005_001</BARef>
+			</DBA>
+			<DBA id="cons_005_001" connective="Conjunction">
+				<BARef>cons_005_001_001</BARef>
+			</DBA>
+			<DBA id="cons_005_001_001" connective="Conjunction">
+				<BARef>BBA_FTLiteralI_593</BARef>
+			</DBA>
+			
+			<Hit docName="dbxml:///sewebar1.dbxml/TESTBARBORA" ruleID="77"
+				docID="TESTBARBORA" database="LM LM_Barbora_lba.mdb MB" reportURI="">
+				<AssociationRule antecedent="ante_001" consequent="cons_001">
+					<Text>Sex(F) &amp; Salary(high) &amp; District(Praha) :::
+						Quality(good)</Text>
+					<IMValue name="BASE">369</IMValue>
+					<IMValue name="FUI">0.9761904762</IMValue>
+					<IMValue name="a">369</IMValue>
+					<IMValue name="b">9</IMValue>
+					<IMValue name="c">5085</IMValue>
+					<IMValue name="d">718</IMValue>
+					<IMValue name="r">378</IMValue>
+					<IMValue name="n">6181</IMValue>
+					<IMValue name="Confidence">0.9761904762</IMValue>
+					<IMValue name="DConf">0.0675453048</IMValue>
+					<IMValue name="EConf">0.1758615111</IMValue>
+					<IMValue name="Supp">0.0596990778</IMValue>
+					<IMValue name="Cmplt">0.0676567657</IMValue>
+					<IMValue name="AvgDf">0.1063134091</IMValue>
+					<IMValue name="LBound">0.0000000065</IMValue>
+					<IMValue name="UBound">0.9999999986</IMValue>
+					<IMValue name="ELBound">1</IMValue>
+					<IMValue name="EUBound">0</IMValue>
+					<IMValue name="DLBound">1</IMValue>
+					<IMValue name="DUBound">0</IMValue>
+					<IMValue name="Fisher">0</IMValue>
+					<IMValue name="Chi-Sq">34.1393136096</IMValue>
+					<IMValue name="bMean">0.9736842105</IMValue>
+					<IMValue name="bVAR">0.9736842105</IMValue>
+					<IMValue name="bStDev">0.0082007728</IMValue>
+					<IMValue name="P(&gt;=90%)">0.9999999939</IMValue>
+					<IMValue name="P(&gt;=95%)">0.9921172522</IMValue>
+				</AssociationRule>
+			</Hit>
+			<Hit docName="dbxml:///sewebar1.dbxml/TESTBARBORA" ruleID="78"
+				docID="TESTBARBORA" database="LM LM_Barbora_lba.mdb MB" reportURI="">
+				<AssociationRule antecedent="ante_002" consequent="cons_002">
+					<Text>Sex(F) &amp; Salary(high) &amp; District(Praha) &amp;
+						Age(34) ::: Quality(good)</Text>
+					<IMValue name="BASE">36</IMValue>
+					<IMValue name="FUI">0.8</IMValue>
+					<IMValue name="a">36</IMValue>
+					<IMValue name="b">9</IMValue>
+					<IMValue name="c">5418</IMValue>
+					<IMValue name="d">718</IMValue>
+					<IMValue name="r">45</IMValue>
+					<IMValue name="n">6181</IMValue>
+					<IMValue name="Confidence">0.8</IMValue>
+					<IMValue name="DConf">0.0065897858</IMValue>
+					<IMValue name="EConf">0.1219867335</IMValue>
+					<IMValue name="Supp">0.0058243003</IMValue>
+					<IMValue name="Cmplt">0.0066006601</IMValue>
+					<IMValue name="AvgDf">-0.0933626696</IMValue>
+					<IMValue name="LBound">0.9879698153</IMValue>
+					<IMValue name="UBound">0.0319940218</IMValue>
+					<IMValue name="ELBound">1</IMValue>
+					<IMValue name="EUBound">0</IMValue>
+					<IMValue name="DLBound">1</IMValue>
+					<IMValue name="DUBound">0</IMValue>
+					<IMValue name="Fisher">0.9668877861</IMValue>
+					<IMValue name="Chi-Sq">2.9642385564</IMValue>
+					<IMValue name="bMean">0.7872340426</IMValue>
+					<IMValue name="bVAR">0.7872340426</IMValue>
+					<IMValue name="bStDev">0.0590720966</IMValue>
+					<IMValue name="P(&gt;=90%)">0.0140303948</IMValue>
+					<IMValue name="P(&gt;=95%)">0.0000755862</IMValue>
+				</AssociationRule>
+			</Hit>
+			<Hit docName="dbxml:///sewebar1.dbxml/TESTBARBORA" ruleID="79"
+				docID="TESTBARBORA" database="LM LM_Barbora_lba.mdb MB" reportURI="">
+				<AssociationRule antecedent="ante_003" consequent="cons_003">
+					<Text>Sex(F) &amp; Salary(high) &amp; District(Praha) &amp;
+						Age(47) ::: Quality(good)</Text>
+					<IMValue name="BASE">27</IMValue>
+					<IMValue name="FUI">1</IMValue>
+					<IMValue name="a">27</IMValue>
+					<IMValue name="b">0</IMValue>
+					<IMValue name="c">5427</IMValue>
+					<IMValue name="d">727</IMValue>
+					<IMValue name="r">27</IMValue>
+					<IMValue name="n">6181</IMValue>
+					<IMValue name="Confidence">1</IMValue>
+					<IMValue name="DConf">0.004950495</IMValue>
+					<IMValue name="EConf">0.1219867335</IMValue>
+					<IMValue name="Supp">0.0043682252</IMValue>
+					<IMValue name="Cmplt">0.004950495</IMValue>
+					<IMValue name="AvgDf">0.133296663</IMValue>
+					<IMValue name="LBound">0.058149737</IMValue>
+					<IMValue name="UBound">1</IMValue>
+					<IMValue name="ELBound">1</IMValue>
+					<IMValue name="EUBound">0</IMValue>
+					<IMValue name="DLBound">1</IMValue>
+					<IMValue name="DUBound">0</IMValue>
+					<IMValue name="Fisher">0.0338395889</IMValue>
+					<IMValue name="Chi-Sq">3.6148001622</IMValue>
+					<IMValue name="bMean">0.9655172414</IMValue>
+					<IMValue name="bVAR">0.9655172414</IMValue>
+					<IMValue name="bStDev">0.0333135098</IMValue>
+					<IMValue name="P(&gt;=90%)">0.9477241656</IMValue>
+					<IMValue name="P(&gt;=95%)">0.7621847143</IMValue>
+				</AssociationRule>
+			</Hit>
+			<Hit docName="dbxml:///sewebar1.dbxml/TESTBARBORA" ruleID="80"
+				docID="TESTBARBORA" database="LM LM_Barbora_lba.mdb MB" reportURI="">
+				<AssociationRule antecedent="ante_004" consequent="cons_004">
+					<Text>Sex(F) &amp; Salary(high) &amp; District(Praha) &amp;
+						Age(56) ::: Quality(good)</Text>
+					<IMValue name="BASE">27</IMValue>
+					<IMValue name="FUI">1</IMValue>
+					<IMValue name="a">27</IMValue>
+					<IMValue name="b">0</IMValue>
+					<IMValue name="c">5427</IMValue>
+					<IMValue name="d">727</IMValue>
+					<IMValue name="r">27</IMValue>
+					<IMValue name="n">6181</IMValue>
+					<IMValue name="Confidence">1</IMValue>
+					<IMValue name="DConf">0.004950495</IMValue>
+					<IMValue name="EConf">0.1219867335</IMValue>
+					<IMValue name="Supp">0.0043682252</IMValue>
+					<IMValue name="Cmplt">0.004950495</IMValue>
+					<IMValue name="AvgDf">0.133296663</IMValue>
+					<IMValue name="LBound">0.058149737</IMValue>
+					<IMValue name="UBound">1</IMValue>
+					<IMValue name="ELBound">1</IMValue>
+					<IMValue name="EUBound">0</IMValue>
+					<IMValue name="DLBound">1</IMValue>
+					<IMValue name="DUBound">0</IMValue>
+					<IMValue name="Fisher">0.0338395889</IMValue>
+					<IMValue name="Chi-Sq">3.6148001622</IMValue>
+					<IMValue name="bMean">0.9655172414</IMValue>
+					<IMValue name="bVAR">0.9655172414</IMValue>
+					<IMValue name="bStDev">0.0333135098</IMValue>
+					<IMValue name="P(&gt;=90%)">0.9477241656</IMValue>
+					<IMValue name="P(&gt;=95%)">0.7621847143</IMValue>
+				</AssociationRule>
+			</Hit>
+			<Hit docName="dbxml:///sewebar1.dbxml/TESTBARBORA" ruleID="81"
+				docID="TESTBARBORA" database="LM LM_Barbora_lba.mdb MB" reportURI="">
+				<AssociationRule antecedent="ante_005" consequent="cons_005">
+					<Text>Sex(F) &amp; Salary(high) &amp; District(Praha) &amp;
+						Age(66) ::: Quality(good)</Text>
+					<IMValue name="BASE">27</IMValue>
+					<IMValue name="FUI">1</IMValue>
+					<IMValue name="a">27</IMValue>
+					<IMValue name="b">0</IMValue>
+					<IMValue name="c">5427</IMValue>
+					<IMValue name="d">727</IMValue>
+					<IMValue name="r">27</IMValue>
+					<IMValue name="n">6181</IMValue>
+					<IMValue name="Confidence">1</IMValue>
+					<IMValue name="DConf">0.004950495</IMValue>
+					<IMValue name="EConf">0.1219867335</IMValue>
+					<IMValue name="Supp">0.0043682252</IMValue>
+					<IMValue name="Cmplt">0.004950495</IMValue>
+					<IMValue name="AvgDf">0.133296663</IMValue>
+					<IMValue name="LBound">0.058149737</IMValue>
+					<IMValue name="UBound">1</IMValue>
+					<IMValue name="ELBound">1</IMValue>
+					<IMValue name="EUBound">0</IMValue>
+					<IMValue name="DLBound">1</IMValue>
+					<IMValue name="DUBound">0</IMValue>
+					<IMValue name="Fisher">0.0338395889</IMValue>
+					<IMValue name="Chi-Sq">3.6148001622</IMValue>
+					<IMValue name="bMean">0.9655172414</IMValue>
+					<IMValue name="bVAR">0.9655172414</IMValue>
+					<IMValue name="bStDev">0.0333135098</IMValue>
+					<IMValue name="P(&gt;=90%)">0.9477241656</IMValue>
+					<IMValue name="P(&gt;=95%)">0.7621847143</IMValue>
+				</AssociationRule>
+			</Hit>
+		</Hits>
+	</SearchResult>
+
+</result>

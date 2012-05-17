@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="test2.html">District (Praha) => Quality (good) [FUI: 0.90]</a></td></tr>
+<tr><td><a href="test3.html">District (Subset 1-1) => Quality (good) [CHI: 0.05]</a></td></tr>
+<tr><td><a href="test8.html">Ask BK manually</a></td></tr>
+<tr><td><a href="test10.html">Mark rule</a></td></tr>
+<tr><td><a href="test9.html">Clear rule</a></td></tr>
+<tr><td><a href="test11.html">Clear rules</a></td></tr>
+<tr><td><a href="test12.html">BUG: No found rules.</a></td></tr>
+<tr><td><a href="test13.html">Clear marked rule</a></td></tr>
+<tr><td><a href="test14.html">Ask BK automatically</a></td></tr>
+</tbody></table>
+</body>
+</html>

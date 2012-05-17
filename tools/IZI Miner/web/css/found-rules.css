@@ -1,0 +1,106 @@
+@CHARSET "UTF-8";
+
+/* found rules */
+#found-rules {
+	clear: left;
+	line-height: 20px;
+	
+	padding-top: 20px;
+}
+
+#found-rules ul {
+	width: 100%;
+	float: left;
+}
+
+#found-rules li {
+	width: 100%;
+	float: left; clear: left;
+}
+
+#found-rules .connective {
+	color: #336600;
+	font-size: 14px;
+	
+	margin: 0 3px 0 6px;
+}
+
+#found-rules .coefficient {
+	color: #925213;
+    font-size: 0.85em;
+    left: 3px;
+    position: relative;
+    top: -1px;
+}
+
+#found-rules .ims {
+	font-size: 12px;
+	
+	position: relative; top: -1px;
+	margin-left: 12px;
+}
+
+#found-rules .rule {
+	display: block; float: left; clear: left;
+}
+
+#found-rules .im-value {
+	color: #7B0D2E;
+	
+	margin-left: 0.5ex;
+}
+
+#found-rules .bk {
+	background: transparent url('../images/icon-bk-rule.png') 0 0 no-repeat;
+	
+	display: block; float: left; width: 16px; height: 16px;
+	position: relative; top: 7px;
+	margin-left: 10px; margin-right: 10px;
+	visibility: hidden;
+}
+
+#found-rules li:hover > .bk {
+	visibility: visible;	
+}
+
+#found-rules .mark {
+	background: transparent url('../images/icon-mark-rule.png') 0 0 no-repeat;
+	
+	display: block; float: left; width: 16px; height: 16px;
+	position: relative; top: 7px;
+	margin-left: 10px;
+	visibility: hidden;
+}
+
+#found-rules li:hover > .mark {
+	visibility: visible;	
+}
+
+#found-rules .clear {
+	background: transparent url('../images/icon-remove.png') 0 0 no-repeat;
+	
+	display: block; float: left; width: 16px; height: 16px;
+	position: relative; top: 8px;
+	margin-left: 10px;
+	visibility: hidden;
+}
+
+#found-rules li:hover > .clear {
+	visibility: visible;	
+}
+
+/* found rule */
+.found-rule .id {
+	font-size: 0.8em; color: #434343;
+    text-align: right;
+    display: block; float: left;
+    width: 25px;
+    margin-right: 3px;
+}
+
+.found-rule .loading {
+	background: transparent url('../images/icon-loading.gif') 0 7px no-repeat;
+	opacity: 0; visibility: hidden;
+	float: right;
+	width: 20px; height: 29px;	
+}

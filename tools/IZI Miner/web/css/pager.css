@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+#pager {
+    border: 1px solid #cac7bd;
+    line-height: 29px;
+    height: 305px;
+    overflow-y: hidden;
+    display: none;
+}
+
+#paging .pager-actuator, .pager-prev, .pager-next {
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+#paging {
+	height: 20px;
+}
+
+#paging .active {
+    color: #000;
+}
+
+#pager-label {
+    height: 24px;
+    padding: 3px 0 0 30px;
+    margin-bottom: 15px;
+}
+
+#pager-label.mining-not-started {
+    background: transparent url("../images/icon-warning.png") 0 0 no-repeat;
+}
+
+#pager-label.mining-in-progress {
+    background: transparent url("../images/icon-loading.gif") 5px 5px no-repeat;
+}
+
+#pager-label.mining-finished {
+    background: transparent url("../images/icon-complete.png") 0 0 no-repeat;
+}
+
+#pager-label.mining-norules {
+    background: transparent url("../images/icon-warning.png") 0 0 no-repeat;
+}
+
+#pager-clear {
+    color: #126499;
+	background: transparent url('../images/icon-clear.png') 0 5px no-repeat;
+	display: none; width: 100px; height: 24px;
+	float: right;
+	margin: 5px 0 0 0; padding: 9px 0 0 30px;
+}
