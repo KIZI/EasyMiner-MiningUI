@@ -19,7 +19,7 @@ $data = str_replace("\\\"", "\"", $data);
 $serializer = new SerializeRulesTaskSetting();
 
 if (!DEV_MODE) { // SewebarConnect
-    $id = 'VdcuecAZZEa5MTVm6E7huA';
+    $id = 'iXWkAKcPW0eJsmezU_3PSQ';
     $data = array('guid' => $id, 'content' => $serializer->serializeRules($data));
 
     // save LM task
