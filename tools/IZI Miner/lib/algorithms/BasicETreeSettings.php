@@ -17,6 +17,7 @@ class BasicETreeSettings {
     // ETree IM settings
     private $NodeFreqMin = 1;
     private $PerformChiSqTest = 'Yes';
+    private $SplitSignificanceAlpha = 0.025;
     
     function __construct(DOMXPath $XPath, $classAttr, $cond, $IM) {
         $this->XPath = $XPath;
@@ -52,7 +53,7 @@ class BasicETreeSettings {
         $params['IM'] = array(
         	'NodeFreqMin' => $this->NodeFreqMin,
             'PerformChiSqTest' => $this->PerformChiSqTest,
-        	'SplitSignificanceAlpha' => $this->IM['value'],
+        	'SplitSignificanceAlpha' => $this->SplitSignificanceAlpha,
             'NodePurityMin' => $NP,
         	'TreeQualityMin' => $TQ,
         );
