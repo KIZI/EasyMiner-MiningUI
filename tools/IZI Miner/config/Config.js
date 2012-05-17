@@ -76,7 +76,7 @@ var Config = new Class({
 	},
 	
 	getETreeGetURL: function () {
-		return this.ETreeGetURL;
+		return Object.getLength(this.params) ? this.ETreeGetURL + "?id_dm=" + this.params.id_dm : this.ETreeGetURL;
 	},
 	
 	getRootElementID: function () {
