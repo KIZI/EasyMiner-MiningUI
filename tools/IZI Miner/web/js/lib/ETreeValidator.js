@@ -13,7 +13,7 @@ var ETreeValidator = new Class({
 		// TODO valid = false
 		
 		// IM
-		if (rule.getNumIMs() !== 1) {
+		if (!rule.getNumIMs()) {
 			valid = false;
 		}
 		/*
