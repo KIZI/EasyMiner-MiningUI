@@ -60,7 +60,7 @@ if (!DEV_MODE) { // SewebarConnect
     
     // run task
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://lmcloud.vse.cz/SewebarConnect/TaskPooler.ashx');
+    curl_setopt($ch, CURLOPT_URL, 'http://lmcloud.vse.cz/SewebarConnect/Task/Pool');
     curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
