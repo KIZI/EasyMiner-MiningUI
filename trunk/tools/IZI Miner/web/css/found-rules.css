@@ -36,8 +36,10 @@
 #found-rules .ims {
 	font-size: 12px;
 	
-	position: relative; top: -1px;
-	margin-left: 12px;
+	position: relative; top: -8px; 
+	float: left; clear: left;
+	margin-left: 30px;
+	height: 19px;
 }
 
 #found-rules .rule {

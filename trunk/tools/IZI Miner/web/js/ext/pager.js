@@ -8,7 +8,7 @@ var Pager = new Class({
     numPages: 0,
     currentPage: 0,
     perPage: 10,
-    lineHeight: 30,
+    lineHeight: 50,
     prevSymbol: '<',
     nextSymbol: '>',
     elControlType: 'span',
@@ -150,7 +150,7 @@ var Pager = new Class({
     		this.currentPage = locator;
     	}
         
-        var scrollTo = (this.lineHeight * this.perPage + 5) * (this.currentPage - 1);
+        var scrollTo = (this.lineHeight * this.perPage) * (this.currentPage - 1);
         this.paging.getElements('.pager-actuator')[this.currentPage - 1].addClass('active').getSiblings('.pager-actuator').removeClass('active');
         this.content.tween('margin-top', "-" + scrollTo + "px");
         this.fireEvent('onScroll', this.currentPage);

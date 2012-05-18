@@ -27,9 +27,7 @@ var AssociationRule = new Class({
 	
 	/* ident */
 	getIdent: function () {
-		if (this.ident.length !== 0 && this.changed === false) {
-			return this.ident;
-		}
+
 
 		return this.generateIdent();
 	},
@@ -54,13 +52,15 @@ var AssociationRule = new Class({
 			ident += 'Any';
 		}
 		
-		if (Object.getLength(this.IMs) !== 0) {
-			ident += this.generateIMsIdent(this.IMs);
-		} else {
-			ident += ' []';
-		}
-		
 		return ident;
+	},
+	
+	getIMIdent: function () {
+		if (Object.getLength(this.IMs) !== 0) {
+			return this.generateIMsIdent(this.IMs);
+		} else {
+			return ' []';
+		}
 	},
 
 	/* cedent */
@@ -166,7 +166,7 @@ var AssociationRule = new Class({
 	},
 	
 	generateIMsIdent: function (IMs) {
-		var ident = '<span class="ims">[';
+		var ident = '[';
 		var i = 0;
 		Object.each(IMs, function (IM) {
 			ident += IM.toString();
@@ -174,7 +174,7 @@ var AssociationRule = new Class({
 				ident += ', ';
 			}
 		}.bind(this));
-		ident += ']</span>';
+		ident += ']';
 		
 		return ident;
 	},

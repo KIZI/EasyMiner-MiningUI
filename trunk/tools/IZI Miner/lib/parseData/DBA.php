@@ -38,6 +38,10 @@ class DBA {
         return $this->level;
     }
 
+    public function setLevel($val) {
+        $this->level = $val;
+    }
+    
     public function addRef($ref) {
         if (!($ref instanceof BBA) && !($ref instanceof DBA)) {
             throw new InvalidDBAException('Invalid DBA');
@@ -61,10 +65,8 @@ class DBA {
 
             return $array;
         }
-
-         
+        
         $array = array();
-
         if ($this->connective->isBinary() && $this->getLevel() > 1 && count($this->refs) > 1) {
             array_push($array, $this->connective->getLbrac());
         }

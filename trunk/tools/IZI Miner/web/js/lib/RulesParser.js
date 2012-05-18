@@ -39,10 +39,16 @@ var RulesParser = new Class({
 		var brToSolve = this.findOutterBrackets(cedent); // brackets to solve at this level
 	    var bracketsInterval = this.mergeIntervals(brToSolve);
 	    var bToSolve = this.findBooleans(cedent, bracketsInterval); // booleans to solve at this level
+	    var connective = null;
+	    
 	    if (bToSolve.length) {
-	    	var connective = new Connective(this.generateConnectiveID(), bToSolve.getLast().type === 'and' ? 'Conjunction' : 'Disjunction');
+	    	Array.each(bToSolve, function (b) {
+				if (b.type !== 'neg') {
+					connective = new Connective(this.generateConnectiveID(), b.type === 'and' ? 'Conjunction' : 'Disjunction');
+				}
+			}.bind(this));
 	    } else {
-	    	var connective = new Connective(this.generateConnectiveID(), 'Conjunction');
+	    	connective = new Connective(this.generateConnectiveID(), 'Conjunction');
 		}
 	    var aToSolve = this.findAttributes(cedent, bracketsInterval); // attributes to solve at this level
 	    
