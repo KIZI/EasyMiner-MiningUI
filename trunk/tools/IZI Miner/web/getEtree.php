@@ -22,6 +22,8 @@ if (!DEV_MODE) { // SewebarConnect
     $id = $_GET['id_dm'];
     $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => 'ETreeMiner.Task.Template.PMML');
     
+    var_dump($requestData); die;
+    
     // save LM task
     $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
     $LM_import = new DOMDocument('1.0', 'UTF-8');
