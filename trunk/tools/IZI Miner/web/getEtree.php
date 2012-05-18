@@ -70,8 +70,6 @@ if (!DEV_MODE) { // SewebarConnect
     $info = curl_getinfo($ch);
     curl_close($ch);
     
-    echo $response; die;
-    
     // save LM result
     $LM_export_path = './temp/etree_result_'.date('md_His').'.pmml';
     $LM_export = new DOMDocument('1.0', 'UTF-8');
