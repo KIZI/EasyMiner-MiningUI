@@ -453,7 +453,8 @@ var UITemplateRegistrator = new Class({
 
 			li({id: rule.getMarkedRuleCSSID()},
 				span({'class': 'rule'}, rule.getIdent()), 
-				a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}));
+				a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}),
+				span({'class': 'ims'}, rule.getIMIdent()));
 		});
 	},
 	

@@ -679,6 +679,7 @@ ul#attributes-by-group {
 }
 
 #marked-rules .rule {
+	line-height: 25px;
 	float: left;
 }
 
@@ -699,9 +700,8 @@ ul#attributes-by-group {
 
 #marked-rules .ims {
     font-size: 12px;
-    margin-left: 12px;
-    position: relative;
-    top: -1px;
+    float: left; clear: left;
+    position: relative; top: -5px;
 }
 
 #marked-rules .im-value {
