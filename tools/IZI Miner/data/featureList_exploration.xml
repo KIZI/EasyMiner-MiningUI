@@ -532,7 +532,7 @@
     <NestingConstraint level="1">
      <Connectives>
       <Conjunction allowed="yes"/>
-      <Disjunction allowed="yes"/>
+      <Disjunction allowed="no"/>
       <Any allowed="no"/>
       <Negation allowed="no"/>
      </Connectives>
