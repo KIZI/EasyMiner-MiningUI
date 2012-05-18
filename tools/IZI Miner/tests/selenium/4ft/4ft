@@ -17,6 +17,8 @@
 <tr><td><a href="test12.html">BUG: No found rules.</a></td></tr>
 <tr><td><a href="test13.html">Clear marked rule</a></td></tr>
 <tr><td><a href="test14.html">Ask BK automatically</a></td></tr>
+<tr><td><a href="test21.html">BUG: A and neg B => C</a></td></tr>
+<tr><td><a href="test22.html">BUG: A and (neg B or C) => D</a></td></tr>
 </tbody></table>
 </body>
 </html>

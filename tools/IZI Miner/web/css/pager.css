@@ -2,8 +2,8 @@
 
 #pager {
     border: 1px solid #cac7bd;
-    line-height: 29px;
-    height: 305px;
+    line-height: 30px;
+    height: 500px;
     overflow-y: hidden;
     display: none;
 }

@@ -374,7 +374,7 @@ var Cedent = new Class({
 		}.bind(this));
 		
 		Array.each(this.getChildCedents(), function (childCedent) {
-			string += childCedent.toStringAR();
+			string += childCedent.toString();
 			if (this.getNumChildren() !== ++i) {
 				string += '<span class="connective">' + this.connective.toString() + '</span>';
 			}

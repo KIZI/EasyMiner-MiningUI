@@ -430,7 +430,8 @@ var UITemplateRegistrator = new Class({
 				!BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
 				a({id: rule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
 				a({id: rule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
-				div({'class': 'loading'}, '')
+				div({'class': 'loading'}, ''),
+				span({'class': 'ims'}, rule.getIMIdent())
 			);
 		});
 	},

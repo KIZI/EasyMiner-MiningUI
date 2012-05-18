@@ -90,6 +90,7 @@ class AssociationRule{
             }
             $this->BBAs[$elementId] = $element;
         } else { // DBA
+            $element->setLevel($level);
             foreach ($element->getRefIds() as $id) {
                 $ref = $this->parseElement($id, ($level + 1), '');
                 $element->addRef($ref);
