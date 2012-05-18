@@ -19,6 +19,7 @@ $data = str_replace("\\\"", "\"", $data);
 $serializer = new SerializeRulesETree(FAPath);
 
 if (!DEV_MODE) { // SewebarConnect
+    /*
     $id = $_GET['id_dm'];
     $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => 'ETreeMiner.Task.Template.PMML');
     
@@ -31,6 +32,35 @@ if (!DEV_MODE) { // SewebarConnect
     // run task
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
+    curl_setopt($ch, CURLOPT_VERBOSE, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    
+    $response = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
+    
+    echo $response; die;
+    
+    // save LM result
+    $LM_export_path = './temp/etree_result_'.date('md_His').'.pmml';
+    $LM_export = new DOMDocument('1.0', 'UTF-8');
+    $LM_export->loadXML($response, LIBXML_NOBLANKS);
+    $LM_export->save($LM_export_path);
+    */
+    
+    $requestData = array('guid' => 'F3VEUol8uUaGGoGOheU_JA', 'content' => $serializer->serializeRules($data), 'template' => 'ETreeMiner.Task.Template.PMML');
+    
+    // save LM task
+    $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
+    $LM_import = new DOMDocument('1.0', 'UTF-8');
+    $LM_import->loadXML($requestData['query'], LIBXML_NOBLANKS);
+    $LM_import->save($LM_import_path);
+    
+    // run task
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://lmcloud.vse.cz/SewebarConnect/TaskPooler.ashx');
     curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
