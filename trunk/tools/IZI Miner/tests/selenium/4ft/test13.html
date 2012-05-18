@@ -67,9 +67,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>css=#marked-rules .rule</td>
+	<td>click</td>
+	<td>css=.found-rule .mark</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyXpathCount</td>
+	<td>//section[@id='marked-rules']/*/*/li</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -77,9 +82,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>css=#marked-rules .rule</td>
-	<td></td>
+	<td>verifyXpathCount</td>
+	<td>//section[@id='marked-rules']/*/*/li</td>
+	<td>1</td>
 </tr>
 </tbody></table>
 </body>
