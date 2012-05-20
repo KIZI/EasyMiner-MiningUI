@@ -16,7 +16,6 @@ function encodeData($array) {
 if (!DEV_MODE) { // KBI
     $id = intval($_GET['id_dm']);
     $DDPath = APP_PATH.DS.'web'.DS.'temp'.DS.'DD_'.$id.'.pmml';
-    unset($DDPath); die;
     if (!file_exists($DDPath)) {
         $id = $_GET['id_dm'];
         $requestData = array();
