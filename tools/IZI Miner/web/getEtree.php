@@ -18,7 +18,7 @@ $data = isset($_POST['data']) ? $_POST['data'] : $_GET['data'];
 $data = str_replace("\\\"", "\"", $data);
 $serializer = new SerializeRulesETree(FAPath);
 
-if (!DEV_MODE) { // SewebarConnect
+if (!DEV_MODE) { // KBI
     $id = $_GET['id_dm'];
     $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => 'ETreeMiner.Task.Template.PMML');
     

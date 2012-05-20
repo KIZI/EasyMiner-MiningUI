@@ -18,7 +18,7 @@ $data = isset($_POST['data']) ? $_POST['data'] : $_GET['data'];
 $data = str_replace("\\\"", "\"", $data);
 $serializer = new SerializeRulesTaskSetting();
 
-if (!DEV_MODE) { // SewebarConnect
+if (!DEV_MODE) { // KBI
     $id = $_GET['id_dm'];
     $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
@@ -80,7 +80,7 @@ if (!DEV_MODE) { // SewebarConnect
     $LM_import->save($LM_import_path);
 
     // import LM task
-    exec(DEV_LM_PATH.DS.'LMSwbImporter.exe /DSN:"LM Barbora.mdb MB" /Input:"'.$LM_import_path.'" /Alias:"'.DEV_LM_PATH.DS.'Sewebar'.DS.'Template'.DS.'LM.PMML.Alias.txt"  /NoProgress /AppLog:"./temp/_LM_log.dat"');
+    exec(DEV_LM_PATH.DS.'LMSwbImporter.exe /DSN:"LM Barbora.mdb MB" /Input:"'.$LM_import_path.'" /Alias:"'.DEV_LM_PATH.DS.'Sewebar'.DS.'Template'.DS.'LM.PMML.Alias.txt" /Quiet /NoProgress /AppLog:"./temp/_LM_log.dat"');
 
     // run LM task
     $XPath = new DOMXPath($LM_import);
