@@ -52,11 +52,11 @@ var Config = new Class({
 	},
 	
 	getBKGetURL: function () {
-		return Object.getLength(this.params) ? this.BKGetURL + "?id_kb=" + this.params.id_kb : this.BKGetURL;
+		return this.BKGetURL + "?id_kb=" + this.params.id_kb;
 	},
 	
 	getDataGetURL: function () {
-		return this.dataGetURL;
+		return this.dataGetURL + "?id_dm=" + this.params.id_dm;
 	},
 	
 	setDataGetURL: function (url) {
@@ -68,7 +68,7 @@ var Config = new Class({
 	},
 	
 	getRulesGetURL: function () {
-		return Object.getLength(this.params) ? this.rulesGetURL + "?id_dm=" + this.params.id_dm : this.rulesGetURL;
+		return this.rulesGetURL + "?id_dm=" + this.params.id_dm;
 	},
 	
 	setRulesGetURL: function (URL) {
@@ -76,7 +76,7 @@ var Config = new Class({
 	},
 	
 	getETreeGetURL: function () {
-		return Object.getLength(this.params) ? this.ETreeGetURL + "?id_dm=" + this.params.id_dm : this.ETreeGetURL;
+		return this.ETreeGetURL + "?id_dm=" + this.params.id_dm;
 	},
 	
 	getRootElementID: function () {
