@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Description of SerializeRulesQueryByAR
- *
- * @author balda
- */
-class SerializeRulesQueryByAR extends AncestorSerializeRules {
+class SerializeRulesAnnotatedAR extends AncestorSerializeRules {
 
   protected $DD;
   private $id = 0;
@@ -24,8 +19,9 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules {
   /**
    * It creates instance of this class.
    */
-  function __construct($DD) {
+  function __construct($DD, $interestingness) {
       $this->DD = $DD;
+      $this->interestingness = $interestingness;
     parent::__construct();
   }
 
@@ -150,14 +146,6 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules {
     $this->createInterestMeasureSetting($IM, $this->antecedent, $this->consequent, $IMValue);
   }
 
-  /**
-   * Create Basic Structure
-   * <ARBuilder>
-   *     <Dictionary></Dictionary>
-   *     <AssociationRules>
-   *     </AssociationRules>
-   * </ARBuilder>
-   */
   private function createBasicStructure() {
     $this->finalXMLDocument = new DomDocument("1.0", "UTF-8");
 
@@ -167,12 +155,11 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules {
     $ARBuilder->setAttribute("xmlns:dd", "http://keg.vse.cz/ns/datadescription0_2");
     $ARBuilder->setAttribute("xsi:schemaLocation", "http://keg.vse.cz/ns/arbuilder0_2 http://sewebar.vse.cz/schemas/ARBuilder0_2.xsd");
     $ARBuilder->setAttribute("xmlns:guha", "http://keg.vse.cz/ns/GUHA0.1rev1");
-    $ARBuilder->setAttribute("mode", "QueryByAssociationRule");
     $root = $this->finalXMLDocument->appendChild($ARBuilder);
 
     $this->createDictionary($root);
 
-    $ARQuery = $this->finalXMLDocument->createElement("QueryByAssociationRule");
+    $ARQuery = $this->finalXMLDocument->createElement("AnnotatedAssociationRules");
     $this->ARQuery = $root->appendChild($ARQuery);
   }
 
@@ -547,6 +534,10 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules {
       $InterestMeasure->appendChild($this->finalXMLDocument->createTextNode($value[$i]));
       $InterestMeasureTreshold->appendChild($InterestMeasure);
     }
+    
+    $annotation = $this->finalXMLDocument->createElement("Annotation");
+    $annotation->appendChild($this->finalXMLDocument->createElement('Interestingness', $this->interestingness));
+    $InterestMeasureTreshold->appendChild($annotation);
 
     $this->rules[] = $InterestMeasureTreshold;
   }

@@ -46,6 +46,19 @@
 	display: block; float: left; clear: left;
 }
 
+#found-rules .interesting {
+	font-weight: bold; opacity: 0.3;
+}
+
+#found-rules .not-interesting {
+	opacity: 0.3;
+}
+
+#found-rules .exception {
+	color: #C91E1D;
+	font-weight: bold;
+}
+
 #found-rules .im-value {
 	color: #7B0D2E;
 	

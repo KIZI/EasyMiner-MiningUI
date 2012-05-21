@@ -51,8 +51,16 @@ var Config = new Class({
 		this.params = params;
 	},
 	
-	getBKGetURL: function () {
-		return this.BKGetURL + "?id_kb=" + this.params.id_kb;
+	getBKAskURL: function () {
+		return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=ask';
+	},
+	
+	getBKSaveInterestingURL: function () {
+		return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=saveInteresting';
+	},
+	
+	getBKSaveNotInterestingURL: function () {
+		return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=saveNotInteresting';
 	},
 	
 	getDataGetURL: function () {

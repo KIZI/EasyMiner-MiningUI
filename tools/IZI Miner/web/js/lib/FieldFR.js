@@ -23,7 +23,7 @@ var FieldFR = new Class({
 		serialized.name = this.getAttributeName();
 		serialized.type = 'attr';
 		serialized.category = this.type;
-		// TODO XQuery - decompozice???
+		serialized.catref = this.category;
 
 		return serialized;
 	},

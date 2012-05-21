@@ -36,11 +36,10 @@ if (!DEV_MODE) { // KBI
         @$DD->loadXML($response, LIBXML_NOBLANKS); // throws notice due to the PI declaration
         $DD->save($DDPath);
     }
-    
-    $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, LANG);
 } else {
-    $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, null, null, LANG);
+    $DDPath = DDPath;
 }
 
+$DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, LANG);
 $DP->loadData();
 echo $DP->parseData();

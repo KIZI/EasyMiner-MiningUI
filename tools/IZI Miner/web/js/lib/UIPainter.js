@@ -442,18 +442,29 @@ var UIPainter = new Class({
 	/* found rules */
 	updateFoundRule: function (FR) {
 		var elFR = $(FR.getRule().getFoundRuleCSSID());
-		if (!FR.getInteresting()) {
+		if (FR.getIndexed()) {
 			elFR.set('morph', {duration: this.morphDuration});
-			elFR.morph({
-				'opacity': '0.3'
-			});
+			
+			if (FR.isInteresting()) {
+				if (FR.getInteresting()) { // marked as interesting
+					elFR.setStyle('font-weight', 'bold');
+				} else { // marked as not interesting
+					elFR.morph({'opacity': '0.3'});
+				}
+			} else if (FR.isException()) {
+				elFR.setStyle('font-weight', 'bold');
+				elFR.morph({'color': '#C91E1D'});
+			}
+			
 		}
 		
 		var elLoading = elFR.getElement('.loading');
-		elLoading.set('morph', {duration: this.morphDuration});
-		elLoading.morph({
-			'opacity': '0.0'
-		});
+		if (elLoading) {
+			elLoading.set('morph', {duration: this.morphDuration});
+			elLoading.morph({
+				'opacity': '0.0'
+			});
+		}
 	},
 	
 	showFRLoading: function (FR) {

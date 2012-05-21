@@ -7,13 +7,13 @@ var AJAXBalancer = new Class({
 	
 	initialize: function () {},
 	
-	addRequest: function (options) {
+	addRequest: function (options, data) {
 		options.onComplete = function () {
 			this.running--;
 			this.send();
 		}.bind(this);
 		
-		var req = new Request.JSON(options);
+		var req = [new Request.JSON(options), data];
 		
 		this.requests.push(req);
 	},
@@ -28,9 +28,9 @@ var AJAXBalancer = new Class({
 	send: function() {
 		Array.each(this.requests, function (req, key) {
 			if (this.running < this.limit) {
-				if (!req.isRunning() && !req.isSuccess()) {
+				if (!req[0].isRunning() && !req[0].isSuccess()) {
 					this.running++;
-					req.send();
+					req[0].post({'data': req[1]});
 				}
 			}
 		}.bind(this));
@@ -47,8 +47,8 @@ var AJAXBalancer = new Class({
 	stopAllRequests: function () {
 		this.inProgress = false;
 		Array.each(this.requests, function (req, key) {
-			if (req.running) {
-				req.cancel();
+			if (req[0].running) {
+				req[0].cancel();
 			}
 		}.bind(this));
 		
