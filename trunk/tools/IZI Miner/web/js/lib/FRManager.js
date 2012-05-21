@@ -54,7 +54,7 @@ var FRManager = new Class({
 				this.rules[r.getId()] = FR;
 				els.push(Mooml.render('foundRuleTemplate', {key: ++index, rule: FR.getRule(), i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
 				if (this.settings.getBKAutoSearch()) {
-					this.buildRequest(FR);
+					this.buildRequest(FR, this.config.getBKAskURL(), true);
 				}
 			}.bind(this));
 			
@@ -87,24 +87,26 @@ var FRManager = new Class({
 		return rules;
 	},
 	
-	buildRequest: function (FR) {
+	buildRequest: function (FR, URL, update) {
 		var reqData = {
-				data: {
-					limitHits: 1,
+				limitHits: 1,
 					rule0: FR.getRule().serialize(),
-					rules: 1}};
+					rules: 1};
 		
 		var options = {
-			url: this.config.getBKGetURL(),
+			url: URL,
 	        secure: true,
-	        data: JSON.encode(reqData),
 	            
 	        onRequest: function () {
-				this.UIPainter.showFRLoading(FR);
+	        	if (update) {
+	        		this.UIPainter.showFRLoading(FR);
+	        	}
 			}.bind(this),
 	        
 	        onSuccess: function(responseJSON, responseText) {
-	        	this.handleSuccessRequest(FR, responseJSON);
+	        	if (update) {
+	        		this.handleSuccessRequest(FR, responseJSON);
+	        	}
 	        }.bind(this),
 	            
 	        onError: function () {
@@ -128,11 +130,22 @@ var FRManager = new Class({
 	        }.bind(this)
 		};
 		
-		this.AJAXBalancer.addRequest(options);
+		this.AJAXBalancer.addRequest(options, JSON.encode(reqData));
 	},
 	
-	handleSuccessRequest: function (FR, responseJSON) {
-		FR.setInteresting(responseJSON);
+	handleSuccessRequest: function (FR, data) {
+		if (data.confirmation.hits > 0 || data.exception.hits > 0) {
+			FR.setIndexed(true);
+			
+			if (data.confirmation.hits > 0) {
+				FR.setInteresting(data.confirmation.numInteresting >= data.confirmation.numNotInteresting);
+			}
+			
+			if (data.exception.hits > 0) {
+				FR.setException(true);
+			}
+		}
+		
 		this.UIPainter.updateFoundRule(FR);
 	},
 	
@@ -153,7 +166,7 @@ var FRManager = new Class({
 	
 	/* found rules */
 	askBK: function (rule) {
-		this.buildRequest(rule);
+		this.buildRequest(rule, this.config.getBKAskURL(), true);
 		this.AJAXBalancer.run();
 	},
 	
@@ -161,10 +174,18 @@ var FRManager = new Class({
 		this.markedRules.push(FR);
 		this.pager.remove(FR.getRule().getFoundRuleCSSID());
 		this.UIPainter.renderMarkedRules(null, this.markedRules);
+		
+		// index interesting rule into KB
+		this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
+		this.AJAXBalancer.run();
 	},
 	
 	removeFoundRule: function (FR) {
 		this.pager.remove(FR.getRule().getFoundRuleCSSID());
+		
+		// index not interesting rule into KB
+		this.buildRequest(FR, this.config.getBKSaveNotInterestingURL(), false);
+		this.AJAXBalancer.run();
 	},
 	
 	clearFoundRules: function () {

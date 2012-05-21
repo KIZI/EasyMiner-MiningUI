@@ -14,7 +14,9 @@ $configs = array(array('DDPath' => APP_PATH.DS.'data'.DS.'datadescription_0.2.xm
                    'FAPath' => APP_PATH.DS.'data'.DS.'frequencyAnalysis.xml',
                    'LANG' => 'en',
                    'DEV_MODE' => false,
-                   'DEV_LM_PATH' => 'C:'.DS.'xampp'.DS.'htdocs'.DS.'LM'));
+                   'DEV_LM_PATH' => 'C:'.DS.'xampp'.DS.'htdocs'.DS.'LM',
+                   'KB_CONF_ID' => 6,
+                   'KB_EXC_ID' => 7));
 $config = $configs[0];
 
 foreach ($config as $k => $c) {
