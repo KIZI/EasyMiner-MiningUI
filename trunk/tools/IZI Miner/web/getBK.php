@@ -76,6 +76,16 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     $KBParser = new KnowledgeBaseParser($response);
     $confirmation = $KBParser->parse();
 
+    if ($confirmation['hits'] > 0) {
+        $arr = array(
+            'confirmation' => $confirmation, 
+            'exception' => array('hits' => 0),
+        );
+        
+        echo json_encode($arr);
+        die;
+    }
+    
     // exception
     $serializer = new SerializeRulesQueryByAR(DDPath);
     $requestData = array('source' => $id, 'query' => KB_EXC_ID, 'parameters' => $serializer->serializeRules($data));
