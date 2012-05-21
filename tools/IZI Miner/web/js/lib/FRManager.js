@@ -130,11 +130,11 @@ var FRManager = new Class({
 	        }.bind(this)
 		};
 		
-		this.AJAXBalancer.addRequest(options, JSON.encode(reqData));
+		this.AJAXBalancer.addRequest(options, JSON.encode(reqData), FR.getRule().getId());
 	},
 	
 	handleSuccessRequest: function (FR, data) {
-		if (data.confirmation.hits > 0 || data.exception.hits > 0) {
+		if (data && (data.confirmation.hits > 0 || data.exception.hits > 0)) {
 			FR.setIndexed(true);
 			
 			if (data.confirmation.hits > 0) {
@@ -159,9 +159,9 @@ var FRManager = new Class({
 	},
 
 	reset: function () {
+		this.AJAXBalancer.stopAllRequests();
 		this.rules = {};
 		this.maxId = 0;
-		this.AJAXBalancer.stopAllRequests();
 	},
 	
 	/* found rules */
@@ -171,6 +171,7 @@ var FRManager = new Class({
 	},
 	
 	markFoundRule: function (FR) {
+		this.AJAXBalancer.stopRequest(FR.getRule().getId());
 		this.markedRules.push(FR);
 		this.pager.remove(FR.getRule().getFoundRuleCSSID());
 		this.UIPainter.renderMarkedRules(null, this.markedRules);
@@ -181,6 +182,7 @@ var FRManager = new Class({
 	},
 	
 	removeFoundRule: function (FR) {
+		this.AJAXBalancer.stopRequest(FR.getRule().getId());
 		this.pager.remove(FR.getRule().getFoundRuleCSSID());
 		
 		// index not interesting rule into KB
@@ -189,6 +191,7 @@ var FRManager = new Class({
 	},
 	
 	clearFoundRules: function () {
+		this.AJAXBalancer.stopAllRequests();
 		this.pager.reset();
 		this.UIPainter.renderActiveRule();
 	},

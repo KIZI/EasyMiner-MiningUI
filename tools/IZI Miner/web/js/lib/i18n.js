@@ -56,7 +56,8 @@ var i18n = new Class({
 			   52: {'cs': 'Zatím nebyla nalezena žádná pravidla. Nejdříve vytvořte šablonu asociačního pravidla a spusťte dolování.', 'en': 'No discovered rules yet. Create an association rule pattern to start mining.'},
 			   53: {'cs': 'Dotaz na doménové znalosti.', 'en': 'Ask background knowledge.'},
 			   54: {'cs': 'Dolování pravidel úspěšně skončilo.', 'en': 'Mining has finished!'},
-			   55: {'cs': 'Nenalezena žádná pravidla. Zkuste změnit šablonu asociačního pravidla a spusťte dolování znovu.', 'en': 'No discovered rules. Try to change the association rule pattern and start mining again.'}},
+			   55: {'cs': 'Nenalezena žádná pravidla. Zkuste změnit šablonu asociačního pravidla a spusťte dolování znovu.', 'en': 'No discovered rules. Try to change the association rule pattern and start mining again.'},
+			   56: {'cs': 'Relevance feedback', 'en': 'Relevance feedback'}},
 			   
 	initialize: function (lang) {
 		this.lang = lang;

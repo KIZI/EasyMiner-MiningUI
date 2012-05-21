@@ -72,7 +72,12 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
     curl_close($ch);
-
+    
+    if ($response === '' || $info['http_code'] !== 200) { // XQuery is down
+        echo json_encode(false);
+        die;
+    }
+    
     $KBParser = new KnowledgeBaseParser($response);
     $confirmation = $KBParser->parse();
 

@@ -6,7 +6,7 @@ class KnowledgeBaseParser {
     
     function __construct($data) {
         $DOM = new DomDocument('1.0', 'UTF-8');
-        $DOM->loadXML($data);
+        @$DOM->loadXML($data);
         $this->XPath = new DomXPath($DOM);
     }
     
