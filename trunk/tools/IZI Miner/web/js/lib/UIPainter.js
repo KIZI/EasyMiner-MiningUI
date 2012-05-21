@@ -445,15 +445,25 @@ var UIPainter = new Class({
 		if (FR.getIndexed()) {
 			elFR.set('morph', {duration: this.morphDuration});
 			
+			var elFRInfo = elFR.getElement('.info');
+			elFRInfo.setStyle('display', 'block');
+			elFRInfo.setStyle('background', "rgba(255, 255, 255, 0.5) url('./images/icon-help2.png') 0 0 no-repeat");
+			var elFRHelp = elFRInfo.getElement('.help');
 			if (FR.isInteresting()) {
 				if (FR.getInteresting()) { // marked as interesting
 					elFR.setStyle('font-weight', 'bold');
+					elFRHelp.appendText('Association rule is considered as interesting.');
 				} else { // marked as not interesting
-					elFR.morph({'opacity': '0.3'});
+					Array.each(elFR.getChildren('*:not(span.info)'), function (child) {
+						child.set('morph', {duration: this.morphDuration});
+						child.morph({'opacity': '0.3'});
+					}.bind(this));
+					elFRHelp.appendText('Association rule is considered as not interesting.');
 				}
 			} else if (FR.isException()) {
 				elFR.setStyle('font-weight', 'bold');
 				elFR.morph({'color': '#C91E1D'});
+				elFRHelp.appendText('Association rule is considered as exception.');
 			}
 			
 		}

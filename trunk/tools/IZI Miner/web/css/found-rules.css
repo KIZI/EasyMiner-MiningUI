@@ -46,23 +46,41 @@
 	display: block; float: left; clear: left;
 }
 
-#found-rules .interesting {
-	font-weight: bold; opacity: 0.3;
-}
-
-#found-rules .not-interesting {
-	opacity: 0.3;
-}
-
-#found-rules .exception {
-	color: #C91E1D;
-	font-weight: bold;
-}
-
 #found-rules .im-value {
 	color: #7B0D2E;
 	
 	margin-left: 0.5ex;
+}
+
+#found-rules .info {
+	font-weight: normal;
+	background: transparent url('../images/icon-help2.png') 0 0 no-repeat;
+	display: none; float: left;
+	position: relative; top: 7px; left: 6px;
+	width: 16px; height: 16px;
+	margin-right: 10px;
+}
+
+#found-rules .tooltip2 span {
+	background-color: #FFF;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+	
+	display: block;
+	margin: 0;
+	margin-left: -990em;
+	width: 380px;
+	position: relative; top: -5px;
+	z-index: 2; cursor: help;
+}
+
+#found-rules .tooltip2:hover span {
+	margin-left: 35px;
+}
+
+#found-rules .tooltip2 img {
+	vertical-align: top;
+	position: relative; top: 1px; left: -8px;
 }
 
 #found-rules .bk {
