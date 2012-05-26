@@ -441,9 +441,10 @@ var UIPainter = new Class({
 	
 	/* found rules */
 	updateFoundRule: function (FR) {
-		var elFR = $(FR.getRule().getFoundRuleCSSID());
+		var elFR = $(FR.getCSSID());
 		if (FR.getIndexed()) {
 			elFR.set('morph', {duration: this.morphDuration});
+			elFR.setStyle('cursor', 'help');
 			
 			var elFRInfo = elFR.getElement('.info');
 			elFRInfo.setStyle('display', 'block');
@@ -452,19 +453,25 @@ var UIPainter = new Class({
 			if (FR.isInteresting()) {
 				if (FR.getInteresting()) { // marked as interesting
 					elFR.setStyle('font-weight', 'bold');
-					elFRHelp.appendText('Association rule is considered as interesting.');
+					
+					elFR.store('tip:text', this.i18n.translate('Association rule is considered as interesting.'));
 				} else { // marked as not interesting
 					Array.each(elFR.getChildren('*:not(span.info)'), function (child) {
 						child.set('morph', {duration: this.morphDuration});
 						child.morph({'opacity': '0.3'});
 					}.bind(this));
-					elFRHelp.appendText('Association rule is considered as not interesting.');
+					
+					elFR.store('tip:text', this.i18n.translate('Association rule is considered as not interesting.'));
 				}
 			} else if (FR.isException()) {
 				elFR.setStyle('font-weight', 'bold');
 				elFR.morph({'color': '#C91E1D'});
-				elFRHelp.appendText('Association rule is considered as exception.');
+				
+				elFR.store('tip:text', this.i18n.translate('There are exceptions to this association rule in the knowledge base.'));
 			}
+			
+			var elBK = elFR.getElement('.bk');
+			elBK.morph({'display': 'none'});
 			
 		}
 		
@@ -478,7 +485,7 @@ var UIPainter = new Class({
 	},
 	
 	showFRLoading: function (FR) {
-		var elLoading = $(FR.getRule().getFoundRuleCSSID()).getElement('.loading');
+		var elLoading = $(FR.getCSSID()).getElement('.loading');
 		elLoading.set('morph', {duration: this.morphDuration});
 		elLoading.morph({
 			'opacity': '1',

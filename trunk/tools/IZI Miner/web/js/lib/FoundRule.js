@@ -1,48 +1,26 @@
 var FoundRule = new Class({
 	
-	rule: null,
-	indexed: false,
-	interesting: null,
-	exception: null,
+	Properties: ['exception', 'indexed', 'interesting', 'rule'],
+	
+	$exception: null,
+	$indexed: false,
+	$interesting: null,
+	$rule: null,
 	
 	initialize: function (rule) {
-		this.rule = rule;
+		this.$rule = rule;
 	},
 	
-	getRule: function () {
-		return this.rule;
-	},
-	
-	getIndexed: function () {
-		return this.indexed;
-	},
-	
-	setIndexed: function (val) {
-		this.indexed = val;
-	},
-	
-	isInteresting: function () {
-		return (this.interesting !== null);
-	},
-	
-	getInteresting: function () {
-		return this.interesting;
-	},
-	
-	setInteresting: function (val) {
-		this.interesting = val;
+	getCSSID: function() {
+		return 'found-rule-' + this.getRule().getId();
 	},
 	
 	isException: function () {
-		return (this.exception !== null);
+		return (this.$exception !== null);
 	},
 	
-	getException: function () {
-		return this.exception;
-	},
-	
-	setException: function (val) {
-		this.exception = val;
+	isInteresting: function () {
+		return (this.$interesting !== null);
 	}
 	
 });

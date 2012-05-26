@@ -421,17 +421,15 @@ var UITemplateRegistrator = new Class({
 	registerFoundRule: function () {
 		Mooml.register('foundRuleTemplate', function (data) {
 			key = data.key;
-			rule = data.rule;
+			FR = data.FR;
+			rule = FR.getRule();
 			i18n = data.i18n;
 			BK = data.BK;
 			
-			li({id: rule.getFoundRuleCSSID(), 'class': 'found-rule'}, 
+			li({id: FR.getCSSID(), 'class': 'found-rule'}, 
 				span({'class': 'rule'}, '<span class="id">' + key + '.</span>' + rule.getIdent()),
+				span({'class': 'info'}),
 				!BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
-				span({'class': 'tooltip2 info'},
-					span({'class': 'help'},
-						img({src: './images/icon-info.png'}),
-						'')),
 				a({id: rule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
 				a({id: rule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
 				div({'class': 'loading'}, ''),

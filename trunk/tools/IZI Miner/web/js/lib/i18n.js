@@ -57,7 +57,10 @@ var i18n = new Class({
 			   53: {'cs': 'Dotaz na doménové znalosti.', 'en': 'Ask background knowledge.'},
 			   54: {'cs': 'Dolování pravidel úspěšně skončilo.', 'en': 'Mining has finished!'},
 			   55: {'cs': 'Nenalezena žádná pravidla. Zkuste změnit šablonu asociačního pravidla a spusťte dolování znovu.', 'en': 'No discovered rules. Try to change the association rule pattern and start mining again.'},
-			   56: {'cs': 'Relevance feedback', 'en': 'Relevance feedback'}},
+			   56: {'cs': 'Relevance feedback', 'en': 'Relevance feedback'},
+			   57: {'cs': 'Asociační pravidlo je považováno za zajímavé.', 'en': 'Association rule is considered as interesting.'},
+			   58: {'cs': 'Asociační pravidlo je považováno za nezajímavé.', 'en': 'Association rule is considered as not interesting.'},
+			   59: {'cs': 'Pro asociační pravidlo existují ve znalostní bázi vyjímky.', 'en': 'There are exceptions to this association rule in the knowledge base.'}},
 			   
 	initialize: function (lang) {
 		this.lang = lang;
