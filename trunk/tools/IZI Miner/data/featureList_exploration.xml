@@ -309,8 +309,7 @@
       </Validation>
      </Field>
     </Type>
-
-
+    <!-- 
     <Type>
      <Name>b-frequency</Name>
      <DefaultValue>1</DefaultValue>
@@ -466,13 +465,10 @@
       </Validation> 
      </Field>    
     </Type>
+   
+ -->
    </Types>
-   
-   
    <SupportedInterestMeasureCombinations/>
-
-
-
   </InterestMeasures>
 
   <BasicBooleanAttribute coefficient="required">
@@ -509,6 +505,7 @@
                         </Validation>
                     </Field>
     </Type>
+    <!-- 
     <Type>
      <Name>Subset</Name>
      <LocalizedName lang="en">Any subset of values</LocalizedName>
@@ -541,6 +538,7 @@
       </Validation>
      </Field>
     </Type>
+     -->
     <Type>
      <Name>One category</Name>
      <LocalizedName lang="en">One fixed value</LocalizedName>
