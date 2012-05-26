@@ -205,11 +205,7 @@ var AssociationRule = new Class({
 	getMarkedRuleCSSRemoveID: function () {
 		return 'remove-marked-rule-' + this.id;
 	},
-	
-	getFoundRuleCSSID: function() {
-		return 'found-rule-' + this.id;
-	},
-	
+		
 	getFoundRuleCSSBKID: function () {
 		return 'bk-found-rule-' + this.id;
 	},

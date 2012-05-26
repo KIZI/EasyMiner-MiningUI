@@ -56,7 +56,7 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     $requestData = array('source' => $id, 'query' => KB_CONF_ID, 'parameters' => $serializer->serializeRules($data));
 
     // save XML
-    $AARPath = './temp/KB_'.date('md_His').'.pmml';
+    $AARPath = './temp/KB_conf_'.date('md_His').'.pmml';
     $AAR = new DOMDocument('1.0', 'UTF-8');
     @$AAR->loadXML($requestData['parameters'], LIBXML_NOBLANKS); // throws notice due to the PI declaration
     $AAR->save($AARPath);
@@ -94,9 +94,9 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     // exception
     $serializer = new SerializeRulesQueryByAR(DDPath);
     $requestData = array('source' => $id, 'query' => KB_EXC_ID, 'parameters' => $serializer->serializeRules($data));
-
+    
     // save XML
-    $AARPath = './temp/KB_'.date('md_His').'.pmml';
+    $AARPath = './temp/KB_exc_'.date('md_His').'.pmml';
     $AAR = new DOMDocument('1.0', 'UTF-8');
     @$AAR->loadXML($requestData['parameters'], LIBXML_NOBLANKS); // throws notice due to the PI declaration
     $AAR->save($AARPath);

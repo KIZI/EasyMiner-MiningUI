@@ -10,6 +10,7 @@ var FRManager = new Class({
 	rules: {},
 	maxId: 0,
 	markedRules: [],
+	tips: null,
 	
 	initialize: function (config, rulesParser, settings) {
 		this.config = config;
@@ -17,6 +18,13 @@ var FRManager = new Class({
 		this.settings = settings;
 		this.i18n = new i18n(this.config.getLang());
 		this.AJAXBalancer = new AJAXBalancer();
+		this.tips = new Tips('.found-rule');
+		this.tips.addEvent('show', function(tip, el){
+		    tip.addClass('tip-visible');
+		});
+		this.tips.addEvent('hide', function(tip, el){
+		    tip.removeClass('tip-visible');
+		});
 	},
 
 	setUIPainter: function (UIPainter) {
@@ -52,7 +60,7 @@ var FRManager = new Class({
 			Array.each(parsedRules, function (r) {
 				var FR = new FoundRule(r);
 				this.rules[r.getId()] = FR;
-				els.push(Mooml.render('foundRuleTemplate', {key: ++index, rule: FR.getRule(), i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
+				els.push(Mooml.render('foundRuleTemplate', {key: ++index, FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
 				if (this.settings.getBKAutoSearch()) {
 					this.buildRequest(FR, this.config.getBKAskURL(), true);
 				}
@@ -144,6 +152,10 @@ var FRManager = new Class({
 			if (data.exception.hits > 0) {
 				FR.setException(true);
 			}
+			
+			if (FR.getIndexed()) {
+				this.tips.attach($(FR.getCSSID()));
+			}
 		}
 		
 		this.UIPainter.updateFoundRule(FR);
@@ -173,7 +185,7 @@ var FRManager = new Class({
 	markFoundRule: function (FR) {
 		this.AJAXBalancer.stopRequest(FR.getRule().getId());
 		this.markedRules.push(FR);
-		this.pager.remove(FR.getRule().getFoundRuleCSSID());
+		this.pager.remove(FR.getCSSID());
 		this.UIPainter.renderMarkedRules(null, this.markedRules);
 		
 		// index interesting rule into KB
@@ -183,7 +195,7 @@ var FRManager = new Class({
 	
 	removeFoundRule: function (FR) {
 		this.AJAXBalancer.stopRequest(FR.getRule().getId());
-		this.pager.remove(FR.getRule().getFoundRuleCSSID());
+		this.pager.remove(FR.getCSSID());
 		
 		// index not interesting rule into KB
 		this.buildRequest(FR, this.config.getBKSaveNotInterestingURL(), false);
