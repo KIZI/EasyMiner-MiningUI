@@ -27,26 +27,6 @@
   <InterestMeasures threshold="required">
    <Types>
     <Type>
-                    <Name>SUPP</Name>
-                 <DefaultValue>0.05</DefaultValue>
-                 <LocalizedName lang="en">Support</LocalizedName>
-                 <LocalizedName lang="cs">Podpora</LocalizedName>
-                 <ThresholdType>% of all</ThresholdType>
-                 <CompareType>Greater than or equal</CompareType>
-                    <Explanation lang="en">Percentage of objects the rule must match.</Explanation>
-                    <Explanation lang="cs">Relativní podpora pravidla</Explanation>
-                    <Field>
-                        <Name>threshold</Name>
-                        <LocalizedName lang="en">min value</LocalizedName>
-                        <LocalizedName lang="cs">prahová hodnota</LocalizedName>
-                        <Validation>
-                            <MinValue inclusive="no">0</MinValue>
-                            <MaxValue inclusive="yes">1</MaxValue>
-                            <Datatype>double</Datatype>
-                        </Validation>
-                    </Field>
-                </Type>
-    <Type>
                     <Name>FUI</Name>
                     <DefaultValue>0.7</DefaultValue>
                     <LocalizedName lang="en">Confidence</LocalizedName>
@@ -66,6 +46,26 @@
                         </Validation>
                     </Field>
     </Type>
+    <Type>
+                    <Name>SUPP</Name>
+                 <DefaultValue>0.05</DefaultValue>
+                 <LocalizedName lang="en">Support</LocalizedName>
+                 <LocalizedName lang="cs">Podpora</LocalizedName>
+                 <ThresholdType>% of all</ThresholdType>
+                 <CompareType>Greater than or equal</CompareType>
+                    <Explanation lang="en">Percentage of objects the rule must match.</Explanation>
+                    <Explanation lang="cs">Relativní podpora pravidla</Explanation>
+                    <Field>
+                        <Name>threshold</Name>
+                        <LocalizedName lang="en">min value</LocalizedName>
+                        <LocalizedName lang="cs">prahová hodnota</LocalizedName>
+                        <Validation>
+                            <MinValue inclusive="no">0</MinValue>
+                            <MaxValue inclusive="yes">1</MaxValue>
+                            <Datatype>double</Datatype>
+                        </Validation>
+                    </Field>
+                </Type>
     <Type>
                     <Name>CHI</Name>
      <DefaultValue>0.01</DefaultValue>
