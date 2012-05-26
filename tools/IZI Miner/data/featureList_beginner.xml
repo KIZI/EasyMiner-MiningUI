@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arf:GUHAFeatureList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_05 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
-	xmlns:arf="http://keg.vse.cz/ns/arfeatures_02" mode="AssociationRules"
-	procedure="4ft">
+	xmlns:arf="http://keg.vse.cz/ns/arfeatures_02" mode="AssociationRules" procedure="4ft">
 	<UserInterface>
 		<AllowMultipleRules>false</AllowMultipleRules>
 		<Name>Beginner</Name>
@@ -29,16 +28,15 @@
 		<InterestMeasures threshold="required">
 			<Types>
 				<Type>
-					<Name>SUPP</Name>
-					<DefaultValue>0.05</DefaultValue>
-					<LocalizedName lang="en">Support</LocalizedName>
-					<LocalizedName lang="cs">Podpora</LocalizedName>
+					<Name>FUI</Name>
+					<LocalizedName lang="en">Confidence</LocalizedName>
+					<LocalizedName lang="cs">Spolehlivost</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
 					<CompareType>Greater than or equal</CompareType>
-					<Explanation lang="en">Percentage of objects the rule must match.</Explanation>
-					<Explanation lang="cs">Relativní podpora pravidla</Explanation>
+					<Explanation lang="en">At lest specified percentage of instances matching the left side of the rule must match also the right side of the rule.</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>0.7</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
@@ -49,15 +47,16 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>FUI</Name>
-					<DefaultValue>0.7</DefaultValue>
-					<LocalizedName lang="en">Confidence</LocalizedName>
-					<LocalizedName lang="cs">Spolehlivost</LocalizedName>
+					<Name>SUPP</Name>
+					<LocalizedName lang="en">Support</LocalizedName>
+					<LocalizedName lang="cs">Podpora</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
 					<CompareType>Greater than or equal</CompareType>
-					<Explanation lang="en">At lest specified percentage of instances matching the left side of the rule must match also the right side of the rule.</Explanation>
+					<Explanation lang="en">Percentage of objects the rule must match.</Explanation>
+					<Explanation lang="cs">Relativní podpora pravidla</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>0.05</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
@@ -69,7 +68,6 @@
 				</Type>
 				<Type>
 					<Name>CHI</Name>
-					<DefaultValue>0.01</DefaultValue>
 					<LocalizedName lang="en">Chi-Square</LocalizedName>
 					<LocalizedName lang="cs">Chí-kvadrát</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
@@ -77,6 +75,7 @@
 					<Explanation lang="en">The degree of dependence between the conditions expressed by the left and right side of the rule must pass chi-square test on level alpha</Explanation>
 					<Field>
 						<Name>alpha</Name>
+						<DefaultValue>0.01</DefaultValue>
 						<LocalizedName lang="en">alpha</LocalizedName>
 						<LocalizedName lang="cs">alfa</LocalizedName>
 						<Validation>

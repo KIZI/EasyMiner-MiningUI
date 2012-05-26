@@ -55,7 +55,7 @@ var FeatureList = new Class({
 		this.IMTreshold = data.interestMeasures.treshold;
 		
 		Object.each(data.interestMeasures.types, function (value, key) {
-			this.IMs[key] = new InterestMeasure(key, value.defaultValue, value.localizedName, value.explanation, value.thresholdType, value.compareType, value.fields, new StringHelper());
+			this.IMs[key] = new InterestMeasure(key, value.localizedName, value.explanation, value.thresholdType, value.compareType, value.fields, new StringHelper());
 		}.bind(this));
 		
 		Object.each(data.interestMeasures.combinations, function (value, key) {
