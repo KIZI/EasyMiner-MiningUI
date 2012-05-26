@@ -3,7 +3,6 @@
 var InterestMeasure = new Class({
 
 	name: '',
-	defaultValue: 0,
 	localizedName: '',
 	explanation: '',
 	thresholdType: '',
@@ -11,9 +10,8 @@ var InterestMeasure = new Class({
 	field: [],
 	stringHelper: null,
 
-	initialize: function (name, defaultValue, localizedName, explanation, thresholdType, compareType, fields, stringHelper) {
+	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper) {
 		this.name = name;
-		this.defaultValue = defaultValue;
 		this.localizedName = localizedName;
 		this.explanation = explanation;
 		this.thresholdType = thresholdType;
@@ -24,10 +22,6 @@ var InterestMeasure = new Class({
 	
 	getName: function () {
 		return this.name;
-	},
-	
-	getDefaultValue: function () {
-		return this.defaultValue;
 	},
 	
 	getLocalizedName: function () {

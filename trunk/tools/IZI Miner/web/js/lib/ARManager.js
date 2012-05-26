@@ -89,7 +89,7 @@ var ARManager = new Class({
 	
 	addIM: function (name, thresholdValue, alphaValue) {
 		var IMPrototype = this.getIMPrototype(name);
-		var IM = new InterestMeasureAR(name, IMPrototype.getDefaultValue(), IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), thresholdValue, alphaValue);
+		var IM = new InterestMeasureAR(name, IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), thresholdValue, alphaValue);
 		this.activeRule.addIM(IM);
 		
 		this.UIPainter.hideOverlay();

@@ -87,7 +87,6 @@ class FeatureListParser {
         $array['types'] = array();
         foreach ($this->XPath->evaluate('BuildingBlocks/InterestMeasures/Types/Type') as $t) {
             $name = $this->XPath->evaluate('Name', $t)->item(0)->nodeValue;
-            $defaultValue = $this->XPath->evaluate('DefaultValue', $t)->item(0)->nodeValue;
             $localizedName = '';
             if ($LN = $this->XPath->evaluate('LocalizedName[@lang="'.$this->lang.'"]', $t)->item(0)) {
                 $localizedName = $LN->nodeValue;
@@ -98,10 +97,11 @@ class FeatureListParser {
             if ($EX = $this->XPath->evaluate('Explanation[@lang="'.$this->lang.'"]', $t)->item(0)) {
                 $explanation = $EX->nodeValue;
             }
-            $IM = new FLInterestMeasure($name, $defaultValue, $localizedName, $thresholdType, $compareType, $explanation);
+            $IM = new FLInterestMeasure($name, $localizedName, $thresholdType, $compareType, $explanation);
 
             foreach ($this->XPath->evaluate('Field', $t) as $f) {
                 $name = $this->XPath->evaluate('Name', $f)->item(0)->nodeValue;
+                $defaultValue = $this->XPath->evaluate('DefaultValue', $f)->item(0)->nodeValue;
                 $localizedName = $this->XPath->evaluate('LocalizedName[@lang="'.$this->lang.'"]', $f)->item(0)->nodeValue;
                 $dataType = $this->XPath->evaluate('Validation/Datatype', $f)->item(0)->nodeValue;
                 
@@ -112,7 +112,7 @@ class FeatureListParser {
                     }
                     sort($vals);
                     
-                    $IM->addEnumerationField($name, $localizedName, $vals, $dataType);
+                    $IM->addEnumerationField($name, $defaultValue, $localizedName, $vals, $dataType);
                 } else { // interval
                     if ($mv = $this->XPath->evaluate('Validation/MinValue', $f)->item(0)) {
                         $minValue = intval($mv->nodeValue);
@@ -130,7 +130,7 @@ class FeatureListParser {
                         $maxValueInclusive = self::$IM_INCLUSIVE_MAX;
                     }
         
-                    $IM->addIntervalField($name, $localizedName, $minValue, $minValueInclusive, $maxValue, $maxValueInclusive, $dataType);
+                    $IM->addIntervalField($name, $defaultValue, $localizedName, $minValue, $minValueInclusive, $maxValue, $maxValueInclusive, $dataType);
                 }
             }
             

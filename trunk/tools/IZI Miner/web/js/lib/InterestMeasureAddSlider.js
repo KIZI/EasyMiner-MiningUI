@@ -4,7 +4,6 @@ var InterestMeasureAddSlider = new Class({
 	numSteps: 100,
 	precision: 0,
 	inversePrecision: 2,
-	initialStep: 0.75,
 	dataType: 'double',
 	
 	elementSlider: null,
@@ -16,6 +15,7 @@ var InterestMeasureAddSlider = new Class({
 		this.dataType = field.dataType;
 		this.elementSlider = elementSlider;
 		this.field = field;
+		console.log(this.field);
 		
 		if (this.dataType !== 'enum') {
 			this.numberNormalizer = new NumberNormalizer(field.minValue, field.maxValue, this.inversePrecision, 0, 100, this.precision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
@@ -24,7 +24,7 @@ var InterestMeasureAddSlider = new Class({
 		
 		this.parent(this.elementSlider, this.elementSlider.getElement('.knob'), {
 	        range: [0, (this.dataType !== 'enum' ? this.numSteps : (field.values.length - 1))],
-	        initialStep: this.dataType !== 'enum' ? this.numberNormalizer.normalize(this.initialStep) : 0,
+	        initialStep: this.dataType !== 'enum' ? this.numberNormalizer.normalize(this.field.defaultValue) : this.field.values.indexOf(this.field.defaultValue),
 	        
 	        onChange: function(value) {
 	        	this.handleChange(value);
