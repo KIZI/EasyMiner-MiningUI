@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arf:GUHAFeatureList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_02 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
-	xmlns:arf="http://keg.vse.cz/ns/arfeatures_02" mode="AssociationRules" procedure="4ft">
+	xmlns:arf="http://keg.vse.cz/ns/arfeatures_02" mode="AssociationRules"
+	procedure="4ft">
 	<UserInterface>
 		<AllowMultipleRules>false</AllowMultipleRules>
 		<Name>Exploration</Name>
@@ -17,10 +18,10 @@
 	</UserInterface>
 
 	<RulePattern>
-		<Antecedent minNumberOfBBAs="1"/>
-		<Consequent minNumberOfBBAs="1" maxNumberOfBBAs="1"/>
-		<Condition minNumberOfBBAs="0" maxNumberOfBBAs="0"/>
-		<GeneralConstraint minNumberOfBBAs="2"/>
+		<Antecedent minNumberOfBBAs="1" />
+		<Consequent minNumberOfBBAs="1" maxNumberOfBBAs="1" />
+		<Condition minNumberOfBBAs="0" maxNumberOfBBAs="0" />
+		<GeneralConstraint minNumberOfBBAs="2" />
 	</RulePattern>
 
 	<BuildingBlocks>
@@ -317,70 +318,162 @@
 						</Validation>
 					</Field>
 				</Type>
-				<!-- <Type> <Name>b-frequency</Name> <DefaultValue>1</DefaultValue> <LocalizedName 
-					lang="en">b-frequency</LocalizedName> <LocalizedName lang="cs">b-frequency</LocalizedName> 
-					<ThresholdType>Abs</ThresholdType> <CompareType>Greater than or equal</CompareType> 
-					<Explanation lang="en">Number of objects that matche the antecedent but not 
-					the consequent</Explanation> <Field> <Name>threshold</Name> <LocalizedName 
-					lang="en">min value</LocalizedName> <LocalizedName lang="cs">prahová hodnota</LocalizedName> 
-					<Validation> <MinValue inclusive="no">0</MinValue> <MaxValue inclusive="yes">9999999</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> </Type> <Type> <Name>c-frequency</Name> 
-					<DefaultValue>1</DefaultValue> <LocalizedName lang="en">c-frequency</LocalizedName> 
-					<LocalizedName lang="cs">c-frequency</LocalizedName> <ThresholdType>Abs</ThresholdType> 
-					<CompareType>Greater than or equal</CompareType> <Explanation lang="en">Number 
-					of objects that match the consequent but not the antecedent</Explanation> 
-					<Field> <Name>threshold</Name> <LocalizedName lang="en">min value</LocalizedName> 
-					<LocalizedName lang="cs">prahová hodnota</LocalizedName> <Validation> <MinValue 
-					inclusive="no">0</MinValue> <MaxValue inclusive="yes">9999999</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> </Type> <Type> <Name>d-frequency</Name> 
-					<DefaultValue>1</DefaultValue> <LocalizedName lang="en">d-frequency</LocalizedName> 
-					<LocalizedName lang="cs">d-frequency</LocalizedName> <ThresholdType>Abs</ThresholdType> 
-					<CompareType>Greater than or equal</CompareType> <Explanation lang="en">Number 
-					of objects that do not match neither the consequent nor the antecedent</Explanation> 
-					<Field> <Name>threshold</Name> <LocalizedName lang="en">min value</LocalizedName> 
-					<LocalizedName lang="cs">prahová hodnota</LocalizedName> <Validation> <MinValue 
-					inclusive="no">0</MinValue> <MaxValue inclusive="yes">9999999</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> </Type> <Type> <Name>d-frequency</Name> 
-					<DefaultValue>1</DefaultValue> <LocalizedName lang="en">d-frequency</LocalizedName> 
-					<LocalizedName lang="cs">d-frequency</LocalizedName> <ThresholdType>Abs</ThresholdType> 
-					<CompareType>Greater than or equal</CompareType> <Explanation lang="en">Number 
-					of objects that do not match neither the consequent nor the antecedent</Explanation> 
-					<Field> <Name>threshold</Name> <LocalizedName lang="en">min value</LocalizedName> 
-					<LocalizedName lang="cs">prahová hodnota</LocalizedName> <Validation> <MinValue 
-					inclusive="no">0</MinValue> <MaxValue inclusive="yes">9999999</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> </Type> <Type> <Name>r-frequency</Name> 
-					<DefaultValue>1</DefaultValue> <LocalizedName lang="en">r-frequency</LocalizedName> 
-					<LocalizedName lang="cs">r-frequency</LocalizedName> <ThresholdType>Abs</ThresholdType> 
-					<CompareType>Greater than or equal</CompareType> <Explanation lang="en">Number 
-					of objects that match the antecedent</Explanation> <Field> <Name>threshold</Name> 
-					<LocalizedName lang="en">min value</LocalizedName> <LocalizedName lang="cs">prahová 
-					hodnota</LocalizedName> <Validation> <MinValue inclusive="no">0</MinValue> 
-					<MaxValue inclusive="yes">9999999</MaxValue> <Datatype>integer</Datatype> 
-					</Validation> </Field> </Type> <Type> <Name>s-frequency</Name> <DefaultValue>1</DefaultValue> 
-					<LocalizedName lang="en">s-frequency</LocalizedName> <LocalizedName lang="cs">s-frequency</LocalizedName> 
-					<ThresholdType>Abs</ThresholdType> <CompareType>Greater than or equal</CompareType> 
-					<Explanation lang="en">Number of objects that do not match the antecedent</Explanation> 
-					<Field> <Name>threshold</Name> <LocalizedName lang="en">min value</LocalizedName> 
-					<LocalizedName lang="cs">prahová hodnota</LocalizedName> <Validation> <MinValue 
-					inclusive="no">0</MinValue> <MaxValue inclusive="yes">9999999</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> </Type> <Type> <Name>k-frequency</Name> 
-					<DefaultValue>1</DefaultValue> <LocalizedName lang="en">k-frequency</LocalizedName> 
-					<LocalizedName lang="cs">k-frequency</LocalizedName> <ThresholdType>Abs</ThresholdType> 
-					<CompareType>Greater than or equal</CompareType> <Explanation lang="en">Number 
-					of objects that match the consequent</Explanation> <Field> <Name>threshold</Name> 
-					<LocalizedName lang="en">min value</LocalizedName> <LocalizedName lang="cs">prahová 
-					hodnota</LocalizedName> <Validation> <MinValue inclusive="no">0</MinValue> 
-					<MaxValue inclusive="yes">9999999</MaxValue> <Datatype>integer</Datatype> 
-					</Validation> </Field> </Type> <Type> <Name>l-frequency</Name> <DefaultValue>1</DefaultValue> 
-					<LocalizedName lang="en">l-frequency</LocalizedName> <LocalizedName lang="cs">l-frequency</LocalizedName> 
-					<ThresholdType>Abs</ThresholdType> <CompareType>Greater than or equal</CompareType> 
-					<Explanation lang="en">Number of objects that do not match the consequent</Explanation> 
-					<Field> <Name>threshold</Name> <LocalizedName lang="en">min value</LocalizedName> 
-					<LocalizedName lang="cs">prahová hodnota</LocalizedName> <Validation> <MinValue 
-					inclusive="no">0</MinValue> <MaxValue inclusive="yes">9999999</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> </Type> -->
+				<!--
+				<Type>
+					<Name>a-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">a-frequency</LocalizedName>
+					<LocalizedName lang="cs">a-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that match both antecedent and consequent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>b-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">b-frequency</LocalizedName>
+					<LocalizedName lang="cs">b-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that match the antecedent but not the consequent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>c-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">c-frequency</LocalizedName>
+					<LocalizedName lang="cs">c-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that match the consequent but not the antecedent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>d-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">d-frequency</LocalizedName>
+					<LocalizedName lang="cs">d-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that do not match neither the consequent nor the antecedent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>r-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">r-frequency</LocalizedName>
+					<LocalizedName lang="cs">r-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that match the antecedent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>s-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">s-frequency</LocalizedName>
+					<LocalizedName lang="cs">s-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that do not match the antecedent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>k-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">k-frequency</LocalizedName>
+					<LocalizedName lang="cs">k-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that match the consequent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				<Type>
+					<Name>l-frequency</Name>
+					<DefaultValue>1</DefaultValue>
+					<LocalizedName lang="en">l-frequency</LocalizedName>
+					<LocalizedName lang="cs">l-frequency</LocalizedName>
+					<ThresholdType>Abs</ThresholdType>
+					<CompareType>Greater than or equal</CompareType>
+					<Explanation lang="en">Number of objects that do not match the consequent</Explanation>
+					<Field>
+						<Name>threshold</Name>
+						<LocalizedName lang="en">min value</LocalizedName>
+						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
+						<Validation>
+							<MinValue inclusive="no">0</MinValue>
+							<MaxValue inclusive="yes">10000</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+				</Type>
+				-->
 			</Types>
-			<SupportedInterestMeasureCombinations/>
+			<SupportedInterestMeasureCombinations />
 		</InterestMeasures>
 
 		<BasicBooleanAttribute coefficient="required">
@@ -396,7 +489,7 @@
 						<LocalizedName lang="en">Minimum number of values</LocalizedName>
 						<LocalizedName lang="cs">Minimální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -409,7 +502,7 @@
 						<LocalizedName lang="en">Maximum number of values</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -437,7 +530,7 @@
 						<LocalizedName lang="en">Value</LocalizedName>
 						<LocalizedName lang="cs">Kategorie</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<Datatype>string</Datatype>
 						</Validation>
 					</Field>
@@ -453,7 +546,7 @@
 						<LocalizedName lang="en">Min length</LocalizedName>
 						<LocalizedName lang="cs">Minimální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -465,7 +558,7 @@
 						<LocalizedName lang="en">Number of values considered as consecutive</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>3</MaxValue>
 							<Datatype>integer</Datatype>
@@ -484,7 +577,7 @@
 						<LocalizedName lang="en">Min length</LocalizedName>
 						<LocalizedName lang="cs">Minimální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -496,7 +589,7 @@
 						<LocalizedName lang="en">Number of values considered as consecutive</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>3</MaxValue>
 							<Datatype>integer</Datatype>
@@ -515,7 +608,7 @@
 						<LocalizedName lang="en">Min length</LocalizedName>
 						<LocalizedName lang="cs">Minimální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -528,7 +621,7 @@
 						<LocalizedName lang="en">Number of values considered as low</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>3</MaxValue>
 							<Datatype>integer</Datatype>
@@ -547,7 +640,7 @@
 						<LocalizedName lang="en">Minimum number of values</LocalizedName>
 						<LocalizedName lang="cs">Minimální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -560,7 +653,7 @@
 						<LocalizedName lang="en">Number of values considered as high</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>3</MaxValue>
 							<Datatype>integer</Datatype>
@@ -579,7 +672,7 @@
 						<LocalizedName lang="en">Minimum number of values</LocalizedName>
 						<LocalizedName lang="cs">Minimální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
@@ -592,7 +685,7 @@
 						<LocalizedName lang="en">Number of values considered as high</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
-							<Required value="yes"/>
+							<Required value="yes" />
 							<MinValue>1</MinValue>
 							<MaxValue>3</MaxValue>
 							<Datatype>integer</Datatype>
@@ -609,26 +702,26 @@
 				<MaxLevels>3</MaxLevels>
 				<NestingConstraint level="1">
 					<Connectives>
-						<Conjunction allowed="yes"/>
-						<Disjunction allowed="no"/>
-						<Any allowed="no"/>
-						<Negation allowed="no"/>
+						<Conjunction allowed="yes" />
+						<Disjunction allowed="no" />
+						<Any allowed="no" />
+						<Negation allowed="no" />
 					</Connectives>
 				</NestingConstraint>
 				<NestingConstraint level="2">
 					<Connectives>
-						<Conjunction allowed="yes"/>
-						<Disjunction allowed="yes"/>
-						<Any allowed="no"/>
-						<Negation allowed="no"/>
+						<Conjunction allowed="yes" />
+						<Disjunction allowed="yes" />
+						<Any allowed="no" />
+						<Negation allowed="no" />
 					</Connectives>
 				</NestingConstraint>
 				<NestingConstraint level="3">
 					<Connectives>
-						<Conjunction allowed="no"/>
-						<Disjunction allowed="no"/>
-						<Any allowed="no"/>
-						<Negation allowed="yes"/>
+						<Conjunction allowed="no" />
+						<Disjunction allowed="no" />
+						<Any allowed="no" />
+						<Negation allowed="yes" />
 					</Connectives>
 				</NestingConstraint>
 			</NestingConstraints>

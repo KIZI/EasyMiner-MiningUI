@@ -15,11 +15,10 @@ var InterestMeasureAddSlider = new Class({
 		this.dataType = field.dataType;
 		this.elementSlider = elementSlider;
 		this.field = field;
-		console.log(this.field);
 		
 		if (this.dataType !== 'enum') {
-			this.numberNormalizer = new NumberNormalizer(field.minValue, field.maxValue, this.inversePrecision, 0, 100, this.precision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
-			this.inverseNumberNormalizer = new NumberNormalizer(0, 100, this.precision, field.minValue, field.maxValue, this.inversePrecision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
+			this.numberNormalizer = new NumberNormalizer(field.minValue, field.maxValue, this.inversePrecision, 0, this.numSteps, this.precision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
+			this.inverseNumberNormalizer = new NumberNormalizer(0, this.numSteps, this.precision, field.minValue, field.maxValue, this.inversePrecision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
 		}
 		
 		this.parent(this.elementSlider, this.elementSlider.getElement('.knob'), {
