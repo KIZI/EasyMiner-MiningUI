@@ -13,32 +13,12 @@ var InterestMeasureAR = new Class({
 		this.alpha = alpha;
 	},
 	
-	getValue: function () {
-		return this.hasThreshold() ? this.getThreshold() : this.getAlpha();
-	},
-	
-	setValue: function (val) {
-		if (this.hasThreshold()) {
-			this.threshold = val;
-		} else {
-			this.alpha = val;
-		}
-	},
-	
-	hasThreshold: function() {
-		return this.threshold !== null;
-	},
-	
 	getThreshold: function () {
 		return this.threshold;
 	},
 	
 	setThreshold: function (val) {
 		this.threshold = val;
-	},
-	
-	hasAlpha: function() {
-		return this.alpha !== null;
 	},
 	
 	getAlpha: function () {
@@ -69,7 +49,7 @@ var InterestMeasureAR = new Class({
 	},
 	
 	toString: function () {
-		return this.getLocalizedName() + ':<span class="im-value">' + this.getValue().format({decimals: this.displayPrecision}) + '</span>';
+		return this.getLocalizedName() + ':<span class="im-value">' + this.getThreshold().format({decimals: this.displayPrecision}) + '</span>';
 	}
 
 });

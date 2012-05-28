@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Add IM & Add IM - supported combination</title>
+<link rel="selenium.base" href="http://localhost/izi-miner/web/" />
+<title>Edit IM</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Add IM & Add IM - supported combination</td></tr>
+<tr><td rowspan="1" colspan="3">Edit IM</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -22,8 +23,13 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=add-im-select</td>
-	<td>value=DFUI</td>
+	<td>css=#add-im-select</td>
+	<td>value=SUPP</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-im-threshold-value</td>
+	<td>0.10</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -31,14 +37,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=add-im</td>
+	<td>waitForElementPresent</td>
+	<td>css=.edit-im</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=add-im-select</td>
-	<td>value=DLCI</td>
+	<td>click</td>
+	<td>css=.edit-im</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedValue</td>
+	<td>css=#edit-im-select</td>
+	<td>SUPP</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=#edit-im-threshold-value</td>
+	<td>0.10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#edit-im-threshold-value</td>
+	<td>0.20</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -46,25 +67,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=add-im</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=#im-supp .threshold</td>
+	<td>0.20</td>
 </tr>
-<tr>
-	<td>select</td>
-	<td>id=add-im-select</td>
-	<td>value=l-frequency</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyXpathCount</td>
-	<td>//div[@id='interest-measures']/div/div</td>
-	<td>3</td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

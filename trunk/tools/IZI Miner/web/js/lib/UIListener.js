@@ -260,44 +260,54 @@ var UIListener = new Class({
 	},
 	
 	registerIMEventHandler: function (IM) {
-		// change IM value
-		$(IM.getCSSSliderID()).addEvent('change', function () {
-			this.ARManager.editIM(IM);
+		// edit
+		$(IM.getCSSEditID()).addEvent('click', function (e) {
+			e.stop();
+			this.ARManager.openEditIMWindow(IM);
 		}.bind(this));
 		
 		// remove
-		$(IM.getCSSRemoveID()).addEvent('click', function (event) {
-			event.stop();
+		$(IM.getCSSRemoveID()).addEvent('click', function (e) {
+			e.stop();
 			this.ARManager.removeIM(IM);
 		}.bind(this));
 	},
 	
-	registerAddIMFormEventHandler: function () {
+	registerIMFormEventHandler: function (action) {
 		// submit
-		var elementSubmit = $('add-im-form').getElement('input[type=submit]');
+		var elementSubmit = $(action + '-im-form').getElement('input[type=submit]');
 		elementSubmit.addEvent('click', function (event) {
 			event.stop();
-			var elementSelect = $('add-im-select');
+			var elementSelect = $(action + '-im-select');
 			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
 			var IM = this.ARManager.getIMPrototype(IMName);
-			var IMThresholdValue = $('add-im-threshold-value') ? $('add-im-threshold-value').value : null;
-			var IMAlphaValue = $('add-im-alpha-value') ? $('add-im-alpha-value').value : null;
-			var IM = this.ARManager.addIM(IMName, IMThresholdValue, IMAlphaValue);
+
+			var validator = new IMValidator();
+			var valid = validator.validate(IM, action);
+			if (valid) {
+				var thresholdValue = IM.hasThreshold() ? $(action + '-im-threshold-value').value : null;
+				var alphaValue = IM.hasAlpha() ? $(action + '-im-alpha-value').value : null;
+				if (action === 'add') {
+					var IM = this.ARManager.addIM(IM, thresholdValue, alphaValue);
+				} else {
+					var IM = this.ARManager.editIM(IM, thresholdValue, alphaValue);
+				}
+			}
 		}.bind(this));
 		
 		// change IM
-		var elementSelect = $('add-im-select');
+		var elementSelect = $(action + '-im-select');
 		elementSelect.addEvent('change', function (e) {
 			e.stop();
 			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
 			var IM = this.ARManager.getIMPrototype(IMName);
-			this.UIPainter.renderAddIMAutocomplete(IM);
+			this.UIPainter.renderIMAutocomplete(action, IM);
 		}.bind(this));
 		
 		// close
-		var elementClose = $('add-im-close');
+		var elementClose = $(action + '-im-close');
 		elementClose.addEvent('click', function (event) {
-			this.ARManager.closeAddIMWindow();
+			this.ARManager.closeIMWindow();
 			event.stop();
 		}.bind(this));
 	},

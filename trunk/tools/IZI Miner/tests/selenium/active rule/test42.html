@@ -3,17 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost/arbuilder/web/" />
-<title>2x Add IM & Remove IM & Show add IM button</title>
+<link rel="selenium.base" href="http://localhost/izi-miner/web/" />
+<title>Add IM - no slider</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">2x Add IM & Remove IM & Show add IM button</td></tr>
+<tr><td rowspan="1" colspan="3">Add IM - no slider</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/arbuilder/web/</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -24,7 +24,12 @@
 <tr>
 	<td>select</td>
 	<td>id=add-im-select</td>
-	<td>label=Support</td>
+	<td>value=a-frequency</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-im-threshold-value</td>
+	<td>100</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -32,29 +37,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=add-im</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=add-im-select</td>
-	<td>label=Above Average Implication</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=im-above-average-implication-remove</td>
+	<td>assertElementNotPresent</td>
+	<td>id=add-im-window</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>xpath=//a[@id='add-im' and not(contains(@style,'display: none'))]</td>
-	<td>1</td>
+	<td>id=im-a-frequency</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#im-a-frequency .threshold</td>
+	<td>100</td>
 </tr>
 
 </tbody></table>

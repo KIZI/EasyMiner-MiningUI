@@ -3,13 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost/arbuilder/web/" />
-<title>Add attribute & Remove cedent</title>
+<title>BUG: Add wildcard coefficient</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Add attribute & Remove cedent</td></tr>
+<tr><td rowspan="1" colspan="3">BUG: Add wildcard coefficient</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -22,14 +21,19 @@
 	<td>css=#antecedent .cedent</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=div.cedent a.remove-cedent</td>
-	<td></td>
+	<td>verifyText</td>
+	<td>css=div.field span</td>
+	<td>Age</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>css=div.cedent div.field</td>
-	<td></td>
+	<td>select</td>
+	<td>id=add-coefficient-select</td>
+	<td>label=Subset</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=add-coefficient-minlength</td>
+	<td>1</td>
 </tr>
 
 </tbody></table>

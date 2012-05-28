@@ -318,10 +318,8 @@
 						</Validation>
 					</Field>
 				</Type>
-				<!--
 				<Type>
-					<Name>a-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>a</Name>
 					<LocalizedName lang="en">a-frequency</LocalizedName>
 					<LocalizedName lang="cs">a-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -329,18 +327,18 @@
 					<Explanation lang="en">Number of objects that match both antecedent and consequent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>b-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>b</Name>
 					<LocalizedName lang="en">b-frequency</LocalizedName>
 					<LocalizedName lang="cs">b-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -348,18 +346,18 @@
 					<Explanation lang="en">Number of objects that match the antecedent but not the consequent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>c-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>c</Name>
 					<LocalizedName lang="en">c-frequency</LocalizedName>
 					<LocalizedName lang="cs">c-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -367,18 +365,18 @@
 					<Explanation lang="en">Number of objects that match the consequent but not the antecedent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>d-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>d</Name>
 					<LocalizedName lang="en">d-frequency</LocalizedName>
 					<LocalizedName lang="cs">d-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -386,18 +384,18 @@
 					<Explanation lang="en">Number of objects that do not match neither the consequent nor the antecedent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>r-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>r</Name>
 					<LocalizedName lang="en">r-frequency</LocalizedName>
 					<LocalizedName lang="cs">r-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -405,18 +403,18 @@
 					<Explanation lang="en">Number of objects that match the antecedent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>s-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>s</Name>
 					<LocalizedName lang="en">s-frequency</LocalizedName>
 					<LocalizedName lang="cs">s-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -424,18 +422,18 @@
 					<Explanation lang="en">Number of objects that do not match the antecedent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>k-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>k</Name>
 					<LocalizedName lang="en">k-frequency</LocalizedName>
 					<LocalizedName lang="cs">k-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -443,18 +441,18 @@
 					<Explanation lang="en">Number of objects that match the consequent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
 				<Type>
-					<Name>l-frequency</Name>
-					<DefaultValue>1</DefaultValue>
+					<Name>l</Name>
 					<LocalizedName lang="en">l-frequency</LocalizedName>
 					<LocalizedName lang="cs">l-frequency</LocalizedName>
 					<ThresholdType>Abs</ThresholdType>
@@ -462,16 +460,16 @@
 					<Explanation lang="en">Number of objects that do not match the consequent</Explanation>
 					<Field>
 						<Name>threshold</Name>
+						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="yes">10000</MaxValue>
+							<MaxValue inclusive="yes">9999999</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
 				</Type>
-				-->
 			</Types>
 			<SupportedInterestMeasureCombinations />
 		</InterestMeasures>

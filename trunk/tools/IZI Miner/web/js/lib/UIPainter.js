@@ -318,10 +318,6 @@ var UIPainter = new Class({
 	renderIM: function (IM) {
 		var elementParent = $$('div#interest-measures > div')[0];
 		elementParent.grab(Mooml.render('interestMeasureTemplate', {IM: IM, i18n: this.i18n}));
-		
-	    var elementSlider = $(IM.getCSSSliderID());
-	    var IMSlider = new InterestMeasureARSlider(elementSlider, IM, IM.fields[0], this.ARManager);	
-	    
 	    this.UIListener.registerIMEventHandler(IM);
 	}, 
 	
@@ -331,20 +327,31 @@ var UIPainter = new Class({
 		var selectedIM = IMs[Object.keys(IMs)[0]];
 		Object.each(IMs, function (IM) {
 			var isSelected = (IM.getName() === selectedIM.getName());
-			$('add-im-select').grab(Mooml.render('addIMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
+			$('add-im-select').grab(Mooml.render('IMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
 		}.bind(this));
 		
-		this.renderAddIMAutocomplete(selectedIM);
+		this.renderIMAutocomplete('add', selectedIM);
 
-		this.UIListener.registerAddIMFormEventHandler();
+		this.UIListener.registerIMFormEventHandler('add');
 	},
 	
-	renderAddIMAutocomplete: function (selectedIM) {
-		var autocomplete = $('add-im-form').getElement('.autocomplete');
-		autocomplete.empty();
+	renderEditIMWindow: function(IMs, selectedIM) {
+		var overlay = this.showOverlay();
+		overlay.grab(Mooml.render('editIMWindowTemplate', {i18n: this.i18n, IM: selectedIM}));
+		Object.each(IMs, function (IM) {
+			var isSelected = (IM.getName() === selectedIM.getName());
+			$('edit-im-select').grab(Mooml.render('IMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
+		}.bind(this));
+		
+		this.renderIMAutocomplete('edit', selectedIM);
+
+		this.UIListener.registerIMFormEventHandler('edit');
+	},
+	
+	renderIMAutocomplete: function (action, selectedIM) {
+		var elAutocomplete = $(action + '-im-form').getElement('.autocomplete').empty();
 		Array.each(selectedIM.getFields(), function (f) {
-			autocomplete.grab(Mooml.render('addIMWindowAutocompleteTemplate', {i18n: this.i18n, field: f}));
-			var IMSlider = new InterestMeasureAddSlider($('add-im-' + f.name + '-slider'), f);
+			var IMSlider = new InterestMeasureSlider(elAutocomplete, f, action, selectedIM);
 		}.bind(this));
 	},
 	

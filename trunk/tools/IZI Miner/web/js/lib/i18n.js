@@ -60,7 +60,8 @@ var i18n = new Class({
 			   56: {'cs': 'Relevance feedback', 'en': 'Relevance feedback'},
 			   57: {'cs': 'Asociační pravidlo je považováno za zajímavé.', 'en': 'Association rule is considered as interesting.'},
 			   58: {'cs': 'Asociační pravidlo je považováno za nezajímavé.', 'en': 'Association rule is considered as not interesting.'},
-			   59: {'cs': 'Pro asociační pravidlo existují ve znalostní bázi vyjímky.', 'en': 'There are exceptions to this association rule in the knowledge base.'}},
+			   59: {'cs': 'Pro asociační pravidlo existují ve znalostní bázi vyjímky.', 'en': 'There are exceptions to this association rule in the knowledge base.'},
+			   60: {'cs': 'Neplatná hodnota', 'en': 'Invalid value'}},
 			   
 	initialize: function (lang) {
 		this.lang = lang;

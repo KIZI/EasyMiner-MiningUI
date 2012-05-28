@@ -7,7 +7,7 @@ var InterestMeasure = new Class({
 	explanation: '',
 	thresholdType: '',
 	compareType: '',
-	field: [],
+	fields: [],
 	stringHelper: null,
 
 	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper) {
@@ -56,8 +56,34 @@ var InterestMeasure = new Class({
 		return this.stringHelper;
 	},
 	
+	hasThreshold: function() {
+		var has = false;
+		Array.each(this.fields, function (f) {
+			if (f.name === 'threshold') {
+				has = true;
+			}
+		}.bind(this));
+		
+		return has;
+	},
+	
+	hasAlpha: function() {
+		var has = false;
+		Array.each(this.fields, function (f) {
+			if (f.name === 'alpha') {
+				has = true;
+			}
+		}.bind(this));
+		
+		return has;
+	},
+	
 	getCSSID: function () {
 		return 'im-' + this.getNormalizedName();
+	},
+	
+	getCSSEditID: function () {
+		return 'im-' + this.getNormalizedName() + '-edit';
 	},
 	
 	getCSSRemoveID: function () {
