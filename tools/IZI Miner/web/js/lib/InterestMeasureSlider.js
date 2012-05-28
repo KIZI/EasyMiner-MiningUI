@@ -1,0 +1,170 @@
+var InterestMeasureSlider = new Class({
+	Extends: Slider,
+
+	elParent: null,
+	field: null,
+	action: '',
+	IM: null,
+	dataType: '',
+	
+	sliderEnabled: true,
+	sliderWidth: 0,
+	sliderBorder: 10,
+	sliderDefaultWidth: 110,
+	sliderMaxWidth: 200,
+	elSlider: null,
+	valueDefaultWidth: 6,
+	elValue: null,
+	inversePrecision: 0,
+	numSteps: 0,
+	precision: 0,
+	
+	numberNormalizer: null,
+	inverseNumberNormalizer: null,
+	
+	initialize: function (elParent, field, action, IM) {
+		this.elParent = elParent;
+		this.field = field;
+		this.action = action;
+		this.IM = IM;
+		this.dataType = this.field.dataType;
+		
+		// calculate num
+		this.calculateNumSteps();
+		
+		// normalizers
+		if (this.dataType !== 'enum') {
+			this.numberNormalizer = new NumberNormalizer(field.minValue, field.maxValue, this.inversePrecision, 0, this.numSteps, this.precision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
+			this.inverseNumberNormalizer = new NumberNormalizer(0, this.numSteps, this.precision, field.minValue, field.maxValue, this.inversePrecision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
+		}
+
+		// create HTML elements
+		this.createInput();
+		
+		if (this.sliderEnabled) { // create slider
+			this.createSlider();
+			this.parent(this.elSlider, this.elSlider.getElement('.knob'), {
+				range: [0, this.numSteps],
+				initialStep: this.getValue(),
+				onChange: function (value) {
+					this.handleChange(value);
+				}
+			});
+		} else { // set defaultValue
+			this.elValue.set('value', this.getValue());
+		}
+	},
+	
+	calculateNumSteps: function () {
+		if (this.dataType === 'double') {
+			var numSteps = (this.field.maxValue - this.field.minValue) * 100;
+			if ((numSteps + this.sliderBorder) <= this.sliderMaxWidth) {
+				this.numSteps = numSteps;
+				this.sliderWidth = this.sliderBorder + this.numSteps;
+				this.inversePrecision = 2;
+			} else {
+				this.sliderEnabled = false;
+			}
+		} else if (this.dataType === 'integer') {
+			var numSteps = this.field.maxValue - this.field.minValue;
+			if ((numSteps + this.sliderBorder) <= this.sliderMaxWidth) {
+				this.numSteps = numSteps;
+				this.sliderWidth = this.sliderBorder + this.numSteps;
+			} else {
+				this.sliderEnabled = false;
+			}
+		} else if (this.dataType === 'enum') {
+			this.numSteps = (this.field.values.length - 1);
+			this.sliderWidth = this.sliderDefaultWidth;
+		} else {
+			this.numSteps = 100;
+			this.sliderWidth = this.sliderDefaultWidth;
+		}
+	},
+	
+	createInput: function () {
+		var elLabel = new Element('label', {
+			'for': 'add-im-' + this.field.name + '-value',
+			html: this.field.localizedName + ':'
+		});
+		this.elParent.grab(elLabel);
+		
+		var width = this.dataType !== 'enum' ? this.field.maxValue.toString().length * 2 + (this.dataType !== 'integer' ? this.inversePrecision + 1 : 0) : this.valueDefaultWidth;
+		this.elValue = new Element('input', {
+			type: 'text',
+			id: this.action + '-im-' + this.field.name + '-value',
+			name: this.action + '-im-' + this.field.name + '-value', 
+			'readonly': this.sliderEnabled ? 'readonly' : '', 
+			'data-validators': 'dataType:"' + this.dataType + '" minValue:' + this.field.minValue + ' minValueInclcusive:' + this.field.minValueInclusive + ' maxValue:' + this.field.maxValue + ' maxValueInclusive:' + this.field.maxValueInclusive,
+			'class': this.action + '-im-value',
+			styles: {
+				width: width + 'ex'
+			}
+		});
+		this.elParent.grab(this.elValue);
+		
+		if (!this.sliderEnabled) {
+			// input comment
+			var comment = new Element('em', {
+				html: this.dataType.capitalize() + ' ' + (this.field.minValueInclusive ? '<' : '(') + this.field.minValue + '; ' + this.field.maxValue.format({group: ' '}) + (this.field.maxValueInclusive ? '>' : ')')
+			});
+			this.elParent.grab(comment);
+			
+			// input validation message
+			var label = new Element('label', {html: '&nbsp;'});
+			this.elParent.grab(label);
+			var error = new Element('div', {
+				id: 'message'
+			});
+			this.elParent.grab(error);
+		}
+	},
+	
+	createSlider: function () {
+		this.elSlider = new Element('div#', {
+			id: this.action + '-im-' + this.field.name +'-slider', 
+			'class': this.action + '-im-slider',
+			styles: {
+				width: this.sliderWidth
+			}
+		});
+		var elKnob = new Element('div', {
+			'class': 'knob'
+		});
+		this.elSlider.grab(elKnob);
+		this.elParent.grab(this.elSlider);
+	},
+	
+	getValue: function () {
+		if (this.action === 'add') {
+			if (this.sliderEnabled) {
+				return this.dataType !== 'enum' ? this.numberNormalizer.normalize(this.field.defaultValue) : this.field.values.indexOf(this.field.defaultValue);
+			} else {
+				return this.field.defaultValue;
+			}
+		} else { // edit
+			if (this.sliderEnabled) {
+				if (this.dataType !== 'enum') {
+					return this.numberNormalizer.normalize(this.field.name === 'threshold' ? this.IM.getThreshold() : this.IM.getAlpha());
+				} else {
+					return this.field.values.indexOf(this.field.name === 'threshold' ? this.IM.getThreshold() : this.IM.getAlpha());
+				}
+			} else {
+				return this.field.name === 'threshold' ? this.IM.getThreshold() : this.IM.getAlpha();
+			}
+		}
+	},
+	
+	handleChange: function (value) {
+		if (this.dataType !== 'enum') {
+	    	var number = this.inverseNumberNormalizer.validate(value);
+	    	number = this.inverseNumberNormalizer.normalize(number);
+	    	var string = this.inverseNumberNormalizer.format(number);
+	    	this.elValue.set('value', string);
+		} else {
+			var number = this.field.values[value];
+			this.elValue.set('value', number);
+		}
+	}
+
+});

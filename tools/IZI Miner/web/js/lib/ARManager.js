@@ -63,11 +63,7 @@ var ARManager = new Class({
 	},
 	
 	hasPossibleIMs: function () {
-		return Object.getLength(this.getPossibleIMs()) > 0;
-	},
-
-	getPossibleIMs: function () {
-		return this.FL.getPossibleIMs(this.activeRule.getIMs());
+		return Object.getLength(this.FL.getPossibleIMs(this.activeRule.getIMs())) > 0;
 	},
 	
 	getActiveRule: function () {
@@ -75,11 +71,16 @@ var ARManager = new Class({
 	},
 	
 	openAddIMWindow: function () {
-		var possibleIMs = this.getPossibleIMs();
+		var possibleIMs = this.FL.getPossibleIMs(this.activeRule.getIMs());
 		this.UIPainter.renderAddIMWindow(possibleIMs);
 	},
 	
-	closeAddIMWindow: function () {
+	openEditIMWindow: function (selectedIM) {
+		var IMs = this.FL.getIMs();
+		this.UIPainter.renderEditIMWindow(IMs, selectedIM);
+	},
+	
+	closeIMWindow: function () {
 		this.UIPainter.hideOverlay();
 	},
 	
@@ -87,18 +88,16 @@ var ARManager = new Class({
 		this.activeRule.addAntecedent(antecedent);
 	},
 	
-	addIM: function (name, thresholdValue, alphaValue) {
-		var IMPrototype = this.getIMPrototype(name);
-		var IM = new InterestMeasureAR(name, IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), thresholdValue, alphaValue);
+	addIM: function (IMPrototype, thresholdValue, alphaValue) {
+		var IM = new InterestMeasureAR(IMPrototype.getName(), IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), thresholdValue, alphaValue);
 		this.activeRule.addIM(IM);
-		
 		this.UIPainter.hideOverlay();
 		this.UIPainter.renderActiveRule();
 	},
 	
-	editIM: function (IM) {
-		this.activeRule.editIM(IM, $(IM.getCSSValueID()).get('text'));
-		this.setActiveRuleChanged();
+	editIM: function (IMPrototype, thresholdValue, alphaValue) {
+		this.activeRule.editIM(IMPrototype, thresholdValue, alphaValue);
+		this.UIPainter.hideOverlay();
 		this.UIPainter.renderActiveRule();
 	},
 	

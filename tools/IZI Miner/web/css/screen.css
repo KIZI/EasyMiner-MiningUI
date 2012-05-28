@@ -59,7 +59,7 @@ section#overlay > div {
 #edit-im-window,
 #edit-connective-window,
 #settings-window {
-	width: 365px;
+	width: 380px;
 }
 
 section#overlay h2 {
@@ -139,6 +139,19 @@ input[type='text'].add-im-value	 {
 	
 	float: right;
 	position: relative; top: -20px;
+}
+
+#add-im-window em,
+#edit-im-window em {
+	font-size: 14px;
+	font-style: normal;
+	padding-left: 5px;
+}
+
+#add-im-window #message,
+#edit-im-window #message {
+	color: #A41D1D;
+	line-height: 1em;
 }
 
 /* header */
@@ -261,9 +274,14 @@ div#antecedent {
 }
 
 div#interest-measures {
-	width: 170px;
+	width: 190px;
 	float: left;
 	margin-right: 20px;
+}
+
+div#interest-measures > div > div {
+	float: left; clear: left;
+	margin-bottom: 7px;
 }
 
 #interest-measures #add-im {
@@ -278,19 +296,30 @@ div#interest-measures {
 
 div#interest-measures .name {
 	font-size: 14px;
+	float: left;
+	width: 150px;
 }
 
 div#interest-measures .im-slider {
 	margin: 5px 0 6px;
 }
 
-div#interest-measures .im-slider-static,
-div#interest-measures .im-slider-value {
+div#interest-measures .threshold,
+div#interest-measures .alpha {
 	color: #7B0D2E;
 }
 
-div#interest-measures .im-slider-static {
-	padding-left: 5px;
+div#interest-measures .edit-im {
+	background: transparent url('../images/icon-edit3.png') 0 0 no-repeat;
+	visibility: hidden;
+	
+	display: block; width: 15px; height: 15px;
+	float: left;
+	margin-right: 10px;
+}
+
+div#interest-measures > div > div:hover .edit-im {
+	visibility: visible;
 }
 
 div#interest-measures .remove-im {
@@ -298,23 +327,16 @@ div#interest-measures .remove-im {
 	visibility: hidden;
 	
 	display: block; width: 15px; height: 15px;
-	float: right;
+	float: left;
 }
 
-div#interest-measures div > div:hover .remove-im {
-	background: transparent url('../images/icon-remove.png') 0 0 no-repeat;
+div#interest-measures > div > div:hover .remove-im {
 	visibility: visible;
-	
-	display: block; width: 15px; height: 15px;
-	float: right;
-	margin-right: 15px;
 }
 
 div#succedent {
 	float: left;	
 }
-
-
 
 div#antecedent > div.cedent,
 div#succedent > div.cedent { 
@@ -517,6 +539,7 @@ section#overlay #edit-coefficient-minlength-slider,
 section#overlay #add-coefficient-maxlength-slider,
 section#overlay #edit-coefficient-maxlength-slider,
 section#overlay .add-im-slider,
+section#overlay .edit-im-slider,
 section#active-rule .im-slider {
     background: #FFF none;
     border: 1px solid #A6C9E2;
@@ -531,6 +554,7 @@ section#overlay #edit-coefficient-minlength-slider .knob,
 section#overlay #add-coefficient-maxlength-slider .knob,
 section#overlay #edit-coefficient-maxlength-slider .knob,
 section#overlay .add-im-slider .knob,
+section#overlay .edit-im-slider .knob,
 section#active-rule .im-slider .knob {
 	background: url("../images/?new=0078ae&w=1&h=400&f=png&q=100&fltr[]=over|textures/02_glass.png|0|0|45") repeat-x scroll 0 50% #0078AE;
     border: 1px solid #77D5F7;

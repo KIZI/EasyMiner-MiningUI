@@ -8,9 +8,10 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="test1.html">Blank active rule</a></td></tr>
 <tr><td><a href="test2.html">Add IM - interval</a></td></tr>
 <tr><td><a href="test39.html">Add IM - enumeration</a></td></tr>
+<tr><td><a href="test42.html">Add IM - no slider</a></td></tr>
+<tr><td><a href="../../../../../../Users/Radek/Desktop/xxx.html">Add IM - combination</a></td></tr>
 <tr><td><a href="test3.html">Drag IM knot</a></td></tr>
 <tr><td><a href="test4.html">Remove IM</a></td></tr>
 <tr><td><a href="test5.html">Close add IM window</a></td></tr>
@@ -34,8 +35,8 @@
 <tr><td><a href="test35.html">Group attributes confirm</a></td></tr>
 <tr><td><a href="test37.html">BUG: Proper number of cedents 1</a></td></tr>
 <tr><td><a href="test38.html">BUG: Proper number of cedents 2</a></td></tr>
-<tr><td><a href="../4ft/test15.html">BUG: Drag add IM knob (category)</a></td></tr>
-<tr><td><a href="../4ft/test16.html">BUG: Add wildcard coefficient</a></td></tr>
+<tr><td><a href="test41.html">BUG: Drag add IM knob (category)</a></td></tr>
+<tr><td><a href="test40.html">BUG: Add wildcard coefficient</a></td></tr>
 </tbody></table>
 </body>
 </html>

@@ -10,7 +10,7 @@ var UITemplateRegistrator = new Class({
 		this.registerStructure();		
 		this.registerNavigation();
 		this.registerActiveRule();
-		this.registerAddIMWindow();
+		this.registerIMWindow();
 		this.registerAddCoefficientWindow();
 		this.registerEditConnectiveWindow();
 		this.registerFoundRule();
@@ -138,12 +138,12 @@ var UITemplateRegistrator = new Class({
 			
 			div({id: IM.getCSSID()},
 				span({'class': 'name', 'title': IM.getFields().localizedName}, 
-						IM.getLocalizedName() + ': ', 
-						span({id: IM.getCSSValueID(), 'class': 'im-slider-value'}),
-						IM.hasThreshold() && IM.hasAlpha() ? ',<span class="im-slider-static">α ' + IM.getAlpha() + '</span>' : '',
-						a({id: IM.getCSSRemoveID(), href: '#', 'class': 'remove-im', 'title': i18n.translate('Remove')})),
-				div({id: IM.getCSSSliderID(), 'class': 'im-slider'},
-						div({'class': 'knob'})));
+					IM.getLocalizedName() + ': ', 
+					IM.hasThreshold() ? span({'class': 'threshold'}, IM.getThreshold()) : '', 
+					IM.hasThreshold() && IM.hasAlpha() ? ', ' : '',
+					IM.hasAlpha() ? span({'class': 'alpha'}, 'α ' + IM.getAlpha()) : ''),
+				a({id: IM.getCSSEditID(), href: '#', 'class': 'edit-im', 'title': i18n.translate('Edit')}),
+				a({id: IM.getCSSRemoveID(), href: '#', 'class': 'remove-im', 'title': i18n.translate('Remove')}));
 		});
 		
 		Mooml.register('cedentTemplate', function (data) {
@@ -204,7 +204,7 @@ var UITemplateRegistrator = new Class({
 		});
 	},
 	
-	registerAddIMWindow: function () {
+	registerIMWindow: function () {
 		Mooml.register('addIMWindowTemplate', function (data) {
 			i18n = data.i18n;
 			
@@ -217,21 +217,23 @@ var UITemplateRegistrator = new Class({
 					div({'class': 'autocomplete'}),
 					input({type: 'submit', value: i18n.translate('Add')})));
 		});
-		
-		Mooml.register('addIMWindowAutocompleteTemplate', function (data) {
+
+		Mooml.register('editIMWindowTemplate', function (data) {
 			i18n = data.i18n;
-			field = data.field;
+			IM = data.IM;
 			
-			div(
-				div(
-					label({'for': 'add-im-' + field.name +'-value'}, field.localizedName + ':')),
-				div(
-					input({type: 'text', name: 'add-im-' + field.name +'-value', id: 'add-im-' + field.name +'-value', 'readonly': 'readonly', 'class': 'add-im-value'}),
-					div({id: 'add-im-' + field.name +'-slider', 'class': 'add-im-slider'},
-						div({'class': 'knob'}))));
+			div({id: 'edit-im-window'},
+				a({id: 'edit-im-close', href: '#'}, i18n.translate('Close')),
+				h2(i18n.translate('Edit interest measure')),
+				form({action: '#', method: 'POST', id: 'edit-im-form'},
+					label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
+					IM.getLocalizedName(),
+					select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
+					div({'class': 'autocomplete'}),
+					input({type: 'submit', value: i18n.translate('Edit')})));
 		});
 		
-		Mooml.register('addIMWindowSelectOptionTemplate', function (data) {
+		Mooml.register('IMWindowSelectOptionTemplate', function (data) {
 			IM = data.IM;
 			isSelected = data.isSelected;
 

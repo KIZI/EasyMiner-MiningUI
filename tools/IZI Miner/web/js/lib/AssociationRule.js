@@ -155,8 +155,9 @@ var AssociationRule = new Class({
 		this.setChanged(true);
 	},
 	
-	editIM: function(IM, value) {
-		IM.setValue(value);
+	editIM: function(IM, threshold, alpha) {
+		this.IMs[IM.getName()].setThreshold(threshold);
+		this.IMs[IM.getName()].setAlpha(alpha);
 		this.setChanged(true);
 	},
 	
