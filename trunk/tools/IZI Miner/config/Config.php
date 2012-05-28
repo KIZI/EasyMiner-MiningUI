@@ -13,7 +13,7 @@ $configs = array(array('DDPath' => APP_PATH.DS.'data'.DS.'datadescription_0.2.xm
                    'ETreePath' => null, 
                    'FAPath' => APP_PATH.DS.'data'.DS.'frequencyAnalysis.xml',
                    'LANG' => 'en',
-                   'DEV_MODE' => true,
+                   'DEV_MODE' => false,
                    'DEV_LM_PATH' => 'C:'.DS.'xampp'.DS.'htdocs'.DS.'LM',
                    'KB_CONF_ID' => 6,
                    'KB_EXC_ID' => 7));
