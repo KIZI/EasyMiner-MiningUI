@@ -27,7 +27,7 @@ if (!DEV_MODE) { // KBI
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
-    
+        
         $response = curl_exec($ch);
         $info = curl_getinfo($ch);
         curl_close($ch);
