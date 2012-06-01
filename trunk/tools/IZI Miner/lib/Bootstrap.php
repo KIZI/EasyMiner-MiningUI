@@ -1,5 +1,14 @@
 <?php
 
+// PHP error reporting
+if (DEV_MODE) {
+    error_reporting(E_ALL ^ E_NOTICE);
+    ini_set('display_errors', 1);
+} else {
+    error_reporting(0);
+    ini_set('display_errors', 0);
+}
+
 // PHP native JSON is preferred
 if (!function_exists('json_encode')) {
   require_once 'lib/JSON.php';

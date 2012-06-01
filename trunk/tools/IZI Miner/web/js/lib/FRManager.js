@@ -158,11 +158,12 @@ var FRManager = new Class({
 			}
 		}
 		
-		this.UIPainter.updateFoundRule(FR);
+		this.UIPainter.updateFoundRule(FR, this.FL);
 	},
 	
 	handleErrorRequest: function (FR) {
-		FR.setInteresting(true);
+		FR.setIndexed(false);
+		this.UIPainter.updateFoundRule(FR, this.FL);
 	},
 	
 	handleError: function () {

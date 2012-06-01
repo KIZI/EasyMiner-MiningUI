@@ -477,8 +477,10 @@ var UIPainter = new Class({
 				elFR.store('tip:text', this.i18n.translate('There are exceptions to this association rule in the knowledge base.'));
 			}
 			
-			var elBK = elFR.getElement('.bk');
-			elBK.morph({'display': 'none'});
+			if (!this.FL.getAutoSuggest()) {
+				var elBK = elFR.getElement('.bk');
+				elBK.morph({'display': 'none'});
+			}
 			
 		}
 		
