@@ -295,10 +295,6 @@ class SerializeRulesTaskSetting extends AncestorSerializeRules {
             return date('d. m. Y H:i:s');
         }
 
-        // else { // TODO delete when SewebarConnect is ready
-        //        return sha1($this->finalXmlDocument->saveXML($this->arQuery));
-        //    }
-
         $modelName = '';
         $implInserted = false;
         foreach ($ruleData as $k => $rData) {

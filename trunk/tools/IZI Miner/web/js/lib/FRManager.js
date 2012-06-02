@@ -225,14 +225,14 @@ var FRManager = new Class({
 		return this.markedRules;
 	},
 	
-	removeMarkedRule: function(rule) {
+	removeMarkedRule: function(FR) {
 		Object.each(this.markedRules, function (MR, key) {
-			if (rule.getId() === MR.getRule().getId()) {
+			if (FR.getRule().getId() === MR.getRule().getId()) {
 				delete this.markedRules[key];
 			}
 		}.bind(this));
 
-		this.UIPainter.renderMarkedRules(null);
+		this.UIPainter.renderMarkedRules(null, this.markedRules);
 	},
 
 	sortMarkedRules: function (order) {
