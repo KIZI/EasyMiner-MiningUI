@@ -50,6 +50,8 @@ var Pager = new Class({
 	
 	setInProgress: function () {
 		this.reset();
+		this.content.tween('margin-top', "-0px");
+        this.fireEvent('onScroll', this.currentPage);
 		
     	this.label.removeProperty('class');
     	this.label.addClass('mining-in-progress');
