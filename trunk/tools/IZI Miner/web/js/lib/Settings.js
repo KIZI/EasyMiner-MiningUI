@@ -1,8 +1,6 @@
 var Settings = new Class({
 	
-	rulesCnt: 25,
-	sorts: ['id', 'im', 'length'],
-	defSort: 'id',
+	rulesCnt: 100,
 	BK: {autoSearch: false},
 	rec: {enabled: true},
 	foundRules: {
@@ -18,14 +16,6 @@ var Settings = new Class({
 	
 	setRulesCnt: function (cnt) {
 		this.rulesCnt = cnt;
-	},
-	
-	getSorts: function () {
-		return this.sorts;
-	},
-	
-	getDefSort: function () {
-		return this.defSort;
 	},
 	
 	getBKAutoSearch: function () {
