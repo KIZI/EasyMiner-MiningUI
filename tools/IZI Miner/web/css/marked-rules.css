@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+/* marked rules */
+#marked-rules {
+	color: #434343;
+   	background-color: #FFF;
+	border-radius: 5px;
+    border: 1px solid #DFDFDF;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+	line-height: 20px;
+    
+    width: 800px;
+    margin-top: 25px; padding: 10px 20px;
+}
+
+#marked-rules h2 {
+	color: #314E64;
+	border-bottom: 1px solid #314E64;
+	font-family: 'Average',serif;
+	background: transparent url('../images/icon-dropdown-big-dark.png') right center no-repeat;
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+
+#marked-rules h2 a.dropdown { 
+	display: block;
+	float: right;
+	width: 12px; height: 12px;
+    position: relative; left: 1px; top: 5px;
+}
+
+#marked-rules li {
+	float: left; clear: left;
+}
+
+#marked-rules .rule {
+	line-height: 25px;
+	float: left;
+}
+
+#marked-rules .coefficient {
+    color: #925213;
+    font-size: 0.85em;
+    left: 3px;
+    position: relative;
+    top: -1px;
+}
+
+#marked-rules .connective {
+	color: #336600;
+	font-size: 14px;
+	
+	margin: 0 3px 0 6px;
+}
+
+#marked-rules .ims {
+    font-size: 12px;
+    float: left; clear: left;
+    position: relative; top: -5px;
+}
+
+#marked-rules .im-value {
+    color: #7B0D2E;
+    margin-left: 0.5ex;
+}
+
+#marked-rules .clear {
+	background: transparent url('../images/icon-remove.png') 0 0 no-repeat;
+	
+	display: block; float: left; width: 16px; height: 16px;
+	position: relative; top: 7px;
+	margin-left: 10px;
+	visibility: hidden;
+}
+
+#marked-rules li:hover > .clear {
+	visibility: visible;	
+}

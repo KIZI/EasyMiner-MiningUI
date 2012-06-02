@@ -227,13 +227,6 @@ var UIListener = new Class({
 			
 		}.bind(this));
 	},
-	
-	registerMarkedRuleEventHandlers: function (rule) {
-		$(rule.getMarkedRuleCSSRemoveID()).addEvent('click', function (event) {
-			this.FRManager.removeMarkedRule(rule);
-			event.stop();
-		}.bind(this));
-	},
 
 	registerActiveRuleEventHandlers: function (rule) {
 		if (this.ARManager.hasPossibleIMs()) {
@@ -424,7 +417,7 @@ var UIListener = new Class({
 		var elementSelect = $('edit-coefficient-select');
 		elementSelect.addEvent('change', function (event) {
 			event.stop();
-			this.ARManager.updateEditCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value)
+			this.ARManager.updateEditCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
 		}.bind(this));
 		
 		// close
@@ -558,6 +551,13 @@ var UIListener = new Class({
 			
 			var elToggle = $$('#marked-rules > div')[0];
 			elToggle.toggle();
+		}.bind(this));
+	},
+	
+	registerMarkedRuleEventHandlers: function (FR) {
+		$(FR.getRule().getMarkedRuleCSSRemoveID()).addEvent('click', function (event) {
+			this.FRManager.removeMarkedRule(FR);
+			event.stop();
 		}.bind(this));
 	}
 	

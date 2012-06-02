@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+/* pager */
 #pager {
     border: 1px solid #cac7bd;
     line-height: 30px;

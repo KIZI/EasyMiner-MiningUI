@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+/* settings */
+form#settings-form {
+	line-height: 2em;
+}
+
+#settings-form > div {
+	clear: left;
+}
+
+#settings-form .category {
+	color: #925213;
+}
+
+#settings-form br.clearfix {
+	clear: left;
+	margin-top: 1em;
+}
+
+#settings-form label.thin {
+	line-height: 1.3em;
+}
+
+#settings-form .info {
+	background: transparent url('../images/icon-help.png') 0 0 no-repeat;
+	display: block; float: right;
+	position: relative; top: 6px; 
+	width: 24px; height: 24px;
+}
+
+#settings-form > div > div > .warning {
+	background: transparent url('../images/icon-warning.png') 0 0 no-repeat;
+	display: block; float: left;
+	position: relative; top: 6px; left: 5px;
+	width: 24px; height: 24px;
+}
+
+#settings-form #fl-select {
+	float: left;
+	position: relative; top: 8px;
+	margin-right: 0;
+}
+
+#settings-form .autocomplete {
+	margin-bottom: 90px;
+}
+
+a.autosuggest-on,
+a.autofilter-on {
+	color: #434343;
+	background: transparent url('../images/icon-switch-on.png') 0 11px no-repeat;
+	text-decoration: none;
+	display: block; float: left;
+	padding-left: 15px;
+}
+
+a.autosuggest-off,
+a.autofilter-off {
+	color: #434343;
+	background: transparent url('../images/icon-switch-off.png') 0 11px no-repeat;
+	text-decoration: none;
+	display: block; float: left;
+	padding-left: 15px;
+}

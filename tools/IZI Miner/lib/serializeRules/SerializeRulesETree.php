@@ -291,7 +291,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
     private function getModelName($ruleData) {
         if (DEV_MODE) {
             return date('d. m. Y H:i:s');
-        } else { // TODO delete when SewebarConnect is ready
+        } else {
             return sha1($this->finalXmlDocument->saveXML($this->arQuery));
         }
         

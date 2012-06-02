@@ -184,15 +184,15 @@ var UIPainter = new Class({
 			elementParent = $$('#marked-rules ul')[0];
 			elementParent.empty();
 		}
-		
+
 		var i = 0;
 		Object.each(markedRules, function (FR) {
 			FR.getRule().setId(++i);
 			var elementRule = Mooml.render('markedRuleTemplate', {i18n: this.i18n, rule: FR.getRule()});
 			elementParent.grab(elementRule);
-			this.UIListener.registerMarkedRuleEventHandlers(FR.getRule());
+			this.UIListener.registerMarkedRuleEventHandlers(FR);
 		}.bind(this));
-		
+
 		var sortables = new Sortables(elementParent, {
 			clone: true,
 			revert: true,
@@ -449,6 +449,8 @@ var UIPainter = new Class({
 	/* found rules */
 	updateFoundRule: function (FR) {
 		var elFR = $(FR.getCSSID());
+		if (!elFR) { return; }
+		
 		if (FR.getIndexed()) {
 			elFR.set('morph', {duration: this.morphDuration});
 			elFR.setStyle('cursor', 'help');
