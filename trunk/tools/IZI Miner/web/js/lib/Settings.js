@@ -1,6 +1,6 @@
 var Settings = new Class({
 	
-	rulesCnt: 100,
+	rulesCnt: 250,
 	BK: {autoSearch: false},
 	rec: {enabled: true},
 	foundRules: {
