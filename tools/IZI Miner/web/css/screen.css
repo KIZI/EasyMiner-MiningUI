@@ -300,10 +300,6 @@ section#active-rule > span.controls {
 	clear: both;
 }
 
-#ar-scroller {
-	padding-bottom: 10px;
-}
-
 div#antecedent {
 	float: left;
 	padding-right: 20px;
@@ -567,4 +563,8 @@ span#mining-in-progress {
 	display: none; opacity: 0;
 	padding-left: 20px;	margin-bottom: 5px;
 	background: transparent url('../images/icon-loading.gif') 0 0 no-repeat;
+}
+
+#ar-scroller {
+	padding-bottom: 10px;
 }
