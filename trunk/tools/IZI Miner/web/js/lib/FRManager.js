@@ -8,8 +8,8 @@ var FRManager = new Class({
 	UIPainter: null,
 	UIListener: null,
 	rules: {},
-	maxId: 0,
 	markedRules: [],
+	maxIndex: 0,
 	tips: null,
 	
 	initialize: function (config, rulesParser, settings) {
@@ -43,56 +43,63 @@ var FRManager = new Class({
 		this.reset();
 		this.UIPainter.renderActiveRule();
 		this.pager.setInProgress();
-		
 	},
 	
 	renderRules: function (rules, numRules, inProgress) {
 		// filter new rules
-		rules = this.filterRules(rules, this.maxId);
+		rules = this.filterRules(rules);
 		var parsedRules = this.rulesParser.parse(rules);
 		
 		if (!inProgress && !numRules && !Object.getLength(this.rules)) {
 			this.pager.setNoRules();
 			this.UIPainter.renderActiveRule();
-		} else {
-			var index = 0;
-			var els = [];
-			Array.each(parsedRules, function (r) {
-				var FR = new FoundRule(r);
-				this.rules[r.getId()] = FR;
-				els.push(Mooml.render('foundRuleTemplate', {key: ++index, FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
+		} else { 
+			if (numRules > Object.getLength(this.rules)) { // new rules to render
+				var els = [];
+				Array.each(parsedRules, function (r) {
+					var FR = new FoundRule(r);
+					this.rules[r.getId()] = FR;
+					els.push(Mooml.render('foundRuleTemplate', {key: ++this.maxIndex, FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
+					if (this.settings.getBKAutoSearch()) {
+						this.buildRequest(FR, this.config.getBKAskURL(), true);
+					}
+				}.bind(this));
+				
+				// render 
+				this.pager.add(els);
+				
+				// register handlers
+				Object.each(this.rules, function (FR) {
+					this.UIListener.registerFoundRuleEventHandlers(FR, this.settings.getBKAutoSearch());
+				}.bind(this));
+	
+				
 				if (this.settings.getBKAutoSearch()) {
-					this.buildRequest(FR, this.config.getBKAskURL(), true);
+					this.AJAXBalancer.run.delay(500, this.AJAXBalancer);
 				}
-			}.bind(this));
-			
-			// render 
-			this.pager.add(els);
-			
-			// register handlers
-			Object.each(this.rules, function (FR) {
-				this.UIListener.registerFoundRuleEventHandlers(FR, this.settings.getBKAutoSearch());
-			}.bind(this));
+			}
 			
 			if (!inProgress) {
 				this.pager.setFinished();
-			}
-			
-			if (this.settings.getBKAutoSearch()) {
-				this.AJAXBalancer.run.delay(500, this.AJAXBalancer);
 			}
 			
 			this.UIPainter.renderActiveRule();
 		}
 	},
 	
-	filterRules: function (rules, maxId) {
-		rules = Object.cleanValues(rules, function(value) {
-			if (!value.hasOwnProperty('value')) { return true; } // if one rule is returned, it does not have id
-			return value.id > maxId;
+	filterRules: function (rules) {
+		var filtered = [];
+		var i = 0;
+		Array.each(rules, function (rule, key) {
+			// TODO one rule
+			//if (!value.hasOwnProperty('value')) { return true; } // if one rule is returned, it does not have id
+			
+			if (++i > this.maxIndex) {
+				filtered.push(rule);
+			}
 		}.bind(this));
 		
-		return rules;
+		return filtered;
 	},
 	
 	buildRequest: function (FR, URL, update) {
@@ -174,7 +181,7 @@ var FRManager = new Class({
 	reset: function () {
 		this.AJAXBalancer.stopAllRequests();
 		this.rules = {};
-		this.maxId = 0;
+		this.maxIndex = 0;
 	},
 	
 	/* found rules */
