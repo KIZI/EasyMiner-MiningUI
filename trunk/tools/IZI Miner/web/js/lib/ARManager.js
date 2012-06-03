@@ -341,5 +341,5 @@ var ARManager = new Class({
 		this.ETreeManager.recommendAttributes(this.activeRule);
 		this.UIPainter.renderActiveRule();
 	}
-
+	
 });
