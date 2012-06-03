@@ -452,13 +452,13 @@ var UIPainter = new Class({
 	updateScrollbar: function (scrollerWidth, width) {
 		var scrollerWidth = $('ar-scroller').getSize().x;
 		var width = $('antecedent').getSize().x + $('interest-measures').getSize().x + $('succedent').getSize().x + 1; // IE9 hack (+1)
+		$('ar-wrapper').setStyle('width', width);
 		
 		if (width > scrollerWidth) {
 			$('ar-scroller').setStyle('overflow-x', 'scroll');
 		} else {
 			$('ar-scroller').setStyle('overflow-x', 'hidden');
 		}
-		$('ar-wrapper').setStyle('width', width);
 	},
 	
 	/* found rules */
