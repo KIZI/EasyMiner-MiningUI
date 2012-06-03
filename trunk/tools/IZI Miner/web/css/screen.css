@@ -366,7 +366,7 @@ div.field {
 }
 
 div.cedent div.field span.field-drag {
-	cursor: pointer;	
+	cursor: move;	
 	float: left;
 }
 
@@ -636,7 +636,7 @@ ul#attributes-by-group {
 }
 
 #attributes > div > ul > li {
-	cursor: pointer;
+	cursor: move;
 	padding-left: 20px;
 }
 
