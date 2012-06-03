@@ -122,12 +122,14 @@ var UITemplateRegistrator = new Class({
 			
 			section({id: 'active-rule'}, 
 				h2(i18n.translate('Association rule pattern')),
-				div({id: 'antecedent'}, h3(i18n.translate('Antecedent'))),
-				div({id: 'interest-measures'}, 
-						h3(i18n.translate('Interest measures')), 
-						div(),
-						displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add')) : ''),
-				div({id: 'succedent'}, h3(i18n.translate('Consequent'))),
+				div({id: 'ar-scroller'},
+					div({id: 'ar-wrapper'},
+						div({id: 'antecedent'}, h3(i18n.translate('Antecedent'))),
+						div({id: 'interest-measures'}, 
+								h3(i18n.translate('Interest measures')), 
+								div(),
+								displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add')) : ''),
+						div({id: 'succedent'}, h3(i18n.translate('Consequent'))))),
 				div({'class': 'clearfix'}),
 				span({id: 'action-box', styles: {'visibility': taskBox ? 'visible' : 'hidden'}}, taskText));
 		});

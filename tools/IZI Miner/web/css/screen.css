@@ -154,6 +154,38 @@ input[type='text'].add-im-value	 {
 	line-height: 1em;
 }
 
+section#overlay #add-coefficient-minlength-slider,
+section#overlay #edit-coefficient-minlength-slider,
+section#overlay #add-coefficient-maxlength-slider,
+section#overlay #edit-coefficient-maxlength-slider,
+section#overlay .add-im-slider,
+section#overlay .edit-im-slider {
+    background: #FFF none;
+    border: 1px solid #A6C9E2;
+    border-radius: 5px;
+    height: 5px;
+    margin-top: 5px;
+    width: 133px;
+}
+
+section#overlay #add-coefficient-minlength-slider .knob,
+section#overlay #edit-coefficient-minlength-slider .knob,
+section#overlay #add-coefficient-maxlength-slider .knob,
+section#overlay #edit-coefficient-maxlength-slider .knob,
+section#overlay .add-im-slider .knob,
+section#overlay .edit-im-slider .knob {
+	background: url("../images/?new=0078ae&w=1&h=400&f=png&q=100&fltr[]=over|textures/02_glass.png|0|0|45") repeat-x scroll 0 50% #0078AE;
+    border: 1px solid #77D5F7;
+    color: #FFFFFF;
+    font-weight: normal;
+    outline: medium none;
+    border-radius: 5px;
+	cursor: pointer;
+    
+    width: 10px; height: 10px;
+    top: -3px;
+}
+
 /* header */
 header {
 	height: 135px;
@@ -268,15 +300,19 @@ section#active-rule > span.controls {
 	clear: both;
 }
 
+#ar-scroller {
+	padding-bottom: 10px;
+}
+
 div#antecedent {
 	float: left;
-	margin-right: 20px;
+	padding-right: 20px;
 }
 
 div#interest-measures {
 	width: 190px;
 	float: left;
-	margin-right: 20px;
+	padding-right: 20px;
 }
 
 div#interest-measures > div > div {
@@ -531,141 +567,4 @@ span#mining-in-progress {
 	display: none; opacity: 0;
 	padding-left: 20px;	margin-bottom: 5px;
 	background: transparent url('../images/icon-loading.gif') 0 0 no-repeat;
-}
-
-
-section#overlay #add-coefficient-minlength-slider,
-section#overlay #edit-coefficient-minlength-slider,
-section#overlay #add-coefficient-maxlength-slider,
-section#overlay #edit-coefficient-maxlength-slider,
-section#overlay .add-im-slider,
-section#overlay .edit-im-slider,
-section#active-rule .im-slider {
-    background: #FFF none;
-    border: 1px solid #A6C9E2;
-    border-radius: 5px;
-    height: 5px;
-    margin-top: 5px;
-    width: 133px;
-}
-
-section#overlay #add-coefficient-minlength-slider .knob,
-section#overlay #edit-coefficient-minlength-slider .knob,
-section#overlay #add-coefficient-maxlength-slider .knob,
-section#overlay #edit-coefficient-maxlength-slider .knob,
-section#overlay .add-im-slider .knob,
-section#overlay .edit-im-slider .knob,
-section#active-rule .im-slider .knob {
-	background: url("../images/?new=0078ae&w=1&h=400&f=png&q=100&fltr[]=over|textures/02_glass.png|0|0|45") repeat-x scroll 0 50% #0078AE;
-    border: 1px solid #77D5F7;
-    color: #FFFFFF;
-    font-weight: normal;
-    outline: medium none;
-    border-radius: 5px;
-	cursor: pointer;
-    
-    width: 10px; height: 10px;
-    top: -3px;
-}	
-
-/* navigation */
-nav {
-	color: #434343;
-	float: right;
-	width: 180px;
-	margin-top: 30px;
-	line-height: 20px
-}
-
-a#attributes-by-list,
-a#attributes-by-group {
-	color: #126499;
-	font-size: 12px;
-}
-
-#attributes {
-   	background-color: #FFF;
-	border-radius: 5px;
-    border: 1px solid #DFDFDF;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-    
-    padding: 10px;
-    width: 160px;
-    margin-bottom: 25px;
-}
-
-#attributes h2 { 
-	color: #314E64;
-	border-bottom: 1px solid #314E64;
-	font-family: 'Average',serif;
-	background: transparent url('../images/icon-dropdown-big-dark.png') right center no-repeat;
-	font-size: 20px;
-	margin-bottom: 5px;
-	margin: 0 20px 5px;
-}
-
-#attributes h2 a.dropdown { 
-	display: block;
-	float: right;
-	width: 12px; height: 12px;
-    position: relative; left: 1px; top: 5px;
-}
-
-#attributes > div > ul {
-	margin: 0; padding: 0;
-}
-
-ul#attributes-by-group {
-	background: transparent url('../images/icon-group4.png') 0 2px no-repeat;
-}
-
-#attributes #attributes-by-group > li {
-	padding-left: 20px;
-}
-
-#attributes-by-group span {
-	color: #314E64;
-	font-size: 14px;
-}
-
-#attributes-by-group span.coefficient {
- 	color: #925213;
-    font-size: 0.85em;
-    
-    position: relative; left: 3px; top: -1px;
-}
-
-#attributes > div > ul > li {
-	cursor: move;
-	padding-left: 20px;
-}
-
-#attributes > div > ul > li:hover {
-	color: #000 !important;
-}
-
-#attributes > div > ul > li.rec1 {
-	background: transparent url('../images/icon-rec1.png') 0 2px no-repeat;
-}
-
-#attributes > div > ul > li.rec2 {
-	background: transparent url('../images/icon-rec2.png') 0 2px no-repeat;
-}
-
-#attributes > div > ul > li.used {
-	color: #AAA;
-}
-
-#etree-progress {
-    color: #666666;
-	font-size: 14px;
-	display: block;
-	padding-left: 20px;	
-    margin: 5px 0 5px 20px;
-	background: transparent url('../images/icon-loading.gif') 0 0 no-repeat;
-}
-
-#attributes > div > div {
-	line-height: 10px;
-	text-align: right;
 }
