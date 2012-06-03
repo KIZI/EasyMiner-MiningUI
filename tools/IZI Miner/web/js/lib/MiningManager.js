@@ -6,6 +6,7 @@ var MiningManager = new Class({
 	requests: [],
 	inProgress: false,
 	finishedStates: ['Solved', 'Interrupted'],
+	reqDelay: 1000,
 	
 	initialize: function (config, FRManager) {
 		this.config = config;
@@ -62,12 +63,14 @@ var MiningManager = new Class({
 		if (this.finishedStates.contains(state)) { // task is finished
 			this.inProgress = false;
 		} else { // task is still running
-			this.makeRequest(data);
+			this.makeRequest.delay(this.reqDelay, this, data);
 		}
 		
 		var rules = responseJSON.rules;
 		var numRules = responseJSON.hasOwnProperty('rules') ? Object.getLength(responseJSON.rules) : 0;
-		this.FRManager.renderRules(rules, numRules, this.inProgress);
+		if (numRules) {
+			this.FRManager.renderRules(rules, numRules, this.inProgress);
+		}
 	},
 	
 	handleErrorRequest: function () {
