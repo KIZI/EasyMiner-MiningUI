@@ -491,7 +491,7 @@ var UIPainter = new Class({
 				elFR.setStyle('font-weight', 'bold');
 				elFR.morph({'color': '#C91E1D'});
 				
-				elFR.store('tip:text', this.i18n.translate('There are exceptions to this association rule in the knowledge base.'));
+				elFR.store('tip:text', this.i18n.translate('This rule is an exception to a rule stored in knowledge base.'));
 			}
 			
 			if (!this.FL.getAutoSuggest()) {
