@@ -189,7 +189,7 @@ section#overlay .edit-im-slider .knob {
 /* header */
 header {
 	height: 135px;
-	width: 1050px;
+	width: 1250px;
 	margin: 0 auto;
 }
 
@@ -252,7 +252,7 @@ div#wrapper {
 }
 
 section#main {
-	width: 1050px;
+	width: 1250px;
 	margin: 0 auto; padding-bottom: 30px;
 }
 
@@ -264,7 +264,7 @@ section#content {
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 	
 	float: left;
-	width: 800px;
+	width: 1000px;
 	margin-top: 30px;
 	padding: 10px 20px 10px;
 }
