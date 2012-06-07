@@ -68,9 +68,7 @@ var MiningManager = new Class({
 		
 		var rules = responseJSON.rules;
 		var numRules = responseJSON.hasOwnProperty('rules') ? Object.getLength(responseJSON.rules) : 0;
-		if (numRules) {
-			this.FRManager.renderRules(rules, numRules, this.inProgress);
-		}
+		this.FRManager.renderRules(rules, numRules, this.inProgress);
 	},
 	
 	handleErrorRequest: function () {
