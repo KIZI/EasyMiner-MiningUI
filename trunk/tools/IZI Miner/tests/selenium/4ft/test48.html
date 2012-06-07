@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/izi-miner/web/" />
-<title>Show & hide scrollbar.</title>
+<title>Mining indicator - found rules.</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Show & hide scrollbar.</td></tr>
+<tr><td rowspan="1" colspan="3">Mining indicator - found rules.</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -18,7 +18,7 @@
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
-	<td>css=li#attribute-nav-district</td>
+	<td>css=li#attribute-nav-age</td>
 	<td>css=#antecedent .cedent</td>
 </tr>
 <tr>
@@ -28,8 +28,18 @@
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
-	<td>css=li#attribute-nav-district</td>
+	<td>css=li#attribute-nav-salary</td>
 	<td>css=#antecedent .cedent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-im</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -38,8 +48,8 @@
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
-	<td>css=li#attribute-nav-district</td>
-	<td>css=#antecedent .cedent</td>
+	<td>css=li#attribute-nav-quality</td>
+	<td>css=#succedent .cedent</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -47,60 +57,16 @@
 	<td></td>
 </tr>
 <tr>
-	<td>dragAndDropToObject</td>
-	<td>css=li#attribute-nav-district</td>
-	<td>css=#antecedent .cedent</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
+	<td>css=#mine-rules-confirm</td>
 	<td></td>
 </tr>
 <tr>
-	<td>dragAndDropToObject</td>
-	<td>css=li#attribute-nav-district</td>
-	<td>css=#antecedent .cedent</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
+	<td>waitForElementPresent</td>
+	<td>css=.mining-finished</td>
 	<td></td>
 </tr>
-<tr>
-	<td>dragAndDropToObject</td>
-	<td>css=li#attribute-nav-district</td>
-	<td>css=#antecedent .cedent</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>xpath=//div[@id='ar-scroller' and @style='overflow-x: scroll;']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=.remove-field</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=.remove-field</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=.remove-field</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>xpath=//div[@id='ar-scroller' and @style='overflow-x: hidden;']</td>
-	<td></td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

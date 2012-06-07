@@ -50,10 +50,10 @@ var FRManager = new Class({
 		rules = this.filterRules(rules);
 		var parsedRules = this.rulesParser.parse(rules);
 		
-		if (!inProgress && !numRules && !Object.getLength(this.rules)) {
+		if (!inProgress && !numRules) {
 			this.pager.setNoRules();
 			this.UIPainter.renderActiveRule();
-		} else { 
+		} else if (numRules) {
 			if (numRules > Object.getLength(this.rules)) { // new rules to render
 				var els = [];
 				Array.each(parsedRules, function (r) {
