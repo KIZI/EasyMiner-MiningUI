@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arf:GUHAFeatureList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_05 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
-	xmlns:arf="http://keg.vse.cz/ns/arfeatures_02" mode="AssociationRules" procedure="4ft">
-	<UserInterface>
+	xmlns:arf="http://keg.vse.cz/ns/arfeatures_05" mode="AssociationRules" procedure="4ft">
+	<UserInterface priority="1">
 		<AllowMultipleRules>false</AllowMultipleRules>
 		<Name>Beginner</Name>
 		<LocalizedName lang="en">Beginner</LocalizedName>
@@ -11,8 +11,7 @@
 			<Option default="true">
 				<Name>heuristic</Name>
 				<LocalizedName lang="en">Heuristic</LocalizedName>
-				<Explanation lang="en">The system will sort features according to their ability to predict the value of the target attribute. The prediction is fast, but only approximative.
-				</Explanation>
+				<Explanation lang="en">The system will sort features according to their ability to predict the value of the target attribute. The prediction is fast, but only approximative.</Explanation>
 			</Option>
 		</AutoSuggest>
 	</UserInterface>

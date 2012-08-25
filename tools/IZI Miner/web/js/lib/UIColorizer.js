@@ -1,19 +1,15 @@
-/*global Class: false */ 
-
 var UIColorizer = new Class({
-
-	initialize: function () {},
 	
-	cedentDragEnter: function (cedent) {
-		cedent.tween('background-color', '#98B5C1');
+	dragEnter: function (element) {
+        element.tween('background-color', '#98B5C1');
 	},
 	
-	cedentDragLeave: function (cedent) {
-		cedent.tween('background-color', '#FFF');
+	dragLeave: function (element) {
+        element.tween('background-color', '#FFF');
 	},
 	
-	cedentDragDrop: function (cedent) {
-		cedent.highlight('#7389AE');
+	dragDrop: function (element) {
+        element.highlight('#7389AE');
 	}
 	
 });

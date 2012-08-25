@@ -72,9 +72,8 @@ var MiningManager = new Class({
 	},
 	
 	handleErrorRequest: function () {
-		this.inProgress = false;
+
 		this.stopAllRequests();
-		this.clearAllRequests();
 		this.FRManager.handleError();
 	},
 	
@@ -88,6 +87,9 @@ var MiningManager = new Class({
 				req.cancel();
 			}
 		}.bind(this));
+
+        this.clearAllRequests();
+        this.inProgress = false;
 	},
 	
 	clearAllRequests: function () {

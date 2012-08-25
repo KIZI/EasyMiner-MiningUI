@@ -1,17 +1,61 @@
-<?xml-model href="http://sewebar.vse.cz/schemas/DataDescription0_2.xsd" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <data:DataDescription xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://keg.vse.cz/ns/datadescription0_2 http://sewebar.vse.cz/schemas/DataDescription0_2.xsd"
-    xmlns:data="http://keg.vse.cz/ns/datadescription0_2">
-    <Dictionary sourceDictType="TransformationDictionary" sourceFormat="PMML" default="true"
-        completeness="All" id="bkef" sourceName="Loans">
-        <Identifier name="Metabase">LM LMBarbora.mdb MB</Identifier>
+                      xsi:schemaLocation="http://keg.vse.cz/ns/datadescription0_2 http://sewebar.vse.cz/schemas/DataDescription0_2.xsd"
+                      xmlns:data="http://keg.vse.cz/ns/datadescription0_2">
+    <!-- LMDataSource.Matrix.ARD.PMML.Template, version of 2012-07-31 -->
+
+    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="DataDictionary" id="1">
+        <Identifier  name="dataset">Loans</Identifier>
+        <Identifier  name="metabase">LM Barbora.mdb MB</Identifier>
+        <Field dataType="integer">
+            <Name>Age</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>amount</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>birth_number</Name>
+        </Field>
+        <Field dataType="string">
+            <Name>District</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>duration</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>loan_id</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>payments</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>Salary</Name>
+        </Field>
+        <Field dataType="string">
+            <Name>Sex</Name>
+        </Field>
+        <Field dataType="string">
+            <Name>status</Name>
+        </Field>
+    </Dictionary>
+    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="TransformationDictionary" id="2" default="true" sourceName="Loans">
+        <Identifier  name="dataset">Loans</Identifier>
+        <Identifier  name="metabase">LM Barbora.mdb MB</Identifier>
         <Field dataType="string">
             <Name>Age</Name>
-            <Interval closure="closedOpen" leftMargin="21" rightMargin="31" />
-            <Interval closure="closedOpen" leftMargin="31" rightMargin="41" />
-            <Interval closure="closedOpen" leftMargin="41" rightMargin="51" />
-            <Interval closure="closedOpen" leftMargin="51" rightMargin="61" />
-            <Interval closure="closedOpen" leftMargin="61" rightMargin="71" />
+            <Category>&lt;21;31)</Category>
+            <Category>&lt;31;41)</Category>
+            <Category>&lt;41;51)</Category>
+            <Category>&lt;51;61)</Category>
+            <Category>&lt;61;71)</Category>
+        </Field>
+        <Field dataType="string">
+            <Name>Amount</Name>
+            <Category>&lt; 20</Category>
+            <Category>&lt;20;50)</Category>
+            <Category>&lt;50;100)</Category>
+            <Category>&lt;100;250)</Category>
+            <Category>&lt;250;500)</Category>
+            <Category>&gt;= 500</Category>
         </Field>
         <Field dataType="string">
             <Name>District</Name>
@@ -94,33 +138,6 @@
             <Category>Znojmo</Category>
         </Field>
         <Field dataType="string">
-            <Name>Quality</Name>
-            <Category>good</Category>
-            <Category>bad</Category>
-        </Field>
-        <Field>
-            <Name>Salary</Name>
-            <Category>low</Category>
-            <Category>avg</Category>
-            <Category>high</Category>
-        </Field>        
-        <Field dataType="string">
-            <Name>Sex</Name>
-            <Category>M</Category>
-            <Category>F</Category>
-        </Field>
-    
-        <Field dataType="string">
-            <Name>Amount</Name>
-            <Category>&lt; 20</Category>
-            <Category>&lt;20;50)</Category>
-            <Category>&lt;50;100)</Category>
-            <Category>&lt;100;250)</Category>
-            <Category>&lt;250;500)</Category>
-            <Category>&gt;= 500</Category>
-        </Field>
-        
-        <Field dataType="string">
             <Name>Duration</Name>
             <Category>1 year</Category>
             <Category>2 years</Category>
@@ -128,20 +145,34 @@
             <Category>4 years</Category>
             <Category>5 years</Category>
         </Field>
-        
         <Field dataType="string">
             <Name>Repayment</Name>
-            <Interval closure="openClosed" leftMargin="0" rightMargin="1"/>
-            <Interval closure="openClosed" leftMargin="1" rightMargin="2"/>
-            <Interval closure="openClosed" leftMargin="2" rightMargin="3"/>
-            <Interval closure="openClosed" leftMargin="3" rightMargin="4"/>
-            <Interval closure="openClosed" leftMargin="4" rightMargin="5"/>
-            <Interval closure="openClosed" leftMargin="5" rightMargin="6"/>
-            <Interval closure="openClosed" leftMargin="6" rightMargin="7"/>
-            <Interval closure="openClosed" leftMargin="7" rightMargin="8"/>
-            <Interval closure="openClosed" leftMargin="8" rightMargin="9"/>
-            <Interval closure="openClosed" leftMargin="9" rightMargin="10"/>
+            <Category>(0;1&gt;</Category>
+            <Category>(1;2&gt;</Category>
+            <Category>(2;3&gt;</Category>
+            <Category>(3;4&gt;</Category>
+            <Category>(4;5&gt;</Category>
+            <Category>(5;6&gt;</Category>
+            <Category>(6;7&gt;</Category>
+            <Category>(7;8&gt;</Category>
+            <Category>(8;9&gt;</Category>
+            <Category>(9;10&gt;</Category>
         </Field>
-        
+        <Field dataType="string">
+            <Name>Salary</Name>
+            <Category>low</Category>
+            <Category>avg</Category>
+            <Category>high</Category>
+        </Field>
+        <Field dataType="string">
+            <Name>Sex</Name>
+            <Category>F</Category>
+            <Category>M</Category>
+        </Field>
+        <Field dataType="string">
+            <Name>Quality</Name>
+            <Category>good</Category>
+            <Category>bad</Category>
+        </Field>
     </Dictionary>
 </data:DataDescription>

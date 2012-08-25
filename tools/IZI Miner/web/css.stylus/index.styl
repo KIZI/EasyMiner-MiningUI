@@ -1,0 +1,73 @@
+
+@import url(http://fonts.googleapis.com/css?family=Average&subset=latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Droid\+Sans:400,700);
+
+contentWidth = 1000px
+
+color = #434343
+linkColor = #126499
+backgroundColor = #EDEDED
+font = 'Helvetica Neue', 'Arial', 'sans-serif'
+errorColor = #A41D1D
+h1Color = #FFF
+h1Font = 48px 'Average', 'serif'
+h2Font = 20px 'Average', 'serif'
+h2Color = #314E64
+h2ARFont = 36px 'Droid Sans', 'sans-serif'
+h2ARColor = #925213
+h3ContentFont = 16px
+h3ContentColor = #314E64
+overlayBorderColor = #AAA
+overlayShadowColor = rgba(0, 0, 0, 0.6)
+boxBorderColor = #DFDFDF
+boxShadowColor = rgba(0, 0, 0, 0.4)
+
+// pager
+pagerBorder = 1px solid #cac7bd
+
+@import '_boilerplate.styl'
+@import '_mixins.styl'
+@import '_popup.styl'
+@import '_settings.styl'
+@import '_header.styl'
+@import '_navigation.styl'
+@import '_ar_pattern.styl'
+@import '_pager.styl'
+@import '_found-rules.styl'
+@import '_marked-rules.styl'
+@import '_footer.styl'
+@import '_boilerplate2.styl'
+
+body
+  background backgroundColor url('../images/bg-header.png') repeat-x 50% 0
+  font-family font
+  overflow-y scroll
+
+#wrapper
+  background transparent url('../images/bg-body.jpg') center -10px repeat
+  min-height 500px
+
+section#main
+  width 1250px
+  margin 0 auto; padding-bottom 30px
+
+section#content
+  box()
+  float left
+  width contentWidth
+  margin-top 30px
+  padding-left 30px
+
+  h2
+    h2AR()
+    margin 0
+
+  h3
+    color h3ContentColor
+    font h3ContentFont
+    border-bottom 1px solid h3ContentColor
+    line-height 20px
+    margin-bottom 10px
+
+a
+  color linkColor

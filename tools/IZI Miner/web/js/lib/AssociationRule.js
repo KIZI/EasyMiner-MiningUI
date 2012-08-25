@@ -27,13 +27,7 @@ var AssociationRule = new Class({
 	
 	/* ident */
 	getIdent: function () {
-
-
 		return this.generateIdent();
-	},
-	
-	setIdent: function (ident) {
-		this.ident = ident;
 	},
 	
 	generateIdent: function () {
@@ -65,16 +59,13 @@ var AssociationRule = new Class({
 
 	/* cedent */
 	addField: function (field, cedent) {
-		cedent.addLiteralRef(field);
+		cedent.addChild(field);
 		this.setChanged(true);
 	},
 	
 	removeField: function (field) {
-		var removed = this.antecedent.removeLiteralRef(field);
-		if (removed !== true) {
-			this.succedent.removeLiteralRef(field);
-		}
-		this.update();
+		this.antecedent.removeChild(field);
+		this.succedent.removeChild(field);
 		this.setChanged(true);
 	},
 	
@@ -237,6 +228,20 @@ var AssociationRule = new Class({
 		serialized.append(this.succedent.serialize());
 		
 		return serialized;
-	}
+	},
+
+    toSettings: function() {
+        var settings = {};
+        settings['antecedent'] = {};
+        if (this.antecedent) {
+            settings['antecedent'] = this.antecedent.toSettings();
+        }
+        settings['consequent'] = {};
+        if (this.succedent) {
+            settings['consequent'] = this.succedent.toSettings();
+        }
+
+        return settings;
+    }
 	
 });

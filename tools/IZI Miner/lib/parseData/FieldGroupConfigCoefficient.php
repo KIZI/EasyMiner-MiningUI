@@ -6,15 +6,16 @@
  * @author Radek Skrabal <radek@skrabal.me>
  * @version 1.0
  */
-class FieldGroupConfigCoefficient {
-
+class FieldGroupConfigCoefficient
+{
     private $fieldRef;
     private $type;
     private $minimalLength;
     private $maximalLength;
     private $category;
 
-    public function __construct($fieldRef, CoefficientType $type, $minimalLength, $maximalLength, $category, &$attributes, &$coefficients) {
+    public function __construct($fieldRef, CoefficientType $type, $minimalLength, $maximalLength, $category, &$attributes, &$coefficients)
+    {
         $this->fieldRef = $fieldRef;
         $this->type = $type;
 
@@ -73,7 +74,8 @@ class FieldGroupConfigCoefficient {
         }
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         if ($this->type->getName() === 'One category') {
             $array = array($this->fieldRef => array('coefficient' => array('category' => $this->category)));
         } else {

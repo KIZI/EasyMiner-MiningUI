@@ -1,5 +1,3 @@
-/*global Class: false */ 
-
 var Field = new Class({
 
 	id: 0,
@@ -78,14 +76,20 @@ var Field = new Class({
 	},
 	
 	toString: function () {
-		if (this.type === null) {
-			return this.getAttributeName();;
+		if (!this.type) {
+			return this.getAttributeName();
 		}
-		
+
 		if (this.type === 'One category') {
-			return this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
-		} else {
-			return this.getAttributeName() + '<span class="coefficient">(' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
+            if (this.category.contains('<') || this.category.contains('>')) {
+                return this.getAttributeName() + '<span class="coefficient">' + this.category + '</span>';
+            } else {
+			    return this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
+            }
+        } else if (this.type == 'Subset' && this.minimalLength == 1 && this.maximalLength == 1) {
+            return this.getAttributeName() + '<span class="coefficient">(*)</span>';
+        } else {
+			return this.getAttributeName() + '<span class="coefficient">(*' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
 		}
 	}
 

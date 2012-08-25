@@ -1,7 +1,7 @@
 <?php
 
-class SerializeRulesETree extends AncestorSerializeRules {
-
+class SerializeRulesETree extends AncestorSerializeRules
+{
     private $dd;
     private $ddXpath;
     private $FAPath;
@@ -47,7 +47,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
 
     private $types = array('neg' => 'Negation', 'and' => 'Conjunction', 'or' => 'Disjunction', 'lit' => 'Literal');
     private $ONE_CATEGORY = "One category";
-    
+
     // prasarny
     private $cond = array();
     private $extension;
@@ -56,11 +56,12 @@ class SerializeRulesETree extends AncestorSerializeRules {
     /**
      * It creates instance of this class.
      */
-    function __construct($FAPath) {
+    public function __construct($FAPath)
+    {
         parent::__construct();
-        
+
         $this->FAPath = $FAPath;
-        
+
         $this->literal = $this->literals[0];
         $this->booleans = array_merge($this->positiveBooleans, $this->negativeBooleans);
         $this->forceDepthBoolean = $this->booleans[0];
@@ -69,7 +70,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
         $this->connectives = array_merge($this->brackets, $this->booleans);
 
         // load Data Description XML
-        $this->dd = new DomDocument();
+        $this->dd = new \DOMDocument();
         if (file_exists(DDPath)) {
             $this->dd->load(DDPath);
         } else {
@@ -79,8 +80,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
         // init XPath
         $this->ddXpath = new DOMXPath($this->dd);
         $this->ddXpath->registerNamespace('dd', "http://keg.vse.cz/ns/datadescription0_2");
-        
-        $this->FA = new DOMDocument('1.0', 'UTF-8');
+
+        $this->FA = new \DOMDocument('1.0', 'UTF-8');
         if ($this->FAPath !== null) {
             if (file_exists($this->FAPath)) {
                 $this->FA->load($this->FAPath, LIBXML_NOBLANKS);
@@ -91,7 +92,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
         }
     }
 
-    public function serializeRules($json, $forcedDepth = 3, $minBracketSize = 5) {
+    public function serializeRules($json, $forcedDepth = 3, $minBracketSize = 5)
+    {
         // Create basic structure of Document.
         $this->createBasicStructure();
 
@@ -116,7 +118,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
         foreach ($ruleData as $k => $rdata) {
             if (!in_array($rdata->type, $this->operators) && $k < $intToSolveStart) {
                 $intToSolveStart = $k; // interval start
-            } else if (!$isPrevOper && in_array($rdata->type, $this->operators)) {
+            } elseif (!$isPrevOper && in_array($rdata->type, $this->operators)) {
                 array_push($intsToSolve, array('start' => $intToSolveStart, 'end' => $k));
                 $intToSolveStart = PHP_INT_MAX;
             }
@@ -125,7 +127,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
                 array_push($intsToSolve, array('start' => $intToSolveStart, 'end' => $k));
                 break;
             }
-            
+
             // crreateInterestMeasureSettings
             if ($rdata->type == 'oper') {
                 $IM = array ('name' => $rdata->name, 'value' => $rdata->fields[0]->value);
@@ -133,17 +135,17 @@ class SerializeRulesETree extends AncestorSerializeRules {
 
             $isPrevOper = in_array($rdata->type, $this->operators);
         }
-        
+
         $this->createInputAttributesGroupSettings($jsonData->{'attributes'});
         $classAttr = $this->createClassAttributeSettings($this->reduceArrayByIndices($ruleData, $intsToSolve[1]['start'], $intsToSolve[1]['end']));
-        
+
         // condition
         $conditionId = $this->parsePartialCedent($this->reduceArrayByIndices($ruleData, $intsToSolve[0]['start'], $intsToSolve[0]['end']), $depth = 1, $forcedDepth, $minBracketSize);
         $this->createCondition($conditionId);
-        
+
         // settings
         $this->createETreeSettings($classAttr, $this->cond, $IM);
-        
+
         // update modelName
         $this->updateModelName($ruleData);
 
@@ -151,7 +153,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
         return $this->finalXmlDocument->saveXML();
     }
 
-    protected function parsePartialCedent($pcedent, $depth, $forcedDepth, $minBracketSize) {
+    protected function parsePartialCedent($pcedent, $depth, $forcedDepth, $minBracketSize)
+    {
         $brToSolve = $this->findOutterBrackets($pcedent, $minBracketSize); // brackets to solve at this level
         $bracketsInterval = $this->mergeIntervals($brToSolve);
         $bToSolve = $this->findBooleans($pcedent, $bracketsInterval); // booleans to solve at this level
@@ -177,8 +180,9 @@ class SerializeRulesETree extends AncestorSerializeRules {
     }
 
 
-    private function createBasicStructure() {
-        $this->finalXmlDocument = new DomDocument("1.0", "UTF-8");
+    private function createBasicStructure()
+    {
+        $this->finalXmlDocument = new \DOMDocument("1.0", "UTF-8");
         //$this->finalXmlDocument->formatOutput = true;
 
         // add schematron validation
@@ -253,7 +257,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
         $this->extension = $extension = $this->finalXmlDocument->createElement('Extension');
         $extension->setAttribute('name', 'LISp-Miner');
         $this->taskNotice = $extension->appendChild($this->finalXmlDocument->createElement('TaskNotice'));
-        
+
         $this->arQuery->appendChild($extension);
 
         // extension metabase
@@ -277,7 +281,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      *
      * @param <Array> $ruleData Array of StdClass objects representing the rule
      */
-    private function updateModelName($ruleData) {
+    private function updateModelName($ruleData)
+    {
         $modelName = $this->getModelName($ruleData);
         $this->modelName->appendChild($this->finalXmlDocument->createTextNode($modelName));
     }
@@ -288,22 +293,23 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $ruleData Array of StdClass objects representing the rule
      * @return <String> $modelName String representation of the rule
      */
-    private function getModelName($ruleData) {
+    private function getModelName($ruleData)
+    {
         if (DEV_MODE) {
             return date('d. m. Y H:i:s');
         } else {
             return sha1($this->finalXmlDocument->saveXML($this->arQuery));
         }
-        
+
         $modelName = '';
         $implInserted = false;
         foreach ($ruleData as $k => $rData) {
             $modelName .= '';
             if ($this->isType($rData->type, $this->attributes)) {
                 $modelName .= (isset($rData->literalSign) && $this->isType($rData->literalSign, $this->negativeBooleans) ? strtoupper($this->negativeBoolean).' ' : '').$rData->name.($rData->category == $this->ONE_CATEGORY ? '('.$rData->fields[0]->value.')' : '(?)');
-            } else if ($this->isType($rData->type, $this->booleans)) {
+            } elseif ($this->isType($rData->type, $this->booleans)) {
                 $modelName .= strtoupper($rData->type);
-            } else if ($this->isType($rData->type, $this->operators) && !$implInserted) {
+            } elseif ($this->isType($rData->type, $this->operators) && !$implInserted) {
                 $modelName .= '=&gt;';
                 $implInserted = true;
             }
@@ -319,7 +325,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * Create Data Description dictionary
      * It means get dictionary from elsewhere and just inject it here.
      */
-    private function createDataDescription($root) {
+    private function createDataDescription($root)
+    {
         $dictionary = $this->finalXmlDocument->createElement("DataDescription");
         $this->dictionary = $root->appendChild($dictionary);
 
@@ -334,17 +341,20 @@ class SerializeRulesETree extends AncestorSerializeRules {
         }
     }
 
-    private function createInterestMeasureSetting() {
+    private function createInterestMeasureSetting()
+    {
         $this->interestMeasureSetting = $this->finalXmlDocument->createElement("InterestMeasureSetting");
-        
+
         return $this->interestMeasureSetting;
     }
 
-    private function createCondition($id) {
+    private function createCondition($id)
+    {
         $this->conditionSetting->appendChild($this->finalXmlDocument->createTextNode($id));
     }
-    
-    private function createInputAttributesGroupSettings($attributes) {
+
+    private function createInputAttributesGroupSettings($attributes)
+    {
         $element = $this->finalXmlDocument->createElement('InputAttributesSettings');
         $element->setAttribute('id', $this->getNewId());
         $element->appendChild($this->finalXmlDocument->createElement('Name', 'Attributes'));
@@ -356,17 +366,18 @@ class SerializeRulesETree extends AncestorSerializeRules {
             $elementInner->appendChild($this->finalXmlDocument->createElement('FieldRef', $a));
             $element->appendChild($elementInner);
         }
-        $this->inputAttributesGroupSettings->appendChild($element);        
+        $this->inputAttributesGroupSettings->appendChild($element);
     }
-    
-    private function createClassAttributeSettings($array) {
+
+    private function createClassAttributeSettings($array)
+    {
         $attribute = $array[0];
-        
+
         $element = $this->finalXmlDocument->createElement('ClassAttributeSetting');
         $element->setAttribute('id', $this->getNewId());
         $element->appendChild($this->finalXmlDocument->createElement('FieldRef', $attribute->name));
         $this->classAttributeSettings->appendChild($element);
-        
+
         $taskNotice = 'Succedent|'.$attribute->name.'|'.$attribute->category.'|';
         if ($attribute->category === 'One category') {
             $taskNotice .= $attribute->fields[0]->value;
@@ -375,23 +386,24 @@ class SerializeRulesETree extends AncestorSerializeRules {
             $taskNotice .= $attribute->fields[1]->value;
         }
         $this->taskNotice->appendChild($this->finalXmlDocument->createTextNode($taskNotice));
-        
+
         return array('name' => $attribute->name);
     }
 
-    private function createETreeSettings($classAttr, $cond, $IM) {
+    private function createETreeSettings($classAttr, $cond, $IM)
+    {
         $settings = new BasicETreeSettings($this->FAXPath, $classAttr, $cond, $IM);
         $params = $settings->evaluate();
-        
+
         foreach ($params['extension'] as $name => $value) {
             $this->extension->appendChild($this->finalXmlDocument->createElement($name, $value));
         }
-        
+
         foreach ($params['IM'] as $name => $value) {
             $this->interestMeasureSetting->appendChild($this->finalXmlDocument->createElement($name, $value));
         }
     }
-    
+
     /**
      * Create DBASetting
      * <DBASetting type="TYPE" id="ID">
@@ -403,7 +415,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $attributes Array of attributes
      * @return <Int> $id Id od DBA
      */
-    private function createDbaSetting($btype, $attributes, $depth, $forcedDepth, $dbaIds = array()) {
+    private function createDbaSetting($btype, $attributes, $depth, $forcedDepth, $dbaIds = array())
+    {
         $id = $this->getNewId();
         $dbaSetting = $this->finalXmlDocument->createElement("DBASetting");
         $dbaSetting->setAttribute("type", $this->types[$btype]);
@@ -429,7 +442,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
             $minimalLength->appendChild($this->finalXmlDocument->createTextNode("1"));
             $dbaSetting->appendChild($minimalLength);
 
-        } else if ($this->isType($btype, $this->literals)) {
+        } elseif ($this->isType($btype, $this->literals)) {
             $baSettingRefId = $this->createBbaSetting($attributes[0]);
 
             $baSettingRef = $this->finalXmlDocument->createElement("BASettingRef");
@@ -447,7 +460,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
         return $id;
     }
 
-    private function createBbaSetting($attribute) {
+    private function createBbaSetting($attribute)
+    {
         $id = $this->getNewID();
         $baSetting = $this->finalXmlDocument->createElement("BBASetting");
         $baSetting->setAttribute("id", $id);
@@ -474,13 +488,14 @@ class SerializeRulesETree extends AncestorSerializeRules {
         $df->setAttribute('name', $attribute->name);
         $df->setAttribute('optype', 'categorical');
         $df->setAttribute('dataType', 'string');
-        // TODO - uncomment
+
         //$this->dataDictionary->appendChild($df);
 
         return $id;
     }
 
-    private function createCoefficient($attribute) {
+    private function createCoefficient($attribute)
+    {
         $coefFields = $attribute->fields;
         $coefficient = $this->finalXmlDocument->createElement("Coefficient");
 
@@ -497,7 +512,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
             $category = $this->finalXmlDocument->createElement("Category");
             $category->appendChild($this->finalXmlDocument->createTextNode($attribute->fields[0]->value));
             $coefficient->appendChild($category);
-            
+
             // prasarny
             $cond['cat'] = $attribute->fields[0]->value;
         } else {
@@ -523,7 +538,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
             $maximalLength = $this->finalXmlDocument->createElement("MaximalLength");
             $maximalLength->appendChild($this->finalXmlDocument->createTextNode($maxLength));
             $coefficient->appendChild($maximalLength);
-            
+
             // prasarny
             $cond['minLength'] = $minimalLength;
             $cond['minLength'] = $maximalLength;
@@ -538,7 +553,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      *
      * @return <int> id
      */
-    private function getNewId() {
+    private function getNewId()
+    {
         return ++$this->id;
     }
 
@@ -550,7 +566,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <int> $end End index
      * @return <Array> $rarray Output array
      */
-    private function reduceArrayByIndices($array, $start, $end) {
+    private function reduceArrayByIndices($array, $start, $end)
+    {
         $rarray = array();
         for ($i = $start; $i <= $end; $i++) {
             array_push($rarray, $array[$i]);
@@ -565,7 +582,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $pcedent Array of StdClasses representing partial cedent
      * @return <Boolean> Boolean value representing existence of brackets
      */
-    private function hasBrackets($pcedent) {
+    private function hasBrackets($pcedent)
+    {
         return $this->countBrackets($pcedente) ? true : false;
     }
 
@@ -575,7 +593,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $pcedent Array of StdClasses representing partial cedent
      * @return <int> $numBrackets Number of brackets
      */
-    private function countBrackets($pcedent) {
+    private function countBrackets($pcedent)
+    {
         $numBrackets = 0;
         foreach ($pcedent as $obj) {
             if (in_array($obj->type, $this->brackets)) { $numBrackets++; }
@@ -591,7 +610,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Int> $minBracketSize Min. size of a bracket to be considered as s bracket
      * @return <Array> $oBrackets Array of intervals closed with outter brackets
      */
-    private function findOutterBrackets($pcedent, $minBracketSize = 5) {
+    private function findOutterBrackets($pcedent, $minBracketSize = 5)
+    {
         $oBrackets = array();
 
         $oBracketsStack = array();
@@ -602,7 +622,7 @@ class SerializeRulesETree extends AncestorSerializeRules {
                     $oBracketStart = $k;
                 }
                 array_push($oBracketsStack, $obj->type);
-            } else if (in_array($obj->type, $this->closingBrackets)) {
+            } elseif (in_array($obj->type, $this->closingBrackets)) {
                 array_pop($oBracketsStack);
                 if (empty($oBracketsStack) && (($k - $oBracketStart + 1) >= $minBracketSize)) { // we do have outter bracket end here
                     array_push($oBrackets, array('start' => $oBracketStart, 'end' => $k));
@@ -620,7 +640,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $bracketsInterval Merged interval representing solved brackets as DBA
      * @return <Array> $booleans Array of booleans
      */
-    private function findBooleans($pCedent, $bracketsInterval) {
+    private function findBooleans($pCedent, $bracketsInterval)
+    {
         $booleans = array();
 
         foreach($pCedent as $k => $obj) {
@@ -640,7 +661,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $bracketsInterval Merged interval representing solved brackets as DBA
      * @return <Array> $attributes Array of attributes
      */
-    private function findAttributes($pCedent, $bracketsInterval) {
+    private function findAttributes($pCedent, $bracketsInterval)
+    {
         $attributes = array();
 
         foreach($pCedent as $k => $obj) {
@@ -659,7 +681,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $intervals Array of intervals
      * @return <Array> $interval Output array
      */
-    private function mergeIntervals($intervals) {
+    private function mergeIntervals($intervals)
+    {
         $interval = array();
         foreach ($intervals as $interval) {
             for ($i = $interval['start']; $i <= $interval['end']; $i++) {
@@ -677,7 +700,8 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $negativeBooleans Array of negative booleans to be replaced
      * @return <Array> $ruleData Array of StdClass objects representing the rule
      */
-    private function replaceNegativeBooleans($ruleData, $negativeBooleans) {
+    private function replaceNegativeBooleans($ruleData, $negativeBooleans)
+    {
         foreach ($ruleData as $k => $rData) {
             if ($this->isType($rData->type, $negativeBooleans)) {
                 unset($ruleData[$k]);
@@ -695,10 +719,11 @@ class SerializeRulesETree extends AncestorSerializeRules {
      * @param <Array> $types Array of types to check against
      * @return <Bool> Is type?
      */
-    private function isType($type, $types) {
+    private function isType($type, $types)
+    {
         if (is_array($types)) {
             return in_array($type, $types);
-        } else if (strlen($types)) {
+        } elseif (strlen($types)) {
             return $type == $types;
         }
 

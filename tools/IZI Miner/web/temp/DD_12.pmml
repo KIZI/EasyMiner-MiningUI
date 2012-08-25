@@ -1,11 +1,45 @@
-<?xml version="1.0"?>
 <data:DataDescription xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:data="http://keg.vse.cz/ns/datadescription0_2"
-    xsi:schemaLocation="http://keg.vse.cz/ns/datadescription0_2 http://sewebar.vse.cz/schemas/DataDescription0_2.xsd">
-    <!-- LMDataSource.Matrix.ARD.PMML.Template, version of 2012-05-15 -->
-    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="TransformationDictionary"
-        id="1" default="true" sourceName="Loans">
-        <Identifier name="metabase">LMM-cjIV9HHXaE6-TjYt1k6Ybg</Identifier>
+                      xsi:schemaLocation="http://keg.vse.cz/ns/datadescription0_2 http://sewebar.vse.cz/schemas/DataDescription0_2.xsd"
+                      xmlns:data="http://keg.vse.cz/ns/datadescription0_2">
+    <!-- LMDataSource.Matrix.ARD.PMML.Template, version of 2012-07-31 -->
+
+    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="DataDictionary" id="1">
+        <Identifier  name="dataset">Loans</Identifier>
+        <Identifier  name="metabase">LM Barbora.mdb MB</Identifier>
+        <Field dataType="integer">
+            <Name>Age</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>amount</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>birth_number</Name>
+        </Field>
+        <Field dataType="string">
+            <Name>District</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>duration</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>loan_id</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>payments</Name>
+        </Field>
+        <Field dataType="integer">
+            <Name>Salary</Name>
+        </Field>
+        <Field dataType="string">
+            <Name>Sex</Name>
+        </Field>
+        <Field dataType="string">
+            <Name>status</Name>
+        </Field>
+    </Dictionary>
+    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="TransformationDictionary" id="2" default="true" sourceName="Loans">
+        <Identifier  name="dataset">Loans</Identifier>
+        <Identifier  name="metabase">LM Barbora.mdb MB</Identifier>
         <Field dataType="string">
             <Name>Age</Name>
             <Category>&lt;21;31)</Category>

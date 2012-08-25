@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arf:GUHAFeatureList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_02 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
-	xmlns:arf="http://keg.vse.cz/ns/arfeatures_02" mode="AssociationRules"
-	procedure="4ft">
-	<UserInterface>
+	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_05 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
+	xmlns:arf="http://keg.vse.cz/ns/arfeatures_05" mode="AssociationRules" procedure="4ft">
+	<UserInterface priority="2">
 		<AllowMultipleRules>false</AllowMultipleRules>
 		<Name>Exploration</Name>
 		<LocalizedName lang="en">Exploration full</LocalizedName>
@@ -502,7 +501,7 @@
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
-							<MaxValue>1</MaxValue>
+							<MaxValue>2</MaxValue>
 							<Datatype>integer</Datatype>
 							<Previous>isSmallerOrEqual</Previous>
 						</Validation>

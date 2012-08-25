@@ -1,288 +1,249 @@
-/*global Class: false */ 
-
 var Cedent = new Class({
 
-	id: 0,
-	level: 0,
-	constraint: {},
-	connective: null,
-	literalRefs: [],
-	childCedents: [],
-	scope: '',
-	sign: true,
-	colors: {0: '#FF9999', 1: '#CC99FF', 2: '#99CCFF', 3: '#FFFF99', 4: '#99FFCC', 5: '#FFCC99'},
+    GetterSetter: ['id', 'level', 'stringHelper', 'connective', 'children', 'scope'],
 
-	initialize: function (id, level, constraint, connective, literalRefs, childCedents, scope) {
-		this.id = id;
-		this.level = level;
-		this.constraint = constraint;
-		this.connective = connective;
-		this.literalRefs = literalRefs;
-		this.childCedents = childCedents;
-		this.scope = scope;
-	},
-	
-	getId: function () {
-		return this.id;
-	},
-	
-	setId: function (id) {
-		this.id = id;
-	},
-	
-	getLevel: function () {
-		return this.level;
+	$id: 0,
+	$level: 0,
+	$connective: null,
+    $children: [],
+	$scope: '',
+
+	initialize: function (id, level, connective, children, scope) {
+		this.$id = id;
+		this.$level = level;
+		this.$connective = connective;
+        this.$children = children || [];
+		this.$scope = scope;
 	},
 	
 	getNextLevel: function () {
-		return (this.level + 1);
+		return (this.$level + 1);
 	},
-	
-	getConstraint: function () {
-		return this.constraint;
+
+    addChild: function(child, position) {
+        if (position !== undefined) {
+            this.$children = this.$children.insertAt(child, position);
+        } else {
+            this.$children.include(child);
+        }
+    },
+
+    removeChild: function(child) {
+        this.$children.each(function(c) {
+            if (child === c) {
+                this.$children.erase(child);
+            } else if (!instanceOf(child, Cedent) && instanceOf(c, Cedent)) {
+                c.removeChild(child);
+            }
+        }.bind(this));
+
+        this.update();
+    },
+
+    getNumChildren: function() {
+        return this.$children.length;
+    },
+
+    getNumChildCedents: function() {
+        var count = 0;
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                count++;
+                count += child.getNumChildCedents();
+            }
+        }.bind(this));
+
+        return count;
+    },
+
+    getNumFields: function(maxLevel) {
+        maxLevel = maxLevel || Infinity;
+
+        var count = 0;
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                count += child.getNumFields(maxLevel);
+            } else if (this.$level <= maxLevel) {
+                count++;
+            }
+        }.bind(this));
+
+        return count;
+    },
+
+	groupChildren: function (cedent) {
+        var i = 0, replaced = null;
+        Array.from(this.$children).each(function(child) {
+            if (!instanceOf(child, Cedent) && child.isMarked()) {
+                child.unMark();
+                cedent.addChild(child);
+                if (replaced === null) {
+                    replaced = child;
+                } else {
+                    this.removeChild(child);
+                }
+                i++;
+            }
+        }.bind(this));
+
+        this.replaceChild(replaced, cedent);
 	},
-	
-	getConnective: function () {
-		return this.connective;
+
+	unmarkChildren: function () {
+        this.$children.each(function(child) {
+            if (!instanceOf(child, Cedent) && child.isMarked()) {
+                child.unMark();
+            }
+        }.bind(this));
 	},
-	
-	setConnective: function (connectiveName) {
-		this.connective.set(connectiveName);
-	},
-	
-	addLiteralRef: function (literalRef) {
-		this.literalRefs.push(literalRef);
-	},
-	
-	getLiteralRefs: function () {
-		return this.literalRefs;
-	},
-	
-	removeLiteralRef: function (literalRef) {
-		var removed = false;
-		Array.each(this.literalRefs, function (litRef, key) {
-			if (litRef.getId() === literalRef.getId()) {
-				this.literalRefs = this.literalRefs.remove(key);
-				removed = true;
-			}
-		}.bind(this));
-		
-		if (removed !== true) {
-			Array.each(this.childCedents, function (childCedent) {
-				if (childCedent.removeLiteralRef(literalRef) === true) {
-					removed = true;
-				}
-			}.bind(this));
-		}
-		
-		return removed;
-	},
-	
-	getNumLiteralRefs: function () {
-		var count = 0;
-		Object.each(this.literalRefs, function () {
-			count++;
-		}.bind(this));
-		
-		return count;
-	},
-	
-	groupLiteralRefs: function (newCedent) {	
-		Array.each(this.literalRefs, function (field, key) {
-			if (field.isMarked()) {
-				field.unMark();
-				newCedent.addLiteralRef(field);
-				this.removeLiteralRef(field);
-			}
-		}.bind(this));
-		this.addChildCedent(newCedent);
-	},
-	
-	unmarkLiteralRefs: function () {
-		Array.each(this.literalRefs, function (field, key) {
-			if (field.isMarked()) {
-				field.unMark();
-			}
-		}.bind(this));
-	},
-	
-	addChildCedent: function (cedent) {
-		this.childCedents.push(cedent);
-	},
-	
-	getChildCedents: function () {
-		return this.childCedents;
-	},
-	
-	getNumChildCedents: function () {
-		var count = 0;
-		Object.each(this.childCedents, function () {
-			count++;
-		}.bind(this));
-		
-		return count;
-	},
-	
-	removeChildCedent: function (cedent) {
-		Object.each(this.childCedents, function (childCedent, key) {
-			if (childCedent.getId() === cedent.getId()) {
-				delete this.childCedents[key];
-			} else {
-				childCedent.removeChildCedent(cedent);
-			}
-		}.bind(this));
-	},
-	
-	getNumChildren: function () {
-		return this.getNumLiteralRefs() + this.getNumChildCedents();
-	},
-	
-	getNumLiterals: function () {
-		var numLiterals = this.getNumLiteralRefs();
-		Object.each(this.childCedents, function (cedent) {
-			numLiterals += cedent.getNumLiterals();
-		}.bind(this));
-		
-		return numLiterals;
-	},
-	
-	getLiterals: function () {
-		var literals = Array.clone(this.literalRefs);
-		
-		Array.each(this.childCedents, function (childCedent) {
-			literals.append(childCedent.getLiterals());
-		}.bind(this));
-		
-		return literals;
-	},
-	
-	getScope: function () {
-		return this.scope;
-	},
-	
+
+    replaceChild: function(child, replace) {
+        for (var i = 0; i < this.$children.length; i++) {
+            if (this.$children[i] === child) {
+                this.$children[i] = replace;
+                return;
+            }
+        }
+    },
+
 	getNumMarkedFields: function () {
-		var count = 0;
-		Array.each(this.getLiteralRefs(), function (field, key) {
-			if (field.isMarked()) { count++; }
-		}.bind(this));
-		
+        var count = 0;
+        this.$children.each(function(child) {
+            if (!instanceOf(child, Cedent) && child.isMarked()) {
+                count++;
+            }
+        }.bind(this));
+
 		return count;
 	},
-	
+
 	getCSSID: function () {
-		return 'cedent-' + this.id;
+		return 'cedent-' + this.$id;
 	},
 	
 	getCSSEditConnectiveID: function () {
-		return 'edit-connective-' + this.id;
+		return 'edit-connective-' + this.$id;
 	},
 	
 	getCSSAddCedentID: function () {
-		return 'add-cedent-' + this.id;
+		return 'add-cedent-' + this.$id;
 	},
 	
 	getCSSFieldsID: function () {
-		return 'cedent-fields-' + this.id;
+		return 'cedent-fields-' + this.$id;
 	},
 	
 	getCSSGroupFieldsConfirmID: function () {
-		return 'group-fields-confirm-' + this.id;
-	},
-	
-	getCSSGroupFieldsRejectID: function () {
-		return 'group-fields-reject-' + this.id;
+		return 'group-fields-confirm-' + this.$id;
 	},
 	
 	getCSSInfoID: function () {
-		return 'cedent-info-' + this.id;
+		return 'cedent-info-' + this.$id;
 	},
 	
 	getCSSRemoveID: function () {
-		return 'remove-cedent-' + this.id;
+		return 'remove-cedent-' + this.$id;
 	},
 	
 	getCSSChangeSignID: function () {
-		return 'change-cedent-sign-' + this.id;
+		return 'change-cedent-sign-' + this.$id;
 	},
 	
 	isEmpty: function () {
-		return (Object.getLength(this.literalRefs) === 0 && Object.getLength(this.childCedents) === 0);
+        return (this.$children.length === 0);
 	},
-	
-	getSign: function () {
-		return (this.sign === true ? 'positive' : 'negative');
-	},
-	
-	changeSign: function () {
-		this.sign = !this.sign;			
-	},
-	
-	setPositiveSign: function () {
-		this.sign = true;
-	},
-	
-	hasPositiveSign: function () {
-		return this.sign;
-	},
-	
-	isNegativeSignAllowed: function () {
-		return this.constraint.Disjunction;
-	},
-	
-	getBackgroundColor: function () {
-		return this.colors[this.id % 6];
-	},
-	
-	hasBrackets: function () {
-		if ((this.level === 1 && this.getNumLiteralRefs() > 1 && this.getNumLiterals() !== this.getNumLiteralRefs()) || (this.level === 2 && this.getNumLiteralRefs() > 1)) {
-			return true;
-		}
-		//else if (this.getNumLiteralRefs() > 2) {
-		//	return true;
-		//}
-		
-		return false;
-	},
-	
-	/*
-	hasBrackets: function () {
-		if (this.getNumLiteralRefs() > 1 && (this.getNumLiterals() > this.getNumLiteralRefs() + 1)) {
-			return true;
-		} else if (this.getNumLiteralRefs() > 1) {
-			return true;
-		}
-		
-		return false;
-	},*/
-	
-	displayChangeSign: function () {
-		return this.isNegativeSignAllowed() && this.hasBrackets();
-	},
+
+    hasOpeningBracket: function(position, level) {
+        level = level || this.$level;
+
+        var bracket = this.getBracketByPosition(position);
+        var logical = (bracket && bracket.level === level && bracket.start === position) ? true : false;
+
+        return logical;
+    },
+
+    hasClosingBracket: function(position, level) {
+        level = level || this.$level;
+
+        var bracket = this.getBracketByPosition(position);
+        var logical = (bracket && bracket.level === level && bracket.end === position) ? true : false;
+
+        return logical;
+    },
+
+    getBracketByPosition: function(position) {
+        var bracket = null;
+        var brackets = this.getBrackets();
+        for (i = 0; i < brackets.length; i++) {
+            bracket = brackets[i];
+            if (bracket.start === position || bracket.end === position) {
+                return bracket;
+            }
+        }
+
+        return bracket;
+    },
+
+    getBrackets: function() {
+        var brackets = [];
+
+        var levels = this.getFieldLevels();
+        var index = 0;
+        var bracket = {};
+        var bracketSize = 0, bracketLevel = 1, bracketOpened = false;
+        levels.each(function(level) {
+            index++;
+            if (index === levels.length) { // last item
+                if (++bracketSize > 1 && bracketOpened) {
+                    bracket = {level: bracketLevel, start: index - bracketSize + 1, end: index};
+                    brackets.push(bracket);
+                }
+            } else if (level !== bracketLevel) { // close bracket
+                if (bracketSize > 1 && bracketOpened) {
+                    bracket = {level: bracketLevel, start: index - bracketSize, end: index - 1};
+                    brackets.push(bracket);
+                }
+
+                bracketSize = 1; bracketLevel = level; bracketOpened = true;
+            } else { // next item in bracket
+                bracketSize++;
+            }
+        }.bind(this));
+
+        return brackets;
+    },
+
+    getFieldLevels: function() {
+        var levels = [];
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                levels = levels.concat(child.getFieldLevels());
+            } else {
+                levels.push(this.getLevel());
+            }
+        }.bind(this));
+
+        return levels;
+    },
 	
 	displayGroupButton: function () {
-		var numMarkedFields = 0;
-		Object.each(this.literalRefs, function (literalRef) {
-			if (literalRef.isMarked()) { numMarkedFields++; }
-		}.bind(this));
-		
-		return (numMarkedFields > 1);
+        return (this.getNumMarkedFields() > 1);
 	},
 	
 	/* misc */
-	
 	isAttributeUsed: function (attribute) {
 		var used = false;
-		Array.each(this.literalRefs, function (literalRef) {
-			if (literalRef.getAttributeName() === attribute.getName()) {
-				used = true;
-			}
-		}.bind(this));
-		
-		Array.each(this.childCedents, function (childCedent) {
-			if (childCedent.isAttributeUsed(attribute)) {
-				used = true;
-			}
-		}.bind(this));
+		this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                if (child.isAttributeUsed(attribute)) {
+                    used = true;
+                }
+            } else {
+                if (child.getAttributeName() === attribute.getName()) {
+                    used = true;
+                }
+            }
+        }.bind(this));
 		
 		return used;
 	},
@@ -306,89 +267,85 @@ var Cedent = new Class({
 	
 	serialize: function () {
 		var serialized = [];
-		
-		if (this.hasPositiveSign() !== true) { 
-			serialized.push({name: 'NEG', type: 'neg'});
-		}
-		if (this.hasBrackets()) { 
-			serialized.push({name: '(', type: 'lbrac'});
-		}
-		
-		var i = 0;
-		Array.each(this.literalRefs, function (literalRef) {
-			if (!literalRef.hasPositiveSign()) {
-				serialized.push({name: 'NEG', type: 'neg'});
-			}
-			serialized.push(literalRef.serialize());
-			if (this.getNumChildren() !== ++i) {
-				serialized.push(this.connective.serialize());
-			}
-		}.bind(this));
-		
-		Array.each(this.childCedents, function (childCedent) {
-			serialized.combine(childCedent.serialize());
-			if (this.getNumChildren() !== ++i) {
-				serialized.push(this.connective.serialize());
-			}
-		}.bind(this));
-		
-		if (this.hasBrackets()) { 
-			serialized.push({name: ')', type: 'rbrac'});
-		}
-		
+
+        var index = 1;
+
+        if (this.hasOpeningBracket(index)) {
+            serialized.push({name: '(', type: 'lbrac'});
+        }
+
+        this.$children.each(function(child) {
+            serialized.push(child.serialize()); // APField or Cedent
+
+            if (index++ < this.getNumChildren()) { // Connective
+                serialized.push(this.$connective.serialize());
+            }
+        }.bind(this));
+
+        if (this.hasClosingBracket(index)) {
+            serialized.push({name: ')', type: 'rbrac'});
+        }
+
 		return serialized;
 	},
-	
+
+    toString: function () {
+        if (this.isEmpty()) { return 'Any'; }
+
+        var index = 1;
+
+        var string = '';
+        if (this.hasOpeningBracket(index)) {
+            string += '(';
+        }
+
+        this.$children.each(function(child) {
+            string += child.toString(); // APField or Cedent
+
+            if (index < this.getNumChildren()) { // Connective
+                string += this.$connective.toString();
+                index++;
+            }
+        }.bind(this));
+
+        if (this.hasClosingBracket(index)) {
+            string += ')';
+        }
+
+        return string;
+    },
+
+    toSettings: function() {
+        var settings = {};
+        var connective = {};
+        connective[this.$connective.getName()] = true;
+        settings[this.$level] = connective;
+
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                Object.each(child.toSettings(), function(value, key) {
+                    settings[key] = value;
+                }.bind(this));
+            }
+        }.bind(this));
+
+        return settings;
+    },
+
 	update: function () {
-		if (this.getNumLiteralRefs() === 0 && this.getNumChildren() === 1) {
-			var childCedent = this.childCedents[0];
-			this.literalRefs = childCedent.getLiteralRefs();
-			this.childCedents = childCedent.getChildCedents();
+		if (this.getNumFields(this.$level) === 0 && this.getNumChildren() === 1) {
+            this.$connective = this.$children[0].getConnective();
+            this.$children = this.$children[0].getChildren();
 		}
-		
-		Array.each(this.childCedents, function (childCedent) {
-			if (childCedent.getNumLiterals() === 0) {
-				this.removeChildCedent(childCedent);
-			}
-		}.bind(this));
-	},
-	
-	toString: function () {
-		if (this.isEmpty()) { return 'Any'; }
-		
-		var string = '';
-		if (this.hasPositiveSign() !== true) { string += '<span class="field-sign negative">'; }
-		if (this.hasBrackets()) { 
-			string += '('; 
-			//string += '<span class="left-bracket">(</span>'; 
-		}
-		
-		//string += '<span class="rule">';
-		
-		var i = 0;
-		Array.each(this.literalRefs, function (field) {
-			string += field.toStringAR();
-			if (this.getNumChildren() !== ++i) {
-				string += '<span class="connective">' + this.connective.toString() + '</span>';
-			}
-		}.bind(this));
-		
-		Array.each(this.getChildCedents(), function (childCedent) {
-			string += childCedent.toString();
-			if (this.getNumChildren() !== ++i) {
-				string += '<span class="connective">' + this.connective.toString() + '</span>';
-			}
-		}.bind(this));
-		
-		//string += '</span>';
-		
-		if (this.hasBrackets()) { 
-			string += ' )'; 
-			//string += '<span class="right-bracket">)</span>'; 
-		}
-		if (this.hasPositiveSign() !== true) { string += '</span>'; }
-		
-		return string;
+
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent) && child.getNumFields() === 0) {
+                this.removeChild(child);
+            } else if (instanceOf(child, Cedent) && child.getNumFields(child.getLevel()) === 1) {
+                this.removeChild(child);
+                this.addChild(child.getChildren()[0]);
+            }
+        }.bind(this));
 	}
 
 });

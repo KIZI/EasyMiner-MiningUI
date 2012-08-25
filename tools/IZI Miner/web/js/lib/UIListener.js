@@ -74,30 +74,42 @@ var UIListener = new Class({
 	},
 	
 	registerNavigationEventHandlers: function () {
-		var elAttrDropdown = $$('#attributes a.dropdown')[0];
-		elAttrDropdown.addEvent('click', function (event) {
+		var el = $$('#attributes a.toggle')[0];
+		el.addEvent('click', function (event) {
 			event.stop();
-			var elAttrToggle = $$('#attributes > div')[0];
-			elAttrToggle.toggle();
+			var elToggle = $$('#attributes > div')[0];
+			elToggle.toggle();
+            var elH2 = $$('#attributes h2')[0];
+            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
 		}.bind(this));
-		
-		if (this.ARManager.getAttributesByGroup()) {
-			// attributes by list
-			$('attributes-by-list').addEvent('click', function (event) {
-				event.stop();
-				this.ARManager.displayAttributesByList();
-			}.bind(this));
-		} else {
-			// attributes by group
-			$('attributes-by-group').addEvent('click', function (event) {
-				this.ARManager.displayAttributesByGroup();
-				event.stop();
-			}.bind(this));
-		}
+
+//		if (this.ARManager.getAttributesByGroup()) {
+//			// attributes by list
+//			$('attributes-by-list').addEvent('click', function (event) {
+//				event.stop();
+//				this.ARManager.displayAttributesByList();
+//			}.bind(this));
+//		} else {
+//			// attributes by group
+//			$('attributes-by-group').addEvent('click', function (event) {
+//				this.ARManager.displayAttributesByGroup();
+//				event.stop();
+//			}.bind(this));
+//		}
+
+        var el = $$('#data-fields a.toggle')[0];
+        el.addEvent('click', function (event) {
+            event.stop();
+            var elToggle = $$('#data-fields > div')[0];
+            elToggle.toggle();
+            var elH2 = $$('#data-fields h2')[0];
+            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
+        }.bind(this));
 	},
 	
 	registerAttributeEventHandler: function (attribute) {
-		$(attribute.getCSSID()).addEvent('mousedown', function (event) {
+        // drag & drop
+        $(attribute.getCSSID()).addEvent('mousedown', function (event) {
 			event.stop();
 			
 			// disable right click drag & drop
@@ -112,22 +124,42 @@ var UIListener = new Class({
 			    }).inject(document.body);
 			
 		    var drag = new Drag.Move(clone, {
-		        droppables: $$('div.cedent'),
+		        droppables: $$('div.cedent.empty').combine($$('div.field')).combine($$('div.connective')),
 
-		        onDrop: function (dragging, cedent) {
+		        onDrop: function (dragging, element) {
 		        	dragging.destroy();
-		        	if (cedent !== null) {
-		        		cedent.fireEvent('addAttribute', attribute);
-		        		this.UIColorizer.cedentDragDrop(cedent);
+		        	if (element !== null) {
+                        var cedent = {};
+                        var position = undefined;
+                        if (element.getAttribute('class') !== 'cedent empty') {
+                            cedent = element.getParent().getParent();
+                            var position = element.getAllPrevious('.field').length + (element.getAttribute('class') === 'field' ? 1 : 0);
+                        } else {
+                            cedent = element;
+                        }
+		        		cedent.fireEvent('addAttribute', [attribute, position]);
+		        		this.UIColorizer.dragDrop(cedent);
 		        	}
 		        }.bind(this),
 		        
-		        onEnter: function (dragging, cedent) {
-		        	this.UIColorizer.cedentDragEnter(cedent);
+		        onEnter: function (dragging, element) {
+                    var cedent = {};
+                    if (element.getAttribute('class') !== 'cedent empty') {
+                        cedent = element.getParent().getParent();
+                    } else {
+                        cedent = element;
+                    }
+		        	this.UIColorizer.dragEnter(cedent);
 		        }.bind(this),
 		        
-		        onLeave: function (dragging, cedent) {
-		        	this.UIColorizer.cedentDragLeave(cedent);
+		        onLeave: function (dragging, element) {
+                    var cedent = {};
+                    if (element.getAttribute('class') !== 'cedent empty') {
+                        cedent = element.getParent().getParent();
+                    } else {
+                        cedent = element;
+                    }
+		        	this.UIColorizer.dragLeave(cedent);
 		        }.bind(this),
 		        
 		        onCancel: function (dragging) {
@@ -138,12 +170,99 @@ var UIListener = new Class({
 		    drag.start(event);
 		    
 		}.bind(this));
+
+        // edit
+        $(attribute.getCSSEditID()).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.openEditAttributeWindow(attribute);
+        }.bind(this));
+
+        // remove
+        $(attribute.getCSSRemoveID()).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.removeAttribute(attribute);
+        }.bind(this));
 	},
-	
+
+    registerAddAttributeEventHandler: function(field) {
+        // submit
+        var elementSubmit = $('add-attribute-form').getElement('input[type=submit]');
+        elementSubmit.addEvent('click', function (event) {
+            event.stop();
+            this.ARBuilder.reloadAttributes();
+        }.bind(this));
+
+        // close
+        $('add-attribute-close').addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.closeAddAttributeWindow();
+        }.bind(this));
+    },
+
+    registerEditAttributeEventHandler: function(attribute) {
+        // submit
+        var elementSubmit = $('edit-attribute-form').getElement('input[type=submit]');
+        elementSubmit.addEvent('click', function (event) {
+            event.stop();
+            this.ARBuilder.reloadAttributes();
+        }.bind(this));
+
+        // close
+        $('edit-attribute-close').addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.closeEditAttributeWindow();
+        }.bind(this));
+    },
+
+    registerDataFieldEventHandler: function(field) {
+        // drag & drop
+        $(field.getCSSID()).addEvent('mousedown', function (event) {
+            event.stop();
+
+            // disable right click drag & drop
+            if (event.rightClick) {
+                return false;
+            }
+
+            var draggedField = $(field.getCSSID());
+            var clone = draggedField.clone().setStyles(draggedField.getCoordinates()).setStyles({
+                opacity: 0.7,
+                position: 'absolute'
+            }).inject(document.body);
+
+            var drag = new Drag.Move(clone, {
+                droppables: $('attributes'),
+
+                onDrop: function (dragging, element) {
+                    dragging.destroy();
+                    if (element !== null) {
+                        this.ARBuilder.openAddAttributeWindow(field);
+                        this.UIColorizer.dragLeave(element);
+                    }
+                }.bind(this),
+
+                onEnter: function (dragging, element) {
+                    this.UIColorizer.dragEnter(element);
+                }.bind(this),
+
+                onLeave: function (dragging, element) {
+                    this.UIColorizer.dragLeave(element);
+                }.bind(this),
+
+                onCancel: function (dragging) {
+                    dragging.destroy();
+                }
+            });
+
+            drag.start(event);
+
+        }.bind(this));
+    },
+
 	registerFieldEventHandler: function (field) {
 		$(field.getCSSID()).addEvent('mousedown', function (event) {
 			event.stop();
-			
+
 			// disable right click drag & drop
 			if (event.rightClick) {
 				return false;
@@ -162,16 +281,16 @@ var UIListener = new Class({
 		        	dragging.destroy();
 		        	if (elementCedent !== null) {
 		        		elementCedent.fireEvent('addField', field);
-		        		this.UIColorizer.cedentDragDrop(elementCedent);
+		        		this.UIColorizer.dragDrop(elementCedent);
 		        	}
 		        }.bind(this),
 		        
 		        onEnter: function (dragging, elementCedent) {
-		        	this.UIColorizer.cedentDragEnter(elementCedent);
+		        	this.UIColorizer.dragEnter(elementCedent);
 		        }.bind(this),
 		        
 		        onLeave: function (dragging, elementCedent) {
-		        	this.UIColorizer.cedentDragLeave(elementCedent);
+		        	this.UIColorizer.dragLeave(elementCedent);
 		        }.bind(this),
 		        
 		        onCancel: function (dragging) {
@@ -206,16 +325,16 @@ var UIListener = new Class({
 		        	dragging.destroy();
 		        	if (elementCedent !== null) {
 		        		elementCedent.fireEvent('addFieldGroup', FG);
-		        		this.UIColorizer.cedentDragDrop(elementCedent);
+		        		this.UIColorizer.dragDrop(elementCedent);
 		        	}
 		        }.bind(this),
 		        
 		        onEnter: function (dragging, elementCedent) {
-		        	this.UIColorizer.cedentDragEnter(elementCedent);
+		        	this.UIColorizer.dragEnter(elementCedent);
 		        }.bind(this),
 		        
 		        onLeave: function (dragging, elementCedent) {
-		        	this.UIColorizer.cedentDragLeave(elementCedent);
+		        	this.UIColorizer.dragLeave(elementCedent);
 		        }.bind(this),
 		        
 		        onCancel: function (dragging) {
@@ -307,8 +426,8 @@ var UIListener = new Class({
 	
 	registerCedentEventHandlers: function (cedent, rule) {
 		// add attribute (fired by drag & drop)
-		$(cedent.getCSSID()).addEvent('addAttribute', function (attribute) {
-			this.ARManager.addAttribute(cedent, attribute);
+		$(cedent.getCSSID()).addEvent('addAttribute', function (attribute, position) {
+			this.ARManager.addAttribute(cedent, attribute, position);
 		}.bind(this));
 		
 		// add preset field (fired by drag & drop)
@@ -331,21 +450,12 @@ var UIListener = new Class({
 		Array.each(elCons, function (elCon) {
 			elCon.addEvent('click', function (e) {
 				e.stop();
-				// TODO called twice, how to stop propagation???
-				if (!$('edit-connective-window')) {
-					this.ARManager.openEditConnectiveWindow(cedent);
-				}
+                if (!$('edit-connective-window')) {
+                    this.ARManager.openEditConnectiveWindow(cedent);
+                }
 			}.bind(this));
 		}.bind(this));
-		
-		// change cedent sign
-		if (cedent.displayChangeSign()) {
-			$(cedent.getCSSChangeSignID()).addEvent('click', function (event) {
-				this.ARManager.changeCedentSign(cedent);
-				event.stop();
-			}.bind(this));
-		}
-		
+
 		// group fields option
 		if (rule.getGroupFields() && cedent.displayGroupButton()) {
 			// group fields confirm
@@ -432,17 +542,19 @@ var UIListener = new Class({
 		// submit
 		var elementSubmit = $('edit-connective-form').getElement('input[type=submit]');
 		elementSubmit.addEvent('click', function (event) {
-			var elementSelect = $('edit-connective-select');
-			var connectiveName = elementSelect.options[elementSelect.selectedIndex].value;
-			this.ARManager.editConnective(cedent, connectiveName);
 			event.stop();
+            var elementSelect = $('edit-connective-select');
+			if (elementSelect) {
+                var connectiveName = elementSelect.options[elementSelect.selectedIndex].value;
+			    this.ARManager.editConnective(cedent, connectiveName);
+            }
 		}.bind(this));
 		
 		// close
 		var elementClose = $('edit-connective-close');
 		elementClose.addEvent('click', function (event) {
-			this.ARManager.closeEditConnectiveWindow();
 			event.stop();
+			this.ARManager.closeEditConnectiveWindow();
 		}.bind(this));
 	},
 	
@@ -461,7 +573,7 @@ var UIListener = new Class({
 		}.bind(this));
 		
 		var elMark = $(field.getCSSMarkID());
-		if (cedent.getNumLiteralRefs() > 1 && elMark) {
+		if (cedent.getNumFields(cedent.getLevel()) > 1 && elMark) {
 			// mark / unmark rule
 			elMark.addEvent('click', function (event) {
 				this.ARManager.changeMark(field);
@@ -485,27 +597,26 @@ var UIListener = new Class({
 			}).inject(document.body);
 			
 		    var drag = new Drag.Move(clone, {
+//                droppables: $$('div.field or div.connective'),
 		    	droppables: $$('div.cedent'),
-		        //droppables: $$('div.cedent:not(div#' + cedent.getCSSID() + ')'),
-	
+
 		        onDrop: function (dragging, elementCedent) {
 		        	dragging.destroy();
 		        	if (elementCedent === $(cedent.getCSSID())) { return; };
-		        	
 		        	if (elementCedent !== null) {
 		        		elementCedent.fireEvent('addFieldAR', field);
-		        		this.UIColorizer.cedentDragDrop(elementCedent);
+		        		this.UIColorizer.dragDrop(elementCedent);
 		        	}
 		        }.bind(this),
 		        
 		        onEnter: function (dragging, elementCedent) {
 		        	if (elementCedent === $(cedent.getCSSID())) { return; };
-		        	this.UIColorizer.cedentDragEnter(elementCedent);
+		        	this.UIColorizer.dragEnter(elementCedent);
 		        }.bind(this),
 		        
 		        onLeave: function (dragging, elementCedent) {
 		        	if (elementCedent === $(cedent.getCSSID())) { return; };
-		        	this.UIColorizer.cedentDragLeave(elementCedent);
+		        	this.UIColorizer.dragLeave(elementCedent);
 		        }.bind(this),
 		        
 		        onCancel: function (dragging) {
@@ -540,17 +651,18 @@ var UIListener = new Class({
 		// clear
 		$('pager-clear').addEvent('click', function (e) {
 			e.stop();
-			this.FRManager.clearFoundRules();
+			this.FRManager.reset();
 		}.bind(this));
 	},
 	
 	registerMarkedRulesEventHandlers: function () {
-		var elDropdown = $$('#marked-rules a.dropdown')[0];
+		var elDropdown = $$('#marked-rules a.toggle')[0];
 		elDropdown.addEvent('click', function (event) {
 			event.stop();
-			
 			var elToggle = $$('#marked-rules > div')[0];
 			elToggle.toggle();
+            var elH2 = $$('#marked-rules h2')[0];
+            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
 		}.bind(this));
 	},
 	

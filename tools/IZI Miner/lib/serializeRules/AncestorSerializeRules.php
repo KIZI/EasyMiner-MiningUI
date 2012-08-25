@@ -6,12 +6,13 @@
  * @author Jakub Balhar
  * @version 1.0
  */
-abstract class AncestorSerializeRules {
+abstract class AncestorSerializeRules
+{
   /**
    * It creates instance of descendant.
    */
-  public function  __construct(){
-
+  public function  __construct()
+  {
   }
 
   /**
@@ -20,6 +21,5 @@ abstract class AncestorSerializeRules {
    *
    * @param <type> $json
    */
-  public abstract function serializeRules($json);
+  abstract public function serializeRules($json);
 }
-?>

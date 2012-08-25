@@ -6,8 +6,8 @@
  *
  * @author balda
  */
-class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
-
+class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules
+{
   private $dd;
   private $ddXpath;
 
@@ -27,12 +27,13 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
   /**
    * It creates instance of this class.
    */
-  function __construct() {
+  public function __construct()
+  {
     parent::__construct();
 
     // load Data Description XML
     $domDdPath = $_SESSION["ARBuilder_domDataDescr"];
-    $this->dd = new DomDocument();
+    $this->dd = new \DOMDocument();
     if (file_exists($domDdPath)) {
       $this->dd->load($domDdPath);
     } else {
@@ -48,7 +49,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * serializeRules, this one is main function and it gets JSON and returns
    * correct XML reprezantation of the data.
    */
-  public function serializeRules($json) {
+  public function serializeRules($json)
+  {
     // Create basic structure of Document.
     $this->createBasicStructure();
     // get Data from JSON
@@ -72,7 +74,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
   /**
    * It creates final XML document from all BBAs, DBAs and AsociationRules
    */
-  private function createXML(){
+  private function createXML()
+  {
     $bbaLength = count($this->bbas);
     for($actualBba = 0; $actualBba < $bbaLength; $actualBba++){
       $this->ARQuery->appendChild($this->bbas[$actualBba]);
@@ -93,7 +96,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    *
    * @param <Array> $ruleData Array of elements creating the rule.
    */
-  private function serializeRule($ruleData){
+  private function serializeRule($ruleData)
+  {
     $IM = array();
     $IMValue = array();
     $this->rule = array();
@@ -119,14 +123,12 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
           $fieldLength = count($fields);
           if($fieldLength < 1){
             $minLength = "";
-          }
-          else{
+          } else{
             $minLength = $fields[0]->{'value'};
           }
           if($fieldLength < 2){
             $maxLength = "";
-          }
-          else{
+          } else{
             $maxLength = $fields[1]->{'value'};
           }
         }
@@ -137,8 +139,7 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
         $fields = $actualRuleElement->{'fields'};
         if(count($fields) > 0){
           $value = $fields[0]->{'value'};
-        }
-        else{
+        } else{
           $value = 0;
         }
         if($value == ""){
@@ -167,8 +168,9 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    *     </AssociationRules>
    * </ARBuilder>
    */
-  private function createBasicStructure() {
-    $this->finalXMLDocument = new DomDocument("1.0", "UTF-8");
+  private function createBasicStructure()
+  {
+    $this->finalXMLDocument = new \DOMDocument("1.0", "UTF-8");
 
     // add BKEF XSL processing instruction
     $pi = $this->finalXMLDocument->createProcessingInstruction('xml-stylesheet', 'type="text/xsl" href="bkef-styl.xsl"');
@@ -206,7 +208,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    *
    * TODO param spec
    */
-  private function createHeader($root) {
+  private function createHeader($root)
+  {
     // element Header
     $header = $this->finalXMLDocument->createElement('Header');
 
@@ -263,7 +266,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * Create Dictionary
    * It means get dictionary from elsewhere and just inject it here.
    */
-  private function createDictionary($root) {
+  private function createDictionary($root)
+  {
     $Dictionary = $this->finalXMLDocument->createElement("DataDescription");
     $this->Dictionary = $root->appendChild($Dictionary);
 
@@ -271,7 +275,7 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
     $domDD1 = $_SESSION["ARBuilder_domDataDescr"];
 
     // load XML
-    $domDD = new DomDocument();
+    $domDD = new \DOMDocument();
     if (file_exists($domDD1)) {
       $domDD->load($domDD1);
     } else {
@@ -299,7 +303,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    *
    * @return <int> position of new rule
    */
-  private function getNewRulePosition(){
+  private function getNewRulePosition()
+  {
     return ++$this->rulePosition;
   }
 
@@ -316,7 +321,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <String> $category CatRef of BBA
    * @return <int> id id of this BBA
    */
-  private function createBBASetting($text, $fieldRef, $category) {
+  private function createBBASetting($text, $fieldRef, $category)
+  {
     $BBASetting = $this->finalXMLDocument->createElement("BBA");
     $id = $this->getNewID();
     $position = $this->getNewRulePosition();
@@ -344,7 +350,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    *
    * @return <int> id
    */
-  private function getNewID() {
+  private function getNewID()
+  {
     return ++$this->id;
   }
 
@@ -359,7 +366,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <Array> $elements elements BARef
    * @return <int> id of DBA
    */
-  private function createDBASetting($type, $elements) {
+  private function createDBASetting($type, $elements)
+  {
     if($type == "(" || $type == ")" || $type == null){
       return;
     }
@@ -391,7 +399,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
   /**
    * Solve DBAs from the rule.
    */
-  private function createDBAs() {
+  private function createDBAs()
+  {
     $workingRule = $this->rule;
     // change negations into DBA and create corresponding DBAs
     for ($i = 0; $i < count($workingRule); $i++) {
@@ -454,8 +463,7 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
     // change consequent for one DBA
     if(count($ruleConsequent) > 0){
       $this->consequent = $this->solvePlainDBA($ruleConsequent);
-    }
-    else{
+    } else{
       $this->consequent = "";
     }
 
@@ -467,7 +475,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <Array> $rule Rule
    * @return <Boolean>
    */
-  private function existsBracket($rule) {
+  private function existsBracket($rule)
+  {
     if ($this->getRbrac($rule) != -1) {
       return true;
     }
@@ -481,7 +490,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <Array> $inputRulePart Array of rule elements
    * @return <int>  id of this DBA
    */
-  private function solvePlainDBA($inputRulePart) {
+  private function solvePlainDBA($inputRulePart)
+  {
     $rulePart = $inputRulePart;
     // Until rulePart has only rule
     while(count($rulePart) > 1){
@@ -538,7 +548,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <int> $to end of replacing
    * @return <Array> rule
    */
-  private function replacePartWithDBA($rule, $replaceWith, $from, $to) {
+  private function replacePartWithDBA($rule, $replaceWith, $from, $to)
+  {
     $rule[$from] = $replaceWith;
     for ($i = $from + 1; $i <= $to; $i++) {
       unset($rule[$i]);
@@ -556,7 +567,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <Array> $where rule
    * @return int
    */
-  private function getRbrac($where) {
+  private function getRbrac($where)
+  {
     for ($i = 0; $i < count($where); $i++) {
       if ($where[$i] == ")") {
         return $i;
@@ -572,7 +584,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <Array> $where rule
    * @return int
    */
-  private function getLbrac($where, $rBracPos) {
+  private function getLbrac($where, $rBracPos)
+  {
     for ($i = $rBracPos; $i >= 0; $i--) {
       if ($where[$i] == "(") {
         return $i;
@@ -587,7 +600,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <String> $ruleType  type of Element
    * @return <Boolean> Whetre type is boolean
    */
-  private function isBoolean($ruleType) {
+  private function isBoolean($ruleType)
+  {
     if ($ruleType == "AND" or $ruleType == "OR" or $ruleType == "NEG" or $ruleType == "(" or $ruleType == ")") {
       return true;
     }
@@ -607,7 +621,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    * @param <int> $antecedent number of antecedent
    * @param <int> $consequent number of consequent
    */
-  private function createInterestMeasureSetting($name, $antecedent, $consequent, $value) {
+  private function createInterestMeasureSetting($name, $antecedent, $consequent, $value)
+  {
     $InterestMeasureTreshold = $this->finalXMLDocument->createElement("AssociationRule");
     $InterestMeasureTreshold->setAttribute("antecedent", $antecedent);
     if($consequent != ""){
@@ -631,7 +646,8 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
    *
    * @param <String> $elements JSON
    */
-  function prepareData($elements) {
+  public function prepareData($elements)
+  {
     $obj = json_decode($elements);
     $obj->{'rules'};
     $ruleData = $obj->{'rule' . $i}; // this is array
@@ -639,4 +655,3 @@ class SerializeRulesBackgroundAssociationRules extends AncestorSerializeRules {
 
 }
 
-?>

@@ -2,43 +2,58 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>QUnit Tests for AR Builder</title>
-	<link rel="stylesheet" media="screen,projection,tv" type="text/css" href="QUnit.css" />
+	<title>QUnit Tests for I:ZI Miner</title>
+	<link rel="stylesheet" media="screen,projection,tv" type="text/css" href="qunit-1.10.0.css" />
 	<script src="../../../../../web/js/ext/mootools-core-1.4.5-nocompat.js"></script>
 	<script src="../../../../../web/js/ext/mootools-more-1.4.0.1-nocompat.js"></script>
-	<script type="text/javascript" src="QUnit-1.3.0.js"></script>	
-	<script type="text/javascript" src="Sinon-1.2.0.js"></script>
-    <script type="text/javascript" src="Sinon-IE-1.2.0.js"></script>
-    <script type="text/javascript" src="Sinon-QUnit-1.0.0.js"></script>
-	<script src="../../../../../web/js/lib/AssociationRule.js"></script>
-	<script type="text/javascript" src="AssociationRuleTest.js"></script>
+    <script src="../../../../../web/js/lib/Mutators.js"></script>
+	<script src="qunit-1.10.0.js"></script>
+	<script src="sinon-1.4.2.js"></script>
+    <script src="sinon-ie-1.4.2.js"></script>
+    <script src="sinon-qunit-1.0.0.js"></script>
+    <script src="../../../../../web/js/lib/AJAXBalancer.js"></script>
+    <script src="../../../../../web/js/lib/APField.js"></script>
+    <script src="APFieldTest.js"></script>
+    <script src="../../../../../web/js/lib/ARBuilder.js"></script>
+    <script src="../../../../../web/js/lib/ARManager.js"></script>
+    <script src="../../../../../web/js/lib/AssociationRule.js"></script>
+	<script src="AssociationRuleTest.js"></script>
+    <script src="../../../../../web/js/lib/AssociationRuleValidator.js"></script>
+    <script src="AssociationRuleValidatorTest.js"></script>
 	<script src="../../../../../web/js/lib/Attribute.js"></script>
-	<script type="text/javascript" src="AttributeTest.js"></script>
+	<script src="AttributeTest.js"></script>
 	<script src="../../../../../web/js/lib/BBACoefficient.js"></script>
-	<script type="text/javascript" src="BBACoefficientTest.js"></script>
+	<script src="BBACoefficientTest.js"></script>
 	<script src="../../../../../web/js/lib/Cedent.js"></script>
-	<script type="text/javascript" src="CedentTest.js"></script>
+	<script src="CedentTest.js"></script>
 	<script src="../../../../../config/Config.js"></script>
-	<script type="text/javascript" src="ConfigTest.js"></script>
+	<script src="ConfigTest.js"></script>
 	<script src="../../../../../web/js/lib/Connective.js"></script>
-	<script type="text/javascript" src="ConnectiveTest.js"></script>
+	<script src="ConnectiveTest.js"></script>
 	<script src="../../../../../web/js/lib/DataDescription.js"></script>
-	<script src="../../../../../web/js/lib/DataParser.js"></script>
-	<script type="text/javascript" src="DataParserTest.js"></script>
-	<script src="../../../../../web/js/lib/FeatureList.js"></script>
+    <script src="DataDescriptionTest.js"></script>
+    <script src="../../../../../web/js/lib/DataParser.js"></script>
+	<script src="DataParserTest.js"></script>
+    <script src="../../../../../web/js/lib/ETreeManager.js"></script>
+    <script src="../../../../../web/js/lib/ETreeValidator.js"></script>
+    <script src="ETreeValidatorTest.js"></script>
+    <script src="../../../../../web/js/lib/FeatureList.js"></script>
+    <script src="FeatureListTest.js"></script>
 	<script src="../../../../../web/js/lib/Field.js"></script>
-	<script type="text/javascript" src="FieldTest.js"></script>
+	<script src="FieldTest.js"></script>
 	<script src="../../../../../web/js/lib/FieldAR.js"></script>
-	<script type="text/javascript" src="FieldARTest.js"></script>
+	<script src="FieldARTest.js"></script>
 	<script src="../../../../../web/js/lib/FieldGroup.js"></script>
 	<script type="text/javascript" src="FieldGroupTest.js"></script>
 	<script src="../../../../../web/js/lib/FieldGroupConfig.js"></script>
-	<script src="../../../../../web/js/lib/InterestMeasure.js"></script>
+    <script src="../../../../../web/js/lib/FRManager.js"></script>
+    <script src="../../../../../web/js/lib/InterestMeasure.js"></script>
 	<script type="text/javascript" src="InterestMeasureTest.js"></script>
 	<script src="../../../../../web/js/lib/InterestMeasureAR.js"></script>
 	<script type="text/javascript" src="InterestMeasureARTest.js"></script>
 	<script src="../../../../../web/js/lib/i18n.js"></script>
 	<script type="text/javascript" src="i18nTest.js"></script>
+    <script src="../../../../../web/js/lib/MiningManager.js"></script>
 	<script src="../../../../../web/js/lib/NativeTypeExtender.js"></script>
 	<script type="text/javascript" src="NativeTypeExtenderTest.js"></script>
 	<script src="../../../../../web/js/lib/NumberNormalizer.js"></script>
@@ -47,6 +62,7 @@
 	<script type="text/javascript" src="RulesParserTest.js"></script>
 	<script src="../../../../../web/js/lib/RulePattern.js"></script>
 	<script src="../../../../../web/js/lib/Settings.js"></script>
+	<script src="../../../../../web/js/lib/Storage.js"></script>
 	<script src="../../../../../web/js/lib/StringHelper.js"></script>
 	<script type="text/javascript" src="StringHelperTest.js"></script>
 	<script src="../../../../../web/js/lib/URLHelper.js"></script>
@@ -60,7 +76,7 @@
 </head>
 <body>
 	<header>
-		<h1 id="qunit-header">QUnit Tests for AR Builder</h1>
+		<h1 id="qunit-header">QUnit Tests for I:ZI Miner</h1>
 	</header>
 	
 	<section>

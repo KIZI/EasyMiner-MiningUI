@@ -47,7 +47,7 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
 
     // save XML
     $AARPath = './temp/KB_'.date('md_His').'.pmml';
-    $AAR = new DOMDocument('1.0', 'UTF-8');
+    $AAR = new \DOMDocument('1.0', 'UTF-8');
     @$AAR->loadXML($requestData['content'], LIBXML_NOBLANKS); // throws notice due to the PI declaration
     $AAR->save($AARPath);
 } else {
@@ -57,7 +57,7 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
 
     // save XML
     $AARPath = './temp/KB_conf_'.date('md_His').'.pmml';
-    $AAR = new DOMDocument('1.0', 'UTF-8');
+    $AAR = new \DOMDocument('1.0', 'UTF-8');
     @$AAR->loadXML($requestData['parameters'], LIBXML_NOBLANKS); // throws notice due to the PI declaration
     $AAR->save($AARPath);
 
@@ -97,7 +97,7 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     
     // save XML
     $AARPath = './temp/KB_exc_'.date('md_His').'.pmml';
-    $AAR = new DOMDocument('1.0', 'UTF-8');
+    $AAR = new \DOMDocument('1.0', 'UTF-8');
     @$AAR->loadXML($requestData['parameters'], LIBXML_NOBLANKS); // throws notice due to the PI declaration
     $AAR->save($AARPath);
 

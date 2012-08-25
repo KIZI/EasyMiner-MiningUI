@@ -123,7 +123,7 @@ var InterestMeasureSlider = new Class({
 	createSlider: function () {
 		this.elSlider = new Element('div#', {
 			id: this.action + '-im-' + this.field.name +'-slider', 
-			'class': this.action + '-im-slider',
+			'class': 'slider',
 			styles: {
 				width: this.sliderWidth
 			}

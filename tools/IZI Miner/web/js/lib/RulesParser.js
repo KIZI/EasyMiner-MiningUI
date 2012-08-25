@@ -52,7 +52,7 @@ var RulesParser = new Class({
 		}
 	    var aToSolve = this.findAttributes(cedent, bracketsInterval); // attributes to solve at this level
 	    
-	    var partialCedent = new Cedent(this.generateCedentID(), depth, this.FL.getDBAConstraint(scope, 1), connective, [], [], scope);
+	    var partialCedent = new Cedent(this.generateCedentID(), depth, connective, [], scope);
 	    Array.each(aToSolve, function (attribute, k) {
 	    	var vals = [];
 	    	Array.each(attribute.fields, function (f) {
@@ -63,10 +63,9 @@ var RulesParser = new Class({
 	    	if (k > 0 && bToSolve[k - 1] && bToSolve[k - 1].type === 'neg') {
 	    		literalRef.setNegativeSign();
 	    	}
-	    	partialCedent.addLiteralRef(literalRef);
+	    	partialCedent.addChild(literalRef);
 		}.bind(this));
 	    
-	    var dbaIds = [];
 	    Array.each(brToSolve, function (br) {
 	    	if ((cedent[br.start + 1] !== -1) && (cedent[br.end - 1] !== -1) && true || ((br.start + 1) < (br.end -1))) {
 	    		var newCedent = cedent.slice(br.start + 1, br.end);

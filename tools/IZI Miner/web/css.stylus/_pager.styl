@@ -1,0 +1,42 @@
+#pager
+  border pagerBorder
+  line-height 30px
+  height 500px
+  overflow-y hidden
+  display none
+
+#paging
+  height 20px
+
+  .pager-actuator,
+  .pager-prev,
+  .pager-next
+    color #c0c0c0
+    cursor pointer
+    margin-right 4px
+
+  .active
+    color #000
+
+#pager-label
+  height 24px
+  padding 3px 0 0 30px
+  margin-bottom 15px
+
+  &.mining-not-started
+    background transparent url("../images/sprite-icons.png") -16px -360px no-repeat
+
+  &.mining-in-progress
+    background transparent url("../images/sprite-icons.png") -18px -416px no-repeat
+
+  &.mining-finished
+    background transparent url("../images/sprite-icons.png") -164px -16px no-repeat
+
+  &.mining-norules
+    background transparent url("../images/sprite-icons.png") -16px -360px no-repeat
+
+#pager-clear
+  background transparent url('../images/sprite-icons.png') -164px -64px no-repeat
+  display none; width 100px; height 24px
+  float right
+  margin 5px 0 0 0; padding 9px 0 0 30px

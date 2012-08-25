@@ -16,6 +16,7 @@ var UITemplateRegistrator = new Class({
 		this.registerFoundRule();
 		this.registerMarkedRules();
 		this.registerSettingsWindow();
+        this.registerAttributeWindow();
 	},
 	
 	registerStructure: function () {
@@ -38,7 +39,7 @@ var UITemplateRegistrator = new Class({
 			i18n = data.i18n;
 			
 			div({id: 'wrapper'}, 
-				section({id: 'main'},
+				section({id: 'main', 'class': 'clearfix'},
 					section({id: 'content'},
 						section({id: 'active-rule'}),
 						section({id: 'found-rules'}, 
@@ -49,8 +50,7 @@ var UITemplateRegistrator = new Class({
 								ul({'class': 'scroller'})),
 							a({id: 'pager-clear', href: '#'}, i18n.translate('Clear rules'))
 						)),
-					nav({id: 'navigation'}),
-					div({'class': 'clearfix'})));
+					nav({id: 'navigation'})));
 		});
 		
 		Mooml.register('footerTemplate', function (data) {
@@ -69,22 +69,24 @@ var UITemplateRegistrator = new Class({
 			
 			if (byGroup) {
 				section({id: 'attributes'}, 
-					h2(i18n.translate('Attributes'), a({href: '#', 'class': 'dropdown'}, '')),
+					h2({'class': 'minimize'}, i18n.translate('Attributes'), a({href: '#', 'class': 'toggle'}, '')),
 					div(
 						ul(),
 						span({id: 'etree-progress', styles: {'visibility': inProgress ? 'visible' : 'hidden'}}, i18n.translate('Sort in progress.')),
 						div(a({id: 'attributes-by-list', href: '#'}, i18n.translate('attributes')))));
 			} else {
 				section({id: 'attributes'}, 
-					h2(i18n.translate('Attributes'), a({href: '#', 'class': 'dropdown'}, '')),
+					h2({'class': 'minimize'}, i18n.translate('Attributes'), a({href: '#', 'class': 'toggle'}, '')),
 					div(
-						ul(),
-						span({id: 'etree-progress', styles: {'visibility': inProgress ? 'visible' : 'hidden'}}, i18n.translate('Sort in progress.')),
-						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))));	
+						ul({'class': 'clearfix'}),
+						span({id: 'etree-progress', styles: {'visibility': inProgress ? 'visible' : 'hidden'}}, i18n.translate('Sort in progress.'))//,
+//						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
+                ));
 			}
 		});
 		
 		Mooml.register('attributeByListTemplate', function (data) {
+            i18n = data.i18n;
 			attribute = data.attribute;
 			isUsed = data.isUsed;
 			
@@ -97,8 +99,26 @@ var UITemplateRegistrator = new Class({
 				className = 'used';
 			}
 			
-			li({id: attribute.getCSSID(), 'class': className}, attribute.getName());
+			li({'class': className},
+                span({id: attribute.getCSSID()}, attribute.getName()),
+                a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}),
+                a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}));
 		});
+
+        Mooml.register('dataFieldsStructureTemplate', function (data) {
+            i18n = data.i18n;
+
+            section({id: 'data-fields'},
+                h2({'class': 'minimize'}, i18n.translate('Data fields'), a({href: '#', 'class': 'toggle'}, '')),
+                div(
+                    ul({'class': 'clearfix'})));
+        });
+
+        Mooml.register('dataFieldTemplate', function (data) {
+            field = data.field;
+
+            li({id: field.getCSSID()}, field.getName());
+        });
 	},
 	
 	registerActiveRule: function () {
@@ -128,7 +148,7 @@ var UITemplateRegistrator = new Class({
 						div({id: 'interest-measures'}, 
 								h3(i18n.translate('Interest measures')), 
 								div(),
-								displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add')) : ''),
+								displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add IM')) : ''),
 						div({id: 'succedent'}, h3(i18n.translate('Consequent'))))),
 				div({'class': 'clearfix'}),
 				span({id: 'action-box', styles: {'visibility': taskBox ? 'visible' : 'hidden'}}, taskText));
@@ -153,17 +173,11 @@ var UITemplateRegistrator = new Class({
 			cedent = data.cedent;
 			i18n = data.i18n;
 			
-			div({id: cedent.getCSSID(), 'class': 'cedent'},
-				div({id: cedent.getCSSFieldsID(), 'class': 'fields'}, !cedent.getNumLiterals() ? '<span class="info">Drag & Drop<br/>attribute here</span>' : ''),
+			div({id: cedent.getCSSID(), 'class': 'cedent'+(cedent.getNumFields() === 0 ? ' empty': '')},
+				div({id: cedent.getCSSFieldsID(), 'class': 'fields'}, !cedent.getNumFields() ? '<span class="info">Drag & Drop<br/>attribute here</span>' : ''),
 				div({'class': 'controls'},
 					span({id: cedent.getCSSInfoID(), 'class': 'info'},
-						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + i18n.translate('group fields') + '</a> | ' : '')));
-		});
-		
-		Mooml.register('cedentSignTemplate', function (data) {
-			cedent = data.cedent;
-			
-			a({id: cedent.getCSSChangeSignID(), href: '#', 'class': 'change-cedent-sign ' + cedent.getSign()});
+						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + i18n.translate('Group marked fields') + '</a>' : '')));
 		});
 		
 		Mooml.register('fieldTemplate', function (data) {
@@ -171,22 +185,22 @@ var UITemplateRegistrator = new Class({
 			i18n = data.i18n;
 			fieldSign = field.getSign().toLowerCase();
 			cedent = data.cedent;
-			
+
 			if (field.getType() === null) {
 				div({id: field.getCSSID(), 'class': 'field'},
 					span({id: field.getCSSDragID()}, field.toString()));
 			} else {
 				div({id: field.getCSSID(), 'class': 'field'},
 						fieldSign === 'negative' ? a({id: field.getCSSChangeSignID(), href: '#', 'class': 'change-sign ' + fieldSign}) : '',
-						span({id: field.getCSSDragID(), 'class': 'field-drag'}, field.toStringAR()),
+						span({id: field.getCSSDragID(), 'class': 'field-drag'}, field.toString()),
 						div({'class': 'controls'},
-							cedent.getNumLiteralRefs() > 2 ? a({id: field.getCSSMarkID(), href: '#', 'class': field.isMarked() === true ? 'marked-field': 'mark-field', 'title': field.isMarked() === true ? i18n.translate('Unmark') : i18n.translate('Mark')}) : '',
 							a({id: field.getCSSRemoveID(), href: '#', 'class': 'remove-field', 'title': i18n.translate('Remove')}),
 							a({id: field.getEditCoefficientCSSID(), href: '#', 'class': 'edit-coefficient', 'title': i18n.translate('Edit')}),
-							fieldSign === 'positive' ? a({id: field.getCSSChangeSignID(), href: '#', 'class': 'change-sign ' + fieldSign}) : ''));
+							fieldSign === 'positive' ? a({id: field.getCSSChangeSignID(), href: '#', 'class': 'change-sign ' + fieldSign}) : '',
+                            cedent.getNumFields(cedent.getLevel()) > 2 ? a({id: field.getCSSMarkID(), href: '#', 'class': field.isMarked() === true ? 'marked-field': 'mark-field', 'title': field.isMarked() === true ? i18n.translate('Unmark') : i18n.translate('Mark')}) : ''));
 			}
 		});
-		
+
 		Mooml.register('connectiveTemplate', function (data) {
 			connective = data.connective;
 			i18n = data.i18n;
@@ -293,7 +307,7 @@ var UITemplateRegistrator = new Class({
 							),
 							tr(
 								td({colspan: 2}, 
-									div({id: 'add-coefficient-minlength-slider'},
+									div({id: 'add-coefficient-minlength-slider', 'class': 'slider'},
 										div({'class': 'knob'}))
 								)
 							),
@@ -304,7 +318,7 @@ var UITemplateRegistrator = new Class({
 							),
 							tr(
 								td({colspan: 2}, 
-									div({id: 'add-coefficient-maxlength-slider'},
+									div({id: 'add-coefficient-maxlength-slider', 'class': 'slider'},
 										div({'class': 'knob'}))
 								)
 							)
@@ -335,7 +349,7 @@ var UITemplateRegistrator = new Class({
 							),
 							tr(
 								td({colspan: 2}, 
-									div({id: 'edit-coefficient-minlength-slider'},
+									div({id: 'edit-coefficient-minlength-slider', 'class': 'slider'},
 										div({'class': 'knob'}))
 								)
 							),
@@ -346,7 +360,7 @@ var UITemplateRegistrator = new Class({
 							),
 							tr(
 								td({colspan: 2}, 
-									div({id: 'edit-coefficient-maxlength-slider'},
+									div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
 										div({'class': 'knob'}))
 								)
 							)
@@ -447,10 +461,9 @@ var UITemplateRegistrator = new Class({
 			i18n = data.i18n;
 			
 			section({id: 'marked-rules'}, 
-					h2(i18n.translate('Rule clipboard'), a({href: '#', 'class': 'dropdown'}, '')),
+					h2({'class': 'minimize'}, i18n.translate('Rule clipboard'), a({href: '#', 'class': 'toggle'}, '')),
 					div(
-						ul(),
-						div({'class': 'clearfix'})));
+						ul()));
 		});
 		
 		Mooml.register('markedRuleTemplate', function (data) {
@@ -527,6 +540,28 @@ var UITemplateRegistrator = new Class({
 				option({'value': FL.getName()}, FL.getLocalizedName());
 			}
 		});
-	}
+	},
+
+    registerAttributeWindow: function() {
+        Mooml.register('addAttributeTemplate', function (data) {
+            i18n = data.i18n;
+
+            div({id: 'add-attribute-window'},
+                a({id: 'add-attribute-close', href: '#'}, i18n.translate('Close')),
+                h2(i18n.translate('Add attribute')),
+                form({action: '#', method: 'POST', id: 'add-attribute-form'},
+                    input({type: 'submit', value: i18n.translate('Add')})));
+        });
+
+        Mooml.register('editAttributeTemplate', function (data) {
+            i18n = data.i18n;
+
+            div({id: 'edit-attribute-window'},
+                a({id: 'edit-attribute-close', href: '#'}, i18n.translate('Close')),
+                h2(i18n.translate('Edit attribute')),
+                form({action: '#', method: 'POST', id: 'edit-attribute-form'},
+                    input({type: 'submit', value: i18n.translate('Save')})));
+        });
+    }
 	
 });

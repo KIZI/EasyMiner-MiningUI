@@ -17,18 +17,18 @@ var Connective = new Class({
 	getCSSID: function () {
 		return 'connective-' + this.id;
 	},
-	
-	set: function (name) {
-		this.name = name;
-	},
-	
+
+    toLogical: function () {
+        return (this.name === 'Conjunction' ? 'and' : 'or');
+    },
+
 	serialize: function () {
-		return {name: this.toString().toUpperCase(), 
-			type: this.toString()};
+		return {name: this.toLogical().toUpperCase(),
+			type: this.toLogical()};
 	},
 	
 	toString: function() {
-		return (this.name === 'Conjunction' ? 'and' : 'or');
+		return ('<span class="connective">' + this.toLogical() + '</span>');
 	}
 
 });
