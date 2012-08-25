@@ -25,6 +25,10 @@ var Attribute = new Class({
 	getChoices: function () {
 		return this.choices;
 	},
+
+    getStringHelper: function() {
+        return this.stringHelper;
+    },
 	
 	getValue: function () {
 		return this.value;
@@ -45,6 +49,20 @@ var Attribute = new Class({
 	/* misc */
 	getCSSID: function () {
 		return 'attribute-nav-' + this.getNormalizedName();
-	}
+	},
+
+    getCSSEditID: function () {
+        return 'attribute-edit-' + this.getNormalizedName();
+    },
+
+    getCSSRemoveID: function() {
+        return 'attribute-remove-' + this.getNormalizedName();
+    },
+
+    load: function(obj) {
+        this.name = obj.name;
+        this.stringHelper = this.stringHelper || new StringHelper();
+        this.value = obj.value;
+    }
 
 });

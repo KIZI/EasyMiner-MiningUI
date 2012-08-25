@@ -20,33 +20,37 @@ var ARBuilder = new Class({
 	initialize: function (config) {
 		this.config = config;
 		this.settings = new Settings();
-		this.dataParser = new DataParser(this.config);
-		this.dataParser.getData();
+		this.initDataParser();
 		this.DD = this.dataParser.getDD();
-		this.FLs = this.dataParser.getFLs();
-		this.FGC = this.dataParser.getFGC();
-		
-		this.FRManager = new FRManager(this.config, new RulesParser(this, this.DD, this.getDefFL()), this.settings);
-		this.miningManager = new MiningManager(this.config, this.FRManager);
-		this.ETreeManager = new ETreeManager(this.config, this.DD);
-		this.ARManager = new ARManager(this, this.DD, this.getDefFL(), this.miningManager, this.ETreeManager, this.settings);
-		this.ETreeManager.setARManager(this.ARManager);
-		this.UIColorizer = new UIColorizer();
-		this.UIListener = new UIListener(this, this.ARManager, this.FRManager, this.UIColorizer);
-		this.UIPainter = new UIPainter(this, this.config, this.DD, this.getDefFL(), this.FGC, this.ARManager, this.FRManager, this.miningManager, this.ETreeManager, this.UIColorizer, this.UIListener);
-		this.UIListener.setUIPainter(this.UIPainter);
-		this.ARManager.setUIPainter(this.UIPainter);
-		this.ETreeManager.setUIPainter(this.UIPainter);
-		this.FRManager.setUIPainter(this.UIPainter);
-		this.FRManager.setUIListener(this.UIListener);
-	},
-	
+        this.FLs = this.dataParser.getFLs();
+        this.FGC = this.dataParser.getFGC();
+
+        this.FRManager = new FRManager(this.config, new RulesParser(this, this.DD, this.getDefFL()), this.settings);
+        this.miningManager = new MiningManager(this.config, this.FRManager);
+        this.ETreeManager = new ETreeManager(this.config, this.DD);
+        this.ARManager = new ARManager(this, this.DD, this.getDefFL(), this.miningManager, this.ETreeManager, this.settings);
+        this.ETreeManager.setARManager(this.ARManager);
+        this.UIColorizer = new UIColorizer();
+        this.UIListener = new UIListener(this, this.ARManager, this.FRManager, this.UIColorizer);
+        this.UIPainter = new UIPainter(this, this.config, this.DD, this.getDefFL(), this.FGC, this.ARManager, this.FRManager, this.miningManager, this.ETreeManager, this.UIColorizer, this.UIListener);
+        this.UIListener.setUIPainter(this.UIPainter);
+        this.ARManager.setUIPainter(this.UIPainter);
+        this.ETreeManager.setUIPainter(this.UIPainter);
+        this.FRManager.setUIPainter(this.UIPainter);
+        this.FRManager.setUIListener(this.UIListener);
+    },
+
+    initDataParser: function() {
+        this.dataParser = new DataParser(this.config);
+        this.dataParser.getData();
+    },
+
 	// run ARB
 	run: function () {
 		this.UIPainter.createUI();
 		this.FRManager.initPager();
 	},
-	
+
 	getDefFL: function () {
 		return this.FLs[this.defFLIndex];
 	},
@@ -102,7 +106,7 @@ var ARBuilder = new Class({
 			el.text = this.UIPainter.i18n.translate('On');
 		}
 	},
-	
+
 	closeSettingsWindow: function () {
 		this.UIPainter.hideOverlay();
 	},
@@ -126,6 +130,59 @@ var ARBuilder = new Class({
 		this.UIPainter.renderActiveRule();
 		
 		this.UIPainter.hideOverlay();
-	}
+	},
+
+    openAddAttributeWindow: function(field) {
+        this.UIPainter.renderAddAttributeWindow(field);
+    },
+
+    openEditAttributeWindow: function (attribute) {
+        this.UIPainter.renderEditAttributeWindow(attribute);
+    },
+
+    reloadAttributes: function() {
+        this.initDataParser();
+        // TODO show loading indicator
+        this.UIPainter.renderNavigation();
+        this.reset();
+        this.UIPainter.hideOverlay();
+    },
+
+    closeAddAttributeWindow: function() {
+        this.UIPainter.hideOverlay();
+    },
+
+    closeEditAttributeWindow: function() {
+        this.UIPainter.hideOverlay();
+    },
+
+    removeAttribute: function(attribute) {
+        // remove attribute
+        this.DD.removeAttribute(attribute);
+        this.UIPainter.removeAttribute(attribute);
+
+        // reset UI
+        this.reset();
+    },
+
+    reset: function() {
+        // active rule
+        this.ARManager.initBlankAR();
+
+        // mining
+        this.miningManager.stopAllRequests();
+        // TODO call KBI to stop mining
+
+        // found rules
+        // TODO reset only if necessary
+        this.FRManager.reset();
+
+        // marked rules
+        // TODO reset only if necessary
+        this.FRManager.removeMarkedRules();
+
+        // ETree
+        this.ETreeManager.reset();
+    }
 
 });

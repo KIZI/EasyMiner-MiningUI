@@ -6,8 +6,8 @@
  * @author Radek Skrabal <radek@skrabal.me>
  * @version 1.0
  */
-class TaskSettingRule {
-
+class TaskSettingRule
+{
     private $TSRNode;
     private $ER;
     private $attributes; // supported attributes
@@ -24,7 +24,8 @@ class TaskSettingRule {
     private $XPath;
     private $XPathTSR;
 
-    function  __construct(&$TSRNode, &$ER, &$attributes, &$IMs, DBAParser $DBAP, BBAParser $BBAP) {
+    public function  __construct(&$TSRNode, &$ER, &$attributes, &$IMs, DBAParser $DBAP, BBAParser $BBAP)
+    {
         $this->TSRNode = $TSRNode;
         $this->ER = $ER;
         $this->attributes = $attributes;
@@ -41,7 +42,8 @@ class TaskSettingRule {
         $this->XPath = new DOMXPath($this->ER);
     }
 
-    public function parse() {
+    public function parse()
+    {
         // init IMs
         $this->parseIMs();
 
@@ -58,7 +60,8 @@ class TaskSettingRule {
         }
     }
 
-    protected function parseIMs() {
+    protected function parseIMs()
+    {
         foreach ($this->XPath->evaluate('//InterestMeasureSetting/InterestMeasureThreshold') as $iIM){
             $name = $this->XPath->evaluate('InterestMeasure', $iIM)->item(0)->nodeValue;
             $value = floatval($this->XPath->evaluate('Threshold', $iIM)->item(0)->nodeValue);
@@ -69,12 +72,12 @@ class TaskSettingRule {
         }
     }
 
-    protected function parseElement($elementId, $level, $type) {
+    protected function parseElement($elementId, $level, $type)
+    {
         if ($type === 'BBA') {
             $element = $this->BBAP->getBBA($elementId);
             if ($element === null) { throw new InvalidRuleException('Rule has invalid BBA and cannot be parsed'); }
-        }
-        else if ($type === 'DBA') {
+        } elseif ($type === 'DBA') {
             $element = $this->DBAP->getDBA($elementId);
             if ($element === null) { throw new InvalidRuleException('Rule has invalid DBA and cannot be parsed'); }
         } else {
@@ -98,15 +101,17 @@ class TaskSettingRule {
         return $element;
     }
 
-    protected function hasValidIM($IM) {
+    protected function hasValidIM($IM)
+    {
         if (isset($this->IMs['types'][$IM->getName()])) {
             if ($this->hasValidIMValue($IM)) { return true; }
         }
 
         return false;
     }
-     
-    protected function hasValidIMValue($IM) {
+
+    protected function hasValidIMValue($IM)
+    {
         $field = &$this->IMs['types'][$IM->getName()]['field'];
 
         // validate data type
@@ -115,7 +120,7 @@ class TaskSettingRule {
 
             if ($dataType == 'string') {
                 // TODO add string validation
-            } else if ($dataType == 'integer' || $dataType == 'float' || $dataType == 'double') {
+            } elseif ($dataType == 'integer' || $dataType == 'float' || $dataType == 'double') {
                 if (!is_numeric($IM->getValue())) { return false; }
 
                 if (isset($field['minValue']) && isset($field['minValueInclusive'])) {
@@ -139,7 +144,8 @@ class TaskSettingRule {
         return true;
     }
 
-    protected function hasValidBBA($BBA) {
+    protected function hasValidBBA($BBA)
+    {
         if (isset($this->attributes[$BBA->getFieldRef()])) {  // find the right attribute
             $attribute = &$this->attributes[$BBA->getFieldRef()];
             foreach ($BBA->getCatRefs() as $cr) {
@@ -158,7 +164,8 @@ class TaskSettingRule {
         return false;
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $array = array('antecedent' => array(), 'IM' => array(), 'consequent' => array());
 
         if ($this->antecedent !== null) {

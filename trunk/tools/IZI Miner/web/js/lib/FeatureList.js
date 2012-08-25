@@ -26,7 +26,6 @@ var FeatureList = new Class({
 	DBAConstraints: {},
 	
 	// custom properties
-	defaultConnectiveName: 'Conjunction',
 	maxConnectiveID: 0,
 	
 	initialize: function (data) {
@@ -77,18 +76,12 @@ var FeatureList = new Class({
 		
 		// derived boolean attribute
 		this.DBAMaxLevels = data.DBA.maxLevels;
-		
+
+        this.DBAConstraints = {};
 		Object.each(data.DBA.constraints, function (DBAC, scope) {
+            this.DBAConstraints[scope] = {};
 			Object.each(DBAC, function(value, key) {
-				var constraint = {
-					'Conjunction': value.Conjunction.allowed,
-					'Disjunction': value.Disjunction.allowed,
-					'Any': value.Any.allowed,
-					'Negation': value.Negation.allowed};
-				if (typeOf(this.DBAConstraints[scope]) !== 'object') {
-					this.DBAConstraints[scope] = {};
-				}
-				this.DBAConstraints[scope][key] = constraint;
+				this.DBAConstraints[scope][key] = value;
 			}.bind(this));
 		}.bind(this));
 	},
@@ -194,13 +187,68 @@ var FeatureList = new Class({
 	getDefaultBBACoef: function () {
 		return this.getBBACoefficients()[Object.keys(this.getBBACoefficients())[0]];
 	},
-	
-	getDBAConstraint: function (scope, level) {
-		return this.DBAConstraints[scope]['level' + level];
-	},
-	
-	getDefaultConnective: function () {
-		return new Connective(this.generateConnectiveID(), this.defaultConnectiveName);
+
+    getAllowedConnectives: function(scope) {
+        var array = [];
+        Object.each(this.DBAConstraints[scope], function(value, key) {
+            if (value) {
+                array.push(key);
+            }
+        });
+
+        return array;
+    },
+
+    isConnectiveAllowed: function(type, scope, settings, level) {
+        switch (type) {
+            case 'Conjunction':
+                var connectiveUsed = 0;
+                var connectives = this.getAllowedConnectives(scope);
+                Object.each(settings, function(setting, lvl) {
+                    if (setting['Conjunction'] || setting['Disjunction']) { connectiveUsed++; }
+                }.bind(this));
+
+                if (connectives.contains('Conjunction') && (connectiveUsed < this.DBAMaxLevels) && level < 3) {
+                    return true;
+                }
+
+                break;
+            case 'Disjunction':
+                var conjunctionUsedCount = 0;
+                var disjunctionUsedCount = 0;
+                var connectives = this.getAllowedConnectives(scope);
+                Object.each(settings, function(setting, lvl) {
+                    if (setting['Disjunction'] && level == lvl) {
+                        // continue;
+                    } else {
+                        if (setting['Disjunction']) {
+                            disjunctionUsedCount++;
+                        } else if (setting['Conjunction']) {
+                            conjunctionUsedCount++;
+                        }
+                    }
+                }.bind(this));
+
+                if (connectives.contains('Disjunction') && ((conjunctionUsedCount + disjunctionUsedCount) < this.DBAMaxLevels) && disjunctionUsedCount < 1 && level < 3) {
+                    return true;
+                }
+
+                break;
+            case 'Negation':
+                var connectives = this.getAllowedConnectives(scope);
+
+                return connectives.contains('Negation');
+        }
+
+        return false;
+    },
+
+	getDefaultConnective: function (level, settings, scope) {
+        if (this.isConnectiveAllowed('Conjunction', scope, settings[scope], level)) {
+            return new Connective(this.generateConnectiveID(), 'Conjunction');
+        }
+
+        return new Connective(this.generateConnectiveID(), 'Disjunction');
 	},
 	
 	generateConnectiveID: function () {

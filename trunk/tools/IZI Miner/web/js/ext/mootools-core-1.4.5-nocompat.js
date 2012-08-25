@@ -2051,7 +2051,6 @@ local.search = function(context, expression, append, first){
 
 			if (!this.isHTMLDocument
 				|| qsaFailExpCache[expression]
-				//TODO: only skip when expression is actually mixed case
 				|| this.brokenMixedCaseQSA
 				|| (this.brokenCheckedQSA && expression.indexOf(':checked') > -1)
 				|| (this.brokenEmptyAttributeQSA && reEmptyAttribute.test(expression))

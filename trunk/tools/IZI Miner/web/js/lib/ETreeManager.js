@@ -118,6 +118,24 @@ var ETreeManager = new Class({
 	
 	getInProgress: function() {
 		return this.inProgress;
-	}
-	
+	},
+
+    reset: function () {
+        Array.each(this.requests, function (req, key) {
+            if (req.running) {
+                req.cancel();
+            }
+        }.bind(this));
+        this.clearAllRequests();
+
+        if (this.inProgress) {
+            this.inProgress = false;
+            this.UIPainter.hideETReeProgress();
+        }
+    },
+
+    clearAllRequests: function () {
+        this.requests = [];
+    }
+
 });

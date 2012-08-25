@@ -1,8 +1,5 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
-define('APP_PATH', realpath(realpath(dirname(__FILE__)).DS.'..'));
-
 $configs = array(array('DDPath' => APP_PATH.DS.'data'.DS.'datadescription_0.2.xml',
                    'FLPath' => array (
                         APP_PATH.DS.'data'.DS.'featureList_beginner.xml', // array only, first one is default
@@ -13,7 +10,6 @@ $configs = array(array('DDPath' => APP_PATH.DS.'data'.DS.'datadescription_0.2.xm
                    'ETreePath' => null, 
                    'FAPath' => APP_PATH.DS.'data'.DS.'frequencyAnalysis.xml',
                    'LANG' => 'en',
-                   'DEV_MODE' => false,
                    'DEV_LM_PATH' => 'C:'.DS.'xampp'.DS.'htdocs'.DS.'LM',
                    'KB_CONF_ID' => 6,
                    'KB_EXC_ID' => 7));

@@ -1,73 +1,48 @@
 <?php
 
-require_once '../config/Config.php';
 require_once '../lib/Bootstrap.php';
+require_once '../config/Config.php';
 
-// data encoding
-function encodeData($array) {
-    $data = "";
-    foreach ($array as $key => $value) {
-        $data .= "{$key}=".urlencode($value).'&';
-    }
+use IZI\Encoder\URLEncoder;
+use IZI\FileLoader\XMLLoader;
+use IZI\Parser\DataParser;
+use IZI\Serializer\TaskSetting as SerializerTaskSetting;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-    return $data;
-}
+$request = Request::createFromGlobals();
+$id = (int)$request->query->get('id_dm');
+$data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
+$serializer = new SerializerTaskSetting();
+$loader = new XMLLoader();
 
-// LM task
-$data = isset($_POST['data']) ? $_POST['data'] : $_GET['data'];
-$data = str_replace("\\\"", "\"", $data);
-$serializer = new SerializeRulesTaskSetting();
+$requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
-if (!DEV_MODE) { // KBI
-    $id = $_GET['id_dm'];
-    $requestData = array('source' => $id, 'query' => $serializer->serializeRules($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
+// save LM task
+$LM_import = $loader->load($requestData['query']);
+$LM_import->save('./temp/4ft_task_'.date('md_His').'.pmml');
 
-    // save LM task
-    $LM_import_path = './temp/4ft_task_'.date('md_His').'.pmml';
-    $LM_import = new DOMDocument('1.0', 'UTF-8');
-    $LM_import->loadXML($requestData['query'], LIBXML_NOBLANKS);
-    $LM_import->save($LM_import_path);
-    
-    // run task
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
-    curl_setopt($ch, CURLOPT_VERBOSE, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
+// run task
+$encoder = new URLEncoder();
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw");
+curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
+curl_setopt($ch, CURLOPT_VERBOSE, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
 
-    $response = curl_exec($ch);
-    $info = curl_getinfo($ch);
-    curl_close($ch);
+$response = curl_exec($ch);
+$info = curl_getinfo($ch);
+curl_close($ch);
 
-    // save LM result
-    $LM_export_path = './temp/4ft_result_'.date('md_His').'.pmml';
-    $LM_export = new DOMDocument('1.0', 'UTF-8');
-    $LM_export->loadXML($response, LIBXML_NOBLANKS);
-    $LM_export->save($LM_export_path);
-} else { // localhost dev env
-    $LM_import_path = './temp/4ft_task_'.date('md_His').'.pmml';
-    $LM_import = new DOMDocument('1.0', 'UTF-8');
-    $LM_import->loadXML($serializer->serializeRules($data), LIBXML_NOBLANKS);
-    $LM_import->save($LM_import_path);
-
-    // import LM task
-    exec(DEV_LM_PATH.DS.'LMSwbImporter.exe /DSN:"LM Barbora.mdb MB" /Input:"'.$LM_import_path.'" /Alias:"'.DEV_LM_PATH.DS.'Sewebar'.DS.'Template'.DS.'LM.PMML.Alias.txt" /Quiet /NoProgress /AppLog:"./temp/_LM_log.dat"');
-
-    // run LM task
-    $XPath = new DOMXPath($LM_import);
-    $taskName = $XPath->evaluate('//*[@modelName]/@modelName')->item(0)->value;
-    exec(DEV_LM_PATH.DS.'LMTaskPooler.exe /DSN:"LM Barbora.mdb MB" /TaskName:"'.$taskName.'" /Quiet /NoProgress /AppLog:"./temp/_LM_log.dat"');
-
-    // export LM task
-    $LM_export_path = './temp/4ft_result_'.date('md_His').'.pmml';
-    exec(DEV_LM_PATH.DS.'LMSwbExporter.exe /DSN:"LM Barbora.mdb MB" /TaskName:"'.$taskName.'" /Template:"'.DEV_LM_PATH.DS.'/Sewebar/Template/4ftMiner.Task.ARD.Template.PMML" /Alias:"'.DEV_LM_PATH.DS.'Sewebar'.DS.'Template'.DS.'LM.PMML.Alias.txt" /Output:"'.$LM_export_path.'" /Quiet /NoProgress /AppLog:"./temp/_LM_log.dat"');
-    $response = file_get_contents($LM_export_path);
-    $response = preg_replace('/[^(\x20-\x7F)]*/','', $response);
-}
+// save LM result
+$LM_export = $loader->load($response);
+$LM_export->save('./temp/4ft_result_'.date('md_His').'.pmml');
 
 $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, $response, null, LANG);
 $DP->loadData();
 $DP->parseData();
-echo $DP->getER();
+
+$response = new Response($DP->getER(), 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response->send();
 

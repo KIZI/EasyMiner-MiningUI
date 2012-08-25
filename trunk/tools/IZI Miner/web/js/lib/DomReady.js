@@ -1,3 +1,5 @@
+"use strict";
+
 var DomReady = new Class({
 
 	initialize: function () {
@@ -13,11 +15,9 @@ var DomReady = new Class({
 		var config = new Config();
 		var uri = new URI(window.location.href);
 		config.setParams(uri.get('data'));
-		
+
 		var ARB = new ARBuilder(config);
 		ARB.run();
 	}
 
 });
-
-var DomReady = new DomReady();

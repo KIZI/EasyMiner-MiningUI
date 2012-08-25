@@ -28,12 +28,9 @@
 <tr><td><a href="test19.html">Remove attribute</a></td></tr>
 <tr><td><a href="test31.html">Move attribute between cedents</a></td></tr>
 <tr><td><a href="test30.html">Change attribute sign</a></td></tr>
-<tr><td><a href="test32.html">Add predefined attribute</a></td></tr>
-<tr><td><a href="test33.html">Add predefined attribute group</a></td></tr>
-<tr><td><a href="test35.html">Group attributes confirm</a></td></tr>
+<tr><td><a href="test35.html">Group attributes</a></td></tr>
 <tr><td><a href="test47.html">Show & hide scrollbar.</a></td></tr>
 <tr><td><a href="test37.html">BUG: Proper number of cedents 1</a></td></tr>
-<tr><td><a href="test38.html">BUG: Proper number of cedents 2</a></td></tr>
 <tr><td><a href="test41.html">BUG: Drag add IM knob (category)</a></td></tr>
 </tbody></table>
 </body>

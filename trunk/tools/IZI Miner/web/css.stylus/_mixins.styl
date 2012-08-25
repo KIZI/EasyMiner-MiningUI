@@ -1,0 +1,93 @@
+box()
+  color color
+  background-color #FFF
+  border-radius(5px)
+  border 1px solid boxBorderColor
+  box-shadow(0, 0, 10px, boxShadowColor)
+  padding 10px
+
+overlay()
+  background-color #FFF
+  border-radius(15px)
+  border 2px solid overlayBorderColor
+  box-shadow(5px, 5px, 5px, overlayShadowColor)
+  width 400px
+  margin 10% auto; padding 35px 25px
+
+overlay-close()
+  color #126499
+  background transparent url('../images/sprite-icons.png') -67px -116px no-repeat
+  padding-left 20px
+  float right
+  position relative; top -20px
+
+h2()
+  color h2Color
+  font h2Font
+  font-weight bold
+  border-bottom 1px solid h2Color
+
+h2AR()
+  color h2ARColor
+  font h2ARFont
+  font-weight normal
+  border-bottom none
+
+associationRule()
+  line-height 25px
+  float left
+
+coefficient()
+  color #925213
+  font-size 0.85em
+  position relative; top -1px; left 3px
+
+connective()
+  color #336600
+  font-size 14px
+  margin 0 3px 0 6px
+
+ims()
+  font-size 12px;
+  float left; clear left
+  position relative; top -5px
+
+imValue()
+  color #7B0D2E
+  margin-left 0.5ex
+
+bracket()
+  font-size 18px
+  float left
+  position relative; top -2px
+
+edit()
+  background transparent url('../images/sprite-icons.png') -19px -262px no-repeat
+  display block; width 16px; height 20px
+  visibility hidden
+
+remove()
+  background transparent url('../images/sprite-icons.png') -19px -15px no-repeat
+  display block; width 16px; height 20px
+  visibility hidden
+
+loading()
+  background transparent url('../images/sprite-icons.png') -18px -416px no-repeat
+  display block; width 16px; height 20px
+
+tip()
+  border-radius(5px)
+  box-shadow(0, 0, 5px, rgba(0, 0, 0, 0.3))
+  background-color #FFF
+  height 22px
+  padding 7px 5px 0 10px
+
+border-radius(n)
+  border-radius n
+  -webkit-border-radius n
+  -moz-border-radius n
+
+box-shadow(h, v, blur, color)
+  box-shadow v h blur color
+  -webkit-box-shadow v h blur color
+  -moz-box-shadow v h blur color

@@ -1,7 +1,7 @@
 module('RulesParser');
 
 test('findOutterBrackets', function () {
-	var rulesParser = new RulesParser(null);
+	var rulesParser = new RulesParser(new Element('body')); // ugly hack
 	var cedent1 = [];
 	var cedent2 = [{"name": "District", "type": "attr"}, {"name": "OR", "type": "or"}, {"name":"Salary", "type":"attr"}];
 	var cedent3 = [{"name": "(", "type": "lbrac"}, {"name": "District", "type": "attr"}, {"name": "OR", "type": "or"}, {"name":"Salary", "type":"attr"}, {"name": ")", "type": "rbrac"}];
@@ -12,7 +12,7 @@ test('findOutterBrackets', function () {
 });
 
 test('mergeIntervals', function () {
-	var rulesParser = new RulesParser(null);
+	var rulesParser = new RulesParser(new Element('body')); // ugly hack
 	var intervals1 = [];
 	var intervals2 = [{start: 0, end: 2}];
 	var intervals3 = [{start: 1, end: 3}, {start: 5, end: 5}];
@@ -23,7 +23,7 @@ test('mergeIntervals', function () {
 });
 
 test('findBooleans', function () {
-	var rulesParser = new RulesParser(null);
+	var rulesParser = new RulesParser(new Element('body')); // ugly hack
 	var cedent1 = [];
 	var cedent2 = [{"name": "District", "type": "attr"}, {"name": "OR", "type": "or"}, {"name":"Salary", "type":"attr"}];
 	var cedent3 = [{"name": "District", "type": "attr"}, {"name": "OR", "type": "or"}, {"name":"Salary", "type":"attr"}, {"name": "AND", "type": "and"}, {"name": "OR", "type": "or"}, {"name": "NEG", "type": "neg"}];
@@ -35,7 +35,7 @@ test('findBooleans', function () {
 });
 
 test('findAttributes', function () {
-	var rulesParser = new RulesParser(null);
+	var rulesParser = new RulesParser(new Element('body')); // ugly hack
 	var cedent1 = [];
 	var cedent2 = [{"name": "District", "type": "attr"}, {"name": "OR", "type": "or"}, {"name":"Salary", "type":"attr"}];
 	var cedent3 = [{"name": "District", "type": "attr"}, {"name": "OR", "type": "or"}, {"name":"Salary", "type":"attr"}, {"name": "District", "type": "attr"}, {"name":"Salary", "type":"attr"}];
@@ -45,4 +45,3 @@ test('findAttributes', function () {
 	deepEqual(rulesParser.findAttributes(cedent2, bracketsInterval), []);
 	deepEqual(rulesParser.findAttributes(cedent3, bracketsInterval), [undefined, undefined, undefined, {"name": "District", "type": "attr"}, {"name":"Salary", "type":"attr"}]);
 });
-

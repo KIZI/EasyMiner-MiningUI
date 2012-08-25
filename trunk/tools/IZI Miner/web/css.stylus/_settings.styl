@@ -1,0 +1,89 @@
+#settings-form
+  line-height 2em
+
+  div
+    clear left
+
+  .category
+    color #925213
+
+  br.clearfix
+    clear left
+    margin-top 1em
+
+  label.thin
+    line-height 1.3em
+
+  .info
+    background transparent url('../images/sprite-icons.png') -14px -459px no-repeat
+    display block; float right
+    position relative; top 6px
+    width 24px; height 24px
+
+  div > .warning
+    background transparent url('../images/sprite-icons.png') -16px -360px no-repeat
+    display block; float left
+    position relative; top 6px; left 5px
+    width 24px; height 24px
+
+  #fl-select
+    float left
+    position relative; top 8px
+    margin-right 0
+
+  .autocomplete
+    margin-bottom 90px
+
+  a.autosuggest-on,
+  a.autofilter-on
+    color color
+    background transparent url('../images/sprite-icons.png') -70px -9px  no-repeat
+    text-decoration none
+    display block; float left
+    padding-left 15px
+
+  a.autosuggest-off,
+  a.autofilter-off
+    color color
+    background transparent url('../images/sprite-icons.png') -70px -57px no-repeat
+    text-decoration none
+    display block; float left
+    padding-left 15px
+
+  .tooltip
+    color #000000
+    text-decoration none
+    outline none
+    cursor help
+    position relative
+    span
+      text-align justify
+      line-height 1.25em
+      margin-left -999em; padding: 0.5em 0.8em 0.8em 2em
+      position absolute
+    &:hover
+      span
+        font-family 'Calibri' 'Tahoma' 'Geneva' sans-serif
+        border-radius(5px)
+        box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.1))
+        width 250px
+        margin-left -3em
+        position absolute; top 2em; left 1em
+        z-index 99
+      img
+        border 0
+        margin -10px 0 0 -55px
+        float left
+        position absolute
+      em
+        font-family 'Candara' 'Tahoma' 'Geneva' sans-serif
+        font-size 1.2em
+        font-weight bold
+        display block
+        padding 0.2em 0 0.6em 0
+    > .help
+      background-color #D3E6F4
+      border 1px solid #2BB0D7
+    > .warning
+      background-color #FFFFAA
+      border 1px solid #FFAD33

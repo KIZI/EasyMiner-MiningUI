@@ -85,37 +85,6 @@ var FieldAR = new Class({
 		}
 
 		return serialized;
-	},
-	
-	toString: function () {
-		var string = '';
-		if (this.hasPositiveSign() === true) { 
-			string += '<span class="field-sign positive">'; 
-		} else {
-			string += '<span class="field-sign negative">';
-		}
-		
-		if (this.type === null) {
-			string += this.getAttributeName() + '</span>';
-			return string;
-		}
-		
-		if (this.type === 'One category') {
-			string += this.getAttributeName() + ' (' + this.category + ')';
-		} else {
-			string += this.getAttributeName() + ' (' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength + ')';
-		}
-		string += '</span>';
-		
-		return string
-	},
-
-	toStringAR: function() {
-		if (this.type === 'One category') {
-			return this.getAttributeName() + '<span class="coefficient">' + (!this.category.contains('(') && !this.category.contains(')') ? '(' : '') + this.category + (!this.category.contains('(') && !this.category.contains(')') ? ')' : '') + '</span>';
-		} else {
-			return this.getAttributeName() + '<span class="coefficient">(' + ((this.type === 'Subset' && this.minimalLength == 1 && this.maximalLength == 1) ? '*' : '*' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength) + ')</span>';
-		}
 	}
 	
 });

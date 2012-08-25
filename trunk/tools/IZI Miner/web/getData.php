@@ -1,45 +1,43 @@
 <?php
 
-require_once '../config/Config.php';
 require_once '../lib/Bootstrap.php';
+require_once '../config/Config.php';
 
-// data encoding
-function encodeData($array) {
-    $data = "";
-    foreach ($array as $key => $value) {
-        $data .= "{$key}=".urlencode($value).'&';
-    }
+use IZI\Encoder\URLEncoder;
+use IZI\FileLoader\XMLLoader;
+use IZI\Parser\DataParser;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-    return $data;
+$request = Request::createFromGlobals();
+$id = (int)$request->query->get('id_dm');
+
+if (DEV_MODE) {
+    $path = APP_PATH.'/data/datadescription_0.2.xml';
+} else { // KBI
+    $requestData = array();
+
+    // run export
+    $encoder = new URLEncoder();
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=dataDescription&format=raw&source='.$id);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
+    curl_setopt($ch, CURLOPT_VERBOSE, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+
+    $response = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
+
+    $path = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
+    $loader = new XMLLoader();
+    $DD = $loader->load($response);
+    $DD->save($path);
 }
 
-if (!DEV_MODE) { // KBI
-    $id = intval($_GET['id_dm']);
-    $DDPath = APP_PATH.DS.'web'.DS.'temp'.DS.'DD_'.$id.'.pmml';
-    if (!file_exists($DDPath)) {
-        $id = $_GET['id_dm'];
-        $requestData = array();
-        
-        // run export
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=dataDescription&format=raw&source='.$id);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
-        curl_setopt($ch, CURLOPT_VERBOSE, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        curl_close($ch);
-        
-        $DD = new DOMDocument('1.0', 'UTF-8');
-        @$DD->loadXML($response, LIBXML_NOBLANKS); // throws notice due to the PI declaration
-        $DD->save($DDPath);
-    }
-} else {
-    $DDPath = DDPath;
-}
-
-$DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, LANG);
+$DP = new DataParser($path, unserialize(FLPath), FGCPath, null, null, LANG);
 $DP->loadData();
-echo $DP->parseData();
+
+$response = new Response($DP->parseData(), 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response->send();

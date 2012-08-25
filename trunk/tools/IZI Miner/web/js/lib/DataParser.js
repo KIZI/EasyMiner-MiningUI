@@ -27,7 +27,8 @@ var DataParser = new Class({
 	},
 	
 	parseData: function (data) {
-		this.DD = new DataDescription(data.DD);
+		this.DD = new DataDescription(data.DD, new Storage());
+        this.DD.parse(data.DD);
 		
 		Array.each(data.FLs, function (iFL) {
 			var FL = new FeatureList(iFL);

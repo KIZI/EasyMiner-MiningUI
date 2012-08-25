@@ -1,5 +1,11 @@
 <?php
 
+use Symfony\Component\ClassLoader\UniversalClassLoader;
+
+define('DS', DIRECTORY_SEPARATOR);
+define('APP_PATH', __DIR__.'/..');
+define('DEV_MODE', true);
+
 // PHP error reporting
 if (DEV_MODE) {
     error_reporting(E_ALL ^ E_NOTICE);
@@ -9,27 +15,10 @@ if (DEV_MODE) {
     ini_set('display_errors', 0);
 }
 
-// PHP native JSON is preferred
-if (!function_exists('json_encode')) {
-  require_once 'lib/JSON.php';
-}
+require_once APP_PATH.'/vendor/autoload.php';
 
-// class autoloader
-function __autoload($class_name) {
-    $paths = array(
-    	'lib', 
-    	'lib'.DS.'algorithms',
-    	'lib'.DS.'exceptions',
-    	'lib'.DS.'garbage', 
-    	'lib'.DS.'parseData', 
-    	'lib'.DS.'serializeRules'
-    );
-    
-    foreach ($paths as $p) {
-        $path = APP_PATH.DS.$p.DS.$class_name.'.php';
-        if (file_exists($path)) {
-            require_once $path;
-            break;
-        }
-    }
-}
+$loader = new UniversalClassLoader();
+$loader->registerNamespaces(array(
+    'IZI' => APP_PATH.'/src',
+));
+$loader->register();

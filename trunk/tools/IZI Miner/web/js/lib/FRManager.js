@@ -181,7 +181,9 @@ var FRManager = new Class({
 	reset: function () {
 		this.AJAXBalancer.stopAllRequests();
 		this.rules = {};
+        this.pager.reset();
 		this.maxIndex = 0;
+        this.UIPainter.renderActiveRule();
 	},
 	
 	/* found rules */
@@ -210,12 +212,6 @@ var FRManager = new Class({
 		this.AJAXBalancer.run();
 	},
 	
-	clearFoundRules: function () {
-		this.AJAXBalancer.stopAllRequests();
-		this.pager.reset();
-		this.UIPainter.renderActiveRule();
-	},
-	
 	/* marked rules */
 	getMarkedRule: function(id) {
 		var rule = null;
@@ -241,6 +237,11 @@ var FRManager = new Class({
 
 		this.UIPainter.renderMarkedRules(null, this.markedRules);
 	},
+
+    removeMarkedRules: function() {
+        this.markedRules = [];
+        this.UIPainter.renderMarkedRules();
+    },
 
 	sortMarkedRules: function (order) {
 		var markedRules = [];

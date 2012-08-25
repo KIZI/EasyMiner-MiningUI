@@ -77,6 +77,20 @@ var NativeTypeExtender = new Class({
 			
 	        return true;
 		});
+
+        Array.implement('insertAt', function(item, position) {
+            if (position === 0) {
+                return [item].append(this);
+            } else if ((position) === this.length) {
+                return this.append([item]);
+            }
+
+            var array = Array.from(this.slice(0, position));
+            array.push(item);
+            array.append(Array.from(this.slice(position, this.length)));
+
+            return array;
+        });
 	}
 	
 });

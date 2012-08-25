@@ -26,40 +26,6 @@ var FieldFR = new Class({
 		serialized.catref = this.category;
 
 		return serialized;
-	},
-	
-	toStringAR: function() {
-		var str = '';
-		if (!this.hasPositiveSign()) {
-			str += '<span class="field-sign negative"></span>';
-		}
-		
-		str += this.getAttributeName() + '<span class="coefficient">';
-		if (this.category.length > 1) {
-			str += '(';
-		}
-		
-		Array.each(this.category, function (cat, key) {
-			if (this.category.length === 1 && !cat.contains('(') && !cat.contains(')')) {
-				str += '(';
-			}
-			str += cat;
-			if (this.category.length === 1 && !cat.contains('(') && !cat.contains(')')) {
-				str += ')';
-			}
-			
-			if (this.category.length !== (key + 1)) {
-				str += ', ';
-			}
-		}.bind(this));
-		
-		if (this.category.length > 1) {
-			str += ')';
-		}
-		
-		str += '</span>';
-		
-		return str;
 	}
 	
 });

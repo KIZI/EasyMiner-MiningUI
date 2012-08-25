@@ -24,7 +24,7 @@ if (!DEV_MODE) { // KBI
     
     // save LM task
     $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
-    $LM_import = new DOMDocument('1.0', 'UTF-8');
+    $LM_import = new \DOMDocument('1.0', 'UTF-8');
     $LM_import->loadXML($requestData['query'], LIBXML_NOBLANKS);
     $LM_import->save($LM_import_path);
     
@@ -42,12 +42,12 @@ if (!DEV_MODE) { // KBI
     
     // save LM result
     $LM_export_path = './temp/etree_result_'.date('md_His').'.pmml';
-    $LM_export = new DOMDocument('1.0', 'UTF-8');
+    $LM_export = new \DOMDocument('1.0', 'UTF-8');
     $LM_export->loadXML($response, LIBXML_NOBLANKS);
     $LM_export->save($LM_export_path);
 } else { // localhost dev env
     $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
-    $LM_import = new DOMDocument('1.0', 'UTF-8');
+    $LM_import = new \DOMDocument('1.0', 'UTF-8');
     $LM_import->loadXML($serializer->serializeRules($data), LIBXML_NOBLANKS);
     $LM_import->save($LM_import_path);
     

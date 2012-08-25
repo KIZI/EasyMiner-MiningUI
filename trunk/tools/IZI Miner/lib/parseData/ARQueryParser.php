@@ -6,15 +6,16 @@
  * @author Jakub Balhar
  * @version 1.0
  */
-class ARQueryDBA {
-
+class ARQueryDBA
+{
     /**
      * It creates instance of this class based on params
      *
      * @param <DomNode> $dbaNode Node representing one DBA
      * @param <Array> $elements array containing elements of DBA
      */
-    function __construct($dbaNode, $elements) {
+    public function __construct($dbaNode, $elements)
+    {
         $this->elements = $elements;
         $this->refs = array();
         $this->connective = "";
@@ -25,9 +26,9 @@ class ARQueryDBA {
         $connective = $utils->getAttribute($dbaNode, "type");
         if ($connective == "Negation") {
             $this->connective = "NEG";
-        } else if ($connective == "Conjunction") {
+        } elseif ($connective == "Conjunction") {
             $this->connective = "AND";
-        } else if ($connective == "Disjunction") {
+        } elseif ($connective == "Disjunction") {
             $this->connective = "OR";
         }
         foreach ($dbas as $dba) {
@@ -42,7 +43,8 @@ class ARQueryDBA {
      *
      * @return <integer> id
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -51,7 +53,8 @@ class ARQueryDBA {
      *
      * @return <String> JSON representing this Object
      */
-    public function toJSON() {
+    public function toJSON()
+    {
         // Pro vsechny refs
         $elements = array();
 
@@ -90,14 +93,15 @@ class ARQueryDBA {
  * @author Jakub Balhar
  * @version 1.0
  */
-class ARQueryBBA {
-
+class ARQueryBBA
+{
     /**
      * It creates instance of this class based on params
      *
      * @param <DomNode> $bbaNode Node representing one BBA
      */
-    public function __construct($bbaNode) {
+    public function __construct($bbaNode)
+    {
         $this->fieldRef = "";
         $this->catRef = array();
 
@@ -118,7 +122,8 @@ class ARQueryBBA {
      *
      * @return <integer> id
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -127,7 +132,8 @@ class ARQueryBBA {
      *
      * @return <String> JSON representing this Object
      */
-    public function toJSON() {
+    public function toJSON()
+    {
         $element = array();
         $element['name'] = $this->fieldRef;
         $element['type'] = "attr";
@@ -151,14 +157,15 @@ class ARQueryBBA {
  * @author Jakub Balhar
  * @version 1.0
  */
-class ARQueryBBAField {
-
+class ARQueryBBAField
+{
     /**
      * It creates instance of this class based on params
      *
      * @param <DomNode> $fieldNode Node representing one field
      */
-    public function __construct($fieldNode) {
+    public function __construct($fieldNode)
+    {
         $this->name = "";
         $this->value = array();
 
@@ -178,7 +185,8 @@ class ARQueryBBAField {
      *
      * @return <String> JSON representing this Object
      */
-    public function toJSON() {
+    public function toJSON()
+    {
         $field = array();
         $field['name'] = $this->name;
         $field['value'] = $this->value;
@@ -193,15 +201,16 @@ class ARQueryBBAField {
  * @author Jakub Balhar
  * @version 1.0
  */
-class ARQueryRule {
-
+class ARQueryRule
+{
     /**
      * It creates AsociationRule based on the parameters
      *
      * @param <DomNode> $asociationRuleNode Node representing one rule
      * @param <DomDocument> $domER DomDocument representing XML containing rules
      */
-    function __construct($asociationRuleNode, $domER) {
+    public function __construct($asociationRuleNode, $domER)
+    {
         if ($domER->getElementsByTagName('AntecedentSetting')->length > 0) {
             $antNode = $domER->getElementsByTagName('AntecedentSetting')->item(0);
             $this->antecedent = $antNode->nodeValue;
@@ -239,7 +248,8 @@ class ARQueryRule {
      *
      * @return <String> JSON representing Rules
      */
-    public function toJSON() {
+    public function toJSON()
+    {
         $arrayOfElements = array();
         if ($this->antecedent != null) {
             $antJson = $this->elements[$this->antecedent]->toJSON();
@@ -268,4 +278,3 @@ class ARQueryRule {
 
 }
 
-?>

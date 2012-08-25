@@ -1,0 +1,4 @@
+TODO
+==============
+- move settings into config... no reason to have two separate configs
+- style found rules - list-style-type: none

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen SCHSchema="http://sewebar.vse.cz/schemas/GUHARestr0_1.sch"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_0" version="4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pmml="http://www.dmg.org/PMML-4_0"
+    xsi:schemaLocation="http://www.dmg.org/PMML-4_0 http://sewebar.vse.cz/schemas/PMML4.0+GUHA0.1.xsd">
+    <Header copyright="Copyright (c) KIZI UEP">
+        <Extension name="dataset" value="Loans"/>
+        <Extension name="author" value="admin"/>
+        <Extension name="subsystem" value="4ft-Miner"/>
+        <Extension name="module" value="4ftResult.exe"/>
+        <Extension name="format" value="4ftMiner.Task"/>
+        <Application name="SEWEBAR-CMS" version="0.00.01 22.10.2011"/>
+        <Annotation/>
+        <Timestamp>22.10.2011 22:28:05</Timestamp>
+    </Header>
+    <DataDictionary/>
+    <guha:AssociationModel xmlns=""
+        xsi:schemaLocation="http://keg.vse.cz/ns/GUHA0.1rev1 http://sewebar.vse.cz/schemas/GUHA0.1rev1.xsd"
+        xmlns:guha="http://keg.vse.cz/ns/GUHA0.1rev1"
+        modelName="District(Benesov) =&amp;gt; Quality(good) | 7989971a1ad29a08d7908285cc24a085471d2f5c"
+        functionName="associationRules" algorithmName="4ft">
+        <TaskSetting>
+            <BBASettings>
+                <BBASetting id="5">
+                    <Text>District</Text>
+                    <Name>District</Name>
+                    <FieldRef>District</FieldRef>
+                    <Coefficient>
+                        <Type>One category</Type>
+                        <Category>Benesov</Category>
+                    </Coefficient>
+                </BBASetting>
+                <BBASetting id="9">
+                    <Text>Quality</Text>
+                    <Name>Quality</Name>
+                    <FieldRef>Quality</FieldRef>
+                    <Coefficient>
+                        <Type>One category</Type>
+                        <Category>good</Category>
+                    </Coefficient>
+                </BBASetting>
+            </BBASettings>
+            <DBASettings>
+                <DBASetting type="Literal" id="4">
+                    <BASettingRef>5</BASettingRef>
+                    <LiteralSign>Positive</LiteralSign>
+                </DBASetting>
+                <DBASetting type="Conjunction" id="3">
+                    <BASettingRef>4</BASettingRef>
+                    <MinimalLength>1</MinimalLength>
+                </DBASetting>
+                <DBASetting type="Conjunction" id="2">
+                    <BASettingRef>3</BASettingRef>
+                    <MinimalLength>1</MinimalLength>
+                </DBASetting>
+                <DBASetting type="Literal" id="8">
+                    <BASettingRef>9</BASettingRef>
+                    <LiteralSign>Positive</LiteralSign>
+                </DBASetting>
+                <DBASetting type="Conjunction" id="7">
+                    <BASettingRef>8</BASettingRef>
+                    <MinimalLength>1</MinimalLength>
+                </DBASetting>
+                <DBASetting type="Conjunction" id="6">
+                    <BASettingRef>7</BASettingRef>
+                    <MinimalLength>1</MinimalLength>
+                </DBASetting>
+            </DBASettings>
+            <AntecedentSetting>2</AntecedentSetting>
+            <ConsequentSetting>6</ConsequentSetting>
+            <InterestMeasureSetting>
+                <InterestMeasureThreshold id="1">
+                    <InterestMeasure>FUI</InterestMeasure>
+                    <CompareType>Greater than or equal</CompareType>
+                    <Threshold>0.5</Threshold>
+                </InterestMeasureThreshold>
+                <InterestMeasureThreshold id="2">
+                    <InterestMeasure>SUPP</InterestMeasure>
+                    <CompareType>Greater than or equal</CompareType>
+                    <Threshold>0.1</Threshold>
+                </InterestMeasureThreshold>
+            </InterestMeasureSetting>
+        </TaskSetting>
+        <AssociationRules />
+    </guha:AssociationModel>
+</PMML>

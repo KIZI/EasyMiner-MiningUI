@@ -72,15 +72,17 @@ var UIPainter = new Class({
 	},
 	
 	renderNavigation: function () {
-		var navigation = $('navigation');
-		
 		// attributes
-		this.renderAttributes(navigation);
+		this.renderAttributes();
+
+        // data fields
+        this.renderDataFields();
+
+        this.UIListener.registerNavigationEventHandlers();
 	},
 	
 	renderAttributes: function(navigation) {
-		navigation = navigation || $('navigation');
-		
+		var navigation = $('navigation');
 		var attributes = $('attributes');
 		if (attributes) {
 			Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARManager.getAttributesByGroup(), inProgress: this.ETreeManager.getInProgress()}).replaces(attributes);
@@ -93,8 +95,6 @@ var UIPainter = new Class({
 		} else {
 			this.renderAttributesByList();
 		}
-		
-		this.UIListener.registerNavigationEventHandlers();
 	},
 	
 	renderAttributesByGroup: function (elementParent) {
@@ -116,7 +116,7 @@ var UIPainter = new Class({
 		if (elementParent.hasChildNodes()) {
 			elementParent.empty();
 		}
-		
+
 		Object.each(this.DD.getAttributes(), function (attribute) {
 			this.renderAttributeByList(attribute, elementParent);
 		}.bind(this));
@@ -124,7 +124,7 @@ var UIPainter = new Class({
 	
 	renderAttributeByList: function (attribute, elementParent) {
 		if (elementParent) { // insert
-			elementParent.grab(Mooml.render('attributeByListTemplate', {isUsed: this.ARManager.getActiveRule().isAttributeUsed(attribute), attribute: attribute}));
+			elementParent.grab(Mooml.render('attributeByListTemplate', {i18n: this.i18n, isUsed: this.ARManager.getActiveRule().isAttributeUsed(attribute), attribute: attribute}));
 			this.UIListener.registerAttributeEventHandler(attribute);
 		} else { // re-render
 			var element = $(attribute.getCSSID());
@@ -150,6 +150,51 @@ var UIPainter = new Class({
 			}
 		}
 	},
+
+    renderAddAttributeWindow: function(field) {
+        var overlay = this.showOverlay();
+        var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n});
+        overlay.grab(window);
+
+        // TODO render pre-processing component inside
+
+        this.UIListener.registerAddAttributeEventHandler(attribute);
+    },
+
+    renderEditAttributeWindow: function (attribute) {
+        var overlay = this.showOverlay();
+        var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n});
+        overlay.grab(window);
+
+        // TODO render pre-processing component inside
+
+        this.UIListener.registerEditAttributeEventHandler(attribute);
+    },
+
+    removeAttribute: function(attribute) {
+        $(attribute.getCSSID()).getParent().destroy();
+    },
+
+    renderDataFields: function() {
+        var navigation = $('navigation');
+        var dataFields = $('data-fields');
+        if (dataFields) {
+            dataFields = Mooml.render('dataFieldsStructureTemplate', {i18n: this.i18n}).replaces(dataFields);
+        } else {
+            dataFields = Mooml.render('dataFieldsStructureTemplate', {i18n: this.i18n});
+            navigation.grab(dataFields);
+        }
+
+        this.DD.getFields().each(function(field) {
+            this.renderDataField(field, dataFields.getElement('ul'));
+            this.UIListener.registerDataFieldEventHandler(field);
+        }.bind(this));
+    },
+
+    renderDataField: function(field, elementParent) {
+        var DF = Mooml.render('dataFieldTemplate', {field: field});
+        elementParent.grab(Mooml.render('dataFieldTemplate', {field: field}));
+    },
 	
 	sortAttributes: function (positions) {
 		var sorter = new Fx.Sort($$('#attributes > div > ul > li'), {
@@ -259,46 +304,33 @@ var UIPainter = new Class({
 		}
 		
 		var elementFields = elementCedent.getElement('div.fields');
-		if (cedent.displayChangeSign()) {
-			var elementCedentSign = Mooml.render('cedentSignTemplate', {cedent: cedent});
-			elementFields.grab(elementCedentSign);
-		}
-		
-		if (cedent.hasBrackets()) {
-			var elementLeftBracket = Mooml.render('bracketTemplate', {isLeft: true});
-			elementFields.grab(elementLeftBracket);
-		}
 
-		var numChildren = cedent.getNumChildren();
-		var i = 0;
-		Object.each(cedent.getLiteralRefs(), function (field) {
-			this.renderField(field, elementFields, cedent);
-			
-			if (++i !== numChildren && i !== cedent.getNumLiteralRefs()) {
-				var connective = Mooml.render('connectiveTemplate', {connective: cedent.getConnective(), i18n: this.i18n});
-				elementFields.grab(connective);
-			}
-		}.bind(this));
-		
-		if (cedent.hasBrackets()) {
-			var rightBracket = Mooml.render('bracketTemplate', {isLeft: false});
-			elementFields.grab(rightBracket);
-		}
+        var index = 1;
 
-		if (i > 0 && i < numChildren) {
-			var connective = Mooml.render('connectiveTemplate', {connective: cedent.getConnective(), i18n: this.i18n});
-			elementFields.grab(connective);
-		}
+        if (cedent.hasOpeningBracket(index)) {
+            var elementLeftBracket = Mooml.render('bracketTemplate', {isLeft: true});
+            elementFields.grab(elementLeftBracket);
+        }
 
-		Object.each(cedent.getChildCedents(), function (childCedent) {
-			this.renderCedent(childCedent, $(cedent.getCSSFieldsID()));
-			
-			if (++i !== numChildren) {
-				var connective = Mooml.render('connectiveTemplate', {connective: cedent.getConnective(), i18n: this.i18n});
-				elementFields.grab(connective);
-			}
-		}.bind(this));
-		
+        cedent.getChildren().each(function(child) {
+            if (instanceOf(child, Cedent)) { // Cedent
+                this.renderCedent(child, elementFields);
+            } else { // FieldAR
+                this.renderField(child, elementFields, cedent);
+            }
+
+            if (index < cedent.getNumChildren()) { // Connective
+                this.renderConnective(cedent.getConnective(), elementFields);
+            }
+
+            index++;
+        }.bind(this));
+
+        if (cedent.hasClosingBracket(index - 1)) {
+            var rightBracket = Mooml.render('bracketTemplate', {isLeft: false});
+            elementFields.grab(rightBracket);
+        }
+
 		this.UIListener.registerCedentEventHandlers(cedent, this.ARManager.getActiveRule());
 	},
 	
@@ -316,7 +348,12 @@ var UIPainter = new Class({
 			this.UIListener.registerFieldAREventHandlers(field, cedent);
 		}
 	},
-	
+
+    renderConnective: function (connective, elementParent) {
+        var elementConnective = Mooml.render('connectiveTemplate', {connective: connective, i18n: this.i18n});
+        elementParent.grab(elementConnective);
+    },
+
 	renderIM: function (IM) {
 		var elementParent = $$('div#interest-measures > div')[0];
 		elementParent.grab(Mooml.render('interestMeasureTemplate', {IM: IM, i18n: this.i18n}));
@@ -437,14 +474,15 @@ var UIPainter = new Class({
 	renderEditConnectiveWindow: function (cedent) {
 		var overlay = this.showOverlay();
 		overlay.grab(Mooml.render('editConnectiveWindowTemplate', {i18n: this.i18n}));
-		
-		Object.each(cedent.constraint, function(allowed, connective) {
-			if (allowed === true && connective !== 'Negation') {
-				var isSelected = (connective === cedent.getConnective().getName());
-				$('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {isSelected: isSelected, connective: connective}));
-			}
-		}.bind(this));
-		
+
+        if (this.FL.isConnectiveAllowed('Conjunction', cedent.getScope(), this.ARManager.getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
+            $('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {isSelected: cedent.getConnective().getName() === 'Conjunction', connective: 'Conjunction'}));
+        }
+
+        if (this.FL.isConnectiveAllowed('Disjunction', cedent.getScope(), this.ARManager.getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
+            $('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {isSelected: cedent.getConnective().getName() === 'Disjunction', connective: 'Disjunction'}));
+        }
+
 		this.UIListener.registerEditConnectiveFormEventHandler(cedent);
 	},
 	

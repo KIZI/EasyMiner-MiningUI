@@ -1,0 +1,112 @@
+nav
+  color color
+  float right
+  width 180px
+  margin-top 30px
+  line-height 20px
+
+#attributes
+    box()
+    width 160px
+    margin-bottom 25px
+
+  h2
+    h2()
+    margin-bottom 5px
+    margin 0 20px 5px
+
+  h2.minimize
+    background transparent url('../images/sprite-icons.png') 88px -212px no-repeat
+
+  h2.maximize
+    background transparent url('../images/sprite-icons.png') 89px -161px no-repeat
+
+  ul#attributes-by-group
+    background transparent url('../images/icon-group4.png') 0 2px no-repeat
+
+  #attributes-by-group > li
+    padding-left 20px
+
+  #attributes-by-group span
+    color h2Color
+    font-size 14px
+
+  #attributes-by-group span.coefficient
+    coefficient()
+
+  a#attributes-by-list,
+  a#attributes-by-group
+    font-size 13px
+
+  li
+    cursor move
+    padding-left 20px
+    float left
+
+  li:hover
+    color #000
+
+  li.rec1
+    background transparent url('../images/icon-rec1.png') 0 2px no-repeat
+
+  li.rec2
+    background transparent url('../images/icon-rec2.png') 0 2px no-repeat
+
+  li.used
+    color #AAA
+
+  a.edit-attribute
+    edit()
+    margin-left 10px
+    float right
+
+  li:hover a.edit-attribute
+    visibility visible
+
+  a.remove-attribute
+    remove()
+    margin-left 5px
+    float right
+
+  li:hover a.remove-attribute
+    visibility visible
+
+  #etree-progress
+    color #666
+    font-size 14px
+    background transparent url("../images/sprite-icons.png") -18px -413px no-repeat
+    display block
+    padding-left 20px
+    margin 5px 0 5px 20px
+
+#data-fields
+    box()
+    width 160px
+    padding-bottom 20px
+    margin-bottom 25px
+
+  h2
+    h2()
+    margin 0 20px 5px
+
+  h2.minimize
+    h2Minimize()
+
+  h2.maximize
+    h2Maximize()
+
+  h2 a
+    display block; width 12px; height 12px
+    float right
+    position relative; left 1px; top 5px
+
+  ul
+    margin-bottom 10px
+
+  li
+    cursor move
+    padding-left 20px
+    clear left
+
+  li:hover
+    color #000

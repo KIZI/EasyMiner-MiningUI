@@ -8,8 +8,11 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="test1.html">Navigation</a></td></tr>
-<tr><td><a href="test2.html">Predefined</a></td></tr>
+<tr><td><a href="test5.html">Add attribute</a></td></tr>
+<tr><td><a href="test6.html">Close add attribute window</a></td></tr>
+<tr><td><a href="test3.html">Edit attribute</a></td></tr>
+<tr><td><a href="test4.html">Close edit attribute window</a></td></tr>
+<tr><td><a href="test2.html">Remove attribute</a></td></tr>
 </tbody></table>
 </body>
 </html>

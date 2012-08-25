@@ -78,3 +78,17 @@ test('extendNativeArray - equal', function () {
 	strictEqual([1, 2, 3, 4].equalsTo([1, 2, 3]), false);
 });
 
+test('extendNativeArray - insertAt', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5];
+    arr = arr.insertAt(0, 0);
+    arr = arr.insertAt(2, 2);
+    arr = arr.insertAt(4, 4);
+    arr = arr.insertAt(6, 6);
+
+    for (var i = 0; i <= 6; i++) {
+        strictEqual(arr[i], i);
+    }
+});

@@ -26,7 +26,7 @@ var ETreeValidator = new Class({
 		}*/
 
 		// succedent
-		var succedentNumLiterals = rule.getSuccedent().getNumLiterals();
+		var succedentNumLiterals = rule.getSuccedent().getNumFields();
 		if (succedentNumLiterals !== 1) {
 			valid = false;
 		}

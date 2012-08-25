@@ -40,26 +40,24 @@ var ARManager = new Class({
 	initBlankAR: function () {
 		this.maxCedentID = 0;
 		this.maxFieldID = 0;
-		
-		var AR = new AssociationRule(this.initARValidator());
+
+        this.activeRule = new AssociationRule(this.initARValidator());
 
 		// antecedent
-		var antecedent = this.initCedent('antecedent', 1);
-		AR.addAntecedent(antecedent);
+        var antecedent = this.initCedent('antecedent', 1);
+        this.activeRule.addAntecedent(antecedent);
 		
 		// succedent
-		var succedent = this.initCedent('consequent', 1);
-		AR.addSuccedent(succedent);
-		
-		this.activeRule = AR;
+        var succedent = this.initCedent('consequent', 1);
+        this.activeRule.addSuccedent(succedent);
 	},
 	
 	initARValidator: function () {
 		return new AssociationRuleValidator(this.FL.getRulePattern(), this.FL.getIMCombinations());
 	},
 	
-	initCedent: function (scope, level) {
-		return new Cedent(this.generateCedentID(), level, this.FL.getDBAConstraint(scope, level), this.FL.getDefaultConnective(), [], [], scope);
+	initCedent: function (scope, level, parentCedent) {
+		return new Cedent(this.generateCedentID(), level, this.FL.getDefaultConnective(level, this.activeRule.toSettings(), scope), [], scope);
 	},
 	
 	hasPossibleIMs: function () {
@@ -106,14 +104,9 @@ var ARManager = new Class({
 		this.UIPainter.renderActiveRule();
 	},
 	
-	setIMChanged: function () {
-		this.setActiveRuleChanged();
-		this.UIPainter.renderActiveRule();
-	},
-	
-	addAttribute: function (cedent, attribute) {
+	addAttribute: function (cedent, attribute, position) {
 		var field = new FieldAR(this.generateFieldID(), attribute, null, new StringHelper());
-		cedent.addLiteralRef(field);
+		cedent.addChild(field, position);
 
 		this.UIPainter.renderActiveRule();
 		this.openAddCoefficientWindow(field);
@@ -179,8 +172,9 @@ var ARManager = new Class({
 	},
 	
 	editConnective: function(cedent, connectiveName) {
-		cedent.setConnective(connectiveName);
-		
+        var connective = new Connective(this.FL.generateConnectiveID(), connectiveName);
+        cedent.setConnective(connective);
+
 		this.UIPainter.renderCedent(cedent, null);
 		this.setActiveRuleChanged();
 		this.closeEditConnectiveWindow();
@@ -191,10 +185,11 @@ var ARManager = new Class({
 	},
 	
 	addField: function (field, cedent) {
+        var fieldAR = {};
 		if (field.getType() === 'One category') {
-			var fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getCategory());
+			fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getCategory());
 		} else {
-			var fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
+			fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
 		}
 		this.activeRule.addField(fieldAR, cedent);
 		this.UIPainter.renderActiveRule();
@@ -203,6 +198,7 @@ var ARManager = new Class({
 	addFieldAR: function (field, cedent) {
 		this.activeRule.removeField(field);
 		this.activeRule.addField(field, cedent);
+        this.activeRule.update();
 		this.UIPainter.renderActiveRule();
 	},
 	
@@ -222,12 +218,15 @@ var ARManager = new Class({
 	},
 
 	addFieldGroup: function (FG, cedent) {
-		cedent.setConnective(FG.getConnective());
-		Object.each(FG.getFields(), function (field) {
+        var connective = new Connective(this.FL.generateConnectiveID(), FG.getConnective());
+		cedent.setConnective(connective);
+
+        Object.each(FG.getFields(), function (field) {
+            var fieldAR = {};
 			if (field.getType() === 'One category') {
-				var fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getCategory());
+				fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getCategory());
 			} else {
-				var fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
+				fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
 			}
 			this.activeRule.addField(fieldAR, cedent);
 		}.bind(this));
@@ -237,32 +236,21 @@ var ARManager = new Class({
 	},
 	
 	groupFields: function (cedent) {
-		if (cedent.getNumLiteralRefs() !== cedent.getNumMarkedFields()) {
-			var newCedent = new Cedent(this.generateCedentID(), cedent.getNextLevel(), this.FL.getDBAConstraint(cedent.getScope(), cedent.getNextLevel()), this.FL.getDefaultConnective(), [], [], cedent.getScope());
-			cedent.groupLiteralRefs(newCedent);
+		if (cedent.getNumFields(cedent.getLevel()) !== cedent.getNumMarkedFields()) {
+            var level = cedent.getNextLevel();
+			var newCedent = new Cedent(this.generateCedentID(), level, this.FL.getDefaultConnective(level, this.activeRule.toSettings(), cedent.getScope()), [], cedent.getScope());
+			cedent.groupChildren(newCedent);
 		} else {
-			cedent.unmarkLiteralRefs();
+			cedent.unmarkChildren();
 		}
 		this.UIPainter.renderActiveRule();
 		this.setActiveRuleChanged();
-	},
-	
-	rejectGroupFields: function (cedent) {
-		this.activeRule.setGroupFields(false);
-		this.UIPainter.clearCedentInfo(cedent);
 	},
 	
 	changeMark: function(field) {
 		field.changeMark();
 		this.activeRule.setGroupFields(true);
 		this.UIPainter.renderActiveRule();
-	},
-	
-	addCedent: function (cedent) {
-		var childCedent = new Cedent(this.generateCedentID(), cedent.getNextLevel(), this.FL.getDBAConstraint(cedent.getScope(), cedent.getNextLevel()), this.FL.getDefaultConnective(), [], [], cedent.getScope());
-		cedent.addChildCedent(childCedent);
-		this.UIPainter.renderCedent(cedent, null);
-		this.setActiveRuleChanged();
 	},
 	
 	removeCedent: function (cedent) {
@@ -276,12 +264,6 @@ var ARManager = new Class({
 		
 		this.UIPainter.renderActiveRule();
 	},
-	
-	changeCedentSign: function(cedent) {
-		cedent.changeSign();
-		this.setActiveRuleChanged();
-		this.UIPainter.renderCedent(cedent, null);
-	},
 
 	setActiveRuleChanged: function () {
 		this.activeRule.setChanged(true);
@@ -289,17 +271,6 @@ var ARManager = new Class({
 	
 	getIMPrototype: function (name) {
 		return this.FL.getIM(name);
-	},
-	
-	displayAttributesByGroup: function () {
-		this.attributesByGroup = true;
-		this.UIPainter.renderAttributes();
-	},
-	
-	displayAttributesByList: function () {
-		this.attributesByGroup = false;
-		this.UIPainter.renderAttributes();
-		this.sortAttributes();
 	},
 	
 	generateCedentID: function () {

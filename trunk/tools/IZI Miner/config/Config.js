@@ -1,7 +1,7 @@
 var Config = new Class({
 	
 	// app info
-	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
+	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)2',
 	name: 'I<em>:</em>ZI Miner',
 	version: '1.0-beta',
 	slogan: 'easy association rule mining',
@@ -50,6 +50,10 @@ var Config = new Class({
 	setParams: function (params) {
 		this.params = params;
 	},
+
+    getIdDm: function() {
+        return this.params.id_dm.toInt();
+    },
 	
 	getBKAskURL: function () {
 		return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=ask';
@@ -62,6 +66,10 @@ var Config = new Class({
 	getBKSaveNotInterestingURL: function () {
 		return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=saveNotInteresting';
 	},
+
+    setBKGetURL: function (url) {
+          this.BKGetURL = url;
+    },
 	
 	getDataGetURL: function () {
 		return this.dataGetURL + "?id_dm=" + this.params.id_dm;
