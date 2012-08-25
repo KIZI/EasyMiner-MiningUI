@@ -21,3 +21,5 @@ var DomReady = new Class({
 	}
 
 });
+
+var DR = new DomReady();
