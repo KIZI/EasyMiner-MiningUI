@@ -1,6 +1,6 @@
 <?php
 
-require_once '../lib/Bootstrap.php';
+require_once './Bootstrap.php';
 require_once '../config/Config.php';
 
 use IZI\Encoder\URLEncoder;

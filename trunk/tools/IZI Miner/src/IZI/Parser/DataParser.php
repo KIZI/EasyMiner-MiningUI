@@ -3,11 +3,11 @@
 namespace IZI\Parser;
 
 use IZI\FileLoader\XMLLoader;
-use IZI\DataDescription\Parser as DataDescriptionParser;
-use IZI\ETree\Parser as ETreeParser;
-use IZI\FeatureList\Parser as FeatureListParser;
-use IZI\FieldGroupConfig\Parser as FieldGroupConfigParser;
-use IZI\Parser\Rules\RulesParser;
+use IZI\Parser\ETreeParser;
+use IZI\Parser\DataDescriptionParser;
+use IZI\Parser\FeatureListParser;
+use IZI\Parser\FieldGroupConfigParser;
+use IZI\Parser\RulesParser;
 
 class DataParser
 {
