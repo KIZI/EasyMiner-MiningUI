@@ -1,21 +1,20 @@
 <?php
 
+use Symfony\Component\ClassLoader\UniversalClassLoader;
+
 define('DS', DIRECTORY_SEPARATOR);
 define('APP_PATH', __DIR__.'/../..');
 
-// Symfony2 ClassLoader
-require_once APP_PATH.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-use Symfony\Component\ClassLoader\UniversalClassLoader;
+require_once APP_PATH . '/vendor/autoload.php';
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Symfony' => APP_PATH.'/vendor',
     'IZI' => APP_PATH.'/src',
     'PHPUnit' => APP_PATH.'/vendor',
 ));
 $loader->register();
 
-$pathXML = realpath(dirname(__FILE__));
+$pathXML = realpath(dirname(__FILE__)).'/_data';
 define('DD', $pathXML.DS.'datadescription_0.2.xml');
 define('FL', $pathXML.DS.'featurelistQueryByAr.xml');
 define('FGC', $pathXML.DS.'fieldGroupConfig.xml');
