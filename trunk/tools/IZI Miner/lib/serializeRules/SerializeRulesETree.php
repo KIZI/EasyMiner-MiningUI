@@ -584,7 +584,7 @@ class SerializeRulesETree extends AncestorSerializeRules
      */
     private function hasBrackets($pcedent)
     {
-        return $this->countBrackets($pcedente) ? true : false;
+        return $this->countBrackets($pcedent) ? true : false;
     }
 
     /**

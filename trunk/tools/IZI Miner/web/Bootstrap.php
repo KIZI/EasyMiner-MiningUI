@@ -15,7 +15,7 @@ if (DEV_MODE) {
     ini_set('display_errors', 0);
 }
 
-require_once APP_PATH.'/vendor/autoload.php';
+require_once APP_PATH . '/vendor/autoload.php';
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
