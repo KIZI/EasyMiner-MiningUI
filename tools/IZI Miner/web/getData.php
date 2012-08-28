@@ -20,7 +20,7 @@ if (DEV_MODE) {
     // run export
     $encoder = new URLEncoder();
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=dataDescription&format=raw&source='.$id);
+    curl_setopt($ch, CURLOPT_URL, 'http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=dataDescription&format=raw&source='.$id);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

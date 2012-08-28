@@ -1,41 +1,38 @@
 <?php
 
-require_once '../config/Config.php';
 require_once './Bootstrap.php';
+require_once '../config/Config.php';
 
-// data encoding
-function encodeData($array) {
-    $data = "";
-    foreach ($array as $key => $value) {
-        $data .= "{$key}=".urlencode($value).'&';
-    }
+use IZI\Encoder\URLEncoder;
+use IZI\FileLoader\XMLLoader;
+use IZI\Parser\DataParser;
+use IZI\Serializer\QueryByARSerializer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-    return $data;
+$request = Request::createFromGlobals();
+$id = (int)$request->query->get('id_kb');
+$data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
+
+if (DEV_MODE) {
+    $path = APP_PATH.'/data/datadescription_0.2.xml';
+} else { // KBI
+    $path = APP_PATH.'/web/temp/DD_'.$id.'.pmml';;
 }
 
-$data = isset($_POST['data']) ? $_POST['data'] : $_GET['data'];
-$data = str_replace("\\\"", "\"", $data);
-
-if (!DEV_MODE) { // KBI
-    $id = intval($_GET['id_dm']);
-    $DDPath = APP_PATH.DS.'web'.DS.'temp'.DS.'DD_'.$id.'.pmml';
-} else {
-    $DDPath = DDPath;
-}
-
-$id = intval($_GET['id_kb']);
-$action = $_GET['action'];
+$encoder = new URLEncoder();
+$action = $request->query->get('action');
 if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     if ($action === 'saveInteresting') {
-        $serializer = new SerializeRulesAnnotatedAR($DDPath, 'interesting');
+        $serializer = new SerializeRulesAnnotatedAR($path, 'interesting');
     } else if ($action === 'saveNotInteresting') {
-        $serializer = new SerializeRulesAnnotatedAR($DDPath, 'not interesting');
+        $serializer = new SerializeRulesAnnotatedAR($path, 'not interesting');
     }
 
     $requestData = array('source' => $id, 'content' => $serializer->serializeRules($data));
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=storeDocument&format=raw');
+    curl_setopt($ch, CURLOPT_URL, 'http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=storeDocument&format=raw');
     curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -52,7 +49,7 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     $AAR->save($AARPath);
 } else {
     // confirmation
-    $serializer = new SerializeRulesQueryByAR(DDPath);
+    $serializer = new QueryByARSerializer($path);
     $requestData = array('source' => $id, 'query' => KB_CONF_ID, 'parameters' => $serializer->serializeRules($data));
 
     // save XML
@@ -63,8 +60,8 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
 
     // run task
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, encodeData($requestData));
+    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -72,6 +69,8 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
     curl_close($ch);
+
+    var_dump($response, $info); die;
     
     if ($response === '' || $info['http_code'] !== 200) { // XQuery is down
         echo json_encode(false);
@@ -121,12 +120,7 @@ if ($action === 'saveInteresting' || $action === 'saveNotInteresting') {
         'exception' => $exception
     );
     
-    if (function_exists('json_encode')) {
-        echo json_encode($arr);
-    } else {
-        $JSON = new Services_JSON();
-        echo $JSON->encode($arr);
-    }
+    echo json_encode($arr);
 }
 
 

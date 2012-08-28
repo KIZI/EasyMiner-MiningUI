@@ -25,7 +25,7 @@ $LM_import->save('./temp/4ft_task_'.date('md_His').'.pmml');
 // run task
 $encoder = new URLEncoder();
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://sewebar-dev.vse.cz/index.php?option=com_kbi&task=query&format=raw");
+curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
 curl_setopt($ch, CURLOPT_VERBOSE, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -34,6 +34,9 @@ curl_setopt($ch, CURLOPT_POST, true);
 $response = curl_exec($ch);
 $info = curl_getinfo($ch);
 curl_close($ch);
+
+// TODO remove
+//$response = file_get_contents('./temp/_test.pmml');
 
 // save LM result
 $LM_export = $loader->load($response);

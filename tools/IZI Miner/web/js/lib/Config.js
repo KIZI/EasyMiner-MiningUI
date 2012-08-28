@@ -1,7 +1,7 @@
 var Config = new Class({
 	
 	// app info
-	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)2',
+	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
 	name: 'I<em>:</em>ZI Miner',
 	version: '1.0-beta',
 	slogan: 'easy association rule mining',
