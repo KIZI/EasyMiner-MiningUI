@@ -100,14 +100,7 @@ class DataParser
 
     protected function toJSON($array)
     {
-        if (function_exists('json_encode')) {
-            $json = json_encode($array);
-        } else {
-            $JSON = new Services_JSON();
-            $json = $JSON->encode($array);
-        }
-
-        return $json;
+        return json_encode($array);
     }
 }
 

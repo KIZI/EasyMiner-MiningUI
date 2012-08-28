@@ -5,9 +5,11 @@
 
   ul
     width 100%
+    padding-left 0
     float left
     li
       width 100%
+      padding-left 0
       float left; clear left
 
   .connective
@@ -21,6 +23,7 @@
 
   .ims
     ims()
+    left 27px
 
   .im-value
     imValue()
@@ -36,7 +39,7 @@
   .bk
     background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
     display block; width 16px; height 16px
-    position relative; top 7px
+    position relative; top 5px
     margin 0 10px
     visibility hidden
     float left
@@ -44,10 +47,10 @@
   li:hover > .bk
     visibility visible
 
-  #found-rules .mark
+  .mark
     background transparent url('../images/sprite-icons.png') -18px -68px no-repeat
     display block; width 16px; height 16px
-    position relative; top 7px
+    position relative; top 5px
     margin-left 10px
     visibility hidden
     float left
@@ -57,9 +60,12 @@
 
   .clear
     remove()
+    position relative; top 2px
+    margin-left 5px
     float left
 
   li:hover > .clear
+    list-style-type none
     visibility visible
 
 .found-rule
@@ -72,7 +78,8 @@
     float left
 
   .loading
-    loading()
+    background transparent url("../images/sprite-icons.png") -18px -408px no-repeat
+    display block; width 20px; height 24px
     opacity 0; visibility hidden
     float right
 

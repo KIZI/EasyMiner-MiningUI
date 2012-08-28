@@ -1,11 +1,8 @@
 <?php
 
-/**
- * Description of SerializeRulesQueryByAR
- *
- * @author balda
- */
-class SerializeRulesQueryByAR extends AncestorSerializeRules
+namespace IZI\Serializer;
+
+class QueryByARSerializer
 {
   protected $DD;
   private $id = 0;
@@ -21,13 +18,9 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules
   private $dbas = array();
   private $rules = array();
 
-  /**
-   * It creates instance of this class.
-   */
   public function __construct($DD)
   {
       $this->DD = $DD;
-    parent::__construct();
   }
 
   /**
@@ -94,31 +87,14 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules
       $actualRuleElement = $ruleData[$ruleElement];
       if ($actualRuleElement->type == "attr") {
         $text = $actualRuleElement->name;
-        $name = $actualRuleElement->name;
-
         $fieldRef = $actualRuleElement->{'name'};
-        $fields = $actualRuleElement->{'fields'};
-        $fieldName = $fields[0]->{'name'};
-        $type = $actualRuleElement->{'category'};
 
         $category = null;
         $minLength = null;
         $maxLength = null;
-        if ($type == $this->ONE_CATEGORY) {
-          $category = $actualRuleElement->{'catref'};
-        } else {
-          $fieldLength = count($fields);
-          if ($fieldLength < 1) {
-            $minLength = "";
-          } else {
-            $minLength = $fields[0]->{'value'};
-          }
-          if ($fieldLength < 2) {
-            $maxLength = "";
-          } else {
-            $maxLength = $fields[1]->{'value'};
-          }
-        }
+
+        $category = $actualRuleElement->{'catref'};
+
         // Hack around. There shall be better way to do it.
         $literal = true;
         if ($ruleElement > 0) {
@@ -198,7 +174,7 @@ class SerializeRulesQueryByAR extends AncestorSerializeRules
       $domDD->loadXML($this->DD);
     }
     // get <Dictionary>
-    $xPath = new DOMXPath($domDD);
+    $xPath = new \DOMXPath($domDD);
     $xPath->registerNamespace('dd', "http://keg.vse.cz/ns/datadescription0_2");
     $anXPathExpr = "//dd:DataDescription";
     $field = $xPath->query($anXPathExpr);

@@ -559,7 +559,7 @@ nav {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  width: 160px;
+  width: 165px;
   margin-bottom: 25px;
 }
 h2 {
@@ -657,7 +657,7 @@ li:hover a.remove-attribute {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  width: 160px;
+  width: 165px;
   padding-bottom: 20px;
   margin-bottom: 25px;
 }
@@ -926,7 +926,7 @@ section#active-rule #action-box {
   background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
 }
 #pager-label.mining-in-progress {
-  background: transparent url("../images/sprite-icons.png") -18px -416px no-repeat;
+  background: transparent url("../images/sprite-icons.png") -12px -411px no-repeat;
 }
 #pager-label.mining-finished {
   background: transparent url("../images/sprite-icons.png") -164px -16px no-repeat;
@@ -950,10 +950,12 @@ section#active-rule #action-box {
 }
 #found-rules ul {
   width: 100%;
+  padding-left: 0;
   float: left;
 }
 #found-rules ul li {
   width: 100%;
+  padding-left: 0;
   float: left;
   clear: left;
 }
@@ -979,6 +981,7 @@ section#active-rule #action-box {
   clear: left;
   position: relative;
   top: -5px;
+  left: 27px;
 }
 #found-rules .im-value {
   color: #7b0d2e;
@@ -1002,7 +1005,7 @@ section#active-rule #action-box {
   width: 16px;
   height: 16px;
   position: relative;
-  top: 7px;
+  top: 5px;
   margin: 0 10px;
   visibility: hidden;
   float: left;
@@ -1010,13 +1013,13 @@ section#active-rule #action-box {
 #found-rules li:hover > .bk {
   visibility: visible;
 }
-#found-rules #found-rules .mark {
+#found-rules .mark {
   background: transparent url("../images/sprite-icons.png") -18px -68px no-repeat;
   display: block;
   width: 16px;
   height: 16px;
   position: relative;
-  top: 7px;
+  top: 5px;
   margin-left: 10px;
   visibility: hidden;
   float: left;
@@ -1030,9 +1033,13 @@ section#active-rule #action-box {
   width: 16px;
   height: 20px;
   visibility: hidden;
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
   float: left;
 }
 #found-rules li:hover > .clear {
+  list-style-type: none;
   visibility: visible;
 }
 .found-rule .id {
@@ -1045,10 +1052,10 @@ section#active-rule #action-box {
   float: left;
 }
 .found-rule .loading {
-  background: transparent url("../images/sprite-icons.png") -18px -416px no-repeat;
+  background: transparent url("../images/sprite-icons.png") -18px -408px no-repeat;
   display: block;
-  width: 16px;
-  height: 20px;
+  width: 20px;
+  height: 24px;
   opacity: 0;
   visibility: hidden;
   float: right;
