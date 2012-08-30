@@ -3,7 +3,7 @@ module('DataParser', {});
 test('getDD', function () {
 	var config = new Config();
 	config.setDataGetURL('/izi-miner/web/getData.php');
-    config.setParams({id_dm: '25'});
+    config.setParams({id_dm: 'TEST'});
 	var dataParser = new DataParser(config);
 	dataParser.getData();
 
@@ -15,7 +15,7 @@ test('getDD', function () {
 test('getFLs', function () {
 	var config = new Config();
 	config.setDataGetURL('/izi-miner/web/getData.php');
-    config.setParams({id_dm: '25'});
+    config.setParams({id_dm: 'TEST'});
 	var dataParser = new DataParser(config);
 	dataParser.getData();
 	
@@ -25,7 +25,7 @@ test('getFLs', function () {
 test('getFGC', function () {
 	var config = new Config();
     config.setDataGetURL('/izi-miner/web/getData.php');
-    config.setParams({id_dm: '25'});
+    config.setParams({id_dm: 'TEST'});
 	var dataParser = new DataParser(config);
 	dataParser.getData();
 

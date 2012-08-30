@@ -5,7 +5,7 @@ var StringHelper = new Class({
 	},
 	
 	normalizeString: function (string) {
-		string = String.clean(string);
+		string = string.replace(/^\s+/,"");
 		string = string.toLowerCase();
 		if (string.contains(' -')) {
 			string = string.replace(' -', '-');
@@ -13,6 +13,9 @@ var StringHelper = new Class({
 		if (string.contains('- ')) {
 			string = string.replace('- ', '-');
 		}
+        while (string.contains('  ')) {
+            string = string.replace('  ', ' ');
+        }
 		while (string.contains(' ')) {
 			string = string.replace(' ', '-');
 		}

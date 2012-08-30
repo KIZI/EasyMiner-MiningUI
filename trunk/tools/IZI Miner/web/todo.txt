@@ -3,5 +3,26 @@ TODO
 - move settings into config... no reason to have two separate configs
 
 - think about DD - PHP vs. JS
-- rename serializers
 - write tests for serializers
+- repair scrollbar
+- a => neg B... found rules neparsuji negaci?
+- overlay neni pres celou sirku
+- pri pridani data fieldu scrollovat nahoru
+- vertikalni pozadi neni pres cele
+- list-style-type none pri pretahovani data fieldu
+- refactor KBI paths from PHP into JS
+- modern browser check
+- pri new task reload cely IZI
+- feedback module
+- onerror
+
+Dochazka
+==============
+27. 8. 2012
+17.00 - 22.00 architecture up debug
+
+28. 8. 2012
+12.30 - 16.00 stable IZI Miner release
+
+29. 8. 2012
+12.45 - 14.15 serializer tests

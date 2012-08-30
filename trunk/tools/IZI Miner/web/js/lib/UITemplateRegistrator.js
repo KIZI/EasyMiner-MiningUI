@@ -1,5 +1,3 @@
-/*global Class: false, $: false, Element: false */ 
-
 var UITemplateRegistrator = new Class({
 	
 	initialize: function () {
@@ -29,7 +27,8 @@ var UITemplateRegistrator = new Class({
 			config = data.config;
 			
 			header(div({id: 'settings'},
-				a({href: '#', id: 'settings-open'}, i18n.translate('Settings'))),	
+                a({href: '#', id: 'new-task'}, i18n.translate('New task')),
+                a({href: '#', id: 'settings-open'}, i18n.translate('Settings'))),
 				h1(config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
 		});
 		
@@ -478,6 +477,18 @@ var UITemplateRegistrator = new Class({
 	},
 	
 	registerSettingsWindow: function () {
+        Mooml.register('newTaskTemplate', function (data) {
+            i18n = data.i18n;
+            url = data.url;
+
+            div({id: 'new-task-window'},
+                a({id: 'new-task-close', href: '#'}, i18n.translate('Close')),
+                h2(i18n.translate('New task')),
+                iframe({src: url}),
+                form({action: '#', method: 'POST', id: 'new-task-form'},
+                    input({type: 'submit', value: i18n.translate('Save')})));
+        });
+
 		Mooml.register('settingsTemplate', function (data) {
 			autoSuggestPossible = data.autoSuggestPossible;
 			i18n = data.i18n;
@@ -545,20 +556,24 @@ var UITemplateRegistrator = new Class({
     registerAttributeWindow: function() {
         Mooml.register('addAttributeTemplate', function (data) {
             i18n = data.i18n;
+            url = data.url;
 
             div({id: 'add-attribute-window'},
                 a({id: 'add-attribute-close', href: '#'}, i18n.translate('Close')),
                 h2(i18n.translate('Add attribute')),
+                iframe({src: url}),
                 form({action: '#', method: 'POST', id: 'add-attribute-form'},
                     input({type: 'submit', value: i18n.translate('Add')})));
         });
 
         Mooml.register('editAttributeTemplate', function (data) {
             i18n = data.i18n;
+            url = data.url;
 
             div({id: 'edit-attribute-window'},
                 a({id: 'edit-attribute-close', href: '#'}, i18n.translate('Close')),
                 h2(i18n.translate('Edit attribute')),
+                iframe({src: url}),
                 form({action: '#', method: 'POST', id: 'edit-attribute-form'},
                     input({type: 'submit', value: i18n.translate('Save')})));
         });

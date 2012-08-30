@@ -16,13 +16,43 @@ var UIListener = new Class({
 	setUIPainter: function (UIPainter) {
 		this.UIPainter = UIPainter;
 	},
+
+    registerDataReloadEventHandlers: function() {
+        // called when com_dbconnect window is closed
+        var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
+        elIZI.addEvent('reload', function() {
+            var elSubmit = $('overlay').getElement('form input[type="submit"]');
+            elSubmit.fireEvent('click');
+        });
+    },
 	
 	registerSettingsEventHandlers: function () {
-		$('settings-open').addEvent('click', function (event) {
-			event.stop();
+        $('new-task').addEvent('click', function (e) {
+            e.stop();
+            this.ARBuilder.openNewTaskWindow();
+        }.bind(this));
+
+		$('settings-open').addEvent('click', function (e) {
+			e.stop();
 			this.ARBuilder.openSettingsWindow();
 		}.bind(this));
 	},
+
+    registerNewTaskWindowEventHandlers: function () {
+        // save
+        var elSubmit = $('new-task-form').getElement('input[type=submit]');
+        elSubmit.addEvent('click', function (e) {
+            if (e) { e.stop(); }
+            this.ARBuilder.reloadAttributes();
+        }.bind(this));
+
+        // close
+        var elClose = $('new-task-close');
+        elClose.addEvent('click', function (e) {
+            e.stop();
+            this.ARBuilder.closeNewTaskWindow();
+        }.bind(this));
+    },
 	
 	registerSettingsWindowEventHandlers: function (ASPossible) {
 		// change FL
@@ -72,7 +102,7 @@ var UIListener = new Class({
 			e.stop();
 		}.bind(this));
 	},
-	
+
 	registerNavigationEventHandlers: function () {
 		var el = $$('#attributes a.toggle')[0];
 		el.addEvent('click', function (event) {

@@ -75,7 +75,19 @@ var ARBuilder = new Class({
 		
 		return index !== null ? this.FLs[index] : null;
 	},
-	
+
+    getConfig: function() {
+        return this.config;
+    },
+
+    openNewTaskWindow: function () {
+        this.UIPainter.renderNewTaskWindow();
+    },
+
+    closeNewTaskWindow: function () {
+        this.UIPainter.hideOverlay();
+    },
+
 	openSettingsWindow: function () {
 		this.UIPainter.renderSettingsWindow(this.FLs, this.getDefFL(), this.getDefFL().getAutoSuggest(), false, this.settings);
 	},
