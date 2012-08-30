@@ -6,46 +6,60 @@ require_once '../config/Config.php';
 use IZI\Encoder\URLEncoder;
 use IZI\FileLoader\XMLLoader;
 use IZI\Parser\DataParser;
-use IZI\Serializer\TaskSetting as SerializerTaskSetting;
+use IZI\Serializer\TaskSettingSerializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 $request = Request::createFromGlobals();
-$id = (int)$request->query->get('id_dm');
+$id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
-$serializer = new SerializerTaskSetting();
-$loader = new XMLLoader();
+$lang = $request->query->get('lang');
 
-$requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
+if ($id === 'TEST') {
+    $ERPath = APP_PATH.'/data/4ft.pmml';
+    $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, $ERPath, null, $lang);
+    $DP->loadData();
+    $DP->parseData();
+    $responseContent = $DP->getER();
+} else { // KBI
+    $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
+    $loader = new XMLLoader();
+    $serializer = new TaskSettingSerializer($DDPath);
 
-// save LM task
-$LM_import = $loader->load($requestData['query']);
-$LM_import->save('./temp/4ft_task_'.date('md_His').'.pmml');
+    $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
-// run task
-$encoder = new URLEncoder();
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
-curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
-curl_setopt($ch, CURLOPT_VERBOSE, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
+    // save LM task
+    $LM_import = $loader->load($requestData['query']);
+    $LM_import->save('./temp/4ft_task_'.date('md_His').'.pmml');
 
-$response = curl_exec($ch);
-$info = curl_getinfo($ch);
-curl_close($ch);
+    // run task
+    $encoder = new URLEncoder();
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
+    curl_setopt($ch, CURLOPT_VERBOSE, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
 
-// TODO remove
-//$response = file_get_contents('./temp/_test.pmml');
+    $response = curl_exec($ch);
+    $response = iconv("utf-8", "utf-8//IGNORE", $response);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
 
-// save LM result
-$LM_export = $loader->load($response);
-$LM_export->save('./temp/4ft_result_'.date('md_His').'.pmml');
+    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
+        // save LM result
+        $path = './temp/4ft_result_'.date('md_His').'.pmml';
+        file_put_contents($path, $response);
 
-$DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, $response, null, LANG);
-$DP->loadData();
-$DP->parseData();
+        $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, $response, null, $lang);
+        $DP->loadData();
+        $DP->parseData();
+        $responseContent = $DP->getER();
+    } else {
+        $responseContent = json_encode(['failure' => true]);
+    }
+}
 
-$response = new Response($DP->getER(), 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response = new Response($responseContent, 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();
 

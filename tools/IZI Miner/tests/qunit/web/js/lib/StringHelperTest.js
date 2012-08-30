@@ -1,15 +1,16 @@
-module('StringHelper');
+module('StringHelper', {});
 
 test('normalizedString', function () {
 	var stringHelper = new StringHelper();
-	var tests = [[' abcdef ', 'abcdef'],
+	var tests = [[' abcdef', 'abcdef'],
 	             ['abc def', 'abc-def'],
 	             ['abc  def', 'abc-def'],
 	             ['abc def ghi', 'abc-def-ghi'],
 	             ['abc - def', 'abc-def'],
 	             ['áäďěëščřžýáíňóöéťüůú', 'aadeescrzyainooetuuu'],
 	             ['A', 'a'],
-	             ['~!@#$%^&*()_+={}[]:"|;\\\'?.<,>/', '']];
+	             ['~!@#$%^&*()_+={}[]:"|;\\\'?.<,>/', ''],
+                 ['a ', 'a-']];
 	
 	Object.each(tests, function(test) {
 		strictEqual(stringHelper.normalizeString(test[0]), test[1]);

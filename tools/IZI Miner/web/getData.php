@@ -4,16 +4,18 @@ require_once './Bootstrap.php';
 require_once '../config/Config.php';
 
 use IZI\Encoder\URLEncoder;
-use IZI\FileLoader\XMLLoader;
 use IZI\Parser\DataParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 $request = Request::createFromGlobals();
-$id = (int)$request->query->get('id_dm');
+$id = $request->query->get('id_dm');
+$lang = $request->query->get('lang');
 
-if (DEV_MODE) {
-    $path = APP_PATH.'/data/datadescription_0.2.xml';
+if ($id === 'TEST') {
+    $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
+    $DP->loadData();
+    $responseContent = $DP->parseData();
 } else { // KBI
     $requestData = array();
 
@@ -30,14 +32,17 @@ if (DEV_MODE) {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
-    $path = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
-    $loader = new XMLLoader();
-    $DD = $loader->load($response);
-    $DD->save($path);
+    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
+        $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
+        file_put_contents($DDPath, $response);
+
+        $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
+        $DP->loadData();
+        $responseContent = $DP->parseData();
+    } else {
+        $responseContent = json_encode(['failure' => true]);
+    }
 }
 
-$DP = new DataParser($path, unserialize(FLPath), FGCPath, null, null, LANG);
-$DP->loadData();
-
-$response = new Response($DP->parseData(), 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response = new Response($responseContent, 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();

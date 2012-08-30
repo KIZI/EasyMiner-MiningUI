@@ -2,7 +2,9 @@
 
 namespace IZI\Serializer;
 
-class TaskSetting
+use IZI\FileLoader\XMLLoader;
+
+class TaskSettingSerializer
 {
     private $dd;
     private $ddXpath;
@@ -45,7 +47,7 @@ class TaskSetting
     /**
      * It creates instance of this class.
      */
-    public function __construct()
+    public function __construct($DDPath)
     {
         $this->literal = $this->literals[0];
         $this->booleans = array_merge($this->positiveBooleans, $this->negativeBooleans);
@@ -54,13 +56,8 @@ class TaskSetting
         $this->brackets = array_merge($this->openingBrackets, $this->closingBrackets);
         $this->connectives = array_merge($this->brackets, $this->booleans);
 
-        // load Data Description XML
-        $this->dd = new \DOMDocument();
-        if (file_exists(DDPath)) {
-            $this->dd->load(DDPath);
-        } else {
-            $this->dd->loadXML(DDPath);
-        }
+        $loader = new XMLLoader();
+        $this->dd = $loader->load($DDPath);
 
         // init XPath
         $this->ddXpath = new \DOMXPath($this->dd);
@@ -187,7 +184,7 @@ class TaskSetting
         $header->setAttribute('copyright', 'Copyright (c) KIZI UEP');
         $ext = $this->finalXmlDocument->createElement('Extension');
         $ext->setAttribute('name', 'dataset');
-        $ext->setAttribute('value', $this->ddXpath->query("//dd:DataDescription/Dictionary/@sourceName")->item(0)->value);
+        $ext->setAttribute('value', $this->ddXpath->query("//dd:DataDescription/Dictionary/@sourceName")->item(0) ? $this->ddXpath->query("//dd:DataDescription/Dictionary/@sourceName")->item(0)->value : 'Loans');
         $header->appendChild($ext);
         $ext = $this->finalXmlDocument->createElement('Extension');
         $ext->setAttribute('name', 'author');
@@ -248,7 +245,7 @@ class TaskSetting
         // extension metabase
         $extension = $this->finalXmlDocument->createElement('Extension');
         $extension->setAttribute('name', 'metabase');
-        $extension->setAttribute('value', $this->ddXpath->query("//dd:DataDescription/Dictionary[@default='true']/Identifier[@name='Metabase']")->item(0)->nodeValue);
+        $extension->setAttribute('value', $this->ddXpath->query("//dd:DataDescription/Dictionary[@default='true']/Identifier[@name='Metabase']")->item(0) ? $this->ddXpath->query("//dd:DataDescription/Dictionary[@default='true']/Identifier[@name='Metabase']")->item(0) : 'LM Barbora.mdb MB');
         $this->arQuery->appendChild($extension);
 
         $bbaSettings = $this->finalXmlDocument->createElement("BBASettings");
@@ -576,7 +573,7 @@ class TaskSetting
      */
     private function hasBrackets($pcedent)
     {
-        return $this->countBrackets($pcedente) ? true : false;
+        return $this->countBrackets($pcedent) ? true : false;
     }
 
     /**

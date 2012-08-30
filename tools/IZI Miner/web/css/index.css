@@ -379,6 +379,22 @@ td {
   position: relative;
   top: -20px;
 }
+#overlay #add-attribute-window,
+#overlay #edit-attribute-window,
+#overlay #new-task-window {
+  width: 800px;
+}
+#overlay #add-attribute-window iframe,
+#overlay #edit-attribute-window iframe,
+#overlay #new-task-window iframe {
+  width: 800px;
+  height: 400px;
+}
+#overlay #add-attribute-window form input[type="submit"],
+#overlay #edit-attribute-window form input[type="submit"],
+#overlay #new-task-window form input[type="submit"] {
+  margin-left: 310px;
+}
 #settings-form {
   line-height: 2em;
 }
@@ -506,12 +522,19 @@ header #settings a {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
-  background: transparent url("../images/sprite-icons.png") -11px -167px no-repeat;
   padding-right: 12px;
 }
 header #settings a:hover {
   color: #fff;
   text-decoration: underline;
+}
+header #settings a#settings-open {
+  background: transparent url("../images/sprite-icons.png") -11px -167px no-repeat;
+}
+header #settings a#new-task {
+  background: transparent url("../images/sprite-icons.png") -113px -262px no-repeat;
+  margin-right: 150px;
+  padding: 3px 0 0 30px;
 }
 header h1 {
   color: #fff;

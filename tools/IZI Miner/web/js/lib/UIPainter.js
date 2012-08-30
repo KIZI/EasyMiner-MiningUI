@@ -69,6 +69,7 @@ var UIPainter = new Class({
 		this.rootElement.grab(Mooml.render('mainTemplate', {config: this.config, dateHelper: this.dateHelper, i18n: this.i18n}));
 		this.rootElement.grab(Mooml.render('footerTemplate', {config: this.config, i18n: this.i18n}));
 		this.UIListener.registerSettingsEventHandlers();
+        this.UIListener.registerDataReloadEventHandlers();
 	},
 	
 	renderNavigation: function () {
@@ -153,20 +154,18 @@ var UIPainter = new Class({
 
     renderAddAttributeWindow: function(field) {
         var overlay = this.showOverlay();
-        var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n});
+        var url = this.config.getAddAttributeURL(field.getName());
+        var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
-
-        // TODO render pre-processing component inside
 
         this.UIListener.registerAddAttributeEventHandler(attribute);
     },
 
     renderEditAttributeWindow: function (attribute) {
         var overlay = this.showOverlay();
-        var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n});
+        var url = this.config.getEditAttributeURL(attribute.getName());
+        var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
-
-        // TODO render pre-processing component inside
 
         this.UIListener.registerEditAttributeEventHandler(attribute);
     },
@@ -632,6 +631,15 @@ var UIPainter = new Class({
 	},
 	
 	/* settings */
+    renderNewTaskWindow: function () {
+        var url = this.config.get
+        var elWindow = Mooml.render('newTaskTemplate', {i18n: this.i18n, url: url});
+        var overlay = this.showOverlay();
+        overlay.grab(elWindow);
+
+        this.UIListener.registerNewTaskWindowEventHandlers();
+    },
+
 	renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
 		var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: (autoSuggest.length > 0), i18n: this.i18n, reset: reset, settings: settings});
 		var elWindow = $('settings-window');

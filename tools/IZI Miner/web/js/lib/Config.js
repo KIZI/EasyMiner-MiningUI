@@ -11,7 +11,8 @@ var Config = new Class({
 	lang: 'en',
 	
 	// URL settings
-	params: {},
+	$joomlaURL: 'http://sewebar.lmcloud.vse.cz/',
+    params: {},
 	BKGetURL: 'getBK.php',
 	dataGetURL: 'getData.php',
 	dataSetURL: 'setData.php',
@@ -46,6 +47,10 @@ var Config = new Class({
 	getLang: function () {
 		return this.lang;
 	},
+
+    setJoomlaURL: function(url) {
+        this.$joomlaURL = url;
+    },
 	
 	setParams: function (params) {
 		this.params = params;
@@ -72,7 +77,7 @@ var Config = new Class({
     },
 	
 	getDataGetURL: function () {
-		return this.dataGetURL + "?id_dm=" + this.params.id_dm;
+		return this.dataGetURL + "?id_dm=" + this.params.id_dm + '&lang=' + this.lang;
 	},
 	
 	setDataGetURL: function (url) {
@@ -84,7 +89,7 @@ var Config = new Class({
 	},
 	
 	getRulesGetURL: function () {
-		return this.rulesGetURL + "?id_dm=" + this.params.id_dm;
+		return this.rulesGetURL + "?id_dm=" + this.params.id_dm + '&lang=' + this.lang;
 	},
 	
 	setRulesGetURL: function (URL) {
@@ -94,6 +99,18 @@ var Config = new Class({
 	getETreeGetURL: function () {
 		return this.ETreeGetURL + "?id_dm=" + this.params.id_dm;
 	},
+
+    getAddAttributeURL: function(fieldName) {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=' + encodeURIComponent(fieldName);
+    },
+
+    getEditAttributeURL: function(attributeName) {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName);
+    },
+
+    getNewTaskURL: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newIZITask';
+    },
 	
 	getRootElementID: function () {
 		return this.rootElementID;
