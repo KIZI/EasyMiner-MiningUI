@@ -6,4 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'FB' => $baseDir . '/vendor/firephp/firephp-core/lib/FirePHPCore/fb.php',
+    'FirePHP' => $baseDir . '/vendor/firephp/firephp-core/lib/FirePHPCore/FirePHP.class.php',
 );
