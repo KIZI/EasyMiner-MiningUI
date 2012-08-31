@@ -7,14 +7,9 @@ define('APP_PATH', __DIR__.'/..');
 define('DEV_MODE', false);
 
 // PHP error reporting
-if (DEV_MODE) {
-    error_reporting(E_ALL ^ E_NOTICE);
-    ini_set('display_errors', 1);
-} else {
-    // TODO uncomment
-//    error_reporting(0);
-//    ini_set('display_errors', 0);
-}
+error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', 1);
+
 
 require_once APP_PATH . '/vendor/autoload.php';
 
