@@ -1,5 +1,30 @@
 [
     {
+        "name": "firephp/firephp-core",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobLoach/firephp-core",
+            "reference": "c26d972dcb28fd483fa193512091df7b3c85e450"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/RobLoach/firephp-core/zipball/c26d972dcb28fd483fa193512091df7b3c85e450",
+            "reference": "c26d972dcb28fd483fa193512091df7b3c85e450",
+            "shasum": ""
+        },
+        "time": "2012-05-29 00:08:14",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/FirePHPCore/FirePHP.class.php",
+                "lib/FirePHPCore/fb.php"
+            ]
+        }
+    },
+    {
         "name": "symfony/http-foundation",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -7,18 +32,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/HttpFoundation",
-            "reference": "8d5e7f909fa519853e71bcfc57a1da8c637ebcbb"
+            "reference": "c61c023d2e9e9ad2edcc9227bd0ec5f79d616e18"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/HttpFoundation/zipball/8d5e7f909fa519853e71bcfc57a1da8c637ebcbb",
-            "reference": "8d5e7f909fa519853e71bcfc57a1da8c637ebcbb",
+            "url": "https://github.com/symfony/HttpFoundation/zipball/c61c023d2e9e9ad2edcc9227bd0ec5f79d616e18",
+            "reference": "c61c023d2e9e9ad2edcc9227bd0ec5f79d616e18",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-17 08:18:18",
+        "time": "2012-08-30 07:43:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -41,12 +66,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/ClassLoader",
-            "reference": "v2.1.0-BETA4"
+            "reference": "v2.1.0-RC2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/ClassLoader/zipball/v2.1.0-BETA4",
-            "reference": "v2.1.0-BETA4",
+            "url": "https://github.com/symfony/ClassLoader/zipball/v2.1.0-RC2",
+            "reference": "v2.1.0-RC2",
             "shasum": ""
         },
         "require": {
@@ -55,7 +80,7 @@
         "require-dev": {
             "symfony/finder": "2.1.*"
         },
-        "time": "2012-07-15 10:13:51",
+        "time": "2012-08-27 15:51:49",
         "type": "library",
         "extra": {
             "branch-alias": {
