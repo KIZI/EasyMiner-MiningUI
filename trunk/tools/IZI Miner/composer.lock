@@ -1,0 +1,43 @@
+{
+    "hash": "b876e245fa8de6321f012c0da2041f77",
+    "packages": [
+        {
+            "package": "firephp/firephp-core",
+            "version": "dev-master",
+            "source-reference": "c26d972dcb28fd483fa193512091df7b3c85e450",
+            "commit-date": "1338250094"
+        },
+        {
+            "package": "symfony/class-loader",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/class-loader",
+            "version": "dev-master",
+            "source-reference": "v2.1.0-RC2",
+            "commit-date": "1346082709"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "dev-master",
+            "source-reference": "c61c023d2e9e9ad2edcc9227bd0ec5f79d616e18",
+            "commit-date": "1346312580"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}
