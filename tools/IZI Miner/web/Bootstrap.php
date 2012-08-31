@@ -10,6 +10,7 @@ define('DEV_MODE', false);
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', 1);
 
+date_default_timezone_set('Europe/Paris');
 
 require_once APP_PATH . '/vendor/autoload.php';
 
