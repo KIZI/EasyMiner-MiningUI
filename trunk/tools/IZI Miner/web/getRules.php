@@ -46,6 +46,10 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
+    // log into console
+    FB::info(['curl response' => $response]);
+    FB::info(['curl info' => $info]);
+
     if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
         // save LM result
         $path = './temp/4ft_result_'.date('md_His').'.pmml';

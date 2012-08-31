@@ -23,3 +23,5 @@ $loader->registerNamespaces(array(
     'IZI' => APP_PATH.'/src',
 ));
 $loader->register();
+
+require_once('FirePHPCore/fb.php');
