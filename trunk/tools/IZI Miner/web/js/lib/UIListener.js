@@ -38,22 +38,6 @@ var UIListener = new Class({
 		}.bind(this));
 	},
 
-    registerNewTaskWindowEventHandlers: function () {
-        // save
-        var elSubmit = $('new-task-form').getElement('input[type=submit]');
-        elSubmit.addEvent('click', function (e) {
-            if (e) { e.stop(); }
-            this.ARBuilder.reloadAttributes();
-        }.bind(this));
-
-        // close
-        var elClose = $('new-task-close');
-        elClose.addEvent('click', function (e) {
-            e.stop();
-            this.ARBuilder.closeNewTaskWindow();
-        }.bind(this));
-    },
-	
 	registerSettingsWindowEventHandlers: function (ASPossible) {
 		// change FL
 		var elSelect = $('fl-select');

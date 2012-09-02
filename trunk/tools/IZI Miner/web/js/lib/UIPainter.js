@@ -632,8 +632,6 @@ var UIPainter = new Class({
         var elWindow = Mooml.render('newTaskTemplate', {i18n: this.i18n, url: url});
         var overlay = this.showOverlay();
         overlay.grab(elWindow);
-
-        this.UIListener.registerNewTaskWindowEventHandlers();
     },
 
 	renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
