@@ -62,15 +62,15 @@ class DBA
 
     public function toArray()
     {
-        $array = array();
         if (count($this->refs) == 1) {
-            if ($this->connective->isUnary()) {  // negation
-                array_push($array, $this->connective->toArray());
+            $arrRef = $this->refs[0]->toArray();
+            if ($this->connective->isUnary() && $this->getLevel() === 3) {  // negation
+                $arrRef[0]['sign'] = 'negative';
+            } else if (!isset($arrRef[0]['sign'])) {
+                $arrRef[0]['sign'] = 'positive';
             }
 
-            $array = array_merge_recursive($array, $this->refs[0]->toArray());
-
-            return $array;
+            return $arrRef;
         }
 
         $array = array();
@@ -78,31 +78,19 @@ class DBA
             array_push($array, $this->connective->getLbrac());
         }
 
-        if ($this->connective->isUnary()) {  // negation
-            array_push($array, $this->connective->toArray());
-        }
-
         foreach ($this->refs as $k => $r) {
             if ($this->connective->isBinary() && $k > 0) { // conjunction, disjunction
                 array_push($array, $this->connective->toArray());
             }
 
-            $array = array_merge_recursive($array, $r->toArray());
+            $arrRef = $r->toArray();
 
-            /*
-             $ref = array();
-             foreach ($r->toArray() as $k => $ir) {
-             $ref[$k] = $ir;
-             }
-             array_push($array, $ref);
-             */
+            $array = array_merge_recursive($array, $arrRef);
         }
 
         if ($this->connective->isBinary() && $this->getLevel() > 1 && count($this->refs) > 1) {
             array_push($array, $this->connective->getRbrac());
         }
-
-        //var_dump(var_dump($this->id), $array);
 
         return $array;
     }

@@ -157,8 +157,6 @@ var UIPainter = new Class({
         var url = this.config.getAddAttributeURL(field.getName());
         var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
-
-        this.UIListener.registerAddAttributeEventHandler(attribute);
     },
 
     renderEditAttributeWindow: function (attribute) {
@@ -166,8 +164,6 @@ var UIPainter = new Class({
         var url = this.config.getEditAttributeURL(attribute.getName());
         var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
-
-        this.UIListener.registerEditAttributeEventHandler(attribute);
     },
 
     removeAttribute: function(attribute) {

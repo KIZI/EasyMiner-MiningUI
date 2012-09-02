@@ -389,27 +389,6 @@ test('isAttributeUsed - yes', function() {
     strictEqual(cedent.isAttributeUsed(attribute), true);
 });
 
-test('serialize - Subset *', function() {
-    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 1);
-    var cedent = new Cedent(1, 1, null, [field]);
-
-    deepEqual(cedent.serialize(), [{name: "District", type: "attr", category: "Subset", fields :[{name: "minLength", value: 1}, {name: "maxLength", value: 1}]}]);
-});
-
-test('serialize - Subset 1-2', function() {
-    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 2);
-    var cedent = new Cedent(1, 1, null, [field]);
-
-    deepEqual(cedent.serialize(), [{name: "District", type: "attr", category: "Subset", fields :[{name: "minLength", value: 1}, {name: "maxLength", value: 2}]}]);
-});
-
-test('serialize - One category', function() {
-    var field = new FieldAR(1, new Attribute('District'), 'One category', null, 'Praha');
-    var cedent = new Cedent(1, 1, null, [field]);
-
-    deepEqual(cedent.serialize(), [{name: "District", type: "attr", category: "One category", fields :[{name: "category", value: "Praha"}]}]);
-});
-
 test('update', function() {
     var cedent = new Cedent();
     var cedent2 = new Cedent();

@@ -25,7 +25,6 @@ if ($id === 'TEST') {
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
     $loader = new XMLLoader();
     $serializer = new TaskSettingSerializer($DDPath);
-
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
     // save LM task
@@ -46,9 +45,11 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
-    // log into console
-    FB::info(['curl response' => $response]);
-    FB::info(['curl info' => $info]);
+    if (FB_ENABLED) { // log into console
+        FB::info(['curl request' => $requestData]);
+        FB::info(['curl response' => $response]);
+        FB::info(['curl info' => $info]);
+    }
 
     if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
         // save LM result

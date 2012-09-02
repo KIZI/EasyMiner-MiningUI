@@ -443,7 +443,7 @@ var UITemplateRegistrator = new Class({
 			i18n = data.i18n;
 			BK = data.BK;
 			
-			li({id: FR.getCSSID(), 'class': 'found-rule'}, 
+			li({id: FR.getCSSID(), 'class': 'found-rule'},
 				span({'class': 'rule'}, '<span class="id">' + key + '.</span>' + rule.getIdent()),
 				span({'class': 'info'}),
 				!BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
@@ -559,11 +559,7 @@ var UITemplateRegistrator = new Class({
             url = data.url;
 
             div({id: 'add-attribute-window'},
-                a({id: 'add-attribute-close', href: '#'}, i18n.translate('Close')),
-                h2(i18n.translate('Add attribute')),
-                iframe({src: url}),
-                form({action: '#', method: 'POST', id: 'add-attribute-form'},
-                    input({type: 'submit', value: i18n.translate('Add')})));
+                iframe({src: url}));
         });
 
         Mooml.register('editAttributeTemplate', function (data) {
@@ -571,11 +567,7 @@ var UITemplateRegistrator = new Class({
             url = data.url;
 
             div({id: 'edit-attribute-window'},
-                a({id: 'edit-attribute-close', href: '#'}, i18n.translate('Close')),
-                h2(i18n.translate('Edit attribute')),
-                iframe({src: url}),
-                form({action: '#', method: 'POST', id: 'edit-attribute-form'},
-                    input({type: 'submit', value: i18n.translate('Save')})));
+                iframe({src: url}));
         });
     }
 	

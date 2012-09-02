@@ -7,6 +7,7 @@ var Field = new Class({
 	maximalLength: null,
 	category: null,
 	stringHelper: null,
+    sign: true,
 	
 	initialize: function () {
 		this.id = arguments[0];
@@ -44,6 +45,14 @@ var Field = new Class({
 	getCategory: function () {
 		return this.category;
 	},
+
+    changeSign: function () {
+        this.sign = !this.sign;
+    },
+
+    hasPositiveSign: function () {
+        return this.sign;
+    },
 	
 	getCSSID: function () {
 		return 'field-nav-' + this.getNormalizedName();
@@ -80,17 +89,20 @@ var Field = new Class({
 			return this.getAttributeName();
 		}
 
+        var string = '';
 		if (this.type === 'One category') {
             if (this.category.contains('<') || this.category.contains('>')) {
-                return this.getAttributeName() + '<span class="coefficient">' + this.category + '</span>';
+                string += this.getAttributeName() + '<span class="coefficient">' + this.category + '</span>';
             } else {
-			    return this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
+			    string += this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
             }
         } else if (this.type == 'Subset' && this.minimalLength == 1 && this.maximalLength == 1) {
-            return this.getAttributeName() + '<span class="coefficient">(*)</span>';
+            string += this.getAttributeName() + '<span class="coefficient">(*)</span>';
         } else {
-			return this.getAttributeName() + '<span class="coefficient">(*' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
+            string += this.getAttributeName() + '<span class="coefficient">(*' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
 		}
+
+        return string;
 	}
 
 });

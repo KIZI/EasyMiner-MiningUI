@@ -387,8 +387,9 @@ td {
 #overlay #add-attribute-window iframe,
 #overlay #edit-attribute-window iframe,
 #overlay #new-task-window iframe {
+  border: none;
   width: 800px;
-  height: 400px;
+  height: 500px;
 }
 #overlay #add-attribute-window form input[type="submit"],
 #overlay #edit-attribute-window form input[type="submit"],
@@ -1095,8 +1096,8 @@ section#active-rule #action-box {
   padding: 7px 5px 0 10px;
 }
 .found-rule .field-sign.negative {
-  background: transparent url("../images/sprite-icons.png") -118px -173px no-repeat;
-  padding-left: 13px;
+  background: transparent url("../images/sprite-icons.png") -118px -162px no-repeat;
+  padding: 0 2px 0 13px;
 }
 #marked-rules {
   color: #434343;

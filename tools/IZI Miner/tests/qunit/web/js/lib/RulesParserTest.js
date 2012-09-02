@@ -1,4 +1,4 @@
-module('RulesParser');
+module('RulesParser', {});
 
 test('findOutterBrackets', function () {
 	var rulesParser = new RulesParser(new Element('body')); // ugly hack

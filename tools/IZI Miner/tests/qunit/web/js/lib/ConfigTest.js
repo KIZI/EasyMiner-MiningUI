@@ -1,27 +1,29 @@
 module('Config', {});
 
 test('getDataGetURL', function () {
-    var ConfigObj = new Config();
-    ConfigObj.setParams({id_dm: '100'});
-    ConfigObj.setDataGetURL('getData.php');
+    var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '100'});
+    config.setDataGetURL('getData.php');
 
-    strictEqual(ConfigObj.getDataGetURL(), 'getData.php?id_dm=100&lang=en');
+    strictEqual(config.getDataGetURL(), 'getData.php?id_dm=100&lang=en');
 });
 
 test('getRulesGetURL', function () {
-	var ConfigObj = new Config();
-    ConfigObj.setParams({id_dm: '100', id_kb: '27'});
-	ConfigObj.setRulesGetURL('getRules.php');
+	var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '100', id_kb: '27'});
+    config.setRulesGetURL('getRules.php');
 	
-	strictEqual(ConfigObj.getRulesGetURL(), 'getRules.php?id_dm=100&lang=en');
+	strictEqual(config.getRulesGetURL(), 'getRules.php?id_dm=100&lang=en');
 });
 
 test('getBKAskURL', function () {
-    var ConfigObj = new Config();
-    ConfigObj.setParams({id_dm: '100', id_kb: '27'});
-    ConfigObj.setBKGetURL('getBK.php');
+    var config = new Config();
+    config.setParams({id_dm: '100', id_kb: '27'});
+    config.setBKGetURL('getBK.php');
 
-    strictEqual(ConfigObj.getBKAskURL(), 'getBK.php?id_dm=100&id_kb=27&action=ask');
+    strictEqual(config.getBKAskURL(), 'getBK.php?id_dm=100&id_kb=27&action=ask');
 });
 
 test('getIdDm', function() {
@@ -33,30 +35,38 @@ test('getIdDm', function() {
 
 test('getAddAttributeURL', function() {
     var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getAddAttributeURL('Age'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age');
+    strictEqual(config.getAddAttributeURL('Age'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age&kbi=100&lang=en');
 });
 
 test('getAddAttributeURL 2', function() {
     var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getAddAttributeURL('Age '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age%20');
+    strictEqual(config.getAddAttributeURL('Age '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age%20&kbi=100&lang=en');
 });
 
 test('getEditAttributeURL', function() {
     var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getEditAttributeURL('Quality'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality');
+    strictEqual(config.getEditAttributeURL('Quality'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality&kbi=100&lang=en');
 });
 
 test('getEditAttributeURL 2', function() {
     var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getEditAttributeURL('Quality '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality%20');
+    strictEqual(config.getEditAttributeURL('Quality '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality%20&kbi=100&lang=en');
 });
 
 test('getNewTaskURL', function() {

@@ -5,7 +5,6 @@ TODO
 - think about DD - PHP vs. JS
 - write tests for serializers
 - repair scrollbar
-- a => neg B... found rules neparsuji negaci?
 - overlay neni pres celou sirku
 - pri pridani data fieldu scrollovat nahoru
 - vertikalni pozadi neni pres cele
@@ -15,6 +14,8 @@ TODO
 - pri new task reload cely IZI
 - feedback module
 - onerror
+TODO a or B
+TODO a and (not b or c) => d
 
 Dochazka
 ==============
