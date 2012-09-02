@@ -482,11 +482,7 @@ var UITemplateRegistrator = new Class({
             url = data.url;
 
             div({id: 'new-task-window'},
-                a({id: 'new-task-close', href: '#'}, i18n.translate('Close')),
-                h2(i18n.translate('New task')),
-                iframe({src: url}),
-                form({action: '#', method: 'POST', id: 'new-task-form'},
-                    input({type: 'submit', value: i18n.translate('Save')})));
+                iframe({src: url}));
         });
 
 		Mooml.register('settingsTemplate', function (data) {
