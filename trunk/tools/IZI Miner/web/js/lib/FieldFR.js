@@ -1,9 +1,6 @@
-/*global Class: false, Field: false */ 
-
 var FieldFR = new Class({
 	Extends: Field,
 	
-	sign: true,
 	marked: false,
 
 	initialize: function () {
@@ -14,10 +11,6 @@ var FieldFR = new Class({
 		return this.sign;
 	},
 	
-	setNegativeSign: function () {
-		this.sign = false;
-	},
-	
 	serialize: function () {
 		var serialized = {};
 		serialized.name = this.getAttributeName();
@@ -26,6 +19,21 @@ var FieldFR = new Class({
 		serialized.catref = this.category;
 
 		return serialized;
-	}
+	},
+
+    toString: function () {
+        var string = '';
+        if (!this.hasPositiveSign()) {
+            string += '<span class="field-sign negative"></span>';
+        }
+
+        if (this.category.contains('<') || this.category.contains('>')) {
+            string += this.getAttributeName() + '<span class="coefficient">' + this.category + '</span>';
+        } else {
+            string += this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
+        }
+
+        return string;
+    }
 	
 });

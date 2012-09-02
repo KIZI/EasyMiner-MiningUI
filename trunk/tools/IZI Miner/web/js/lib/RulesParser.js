@@ -43,9 +43,7 @@ var RulesParser = new Class({
 	    
 	    if (bToSolve.length) {
 	    	Array.each(bToSolve, function (b) {
-				if (b.type !== 'neg') {
-					connective = new Connective(this.generateConnectiveID(), b.type === 'and' ? 'Conjunction' : 'Disjunction');
-				}
+				connective = new Connective(this.generateConnectiveID(), b.type === 'and' ? 'Conjunction' : 'Disjunction');
 			}.bind(this));
 	    } else {
 	    	connective = new Connective(this.generateConnectiveID(), 'Conjunction');
@@ -58,8 +56,12 @@ var RulesParser = new Class({
 	    	Array.each(attribute.fields, function (f) {
 				vals.push(f.value);
 			}.bind(this));
+
 	    	var literalRef = new FieldFR(this.generateFieldID(), this.DD.getAttributeByName(attribute.name), attribute.category, new StringHelper(), vals);	
-	    	
+	    	if (attribute.sign == 'negative') {
+                literalRef.changeSign();
+            }
+
 	    	if (k > 0 && bToSolve[k - 1] && bToSolve[k - 1].type === 'neg') {
 	    		literalRef.setNegativeSign();
 	    	}

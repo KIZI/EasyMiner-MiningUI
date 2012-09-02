@@ -24,6 +24,7 @@ define('FGCINVALIDSTRUCTURE', $pathXML.DIRECTORY_SEPARATOR.'fieldGroupConfigInva
 define('FGCINVALIDATTRIBUTE', $pathXML.DIRECTORY_SEPARATOR.'fieldGroupConfigInvalidAttribute.xml');
 define('FGCINVALIDCOEFFICIENTTYPE', $pathXML.DIRECTORY_SEPARATOR.'fieldGroupConfigInvalidCoefficientType.xml');
 define('ERASSOCIATIONRULES', $pathXML.DIRECTORY_SEPARATOR.'hitlist_AssociationRules.pmml');
+define('ERASSOCIATIONRULES2', $pathXML.DIRECTORY_SEPARATOR.'hitlist_AssociationRules2.pmml');
 define('ERTASKSETTING', $pathXML.DIRECTORY_SEPARATOR.'hitlist_TaskSetting.xml');
 define('ERARQUERY', $pathXML.DIRECTORY_SEPARATOR.'hitlist_ARQuery.xml');
 

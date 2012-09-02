@@ -17,3 +17,13 @@ $config = [
 foreach ($config as $k => $c) {
     is_array($c) ? define($k, serialize($c)) : define($k, $c);
 }
+
+// PHP error reporting
+error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', 1);
+
+// PHP date timezone
+date_default_timezone_set('Europe/Paris');
+
+// FB logging
+define('FB_ENABLED', true);

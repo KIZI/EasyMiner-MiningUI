@@ -295,10 +295,6 @@ class TaskSettingSerializer
      */
     private function getModelName($ruleData)
     {
-        if (DEV_MODE) {
-            return date('d. m. Y H:i:s');
-        }
-
         $modelName = '';
         $implInserted = false;
         foreach ($ruleData as $k => $rData) {
@@ -438,7 +434,7 @@ class TaskSettingSerializer
             $baSettingRef->appendChild($this->finalXmlDocument->createTextNode($baSettingRefId));
             $dbaSetting->appendChild($baSettingRef);
 
-            $literalSignText = isset($attributes[0]->literalSign) && $attributes[0]->literalSign == "neg" ? "Negative" : "Positive";
+            $literalSignText = isset($attributes[0]->sign) && $attributes[0]->sign == "negative" ? "Negative" : "Positive";
             $literalSign = $this->finalXmlDocument->createElement("LiteralSign");
             $literalSign->appendChild($this->finalXmlDocument->createTextNode($literalSignText));
             $dbaSetting->appendChild($literalSign);

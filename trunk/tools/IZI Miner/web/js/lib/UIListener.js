@@ -214,36 +214,6 @@ var UIListener = new Class({
         }.bind(this));
 	},
 
-    registerAddAttributeEventHandler: function(field) {
-        // submit
-        var elementSubmit = $('add-attribute-form').getElement('input[type=submit]');
-        elementSubmit.addEvent('click', function (event) {
-            event.stop();
-            this.ARBuilder.reloadAttributes();
-        }.bind(this));
-
-        // close
-        $('add-attribute-close').addEvent('click', function(event) {
-            event.stop();
-            this.ARBuilder.closeAddAttributeWindow();
-        }.bind(this));
-    },
-
-    registerEditAttributeEventHandler: function(attribute) {
-        // submit
-        var elementSubmit = $('edit-attribute-form').getElement('input[type=submit]');
-        elementSubmit.addEvent('click', function (event) {
-            event.stop();
-            this.ARBuilder.reloadAttributes();
-        }.bind(this));
-
-        // close
-        $('edit-attribute-close').addEvent('click', function(event) {
-            event.stop();
-            this.ARBuilder.closeEditAttributeWindow();
-        }.bind(this));
-    },
-
     registerDataFieldEventHandler: function(field) {
         // drag & drop
         $(field.getCSSID()).addEvent('mousedown', function (event) {

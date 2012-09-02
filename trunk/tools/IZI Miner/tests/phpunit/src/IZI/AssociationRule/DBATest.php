@@ -50,7 +50,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))));
+                        'value' => 'F')),
+                'sign' => 'positive'));
         $this->assertEquals($array, $DBA->toArray());
     }
 
@@ -75,7 +76,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))));
+                        'value' => 'F')),
+                'sign' => 'positive'));
         $this->assertEquals($array, $DBA->toArray());
     }
 
@@ -95,16 +97,13 @@ class DBATest extends PHPUnit_Framework_TestCase
         $DBA->addRef($BBAMock);
 
         $array = array(
-            array('name' => 'NEG',
-                'type' => 'neg',
-                'category' => '',
-                'fields' => array()),
             array('name' => 'Sex',
                 'type' => 'attr',
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))));
+                        'value' => 'F')),
+                'sign' => 'negative'));
         $this->assertEquals($array, $DBA->toArray());
     }
 
@@ -140,7 +139,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))),
+                        'value' => 'F')),
+                'sign' => 'positive'),
             array('name' => 'AND',
                 'type' => 'and',
                 'category' => '',
@@ -150,7 +150,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'Praha'))));
+                        'value' => 'Praha')),
+                'sign' => 'positive'));
         $this->assertEquals($array, $DBA->toArray());
     }
 
@@ -190,7 +191,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))),
+                        'value' => 'F')),
+                'sign' => 'positive'),
             array('name' => 'AND',
                 'type' => 'and',
                 'category' => '',
@@ -200,7 +202,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'Praha'))),
+                        'value' => 'Praha')),
+                'sign' => 'positive'),
             array('name' => ')',
                 'type' => 'rbrac',
                 'category' => '',
@@ -240,7 +243,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))),
+                        'value' => 'F')),
+                'sign' => 'positive'),
             array('name' => 'OR',
                 'type' => 'or',
                 'category' => '',
@@ -250,7 +254,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'Praha'))));
+                        'value' => 'Praha')),
+                'sign' => 'positive'));
         $this->assertEquals($array, $DBA->toArray());
     }
 
@@ -290,7 +295,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))),
+                        'value' => 'F')),
+                'sign' => 'positive'),
             array('name' => 'OR',
                 'type' => 'or',
                 'category' => '',
@@ -300,7 +306,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'Praha'))),
+                        'value' => 'Praha')),
+                'sign' => 'positive'),
             array('name' => ')',
                 'type' => 'rbrac',
                 'category' => '',
@@ -351,7 +358,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))),
+                        'value' => 'F')),
+                'sign' => 'positive'),
             array('name' => 'AND',
                 'type' => 'and',
                 'category' => '',
@@ -361,7 +369,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'Praha'))),
+                        'value' => 'Praha')),
+                'sign' => 'positive'),
             array('name' => 'AND',
                 'type' => 'and',
                 'category' => '',
@@ -371,7 +380,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => '31'))));
+                        'value' => '31')),
+                'sign' => 'positive'));
         $this->assertEquals($array, $DBA->toArray());
     }
 
@@ -421,7 +431,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'F'))),
+                        'value' => 'F')),
+                'sign' => 'positive'),
             array('name' => 'AND',
                 'type' => 'and',
                 'category' => '',
@@ -431,7 +442,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => 'Praha'))),
+                        'value' => 'Praha')),
+                'sign' => 'positive'),
             array('name' => 'AND',
                 'type' => 'and',
                 'category' => '',
@@ -441,7 +453,8 @@ class DBATest extends PHPUnit_Framework_TestCase
                 'category' => 'One category',
                 'fields' => array(
                     array('name' => 'category',
-                        'value' => '31'))),
+                        'value' => '31')),
+                'sign' => 'positive'),
             array('name' => ')',
                 'type' => 'rbrac',
                 'category' => '',

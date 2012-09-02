@@ -48,6 +48,10 @@ var Config = new Class({
 		return this.lang;
 	},
 
+    setLang: function(lang) {
+        this.lang = lang;
+    },
+
     setJoomlaURL: function(url) {
         this.$joomlaURL = url;
     },
@@ -101,11 +105,11 @@ var Config = new Class({
 	},
 
     getAddAttributeURL: function(fieldName) {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=' + encodeURIComponent(fieldName);
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=' + encodeURIComponent(fieldName) + '&kbi=' + this.params.id_dm + '&lang=' + this.lang;
     },
 
     getEditAttributeURL: function(attributeName) {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName);
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName) + '&kbi=' + this.params.id_dm + '&lang=' + this.lang;
     },
 
     getNewTaskURL: function() {

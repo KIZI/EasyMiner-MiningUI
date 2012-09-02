@@ -3,7 +3,6 @@
 var FieldAR = new Class({
 	Extends: Field,
 	
-	sign: true,
 	marked: false,
 
 	initialize: function () {
@@ -48,14 +47,6 @@ var FieldAR = new Class({
 		return (this.sign === true ? 'Positive' : 'Negative');
 	},
 	
-	changeSign: function () {
-		this.sign = !this.sign;
-	},
-	
-	hasPositiveSign: function () {
-		return this.sign;
-	},
-	
 	isMarked: function () {
 		return this.marked;
 	},
@@ -83,6 +74,7 @@ var FieldAR = new Class({
 			serialized.fields = [{name: 'minLength', value: this.minimalLength},
 			                     {name: 'maxLength', value: this.maximalLength}];
 		}
+        serialized.sign = this.hasPositiveSign() ? 'positive' : 'negative';
 
 		return serialized;
 	}
