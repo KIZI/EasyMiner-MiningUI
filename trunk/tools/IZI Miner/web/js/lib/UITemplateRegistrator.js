@@ -37,7 +37,7 @@ var UITemplateRegistrator = new Class({
 			dateHelper = data.dateHelper,
 			i18n = data.i18n;
 			
-			div({id: 'wrapper'}, 
+			div({id: 'wrapper', 'class': 'clearfix'},
 				section({id: 'main', 'class': 'clearfix'},
 					section({id: 'content'},
 						section({id: 'active-rule'}),
