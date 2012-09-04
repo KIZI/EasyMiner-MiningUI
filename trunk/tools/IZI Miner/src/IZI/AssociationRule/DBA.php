@@ -84,6 +84,11 @@ class DBA
             }
 
             $arrRef = $r->toArray();
+            if ($this->connective->isUnary() && $this->getLevel() === 3) {  // negation
+                $arrRef[0]['sign'] = 'negative';
+            } else if (!isset($arrRef[0]['sign'])) {
+                $arrRef[0]['sign'] = 'positive';
+            }
 
             $array = array_merge_recursive($array, $arrRef);
         }

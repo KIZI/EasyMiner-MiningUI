@@ -266,25 +266,15 @@ var Cedent = new Class({
 	},
 	
 	serialize: function () {
-		var serialized = [];
-
-        var index = 1;
-
-        if (this.hasOpeningBracket(index)) {
-            serialized.push({name: '(', type: 'lbrac'});
-        }
+		var serialized = {};
+        serialized.type = 'cedent';
+        serialized.connective = this.$connective.serialize();
+        serialized.level = this.$level;
+        serialized.children = [];
 
         this.$children.each(function(child) {
-            serialized.push(child.serialize()); // APField or Cedent
-
-            if (index++ < this.getNumChildren()) { // Connective
-                serialized.push(this.$connective.serialize());
-            }
+            serialized.children.push(child.serialize()); // APField or Cedent
         }.bind(this));
-
-        if (this.hasClosingBracket(index)) {
-            serialized.push({name: ')', type: 'rbrac'});
-        }
 
 		return serialized;
 	},
@@ -296,7 +286,7 @@ var Cedent = new Class({
 
         var string = '';
         if (this.hasOpeningBracket(index)) {
-            string += '(';
+            string += '<span class="left-bracket">(</span>';
         }
 
         this.$children.each(function(child) {
@@ -309,7 +299,7 @@ var Cedent = new Class({
         }.bind(this));
 
         if (this.hasClosingBracket(index)) {
-            string += ')';
+            string += '<span class="right-bracket">)</span>';
         }
 
         return string;

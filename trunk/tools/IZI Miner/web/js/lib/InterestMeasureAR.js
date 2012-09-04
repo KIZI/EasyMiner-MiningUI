@@ -32,7 +32,6 @@ var InterestMeasureAR = new Class({
 	serialize: function () {
 		var arr =  {
 			name: this.name, 
-			type: 'oper',
 			thresholdType: this.thresholdType,
 			compareType: this.compareType,
 			fields: []};

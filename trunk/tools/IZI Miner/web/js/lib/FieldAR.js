@@ -61,22 +61,6 @@ var FieldAR = new Class({
 	
 	changeMark: function () {
 		this.marked = !this.marked;
-	},
-	
-	serialize: function () {
-		var serialized = {};
-		serialized.name = this.getAttributeName();
-		serialized.type = 'attr';
-		serialized.category = this.type;
-		if (this.type === 'One category') {
-			serialized.fields = [{name: 'category', value: this.category}];
-		} else if (this.type) {
-			serialized.fields = [{name: 'minLength', value: this.minimalLength},
-			                     {name: 'maxLength', value: this.maximalLength}];
-		}
-        serialized.sign = this.hasPositiveSign() ? 'positive' : 'negative';
-
-		return serialized;
 	}
 	
 });

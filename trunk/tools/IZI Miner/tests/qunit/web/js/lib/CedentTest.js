@@ -512,3 +512,19 @@ test('toSettings 3', function() {
     deepEqual(cedent.toSettings(), settings);
 });
 
+test('serialize - empty children', function() {
+    var cedent = new Cedent(null, 1, new Connective(null, 'Conjunction'), []);
+    var serialized = cedent.serialize();
+
+    strictEqual(serialized.type, 'cedent');
+    strictEqual(instanceOf(serialized.connective, Object), true);
+    strictEqual(serialized.level, 1);
+    strictEqual(serialized.children.length, 0);
+});
+
+test('serialize - children', function() {
+    var cedent = new Cedent(null, 1, new Connective(null, 'Conjunction'), [new FieldAR(null, new Attribute('Age'), 'One category', null, 'low'), new Cedent(null, 1, new Connective(null, 'Conjunction'), [])]);
+    var serialized = cedent.serialize();
+
+    strictEqual(serialized.children.length, 2);
+});

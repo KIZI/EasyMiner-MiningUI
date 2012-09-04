@@ -3,27 +3,27 @@ module('Config', {});
 test('getDataGetURL', function () {
     var config = new Config();
     config.setLang('en');
-    config.setParams({id_dm: '100'});
+    config.setParams({id_dm: '102'});
     config.setDataGetURL('getData.php');
 
-    strictEqual(config.getDataGetURL(), 'getData.php?id_dm=100&lang=en');
+    strictEqual(config.getDataGetURL(), 'getData.php?id_dm=102&lang=en');
 });
 
 test('getRulesGetURL', function () {
 	var config = new Config();
     config.setLang('en');
-    config.setParams({id_dm: '100', id_kb: '27'});
+    config.setParams({id_dm: '102', id_kb: '27'});
     config.setRulesGetURL('getRules.php');
 	
-	strictEqual(config.getRulesGetURL(), 'getRules.php?id_dm=100&lang=en');
+	strictEqual(config.getRulesGetURL(), 'getRules.php?id_dm=102&lang=en');
 });
 
 test('getBKAskURL', function () {
     var config = new Config();
-    config.setParams({id_dm: '100', id_kb: '27'});
+    config.setParams({id_dm: '102', id_kb: '27'});
     config.setBKGetURL('getBK.php');
 
-    strictEqual(config.getBKAskURL(), 'getBK.php?id_dm=100&id_kb=27&action=ask');
+    strictEqual(config.getBKAskURL(), 'getBK.php?id_dm=102&id_kb=27&action=ask');
 });
 
 test('getIdDm', function() {

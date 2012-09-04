@@ -10,16 +10,6 @@ var FieldFR = new Class({
 	hasPositiveSign: function () {
 		return this.sign;
 	},
-	
-	serialize: function () {
-		var serialized = {};
-		serialized.name = this.getAttributeName();
-		serialized.type = 'attr';
-		serialized.category = this.type;
-		serialized.catref = this.category;
-
-		return serialized;
-	},
 
     toString: function () {
         var string = '';
