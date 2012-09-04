@@ -14,8 +14,6 @@ TODO
 - pri new task reload cely IZI
 - feedback module
 - onerror
-TODO a or B
-TODO a and (not b or c) => d
 
 Dochazka
 ==============
