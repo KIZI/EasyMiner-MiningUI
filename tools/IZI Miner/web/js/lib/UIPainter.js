@@ -628,7 +628,7 @@ var UIPainter = new Class({
 	
 	/* settings */
     renderNewTaskWindow: function () {
-        var url = this.config.get
+        var url = this.config.getNewTaskURL();
         var elWindow = Mooml.render('newTaskTemplate', {i18n: this.i18n, url: url});
         var overlay = this.showOverlay();
         overlay.grab(elWindow);

@@ -113,7 +113,7 @@ var Config = new Class({
     },
 
     getNewTaskURL: function() {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newIZITask';
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newDataSource&tmpl=component';
     },
 	
 	getRootElementID: function () {
