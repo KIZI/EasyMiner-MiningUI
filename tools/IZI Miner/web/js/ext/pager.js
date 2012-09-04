@@ -8,7 +8,7 @@ var Pager = new Class({
     numPages: 0,
     currentPage: 0,
     perPage: 10,
-    lineHeight: 50,
+    lineHeight: 56,
     prevSymbol: '<',
     nextSymbol: '>',
     elControlType: 'span',
