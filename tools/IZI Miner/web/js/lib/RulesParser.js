@@ -72,7 +72,7 @@ var RulesParser = new Class({
 	    	if ((cedent[br.start + 1] !== -1) && (cedent[br.end - 1] !== -1) && true || ((br.start + 1) < (br.end -1))) {
 	    		var newCedent = cedent.slice(br.start + 1, br.end);
 	    		var childCedent = this.parseCedent(scope, newCedent, depth + 1);
-	    		partialCedent.addChildCedent(childCedent);
+	    		partialCedent.addChild(childCedent);
 	    	}
 		}.bind(this));
 

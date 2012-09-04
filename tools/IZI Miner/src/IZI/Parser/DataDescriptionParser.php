@@ -56,7 +56,6 @@ class DataDescriptionParser
                     $interval .= $n->getAttribute('leftMargin').';'.$n->getAttribute('rightMargin');
                     $interval .= substr($closure, -4, 4) === 'Open' ? ')' : '>';
                     $attribute->addInterval($interval);
-
                 }
             }
             array_push($attributes, $attribute);

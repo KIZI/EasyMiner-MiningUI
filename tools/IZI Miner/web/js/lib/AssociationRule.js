@@ -219,13 +219,15 @@ var AssociationRule = new Class({
 	},
 	
 	serialize: function () {
-		var serialized = this.antecedent.serialize();
-		
+		var serialized = {};
+        serialized.antecedent = this.antecedent.serialize();
+
+        serialized.IMs = [];
 		Object.each(this.IMs, function (IM) {
-			serialized.push(IM.serialize());
+			serialized.IMs.push(IM.serialize());
 		}.bind(this));
 
-		serialized.append(this.succedent.serialize());
+		serialized.succedent = this.succedent.serialize();
 		
 		return serialized;
 	},

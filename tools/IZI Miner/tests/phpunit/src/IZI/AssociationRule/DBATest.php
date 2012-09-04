@@ -83,7 +83,7 @@ class DBATest extends PHPUnit_Framework_TestCase
 
     public function testToArray1Ref3()
     {
-        $DBA = new DBA('ant_001', $this->connectiveNeg, array(), 1);
+        $DBA = new DBA('ant_001', $this->connectiveNeg, array(), 3);
         $BBAMock = $this->getMock("IZI\AssociationRule\BBA", array('toArray'), array('ant_001', 'Sex', array('F')));
         $BBAMock->expects($this->once())
             ->method("toArray")

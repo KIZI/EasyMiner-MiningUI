@@ -10,7 +10,6 @@ test('serialize - One category', function() {
     var field = new FieldAR(null, new Attribute('Age'), 'One category', null, 'good');
     var serialized = {
         name: 'Age',
-        type: 'attr',
         category: 'One category',
         fields: [
             {name: 'category', value: 'good'}
@@ -25,7 +24,6 @@ test('serialize - Subset *', function() {
     var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 1);
     var serialized = {
         name: "District",
-        type: "attr",
         category: "Subset",
         fields :[
             {name: "minLength", value: 1},
@@ -40,7 +38,6 @@ test('serialize - Subset 1-2', function() {
     var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 2);
     var serialized = {
         name: "District",
-        type: "attr",
         category: "Subset",
         fields :[
             {name: "minLength", value: 1},
@@ -63,7 +60,6 @@ test('serialize - negation', function() {
             }
         ],
         'name': 'Age',
-        'type': 'attr',
         sign: 'negative'
     };
 

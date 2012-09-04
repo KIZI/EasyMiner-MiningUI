@@ -1,4 +1,4 @@
-module('AssociationRule');
+module('AssociationRule', {});
 
 // TODO rewrite tests for generate Ident, these are already tested on lower level
 
@@ -81,4 +81,18 @@ test('toSettings', function() {
     };
 
     deepEqual(AR.toSettings(), settings);
+});
+
+test('serialize', function() {
+    var AR = new AssociationRule();
+    var antecedent = new Cedent(null, 1, new Connective(null, 'Conjunction'));
+    AR.addAntecedent(antecedent);
+    var IM = new InterestMeasureAR('Support', '', '', null, null, 0.850);
+    AR.addIM(IM);
+    var succedent = new Cedent(null, 1, new Connective(null, 'Disjunction'));
+    AR.addSuccedent(succedent);
+
+    strictEqual(instanceOf(AR.serialize().antecedent, Object), true);
+    strictEqual(instanceOf(AR.serialize().IMs, Array), true);
+    strictEqual(instanceOf(AR.serialize().succedent, Object), true);
 });
