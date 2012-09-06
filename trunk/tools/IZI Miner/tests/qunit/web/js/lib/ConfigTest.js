@@ -73,5 +73,5 @@ test('getNewTaskURL', function() {
     var config = new Config();
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getNewTaskURL(), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newIZITask');
+    strictEqual(config.getNewTaskURL(), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newDataSource&tmpl=component');
 });

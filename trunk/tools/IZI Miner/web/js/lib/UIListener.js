@@ -17,6 +17,12 @@ var UIListener = new Class({
 		this.UIPainter = UIPainter;
 	},
 
+    registerResizeEventHandler: function() {
+        window.addEvent('resize', function() {
+            this.UIPainter.resizeWindow();
+        }.bind(this));
+    },
+
     registerDataReloadEventHandlers: function() {
         // called when com_dbconnect window is closed
         var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
@@ -68,7 +74,7 @@ var UIListener = new Class({
 		elSubmit.removeEvent('click');
 		elSubmit.addEvent('click', function (e) {
 			e.stop();
-			var elRulesCnt = $('rules-cnt'); if (!elRulesCnt) { return; } // TODO odprasit
+			var elRulesCnt = $('rules-cnt'); if (!elRulesCnt) { return; }
 			var rulesCnt = $('rules-cnt').value;
 			var elSelect = $('fl-select');
 			var FLName = elSelect.options[elSelect.selectedIndex].value;

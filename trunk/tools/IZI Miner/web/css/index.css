@@ -383,6 +383,7 @@ td {
 #overlay #edit-attribute-window,
 #overlay #new-task-window {
   width: 800px;
+  margin-top: 45px;
 }
 #overlay #add-attribute-window iframe,
 #overlay #edit-attribute-window iframe,

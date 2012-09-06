@@ -61,6 +61,7 @@ var UIPainter = new Class({
 		this.renderStructure();
 		this.renderNavigation();
 		this.renderContent();
+        this.resizeWindow();
 	},
 	
 	renderStructure: function () {
@@ -68,9 +69,24 @@ var UIPainter = new Class({
 		this.rootElement.grab(Mooml.render('headerTemplate', {config: this.config, i18n: this.i18n}));
 		this.rootElement.grab(Mooml.render('mainTemplate', {config: this.config, dateHelper: this.dateHelper, i18n: this.i18n}));
 		this.rootElement.grab(Mooml.render('footerTemplate', {config: this.config, i18n: this.i18n}));
+        this.UIListener.registerResizeEventHandler();
 		this.UIListener.registerSettingsEventHandlers();
         this.UIListener.registerDataReloadEventHandlers();
 	},
+
+    resizeWindow: function() {
+        var contentWidth = Math.max($$('header')[0].getSize().x + 13, $(window).getSize().x);
+        var contentHeight = Math.max($$('header')[0].getSize().y + $('wrapper').getSize().y + $$('footer')[0].getSize().y + 60, $(window).getSize().y);
+
+        // fix overlay width to 100%
+        $('overlay').setStyle('width', contentWidth);
+
+        // fix overlay height to 100%
+        $('overlay').setStyle('height', contentHeight);
+
+        // fix wrapper width to 100%
+        $('wrapper').setStyle('width', contentWidth);
+    },
 	
 	renderNavigation: function () {
 		// attributes
@@ -157,6 +173,7 @@ var UIPainter = new Class({
         var url = this.config.getAddAttributeURL(field.getName());
         var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
+        this.scrollTo();
     },
 
     renderEditAttributeWindow: function (attribute) {
@@ -164,6 +181,21 @@ var UIPainter = new Class({
         var url = this.config.getEditAttributeURL(attribute.getName());
         var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
+        this.scrollTo();
+    },
+
+    renderNewTaskWindow: function () {
+        var url = this.config.getNewTaskURL();
+        var elWindow = Mooml.render('newTaskTemplate', {i18n: this.i18n, url: url});
+        var overlay = this.showOverlay();
+        overlay.grab(elWindow);
+        this.scrollTo();
+    },
+
+    scrollTo: function (x, y) {
+        x = x || 0;
+        y = y || 0;
+        $(this.config.getRootElementID()).scrollTo(x, y);
     },
 
     removeAttribute: function(attribute) {
@@ -627,13 +659,6 @@ var UIPainter = new Class({
 	},
 	
 	/* settings */
-    renderNewTaskWindow: function () {
-        var url = this.config.getNewTaskURL();
-        var elWindow = Mooml.render('newTaskTemplate', {i18n: this.i18n, url: url});
-        var overlay = this.showOverlay();
-        overlay.grab(elWindow);
-    },
-
 	renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
 		var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: (autoSuggest.length > 0), i18n: this.i18n, reset: reset, settings: settings});
 		var elWindow = $('settings-window');
