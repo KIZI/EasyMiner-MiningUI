@@ -3,15 +3,10 @@ TODO
 - move settings into config... no reason to have two separate configs
 
 - think about DD - PHP vs. JS
-- write tests for serializers
 - repair scrollbar
-- overlay neni pres celou sirku
-- pri pridani data fieldu scrollovat nahoru
-- vertikalni pozadi neni pres cele
 - list-style-type none pri pretahovani data fieldu
 - refactor KBI paths from PHP into JS
 - modern browser check
-- pri new task reload cely IZI
 - feedback module
 - onerror
 
@@ -25,3 +20,8 @@ Dochazka
 
 29. 8. 2012
 12.45 - 14.15 serializer tests
+
+6. 9. 2012
+=============
+17.20 - 17.45 tests, background fix
+17.55 - 18.40 overlay fix
