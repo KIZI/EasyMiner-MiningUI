@@ -18,7 +18,7 @@
 
 	<RulePattern>
 		<Antecedent minNumberOfBBAs="1" />
-		<Consequent minNumberOfBBAs="1" maxNumberOfBBAs="1" />
+		<Consequent minNumberOfBBAs="1" />
 		<Condition minNumberOfBBAs="0" maxNumberOfBBAs="0" />
 		<GeneralConstraint minNumberOfBBAs="2" />
 	</RulePattern>
