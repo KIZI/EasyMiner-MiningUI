@@ -38,10 +38,6 @@ var MiningManager = new Class({
 	        	this.handleErrorRequest();
 	        }.bind(this),
 	        
-	        onCancel: function () {
-	        	this.handleErrorRequest();
-	        }.bind(this),
-	        
 	        onFailure: function () {
 	        	this.handleErrorRequest();
 	        }.bind(this),
@@ -83,11 +79,11 @@ var MiningManager = new Class({
 	
 	stopMining: function () {
         // stop all requests
-		Array.each(this.requests, function (req) {
-			if (req.isRunning()) {
-				req.cancel();
-			}
-		});
+        Array.each(this.requests, function (req) {
+            if (req.isRunning()) {
+                req.cancel();
+            }
+        });
 
         // stop remote LM mining
         if (this.inProgress) { // hack around req.cancel(); weird bug
@@ -105,15 +101,9 @@ var MiningManager = new Class({
 	},
 
     stopRemoteMining: function(data) {
-//        console.log('stop');
         var request = new Request.JSON({
             url: this.config.getStopMiningUrl(),
-            secure: true,
-
-            onSuccess: function(responseJSON, responseText) {
-                console.log('stop mining response', responseJSON);
-            }.bind(this)
-
+            secure: true
         }).post({'data': data});
     }
 	
