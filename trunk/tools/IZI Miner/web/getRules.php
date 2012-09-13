@@ -18,11 +18,15 @@ $sleep = (int) $request->query->get('sleep') ?: 0;
 
 if ($id === 'TEST') {
     sleep($sleep); // simulates time required for mining
-    $ERPath = APP_PATH.'/data/4ft.pmml';
-    $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, $ERPath, null, $lang);
+    $taskPath = 'data/4ft_sample_task.pmml';
+    $resultPath = 'data/4ft_sample_result.pmml';
+    $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, APP_PATH.'/web/'.$resultPath, null, $lang);
     $DP->loadData();
     $DP->parseData();
     $responseContent = $DP->getER();
+    $responseContent['task'] = $taskPath;
+    $responseContent['result'] = $resultPath;
+    $responseContent = json_encode($responseContent);
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
     $loader = new XMLLoader();
@@ -30,8 +34,9 @@ if ($id === 'TEST') {
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
     // save LM task
+    $taskPath = 'temp/4ft_task_'.date('md_His').'.pmml';
     $LM_import = $loader->load($requestData['query']);
-    $LM_import->save('./temp/4ft_task_'.date('md_His').'.pmml');
+    $LM_import->save($taskPath);
 
     // run task
     $encoder = new URLEncoder();
@@ -55,13 +60,16 @@ if ($id === 'TEST') {
 
     if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
         // save LM result
-        $path = './temp/4ft_result_'.date('md_His').'.pmml';
-        file_put_contents($path, $response);
+        $resultPath = 'temp/4ft_result_'.date('md_His').'.pmml';
+        file_put_contents($resultPath, $response);
 
         $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, $response, null, $lang);
         $DP->loadData();
         $DP->parseData();
         $responseContent = $DP->getER();
+        $responseContent['task'] = $taskPath;
+        $responseContent['result'] = $resultPath;
+        $responseContent = json_encode($responseContent);
     } else {
         $responseContent = json_encode(['failure' => true]);
     }

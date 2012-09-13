@@ -43,6 +43,7 @@ var FRManager = new Class({
 		this.reset();
 		this.UIPainter.renderActiveRule();
         this.UIPainter.showStopMiningButton();
+        this.UIPainter.hideDownloadButtons();
 		this.pager.setInProgress();
 	},
 
@@ -263,6 +264,10 @@ var FRManager = new Class({
 		
 		this.markedRules = markedRules;
 		this.UIPainter.renderMarkedRules(null);
-	}
+	},
+
+    updateDownloadIcons: function(settingPath, resultPath) {
+        this.UIPainter.updateDownloadButtons(settingPath, resultPath);
+    }
 	
 });

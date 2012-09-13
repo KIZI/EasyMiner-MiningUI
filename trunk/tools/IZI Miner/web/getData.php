@@ -43,7 +43,7 @@ if ($id === 'TEST') {
 
         $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
         $DP->loadData();
-        $responseContent = $DP->parseData();
+        $responseContent = json_encode($DP->parseData());
     } else {
         $responseContent = json_encode(['failure' => true]);
     }
