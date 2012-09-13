@@ -961,6 +961,9 @@ section#active-rule #action-box {
 #pager-label.mining-norules {
   background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
 }
+#pager-label.mining-stopped {
+  background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
+}
 #pager-clear {
   background: transparent url("../images/sprite-icons.png") -164px -64px no-repeat;
   display: none;

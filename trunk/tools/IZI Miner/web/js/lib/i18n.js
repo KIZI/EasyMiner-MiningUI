@@ -64,7 +64,8 @@ var i18n = new Class({
 			   60: {'cs': 'Neplatná hodnota', 'en': 'Invalid value'},
                61: {'cs': 'Data fields', 'en': 'Data fields'},
                62: {'cs': 'Upravit atribut', 'en': 'Edit attribute'},
-               63: {'cs': 'Zastavit dolování', 'en': 'Stop mining'}},
+               63: {'cs': 'Zastavit dolování', 'en': 'Stop mining'},
+               64: {'cs': 'Dolování bylo zastaveno.', 'en': 'Mining has been stopped.'}},
 			   
 	initialize: function (lang) {
 		this.lang = lang;
