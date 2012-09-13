@@ -12,10 +12,19 @@ test('getDataGetURL', function () {
 test('getRulesGetURL', function () {
 	var config = new Config();
     config.setLang('en');
-    config.setParams({id_dm: '102', id_kb: '27'});
+    config.setParams({id_dm: '102'});
     config.setRulesGetURL('getRules.php');
 	
 	strictEqual(config.getRulesGetURL(), 'getRules.php?id_dm=102&lang=en');
+});
+
+test('getRulesGetURL with timeout', function () {
+	var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '102', sleep: '5'});
+    config.setRulesGetURL('getRules.php');
+
+	strictEqual(config.getRulesGetURL(), 'getRules.php?id_dm=102&sleep=5&lang=en');
 });
 
 test('getBKAskURL', function () {
@@ -74,4 +83,13 @@ test('getNewTaskURL', function() {
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
     strictEqual(config.getNewTaskURL(), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newDataSource&tmpl=component');
+});
+
+test('getStopMiningUrl', function() {
+    var config = new Config();
+    config.setLang('en');
+    config.setParams({id_dm: '102'});
+    config.setStopMiningUrl('stopMining.php');
+
+    strictEqual(config.getStopMiningUrl(), 'stopMining.php?id_dm=102&lang=en');
 });

@@ -9,6 +9,7 @@ TODO
 - modern browser check
 - feedback module
 - onerror
+- clear rules should scroll up
 
 Dochazka
 ==============

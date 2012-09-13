@@ -14,8 +14,10 @@ $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
 $lang = $request->query->get('lang');
+$sleep = (int) $request->query->get('sleep') ?: 0;
 
 if ($id === 'TEST') {
+    sleep($sleep); // simulates time required for mining
     $ERPath = APP_PATH.'/data/4ft.pmml';
     $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, $ERPath, null, $lang);
     $DP->loadData();

@@ -4,16 +4,16 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/izi-miner/web/" />
-<title>BUG: A or B => C</title>
+<title>Stop mining</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">BUG: A or B => C</td></tr>
+<tr><td rowspan="1" colspan="3">Stop mining</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>?id_dm=TEST&amp;sleep=10</td>
+	<td>?id_dm=102</td>
 	<td></td>
 </tr>
 <tr>
@@ -24,47 +24,7 @@
 <tr>
 	<td>select</td>
 	<td>css=#add-coefficient-select</td>
-	<td>value=One category</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>css=#add-coefficient-category</td>
-	<td>value=Praha</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>dragAndDropToObject</td>
-	<td>css=#attribute-nav-district</td>
-	<td>css=#antecedent .cedent</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>css=#add-coefficient-select</td>
-	<td>value=One category</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>css=#add-coefficient-category</td>
-	<td>value=Brno</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=.edit-connective</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>css=#edit-connective-select</td>
-	<td>value=Disjunction</td>
+	<td>value=Subset</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -84,7 +44,7 @@
 <tr>
 	<td>type</td>
 	<td>css=#add-im-threshold-value</td>
-	<td>0.2</td>
+	<td>0.70</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -99,7 +59,7 @@
 <tr>
 	<td>select</td>
 	<td>css=#add-coefficient-select</td>
-	<td>value=One category</td>
+	<td>value=Subset</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -112,10 +72,16 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=.found-rule</td>
+	<td>waitForVisible</td>
+	<td>css=#stop-mining</td>
 	<td></td>
 </tr>
+<tr>
+	<td>click</td>
+	<td>css=#stop-mining</td>
+	<td></td>
+</tr>
+
 </tbody></table>
 </body>
 </html>

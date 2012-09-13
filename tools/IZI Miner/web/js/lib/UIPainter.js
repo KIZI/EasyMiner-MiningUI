@@ -72,6 +72,7 @@ var UIPainter = new Class({
         this.UIListener.registerResizeEventHandler();
 		this.UIListener.registerSettingsEventHandlers();
         this.UIListener.registerDataReloadEventHandlers();
+        this.UIListener.registerFoundRulesEventHandlers();
 	},
 
     resizeWindow: function() {
@@ -676,6 +677,14 @@ var UIPainter = new Class({
 			var isSelected = (FL.getName() === selectedFL.getName());
 			elSelect.grab(Mooml.render('flOptionTemplate', {FL: FL, isSelected: isSelected}));
 		}.bind(this));
-	}
+	},
+
+    showStopMiningButton: function() {
+        $('stop-mining').setStyle('visibility', 'visible');
+    },
+
+    hideStopMiningButton: function() {
+        $('stop-mining').setStyle('visibility', 'hidden');
+    }
 	
 });

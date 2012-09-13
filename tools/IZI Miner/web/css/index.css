@@ -930,7 +930,9 @@ section#active-rule #action-box {
   display: none;
 }
 #paging {
-  height: 20px;
+  width: 850px;
+  height: 24px;
+  padding-top: 5px;
 }
 #paging .pager-actuator,
 #paging .pager-prev,
@@ -972,6 +974,13 @@ section#active-rule #action-box {
   clear: left;
   line-height: 20px;
   padding-top: 20px;
+}
+#found-rules #stop-mining {
+  background: transparent url("../images/sprite-icons.png") -14px -511px no-repeat;
+  height: 24px;
+  float: right;
+  padding-left: 27px;
+  visibility: hidden;
 }
 #found-rules ul {
   width: 100%;

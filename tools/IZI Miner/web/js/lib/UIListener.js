@@ -3,13 +3,15 @@ var UIListener = new Class({
 	ARBuilder: null,
 	ARManager: null,
 	FRManager: null,
+    $miningManager: null,
 	UIColorizer: null,
 	UIPainter: null,
 	
-	initialize: function (ARBuilder, ARManager, FRManager, UIColorizer) {
+	initialize: function (ARBuilder, ARManager, FRManager, miningManager, UIColorizer) {
 		this.ARBuilder = ARBuilder;
 		this.ARManager = ARManager;
 		this.FRManager = FRManager;
+        this.$miningManager = miningManager;
 		this.UIColorizer = UIColorizer;
 	},
 	
@@ -617,7 +619,21 @@ var UIListener = new Class({
 			drag.start(event);
 		}.bind(this));
 	},
-	
+
+    registerFoundRulesEventHandlers: function() {
+        // stop mining
+        $('stop-mining').addEvent('click', function (e) {
+            e.stop();
+            this.$miningManager.stopMining();
+        }.bind(this));
+
+        // clear rules
+        $('pager-clear').addEvent('click', function (e) {
+            e.stop();
+            this.FRManager.reset();
+        }.bind(this));
+    },
+
 	registerFoundRuleEventHandlers: function(FR, autoSearch) {
 		if (!autoSearch) { // ask background knowledge
 			$(FR.getRule().getFoundRuleCSSBKID()).addEvent('click', function (e) {
@@ -636,12 +652,6 @@ var UIListener = new Class({
 		$(FR.getRule().getFoundRuleCSSRemoveID()).addEvent('click', function (event) {
 			event.stop();
 			this.FRManager.removeFoundRule(FR);
-		}.bind(this));
-		
-		// clear
-		$('pager-clear').addEvent('click', function (e) {
-			e.stop();
-			this.FRManager.reset();
 		}.bind(this));
 	},
 	

@@ -28,6 +28,7 @@
 <tr><td><a href="test21.html">BUG: A and neg B => C</a></td></tr>
 <tr><td><a href="test22.html">BUG: A and (neg B or C) => D</a></td></tr>
 <tr><td><a href="test45.html">BUG: Wrong pager page.</a></td></tr>
+<tr><td><a href="test51.html">Stop mining</a></td></tr>
 </tbody></table>
 </body>
 </html>

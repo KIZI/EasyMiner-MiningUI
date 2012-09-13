@@ -1,5 +1,7 @@
 var Config = new Class({
-	
+
+    GetterSetter: ['stopMiningUrl'],
+
 	// app info
 	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
 	name: 'I<em>:</em>ZI Miner',
@@ -18,6 +20,7 @@ var Config = new Class({
 	dataSetURL: 'setData.php',
 	ETreeGetURL: 'getEtree.php',
 	rulesGetURL: 'getRules.php',
+    $stopMiningUrl: 'stopMining.php',
 		
 	// root element
 	rootElementID: 'ARBuilder',
@@ -93,7 +96,7 @@ var Config = new Class({
 	},
 	
 	getRulesGetURL: function () {
-		return this.rulesGetURL + "?id_dm=" + this.params.id_dm + '&lang=' + this.lang;
+		return this.rulesGetURL + "?id_dm=" + this.params.id_dm + (this.params.sleep ? '&sleep=' + this.params.sleep : '') + '&lang=' + this.lang;
 	},
 	
 	setRulesGetURL: function (URL) {
@@ -118,6 +121,10 @@ var Config = new Class({
 	
 	getRootElementID: function () {
 		return this.rootElementID;
-	}
+	},
+
+    getStopMiningUrl: function() {
+        return this.$stopMiningUrl + '?id_dm=' + this.params.id_dm + '&lang=' + this.lang;
+    }
 	
 });

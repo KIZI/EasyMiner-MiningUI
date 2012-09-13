@@ -63,7 +63,8 @@ var i18n = new Class({
 			   59: {'cs': 'Toto pravidlo je vyjímkou proti některému pravidlu ze znalostní báze.', 'en': 'This rule is an exception to a rule stored in knowledge base.'},
 			   60: {'cs': 'Neplatná hodnota', 'en': 'Invalid value'},
                61: {'cs': 'Data fields', 'en': 'Data fields'},
-               62: {'cs': 'Upravit atribut', 'en': 'Edit attribute'}},
+               62: {'cs': 'Upravit atribut', 'en': 'Edit attribute'},
+               63: {'cs': 'Zastavit dolování', 'en': 'Stop mining'}},
 			   
 	initialize: function (lang) {
 		this.lang = lang;
