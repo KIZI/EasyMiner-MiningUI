@@ -48,6 +48,8 @@ var UITemplateRegistrator = new Class({
 							div({id: 'paging'}),
 							div({id: 'pager'},
 								ul({'class': 'scroller'})),
+                            a({id: 'view-task-setting', href: '#', target: '_blank'}, i18n.translate('Task setting')),
+                            a({id: 'view-task-result', href: '#', target: '_blank'}, i18n.translate('Task result')),
 							a({id: 'pager-clear', href: '#'}, i18n.translate('Clear rules'))
 						)),
 					nav({id: 'navigation'})));

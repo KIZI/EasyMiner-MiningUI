@@ -76,7 +76,7 @@ class DataParser
         $ETreeParser = new ETreeParser($this->ETree);
         $this->data = array_merge_recursive($this->data, $ETreeParser->parseData());
 
-        return $this->toJSON($this->data);
+        return $this->data;
     }
 
     protected static function sortFLs ($a, $b)
@@ -90,17 +90,12 @@ class DataParser
 
     public function getER()
     {
-        return $this->toJSON($this->data['existingRules']);
+        return $this->data['existingRules'];
     }
 
     public function getRecommendedAttributes()
     {
-        return $this->toJSON($this->data['recommendedAttributes']);
-    }
-
-    protected function toJSON($array)
-    {
-        return json_encode($array);
+        return $this->data['recommendedAttributes'];
     }
 }
 

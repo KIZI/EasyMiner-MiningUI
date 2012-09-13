@@ -32,6 +32,8 @@ class GetRulesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($info['http_code'], 200);
         $this->assertNotEmpty($json->rules);
         $this->assertTrue(array_key_exists('taskState', $json));
+        $this->assertTrue(array_key_exists('4ft_task', $json));
+        $this->assertTrue(array_key_exists('4ft_result', $json));
     }
 
     public function testGetRulesInvalid()
@@ -61,6 +63,7 @@ class GetRulesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($info['content_type'], 'application/json; charset=UTF-8');
         $this->assertEquals($info['http_code'], 200);
         $this->assertTrue($json->failure);
+        $this->assertTrue(array_key_exists('4ft_task', $json));
     }
 
 }

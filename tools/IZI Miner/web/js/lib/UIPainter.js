@@ -685,6 +685,19 @@ var UIPainter = new Class({
 
     hideStopMiningButton: function() {
         $('stop-mining').setStyle('visibility', 'hidden');
+    },
+
+    updateDownloadButtons: function(settingPath, resultPath) {
+        $('view-task-setting').setStyle('visibility', 'visible');
+        $('view-task-setting').set('href', settingPath);
+
+        $('view-task-result').setStyle('visibility', 'visible');
+        $('view-task-result').set('href', resultPath);
+    },
+
+    hideDownloadButtons: function() {
+        $('view-task-setting').setStyle('visibility', 'hidden');
+        $('view-task-result').setStyle('visibility', 'hidden');
     }
 	
 });

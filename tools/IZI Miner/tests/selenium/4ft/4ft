@@ -30,6 +30,8 @@
 <tr><td><a href="test45.html">BUG: Wrong pager page.</a></td></tr>
 <tr><td><a href="test51.html">Stop mining</a></td></tr>
 <tr><td><a href="test52.html">Stop mining when AR changes</a></td></tr>
+<tr><td><a href="test54.html">Show download icons</a></td></tr>
+<tr><td><a href="test53.html">Hide download icons</a></td></tr>
 </tbody></table>
 </body>
 </html>
