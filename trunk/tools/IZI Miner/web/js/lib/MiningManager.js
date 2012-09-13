@@ -5,6 +5,7 @@ var MiningManager = new Class({
 	
 	requests: [],
 	inProgress: false,
+    requestData: {},
 	finishedStates: ['Solved', 'Interrupted'],
 	reqDelay: 1000,
 	
@@ -17,11 +18,11 @@ var MiningManager = new Class({
 		this.inProgress = true;
 		this.FRManager.handleInProgress();
 		
-		var requestData = {
+		this.requestData = {
 				limitHits: limitHits,
 				rule0: rule.serialize(),
 				rules: 1};
-		this.makeRequest(JSON.encode(requestData));
+		this.makeRequest(JSON.encode(this.requestData));
 	},
 	
 	makeRequest: function (data) {
@@ -72,8 +73,7 @@ var MiningManager = new Class({
 	},
 	
 	handleErrorRequest: function () {
-
-		this.stopAllRequests();
+		this.stopMining();
 		this.FRManager.handleError();
 	},
 	
@@ -81,23 +81,40 @@ var MiningManager = new Class({
 		this.requests.push(request);
 	},
 	
-	stopAllRequests: function () {
-		Array.each(this.requests, function (req, key) {
-			if (req.running) {
+	stopMining: function () {
+        // stop all requests
+		Array.each(this.requests, function (req) {
+			if (req.isRunning()) {
 				req.cancel();
 			}
-		}.bind(this));
+		});
 
-        this.clearAllRequests();
+        // stop remote LM mining
+        if (this.inProgress) { // hack around req.cancel(); weird bug
+            this.stopRemoteMining(JSON.encode(this.requestData));
+            this.FRManager.handleStoppedMining();
+        }
+
         this.inProgress = false;
-	},
-	
-	clearAllRequests: function () {
-		this.requests = [];
+        this.requestData = {};
+        this.requests = [];
 	},
 	
 	getInProgress: function () {
 		return this.inProgress;
-	}
+	},
+
+    stopRemoteMining: function(data) {
+//        console.log('stop');
+        var request = new Request.JSON({
+            url: this.config.getStopMiningUrl(),
+            secure: true,
+
+            onSuccess: function(responseJSON, responseText) {
+                console.log('stop mining response', responseJSON);
+            }.bind(this)
+
+        }).post({'data': data});
+    }
 	
 });

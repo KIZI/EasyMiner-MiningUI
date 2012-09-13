@@ -31,7 +31,7 @@ var ARBuilder = new Class({
         this.ARManager = new ARManager(this, this.DD, this.getDefFL(), this.miningManager, this.ETreeManager, this.settings);
         this.ETreeManager.setARManager(this.ARManager);
         this.UIColorizer = new UIColorizer();
-        this.UIListener = new UIListener(this, this.ARManager, this.FRManager, this.UIColorizer);
+        this.UIListener = new UIListener(this, this.ARManager, this.FRManager, this.miningManager, this.UIColorizer);
         this.UIPainter = new UIPainter(this, this.config, this.DD, this.getDefFL(), this.FGC, this.ARManager, this.FRManager, this.miningManager, this.ETreeManager, this.UIColorizer, this.UIListener);
         this.UIListener.setUIPainter(this.UIPainter);
         this.ARManager.setUIPainter(this.UIPainter);
@@ -169,9 +169,7 @@ var ARBuilder = new Class({
         // active rule
         this.ARManager.initBlankAR();
 
-        // mining
-        this.miningManager.stopAllRequests();
-        // TODO call KBI to stop mining
+        this.stopMining();
 
         // found rules
         // TODO reset only if necessary
@@ -183,6 +181,10 @@ var ARBuilder = new Class({
 
         // ETree
         this.ETreeManager.reset();
+    },
+
+    stopMining: function() {
+        this.miningManager.stopMining();
     }
 
 });

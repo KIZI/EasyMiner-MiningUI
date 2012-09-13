@@ -42,8 +42,13 @@ var FRManager = new Class({
 	handleInProgress: function () {
 		this.reset();
 		this.UIPainter.renderActiveRule();
+        this.UIPainter.showStopMiningButton();
 		this.pager.setInProgress();
 	},
+
+    handleStoppedMining: function() {
+        this.UIPainter.hideStopMiningButton();
+    },
 	
 	renderRules: function (rules, numRules, inProgress) {
 		// filter new rules
@@ -81,6 +86,7 @@ var FRManager = new Class({
 			
 			if (!inProgress) {
 				this.pager.setFinished();
+                this.UIPainter.hideStopMiningButton();
 			}
 			
 			this.UIPainter.renderActiveRule();

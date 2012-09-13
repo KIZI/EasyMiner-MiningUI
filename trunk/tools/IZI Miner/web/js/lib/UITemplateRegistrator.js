@@ -44,6 +44,7 @@ var UITemplateRegistrator = new Class({
 						section({id: 'found-rules'}, 
 							h2(i18n.translate('Discovered rules')),
 							div({id: 'pager-label'}),
+                            a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')),
 							div({id: 'paging'}),
 							div({id: 'pager'},
 								ul({'class': 'scroller'})),

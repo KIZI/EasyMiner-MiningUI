@@ -4,46 +4,54 @@ require_once './Bootstrap.php';
 require_once '../config/Config.php';
 
 use IZI\Encoder\URLEncoder;
-use IZI\Parser\DataParser;
+use IZI\Serializer\TaskSettingSerializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
+$data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
 $lang = $request->query->get('lang');
 
 if ($id === 'TEST') {
-    $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
-    $DP->loadData();
-    $responseContent = $DP->parseData();
+    $responseContent = json_encode(['status' => 'stopped']);
 } else { // KBI
+    $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
+    $serializer = new TaskSettingSerializer($DDPath);
+    $serialized = $serializer->serialize($data);
+    $matches = [];
+    preg_match('/modelName=\"([a-z0-9A-Z]{1,})\"/', $serialized, $matches);
+    $taskName = $matches[1];
+
     $requestData = [];
 
-    // run export
+    // run task
     $encoder = new URLEncoder();
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=dataDescription&format=raw&source='.$id);
+    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=cancelQuery&source=".$id."&query=".$taskName."&format=raw");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
 
     $response = curl_exec($ch);
+    $response = iconv("utf-8", "utf-8//IGNORE", $response);
     $info = curl_getinfo($ch);
     curl_close($ch);
 
     if (FB_ENABLED) { // log into console
+        FB::info(['curl request' => $requestData]);
         FB::info(['curl response' => $response]);
         FB::info(['curl info' => $info]);
     }
 
     if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
-        $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
-        file_put_contents($DDPath, $response);
-
-        $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
-        $DP->loadData();
-        $responseContent = $DP->parseData();
+        $success = preg_match('/status=\"success\"/', $response);
+        if ($success) {
+            $responseContent = json_encode(['status' => 'stopped']);
+        } else {
+            $responseContent = json_encode(['status' => 'unknown']);
+        }
     } else {
         $responseContent = json_encode(['failure' => true]);
     }
@@ -51,3 +59,4 @@ if ($id === 'TEST') {
 
 $response = new Response($responseContent, 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();
+
