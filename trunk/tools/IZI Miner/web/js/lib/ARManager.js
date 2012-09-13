@@ -1,5 +1,6 @@
 var ARManager = new Class({
-	
+
+    $ARBuilder: null,
 	DD: null,
 	FL: null,
 	stringHelper: null,
@@ -16,6 +17,7 @@ var ARManager = new Class({
 	attributesByGroup: false,
 	
 	initialize: function (ARBuilder, DD, FL, miningManager, ETreeManager, settings) {
+        this.$ARBuilder = ARBuilder;
 		this.DD = DD;
 		this.FL = FL;
 		this.stringHelper = new StringHelper();
@@ -28,7 +30,7 @@ var ARManager = new Class({
 		this.initARValidator();
 		this.initBlankAR();
 		
-		ARBuilder.addEvent('updateFL', function (FL) {
+		this.$ARBuilder.addEvent('updateFL', function (FL) {
 			this.FL = FL;
 		}.bind(this));
 	},
@@ -89,18 +91,21 @@ var ARManager = new Class({
 	addIM: function (IMPrototype, thresholdValue, alphaValue) {
 		var IM = new InterestMeasureAR(IMPrototype.getName(), IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), thresholdValue, alphaValue);
 		this.activeRule.addIM(IM);
-		this.UIPainter.hideOverlay();
+        this.setActiveRuleChanged();
+        this.UIPainter.hideOverlay();
 		this.UIPainter.renderActiveRule();
 	},
 	
 	editIM: function (IMPrototype, thresholdValue, alphaValue) {
 		this.activeRule.editIM(IMPrototype, thresholdValue, alphaValue);
+        this.setActiveRuleChanged();
 		this.UIPainter.hideOverlay();
 		this.UIPainter.renderActiveRule();
 	},
 	
 	removeIM: function (IM) {
 		this.activeRule.removeIM(IM.getName());
+        this.setActiveRuleChanged();
 		this.UIPainter.renderActiveRule();
 	},
 	
@@ -214,6 +219,7 @@ var ARManager = new Class({
 	
 	changeFieldSign: function(field) {
 		this.activeRule.changeFieldSign(field);
+        this.setActiveRuleChanged();
 		this.UIPainter.renderActiveRule();
 	},
 
@@ -267,6 +273,7 @@ var ARManager = new Class({
 
 	setActiveRuleChanged: function () {
 		this.activeRule.setChanged(true);
+        this.$ARBuilder.stopMining();
 	},
 	
 	getIMPrototype: function (name) {
