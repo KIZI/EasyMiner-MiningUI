@@ -38,6 +38,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
 
     public function testSaveInterestingInvalid()
     {
+        $this->markTestIncomplete();
         // TODO write test for invalid id_dm
 
         $this->assertEquals($info['content_type'], 'application/json; charset=UTF-8');

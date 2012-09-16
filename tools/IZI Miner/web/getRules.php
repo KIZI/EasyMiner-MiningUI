@@ -30,6 +30,7 @@ if ($id === 'TEST') {
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
     if (!file_exists($DDPath)) { goto returnError; }
+
     $loader = new XMLLoader();
     $serializer = new TaskSettingSerializer($DDPath);
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
