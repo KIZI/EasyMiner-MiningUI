@@ -1,17 +1,11 @@
 var UIListener = new Class({
 	
 	ARBuilder: null,
-	ARManager: null,
-	FRManager: null,
-    $miningManager: null,
 	UIColorizer: null,
 	UIPainter: null,
 	
-	initialize: function (ARBuilder, ARManager, FRManager, miningManager, UIColorizer) {
+	initialize: function (ARBuilder, UIColorizer) {
 		this.ARBuilder = ARBuilder;
-		this.ARManager = ARManager;
-		this.FRManager = FRManager;
-        this.$miningManager = miningManager;
 		this.UIColorizer = UIColorizer;
 	},
 	
@@ -105,16 +99,16 @@ var UIListener = new Class({
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
 		}.bind(this));
 
-//		if (this.ARManager.getAttributesByGroup()) {
+//		if (this.ARBuilder.getARManager().getAttributesByGroup()) {
 //			// attributes by list
 //			$('attributes-by-list').addEvent('click', function (event) {
 //				event.stop();
-//				this.ARManager.displayAttributesByList();
+//				this.ARBuilder.getARManager().displayAttributesByList();
 //			}.bind(this));
 //		} else {
 //			// attributes by group
 //			$('attributes-by-group').addEvent('click', function (event) {
-//				this.ARManager.displayAttributesByGroup();
+//				this.ARBuilder.getARManager().displayAttributesByGroup();
 //				event.stop();
 //			}.bind(this));
 //		}
@@ -340,25 +334,25 @@ var UIListener = new Class({
 	},
 
 	registerActiveRuleEventHandlers: function (rule) {
-		if (this.ARManager.hasPossibleIMs()) {
+		if (this.ARBuilder.getARManager().hasPossibleIMs()) {
 			// open add IM window
 			$('add-im').addEvent('click', function (event) {
 				event.stop();
-				this.ARManager.openAddIMWindow();
+				this.ARBuilder.getARManager().openAddIMWindow();
 			}.bind(this));
 		}
 		
-		if (this.ARManager.display4ftTaskBox()) {
+		if (this.ARBuilder.getARManager().display4ftTaskBox()) {
 			$('mine-rules-confirm').addEvent('click', function (event) {
 				event.stop();
-				this.ARManager.mineRulesConfirm();
+				this.ARBuilder.getARManager().mineRulesConfirm();
 			}.bind(this));
 		}
 		
-		if (this.ARManager.displayETreeTaskBox()) {
+		if (this.ARBuilder.getARManager().displayETreeTaskBox()) {
 			$('recommend-attributes-confirm').addEvent('click', function (event) {
 				event.stop();
-				this.ARManager.recommendAttributesConfirm();
+				this.ARBuilder.getARManager().recommendAttributesConfirm();
 			}.bind(this));
 		}
 	},
@@ -367,13 +361,13 @@ var UIListener = new Class({
 		// edit
 		$(IM.getCSSEditID()).addEvent('click', function (e) {
 			e.stop();
-			this.ARManager.openEditIMWindow(IM);
+			this.ARBuilder.getARManager().openEditIMWindow(IM);
 		}.bind(this));
 		
 		// remove
 		$(IM.getCSSRemoveID()).addEvent('click', function (e) {
 			e.stop();
-			this.ARManager.removeIM(IM);
+			this.ARBuilder.getARManager().removeIM(IM);
 		}.bind(this));
 	},
 	
@@ -384,7 +378,7 @@ var UIListener = new Class({
 			event.stop();
 			var elementSelect = $(action + '-im-select');
 			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
-			var IM = this.ARManager.getIMPrototype(IMName);
+			var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
 
 			var validator = new IMValidator();
 			var valid = validator.validate(IM, action);
@@ -392,9 +386,9 @@ var UIListener = new Class({
 				var thresholdValue = IM.hasThreshold() ? $(action + '-im-threshold-value').value : null;
 				var alphaValue = IM.hasAlpha() ? $(action + '-im-alpha-value').value : null;
 				if (action === 'add') {
-					var IM = this.ARManager.addIM(IM, thresholdValue, alphaValue);
+					var IM = this.ARBuilder.getARManager().addIM(IM, thresholdValue, alphaValue);
 				} else {
-					var IM = this.ARManager.editIM(IM, thresholdValue, alphaValue);
+					var IM = this.ARBuilder.getARManager().editIM(IM, thresholdValue, alphaValue);
 				}
 			}
 		}.bind(this));
@@ -404,14 +398,14 @@ var UIListener = new Class({
 		elementSelect.addEvent('change', function (e) {
 			e.stop();
 			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
-			var IM = this.ARManager.getIMPrototype(IMName);
+			var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
 			this.UIPainter.renderIMAutocomplete(action, IM);
 		}.bind(this));
 		
 		// close
 		var elementClose = $(action + '-im-close');
 		elementClose.addEvent('click', function (event) {
-			this.ARManager.closeIMWindow();
+			this.ARBuilder.getARManager().closeIMWindow();
 			event.stop();
 		}.bind(this));
 	},
@@ -419,22 +413,22 @@ var UIListener = new Class({
 	registerCedentEventHandlers: function (cedent, rule) {
 		// add attribute (fired by drag & drop)
 		$(cedent.getCSSID()).addEvent('addAttribute', function (attribute, position) {
-			this.ARManager.addAttribute(cedent, attribute, position);
+			this.ARBuilder.getARManager().addAttribute(cedent, attribute, position);
 		}.bind(this));
 		
 		// add preset field (fired by drag & drop)
 		$(cedent.getCSSID()).addEvent('addField', function (field) {
-			this.ARManager.addField(field, cedent);
+			this.ARBuilder.getARManager().addField(field, cedent);
 		}.bind(this));
 		
 		// add preset field group
 		$(cedent.getCSSID()).addEvent('addFieldGroup', function (FG) {
-			this.ARManager.addFieldGroup(FG, cedent);
+			this.ARBuilder.getARManager().addFieldGroup(FG, cedent);
 		}.bind(this));
 		
 		// add field (fired by drag & drop)
 		$(cedent.getCSSID()).addEvent('addFieldAR', function (field) {
-			this.ARManager.addFieldAR(field, cedent);
+			this.ARBuilder.getARManager().addFieldAR(field, cedent);
 		}.bind(this));
 		
 		// edit connective
@@ -443,7 +437,7 @@ var UIListener = new Class({
 			elCon.addEvent('click', function (e) {
 				e.stop();
                 if (!$('edit-connective-window')) {
-                    this.ARManager.openEditConnectiveWindow(cedent);
+                    this.ARBuilder.getARManager().openEditConnectiveWindow(cedent);
                 }
 			}.bind(this));
 		}.bind(this));
@@ -452,7 +446,7 @@ var UIListener = new Class({
 		if (rule.getGroupFields() && cedent.displayGroupButton()) {
 			// group fields confirm
 			$(cedent.getCSSGroupFieldsConfirmID()).addEvent('click', function (event) {
-				this.ARManager.groupFields(cedent);
+				this.ARBuilder.getARManager().groupFields(cedent);
 				event.stop();
 			}.bind(this));
 		}
@@ -466,11 +460,11 @@ var UIListener = new Class({
 			var coefficientName = elementSelect.options[elementSelect.selectedIndex].value;
 			if (coefficientName === 'One category') {
 				var coefficientCategory = $('add-coefficient-category').value;
-				this.ARManager.addCoefficient(field, coefficientName, coefficientCategory);
+				this.ARBuilder.getARManager().addCoefficient(field, coefficientName, coefficientCategory);
 			} else {
 				var coefficientMinlength = $('add-coefficient-minlength').value;
 				var coefficientMaxlength = $('add-coefficient-maxlength').value;
-				this.ARManager.addCoefficient(field, coefficientName, coefficientMinlength, coefficientMaxlength);
+				this.ARBuilder.getARManager().addCoefficient(field, coefficientName, coefficientMinlength, coefficientMaxlength);
 			}
 			event.stop();
 		}.bind(this));
@@ -479,21 +473,21 @@ var UIListener = new Class({
 		var elementSelect = $('add-coefficient-select');
 		elementSelect.addEvent('change', function (event) {
 			event.stop();
-			this.ARManager.updateAddCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
+			this.ARBuilder.getARManager().updateAddCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
 		}.bind(this));
 		
 		// close
 		var elementClose = $('add-coefficient-close');
 		elementClose.addEvent('click', function (event) {
-			this.ARManager.closeAddCoefficientWindow();
-			this.ARManager.removeField(field);
+			this.ARBuilder.getARManager().closeAddCoefficientWindow();
+			this.ARBuilder.getARManager().removeField(field);
 			event.stop();
 		}.bind(this));
 	},
 	
 	registerEditCoefficientEventHandler: function (field) {
 		$(field.getEditCoefficientCSSID()).addEvent('click', function (event) {
-			this.ARManager.openEditCoefficientWindow(field);
+			this.ARBuilder.getARManager().openEditCoefficientWindow(field);
 			event.stop();
 		}.bind(this));
 	},
@@ -506,11 +500,11 @@ var UIListener = new Class({
 			var coefficientName = elementSelect.options[elementSelect.selectedIndex].value;
 			if (coefficientName === 'One category') {
 				var coefficientCategory = $('edit-coefficient-category').value;
-				this.ARManager.editCoefficient(field, coefficientName, coefficientCategory);
+				this.ARBuilder.getARManager().editCoefficient(field, coefficientName, coefficientCategory);
 			} else {
 				var coefficientMinlength = $('edit-coefficient-minlength').value;
 				var coefficientMaxlength = $('edit-coefficient-maxlength').value;
-				this.ARManager.editCoefficient(field, coefficientName, coefficientMinlength, coefficientMaxlength);
+				this.ARBuilder.getARManager().editCoefficient(field, coefficientName, coefficientMinlength, coefficientMaxlength);
 			}
 			event.stop();
 		}.bind(this));
@@ -519,13 +513,13 @@ var UIListener = new Class({
 		var elementSelect = $('edit-coefficient-select');
 		elementSelect.addEvent('change', function (event) {
 			event.stop();
-			this.ARManager.updateEditCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
+			this.ARBuilder.getARManager().updateEditCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
 		}.bind(this));
 		
 		// close
 		var elementClose = $('edit-coefficient-close');
 		elementClose.addEvent('click', function (event) {
-			this.ARManager.closeEditCoefficientWindow();
+			this.ARBuilder.getARManager().closeEditCoefficientWindow();
 			event.stop();
 		}.bind(this));
 	},
@@ -538,7 +532,7 @@ var UIListener = new Class({
             var elementSelect = $('edit-connective-select');
 			if (elementSelect) {
                 var connectiveName = elementSelect.options[elementSelect.selectedIndex].value;
-			    this.ARManager.editConnective(cedent, connectiveName);
+			    this.ARBuilder.getARManager().editConnective(cedent, connectiveName);
             }
 		}.bind(this));
 		
@@ -546,7 +540,7 @@ var UIListener = new Class({
 		var elementClose = $('edit-connective-close');
 		elementClose.addEvent('click', function (event) {
 			event.stop();
-			this.ARManager.closeEditConnectiveWindow();
+			this.ARBuilder.getARManager().closeEditConnectiveWindow();
 		}.bind(this));
 	},
 	
@@ -554,13 +548,13 @@ var UIListener = new Class({
 		// remove field
 		var elementField = $(field.getCSSRemoveID());
 		elementField.addEvent('click', function (event) {
-			this.ARManager.removeField(field);
+			this.ARBuilder.getARManager().removeField(field);
 			event.stop();
 		}.bind(this));
 		
 		// change field sign
 		$(field.getCSSChangeSignID()).addEvent('click', function (event) {
-			this.ARManager.changeFieldSign(field);
+			this.ARBuilder.getARManager().changeFieldSign(field);
 			event.stop();
 		}.bind(this));
 		
@@ -568,7 +562,7 @@ var UIListener = new Class({
 		if (cedent.getNumFields(cedent.getLevel()) > 1 && elMark) {
 			// mark / unmark rule
 			elMark.addEvent('click', function (event) {
-				this.ARManager.changeMark(field);
+				this.ARBuilder.getARManager().changeMark(field);
 				event.stop();
 			}.bind(this));
 		}
@@ -624,13 +618,13 @@ var UIListener = new Class({
         // stop mining
         $('stop-mining').addEvent('click', function (e) {
             e.stop();
-            this.$miningManager.stopMining();
+            this.ARBuilder.getMiningManager().stopMining();
         }.bind(this));
 
         // clear rules
         $('pager-clear').addEvent('click', function (e) {
             e.stop();
-            this.FRManager.reset();
+            this.ARBuilder.getFRManager().reset();
         }.bind(this));
     },
 
@@ -638,20 +632,20 @@ var UIListener = new Class({
 		if (!autoSearch) { // ask background knowledge
 			$(FR.getRule().getFoundRuleCSSBKID()).addEvent('click', function (e) {
 				e.stop();
-				this.FRManager.askBK(FR);
+				this.ARBuilder.getFRManager().askBK(FR);
 			}.bind(this));		
 		}
 		
 		// mark
 		$(FR.getRule().getFoundRuleCSSMarkID()).addEvent('click', function (event) {
 			event.stop();
-			this.FRManager.markFoundRule(FR);
+			this.ARBuilder.getFRManager().markFoundRule(FR);
 		}.bind(this));
 		
 		// remove
 		$(FR.getRule().getFoundRuleCSSRemoveID()).addEvent('click', function (event) {
 			event.stop();
-			this.FRManager.removeFoundRule(FR);
+			this.ARBuilder.getFRManager().removeFoundRule(FR);
 		}.bind(this));
 	},
 	
@@ -668,7 +662,7 @@ var UIListener = new Class({
 	
 	registerMarkedRuleEventHandlers: function (FR) {
 		$(FR.getRule().getMarkedRuleCSSRemoveID()).addEvent('click', function (event) {
-			this.FRManager.removeMarkedRule(FR);
+			this.ARBuilder.getFRManager().removeMarkedRule(FR);
 			event.stop();
 		}.bind(this));
 	}

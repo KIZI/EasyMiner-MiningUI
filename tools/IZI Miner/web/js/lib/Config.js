@@ -64,7 +64,7 @@ var Config = new Class({
 	},
 
     getIdDm: function() {
-        return this.params.id_dm.toInt();
+        return this.params.id_dm;
     },
 	
 	getBKAskURL: function () {

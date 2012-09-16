@@ -16,6 +16,7 @@ if ($id === 'TEST') {
     $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
     $DP->loadData();
     $responseContent = $DP->parseData();
+    $responseContent['status'] = 'ok';
 } else { // KBI
     $requestData = [];
 
@@ -27,6 +28,7 @@ if ($id === 'TEST') {
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
@@ -37,17 +39,18 @@ if ($id === 'TEST') {
         FB::info(['curl info' => $info]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
+    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
         $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
         file_put_contents($DDPath, $response);
 
         $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
         $DP->loadData();
-        $responseContent = json_encode($DP->parseData());
+        $responseContent = $DP->parseData();
+        $responseContent['status'] = 'ok';
     } else {
-        $responseContent = json_encode(['failure' => true]);
+        $responseContent = ['status' => 'error'];
     }
 }
 
-$response = new Response($responseContent, 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response = new Response(json_encode($responseContent), 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();

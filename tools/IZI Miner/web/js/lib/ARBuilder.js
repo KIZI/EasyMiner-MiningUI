@@ -1,56 +1,70 @@
 var ARBuilder = new Class({
+    GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'miningManager'],
 	Implements: Events,
 
-	config: null,
+	$config: null,
 	settings: null,
 	dataParser: null,
-	FRManager: null,
-	miningManager: null,
-	ETreeManager: null,
-	ARManager: null,
-	UIColorizer: null,
+	$FRManager: null,
+	$miningManager: null,
+	$ETreeManager: null,
+	$ARManager: null,
 	UIPainter: null,
 	UIListener: null,
-	DD: null,
+	$DD: null,
 	FLs: [],
 	defFLIndex: 0,
-	FGC: null,
-	
+	$FGC: null,
+	$callbackDelay: 1000, // miliseconds
+
 	// init basics
 	initialize: function (config) {
-		this.config = config;
-		this.settings = new Settings();
-		this.initDataParser();
-		this.DD = this.dataParser.getDD();
-        this.FLs = this.dataParser.getFLs();
-        this.FGC = this.dataParser.getFGC();
+		this.$config = config;
 
-        this.FRManager = new FRManager(this.config, new RulesParser(this, this.DD, this.getDefFL()), this.settings);
-        this.miningManager = new MiningManager(this.config, this.FRManager);
-        this.ETreeManager = new ETreeManager(this.config, this.DD);
-        this.ARManager = new ARManager(this, this.DD, this.getDefFL(), this.miningManager, this.ETreeManager, this.settings);
-        this.ETreeManager.setARManager(this.ARManager);
-        this.UIColorizer = new UIColorizer();
-        this.UIListener = new UIListener(this, this.ARManager, this.FRManager, this.miningManager, this.UIColorizer);
-        this.UIPainter = new UIPainter(this, this.config, this.DD, this.getDefFL(), this.FGC, this.ARManager, this.FRManager, this.miningManager, this.ETreeManager, this.UIColorizer, this.UIListener);
+        this.UIListener = new UIListener(this, new UIColorizer());
+        this.UIPainter = new UIPainter(this, this.$config, new i18n(this.$config.getLang()), new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator());
         this.UIListener.setUIPainter(this.UIPainter);
-        this.ARManager.setUIPainter(this.UIPainter);
-        this.ETreeManager.setUIPainter(this.UIPainter);
-        this.FRManager.setUIPainter(this.UIPainter);
-        this.FRManager.setUIListener(this.UIListener);
+
+        this.UIPainter.renderOverlay();
+        this.loadData();
     },
 
-    initDataParser: function() {
-        this.dataParser = new DataParser(this.config);
-        this.dataParser.getData();
+    loadData: function() {
+        this.handleLoadData();
+        this.dataParser = new DataParser(this.$config, true);
+        this.dataParser.getData(this.initApplication, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
     },
 
-	// run ARB
-	run: function () {
-		this.UIPainter.createUI();
-		this.FRManager.initPager();
-	},
+    handleLoadData: function() {
+        this.UIPainter.showLoadData();
+    },
 
+    handleLoadDataError: function() {
+        this.UIPainter.showLoadDataError();
+    },
+
+    initApplication: function() {
+        this.UIPainter.hideOverlay();
+
+        this.$DD = this.dataParser.getDD();
+        this.FLs = this.dataParser.getFLs();
+        this.$FGC = this.dataParser.getFGC();
+
+        this.settings = new Settings();
+        this.$FRManager = new FRManager(this.$config, new RulesParser(this, this.$DD, this.getDefFL()), this.settings, this.UIPainter, this.UIListener);
+        this.$miningManager = new MiningManager(this.$config, this.$FRManager);
+        this.$ETreeManager = new ETreeManager(this.$config, this.$DD, this.UIPainter);
+        this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
+        this.$ETreeManager.setARManager(this.$ARManager);
+
+        this.UIPainter.createUI();
+        this.$FRManager.initPager();
+    },
+
+    getFL: function() {
+        return this.getDefFL();  
+    },
+    
 	getDefFL: function () {
 		return this.FLs[this.defFLIndex];
 	},
@@ -76,10 +90,6 @@ var ARBuilder = new Class({
 		return index !== null ? this.FLs[index] : null;
 	},
 
-    getConfig: function() {
-        return this.config;
-    },
-
     openNewTaskWindow: function () {
         this.UIPainter.renderNewTaskWindow();
     },
@@ -91,7 +101,7 @@ var ARBuilder = new Class({
 	updateSettingsWindow: function (FLName) {
 		var FL = this.getFLByName(FLName);
 		var ARValidator = new AssociationRuleValidator(FL.getRulePattern(), FL.getIMCombinations());
-		var reset = this.getDefFL().getName() !== FLName && !ARValidator.isValid(this.ARManager.getActiveRule()) && this.ARManager.getActiveRule().isChanged();
+		var reset = this.getDefFL().getName() !== FLName && !ARValidator.isValid(this.$ARManager.getActiveRule()) && this.$ARManager.getActiveRule().isChanged();
 		this.UIPainter.renderSettingsWindow(this.FLs, FL, FL.getAutoSuggest(), reset, this.settings);
 	},
 	
@@ -128,9 +138,9 @@ var ARBuilder = new Class({
 		// FL switch
 		var FL = this.getFLByName(FLName);
 		var ARValidator = new AssociationRuleValidator(FL.getRulePattern(), FL.getIMCombinations());
-		if (this.getDefFL().getName() !== FLName && !ARValidator.isValid(this.ARManager.getActiveRule())) { // switch FL
+		if (this.getDefFL().getName() !== FLName && !ARValidator.isValid(this.$ARManager.getActiveRule())) { // switch FL
 			this.setDefFL(FLName);
-			this.ARManager.initBlankAR();
+			this.$ARManager.initBlankAR();
 			this.UIPainter.sortAttributes();
 		} else {
 			this.setDefFL(FLName);
@@ -148,8 +158,9 @@ var ARBuilder = new Class({
         this.UIPainter.renderEditAttributeWindow(attribute);
     },
 
+    // TODO handle load data error
     reloadAttributes: function() {
-        this.initDataParser();
+        this.loadData();
         // TODO show loading indicator
         this.UIPainter.renderNavigation();
         this.reset();
@@ -158,7 +169,7 @@ var ARBuilder = new Class({
 
     removeAttribute: function(attribute) {
         // remove attribute
-        this.DD.removeAttribute(attribute);
+        this.$DD.removeAttribute(attribute);
         this.UIPainter.removeAttribute(attribute);
 
         // reset UI
@@ -167,24 +178,24 @@ var ARBuilder = new Class({
 
     reset: function() {
         // active rule
-        this.ARManager.initBlankAR();
+        this.$ARManager.initBlankAR();
 
         this.stopMining();
 
         // found rules
         // TODO reset only if necessary
-        this.FRManager.reset();
+        this.$FRManager.reset();
 
         // marked rules
         // TODO reset only if necessary
-        this.FRManager.removeMarkedRules();
+        this.$FRManager.removeMarkedRules();
 
         // ETree
-        this.ETreeManager.reset();
+        this.$ETreeManager.reset();
     },
 
     stopMining: function() {
-        this.miningManager.stopMining();
+        this.$miningManager.stopMining();
     }
 
 });

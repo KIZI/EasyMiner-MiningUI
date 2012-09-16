@@ -39,7 +39,7 @@ test('getIdDm', function() {
     var config = new Config();
     config.setParams({id_dm: '25'});
 
-    strictEqual(config.getIdDm(), 25);
+    strictEqual(config.getIdDm(), '25');
 });
 
 test('getAddAttributeURL', function() {

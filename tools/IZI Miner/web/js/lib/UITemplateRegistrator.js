@@ -18,10 +18,10 @@ var UITemplateRegistrator = new Class({
 	},
 	
 	registerStructure: function () {
-		Mooml.register('overlayTemplate', function () {
-			section({id: 'overlay'});
-		});
-		
+        Mooml.register('overlayTemplate', function () {
+            section({id: 'overlay'});
+        });
+
 		Mooml.register('headerTemplate', function (data) {
 			i18n = data.i18n;
 			config = data.config;

@@ -1,26 +1,36 @@
 var DataParser = new Class({
 	
 	config: null,
+    $async: true,
 	DD: null,
 	FLs: [],
 	FGC: null,
 	
-	initialize: function (config) {
+	initialize: function (config, async) {
 		this.config = config;
+        this.$async = async;
 	},
 	
-	getData: function () {
+	getData: function (callback, errCallback, bind, delay) {
 		new Request.JSON({
 			url: this.config.getDataGetURL(),
 			secure: true,
-			async: false,
-			
+			async: this.$async,
+
 			onSuccess: function (responseJSON, responseText) {
+                if (responseJSON.status == 'error') {
+                    errCallback.delay(delay, bind);
+                    return;
+                }
 				this.parseData(responseJSON);
+
+                if (instanceOf(callback, Function)) {
+                    callback.delay(delay, bind);
+                }
 			}.bind(this),
 			
 			onError: function (text, error) {
-				throw 'Error | could not get init data';
+				errCallback.delay(delay, bind);
 			}
 		
 		}).get();

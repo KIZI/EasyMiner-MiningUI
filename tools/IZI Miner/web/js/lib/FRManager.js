@@ -12,10 +12,12 @@ var FRManager = new Class({
 	maxIndex: 0,
 	tips: null,
 	
-	initialize: function (config, rulesParser, settings) {
+	initialize: function (config, rulesParser, settings, UIPainter, UIListener) {
 		this.config = config;
 		this.rulesParser = rulesParser;
 		this.settings = settings;
+        this.UIPainter = UIPainter;
+        this.UIListener = UIListener;
 		this.i18n = new i18n(this.config.getLang());
 		this.AJAXBalancer = new AJAXBalancer();
 		this.tips = new Tips('.found-rule');
@@ -27,14 +29,6 @@ var FRManager = new Class({
 		});
 	},
 
-	setUIPainter: function (UIPainter) {
-		this.UIPainter = UIPainter;
-	},
-	
-	setUIListener: function (UIListener) {
-		this.UIListener = UIListener;
-	},
-	
 	initPager: function () {
 		this.pager = new Pager($('pager-label'), $('paging'), $('pager'), $('pager-clear'), i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'), i18n.translate('Mining is in progress, it may take a while to get the results.'), i18n.translate('Mining has finished!'), i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'), i18n.translate('Mining has been stopped.'));
 	},

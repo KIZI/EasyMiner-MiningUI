@@ -7,17 +7,14 @@ var ETreeManager = new Class({
 	requests: [],
 	UIPainter: null,
 	
-	initialize: function (config, DD) {
+	initialize: function (config, DD, UIPainter) {
 		this.config = config;
 		this.DD = DD;
+        this.UIPainter = UIPainter;
 	},
 	
 	setARManager: function (ARManager) {
 		this.ARManager = ARManager;
-	},
-	
-	setUIPainter: function (UIPainter) {
-		this.UIPainter = UIPainter;
 	},
 	
 	recommendAttributes: function (rule) {
