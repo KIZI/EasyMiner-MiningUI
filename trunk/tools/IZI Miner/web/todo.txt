@@ -17,20 +17,6 @@ TODO
 14. 9. 2012
 - 14.10 - 15.30 KBI refactoring
 - 16.30 - 17.30 stable
-TODO - update KBI queries... grrr
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

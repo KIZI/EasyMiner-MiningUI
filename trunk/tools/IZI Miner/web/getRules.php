@@ -26,9 +26,10 @@ if ($id === 'TEST') {
     $responseContent = $DP->getER();
     $responseContent['task'] = $taskPath;
     $responseContent['result'] = $resultPath;
-    $responseContent = json_encode($responseContent);
+    $responseContent['status'] = 'ok';
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
+    if (!file_exists($DDPath)) { goto returnError; }
     $loader = new XMLLoader();
     $serializer = new TaskSettingSerializer($DDPath);
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
@@ -58,7 +59,7 @@ if ($id === 'TEST') {
         FB::info(['curl info' => $info]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
+    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
         // save LM result
         $resultPath = 'temp/4ft_result_'.date('md_His').'.pmml';
         file_put_contents($resultPath, $response);
@@ -69,12 +70,13 @@ if ($id === 'TEST') {
         $responseContent = $DP->getER();
         $responseContent['task'] = $taskPath;
         $responseContent['result'] = $resultPath;
-        $responseContent = json_encode($responseContent);
+        $responseContent['status'] = 'ok';
     } else {
-        $responseContent = json_encode(['failure' => true]);
+        returnError:
+        $responseContent = ['status' => 'error'];
     }
 }
 
-$response = new Response($responseContent, 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response = new Response(json_encode($responseContent), 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();
 

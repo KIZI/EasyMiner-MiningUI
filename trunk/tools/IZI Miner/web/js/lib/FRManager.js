@@ -30,7 +30,7 @@ var FRManager = new Class({
 	},
 
 	initPager: function () {
-		this.pager = new Pager($('pager-label'), $('paging'), $('pager'), $('pager-clear'), i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'), i18n.translate('Mining is in progress, it may take a while to get the results.'), i18n.translate('Mining has finished!'), i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'), i18n.translate('Mining has been stopped.'));
+		this.pager = new Pager($('pager-label'), $('paging'), $('pager'), $('pager-clear'), i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'), i18n.translate('Mining is in progress, it may take a while to get the results.'), i18n.translate('Mining has finished!'), i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'), i18n.translate('Mining has been stopped.'), i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
 	},
 	
 	handleInProgress: function () {
@@ -178,6 +178,7 @@ var FRManager = new Class({
 	
 	handleError: function () {
 		this.pager.reset();
+        this.pager.setError();
 		this.UIPainter.renderActiveRule();
 	},
 

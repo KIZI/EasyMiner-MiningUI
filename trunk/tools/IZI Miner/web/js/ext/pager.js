@@ -19,8 +19,9 @@ var Pager = new Class({
     textFinished: '',
     textNoRules: '',
     $textStopped: '',
+    $textError: '',
     
-    initialize: function(label, paging, container, clear, textInit, textProgress, textFinished, textNoRules, textStopped) {
+    initialize: function(label, paging, container, clear, textInit, textProgress, textFinished, textNoRules, textStopped, textError) {
     	this.label = label;
     	this.paging = paging;
     	this.container = container;
@@ -30,6 +31,7 @@ var Pager = new Class({
     	this.textFinished = textFinished;
     	this.textNoRules = textNoRules;
         this.$textStopped = textStopped;
+        this.$textError = textError;
     	this.content = this.container.getElement(this.innerElement);
     	this.content.set('tween', {transition: this.transition, duration: this.duration});
     	
@@ -76,6 +78,12 @@ var Pager = new Class({
         this.label.removeProperty('class');
         this.label.addClass('mining-stopped');
         this.label.set('text', this.$textStopped);
+    },
+
+    setError: function() {
+        this.label.removeProperty('class');
+        this.label.addClass('mining-error');
+        this.label.set('text', this.$textError);
     },
 	
 	add: function (rules) {
