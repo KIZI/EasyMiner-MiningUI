@@ -29,10 +29,11 @@ test('getRulesGetURL with timeout', function () {
 
 test('getBKAskURL', function () {
     var config = new Config();
+    config.setLang('en');
     config.setParams({id_dm: '102', id_kb: '27'});
     config.setBKGetURL('getBK.php');
 
-    strictEqual(config.getBKAskURL(), 'getBK.php?id_dm=102&id_kb=27&action=ask');
+    strictEqual(config.getBKAskURL(), 'getBK.php?id_dm=102&id_kb=27&action=ask&lang=en');
 });
 
 test('getIdDm', function() {

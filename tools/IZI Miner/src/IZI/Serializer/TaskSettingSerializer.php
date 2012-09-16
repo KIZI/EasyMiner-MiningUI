@@ -59,11 +59,11 @@ class TaskSettingSerializer
         $consequentId = $this->parseCedent($rule->succedent, 1, $forcedDepth);
         $this->consequentSetting->appendChild($this->output->createTextNode($consequentId));
 
-        // Update modelName
-        $this->updateModelName();
-
         // Update TaskSetting - hypothesesCountMax
         $this->updateTaskSetting($json->limitHits);
+
+        // Update modelName
+        $this->updateModelName();
 
         // Serialize XML
         return $this->output->saveXML();

@@ -32,13 +32,17 @@ class GetBKTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('application/json; charset=UTF-8', $info['content_type']);
         $this->assertEquals(200, $info['http_code']);
+        $this->assertSame('ok', $json->status);
         // TODO add key value validation
     }
 
     public function testSaveInterestingInvalid()
     {
         // TODO write test for invalid id_dm
-        $this->markTestIncomplete();
+
+        $this->assertEquals($info['content_type'], 'application/json; charset=UTF-8');
+        $this->assertEquals($info['http_code'], 200);
+        $this->assertSame('error', $json->status);
     }
 
 }
