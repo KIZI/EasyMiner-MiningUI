@@ -1173,11 +1173,16 @@ section#active-rule #action-box {
 #marked-rules h2.maximize {
   background: transparent url("../images/sprite-icons.png") 928px -161px no-repeat;
 }
-#marked-rules li {
+#marked-rules ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+#marked-rules ul li {
+  line-height: 30px;
   float: left;
   clear: left;
 }
-#marked-rules li:hover > .clear {
+#marked-rules ul li:hover > .clear {
   visibility: visible;
 }
 #marked-rules .rule {
@@ -1213,6 +1218,9 @@ section#active-rule #action-box {
   width: 16px;
   height: 20px;
   visibility: hidden;
+  margin-left: 20px;
+  position: relative;
+  top: 2px;
   float: left;
 }
 #marked-rules .field-sign.negative {
