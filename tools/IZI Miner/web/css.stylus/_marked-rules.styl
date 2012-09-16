@@ -15,11 +15,14 @@
   h2.maximize
     background transparent url('../images/sprite-icons.png') 928px -161px no-repeat
 
-  li
-    float left; clear left
-
-  li:hover > .clear
-    visibility visible
+  ul
+    list-style-type none
+    padding-left 0
+    li
+      line-height 30px
+      float left; clear left
+    li:hover > .clear
+      visibility visible
 
   .rule
     associationRule()
@@ -38,6 +41,8 @@
 
   .clear
     remove()
+    margin-left 20px
+    position relative; top 2px
     float left
 
   .field-sign.negative
