@@ -25,6 +25,7 @@ class GetDataTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('DD', $json));
         $this->assertTrue(array_key_exists('FLs', $json));
         $this->assertTrue(array_key_exists('FGC', $json));
+        $this->assertSame('ok', $json->status);
     }
 
     public function testGetDataInvalid()
@@ -43,7 +44,7 @@ class GetDataTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($info['content_type'], 'application/json; charset=UTF-8');
         $this->assertEquals($info['http_code'], 200);
-        $this->assertTrue($json->failure);
+        $this->assertSame('error', $json->status);
     }
 
 }

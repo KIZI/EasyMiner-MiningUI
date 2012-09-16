@@ -16,7 +16,7 @@ var ARManager = new Class({
 	maxFieldID: 0,
 	attributesByGroup: false,
 	
-	initialize: function (ARBuilder, DD, FL, miningManager, ETreeManager, settings) {
+	initialize: function (ARBuilder, DD, FL, miningManager, ETreeManager, settings, UIPainter) {
         this.$ARBuilder = ARBuilder;
 		this.DD = DD;
 		this.FL = FL;
@@ -24,6 +24,7 @@ var ARManager = new Class({
 		this.miningManager = miningManager;
 		this.ETreeManager = ETreeManager;
 		this.settings = settings;
+        this.UIPainter = UIPainter;
 		
 		this.ETreeValidator = new ETreeValidator();
 		
@@ -34,11 +35,7 @@ var ARManager = new Class({
 			this.FL = FL;
 		}.bind(this));
 	},
-	
-	setUIPainter: function (UIPainter) {
-		this.UIPainter = UIPainter;
-	},
-	
+
 	initBlankAR: function () {
 		this.maxCedentID = 0;
 		this.maxFieldID = 0;

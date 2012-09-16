@@ -12,7 +12,7 @@ class DataParserTest extends PHPUnit_Framework_TestCase
     {
         $DP = new DataParser(DD, FL, FGC, ERASSOCIATIONRULES, null, $this->lang);
         $DP->loadData();
-        $data = (array)json_decode($DP->parseData());
+        $data = $DP->parseData();
 
         $this->assertTrue(isset($data['DD']));
         $this->assertEquals(5, count($data));
@@ -23,7 +23,7 @@ class DataParserTest extends PHPUnit_Framework_TestCase
         $this->markTestSkipped();
         $DP = new DataParser(DD, FL, FGC, ERTASKSETTING, null, $this->lang);
         $DP->loadData();
-        $data = (array)json_decode($DP->parseData());
+        $data = $DP->parseData();
 
         $this->assertTrue(isset($data['DD']));
         $this->assertEquals(5, count($data));
@@ -34,7 +34,7 @@ class DataParserTest extends PHPUnit_Framework_TestCase
         $this->markTestSkipped();
         $DP = new DataParser(DD, FL, FGC, ERARQUERY, null, $this->lang);
         $DP->loadData();
-        $data = (array)json_decode($DP->parseData());
+        $data = $DP->parseData();
 
         $this->assertTrue(isset($data['DD']));
         $this->assertEquals(5, count($data));
@@ -44,7 +44,7 @@ class DataParserTest extends PHPUnit_Framework_TestCase
     {
         $DP = new DataParser(DD, FL, FGC, null, null, $this->lang);
         $DP->loadData();
-        $data = (array)json_decode($DP->parseData());
+        $data = $DP->parseData();
 
         $this->assertTrue(isset($data['FGC']));
     }

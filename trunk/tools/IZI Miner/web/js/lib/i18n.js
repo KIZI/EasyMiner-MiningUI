@@ -65,7 +65,9 @@ var i18n = new Class({
                61: {'cs': 'Data fields', 'en': 'Data fields'},
                62: {'cs': 'Upravit atribut', 'en': 'Edit attribute'},
                63: {'cs': 'Zastavit dolování', 'en': 'Stop mining'},
-               64: {'cs': 'Dolování bylo zastaveno.', 'en': 'Mining has been stopped.'}},
+               64: {'cs': 'Dolování bylo zastaveno.', 'en': 'Mining has been stopped.'},
+                65: {'cs': 'Načítám data aplikace...', 'en': 'Loading application data...'},
+                66: {'cs': 'Při načítání dat aplikace došlo k chybě.', 'en': 'An error occured while loading application data.'}},
 			   
 	initialize: function (lang) {
 		this.lang = lang;

@@ -397,6 +397,14 @@ td {
 #overlay #new-task-window form input[type="submit"] {
   margin-left: 310px;
 }
+#overlay #loading-data {
+  text-align: center;
+  background: #fff url("../images/icon-loading-big.gif") center 30px no-repeat;
+  padding: 100px 0 40px;
+}
+#overlay #loading-data.error {
+  background: #fff url("../images/sprite-icons.png") 160px -598px no-repeat;
+}
 #settings-form {
   line-height: 2em;
 }

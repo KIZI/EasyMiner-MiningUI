@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/izi-miner/web/" />
-<title>Add attribute</title>
+<title>Load data</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Add attribute</td></tr>
+<tr><td rowspan="1" colspan="3">Load data</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,20 +17,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=#field-nav-payments</td>
+	<td>waitForElementNotPresent</td>
+	<td>css=#loading-data</td>
 	<td></td>
 </tr>
-<tr>
-	<td>dragAndDropToObject</td>
-	<td>css=#field-nav-payments</td>
-	<td>css=#attributes</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#add-attribute-window</td>
-	<td></td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

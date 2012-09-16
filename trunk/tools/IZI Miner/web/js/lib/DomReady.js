@@ -17,7 +17,6 @@ var DomReady = new Class({
 		config.setParams(uri.get('data'));
 
 		var ARB = new ARBuilder(config);
-		ARB.run();
 	}
 
 });

@@ -1,24 +1,16 @@
-/*global Class: false, $: false, Element: false */ 
-
 var UIPainter = new Class({
 	
 	config: null,
-	DD: null,
-	FL: null,
-	FGC: null,
-	ARManager: null,
-	FRManager: null,
-	ETreeManager: null,
-	miningManager: null,
 	UIColorizer: null,
 	UIListener: null,
+    dateHelper: null,
+    UITemplateRegistrator: null,
+
 	pager: null,
 	
 	rootElement: null,
 	i18n: null,
-	dateHelper: null,
-	UITemplateRegistrator: null,
-	
+
 	callbackStack: [],
 
 	// sort attributes
@@ -28,44 +20,37 @@ var UIPainter = new Class({
 	// dispose element
 	disposeDuration: 750,
 	
-	initialize: function (ARBuilder, config, DD, FL, FGC, ARManager, FRManager, miningManager, ETreeManager, UIColorizer, UIListener) {
-		this.config = config;
+	initialize: function (ARBuilder, config, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator) {
+		this.ARBuilder = ARBuilder;
+        this.config = config;
 		this.rootElement = $(this.config.getRootElementID());
-		this.i18n = new i18n(this.config.getLang());
-		this.DD = DD;
-		this.FL = FL;
-		this.FGC = FGC;
-		this.ARManager = ARManager;
-		this.FRManager = FRManager;
-		this.miningManager = miningManager;
-		this.ETreeManager = ETreeManager;
+		this.i18n = i18n;
 		this.UIColorizer = UIColorizer;
 		this.UIListener = UIListener;
-		this.dateHelper = new DateHelper();
-		this.UITemplateRegistrator = new UITemplateRegistrator();
-		
-		ARBuilder.addEvent('updateFL', function (FL) {
-			this.FL = FL;
-		}.bind(this));
+		this.dateHelper = dateHelper;
+		this.UITemplateRegistrator = UITemplateRegistrator;
 	},
 	
 	getDisposeDuration: function () {
 		return this.disposeDuration;
 	},
-	
+
+    renderOverlay: function() {
+        this.rootElement.grab(Mooml.render('overlayTemplate'));
+    },
+
 	createUI: function () {
 		this.renderAll();
 	},
-	
+
 	renderAll: function () {
 		this.renderStructure();
 		this.renderNavigation();
 		this.renderContent();
         this.resizeWindow();
 	},
-	
+
 	renderStructure: function () {
-		this.rootElement.grab(Mooml.render('overlayTemplate'));
 		this.rootElement.grab(Mooml.render('headerTemplate', {config: this.config, i18n: this.i18n}));
 		this.rootElement.grab(Mooml.render('mainTemplate', {config: this.config, dateHelper: this.dateHelper, i18n: this.i18n}));
 		this.rootElement.grab(Mooml.render('footerTemplate', {config: this.config, i18n: this.i18n}));
@@ -103,12 +88,12 @@ var UIPainter = new Class({
 		var navigation = $('navigation');
 		var attributes = $('attributes');
 		if (attributes) {
-			Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARManager.getAttributesByGroup(), inProgress: this.ETreeManager.getInProgress()}).replaces(attributes);
+			Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARBuilder.getARManager().getAttributesByGroup(), inProgress: this.ARBuilder.getETreeManager().getInProgress()}).replaces(attributes);
 		} else {
-			navigation.grab(Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARManager.getAttributesByGroup(), inProgress: this.ETreeManager.getInProgress()}));
+			navigation.grab(Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARBuilder.getARManager().getAttributesByGroup(), inProgress: this.ARBuilder.getETreeManager().getInProgress()}));
 		}
 		
-		if (this.ARManager.getAttributesByGroup() === true) {
+		if (this.ARBuilder.getARManager().getAttributesByGroup() === true) {
 			this.renderAttributesByGroup(navigation.getElement('ul'));
 		} else {
 			this.renderAttributesByList();
@@ -122,7 +107,7 @@ var UIPainter = new Class({
 			elementParent.empty();
 		}
 
-		elementParent.grab(this.initFieldGroup(this.FGC.getFieldGroupRootConfigID()));
+		elementParent.grab(this.initFieldGroup(this.ARBuilder.getFGC().getFieldGroupRootConfigID()));
 		while (callback = this.callbackStack.pop()) {
 			callback.func.apply(this.UIListener , callback.args);
 		}
@@ -135,14 +120,14 @@ var UIPainter = new Class({
 			elementParent.empty();
 		}
 
-		Object.each(this.DD.getAttributes(), function (attribute) {
+		Object.each(this.ARBuilder.getDD().getAttributes(), function (attribute) {
 			this.renderAttributeByList(attribute, elementParent);
 		}.bind(this));
 	},
 	
 	renderAttributeByList: function (attribute, elementParent) {
 		if (elementParent) { // insert
-			elementParent.grab(Mooml.render('attributeByListTemplate', {i18n: this.i18n, isUsed: this.ARManager.getActiveRule().isAttributeUsed(attribute), attribute: attribute}));
+			elementParent.grab(Mooml.render('attributeByListTemplate', {i18n: this.i18n, isUsed: this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute), attribute: attribute}));
 			this.UIListener.registerAttributeEventHandler(attribute);
 		} else { // re-render
 			var element = $(attribute.getCSSID());
@@ -157,7 +142,7 @@ var UIPainter = new Class({
 					'background-image': 'url(images/icon-rec2.png',
 					'background-repeat': 'no-repeat',
 					'color': '#434343'});
-			} else if (this.ARManager.getActiveRule().isAttributeUsed(attribute)) {
+			} else if (this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute)) {
 				element.morph({
 					'background-image': 'none',
 					'color': '#AAA'});
@@ -213,7 +198,7 @@ var UIPainter = new Class({
             navigation.grab(dataFields);
         }
 
-        this.DD.getFields().each(function(field) {
+        this.ARBuilder.getDD().getFields().each(function(field) {
             this.renderDataField(field, dataFields.getElement('ul'));
             this.UIListener.registerDataFieldEventHandler(field);
         }.bind(this));
@@ -233,7 +218,7 @@ var UIPainter = new Class({
 		sorter.sort(positions).chain(function () {
 			sorter.rearrangeDOM();
 			
-			Array.each(this.DD.getAttributes(), function (attribute) {
+			Array.each(this.ARBuilder.getDD().getAttributes(), function (attribute) {
 				this.renderAttributeByList(attribute);
 			}.bind(this));
 			
@@ -271,13 +256,13 @@ var UIPainter = new Class({
 			revert: true,
 			
 			onComplete: function (element) {
-				this.ARManager.sortMarkedRules(sortables.serialize());
+				this.ARBuilder.getARManager().sortMarkedRules(sortables.serialize());
 			}.bind(this)
 		});
 	},
 	
 	initFieldGroup: function (id) { // recursive
-		var FG = this.FGC.getFieldGroup(id);
+		var FG = this.ARBuilder.getFGC().getFieldGroup(id);
 
 		var returnEl = new Element('li', {id: 'fg-' + id + '-name', 'class': 'field-group-drag', html: '<span>' + FG.getLocalizedName() + '</span>', title: FG.getExplanation()});
 		var FGEl = new Element('ul', {id: 'fg-' + id, 'class': 'field-group'}).inject(returnEl);
@@ -305,25 +290,25 @@ var UIPainter = new Class({
 	},
 	
 	renderActiveRule: function () {
-		Mooml.render('activeRuleTemplate', {rules: this.ARManager.display4ftTaskBox(), attributes: this.ARManager.displayETreeTaskBox(), i18n: this.i18n, displayAddIM: this.ARManager.hasPossibleIMs()}).replaces($('active-rule'));
+		Mooml.render('activeRuleTemplate', {rules: this.ARBuilder.getARManager().display4ftTaskBox(), attributes: this.ARBuilder.getARManager().displayETreeTaskBox(), i18n: this.i18n, displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs()}).replaces($('active-rule'));
 		
 		var elementParent = $('antecedent');
-		this.renderCedent(this.ARManager.getActiveRule().getAntecedent(), elementParent);
+		this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);
 		
-		Object.each(this.ARManager.getActiveRule().getIMs(), function(IM, key) {
+		Object.each(this.ARBuilder.getARManager().getActiveRule().getIMs(), function(IM, key) {
 			this.renderIM(IM);
 		}.bind(this));
 		
 		var elementParent = $('succedent');
-		this.renderCedent(this.ARManager.getActiveRule().getSuccedent(), elementParent);
+		this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getSuccedent(), elementParent);
 		
-		this.UIListener.registerActiveRuleEventHandlers(this.ARManager.getActiveRule());
+		this.UIListener.registerActiveRuleEventHandlers(this.ARBuilder.getARManager().getActiveRule());
 		
 		this.updateScrollbar();
 	},
 	
 	renderCedent: function (cedent, elementParent) {
-		var elementCedent = Mooml.render('cedentTemplate', {rule: this.ARManager.getActiveRule(), cedent: cedent, i18n: this.i18n});
+		var elementCedent = Mooml.render('cedentTemplate', {rule: this.ARBuilder.getARManager().getActiveRule(), cedent: cedent, i18n: this.i18n});
 		if (elementParent !== null) { // new cedent
 			elementParent.grab(elementCedent);
 		} else { // re-render
@@ -359,7 +344,7 @@ var UIPainter = new Class({
             elementFields.grab(rightBracket);
         }
 
-		this.UIListener.registerCedentEventHandlers(cedent, this.ARManager.getActiveRule());
+		this.UIListener.registerCedentEventHandlers(cedent, this.ARBuilder.getARManager().getActiveRule());
 	},
 	
 	renderField: function (field, elementParent, cedent) {
@@ -425,21 +410,21 @@ var UIPainter = new Class({
 	renderAddCoefficientWindow: function (field) {
 		var overlay = this.showOverlay();
 		overlay.grab(Mooml.render('addCoefficientWindowTemplate', {i18n: this.i18n}));
-		var selectedCoefficient = this.FL.getDefaultBBACoef();
+		var selectedCoefficient = this.ARBuilder.getFL().getDefaultBBACoef();
 		this.renderAddCoefficientAutocomplete(field, selectedCoefficient);
 	},
 	
 	renderEditCoefficientWindow: function (field) {
 		var overlay = this.showOverlay();
 		overlay.grab(Mooml.render('editCoefficientWindowTemplate', {i18n: this.i18n}));
-		var selectedCoefficient = this.FL.getBBACoefficient(field.getType());
+		var selectedCoefficient = this.ARBuilder.getFL().getBBACoefficient(field.getType());
 		this.renderEditCoefficientAutocomplete(field, selectedCoefficient);
 	},
 	
 	renderAddCoefficientAutocomplete: function(field, selectedCoefficient) { 
 		Mooml.render('addCoefficientWindowAutocompleteTemplate', {i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('add-coefficient-autocomplete'));
 		
-		Object.each(this.FL.getBBACoefficients(), function (BBACoefficient) {
+		Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
 			var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
 			$('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
 		}.bind(this));
@@ -470,7 +455,7 @@ var UIPainter = new Class({
 	renderEditCoefficientAutocomplete: function(field, selectedCoefficient) { 
 		Mooml.render('editCoefficientWindowAutocompleteTemplate', {field: field, i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('edit-coefficient-autocomplete'));
 		
-		Object.each(this.FL.getBBACoefficients(), function (BBACoefficient) {
+		Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
 			var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
 			$('edit-coefficient-select').grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
 		}.bind(this));
@@ -503,11 +488,11 @@ var UIPainter = new Class({
 		var overlay = this.showOverlay();
 		overlay.grab(Mooml.render('editConnectiveWindowTemplate', {i18n: this.i18n}));
 
-        if (this.FL.isConnectiveAllowed('Conjunction', cedent.getScope(), this.ARManager.getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
+        if (this.ARBuilder.getFL().isConnectiveAllowed('Conjunction', cedent.getScope(), this.ARBuilder.getARManager().getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
             $('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {isSelected: cedent.getConnective().getName() === 'Conjunction', connective: 'Conjunction'}));
         }
 
-        if (this.FL.isConnectiveAllowed('Disjunction', cedent.getScope(), this.ARManager.getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
+        if (this.ARBuilder.getFL().isConnectiveAllowed('Disjunction', cedent.getScope(), this.ARBuilder.getARManager().getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
             $('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {isSelected: cedent.getConnective().getName() === 'Disjunction', connective: 'Disjunction'}));
         }
 
@@ -560,7 +545,7 @@ var UIPainter = new Class({
 				elFR.store('tip:text', this.i18n.translate('This rule is an exception to a rule stored in knowledge base.'));
 			}
 			
-			if (!this.FL.getAutoSuggest()) {
+			if (!this.ARBuilder.getFL().getAutoSuggest()) {
 				var elBK = elFR.getElement('.bk');
 				elBK.morph({'display': 'none'});
 			}
@@ -698,6 +683,16 @@ var UIPainter = new Class({
     hideDownloadButtons: function() {
         $('view-task-setting').setStyle('visibility', 'hidden');
         $('view-task-result').setStyle('visibility', 'hidden');
+    },
+
+    showLoadData: function() {
+        $('overlay').grab(new Element('div', {id: 'loading-data', html: this.i18n.translate('Loading application data...')}));
+        this.showOverlay();
+    },
+
+    showLoadDataError: function() {
+        $('loading-data').set('html', this.i18n.translate('An error occured while loading application data.'));
+        $('loading-data').addClass('error');
     }
-	
+
 });
