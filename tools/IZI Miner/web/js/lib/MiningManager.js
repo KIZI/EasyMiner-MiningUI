@@ -31,7 +31,11 @@ var MiningManager = new Class({
 	        secure: true,
 	            
 	        onSuccess: function(responseJSON, responseText) {
-	        	this.handleSuccessRequest(data, responseJSON);
+                if (responseJSON.status == 'ok') {
+	        	    this.handleSuccessRequest(data, responseJSON);
+                } else {
+                    this.handleErrorRequest();
+                }
 	        }.bind(this),
 	            
 	        onError: function () {

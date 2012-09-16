@@ -34,25 +34,25 @@ class GetRulesTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('taskState', $json));
         $this->assertTrue(array_key_exists('task', $json));
         $this->assertTrue(array_key_exists('result', $json));
+        $this->assertSame('ok', $json->status);
     }
 
     public function testGetRulesInvalid()
     {
-        $this->markTestSkipped();
-        $data = ['data' => [
+        $data = [
             "limitHits" => 250,
             "rule0" => [
                 ["name" => "District", "type" => "attr", "category" => "Subset", "fields" => [["name" => "minLength", "value" => "1"], ["name" => "maxLength", "value" => "1"]]],
                 ["name" => "FUI", "type" => "oper", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "threshold", "value" => "0.70"]]],
                 ["name" => "Quality", "type" => "attr", "category" => "Subset", "fields" => [["name" => "minLength", "value" => "1"], ["name" => "maxLength", "value" => "1"]]]
             ],
-            "rules" => 1]];
+            "rules" => 1];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getRules.php?id_dm=INVALID&lang=en');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, false);
+        curl_setopt($ch, CURLOPT_POST, true);
 
         $response = curl_exec($ch);
         $info = curl_getinfo($ch);
@@ -62,8 +62,7 @@ class GetRulesTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($info['content_type'], 'application/json; charset=UTF-8');
         $this->assertEquals($info['http_code'], 200);
-        $this->assertTrue($json->failure);
-        $this->assertTrue(array_key_exists('4ft_task', $json));
+        $this->assertSame('error', $json->status);
     }
 
 }

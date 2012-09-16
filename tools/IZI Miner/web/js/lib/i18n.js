@@ -67,8 +67,9 @@ var i18n = new Class({
                63: {'cs': 'Zastavit dolování', 'en': 'Stop mining'},
                64: {'cs': 'Dolování bylo zastaveno.', 'en': 'Mining has been stopped.'},
                 65: {'cs': 'Načítám data aplikace...', 'en': 'Loading application data...'},
-                66: {'cs': 'Při načítání dat aplikace došlo k chybě.', 'en': 'An error occured while loading application data.'}},
-			   
+                66: {'cs': 'Při načítání dat aplikace došlo k chybě.', 'en': 'An error occured while loading application data.'},
+                67: {'cs': 'Při dolování došlo k chybě. Zkuste spustit dolování znovu či vytvořit novou úlohu.', 'en': 'An error occured during mining. Try to start mining again or create new data mining task.'}},
+
 	initialize: function (lang) {
 		this.lang = lang;
 	},
