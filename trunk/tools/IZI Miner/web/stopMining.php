@@ -14,9 +14,11 @@ $data = $request->request->has('data') ? $request->request->get('data') : $reque
 $lang = $request->query->get('lang');
 
 if ($id === 'TEST') {
-    $responseContent = json_encode(['status' => 'stopped']);
+    $responseContent = ['status' => 'ok'];
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
+    if (!file_exists($DDPath)) { goto returnError; }
+
     $serializer = new TaskSettingSerializer($DDPath);
     $serialized = $serializer->serialize($data);
     $matches = [];
@@ -45,18 +47,19 @@ if ($id === 'TEST') {
         FB::info(['curl info' => $info]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false) {
+    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
         $success = preg_match('/status=\"success\"/', $response);
         if ($success) {
-            $responseContent = json_encode(['status' => 'stopped']);
+            $responseContent = ['status' => 'ok'];
         } else {
-            $responseContent = json_encode(['status' => 'unknown']);
+            $responseContent = ['status' => 'error'];
         }
     } else {
-        $responseContent = json_encode(['failure' => true]);
+        returnError:
+        $responseContent = ['status' => 'error'];
     }
 }
 
-$response = new Response($responseContent, 200, array('content-type' => 'application/json; charset=UTF-8'));
+$response = new Response(json_encode($responseContent), 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();
 
