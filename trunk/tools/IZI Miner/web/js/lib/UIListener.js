@@ -23,8 +23,7 @@ var UIListener = new Class({
         // called when com_dbconnect window is closed
         var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
         elIZI.addEvent('reload', function() {
-            var elSubmit = $('overlay').getElement('form input[type="submit"]');
-            elSubmit.fireEvent('click');
+            this.ARBuilder.reloadAttributes();
         });
     },
 	
