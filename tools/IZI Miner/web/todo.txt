@@ -5,19 +5,25 @@ TODO
 - think about DD - PHP vs. JS
 - repair scrollbar
 - list-style-type none pri pretahovani data fieldu
-- refactor KBI paths from PHP into JS
-- modern browser check
 - feedback module
 - onerror
 - clear rules should scroll up
 
-- bug (Age* and Sex*) or District* => Quality* [Confidence: 0.70]
+- bug (Age* and Sex*) or District* => Quality* [Confidence: 0.70] - nemá jít zadat
 - seskupeni hodne atributu - bugy
 
 14. 9. 2012
 - 14.10 - 15.30 KBI refactoring
 - 16.30 - 17.30 stable
 
+exporter is occupied !!!!!!!
+ošetřit message od kBI - při minování i data description zkoušet znovu
+stopMining!!!
+
+<br />
+<b>Warning</b>:  DOMDocument::loadXML(): Empty string supplied as input in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>174</b><br />
+<br />
+<b>Fatal error</b>:  Cannot use object of type stdClass as array in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>87</b><br />
 
 
 
@@ -36,3 +42,6 @@ Dochazka
 =============
 17.20 - 17.45 tests, background fix
 17.55 - 18.40 overlay fix
+
+18. 9. 2012
+10.25 - 11.40 background knowledge does not work

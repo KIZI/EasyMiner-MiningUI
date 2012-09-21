@@ -29,7 +29,7 @@ class AnnotatedAssociationRulesSerializer
 
         // init XPath
         $this->ddXpath = new \DOMXPath($this->DD);
-        $this->ddXpath->registerNamespace('dd', "http://keg.vse.cz/ns/datadescription0_2");
+        $this->ddXpath->registerNamespace('data', "http://keg.vse.cz/ns/datadescription0_2");
     }
 
     public function serialize($json, $annotationText)
@@ -77,21 +77,20 @@ class AnnotatedAssociationRulesSerializer
         $this->output = new \DOMDocument("1.0", "UTF-8");
 
         // create PMML
-        $document = $this->output->createElement('arb:ARBuilder');
-        $document->setAttribute("xmlns:arb", "http://keg.vse.cz/ns/arbuilder0_2");
+        $document = $this->output->createElement('ar:ARBuilder');
+        $document->setAttribute("xmlns:ar", "http://keg.vse.cz/ns/arbuilder0_2");
         $document->setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        $document->setAttribute("xmlns:dd", "http://keg.vse.cz/ns/datadescription0_2");
+        $document->setAttribute("xmlns:guha", "http://keg.vse.cz/ns/GUHA0.1rev1");
         $document->setAttribute("xsi:schemaLocation", "http://keg.vse.cz/ns/arbuilder0_2 http://sewebar.vse.cz/schemas/ARBuilder0_2.xsd");
         $root = $this->output->appendChild($document);
 
         // create DataDescription
         $dataDescription = $root->appendChild($this->output->createElement("DataDescription"));
 
-        foreach ($this->ddXpath->query("//dd:DataDescription") as $elField) {
-            $fields = $elField->childNodes;
-            foreach ($fields as $fieldSmall) {
-                $dataDescription->appendChild($this->output->importNode($fieldSmall, true));
-            }
-        }
+        $anXPathExpression = "//data:DataDescription/Dictionary[@sourceDictType='TransformationDictionary']";
+        $dictionary = $this->ddXpath->query($anXPathExpression)->item(0);
+        $dataDescription->appendChild($this->output->importNode($dictionary, true));
 
         $this->associationRules = $root->appendChild($this->output->createElement("AnnotatedAssociationRules"));
     }
@@ -162,6 +161,7 @@ class AnnotatedAssociationRulesSerializer
 
         $bbaSetting = $this->output->createElement("BBA");
         $bbaSetting->setAttribute('id', $bbaId);
+        $bbaSetting->appendChild($this->output->createElement("Text", $attribute->name));
         $bbaSetting->appendChild($this->output->createElement("FieldRef", $attribute->name));
         $bbaSetting->appendChild($this->output->createElement("CatRef", $attribute->fields[0]->value[0]));
         $this->associationRules->appendChild($bbaSetting);
