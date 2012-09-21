@@ -30,6 +30,9 @@ if ($id === 'TEST') {
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
     if (!file_exists($DDPath)) {
+        if (FB_ENABLED) { // log into console
+            FB::error(['error' => 'data description does not exist']);
+        }
         goto returnError;
     }
 
@@ -76,9 +79,6 @@ if ($id === 'TEST') {
         $responseContent['status'] = 'ok';
     } else {
         returnError:
-        if (FB_ENABLED) { // log into console
-            FB::error(['error' => 'data description does not exist']);
-        }
         $responseContent = ['status' => 'error'];
     }
 }
