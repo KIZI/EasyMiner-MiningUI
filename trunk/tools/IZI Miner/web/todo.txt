@@ -19,6 +19,8 @@ TODO
 exporter is occupied !!!!!!!
 ošetřit message od kBI - při minování i data description zkoušet znovu
 stopMining!!!
+kolecko nebeha!!!!
+pri zastaveni stejne ulohy zobrazit tlacitko mine rules
 
 <br />
 <b>Warning</b>:  DOMDocument::loadXML(): Empty string supplied as input in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>174</b><br />
