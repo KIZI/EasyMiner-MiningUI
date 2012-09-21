@@ -30,7 +30,7 @@ if ($id === 'TEST') {
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
     if (!file_exists($DDPath)) {
-        FB::info(['error' => 'data description does not exist']);
+        FB::error(['error' => 'data description does not exist']);
         goto returnError;
     }
 
