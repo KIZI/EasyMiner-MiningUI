@@ -25,7 +25,7 @@ var UIListener = new Class({
         elIZI.addEvent('reload', function() {
             this.ARBuilder.reloadAttributes();
             console.log('reload event'); // TODO remove
-        });
+        }.bind(this));
     },
 	
 	registerSettingsEventHandlers: function () {
