@@ -318,8 +318,7 @@ class TaskSettingSerializer
 
     private function updateModelName()
     {
-        $modelName = sha1(time());
-//        $modelName = sha1($this->output->saveXML($this->arQuery));
+        $modelName = sha1($this->output->saveXML($this->arQuery));
         $this->modelName->appendChild($this->output->createTextNode($modelName));
     }
 

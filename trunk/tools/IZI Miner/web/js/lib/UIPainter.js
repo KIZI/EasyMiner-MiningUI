@@ -522,8 +522,9 @@ var UIPainter = new Class({
 			elFR.setStyle('cursor', 'help');
 			
 			var elFRInfo = elFR.getElement('.info');
+            // TODO refactor into external CSS style
 			elFRInfo.setStyle('display', 'block');
-			elFRInfo.setStyle('background', "rgba(255, 255, 255, 0.5) url('./images/icon-help2.png') 0 0 no-repeat");
+			elFRInfo.setStyle('background', "rgba(255, 255, 255, 0.5) url('./images/sprite-icons.png') -16px -465px no-repeat");
 			var elFRHelp = elFRInfo.getElement('.help');
 			if (FR.isInteresting()) {
 				if (FR.getInteresting()) { // marked as interesting

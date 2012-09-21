@@ -1,14 +1,18 @@
 <?php
 
+namespace IZI\Parser;
+
+use IZI\FileLoader\XMLLoader;
+
 class KnowledgeBaseParser
 {
     private $XPath;
 
     public function __construct($data)
     {
-        $DOM = new \DOMDocument('1.0', 'UTF-8');
-        @$DOM->loadXML($data);
-        $this->XPath = new DomXPath($DOM);
+        $loader = new XMLLoader();
+        $DOM = $loader->load($data);
+        $this->XPath = new \DomXPath($DOM);
     }
 
     public function parse()
