@@ -1,5 +1,10 @@
 "use strict";
 
+var reload = function() {
+    console.log('reload function'); // TODO refactor
+    $(config.getRootElementID()).fireEvent('reload');
+};
+
 var DomReady = new Class({
 
 	initialize: function () {
