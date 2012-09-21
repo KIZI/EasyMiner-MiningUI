@@ -24,6 +24,7 @@ var UIListener = new Class({
         var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
         elIZI.addEvent('reload', function() {
             this.ARBuilder.reloadAttributes();
+            console.log('reload event');
         });
     },
 	
