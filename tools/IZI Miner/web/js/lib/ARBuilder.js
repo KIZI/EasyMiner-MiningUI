@@ -167,6 +167,10 @@ var ARBuilder = new Class({
         this.UIPainter.hideOverlay();
     },
 
+    closeOverlay: function () {
+        this.UIPainter.hideOverlay();
+    },
+
     removeAttribute: function(attribute) {
         // remove attribute
         this.$DD.removeAttribute(attribute);

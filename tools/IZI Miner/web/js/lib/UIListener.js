@@ -24,7 +24,12 @@ var UIListener = new Class({
         var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
         elIZI.addEvent('reload', function() {
             this.ARBuilder.reloadAttributes();
-            console.log('reload event'); // TODO remove
+        }.bind(this));
+
+        // TODO refactor into another function
+        var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
+        elIZI.addEvent('closeOverlay', function() {
+            this.ARBuilder.closeOverlay();
         }.bind(this));
     },
 	
