@@ -29,7 +29,10 @@ if ($id === 'TEST') {
     $responseContent['status'] = 'ok';
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
-    if (!file_exists($DDPath)) { goto returnError; }
+    if (!file_exists($DDPath)) {
+        FB::info(['error' => 'data description does not exist']);
+        goto returnError;
+    }
 
     $loader = new XMLLoader();
     $serializer = new TaskSettingSerializer($DDPath);
