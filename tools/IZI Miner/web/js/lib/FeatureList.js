@@ -208,7 +208,7 @@ var FeatureList = new Class({
                     if (setting['Conjunction'] || setting['Disjunction']) { connectiveUsed++; }
                 }.bind(this));
 
-                if (connectives.contains('Conjunction') && (connectiveUsed < this.DBAMaxLevels) && level < 3) {
+                if (connectives.contains('Conjunction') && (connectiveUsed < this.DBAMaxLevels) && (level < 3) && !(level === 2 && settings[1]['Disjunction'])) {
                     return true;
                 }
 

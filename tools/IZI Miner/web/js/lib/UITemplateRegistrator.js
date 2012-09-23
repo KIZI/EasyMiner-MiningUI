@@ -187,6 +187,7 @@ var UITemplateRegistrator = new Class({
 			i18n = data.i18n;
 			fieldSign = field.getSign().toLowerCase();
 			cedent = data.cedent;
+            markFieldAllowed = data.markFieldAllowed;
 
 			if (field.getType() === null) {
 				div({id: field.getCSSID(), 'class': 'field'},
@@ -199,7 +200,7 @@ var UITemplateRegistrator = new Class({
 							a({id: field.getCSSRemoveID(), href: '#', 'class': 'remove-field', 'title': i18n.translate('Remove')}),
 							a({id: field.getEditCoefficientCSSID(), href: '#', 'class': 'edit-coefficient', 'title': i18n.translate('Edit')}),
 							fieldSign === 'positive' ? a({id: field.getCSSChangeSignID(), href: '#', 'class': 'change-sign ' + fieldSign}) : '',
-                            cedent.getNumFields(cedent.getLevel()) > 2 ? a({id: field.getCSSMarkID(), href: '#', 'class': field.isMarked() === true ? 'marked-field': 'mark-field', 'title': field.isMarked() === true ? i18n.translate('Unmark') : i18n.translate('Mark')}) : ''));
+                            data.markFieldAllowed ? a({id: field.getCSSMarkID(), href: '#', 'class': field.isMarked() === true ? 'marked-field': 'mark-field', 'title': field.isMarked() === true ? i18n.translate('Unmark') : i18n.translate('Mark')}) : ''));
 			}
 		});
 

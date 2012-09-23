@@ -325,11 +325,15 @@ var UIPainter = new Class({
             elementFields.grab(elementLeftBracket);
         }
 
+        var settings = this.ARBuilder.getARManager().getActiveRule().toSettings()[cedent.getScope()];
+        var markFieldsAllowed = (cedent.getNumFields(cedent.getLevel()) > 2) &&
+            (this.ARBuilder.getDefFL().isConnectiveAllowed('Conjunction', cedent.getScope(), settings, cedent.getNextLevel()) || this.ARBuilder.getDefFL().isConnectiveAllowed('Disjunction', cedent.getScope(), settings, cedent.getNextLevel()));
+
         cedent.getChildren().each(function(child) {
             if (instanceOf(child, Cedent)) { // Cedent
                 this.renderCedent(child, elementFields);
             } else { // FieldAR
-                this.renderField(child, elementFields, cedent);
+                this.renderField(child, elementFields, cedent, markFieldsAllowed);
             }
 
             if (index < cedent.getNumChildren()) { // Connective
@@ -347,12 +351,12 @@ var UIPainter = new Class({
 		this.UIListener.registerCedentEventHandlers(cedent, this.ARBuilder.getARManager().getActiveRule());
 	},
 	
-	renderField: function (field, elementParent, cedent) {
-		if (elementParent !== null) { // new field
-			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, cedent: cedent});
+	renderField: function (field, elementParent, cedent, markFielsdAllowed) {
+        if (elementParent !== null) { // new field
+			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, cedent: cedent, markFieldAllowed: markFielsdAllowed});
 			elementParent.grab(elementField);
 		} else { // re-render
-			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, cedent: cedent});
+			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, cedent: cedent, markFieldAllowed: markFielsdAllowed});
 			elementField.replaces($(field.getCSSID()));
 		}
 		
