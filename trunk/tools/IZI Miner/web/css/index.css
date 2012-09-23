@@ -957,14 +957,14 @@ section#active-rule #action-box {
 }
 #pager-label {
   height: 24px;
-  padding: 3px 0 0 30px;
+  padding: 3px 0 0 35px;
   margin-bottom: 15px;
 }
 #pager-label.mining-not-started {
   background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
 }
 #pager-label.mining-in-progress {
-  background: transparent url("../images/sprite-icons.png") -12px -411px no-repeat;
+  background: transparent url("../images/icon-loading.gif") 0 0 no-repeat;
 }
 #pager-label.mining-finished {
   background: transparent url("../images/sprite-icons.png") -164px -16px no-repeat;

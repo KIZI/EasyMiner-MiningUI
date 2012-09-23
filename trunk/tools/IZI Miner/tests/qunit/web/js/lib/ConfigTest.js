@@ -49,7 +49,7 @@ test('getAddAttributeURL', function() {
     config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getAddAttributeURL('Age'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age&kbi=100&lang=en');
+    strictEqual(config.getAddAttributeURL('Age'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age&kbi=100&tmpl=component');
 });
 
 test('getAddAttributeURL 2', function() {
@@ -58,7 +58,7 @@ test('getAddAttributeURL 2', function() {
     config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getAddAttributeURL('Age '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age%20&kbi=100&lang=en');
+    strictEqual(config.getAddAttributeURL('Age '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=Age%20&kbi=100&tmpl=component');
 });
 
 test('getEditAttributeURL', function() {
@@ -67,7 +67,7 @@ test('getEditAttributeURL', function() {
     config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getEditAttributeURL('Quality'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality&kbi=100&lang=en');
+    strictEqual(config.getEditAttributeURL('Quality'), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality&kbi=100&tmpl=component');
 });
 
 test('getEditAttributeURL 2', function() {
@@ -76,7 +76,7 @@ test('getEditAttributeURL 2', function() {
     config.setParams({id_dm: '100'});
     config.setJoomlaURL('http://sewebar.lmcloud.vse.cz/');
 
-    strictEqual(config.getEditAttributeURL('Quality '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality%20&kbi=100&lang=en');
+    strictEqual(config.getEditAttributeURL('Quality '), 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=Quality%20&kbi=100&tmpl=component');
 });
 
 test('getNewTaskURL', function() {

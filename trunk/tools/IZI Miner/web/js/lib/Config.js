@@ -108,11 +108,11 @@ var Config = new Class({
 	},
 
     getAddAttributeURL: function(fieldName) {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=' + encodeURIComponent(fieldName) + '&kbi=' + this.params.id_dm + '&lang=' + this.lang;
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=' + encodeURIComponent(fieldName) + '&kbi=' + this.params.id_dm + '&tmpl=component';
     },
 
     getEditAttributeURL: function(attributeName) {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName) + '&kbi=' + this.params.id_dm + '&lang=' + this.lang;
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName) + '&kbi=' + this.params.id_dm + '&tmpl=component';
     },
 
     getNewTaskURL: function() {

@@ -12,38 +12,19 @@ TODO
 - bug (Age* and Sex*) or District* => Quality* [Confidence: 0.70] - nemá jít zadat
 - seskupeni hodne atributu - bugy
 
-14. 9. 2012
-- 14.10 - 15.30 KBI refactoring
-- 16.30 - 17.30 stable
-
 exporter is occupied !!!!!!!
 ošetřit message od kBI - při minování i data description zkoušet znovu
-stopMining!!!
-kolecko nebeha!!!!
 pri zastaveni stejne ulohy zobrazit tlacitko mine rules
+při reloadu vyskočí chyba!!!
+!!! handle XQuery error in IZI Miner... tests
 
 <br />
 <b>Warning</b>:  DOMDocument::loadXML(): Empty string supplied as input in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>174</b><br />
 <br />
 <b>Fatal error</b>:  Cannot use object of type stdClass as array in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>87</b><br />
 
+23. 9. 2012
+12.30 - 13.00 Loading icon fix
+13.00 - 13.45 (A and B) or C
 
-
-Dochazka
-==============
-27. 8. 2012
-17.00 - 22.00 architecture up debug
-
-28. 8. 2012
-12.30 - 16.00 stable IZI Miner release
-
-29. 8. 2012
-12.45 - 14.15 serializer tests
-
-6. 9. 2012
-=============
-17.20 - 17.45 tests, background fix
-17.55 - 18.40 overlay fix
-
-18. 9. 2012
-10.25 - 11.40 background knowledge does not work
+write tests for getData, getRules, stopMining... verify that IZI handles errors
