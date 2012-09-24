@@ -437,7 +437,7 @@ var UIPainter = new Class({
 		var elFR = $(FR.getCSSID());
 		if (!elFR) { return; }
 		
-		if (FR.getIndexed()) {
+		if (FR.isInteresting() || FR.isException()) {
 			elFR.set('morph', {duration: this.morphDuration});
 			elFR.setStyle('cursor', 'help');
 			
@@ -450,14 +450,14 @@ var UIPainter = new Class({
 				if (FR.getInteresting()) { // marked as interesting
 					elFR.setStyle('font-weight', 'bold');
 					
-					elFR.store('tip:text', this.i18n.translate('Association rule is considered as interesting.'));
+					elFR.store('tip:text', this.i18n.translate('Association rule is novel.'));
 				} else { // marked as not interesting
 					Array.each(elFR.getChildren('*:not(span.info)'), function (child) {
 						child.set('morph', {duration: this.morphDuration});
 						child.morph({'opacity': '0.3'});
 					}.bind(this));
 					
-					elFR.store('tip:text', this.i18n.translate('Association rule is considered as not interesting.'));
+					elFR.store('tip:text', this.i18n.translate('Association rule confirms an already known rule.'));
 				}
 			} else if (FR.isException()) {
 				elFR.setStyle('font-weight', 'bold');

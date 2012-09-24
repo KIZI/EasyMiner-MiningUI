@@ -1,9 +1,8 @@
 var FoundRule = new Class({
 	
-	Properties: ['exception', 'indexed', 'interesting', 'rule'],
+	Properties: ['exception', 'interesting', 'rule'],
 	
 	$exception: null,
-	$indexed: false,
 	$interesting: null,
 	$rule: null,
 	

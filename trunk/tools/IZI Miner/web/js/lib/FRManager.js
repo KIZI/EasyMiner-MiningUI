@@ -128,9 +128,11 @@ var FRManager = new Class({
 			}.bind(this),
 	        
 	        onSuccess: function(responseJSON, responseText) {
-	        	if (update) {
+	        	if (update && responseJSON.status == 'ok') {
 	        		this.handleSuccessRequest(FR, responseJSON);
-	        	}
+	        	} else {
+                    this.handleErrorRequest(FR);
+                }
 	        }.bind(this),
 	            
 	        onError: function () {
@@ -156,29 +158,26 @@ var FRManager = new Class({
 		
 		this.AJAXBalancer.addRequest(options, JSON.encode(reqData), FR.getRule().getId());
 	},
-	
+
+    // TODO refactor into single class
 	handleSuccessRequest: function (FR, data) {
-		if (data && (data.confirmation.hits > 0 || data.exception.hits > 0)) {
-			FR.setIndexed(true);
-			
+		if (data.confirmation.hits > 0 || data.exception.hits > 0) {
 			if (data.confirmation.hits > 0) {
-				FR.setInteresting(data.confirmation.numInteresting >= data.confirmation.numNotInteresting);
-			}
-			
-			if (data.exception.hits > 0) {
+				FR.setInteresting(false);
+			} else if (data.exception.hits > 0) {
 				FR.setException(true);
 			}
-			
-			if (FR.getIndexed()) {
-				this.tips.attach($(FR.getCSSID()));
-			}
-		}
-		
+		} else {
+            FS.setInteresting(true);
+        }
+
+        // TODO refactor into UIPainter
+		this.tips.attach($(FR.getCSSID()));
+
 		this.UIPainter.updateFoundRule(FR, this.FL);
 	},
 	
 	handleErrorRequest: function (FR) {
-		FR.setIndexed(false);
 		this.UIPainter.updateFoundRule(FR, this.FL);
 	},
 	
