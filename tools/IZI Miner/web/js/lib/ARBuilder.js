@@ -48,6 +48,21 @@ var ARBuilder = new Class({
         this.dataParser.getData(this.initApplication, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
     },
 
+    reloadData: function() {
+        this.handleLoadData();
+        this.dataParser = new DataParser(this.$config, true);
+        this.dataParser.getData(this.repaintData, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
+    },
+
+    repaintData: function() {
+        this.$DD = this.dataParser.getDD();
+        this.FLs = this.dataParser.getFLs();
+        this.$FGC = this.dataParser.getFGC();
+
+        this.reset();
+        this.$UIStructurePainter.hideOverlay();
+    },
+
     handleLoadData: function() {
         this.$UIStructurePainter.showLoadData();
     },
@@ -173,11 +188,7 @@ var ARBuilder = new Class({
 
     // TODO handle load data error
     reloadAttributes: function() {
-        this.loadData();
-        // TODO show loading indicator
-        this.UIPainter.renderNavigation();
-        this.reset();
-        this.$UIStructurePainter.hideOverlay();
+        this.reloadData();
     },
 
     closeOverlay: function () {
@@ -194,18 +205,22 @@ var ARBuilder = new Class({
     },
 
     reset: function() {
+        // navigation
+        this.UIPainter.renderNavigation();
+
         // active rule
-        this.$ARManager.initBlankAR();
+        // TODO reset only if necessary
+        //this.$ARManager.initBlankAR();
 
         this.stopMining();
 
         // found rules
         // TODO reset only if necessary
-        this.$FRManager.reset();
+//        this.$FRManager.reset();
 
         // marked rules
         // TODO reset only if necessary
-        this.$FRManager.removeMarkedRules();
+//        this.$FRManager.removeMarkedRules();
 
         // ETree
         this.$ETreeManager.reset();

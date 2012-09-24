@@ -29,6 +29,3 @@ pri zastaveni stejne ulohy zobrazit tlacitko mine rules
 13.00 - 13.45 (A and B) or C
 
 write tests for getData, getRules, stopMining... verify that IZI handles errors
-
-
-!!!!!!!!!! RELOAD !!!!!!!!!!!!

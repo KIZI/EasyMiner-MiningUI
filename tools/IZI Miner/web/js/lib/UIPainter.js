@@ -1,6 +1,7 @@
 var UIPainter = new Class({
 	
 	config: null,
+    ARBuilder: null,
 	UIColorizer: null,
 	UIListener: null,
     dateHelper: null,
@@ -128,6 +129,7 @@ var UIPainter = new Class({
 
     renderDataFields: function() {
         var dataFields = $$('#data-fields ul')[0];
+        dataFields.empty();
         this.ARBuilder.getDD().getFields().each(function(field) {
             this.renderDataField(field, dataFields);
             this.UIListener.registerDataFieldEventHandler(field);
