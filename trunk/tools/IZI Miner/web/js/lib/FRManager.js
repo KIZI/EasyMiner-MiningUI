@@ -12,13 +12,13 @@ var FRManager = new Class({
 	maxIndex: 0,
 	tips: null,
 	
-	initialize: function (config, rulesParser, settings, UIPainter, UIListener) {
+	initialize: function (config, rulesParser, settings, UIPainter, UIListener, i18n) {
 		this.config = config;
 		this.rulesParser = rulesParser;
 		this.settings = settings;
         this.UIPainter = UIPainter;
         this.UIListener = UIListener;
-		this.i18n = new i18n(this.config.getLang());
+		this.i18n = i18n;
 		this.AJAXBalancer = new AJAXBalancer();
 		this.tips = new Tips('.found-rule');
 		this.tips.addEvent('show', function(tip, el){
@@ -30,7 +30,13 @@ var FRManager = new Class({
 	},
 
 	initPager: function () {
-		this.pager = new Pager($('pager-label'), $('paging'), $('pager'), $('pager-clear'), i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'), i18n.translate('Mining is in progress, it may take a while to get the results.'), i18n.translate('Mining has finished!'), i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'), i18n.translate('Mining has been stopped.'), i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
+		this.pager = new Pager($('pager-label'), $('paging'), $('pager'), $('pager-clear'),
+            this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'),
+            this.i18n.translate('Mining is in progress, it may take a while to get the results.'),
+            this.i18n.translate('Mining has finished!'),
+            this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'),
+            this.i18n.translate('Mining has been stopped.'),
+            this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
 	},
 	
 	handleInProgress: function () {

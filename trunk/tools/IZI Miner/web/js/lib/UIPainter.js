@@ -30,69 +30,21 @@ var UIPainter = new Class({
 		this.dateHelper = dateHelper;
 		this.UITemplateRegistrator = UITemplateRegistrator;
 	},
-	
-	getDisposeDuration: function () {
-		return this.disposeDuration;
-	},
-
-    renderOverlay: function() {
-        this.rootElement.grab(Mooml.render('overlayTemplate'));
-    },
 
 	createUI: function () {
-		this.renderAll();
-	},
-
-	renderAll: function () {
-		this.renderStructure();
 		this.renderNavigation();
-		this.renderContent();
-        this.resizeWindow();
+		this.renderActiveRule();
 	},
 
-	renderStructure: function () {
-		this.rootElement.grab(Mooml.render('headerTemplate', {config: this.config, i18n: this.i18n}));
-		this.rootElement.grab(Mooml.render('mainTemplate', {config: this.config, dateHelper: this.dateHelper, i18n: this.i18n}));
-		this.rootElement.grab(Mooml.render('footerTemplate', {config: this.config, i18n: this.i18n}));
-        this.UIListener.registerResizeEventHandler();
-		this.UIListener.registerSettingsEventHandlers();
-        this.UIListener.registerDataReloadEventHandlers();
-        this.UIListener.registerFoundRulesEventHandlers();
-	},
-
-    resizeWindow: function() {
-        var contentWidth = Math.max($$('header')[0].getSize().x + 13, $(window).getSize().x);
-        var contentHeight = Math.max($$('header')[0].getSize().y + $('wrapper').getSize().y + $$('footer')[0].getSize().y + 60, $(window).getSize().y);
-
-        // fix overlay width to 100%
-        $('overlay').setStyle('width', contentWidth);
-
-        // fix overlay height to 100%
-        $('overlay').setStyle('height', contentHeight);
-
-        // fix wrapper width to 100%
-        $('wrapper').setStyle('width', contentWidth);
-    },
-	
 	renderNavigation: function () {
 		// attributes
 		this.renderAttributes();
 
         // data fields
         this.renderDataFields();
-
-        this.UIListener.registerNavigationEventHandlers();
 	},
 	
 	renderAttributes: function(navigation) {
-		var navigation = $('navigation');
-		var attributes = $('attributes');
-		if (attributes) {
-			Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARBuilder.getARManager().getAttributesByGroup(), inProgress: this.ARBuilder.getETreeManager().getInProgress()}).replaces(attributes);
-		} else {
-			navigation.grab(Mooml.render('attributesStructureTemplate', {i18n: this.i18n, byGroup: this.ARBuilder.getARManager().getAttributesByGroup(), inProgress: this.ARBuilder.getETreeManager().getInProgress()}));
-		}
-		
 		if (this.ARBuilder.getARManager().getAttributesByGroup() === true) {
 			this.renderAttributesByGroup(navigation.getElement('ul'));
 		} else {
@@ -170,36 +122,14 @@ var UIPainter = new Class({
         this.scrollTo();
     },
 
-    renderNewTaskWindow: function () {
-        var url = this.config.getNewTaskURL();
-        var elWindow = Mooml.render('newTaskTemplate', {i18n: this.i18n, url: url});
-        var overlay = this.showOverlay();
-        overlay.grab(elWindow);
-        this.scrollTo();
-    },
-
-    scrollTo: function (x, y) {
-        x = x || 0;
-        y = y || 0;
-        $(this.config.getRootElementID()).scrollTo(x, y);
-    },
-
     removeAttribute: function(attribute) {
         $(attribute.getCSSID()).getParent().destroy();
     },
 
     renderDataFields: function() {
-        var navigation = $('navigation');
-        var dataFields = $('data-fields');
-        if (dataFields) {
-            dataFields = Mooml.render('dataFieldsStructureTemplate', {i18n: this.i18n}).replaces(dataFields);
-        } else {
-            dataFields = Mooml.render('dataFieldsStructureTemplate', {i18n: this.i18n});
-            navigation.grab(dataFields);
-        }
-
+        var dataFields = $$('#data-fields ul')[0];
         this.ARBuilder.getDD().getFields().each(function(field) {
-            this.renderDataField(field, dataFields.getElement('ul'));
+            this.renderDataField(field, dataFields);
             this.UIListener.registerDataFieldEventHandler(field);
         }.bind(this));
     },
@@ -224,17 +154,6 @@ var UIPainter = new Class({
 			
 			this.renderAttributes.delay((this.sortDuration + this.morphDuration) * 1.5, this);
 		}.bind(this));
-	},
-	
-	renderMarkedRulesBox: function () {
-		var main = $('main');
-		
-		// marked rules
-		var elementMarkedRules = Mooml.render('markedRulesStructureTemplate', {i18n: this.i18n});
-		main.grab(elementMarkedRules);
-		this.renderMarkedRules(elementMarkedRules.getElement('ul'));
-		
-		this.UIListener.registerMarkedRulesEventHandlers();
 	},
 	
 	renderMarkedRules: function (elementParent, markedRules) {
@@ -284,15 +203,10 @@ var UIPainter = new Class({
 		return returnEl;
 	},
 	
-	renderContent: function () {
-		this.renderActiveRule();
-		this.renderMarkedRulesBox();
-	},
-	
 	renderActiveRule: function () {
-		Mooml.render('activeRuleTemplate', {rules: this.ARBuilder.getARManager().display4ftTaskBox(), attributes: this.ARBuilder.getARManager().displayETreeTaskBox(), i18n: this.i18n, displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs()}).replaces($('active-rule'));
-		
-		var elementParent = $('antecedent');
+        Mooml.render('activeRuleTemplate', {rules: this.ARBuilder.getARManager().display4ftTaskBox(), attributes: this.ARBuilder.getARManager().displayETreeTaskBox(), i18n: this.i18n, displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs()}).replaces($('active-rule'));
+
+        var elementParent = $('antecedent');
 		this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);
 		
 		Object.each(this.ARBuilder.getARManager().getActiveRule().getIMs(), function(IM, key) {
@@ -588,22 +502,6 @@ var UIPainter = new Class({
 		$('etree-progress').fade('out');
 	},
     
-    /* overlay */
-    showOverlay: function () {
-		var elementOverlay = $('overlay');
-		elementOverlay.fade('in');
-		
-		return elementOverlay;
-	},
-	
-	hideOverlay: function () {
-		var elementOverlay = $('overlay');
-		elementOverlay.fade('out');
-		elementOverlay.empty();
-		
-		return elementOverlay;
-	},
-	
 	/* misc */
 	showElement: function (el) {
 		var options = {'opacity': '1'};
@@ -690,14 +588,26 @@ var UIPainter = new Class({
         $('view-task-result').setStyle('visibility', 'hidden');
     },
 
-    showLoadData: function() {
-        $('overlay').grab(new Element('div', {id: 'loading-data', html: this.i18n.translate('Loading application data...')}));
-        this.showOverlay();
+    // TODO duplicite with UIStructurePainter, refactor into another class
+    showOverlay: function () {
+        var elementOverlay = $('overlay');
+        elementOverlay.fade('in');
+
+        return elementOverlay;
     },
 
-    showLoadDataError: function() {
-        $('loading-data').set('html', this.i18n.translate('An error occured while loading application data.'));
-        $('loading-data').addClass('error');
+    hideOverlay: function () {
+        var elementOverlay = $('overlay');
+        elementOverlay.fade('out');
+        elementOverlay.empty();
+
+        return elementOverlay;
+    },
+
+    scrollTo: function (x, y) {
+        x = x || 0;
+        y = y || 0;
+        $(this.config.getRootElementID()).scrollTo(x, y);
     }
 
 });

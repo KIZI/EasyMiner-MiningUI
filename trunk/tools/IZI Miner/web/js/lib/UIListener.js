@@ -3,7 +3,7 @@ var UIListener = new Class({
 	ARBuilder: null,
 	UIColorizer: null,
 	UIPainter: null,
-	
+
 	initialize: function (ARBuilder, UIColorizer) {
 		this.ARBuilder = ARBuilder;
 		this.UIColorizer = UIColorizer;
@@ -11,38 +11,6 @@ var UIListener = new Class({
 	
 	setUIPainter: function (UIPainter) {
 		this.UIPainter = UIPainter;
-	},
-
-    registerResizeEventHandler: function() {
-        window.addEvent('resize', function() {
-            this.UIPainter.resizeWindow();
-        }.bind(this));
-    },
-
-    registerDataReloadEventHandlers: function() {
-        // called when com_dbconnect window is closed
-        var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
-        elIZI.addEvent('reload', function() {
-            this.ARBuilder.reloadAttributes();
-        }.bind(this));
-
-        // TODO refactor into another function
-        var elIZI = $(this.ARBuilder.getConfig().getRootElementID());
-        elIZI.addEvent('closeOverlay', function() {
-            this.ARBuilder.closeOverlay();
-        }.bind(this));
-    },
-	
-	registerSettingsEventHandlers: function () {
-        $('new-task').addEvent('click', function (e) {
-            e.stop();
-            this.ARBuilder.openNewTaskWindow();
-        }.bind(this));
-
-		$('settings-open').addEvent('click', function (e) {
-			e.stop();
-			this.ARBuilder.openSettingsWindow();
-		}.bind(this));
 	},
 
 	registerSettingsWindowEventHandlers: function (ASPossible) {
@@ -94,40 +62,6 @@ var UIListener = new Class({
 		}.bind(this));
 	},
 
-	registerNavigationEventHandlers: function () {
-		var el = $$('#attributes a.toggle')[0];
-		el.addEvent('click', function (event) {
-			event.stop();
-			var elToggle = $$('#attributes > div')[0];
-			elToggle.toggle();
-            var elH2 = $$('#attributes h2')[0];
-            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
-		}.bind(this));
-
-//		if (this.ARBuilder.getARManager().getAttributesByGroup()) {
-//			// attributes by list
-//			$('attributes-by-list').addEvent('click', function (event) {
-//				event.stop();
-//				this.ARBuilder.getARManager().displayAttributesByList();
-//			}.bind(this));
-//		} else {
-//			// attributes by group
-//			$('attributes-by-group').addEvent('click', function (event) {
-//				this.ARBuilder.getARManager().displayAttributesByGroup();
-//				event.stop();
-//			}.bind(this));
-//		}
-
-        var el = $$('#data-fields a.toggle')[0];
-        el.addEvent('click', function (event) {
-            event.stop();
-            var elToggle = $$('#data-fields > div')[0];
-            elToggle.toggle();
-            var elH2 = $$('#data-fields h2')[0];
-            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
-        }.bind(this));
-	},
-	
 	registerAttributeEventHandler: function (attribute) {
         // drag & drop
         $(attribute.getCSSID()).addEvent('mousedown', function (event) {
@@ -619,20 +553,6 @@ var UIListener = new Class({
 		}.bind(this));
 	},
 
-    registerFoundRulesEventHandlers: function() {
-        // stop mining
-        $('stop-mining').addEvent('click', function (e) {
-            e.stop();
-            this.ARBuilder.getMiningManager().stopMining();
-        }.bind(this));
-
-        // clear rules
-        $('pager-clear').addEvent('click', function (e) {
-            e.stop();
-            this.ARBuilder.getFRManager().reset();
-        }.bind(this));
-    },
-
 	registerFoundRuleEventHandlers: function(FR, autoSearch) {
 		if (!autoSearch) { // ask background knowledge
 			$(FR.getRule().getFoundRuleCSSBKID()).addEvent('click', function (e) {
@@ -651,17 +571,6 @@ var UIListener = new Class({
 		$(FR.getRule().getFoundRuleCSSRemoveID()).addEvent('click', function (event) {
 			event.stop();
 			this.ARBuilder.getFRManager().removeFoundRule(FR);
-		}.bind(this));
-	},
-	
-	registerMarkedRulesEventHandlers: function () {
-		var elDropdown = $$('#marked-rules a.toggle')[0];
-		elDropdown.addEvent('click', function (event) {
-			event.stop();
-			var elToggle = $$('#marked-rules > div')[0];
-			elToggle.toggle();
-            var elH2 = $$('#marked-rules h2')[0];
-            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
 		}.bind(this));
 	},
 	
