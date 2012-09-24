@@ -56,6 +56,19 @@ var Cedent = new Class({
         return count;
     },
 
+    getFields: function() {
+        var fields = [];
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                fields.append(child.getFields());
+            } else {
+                fields.push(child);
+            }
+        }.bind(this));
+
+        return fields;
+    },
+
     getNumFields: function(maxLevel) {
         maxLevel = maxLevel || Infinity;
 

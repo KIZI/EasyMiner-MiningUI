@@ -95,8 +95,8 @@ var AssociationRule = new Class({
 	},
 	
 	getLiterals: function () {
-		var literals = this.antecedent.getLiterals();
-		literals.append(this.succedent.getLiterals());
+		var literals = this.antecedent.getFields();
+		literals.append(this.succedent.getFields());
 		
 		return literals;
 	},

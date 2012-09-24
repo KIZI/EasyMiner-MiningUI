@@ -153,13 +153,11 @@ if ($idDm === 'TEST' && $idKb === 'TEST') {
             $KBParser = new KnowledgeBaseParser($response);
             $exception = $KBParser->parse();
 
-//            if ($confirmation['hits'] > 0) {
-                $responseContent = [
-                    'confirmation' => $confirmation,
-                    'exception' => $exception,
-                    'status' => 'ok',
-                ];
-//            }
+            $responseContent = [
+                'confirmation' => $confirmation,
+                'exception' => $exception,
+                'status' => 'ok',
+            ];
         } else {
             $responseContent = ['status' => 'error'];
         }
