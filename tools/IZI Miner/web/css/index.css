@@ -379,6 +379,12 @@ td {
   position: relative;
   top: -20px;
 }
+#overlay #new-task-button {
+  background: transparent;
+  float: none;
+  padding: 0;
+  top: 0;
+}
 #overlay #add-attribute-window,
 #overlay #edit-attribute-window,
 #overlay #new-task-window {

@@ -9,8 +9,11 @@ var ARBuilder = new Class({
 	$miningManager: null,
 	$ETreeManager: null,
 	$ARManager: null,
+    $UIStructureListener: null,
+    $UIStructurePainter: null,
 	UIPainter: null,
 	UIListener: null,
+    $i18n: null,
 	$DD: null,
 	FLs: [],
 	defFLIndex: 0,
@@ -20,13 +23,23 @@ var ARBuilder = new Class({
 	// init basics
 	initialize: function (config) {
 		this.$config = config;
+        this.$i18n = new i18n(this.$config.getLang());
+
+        // Paint application structure
+        this.$UIStructureListener = new UIStructureListener(this);
+        this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater());
+        this.$UIStructureListener.setUIStructurePainter(this.$UIStructurePainter);
+        this.$UIStructurePainter.render();
 
         this.UIListener = new UIListener(this, new UIColorizer());
-        this.UIPainter = new UIPainter(this, this.$config, new i18n(this.$config.getLang()), new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator());
+        this.UIPainter = new UIPainter(this, this.$config, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator());
         this.UIListener.setUIPainter(this.UIPainter);
 
-        this.UIPainter.renderOverlay();
-        this.loadData();
+        if (this.$config.getIdDm()) {
+            this.loadData();
+        } else {
+            this.openNewTaskWindow();
+        }
     },
 
     loadData: function() {
@@ -36,28 +49,28 @@ var ARBuilder = new Class({
     },
 
     handleLoadData: function() {
-        this.UIPainter.showLoadData();
+        this.$UIStructurePainter.showLoadData();
     },
 
     handleLoadDataError: function() {
-        this.UIPainter.showLoadDataError();
+        this.$UIStructurePainter.showLoadDataError();
     },
 
     initApplication: function() {
-        this.UIPainter.hideOverlay();
+        this.$UIStructurePainter.hideOverlay();
 
         this.$DD = this.dataParser.getDD();
         this.FLs = this.dataParser.getFLs();
         this.$FGC = this.dataParser.getFGC();
 
         this.settings = new Settings();
-        this.$FRManager = new FRManager(this.$config, new RulesParser(this, this.$DD, this.getDefFL()), this.settings, this.UIPainter, this.UIListener);
+        this.$FRManager = new FRManager(this.$config, new RulesParser(this, this.$DD, this.getDefFL()), this.settings, this.UIPainter, this.UIListener, this.$i18n);
         this.$miningManager = new MiningManager(this.$config, this.$FRManager);
         this.$ETreeManager = new ETreeManager(this.$config, this.$DD, this.UIPainter);
         this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
         this.$ETreeManager.setARManager(this.$ARManager);
 
-        this.UIPainter.createUI();
+        this.UIPainter.createUI(); // TODO resize window after
         this.$FRManager.initPager();
     },
 
@@ -91,7 +104,7 @@ var ARBuilder = new Class({
 	},
 
     openNewTaskWindow: function () {
-        this.UIPainter.renderNewTaskWindow();
+        this.$UIStructurePainter.renderNewTaskWindow();
     },
 
 	openSettingsWindow: function () {
@@ -126,7 +139,7 @@ var ARBuilder = new Class({
 	},
 
 	closeSettingsWindow: function () {
-		this.UIPainter.hideOverlay();
+		this.$UIStructurePainter.hideOverlay();
 	},
 	
 	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest) {
@@ -147,7 +160,7 @@ var ARBuilder = new Class({
 		}
 		this.UIPainter.renderActiveRule();
 		
-		this.UIPainter.hideOverlay();
+		this.$UIStructurePainter.hideOverlay();
 	},
 
     openAddAttributeWindow: function(field) {
@@ -164,11 +177,11 @@ var ARBuilder = new Class({
         // TODO show loading indicator
         this.UIPainter.renderNavigation();
         this.reset();
-        this.UIPainter.hideOverlay();
+        this.$UIStructurePainter.hideOverlay();
     },
 
     closeOverlay: function () {
-        this.UIPainter.hideOverlay();
+        this.$UIStructurePainter.hideOverlay();
     },
 
     removeAttribute: function(attribute) {
