@@ -33,4 +33,5 @@ write tests for getData, getRules, stopMining... verify that IZI handles errors
 24. 9. 2012
 19.30 - 19.45 BK error handling fix
 19.45 - 20.20 BK changes
-20.20 - ?? ETree fix
+20.20 - 20.35 ETree fix
+23.30 - 00.30 ETree fix

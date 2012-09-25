@@ -103,10 +103,6 @@ var ETreeManager = new Class({
 	handleErrorRequest: function () {
 		this.setInProgress(false);
 		this.UIPainter.renderActiveRule();
-		
-		if (window.console && console.log) {
-			console.log('AJAX request error!');
-		}
 	},
 	
 	addRequest: function (request) {

@@ -2,10 +2,12 @@
 
 namespace IZI\Parser;
 
+use IZI\Algorithm\BasicChiSquareAlgorithm;
+
 class ETreeParser
 {
-    private $ETree;
-    private $ETreeXPath;
+    protected $ETree;
+    protected $ETreeXPath;
 
     public function __construct(\DOMDocument $ETree)
     {
@@ -19,8 +21,8 @@ class ETreeParser
         $array['recommendedAttributes'] = array();
         if ($this->ETreeXPath->evaluate('count(//guha:ETreeModel)')) {
             $algorithm = new BasicChiSquareAlgorithm($this->ETreeXPath->evaluate('//guha:ETreeModel/ETreeRules')->item(0), $this->ETreeXPath);
-            $ETree = new ETree($algorithm);
-            $array['recommendedAttributes'] = $ETree->parse();
+            $algorithm->evaluate();
+            $array['recommendedAttributes'] = $algorithm->getAttributes();
         }
 
         return $array;
