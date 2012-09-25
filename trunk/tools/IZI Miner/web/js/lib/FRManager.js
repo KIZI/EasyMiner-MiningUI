@@ -174,11 +174,11 @@ var FRManager = new Class({
         // TODO refactor into UIPainter
 		this.tips.attach($(FR.getCSSID()));
 
-		this.UIPainter.updateFoundRule(FR, this.FL);
+		this.UIPainter.updateFoundRule(FR);
 	},
 	
 	handleErrorRequest: function (FR) {
-		this.UIPainter.updateFoundRule(FR, this.FL);
+		this.UIPainter.updateFoundRule(FR);
 	},
 	
 	handleError: function () {

@@ -10,25 +10,23 @@ TODO
 - clear rules should scroll up
 
 - seskupeni hodne atributu - bugy
+- pri smazani pravidel zavoalat resize
 
 exporter is occupied !!!!!!!
 ošetřit message od kBI - při minování i data description zkoušet znovu
 pri zastaveni stejne ulohy zobrazit tlacitko mine rules
-!!! handle XQuery error in IZI Miner... tests
 
 <br />
 <b>Warning</b>:  DOMDocument::loadXML(): Empty string supplied as input in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>174</b><br />
 <br />
 <b>Fatal error</b>:  Cannot use object of type stdClass as array in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>87</b><br />
 
-- Pokud aktuální pravidlo potvrzuje existující pravidlo v bázi (je delší), pak se ztuční a zobrazí se hlášení "Association rule is considered as interesting". Správně by mělo být "Association rule confirms an already known rule"  a mělo by zešednout. (viz screenshot)
-- Pokud se pro aktuální pravidlo nenalezne žádné pravidlo (výjimka, potvrzení), potom se v UI nic nestane. Správně by se mělo toto pravidlo zvýraznit tučně a hlášení by mělo být:"Association rule is novel".
-
 23. 9. 2012
 12.30 - 13.00 Loading icon fix
 13.00 - 13.45 (A and B) or C
 
-write tests for getData, getRules, stopMining... verify that IZI handles errors
+write tests for , , ... verify that IZI handles errors
+!!! handle XQuery error in IZI Miner... tests
 
 24. 9. 2012
 19.30 - 19.45 BK error handling fix

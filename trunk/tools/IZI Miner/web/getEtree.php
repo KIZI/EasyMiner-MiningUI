@@ -41,6 +41,7 @@ curl_close($ch);
 $LM_export_path = './temp/etree_result_'.date('md_His').'.pmml';
 file_put_contents($LM_export_path, $response);
 
+// TODO loading icon in navigation - ETree
 // refactor icon-rec1 and icon-rec2 into CSS sprite... fix morph
 // TODO add status for response
 // TODO add response validation

@@ -35,7 +35,7 @@ if ($id === 'TEST') {
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
-    //curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
     $response = curl_exec($ch);
     $response = iconv("utf-8", "utf-8//IGNORE", $response);

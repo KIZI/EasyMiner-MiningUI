@@ -6,13 +6,14 @@ var UIStructurePainter = new Class({
     $UIStructureListener: null,
     $UIStructureTemplater: null,
 
-    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater) {
+    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller) {
         this.$config = config;
         this.$dateHelper = dateHelper;
         this.$i18n = i18n;
         this.$UIStructureListener = UIStructureListener;
         this.$UIStructureTemplater = UIStructureTemplater;
         this.$UIStructureTemplater.register();
+        this.$UIScroller = UIScroller;
     },
 
     render: function() {
@@ -71,9 +72,10 @@ var UIStructurePainter = new Class({
     renderNewTaskWindow: function () {
         var url = this.$config.getNewTaskURL();
         var elWindow = Mooml.render('newTaskTemplate', {i18n: this.$i18n, url: url});
-        var overlay = this.showOverlay();
+        var overlay = this.$UIStructurePainter().showOverlay();
         overlay.grab(elWindow);
-        this.scrollTo();
+
+        this.$UIScroller.scrollTo(0, 0);
     },
 
     resizeWindow: function() {
@@ -88,12 +90,6 @@ var UIStructurePainter = new Class({
 
         // fix wrapper width to 100%
         $('wrapper').setStyle('width', contentWidth);
-    },
-
-    scrollTo: function (x, y) {
-        x = x || 0;
-        y = y || 0;
-        $(this.$config.getRootElementID()).scrollTo(x, y);
     },
 
     showLoadData: function() {
