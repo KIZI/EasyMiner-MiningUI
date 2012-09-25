@@ -168,7 +168,7 @@ var FRManager = new Class({
 				FR.setException(true);
 			}
 		} else {
-            FS.setInteresting(true);
+            FR.setInteresting(true);
         }
 
         // TODO refactor into UIPainter
