@@ -6,6 +6,8 @@ var UIPainter = new Class({
 	UIListener: null,
     dateHelper: null,
     UITemplateRegistrator: null,
+    $UIScroller: null,
+    $UIStructurePainter: null,
 
 	pager: null,
 	
@@ -21,7 +23,7 @@ var UIPainter = new Class({
 	// dispose element
 	disposeDuration: 750,
 	
-	initialize: function (ARBuilder, config, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator) {
+	initialize: function (ARBuilder, config, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator, UIScroller, UIStructurePainter) {
 		this.ARBuilder = ARBuilder;
         this.config = config;
 		this.rootElement = $(this.config.getRootElementID());
@@ -30,6 +32,8 @@ var UIPainter = new Class({
 		this.UIListener = UIListener;
 		this.dateHelper = dateHelper;
 		this.UITemplateRegistrator = UITemplateRegistrator;
+        this.$UIScroller = UIScroller;
+        this.$UIStructurePainter = UIStructurePainter;
 	},
 
 	createUI: function () {
@@ -85,50 +89,37 @@ var UIPainter = new Class({
 		} else { // re-render
 			var element = $(attribute.getCSSID());
 			element.set('morph', {duration: this.morphDuration});
-			if (attribute.isRecommended()) {
-                element.setStyles.delay(2500, element, {
-					'background-image': 'url(images/icon-rec1.png',
-					'background-repeat': 'no-repeat',
-					'color': '#434343'});
-//				element.morph({
-//					'background-image': 'url(images/icon-rec1.png',
-//					'background-repeat': 'no-repeat',
-//					'color': '#434343'});
+            element.removeAttribute('class');
+            if (attribute.isRecommended()) {
+                element.addClass('rec1');
 			} else if (attribute.isPartiallyRecommended()) {
-                element.setStyles.delay(2500, element, {
-                    'background-image': 'url(images/icon-rec2.png',
-                    'background-repeat': 'no-repeat',
-                    'color': '#434343'});
-//				element.morph({
-//					'background-image': 'url(images/icon-rec2.png',
-//					'background-repeat': 'no-repeat',
-//					'color': '#434343'});
+                element.addClass('rec2');
 			} else if (this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute)) {
 				element.morph({
-					'background-image': 'none',
 					'color': '#AAA'});
 			} else {
 				element.morph({
-					'background-image': 'none',
 					'color': '#434343'});
 			}
 		}
 	},
 
     renderAddAttributeWindow: function(field) {
-        var overlay = this.showOverlay();
+        var overlay = this.$UIStructurePainter.showOverlay();
         var url = this.config.getAddAttributeURL(field.getName());
         var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
-        this.scrollTo();
+
+        this.$UIScroller.scrollTo(0, 0);
     },
 
     renderEditAttributeWindow: function (attribute) {
-        var overlay = this.showOverlay();
+        var overlay = this.$UIStructurePainter.showOverlay();
         var url = this.config.getEditAttributeURL(attribute.getName());
         var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n, url: url});
         overlay.grab(window);
-        this.scrollTo();
+
+        this.$UIScroller.scrollTo(0, 0);
     },
 
     removeAttribute: function(attribute) {
@@ -195,9 +186,7 @@ var UIPainter = new Class({
 
 		var returnEl = new Element('li', {id: 'fg-' + id + '-name', 'class': 'field-group-drag', html: '<span>' + FG.getLocalizedName() + '</span>', title: FG.getExplanation()});
 		var FGEl = new Element('ul', {id: 'fg-' + id, 'class': 'field-group'}).inject(returnEl);
-		//if (FG.getId() !== 1) {
-			this.callbackStack.push({func: this.UIListener.registerFieldGroupEventHandler, args: [FG]});
-		//}
+	    this.callbackStack.push({func: this.UIListener.registerFieldGroupEventHandler, args: [FG]});
 
 		if (Object.getLength(FG.getFields()) > 0) {
 			Object.each(FG.getFields(), function (field, key) {
@@ -302,7 +291,7 @@ var UIPainter = new Class({
 	}, 
 	
 	renderAddIMWindow: function (IMs) {
-		var overlay = this.showOverlay();
+		var overlay = this.$UIStructurePainter.showOverlay();
 		overlay.grab(Mooml.render('addIMWindowTemplate', {i18n: this.i18n}));
 		var selectedIM = IMs[Object.keys(IMs)[0]];
 		Object.each(IMs, function (IM) {
@@ -316,7 +305,7 @@ var UIPainter = new Class({
 	},
 	
 	renderEditIMWindow: function(IMs, selectedIM) {
-		var overlay = this.showOverlay();
+		var overlay = this.$UIStructurePainter.showOverlay();
 		overlay.grab(Mooml.render('editIMWindowTemplate', {i18n: this.i18n, IM: selectedIM}));
 		Object.each(IMs, function (IM) {
 			var isSelected = (IM.getName() === selectedIM.getName());
@@ -336,14 +325,14 @@ var UIPainter = new Class({
 	},
 	
 	renderAddCoefficientWindow: function (field) {
-		var overlay = this.showOverlay();
+		var overlay = this.$UIStructurePainter.showOverlay();
 		overlay.grab(Mooml.render('addCoefficientWindowTemplate', {i18n: this.i18n}));
 		var selectedCoefficient = this.ARBuilder.getFL().getDefaultBBACoef();
 		this.renderAddCoefficientAutocomplete(field, selectedCoefficient);
 	},
 	
 	renderEditCoefficientWindow: function (field) {
-		var overlay = this.showOverlay();
+		var overlay = this.$UIStructurePainter.showOverlay();
 		overlay.grab(Mooml.render('editCoefficientWindowTemplate', {i18n: this.i18n}));
 		var selectedCoefficient = this.ARBuilder.getFL().getBBACoefficient(field.getType());
 		this.renderEditCoefficientAutocomplete(field, selectedCoefficient);
@@ -413,7 +402,7 @@ var UIPainter = new Class({
 	},
 	
 	renderEditConnectiveWindow: function (cedent) {
-		var overlay = this.showOverlay();
+		var overlay = this.$UIStructurePainter.showOverlay();
 		overlay.grab(Mooml.render('editConnectiveWindowTemplate', {i18n: this.i18n}));
 
         if (this.ARBuilder.getFL().isConnectiveAllowed('Conjunction', cedent.getScope(), this.ARBuilder.getARManager().getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
@@ -499,10 +488,6 @@ var UIPainter = new Class({
 		});
 	},
 		
-	clearCedentInfo: function (cedent) {
-		$(cedent.getCSSInfoID()).empty();
-	},
-	
 	/* navigation */
 	showETreeProgress: function () {
 		$('etree-progress').fade('in');
@@ -512,49 +497,10 @@ var UIPainter = new Class({
 		$('etree-progress').fade('out');
 	},
     
-	/* misc */
-	showElement: function (el) {
-		var options = {'opacity': '1'};
-		this.morph(el, options);
-	},
-	
-	hideElement: function (el) {
-		var options = {'opacity': '0'};
-		this.morph(el, options);
-	},
-	
 	morph: function (el, options, duration) {
 		duration = duration || this.morphDuration;
 		el.set('morph', {duration: duration});
 		el.morph(options);
-	},
-	
-	disposeFoundRules: function () {
-		var delay = 0;
-		var delayTime = 100;
-		Array.each($$('#found-rules li'), function (el) {
-			delay += delayTime;
-			this.disposeElement.delay(delay, this, el);
-		}.bind(this));
-	},
-	
-	disposeElement: function (el) {
-		var clone = el.clone().setStyles(el.getCoordinates()).setStyles({
-			opacity: 0.7,
-			position: 'absolute'
-	    }).inject(document.body);
-		el.destroy();
-		
-		clone.set('morph', {duration: this.disposeDuration});
-		clone.morph({
-			'opacity': '0',
-			'height': '0'
-		});
-		clone.destroy.delay(this.disposeDuration, clone);
-	},
-	
-	destroyElement: function (el) {
-		el.destroy();
 	},
 	
 	/* settings */
@@ -565,7 +511,7 @@ var UIPainter = new Class({
 			settings.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));
 			this.UIListener.registerSettingsWindowEventHandlers(autoSuggestPossible);
 		} else {
-			var overlay = this.showOverlay();
+			var overlay = this.$UIStructurePainter.showOverlay();
 			overlay.grab(settings);
 			this.UIListener.registerSettingsWindowEventHandlers(autoSuggestPossible);
 		}
@@ -598,26 +544,8 @@ var UIPainter = new Class({
         $('view-task-result').setStyle('visibility', 'hidden');
     },
 
-    // TODO duplicite with UIStructurePainter, refactor into another class
-    showOverlay: function () {
-        var elementOverlay = $('overlay');
-        elementOverlay.fade('in');
-
-        return elementOverlay;
-    },
-
-    hideOverlay: function () {
-        var elementOverlay = $('overlay');
-        elementOverlay.fade('out');
-        elementOverlay.empty();
-
-        return elementOverlay;
-    },
-
-    scrollTo: function (x, y) {
-        x = x || 0;
-        y = y || 0;
-        $(this.config.getRootElementID()).scrollTo(x, y);
+    hideOverlay: function() {
+        this.$UIStructurePainter.hideOverlay();
     }
 
 });

@@ -22,7 +22,19 @@ $encoder = new URLEncoder();
 
 if ($idDm === 'TEST' && $idKb === 'TEST') {
     sleep($sleep); // simulates time required for document saving
-    $responseContent['status'] = 'ok';
+    $responseContent = [
+        'status' => 'ok',
+        'confirmation' => [
+            'hits' => 3,
+            'numInteresting' => 2,
+            'numNotInteresting' => 1,
+        ],
+        'exception' => [
+            'hits' => 0,
+            'numInteresting' => 0,
+            'numNotInteresting' => 0,
+        ],
+    ];
 } else { // KBI
     $DDPath = APP_PATH.'/web/temp/DD_'.$idDm.'.pmml';
     if (!file_exists($DDPath)) {

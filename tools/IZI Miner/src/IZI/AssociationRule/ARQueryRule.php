@@ -117,7 +117,7 @@ class ARQueryRule
             $dataType = &$field['dataType'];
 
             if ($dataType == 'string') {
-                // TODO add string validation
+                // supposed as valid
             } elseif ($dataType == 'integer' || $dataType == 'float' || $dataType == 'double') {
                 if (!is_numeric($IM->getValue())) { return false; }
 
@@ -147,12 +147,10 @@ class ARQueryRule
         if (isset($this->attributes[$BBA->getFieldRef()])) {  // find the right attribute
             $attribute = &$this->attributes[$BBA->getFieldRef()];
             foreach ($BBA->getCatRefs() as $cr) {
-                // TODO - search if One category is in featurelist
                 if (in_array($cr, $attribute['choices'])) {  // find the right value
                     return true;
                 }
 
-                // TODO - search if subset is in featurelist
                 if (strpos($cr, '<') !== false || strpos($cr, '(') !== false ||
                 strpos($cr, ')') !== false || strpos($cr, '>') !== false) { return true; }
             }
