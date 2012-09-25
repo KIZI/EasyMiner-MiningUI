@@ -4,7 +4,6 @@ require_once './Bootstrap.php';
 require_once '../config/Config.php';
 
 use IZI\Encoder\URLEncoder;
-use IZI\FileLoader\XMLLoader;
 use IZI\Parser\DataParser;
 use IZI\Serializer\TaskSettingSerializer;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,14 +35,12 @@ if ($id === 'TEST') {
         goto returnError;
     }
 
-    $loader = new XMLLoader();
     $serializer = new TaskSettingSerializer($DDPath);
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => '4ftMiner.Task.ARD.Template.PMML');
 
     // save LM task
     $taskPath = 'temp/4ft_task_'.date('md_His').'.pmml';
-    $LM_import = $loader->load($requestData['query']);
-    $LM_import->save($taskPath);
+    file_put_contents($taskPath, $requestData['query']);
 
     // run task
     $encoder = new URLEncoder();

@@ -2,25 +2,30 @@
 
 namespace IZI\Serializer;
 
+use IZI\Algorithm\BasicETreeSettings;
 use IZI\FileLoader\XMLLoader;
 
-class TaskSettingSerializer
+class ETreeSerializer
 {
     protected $DD;
-    protected $ddXpath;
+    protected $DDXpath;
+    protected $FA;
+    protected $FAXpath;
 
     protected $id = 0;
+    protected $conditions = [];
 
     // XML document
     protected $output;
     protected $modelName;
-    protected $arQuery;
+    protected $taskSetting;
     protected $hypotheses;
     protected $bbaSettings;
     protected $dbaSettings;
     protected $antecedentSetting;
     protected $consequentSetting;
     protected $interestMeasureSetting;
+    protected $conditionSetting;
 
     protected static $BOOLEAN_TYPES = ['neg' => 'Negation', 'and' => 'Conjunction', 'or' => 'Disjunction', 'lit' => 'Literal'];
     protected static $FORCE_DEPTH_BOOLEAN = 'Conjunction';
@@ -28,14 +33,16 @@ class TaskSettingSerializer
     protected static $LITERALS = ['Literal'];
     protected static $MINIMAL_LENGTH = 1;
 
-    public function __construct($DDPath)
+    public function __construct($DDPath, $FAPath)
     {
         $loader = new XMLLoader();
-        $this->DD = $loader->load($DDPath);
 
-        // init XPath
-        $this->ddXpath = new \DOMXPath($this->DD);
-        $this->ddXpath->registerNamespace('dd', "http://keg.vse.cz/ns/datadescription0_2");
+        $this->DD = $loader->load($DDPath);
+        $this->DDXpath = new \DOMXPath($this->DD);
+        $this->DDXpath->registerNamespace('dd', "http://keg.vse.cz/ns/datadescription0_2");
+
+        $this->FA = $loader->load($FAPath);
+        $this->FAXpath = new \DOMXPath($this->FA);
     }
 
     public function serialize($json, $forcedDepth = 3)
@@ -46,21 +53,18 @@ class TaskSettingSerializer
         // Create basic structure of Document.
         $this->createBasicStructure();
 
-        // Create antecedent
-        $antecedentId = $this->parseCedent($rule->antecedent, 1, $forcedDepth);
-        $this->antecedentSetting->appendChild($this->output->createTextNode($antecedentId));
+        // Input attributes
+        $this->createInputAttributesGroupSettings($json->attributes);
 
-        // IMs
-        foreach ($rule->IMs as $IM) {
-            $this->createInterestMeasureThreshold($IM);
-        }
+        // Class attribute
+        $classAttribute = $this->createClassAttributeSettings($rule->succedent);
 
-        // Create consequent
-        $consequentId = $this->parseCedent($rule->succedent, 1, $forcedDepth);
-        $this->consequentSetting->appendChild($this->output->createTextNode($consequentId));
+        // Condition
+        $conditionId = $this->parseCedent($rule->antecedent, 1, $forcedDepth);
+        $this->conditionSetting->appendChild($this->output->createTextNode($conditionId));
 
-        // Update TaskSetting - hypothesesCountMax
-        $this->updateTaskSetting($json->limitHits);
+        // ETree and InterestMeasure settings
+        $this->createETreeSettings($classAttribute, $this->conditions, $rule->IMs);
 
         // Update modelName
         $this->updateModelName();
@@ -69,7 +73,7 @@ class TaskSettingSerializer
         return $this->output->saveXML();
     }
 
-    protected function createBasicStructure()
+    private function createBasicStructure()
     {
         $this->output = new \DOMDocument("1.0", "UTF-8");
 
@@ -91,7 +95,7 @@ class TaskSettingSerializer
         $header->setAttribute('copyright', 'Copyright (c) KIZI UEP');
         $ext = $this->output->createElement('Extension');
         $ext->setAttribute('name', 'dataset');
-        $ext->setAttribute('value', $this->ddXpath->query("//dd:DataDescription/Dictionary/@sourceName")->item(0) ? $this->ddXpath->query("//dd:DataDescription/Dictionary/@sourceName")->item(0)->value : 'Loans');
+        $ext->setAttribute('value', $this->DDXpath->query("//dd:DataDescription/Dictionary/@sourceName")->item(0)->value);
         $header->appendChild($ext);
         $ext = $this->output->createElement('Extension');
         $ext->setAttribute('name', 'author');
@@ -103,11 +107,11 @@ class TaskSettingSerializer
         $header->appendChild($ext);
         $ext = $this->output->createElement('Extension');
         $ext->setAttribute('name', 'module');
-        $ext->setAttribute('value', '4ftResult.exe');
+        $ext->setAttribute('value', 'ETResult.exe');
         $header->appendChild($ext);
         $ext = $this->output->createElement('Extension');
         $ext->setAttribute('name', 'format');
-        $ext->setAttribute('value', '4ftMiner.Task');
+        $ext->setAttribute('value', 'ETreeMiner.Task');
         $header->appendChild($ext);
         $app = $this->output->createElement('Application');
         $app->setAttribute('name', 'SEWEBAR-CMS');
@@ -123,49 +127,42 @@ class TaskSettingSerializer
         // create DataDictionary
         $dd = $this->output->createElement('DataDictionary');
         $root->appendChild($dd);
+        $this->dataDictionary = $dd;
 
         // create AssociationModel
-        $associationModel = $this->output->createElement('guha:AssociationModel');
+        $associationModel = $this->output->createElement('guha:ETreeModel');
         $associationModel->setAttribute('xmlns', '');
         $associationModel->setAttribute('xsi:schemaLocation', 'http://keg.vse.cz/ns/GUHA0.1rev1 http://sewebar.vse.cz/schemas/GUHA0.1rev1.xsd');
         $associationModel->setAttribute('xmlns:guha', 'http://keg.vse.cz/ns/GUHA0.1rev1');
         $this->modelName = $this->output->createAttribute('modelName');
         $associationModel->setAttributeNode($this->modelName);
-        $associationModel->setAttribute('functionName', 'associationRules');
-        $associationModel->setAttribute('algorithmName', '4ft');
+        $associationModel->setAttribute('functionName', 'explorationTrees');
+        $associationModel->setAttribute('algorithmName', 'ETree');
 
         // create TaskSetting
         $taskSetting = $this->output->createElement("TaskSetting");
-        $this->arQuery = $associationModel->appendChild($taskSetting);
+        $this->taskSetting = $associationModel->appendChild($taskSetting);
 
         // extension LISp-Miner
-        $extension = $this->output->createElement('Extension');
+        $this->extension = $extension = $this->output->createElement('Extension');
         $extension->setAttribute('name', 'LISp-Miner');
-        $hypotheses = $this->output->createElement('HypothesesCountMax');
-        $extension->appendChild($hypotheses);
-        $this->arQuery->appendChild($extension);
-        $this->hypotheses = $hypotheses;
+        $this->taskNotice = $extension->appendChild($this->output->createElement('TaskNotice'));
+
+        $this->taskSetting->appendChild($extension);
 
         // extension metabase
         $extension = $this->output->createElement('Extension');
         $extension->setAttribute('name', 'metabase');
-        $extension->setAttribute('value', $this->ddXpath->query("//dd:DataDescription/Dictionary[@default='true']/Identifier[@name='Metabase']")->item(0) ? $this->ddXpath->query("//dd:DataDescription/Dictionary[@default='true']/Identifier[@name='Metabase']")->item(0)->nodeValue : 'LM Barbora.mdb MB');
-        $this->arQuery->appendChild($extension);
+        $extension->setAttribute('value', $this->DDXpath->query("//dd:DataDescription/Dictionary[@default='true']/Identifier[@name='metabase']")->item(0)->nodeValue);
+        $this->taskSetting->appendChild($extension);
 
-        $bbaSettings = $this->output->createElement("BBASettings");
-        $this->bbaSettings = $this->arQuery->appendChild($bbaSettings);
-        $dbaSettings = $this->output->createElement("DBASettings");
-        $this->dbaSettings = $this->arQuery->appendChild($dbaSettings);
-        $antecedentSetting = $this->output->createElement("AntecedentSetting");
-        $this->antecedentSetting = $this->arQuery->appendChild($antecedentSetting);
-        $consequentSetting = $this->output->createElement("ConsequentSetting");
-        $this->consequentSetting = $this->arQuery->appendChild($consequentSetting);
-        $interestMeasureSetting = $this->output->createElement("InterestMeasureSetting");
-        $this->interestMeasureSetting = $this->arQuery->appendChild($interestMeasureSetting);
+        $this->inputAttributesGroupSettings = $this->taskSetting->appendChild($this->output->createElement("InputAttributesGroupSettings"));
+        $this->classAttributeSettings = $this->taskSetting->appendChild($this->output->createElement("ClassAttributeSettings"));
+        $this->bbaSettings = $this->taskSetting->appendChild($this->output->createElement("BBASettings"));
+        $this->dbaSettings = $this->taskSetting->appendChild($this->output->createElement("DBASettings"));
+        $this->conditionSetting = $this->taskSetting->appendChild($this->output->createElement("ConditionSetting"));
 
-        // create AssociationRules
-        $associationRules = $this->output->createElement("AssociationRules");
-        $associationModel->appendChild($associationRules);
+        $this->interestMeasureSetting = $this->taskSetting->appendChild($this->output->createElement('InterestMeasureSetting'));
 
         $root->appendChild($associationModel);
     }
@@ -173,24 +170,6 @@ class TaskSettingSerializer
     public function generateId()
     {
         return ++$this->id;
-    }
-
-    protected function createInterestMeasureThreshold($IM)
-    {
-        $interestMeasureThreshold = $this->output->createElement("InterestMeasureThreshold");
-        $interestMeasureThreshold->setAttribute("id", $this->generateId());
-        $interestMeasureThreshold->appendChild($this->output->createElement("InterestMeasure", $IM->name));
-        foreach ($IM->fields as $f) {
-            if ($f->name === 'threshold') {
-                $interestMeasureThreshold->appendChild($this->output->createElement("Threshold", $f->value));
-            } elseif ($f->name === 'alpha') {
-                $interestMeasureThreshold->appendChild($this->output->createElement("SignificanceLevel", $f->value));
-            }
-        }
-        $interestMeasureThreshold->appendChild($this->output->createElement("ThresholdType", $IM->thresholdType));
-        $interestMeasureThreshold->appendChild($this->output->createElement("CompareType", $IM->compareType));
-
-        $this->interestMeasureSetting->appendChild($interestMeasureThreshold);
     }
 
     protected function parseCedent($cedent, $level, $forcedDepth)
@@ -275,8 +254,13 @@ class TaskSettingSerializer
         $coefficient = $this->output->createElement("Coefficient");
         $coefficient->appendChild($this->output->createElement("Type", $attribute->category));
 
+        $condition = array();
+        $condition['name'] = $attribute->name;
+        $condition['type'] = $attribute->category;
+
         if ($attribute->category == 'One category') {
             $coefficient->appendChild($this->output->createElement("Category", $attribute->fields[0]->value));
+            $condition['cat'] = $attribute->fields[0]->value;
         } else {
             $fieldsLength = count($attribute->fields);
             $minLength = null;
@@ -295,11 +279,15 @@ class TaskSettingSerializer
 
             $coefficient->appendChild($this->output->createElement("MinimalLength", $minLength));
             $coefficient->appendChild($this->output->createElement("MaximalLength", $maxLength));
+
+            $condition['minLength'] = $minLength;
+            $condition['minLength'] = $maxLength;
         }
+
+        array_push($this->conditions, $condition);
 
         return $coefficient;
     }
-
 
     public function getBooleanName($type)
     {
@@ -311,16 +299,61 @@ class TaskSettingSerializer
         return in_array($literal, self::$LITERALS);
     }
 
-    private function updateTaskSetting($hypothesesCountMax)
+    protected function createInputAttributesGroupSettings($attributes)
     {
-        $this->hypotheses->appendChild($this->output->createTextNode($hypothesesCountMax));
+        $element = $this->output->createElement('InputAttributesSettings');
+        $element->setAttribute('id', $this->generateId());
+        $element->appendChild($this->output->createElement('Name', 'Attributes'));
+        $element->appendChild($this->output->createElement('MinimalLength', 1));
+        $element->appendChild($this->output->createElement('MaximalLength', 1));
+        foreach ($attributes as $a) {
+            $elementInner = $this->output->createElement('InputAttributeSetting');
+            $elementInner->setAttribute('id', $this->generateId());
+            $elementInner->appendChild($this->output->createElement('FieldRef', $a));
+            $element->appendChild($elementInner);
+        }
+        $this->inputAttributesGroupSettings->appendChild($element);
     }
 
-    private function updateModelName()
+    protected function createClassAttributeSettings($succedent)
     {
-        $modelName = sha1($this->output->saveXML($this->arQuery));
+        $attribute = $succedent->children[0];
+
+        $element = $this->output->createElement('ClassAttributeSetting');
+        $element->setAttribute('id', $this->generateId());
+        $element->appendChild($this->output->createElement('FieldRef', $attribute->name));
+        $this->classAttributeSettings->appendChild($element);
+
+        $taskNotice = 'Succedent|'.$attribute->name.'|'.$attribute->category.'|';
+        if ($attribute->category === 'One category') {
+            $taskNotice .= $attribute->fields[0]->value;
+        } else {
+            $taskNotice .= $attribute->fields[0]->value.'-';
+            $taskNotice .= $attribute->fields[1]->value;
+        }
+        $this->taskNotice->appendChild($this->output->createTextNode($taskNotice));
+
+        return array('name' => $attribute->name);
+    }
+
+    private function createETreeSettings($classAttribute, $conditions, $IMs)
+    {
+        $settings = new BasicETreeSettings($this->FAXpath, $classAttribute, $conditions, $IMs);
+        $params = $settings->evaluate();
+
+        foreach ($params['extension'] as $name => $value) {
+            $this->extension->appendChild($this->output->createElement($name, $value));
+        }
+
+        foreach ($params['IM'] as $name => $value) {
+            $this->interestMeasureSetting->appendChild($this->output->createElement($name, $value));
+        }
+    }
+
+    protected function updateModelName()
+    {
+        $modelName = sha1($this->output->saveXML($this->taskSetting));
         $this->modelName->appendChild($this->output->createTextNode($modelName));
     }
-
 
 }

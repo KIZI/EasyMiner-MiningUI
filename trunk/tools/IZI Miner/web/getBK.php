@@ -4,7 +4,6 @@ require_once './Bootstrap.php';
 require_once '../config/Config.php';
 
 use IZI\Encoder\URLEncoder;
-use IZI\FileLoader\XMLLoader;
 use IZI\Parser\DataParser;
 use IZI\Parser\KnowledgeBaseParser;
 use IZI\Serializer\AnnotatedAssociationRulesSerializer;

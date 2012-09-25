@@ -86,15 +86,23 @@ var UIPainter = new Class({
 			var element = $(attribute.getCSSID());
 			element.set('morph', {duration: this.morphDuration});
 			if (attribute.isRecommended()) {
-				element.morph({
+                element.setStyles.delay(2500, element, {
 					'background-image': 'url(images/icon-rec1.png',
 					'background-repeat': 'no-repeat',
 					'color': '#434343'});
+//				element.morph({
+//					'background-image': 'url(images/icon-rec1.png',
+//					'background-repeat': 'no-repeat',
+//					'color': '#434343'});
 			} else if (attribute.isPartiallyRecommended()) {
-				element.morph({
-					'background-image': 'url(images/icon-rec2.png',
-					'background-repeat': 'no-repeat',
-					'color': '#434343'});
+                element.setStyles.delay(2500, element, {
+                    'background-image': 'url(images/icon-rec2.png',
+                    'background-repeat': 'no-repeat',
+                    'color': '#434343'});
+//				element.morph({
+//					'background-image': 'url(images/icon-rec2.png',
+//					'background-repeat': 'no-repeat',
+//					'color': '#434343'});
 			} else if (this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute)) {
 				element.morph({
 					'background-image': 'none',
