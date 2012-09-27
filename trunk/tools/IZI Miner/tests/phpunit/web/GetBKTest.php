@@ -5,28 +5,33 @@ require_once 'Bootstrap.php';
 class GetBKTest extends PHPUnit_Framework_TestCase
 {
 
-    protected $askData = [
-        "limitHits" => 250,
-        "rule0" => [
-            ["name" => "District", "type" => "attr", "category" => "Subset", "fields" => [["name" => "minLength", "value" => "1"], ["name" => "maxLength", "value" => "1"]]],
-            ["name" => "FUI", "type" => "oper", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "threshold", "value" => "0.70"]]],
-            ["name" => "Quality", "type" => "attr", "category" => "Subset", "fields" => [["name" => "minLength", "value" => "1"], ["name" => "maxLength", "value" => "1"]]]
+    protected $data = [
+        "attributes" => [
+            "Age", "Age ", "Age_in_years", "Amount", "Duration", "Repayment", "Salary", "Sex",
         ],
-        "rules" => 1];
-    protected $saveData = [
-        "limitHits" => 250,
         "rule0" => [
-            ["name" => "District", "type" => "attr", "category" => "Subset", "fields" => [["name" => "minLength", "value" => "1"], ["name" => "maxLength", "value" => "1"]]],
-            ["name" => "FUI", "type" => "oper", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "threshold", "value" => "0.70"]]],
-            ["name" => "Quality", "type" => "attr", "category" => "Subset", "fields" => [["name" => "minLength", "value" => "1"], ["name" => "maxLength", "value" => "1"]]]
+            "antecedent" => [
+                "type" => "cedent",
+                "connective" => ["name" => "AND", "type" => "and"],
+                "level" => 1,
+                "children" => [["name" => "District", "category" => "One category", "fields" => [["name" => "category", "value" => "Praha"]], "sign" => "positive"]],
+            ],
+            "IMs" => [["name" => "CHI", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "alpha", "value" => "0.01"]]]],
+            "succedent" => [
+                "type" => "cedent",
+                "connective" => ["name" => "AND", "type" => "and"],
+                "level" => 1,
+                "children" => [["name" => "Quality", "category" => "One category", "fields" => [["name" => "category", "value" => "good"]], "sign" => "positive"]],
+            ],
         ],
-        "rules" => 1];
+        "rules" => 1,
+    ];
 
     public function testSaveInteresting()
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=TEST&id_kb=TEST&action=saveInteresting&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -46,7 +51,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=INVALID&id_kb=TEST&action=saveInteresting&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -66,7 +71,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=TEST&id_kb=INVALID&action=saveInteresting&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -86,7 +91,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=INVALID&id_kb=TEST&action=saveNotInteresting&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -106,7 +111,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=TEST&id_kb=INVALID&action=saveNotInteresting&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -126,7 +131,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=TEST&id_kb=TEST&action=ask&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->askData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -154,7 +159,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=INVALID&id_kb=TEST&action=ask&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -174,7 +179,7 @@ class GetBKTest extends PHPUnit_Framework_TestCase
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getBK.php?id_dm=TEST&id_kb=INVALID&action=ask&lang=en');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->saveData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);

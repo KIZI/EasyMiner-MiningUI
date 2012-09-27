@@ -217,7 +217,7 @@ var UIPainter = new Class({
 		
 		this.UIListener.registerActiveRuleEventHandlers(this.ARBuilder.getARManager().getActiveRule());
 		
-		this.updateScrollbar();
+		this.$UIStructurePainter.resizeApplication();
 	},
 	
 	renderCedent: function (cedent, elementParent) {
@@ -414,19 +414,6 @@ var UIPainter = new Class({
         }
 
 		this.UIListener.registerEditConnectiveFormEventHandler(cedent);
-	},
-	
-	/* active rule */
-	updateScrollbar: function (scrollerWidth, width) {
-		var scrollerWidth = $('ar-scroller').getSize().x;
-		var width = $('antecedent').getSize().x + $('interest-measures').getSize().x + $('succedent').getSize().x + 1; // IE9 hack (+1)
-		$('ar-wrapper').setStyle('width', width);
-		
-		if (width > scrollerWidth) {
-			$('ar-scroller').setStyle('overflow-x', 'scroll');
-		} else {
-			$('ar-scroller').setStyle('overflow-x', 'hidden');
-		}
 	},
 	
 	/* found rules */

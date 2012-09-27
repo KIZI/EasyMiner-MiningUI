@@ -32,7 +32,8 @@ if ($id === 'TEST') {
         if (FB_ENABLED) { // log into console
             FB::error(['error' => 'data description does not exist']);
         }
-        goto returnError;
+        $responseContent = ['status' => 'error'];
+        goto sendResponse;
     }
 
     $serializer = new TaskSettingSerializer($DDPath);
@@ -75,11 +76,11 @@ if ($id === 'TEST') {
         $responseContent['result'] = $resultPath;
         $responseContent['status'] = 'ok';
     } else {
-        returnError:
         $responseContent = ['status' => 'error'];
     }
 }
 
+sendResponse:
 $response = new Response(json_encode($responseContent), 200, array('content-type' => 'application/json; charset=UTF-8'));
 $response->send();
 

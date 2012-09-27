@@ -11,8 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $lang = $request->query->get('lang');
+$sleep = (int) $request->query->get('sleep') ?: 0;
 
 if ($id === 'TEST') {
+    sleep($sleep); // simulates time required for remote request
     $DP = new DataParser(DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
     $DP->loadData();
     $responseContent = $DP->parseData();

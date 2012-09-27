@@ -60,11 +60,11 @@ var UIStructurePainter = new Class({
     },
 
     renderMarkedRules: function() {
-        var main = $('main');
+        var workplace = $('workplace');
 
         // marked rules
         var elementMarkedRules = Mooml.render('markedRulesStructureTemplate', {i18n: this.$i18n});
-        main.grab(elementMarkedRules);
+        workplace.grab(elementMarkedRules);
 
         this.$UIStructureListener.registerMarkedRulesEventHandlers();
     },
@@ -78,8 +78,26 @@ var UIStructurePainter = new Class({
         this.$UIScroller.scrollTo(0, 0);
     },
 
+    resizeApplication: function() {
+        var wrapperWidth = $('ar-wrapper').getSize().x;
+        var width = $('antecedent').getSize().x + $('interest-measures').getSize().x + $('succedent').getSize().x + 1; // IE9 hack (+1)
+
+//        console.log(width > scrollerWidth, width, scrollerWidth);
+//        return;
+
+        $('ar-wrapper').setStyle('width', width);
+
+//        if (width > wrapperWidth) {
+//            $('ar-wrapper').setStyle('overflow-x', 'scroll');
+//        } else {
+//            $('ar-wrapper').setStyle('overflow-x', 'hidden');
+//        }
+
+        this.resizeWindow();
+    },
+
     resizeWindow: function() {
-        var contentWidth = Math.max($$('header')[0].getSize().x + 13, $(window).getSize().x);
+        var contentWidth = Math.max($$('header')[0].getSize().x + 13, $(window).getSize().x, $('workplace').getSize().x + $('navigation').getSize().x + 40);
         var contentHeight = Math.max($$('header')[0].getSize().y + $('wrapper').getSize().y + $$('footer')[0].getSize().y + 60, $(window).getSize().y);
 
         // fix overlay width to 100%

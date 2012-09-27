@@ -27,6 +27,8 @@ exports.main = function()
 		{
 			version = UTIL.trim(stdout).split("\n").pop().match(/^v(.*)$/)[1];
 
+			// TODO: Compare against version in `../../program.json ~ version` (ensure =)
+
 			module.print("\0cyan(Building version: " + version + "\0)\n");
 			
 			buildZipArchive(function()

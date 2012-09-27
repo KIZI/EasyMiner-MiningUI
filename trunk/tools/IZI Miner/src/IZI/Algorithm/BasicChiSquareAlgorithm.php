@@ -81,7 +81,7 @@ class BasicChiSquareAlgorithm
             foreach ($ETRule as $attr) {
                 $value = $attr['significance'] / pow($attr['level'] + 1 - $minLevel, $this->pow);
 
-                if (!isset($attr['name'], $attributes) || $value > $attributes[$attr['name']]) {
+                if (!array_key_exists($attr['name'], $attributes) || ($value > $attributes[$attr['name']])) {
                     $attributes[$attr['name']] = $value;
                 }
             }

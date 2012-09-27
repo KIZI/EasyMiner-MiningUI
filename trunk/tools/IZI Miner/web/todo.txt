@@ -2,34 +2,14 @@ TODO
 ==============
 - move settings into config... no reason to have two separate configs
 
-- think about DD - PHP vs. JS
-- repair scrollbar
-- list-style-type none pri pretahovani data fieldu
 - feedback module
 - onerror
 - clear rules should scroll up
 
 - seskupeni hodne atributu - bugy
 - pri smazani pravidel zavoalat resize
+- probably a hidden FL bug, serializers / parsers are using the same all the time
 
 exporter is occupied !!!!!!!
 ošetřit message od kBI - při minování i data description zkoušet znovu
 pri zastaveni stejne ulohy zobrazit tlacitko mine rules
-
-<br />
-<b>Warning</b>:  DOMDocument::loadXML(): Empty string supplied as input in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>174</b><br />
-<br />
-<b>Fatal error</b>:  Cannot use object of type stdClass as array in <b>/home/sewebar/code.google.com/trunk/tools/IZI Miner/src/IZI/Serializer/QueryByARSerializer.php</b> on line <b>87</b><br />
-
-23. 9. 2012
-12.30 - 13.00 Loading icon fix
-13.00 - 13.45 (A and B) or C
-
-write tests for , , ... verify that IZI handles errors
-!!! handle XQuery error in IZI Miner... tests
-
-24. 9. 2012
-19.30 - 19.45 BK error handling fix
-19.45 - 20.20 BK changes
-20.20 - 20.35 ETree fix
-23.30 - 00.30 ETree fix

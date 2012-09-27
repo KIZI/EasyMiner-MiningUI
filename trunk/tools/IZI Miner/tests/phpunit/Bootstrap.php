@@ -19,6 +19,7 @@ $pathXML = realpath(dirname(__FILE__)).'/_data';
 define('DD', $pathXML.DS.'datadescription_0.2.xml');
 define('FL', $pathXML.DS.'featurelistQueryByAr.xml');
 define('FGC', $pathXML.DS.'fieldGroupConfig.xml');
+define('FA', $pathXML.DS.'frequencyAnalysis.xml');
 define('FGCINVALIDROOTCONFIGID', $pathXML.DIRECTORY_SEPARATOR.'fieldGroupConfigInvalidRootConfigID.xml');
 define('FGCINVALIDSTRUCTURE', $pathXML.DIRECTORY_SEPARATOR.'fieldGroupConfigInvalidStructure.xml');
 define('FGCINVALIDATTRIBUTE', $pathXML.DIRECTORY_SEPARATOR.'fieldGroupConfigInvalidAttribute.xml');
@@ -28,3 +29,4 @@ define('ERASSOCIATIONRULES2', $pathXML.DIRECTORY_SEPARATOR.'hitlist_AssociationR
 define('ERTASKSETTING', $pathXML.DIRECTORY_SEPARATOR.'hitlist_TaskSetting.xml');
 define('ERARQUERY', $pathXML.DIRECTORY_SEPARATOR.'hitlist_ARQuery.xml');
 
+define('DATA_PATH', $pathXML.'/');

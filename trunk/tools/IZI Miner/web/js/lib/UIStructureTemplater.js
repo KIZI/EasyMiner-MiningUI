@@ -29,7 +29,7 @@ var UIStructureTemplater = new Class({
                 $i18n = data.i18n;
 
             div({id: 'wrapper', 'class': 'clearfix'},
-                section({id: 'main', 'class': 'clearfix'},
+                section({id: 'workplace', 'class': 'clearfix'},
                     section({id: 'content'},
                         section({id: 'active-rule'}),
                         section({id: 'found-rules'},
@@ -42,8 +42,11 @@ var UIStructureTemplater = new Class({
                             a({id: 'view-task-setting', href: '#', target: '_blank'}, $i18n.translate('Task setting')),
                             a({id: 'view-task-result', href: '#', target: '_blank'}, $i18n.translate('Task result')),
                             a({id: 'pager-clear', href: '#'}, $i18n.translate('Clear rules'))
-                        )),
-                    nav({id: 'navigation'})));
+                        )
+                    )
+                ),
+                nav({id: 'navigation'})
+            );
         });
 
         Mooml.register('footerTemplate', function (data) {
@@ -182,14 +185,14 @@ var UIStructureTemplater = new Class({
 
             section({id: 'active-rule'},
                 h2($i18n.translate('Association rule pattern')),
-                div({id: 'ar-scroller'},
-                    div({id: 'ar-wrapper'},
+                    div({id: 'ar-wrapper', 'class': 'clearfix'},
                         div({id: 'antecedent'}, h3($i18n.translate('Antecedent'))),
                         div({id: 'interest-measures'},
                             h3($i18n.translate('Interest measures')),
                             div(),
                             displayAddIM ? a({href: '#', id: 'add-im'}, $i18n.translate('Add IM')) : ''),
-                        div({id: 'succedent'}, h3($i18n.translate('Consequent'))))),
+                        div({id: 'succedent'}, h3($i18n.translate('Consequent')))
+                    ),
                 div({'class': 'clearfix'}),
                 span({id: 'action-box', styles: {'visibility': taskBox ? 'visible' : 'hidden'}}, taskText));
         });
