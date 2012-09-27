@@ -58,7 +58,11 @@ var ETreeManager = new Class({
 	        secure: true,
 	            
 	        onSuccess: function(responseJSON, responseText) {
-	        	this.sortAttributes(data, responseJSON);
+                if (responseJSON.status == 'ok') {
+	        	    this.sortAttributes(data, responseJSON.recommendation);
+                } else {
+                    this.handleErrorRequest();
+                }
 	        }.bind(this),
 	            
 	        onError: function () {
@@ -85,7 +89,7 @@ var ETreeManager = new Class({
 	        
 		this.addRequest(request);
 	},
-	
+
 	sortAttributes: function (data, responseJSON) {
 		this.setInProgress(false);
 		if (responseJSON.length === 0) {

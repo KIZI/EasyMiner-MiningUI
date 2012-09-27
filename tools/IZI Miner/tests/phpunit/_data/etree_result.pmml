@@ -1,0 +1,2511 @@
+<?xml version="1.0"?>
+<?oxygen SCHSchema="http://sewebar.vse.cz/schemas/GUHARestr0_1.sch"?>
+<PMML version="4.0" xmlns="http://www.dmg.org/PMML-4_0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:pmml="http://www.dmg.org/PMML-4_0"
+      xsi:schemaLocation="http://www.dmg.org/PMML-4_0 http://sewebar.vse.cz/schemas/PMML4.0+GUHA0.1.xsd"
+        >
+
+    <!-- ETreeMiner.Task.PMML.Template, for version see below -->
+
+    <Header copyright="Copyright (c) KIZI UEP">
+        <Extension name="metabase" value="LMM-VUBEXl1t0k2xnJnXFwuyHg"/>
+        <Extension name="dataset" value="Loans"/>
+        <Extension name="author" value="PowerUser"/>
+        <Extension name="subsystem" value="LM Sewebar Exporter"/>
+        <Extension name="module" value="LMSwbExporter.exe"/>
+        <Extension name="format" value="ETreeMiner.Task"/>
+        <Extension name="version" value="2012-02-24"/>
+        <Application name="LISp-Miner" version="20.01.00 of 4 Sep 2012"/>
+        <Annotation>-</Annotation>
+        <Timestamp>25.9.2012 12:00:59</Timestamp>
+    </Header>
+
+    <!-- Table -->
+
+    <!-- Include Template: Source.DatabaseDictionary.Task.Include.Template -->
+    <!-- Version: 2012-02-19 -->
+
+    <MiningBuildTask>
+        <Extension name="DatabaseDictionary">
+            <Table name="Loans">
+                <Columns>
+                    <Column name="amount" dataType="Long integer"/>
+                    <Column name="birth_number" dataType="Long integer"/>
+                    <Column name="District" dataType="String"/>
+                    <Column name="duration" dataType="Long integer"/>
+                    <Column name="loan_id" dataType="Long integer"/>
+                    <Column name="payments" dataType="Long integer"/>
+                    <Column name="Salary" dataType="Long integer"/>
+                    <Column name="status" dataType="String"/>
+                </Columns>
+                <DerivedColumns>
+                    <DerivedColumn name="Age" dataType="Long integer"
+                                   attributeType="Derived"
+                                   formula="2002 - (1900 + CLng(birth_number/10000))"
+                                   MCPosition="0"
+                                   MCLength="0"
+                                   MCDelimiter=""
+                            />
+                    <DerivedColumn name="Sex" dataType="Boolean"
+                                   attributeType="Derived"
+                                   formula="Mid(Str(birth_number),4,1) In (5,6)"
+                                   MCPosition="0"
+                                   MCLength="0"
+                                   MCDelimiter=""
+                            />
+                </DerivedColumns>
+                <PrimaryKey>
+                    <Column name="loan_id" primaryKeyPosition="0"/>
+                </PrimaryKey>
+            </Table>
+        </Extension>
+    </MiningBuildTask>
+
+    <!-- Matrix -->
+
+    <!-- Include Template: Source.DataDictionary.Task.Include.Template -->
+    <!-- Version: 2012-01-04 -->
+
+    <DataDictionary numberOfFields="8">
+        <DataField
+                name="Age"
+                optype="Cardinal"
+                dataType="Long integer"
+                >
+            <Extension name="Avg" value="43.357386" extender="Avg"/>
+            <Extension name="StDev" value="12.716881" extender="StDev"/>
+            <Interval leftMargin="21.000000" rightMargin="67.000000" closure="closedClosed"/>
+        </DataField>
+        <DataField
+                name="amount"
+                optype="Cardinal"
+                dataType="Long integer"
+                >
+            <Extension name="Avg" value="151450.639702" extender="Avg"/>
+            <Extension name="StDev" value="-1.000000" extender="StDev"/>
+            <Interval leftMargin="4980.000000" rightMargin="590820.000000" closure="closedClosed"/>
+        </DataField>
+        <DataField
+                name="District"
+                optype="Nominal"
+                dataType="String"
+                >
+            <Extension name="maxItems" value="1000"/>
+        </DataField>
+        <DataField
+                name="duration"
+                optype="Cardinal"
+                dataType="Long integer"
+                >
+            <Extension name="Avg" value="36.520466" extender="Avg"/>
+            <Extension name="StDev" value="-1.000000" extender="StDev"/>
+            <Interval leftMargin="12.000000" rightMargin="60.000000" closure="closedClosed"/>
+        </DataField>
+        <DataField
+                name="payments"
+                optype="Cardinal"
+                dataType="Long integer"
+                >
+            <Extension name="Avg" value="4192.148681" extender="Avg"/>
+            <Extension name="StDev" value="-1.000000" extender="StDev"/>
+            <Interval leftMargin="304.000000" rightMargin="41728.000000" closure="closedClosed"/>
+        </DataField>
+        <DataField
+                name="Salary"
+                optype="Cardinal"
+                dataType="Long integer"
+                >
+            <Extension name="Avg" value="9464.201747" extender="Avg"/>
+            <Extension name="StDev" value="-1.000000" extender="StDev"/>
+            <Interval leftMargin="8110.000000" rightMargin="12541.000000" closure="closedClosed"/>
+        </DataField>
+        <DataField
+                name="Sex"
+                optype="Nominal"
+                dataType="Boolean"
+                >
+            <Extension name="maxItems" value="1000"/>
+        </DataField>
+        <DataField
+                name="status"
+                optype="Nominal"
+                dataType="String"
+                >
+            <Extension name="maxItems" value="1000"/>
+        </DataField>
+    </DataDictionary>
+
+    <!-- Attributes -->
+
+    <!-- Include Template: Source.TrasnformationDictionary.Task.Include.Template -->
+    <!-- Version: 2012-07-09 -->
+
+    <TransformationDictionary>
+        <DerivedField
+                name= "Age"
+                dataType="string"
+                optype="continuous"
+                >
+            <Discretize field="Age"
+                    >
+                <Extension name="Frequency" value="1197" extender="&lt;21;31)"/>
+                <Extension name="Frequency" value="1525" extender="&lt;31;41)"/>
+                <Extension name="Frequency" value="1403" extender="&lt;41;51)"/>
+                <Extension name="Frequency" value="1335" extender="&lt;51;61)"/>
+                <Extension name="Frequency" value="721" extender="&lt;61;71)"/>
+                <DiscretizeBin binValue="&lt;21;31)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="21"
+                            rightMargin="31"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;31;41)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="31"
+                            rightMargin="41"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;41;51)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="41"
+                            rightMargin="51"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;51;61)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="51"
+                            rightMargin="61"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;61;71)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="61"
+                            rightMargin="71"
+                            />
+                </DiscretizeBin>
+            </Discretize>
+        </DerivedField>
+        <DerivedField
+                name= "Age_in_years"
+                dataType="string"
+                optype="ordinal"
+                >
+            <MapValues outputColumn="Age_in_years"
+                    >
+                <FieldColumnPair column="Age" field="Age_in_years"/>
+                <InlineTable>
+                    <Extension name="Frequency" value="117" extender="21"/>
+                    <Extension name="Frequency" value="108" extender="22"/>
+                    <Extension name="Frequency" value="135" extender="23"/>
+                    <Extension name="Frequency" value="126" extender="24"/>
+                    <Extension name="Frequency" value="99" extender="25"/>
+                    <Extension name="Frequency" value="117" extender="26"/>
+                    <Extension name="Frequency" value="90" extender="27"/>
+                    <Extension name="Frequency" value="144" extender="28"/>
+                    <Extension name="Frequency" value="63" extender="29"/>
+                    <Extension name="Frequency" value="198" extender="30"/>
+                    <Extension name="Frequency" value="220" extender="31"/>
+                    <Extension name="Frequency" value="99" extender="32"/>
+                    <Extension name="Frequency" value="126" extender="33"/>
+                    <Extension name="Frequency" value="144" extender="34"/>
+                    <Extension name="Frequency" value="180" extender="35"/>
+                    <Extension name="Frequency" value="144" extender="36"/>
+                    <Extension name="Frequency" value="153" extender="37"/>
+                    <Extension name="Frequency" value="207" extender="38"/>
+                    <Extension name="Frequency" value="99" extender="39"/>
+                    <Extension name="Frequency" value="153" extender="40"/>
+                    <Extension name="Frequency" value="135" extender="41"/>
+                    <Extension name="Frequency" value="99" extender="42"/>
+                    <Extension name="Frequency" value="124" extender="43"/>
+                    <Extension name="Frequency" value="234" extender="44"/>
+                    <Extension name="Frequency" value="162" extender="45"/>
+                    <Extension name="Frequency" value="135" extender="46"/>
+                    <Extension name="Frequency" value="90" extender="47"/>
+                    <Extension name="Frequency" value="99" extender="48"/>
+                    <Extension name="Frequency" value="153" extender="49"/>
+                    <Extension name="Frequency" value="172" extender="50"/>
+                    <Extension name="Frequency" value="171" extender="51"/>
+                    <Extension name="Frequency" value="108" extender="52"/>
+                    <Extension name="Frequency" value="162" extender="53"/>
+                    <Extension name="Frequency" value="93" extender="54"/>
+                    <Extension name="Frequency" value="180" extender="55"/>
+                    <Extension name="Frequency" value="153" extender="56"/>
+                    <Extension name="Frequency" value="126" extender="57"/>
+                    <Extension name="Frequency" value="99" extender="58"/>
+                    <Extension name="Frequency" value="144" extender="59"/>
+                    <Extension name="Frequency" value="99" extender="60"/>
+                    <Extension name="Frequency" value="198" extender="61"/>
+                    <Extension name="Frequency" value="135" extender="62"/>
+                    <Extension name="Frequency" value="90" extender="63"/>
+                    <Extension name="Frequency" value="82" extender="64"/>
+                    <Extension name="Frequency" value="99" extender="65"/>
+                    <Extension name="Frequency" value="63" extender="66"/>
+                    <Extension name="Frequency" value="54" extender="67"/>
+                    <row>
+                        <column>21</column>
+                        <field>21</field>
+                    </row>
+                    <row>
+                        <column>22</column>
+                        <field>22</field>
+                    </row>
+                    <row>
+                        <column>23</column>
+                        <field>23</field>
+                    </row>
+                    <row>
+                        <column>24</column>
+                        <field>24</field>
+                    </row>
+                    <row>
+                        <column>25</column>
+                        <field>25</field>
+                    </row>
+                    <row>
+                        <column>26</column>
+                        <field>26</field>
+                    </row>
+                    <row>
+                        <column>27</column>
+                        <field>27</field>
+                    </row>
+                    <row>
+                        <column>28</column>
+                        <field>28</field>
+                    </row>
+                    <row>
+                        <column>29</column>
+                        <field>29</field>
+                    </row>
+                    <row>
+                        <column>30</column>
+                        <field>30</field>
+                    </row>
+                    <row>
+                        <column>31</column>
+                        <field>31</field>
+                    </row>
+                    <row>
+                        <column>32</column>
+                        <field>32</field>
+                    </row>
+                    <row>
+                        <column>33</column>
+                        <field>33</field>
+                    </row>
+                    <row>
+                        <column>34</column>
+                        <field>34</field>
+                    </row>
+                    <row>
+                        <column>35</column>
+                        <field>35</field>
+                    </row>
+                    <row>
+                        <column>36</column>
+                        <field>36</field>
+                    </row>
+                    <row>
+                        <column>37</column>
+                        <field>37</field>
+                    </row>
+                    <row>
+                        <column>38</column>
+                        <field>38</field>
+                    </row>
+                    <row>
+                        <column>39</column>
+                        <field>39</field>
+                    </row>
+                    <row>
+                        <column>40</column>
+                        <field>40</field>
+                    </row>
+                    <row>
+                        <column>41</column>
+                        <field>41</field>
+                    </row>
+                    <row>
+                        <column>42</column>
+                        <field>42</field>
+                    </row>
+                    <row>
+                        <column>43</column>
+                        <field>43</field>
+                    </row>
+                    <row>
+                        <column>44</column>
+                        <field>44</field>
+                    </row>
+                    <row>
+                        <column>45</column>
+                        <field>45</field>
+                    </row>
+                    <row>
+                        <column>46</column>
+                        <field>46</field>
+                    </row>
+                    <row>
+                        <column>47</column>
+                        <field>47</field>
+                    </row>
+                    <row>
+                        <column>48</column>
+                        <field>48</field>
+                    </row>
+                    <row>
+                        <column>49</column>
+                        <field>49</field>
+                    </row>
+                    <row>
+                        <column>50</column>
+                        <field>50</field>
+                    </row>
+                    <row>
+                        <column>51</column>
+                        <field>51</field>
+                    </row>
+                    <row>
+                        <column>52</column>
+                        <field>52</field>
+                    </row>
+                    <row>
+                        <column>53</column>
+                        <field>53</field>
+                    </row>
+                    <row>
+                        <column>54</column>
+                        <field>54</field>
+                    </row>
+                    <row>
+                        <column>55</column>
+                        <field>55</field>
+                    </row>
+                    <row>
+                        <column>56</column>
+                        <field>56</field>
+                    </row>
+                    <row>
+                        <column>57</column>
+                        <field>57</field>
+                    </row>
+                    <row>
+                        <column>58</column>
+                        <field>58</field>
+                    </row>
+                    <row>
+                        <column>59</column>
+                        <field>59</field>
+                    </row>
+                    <row>
+                        <column>60</column>
+                        <field>60</field>
+                    </row>
+                    <row>
+                        <column>61</column>
+                        <field>61</field>
+                    </row>
+                    <row>
+                        <column>62</column>
+                        <field>62</field>
+                    </row>
+                    <row>
+                        <column>63</column>
+                        <field>63</field>
+                    </row>
+                    <row>
+                        <column>64</column>
+                        <field>64</field>
+                    </row>
+                    <row>
+                        <column>65</column>
+                        <field>65</field>
+                    </row>
+                    <row>
+                        <column>66</column>
+                        <field>66</field>
+                    </row>
+                    <row>
+                        <column>67</column>
+                        <field>67</field>
+                    </row>
+                </InlineTable>
+            </MapValues>
+        </DerivedField>
+        <DerivedField
+                name= "Amount"
+                dataType="string"
+                optype="continuous"
+                >
+            <Discretize field="amount"
+                    >
+                <Extension name="Frequency" value="198" extender="&lt; 20"/>
+                <Extension name="Frequency" value="936" extender="&lt;20;50)"/>
+                <Extension name="Frequency" value="1613" extender="&lt;50;100)"/>
+                <Extension name="Frequency" value="2300" extender="&lt;100;250)"/>
+                <Extension name="Frequency" value="1089" extender="&lt;250;500)"/>
+                <Extension name="Frequency" value="45" extender="&gt;= 500"/>
+                <DiscretizeBin binValue="&lt; 20">
+                    <Interval
+                            closure="openOpen"
+                            leftMargin="0"
+                            rightMargin="20000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;20;50)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="20000"
+                            rightMargin="50000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;50;100)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="50000"
+                            rightMargin="100000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;100;250)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="100000"
+                            rightMargin="250000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&lt;250;500)">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="250000"
+                            rightMargin="500000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="&gt;= 500">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="500000"
+                            rightMargin="+inf"
+                            />
+                </DiscretizeBin>
+            </Discretize>
+        </DerivedField>
+        <DerivedField
+                name= "District"
+                dataType="string"
+                optype="ordinal"
+                >
+            <MapValues outputColumn="District"
+                    >
+                <FieldColumnPair column="District" field="District"/>
+                <InlineTable>
+                    <Extension name="Frequency" value="63" extender="Benesov"/>
+                    <Extension name="Frequency" value="63" extender="Beroun"/>
+                    <Extension name="Frequency" value="63" extender="Blansko"/>
+                    <Extension name="Frequency" value="54" extender="Breclav"/>
+                    <Extension name="Frequency" value="207" extender="Brno"/>
+                    <Extension name="Frequency" value="99" extender="Brno - venkov"/>
+                    <Extension name="Frequency" value="55" extender="Bruntal"/>
+                    <Extension name="Frequency" value="54" extender="Ceska Lipa"/>
+                    <Extension name="Frequency" value="81" extender="Ceske Budejovice"/>
+                    <Extension name="Frequency" value="63" extender="Cesky Krumlov"/>
+                    <Extension name="Frequency" value="45" extender="Decin"/>
+                    <Extension name="Frequency" value="18" extender="Domazlice"/>
+                    <Extension name="Frequency" value="135" extender="Frydek - Mistek"/>
+                    <Extension name="Frequency" value="86" extender="Havlickuv Brod"/>
+                    <Extension name="Frequency" value="72" extender="Hodonin"/>
+                    <Extension name="Frequency" value="54" extender="Hradec Kralove"/>
+                    <Extension name="Frequency" value="36" extender="Cheb"/>
+                    <Extension name="Frequency" value="72" extender="Chomutov"/>
+                    <Extension name="Frequency" value="63" extender="Chrudim"/>
+                    <Extension name="Frequency" value="18" extender="Jablonec n. Nisou"/>
+                    <Extension name="Frequency" value="72" extender="Jesenik"/>
+                    <Extension name="Frequency" value="63" extender="Jicin"/>
+                    <Extension name="Frequency" value="54" extender="Jihlava"/>
+                    <Extension name="Frequency" value="99" extender="Jindrichuv Hradec"/>
+                    <Extension name="Frequency" value="54" extender="Karlovy Vary"/>
+                    <Extension name="Frequency" value="225" extender="Karvina"/>
+                    <Extension name="Frequency" value="54" extender="Kladno"/>
+                    <Extension name="Frequency" value="18" extender="Klatovy"/>
+                    <Extension name="Frequency" value="99" extender="Kolin"/>
+                    <Extension name="Frequency" value="99" extender="Kromeriz"/>
+                    <Extension name="Frequency" value="72" extender="Kutna Hora"/>
+                    <Extension name="Frequency" value="63" extender="Liberec"/>
+                    <Extension name="Frequency" value="63" extender="Litomerice"/>
+                    <Extension name="Frequency" value="117" extender="Louny"/>
+                    <Extension name="Frequency" value="45" extender="Melnik"/>
+                    <Extension name="Frequency" value="45" extender="Mlada Boleslav"/>
+                    <Extension name="Frequency" value="61" extender="Most"/>
+                    <Extension name="Frequency" value="72" extender="Nachod"/>
+                    <Extension name="Frequency" value="45" extender="Novy Jicin"/>
+                    <Extension name="Frequency" value="81" extender="Nymburk"/>
+                    <Extension name="Frequency" value="135" extender="Olomouc"/>
+                    <Extension name="Frequency" value="72" extender="Opava"/>
+                    <Extension name="Frequency" value="180" extender="Ostrava - mesto"/>
+                    <Extension name="Frequency" value="90" extender="Pardubice"/>
+                    <Extension name="Frequency" value="54" extender="Pelhrimov"/>
+                    <Extension name="Frequency" value="27" extender="Pisek"/>
+                    <Extension name="Frequency" value="54" extender="Plzen"/>
+                    <Extension name="Frequency" value="81" extender="Plzen - jih"/>
+                    <Extension name="Frequency" value="63" extender="Plzen - sever"/>
+                    <Extension name="Frequency" value="711" extender="Praha"/>
+                    <Extension name="Frequency" value="45" extender="Praha - vychod"/>
+                    <Extension name="Frequency" value="90" extender="Praha - zapad"/>
+                    <Extension name="Frequency" value="108" extender="Prachatice"/>
+                    <Extension name="Frequency" value="27" extender="Prerov"/>
+                    <Extension name="Frequency" value="45" extender="Pribram"/>
+                    <Extension name="Frequency" value="81" extender="Prostejov"/>
+                    <Extension name="Frequency" value="81" extender="Rakovnik"/>
+                    <Extension name="Frequency" value="72" extender="Rokycany"/>
+                    <Extension name="Frequency" value="45" extender="Rychnov nad Kneznou"/>
+                    <Extension name="Frequency" value="27" extender="Semily"/>
+                    <Extension name="Frequency" value="12" extender="Sokolov"/>
+                    <Extension name="Frequency" value="45" extender="Strakonice"/>
+                    <Extension name="Frequency" value="54" extender="Sumperk"/>
+                    <Extension name="Frequency" value="108" extender="Svitavy"/>
+                    <Extension name="Frequency" value="72" extender="Tabor"/>
+                    <Extension name="Frequency" value="99" extender="Tachov"/>
+                    <Extension name="Frequency" value="45" extender="Teplice"/>
+                    <Extension name="Frequency" value="54" extender="Trebic"/>
+                    <Extension name="Frequency" value="63" extender="Trutnov"/>
+                    <Extension name="Frequency" value="81" extender="Uherske Hradiste"/>
+                    <Extension name="Frequency" value="27" extender="Usti nad Labem"/>
+                    <Extension name="Frequency" value="135" extender="Usti nad Orlici"/>
+                    <Extension name="Frequency" value="63" extender="Vsetin"/>
+                    <Extension name="Frequency" value="72" extender="Vyskov"/>
+                    <Extension name="Frequency" value="63" extender="Zdar nad Sazavou"/>
+                    <Extension name="Frequency" value="144" extender="Zlin"/>
+                    <Extension name="Frequency" value="54" extender="Znojmo"/>
+                    <row>
+                        <column>Benesov</column>
+                        <field>Benesov</field>
+                    </row>
+                    <row>
+                        <column>Beroun</column>
+                        <field>Beroun</field>
+                    </row>
+                    <row>
+                        <column>Blansko</column>
+                        <field>Blansko</field>
+                    </row>
+                    <row>
+                        <column>Breclav</column>
+                        <field>Breclav</field>
+                    </row>
+                    <row>
+                        <column>Brno</column>
+                        <field>Brno</field>
+                    </row>
+                    <row>
+                        <column>Brno - venkov</column>
+                        <field>Brno - venkov</field>
+                    </row>
+                    <row>
+                        <column>Bruntal</column>
+                        <field>Bruntal</field>
+                    </row>
+                    <row>
+                        <column>Ceska Lipa</column>
+                        <field>Ceska Lipa</field>
+                    </row>
+                    <row>
+                        <column>Ceske Budejovice</column>
+                        <field>Ceske Budejovice</field>
+                    </row>
+                    <row>
+                        <column>Cesky Krumlov</column>
+                        <field>Cesky Krumlov</field>
+                    </row>
+                    <row>
+                        <column>Decin</column>
+                        <field>Decin</field>
+                    </row>
+                    <row>
+                        <column>Domazlice</column>
+                        <field>Domazlice</field>
+                    </row>
+                    <row>
+                        <column>Frydek - Mistek</column>
+                        <field>Frydek - Mistek</field>
+                    </row>
+                    <row>
+                        <column>Havlickuv Brod</column>
+                        <field>Havlickuv Brod</field>
+                    </row>
+                    <row>
+                        <column>Hodonin</column>
+                        <field>Hodonin</field>
+                    </row>
+                    <row>
+                        <column>Hradec Kralove</column>
+                        <field>Hradec Kralove</field>
+                    </row>
+                    <row>
+                        <column>Cheb</column>
+                        <field>Cheb</field>
+                    </row>
+                    <row>
+                        <column>Chomutov</column>
+                        <field>Chomutov</field>
+                    </row>
+                    <row>
+                        <column>Chrudim</column>
+                        <field>Chrudim</field>
+                    </row>
+                    <row>
+                        <column>Jablonec n. Nisou</column>
+                        <field>Jablonec n. Nisou</field>
+                    </row>
+                    <row>
+                        <column>Jesenik</column>
+                        <field>Jesenik</field>
+                    </row>
+                    <row>
+                        <column>Jicin</column>
+                        <field>Jicin</field>
+                    </row>
+                    <row>
+                        <column>Jihlava</column>
+                        <field>Jihlava</field>
+                    </row>
+                    <row>
+                        <column>Jindrichuv Hradec</column>
+                        <field>Jindrichuv Hradec</field>
+                    </row>
+                    <row>
+                        <column>Karlovy Vary</column>
+                        <field>Karlovy Vary</field>
+                    </row>
+                    <row>
+                        <column>Karvina</column>
+                        <field>Karvina</field>
+                    </row>
+                    <row>
+                        <column>Kladno</column>
+                        <field>Kladno</field>
+                    </row>
+                    <row>
+                        <column>Klatovy</column>
+                        <field>Klatovy</field>
+                    </row>
+                    <row>
+                        <column>Kolin</column>
+                        <field>Kolin</field>
+                    </row>
+                    <row>
+                        <column>Kromeriz</column>
+                        <field>Kromeriz</field>
+                    </row>
+                    <row>
+                        <column>Kutna Hora</column>
+                        <field>Kutna Hora</field>
+                    </row>
+                    <row>
+                        <column>Liberec</column>
+                        <field>Liberec</field>
+                    </row>
+                    <row>
+                        <column>Litomerice</column>
+                        <field>Litomerice</field>
+                    </row>
+                    <row>
+                        <column>Louny</column>
+                        <field>Louny</field>
+                    </row>
+                    <row>
+                        <column>Melnik</column>
+                        <field>Melnik</field>
+                    </row>
+                    <row>
+                        <column>Mlada Boleslav</column>
+                        <field>Mlada Boleslav</field>
+                    </row>
+                    <row>
+                        <column>Most</column>
+                        <field>Most</field>
+                    </row>
+                    <row>
+                        <column>Nachod</column>
+                        <field>Nachod</field>
+                    </row>
+                    <row>
+                        <column>Novy Jicin</column>
+                        <field>Novy Jicin</field>
+                    </row>
+                    <row>
+                        <column>Nymburk</column>
+                        <field>Nymburk</field>
+                    </row>
+                    <row>
+                        <column>Olomouc</column>
+                        <field>Olomouc</field>
+                    </row>
+                    <row>
+                        <column>Opava</column>
+                        <field>Opava</field>
+                    </row>
+                    <row>
+                        <column>Ostrava - mesto</column>
+                        <field>Ostrava - mesto</field>
+                    </row>
+                    <row>
+                        <column>Pardubice</column>
+                        <field>Pardubice</field>
+                    </row>
+                    <row>
+                        <column>Pelhrimov</column>
+                        <field>Pelhrimov</field>
+                    </row>
+                    <row>
+                        <column>Pisek</column>
+                        <field>Pisek</field>
+                    </row>
+                    <row>
+                        <column>Plzen</column>
+                        <field>Plzen</field>
+                    </row>
+                    <row>
+                        <column>Plzen - jih</column>
+                        <field>Plzen - jih</field>
+                    </row>
+                    <row>
+                        <column>Plzen - sever</column>
+                        <field>Plzen - sever</field>
+                    </row>
+                    <row>
+                        <column>Praha</column>
+                        <field>Praha</field>
+                    </row>
+                    <row>
+                        <column>Praha - vychod</column>
+                        <field>Praha - vychod</field>
+                    </row>
+                    <row>
+                        <column>Praha - zapad</column>
+                        <field>Praha - zapad</field>
+                    </row>
+                    <row>
+                        <column>Prachatice</column>
+                        <field>Prachatice</field>
+                    </row>
+                    <row>
+                        <column>Prerov</column>
+                        <field>Prerov</field>
+                    </row>
+                    <row>
+                        <column>Pribram</column>
+                        <field>Pribram</field>
+                    </row>
+                    <row>
+                        <column>Prostejov</column>
+                        <field>Prostejov</field>
+                    </row>
+                    <row>
+                        <column>Rakovnik</column>
+                        <field>Rakovnik</field>
+                    </row>
+                    <row>
+                        <column>Rokycany</column>
+                        <field>Rokycany</field>
+                    </row>
+                    <row>
+                        <column>Rychnov nad Kneznou</column>
+                        <field>Rychnov nad Kneznou</field>
+                    </row>
+                    <row>
+                        <column>Semily</column>
+                        <field>Semily</field>
+                    </row>
+                    <row>
+                        <column>Sokolov</column>
+                        <field>Sokolov</field>
+                    </row>
+                    <row>
+                        <column>Strakonice</column>
+                        <field>Strakonice</field>
+                    </row>
+                    <row>
+                        <column>Sumperk</column>
+                        <field>Sumperk</field>
+                    </row>
+                    <row>
+                        <column>Svitavy</column>
+                        <field>Svitavy</field>
+                    </row>
+                    <row>
+                        <column>Tabor</column>
+                        <field>Tabor</field>
+                    </row>
+                    <row>
+                        <column>Tachov</column>
+                        <field>Tachov</field>
+                    </row>
+                    <row>
+                        <column>Teplice</column>
+                        <field>Teplice</field>
+                    </row>
+                    <row>
+                        <column>Trebic</column>
+                        <field>Trebic</field>
+                    </row>
+                    <row>
+                        <column>Trutnov</column>
+                        <field>Trutnov</field>
+                    </row>
+                    <row>
+                        <column>Uherske Hradiste</column>
+                        <field>Uherske Hradiste</field>
+                    </row>
+                    <row>
+                        <column>Usti nad Labem</column>
+                        <field>Usti nad Labem</field>
+                    </row>
+                    <row>
+                        <column>Usti nad Orlici</column>
+                        <field>Usti nad Orlici</field>
+                    </row>
+                    <row>
+                        <column>Vsetin</column>
+                        <field>Vsetin</field>
+                    </row>
+                    <row>
+                        <column>Vyskov</column>
+                        <field>Vyskov</field>
+                    </row>
+                    <row>
+                        <column>Zdar nad Sazavou</column>
+                        <field>Zdar nad Sazavou</field>
+                    </row>
+                    <row>
+                        <column>Zlin</column>
+                        <field>Zlin</field>
+                    </row>
+                    <row>
+                        <column>Znojmo</column>
+                        <field>Znojmo</field>
+                    </row>
+                </InlineTable>
+            </MapValues>
+        </DerivedField>
+        <DerivedField
+                name= "Duration"
+                dataType="string"
+                optype="ordinal"
+                >
+            <MapValues outputColumn="Duration"
+                    >
+                <FieldColumnPair column="duration" field="Duration"/>
+                <InlineTable>
+                    <Extension name="Frequency" value="1181" extender="1 year"/>
+                    <Extension name="Frequency" value="1243" extender="2 years"/>
+                    <Extension name="Frequency" value="1194" extender="3 years"/>
+                    <Extension name="Frequency" value="1252" extender="4 years"/>
+                    <Extension name="Frequency" value="1311" extender="5 years"/>
+                    <row>
+                        <column>12</column>
+                        <field>1 year</field>
+                    </row>
+                    <row>
+                        <column>13</column>
+                        <field>2 years</field>
+                    </row>
+                    <row>
+                        <column>24</column>
+                        <field>2 years</field>
+                    </row>
+                    <row>
+                        <column>36</column>
+                        <field>3 years</field>
+                    </row>
+                    <row>
+                        <column>48</column>
+                        <field>4 years</field>
+                    </row>
+                    <row>
+                        <column>60</column>
+                        <field>5 years</field>
+                    </row>
+                </InlineTable>
+            </MapValues>
+        </DerivedField>
+        <DerivedField
+                name= "Quality"
+                dataType="string"
+                optype="ordinal"
+                >
+            <MapValues outputColumn="Quality"
+                    >
+                <FieldColumnPair column="status" field="Quality"/>
+                <InlineTable>
+                    <Extension name="Frequency" value="5454" extender="good"/>
+                    <Extension name="Frequency" value="727" extender="bad"/>
+                    <row>
+                        <column>A</column>
+                        <field>good</field>
+                    </row>
+                    <row>
+                        <column>C</column>
+                        <field>good</field>
+                    </row>
+                    <row>
+                        <column>B</column>
+                        <field>bad</field>
+                    </row>
+                    <row>
+                        <column>D</column>
+                        <field>bad</field>
+                    </row>
+                </InlineTable>
+            </MapValues>
+        </DerivedField>
+        <DerivedField
+                name= "Repayment"
+                dataType="string"
+                optype="continuous"
+                >
+            <Discretize field="payments"
+                    >
+                <Extension name="Frequency" value="325" extender="(0;1&gt;"/>
+                <Extension name="Frequency" value="858" extender="(1;2&gt;"/>
+                <Extension name="Frequency" value="873" extender="(2;3&gt;"/>
+                <Extension name="Frequency" value="1098" extender="(3;4&gt;"/>
+                <Extension name="Frequency" value="884" extender="(4;5&gt;"/>
+                <Extension name="Frequency" value="727" extender="(5;6&gt;"/>
+                <Extension name="Frequency" value="595" extender="(6;7&gt;"/>
+                <Extension name="Frequency" value="450" extender="(7;8&gt;"/>
+                <Extension name="Frequency" value="280" extender="(8;9&gt;"/>
+                <Extension name="Frequency" value="90" extender="(9;10&gt;"/>
+                <DiscretizeBin binValue="(0;1&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="0"
+                            rightMargin="1000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(1;2&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="1000"
+                            rightMargin="2000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(2;3&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="2000"
+                            rightMargin="3000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(3;4&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="3000"
+                            rightMargin="4000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(4;5&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="4000"
+                            rightMargin="5000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(5;6&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="5000"
+                            rightMargin="6000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(6;7&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="6000"
+                            rightMargin="7000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(7;8&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="7000"
+                            rightMargin="8000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(8;9&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="8000"
+                            rightMargin="9000"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="(9;10&gt;">
+                    <Interval
+                            closure="openClosed"
+                            leftMargin="9000"
+                            rightMargin="10000"
+                            />
+                </DiscretizeBin>
+            </Discretize>
+        </DerivedField>
+        <DerivedField
+                name= "Salary"
+                dataType="string"
+                optype="continuous"
+                >
+            <Discretize field="Salary"
+                    >
+                <Extension name="Frequency" value="2049" extender="low"/>
+                <Extension name="Frequency" value="2034" extender="avg"/>
+                <Extension name="Frequency" value="2098" extender="high"/>
+                <DiscretizeBin binValue="low">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="8110"
+                            rightMargin="8678"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="avg">
+                    <Interval
+                            closure="closedOpen"
+                            leftMargin="8678"
+                            rightMargin="9624"
+                            />
+                </DiscretizeBin>
+                <DiscretizeBin binValue="high">
+                    <Interval
+                            closure="closedClosed"
+                            leftMargin="9624"
+                            rightMargin="12541"
+                            />
+                </DiscretizeBin>
+            </Discretize>
+        </DerivedField>
+        <DerivedField
+                name= "Sex"
+                dataType="string"
+                optype="ordinal"
+                >
+            <MapValues outputColumn="Sex"
+                    >
+                <FieldColumnPair column="Sex" field="Sex"/>
+                <InlineTable>
+                    <Extension name="Frequency" value="3145" extender="F"/>
+                    <Extension name="Frequency" value="3036" extender="M"/>
+                    <row>
+                        <column>Yes</column>
+                        <field>F</field>
+                    </row>
+                    <row>
+                        <column>No</column>
+                        <field>M</field>
+                    </row>
+                </InlineTable>
+            </MapValues>
+        </DerivedField>
+    </TransformationDictionary>
+
+    <!-- Task -->
+
+    <guha:ETreeModel  xmlns="" xsi:schemaLocation="http://keg.vse.cz/ns/GUHA0.1rev1 http://sewebar.vse.cz/schemas/GUHA0.1rev1.xsd"
+                      xmlns:guha="http://keg.vse.cz/ns/GUHA0.1rev1"
+                      modelName="495af79801d0931b41fdf7004852baf55ac77af6"
+                      functionName="explorationTrees"
+                      algorithmName="ETree"
+                      numberOfTransactions="6181"
+                      numberOfCategories="157"
+                      numberOfRules="1"
+            >
+        <!-- Include Template: ETreeMiner.TaskSetting.Include.Template -->
+        <!-- Version: 2012-04-10 -->
+
+        <TaskSetting>
+            <Extension name="LISp-Miner">
+                <TaskGroup>Default task-group</TaskGroup>
+                <TaskState>Solved</TaskState>
+                <NumberOfVerifications>0</NumberOfVerifications>
+                <TaskStartTime>25.9.2012 12:00:59</TaskStartTime>
+                <TaskDuration>0h 0m 0s</TaskDuration>
+                <ETTaskParamSplitAttributesMax>6</ETTaskParamSplitAttributesMax>
+                <ETTaskParamTreeDepthMax>1</ETTaskParamTreeDepthMax>
+                <ETTaskParamTreeCountMax>500</ETTaskParamTreeCountMax>
+                <ETTaskParamFullDepthTreesOnly>Yes</ETTaskParamFullDepthTreesOnly>
+                <ETTaskParamStoreDecisionTrees>No</ETTaskParamStoreDecisionTrees>
+                <HypothesesCountMax>150</HypothesesCountMax>
+                <TaskNotice>Succedent|Quality|One category|good</TaskNotice>
+            </Extension>
+            <!-- ETLiteralD -->
+            <InputAttributesGroupSettings>
+                <InputAttributesSettings
+                        id="ETCedentD_3">
+                    <Name>Attributes</Name>
+                    <MinimalLength>1</MinimalLength>
+                    <MaximalLength>1</MaximalLength>
+                    <InputAttributeSetting
+                            id="ETLiteralD_2">
+                        <FieldRef>Age</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_3">
+                        <FieldRef>Age</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_4">
+                        <FieldRef>Age_in_years</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_5">
+                        <FieldRef>Amount</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_6">
+                        <FieldRef>Duration</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_7">
+                        <FieldRef>Repayment</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_8">
+                        <FieldRef>Salary</FieldRef>
+                    </InputAttributeSetting>
+                    <InputAttributeSetting
+                            id="ETLiteralD_9">
+                        <FieldRef>Sex</FieldRef>
+                    </InputAttributeSetting>
+                </InputAttributesSettings>
+            </InputAttributesGroupSettings>
+            <!-- ClassAttribut -->
+            <ClassAttributeSettings>
+                <ClassAttributeSetting
+                        id="ETLiteralD_1">
+                    <FieldRef>Quality</FieldRef>
+                </ClassAttributeSetting>
+            </ClassAttributeSettings>
+            <!-- Condition -->
+            <!-- Include Template: Task.FTCedentD.Include.Template -->
+            <!-- Version: 2012-01-04 -->
+
+            <BBASettings>
+                <BBASetting
+                        id="Basic_FTLiteralD_324">
+                    <Name>District( Praha)</Name>
+                    <FieldRef>District</FieldRef>
+                    <Coefficient>
+                        <Type>One category</Type>
+                        <Category>Praha</Category>
+                    </Coefficient>
+                </BBASetting>
+            </BBASettings>
+
+            <DBASettings>
+
+                <DBASetting id="Derived_FTLiteralD_Sign_324"
+                            type="Literal"
+                        >
+                    <Name>District( Praha)</Name>
+                    <BASettingRef>Basic_FTLiteralD_324</BASettingRef>
+                    <LiteralSign>Positive</LiteralSign>
+                    <LiteralType>Basic</LiteralType>
+                    <EquivalenceClass>NULL</EquivalenceClass>
+                </DBASetting>
+                <DBASetting id="Derived_FTCedentD_642"
+                            type="Conjunction"
+                        >
+                    <Name></Name>
+                    <BASettingRef>Derived_FTLiteralD_Sign_324</BASettingRef>
+                    <MinimalLength>1</MinimalLength>
+                    <MaximalLength>99</MaximalLength>
+                </DBASetting>
+                <DBASetting id="Derived_FTCedentBagD_554"
+                            type="Conjunction"
+                        >
+                    <Name>Condition</Name>
+                    <BASettingRef>Derived_FTCedentD_642</BASettingRef>
+                    <MinimalLength>1</MinimalLength>
+                    <MaximalLength>99</MaximalLength>
+                </DBASetting>
+            </DBASettings>
+            <ConditionSetting>Derived_FTCedentBagD_554</ConditionSetting>
+            <!-- Quantifier Settings -->
+            <InterestMeasureSetting>
+                <NodePurityMin>0.924924</NodePurityMin>
+                <NodeFreqMin>1</NodeFreqMin>
+                <TreeQualityMin>0.924000</TreeQualityMin>
+                <PerformChiSqTest>Yes</PerformChiSqTest>
+                <SplitSignificanceAlpha>0.025000</SplitSignificanceAlpha>
+            </InterestMeasureSetting>
+        </TaskSetting>
+
+        <!-- MiningSchema -->
+
+        <pmml:MiningSchema>
+            <pmml:MiningField name="Age"/>
+            <pmml:MiningField name="amount"/>
+            <pmml:MiningField name="District"/>
+            <pmml:MiningField name="duration"/>
+            <pmml:MiningField name="payments"/>
+        </pmml:MiningSchema>
+
+        <ETreeRules>
+
+            <!-- Include Template: Task.FTCedentI.Include.Template -->
+            <!-- Version: 2012-02-06 -->
+            <!-- Item: LiteralI -->
+            <BBA id="BBA_FTLiteralI_10863" literal="false">
+                <Text>District(Praha)</Text>
+                <FieldRef>District</FieldRef>
+                <CatRef>Praha</CatRef>
+            </BBA>
+            <!-- DBA: Sign (Gace) -->
+            <DBA id="DBA_FTLiteralI_Sign_10863" connective="Conjunction" literal="true">
+                <Text>District(Praha)</Text>
+                <BARef>BBA_FTLiteralI_10863</BARef>
+            </DBA>
+            <!-- DBA: CedentI -->
+            <DBA id="DBA_FTCedentI_10244" connective="Conjunction">
+                <Text>District(Praha)</Text>
+                <BARef>DBA_FTLiteralI_Sign_10863</BARef>
+            </DBA>
+            <!-- DBA: CedentBag -->
+            <DBA id="DBA_Condition_3967" connective="Conjunction">
+                <Text>District(Praha)</Text>
+                <BARef>DBA_FTCedentI_10244</BARef>
+            </DBA>
+
+            <!-- Hypothesis -->
+
+            <ETRule id="3967"
+                    FreqTree="711"
+                    FreqQuality="657"
+                    ClassCategory="good"
+                    FreqClass="657"
+                    condition="DBA_Condition_3967"
+                    >
+                <Text>1: Quality: 0.924, Freq: 711 / District(Praha)</Text>
+
+                <ETTree>
+                    <!-- Include Template: ETreeMiner.ETree.Recurse.Include.Template -->
+                    <!-- Version: 2012-02-06 -->
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="0"
+                             FreqQuality="657"
+                             Attribute="Age_in_years"
+                             SplitSignificanceCoef="78.771750"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_1"
+                                      BranchCategory="21"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_2"
+                                      BranchCategory="22"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_3"
+                                      BranchCategory="23"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_4"
+                                      BranchCategory="24"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_5"
+                                      BranchCategory="25"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_6"
+                                      BranchCategory="26"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_7"
+                                      BranchCategory="27"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_8"
+                                      BranchCategory="28"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_9"
+                                      BranchCategory="29"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_10"
+                                      BranchCategory="30"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_11"
+                                      BranchCategory="31"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_12"
+                                      BranchCategory="32"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_13"
+                                      BranchCategory="33"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_14"
+                                      BranchCategory="34"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_15"
+                                      BranchCategory="35"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_16"
+                                      BranchCategory="36"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_17"
+                                      BranchCategory="37"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_18"
+                                      BranchCategory="38"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_19"
+                                      BranchCategory="39"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_20"
+                                      BranchCategory="40"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_21"
+                                      BranchCategory="41"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_22"
+                                      BranchCategory="42"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_23"
+                                      BranchCategory="43"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_24"
+                                      BranchCategory="44"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_25"
+                                      BranchCategory="45"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_26"
+                                      BranchCategory="46"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_27"
+                                      BranchCategory="47"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_28"
+                                      BranchCategory="48"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_29"
+                                      BranchCategory="49"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_30"
+                                      BranchCategory="50"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_31"
+                                      BranchCategory="51"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_32"
+                                      BranchCategory="52"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_33"
+                                      BranchCategory="53"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_34"
+                                      BranchCategory="54"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_35"
+                                      BranchCategory="55"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_36"
+                                      BranchCategory="56"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_37"
+                                      BranchCategory="57"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="45"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_38"
+                                      BranchCategory="58"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_39"
+                                      BranchCategory="59"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_40"
+                                      BranchCategory="60"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_41"
+                                      BranchCategory="61"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_42"
+                                      BranchCategory="62"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_43"
+                                      BranchCategory="63"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_44"
+                                      BranchCategory="64"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_45"
+                                      BranchCategory="65"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_46"
+                                      BranchCategory="66"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_47"
+                                      BranchCategory="67"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <!-- Include Template: ETreeMiner.ETree.Recurse.Include.Template -->
+                    <!-- Version: 2012-02-06 -->
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="1"
+                             FreqQuality="657"
+                             Attribute="Repayment"
+                             SplitSignificanceCoef="15.561477"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_48"
+                                      BranchCategory="(0;1&gt;"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_49"
+                                      BranchCategory="(1;2&gt;"
+                                      FreqBranch="117"
+                                      ClassCategory="good"
+                                      FreqClass="117"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_50"
+                                      BranchCategory="(2;3&gt;"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="72"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_51"
+                                      BranchCategory="(3;4&gt;"
+                                      FreqBranch="117"
+                                      ClassCategory="good"
+                                      FreqClass="117"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_52"
+                                      BranchCategory="(4;5&gt;"
+                                      FreqBranch="81"
+                                      ClassCategory="good"
+                                      FreqClass="81"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_53"
+                                      BranchCategory="(5;6&gt;"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="63"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_54"
+                                      BranchCategory="(6;7&gt;"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="99"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_55"
+                                      BranchCategory="(7;8&gt;"
+                                      FreqBranch="63"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_56"
+                                      BranchCategory="(8;9&gt;"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_57"
+                                      BranchCategory="(9;10&gt;"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <!-- Include Template: ETreeMiner.ETree.Recurse.Include.Template -->
+                    <!-- Version: 2012-02-06 -->
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="2"
+                             FreqQuality="657"
+                             Attribute="Amount"
+                             SplitSignificanceCoef="9.450757"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_58"
+                                      BranchCategory="&lt; 20"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="45"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_59"
+                                      BranchCategory="&lt;20;50)"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="108"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_60"
+                                      BranchCategory="&lt;50;100)"
+                                      FreqBranch="198"
+                                      ClassCategory="good"
+                                      FreqClass="198"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_61"
+                                      BranchCategory="&lt;100;250)"
+                                      FreqBranch="207"
+                                      ClassCategory="good"
+                                      FreqClass="189"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_62"
+                                      BranchCategory="&lt;250;500)"
+                                      FreqBranch="144"
+                                      ClassCategory="good"
+                                      FreqClass="108"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_63"
+                                      BranchCategory="&gt;= 500"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <!-- Include Template: ETreeMiner.ETree.Recurse.Include.Template -->
+                    <!-- Version: 2012-02-06 -->
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="3"
+                             FreqQuality="657"
+                             Attribute="Duration"
+                             SplitSignificanceCoef="7.867903"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_64"
+                                      BranchCategory="1 year"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="171"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_65"
+                                      BranchCategory="2 years"
+                                      FreqBranch="153"
+                                      ClassCategory="good"
+                                      FreqClass="135"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_66"
+                                      BranchCategory="3 years"
+                                      FreqBranch="162"
+                                      ClassCategory="good"
+                                      FreqClass="153"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_67"
+                                      BranchCategory="4 years"
+                                      FreqBranch="117"
+                                      ClassCategory="good"
+                                      FreqClass="108"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_68"
+                                      BranchCategory="5 years"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="90"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <!-- Include Template: ETreeMiner.ETree.Recurse.Include.Template -->
+                    <!-- Version: 2012-02-06 -->
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="4"
+                             FreqQuality="657"
+                             Attribute="Age"
+                             SplitSignificanceCoef="7.720686"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_69"
+                                      BranchCategory="&lt;21;31)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="153"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_70"
+                                      BranchCategory="&lt;31;41)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="162"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_71"
+                                      BranchCategory="&lt;41;51)"
+                                      FreqBranch="189"
+                                      ClassCategory="good"
+                                      FreqClass="189"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_72"
+                                      BranchCategory="&lt;51;61)"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="99"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_73"
+                                      BranchCategory="&lt;61;71)"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="54"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <!-- Include Template: ETreeMiner.ETree.Recurse.Include.Template -->
+                    <!-- Version: 2012-02-06 -->
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="5"
+                             FreqQuality="657"
+                             Attribute="Age"
+                             SplitSignificanceCoef="7.720686"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_74"
+                                      BranchCategory="&lt;21;31)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="153"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_75"
+                                      BranchCategory="&lt;31;41)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="162"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_76"
+                                      BranchCategory="&lt;41;51)"
+                                      FreqBranch="189"
+                                      ClassCategory="good"
+                                      FreqClass="189"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_77"
+                                      BranchCategory="&lt;51;61)"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="99"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_78"
+                                      BranchCategory="&lt;61;71)"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="54"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                </ETTree>
+
+                <ETSplitArray>
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="0"
+                             FreqQuality="657"
+                             Attribute="Age_in_years"
+                             SplitSignificanceCoef="78.771750"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_1"
+                                      BranchCategory="21"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_2"
+                                      BranchCategory="22"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_3"
+                                      BranchCategory="23"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_4"
+                                      BranchCategory="24"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_5"
+                                      BranchCategory="25"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_6"
+                                      BranchCategory="26"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_7"
+                                      BranchCategory="27"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_8"
+                                      BranchCategory="28"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_9"
+                                      BranchCategory="29"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_10"
+                                      BranchCategory="30"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_11"
+                                      BranchCategory="31"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_12"
+                                      BranchCategory="32"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_13"
+                                      BranchCategory="33"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_14"
+                                      BranchCategory="34"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_15"
+                                      BranchCategory="35"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_16"
+                                      BranchCategory="36"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_17"
+                                      BranchCategory="37"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_18"
+                                      BranchCategory="38"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_19"
+                                      BranchCategory="39"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_20"
+                                      BranchCategory="40"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_21"
+                                      BranchCategory="41"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_22"
+                                      BranchCategory="42"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_23"
+                                      BranchCategory="43"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_24"
+                                      BranchCategory="44"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_25"
+                                      BranchCategory="45"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_26"
+                                      BranchCategory="46"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_27"
+                                      BranchCategory="47"
+                                      FreqBranch="36"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_28"
+                                      BranchCategory="48"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_29"
+                                      BranchCategory="49"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_30"
+                                      BranchCategory="50"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_31"
+                                      BranchCategory="51"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_32"
+                                      BranchCategory="52"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="18"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_33"
+                                      BranchCategory="53"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_34"
+                                      BranchCategory="54"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_35"
+                                      BranchCategory="55"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_36"
+                                      BranchCategory="56"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_37"
+                                      BranchCategory="57"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="45"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_38"
+                                      BranchCategory="58"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_39"
+                                      BranchCategory="59"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_40"
+                                      BranchCategory="60"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_41"
+                                      BranchCategory="61"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_42"
+                                      BranchCategory="62"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_43"
+                                      BranchCategory="63"
+                                      FreqBranch="0"
+                                      ClassCategory="good"
+                                      FreqClass="0"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_44"
+                                      BranchCategory="64"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_45"
+                                      BranchCategory="65"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_46"
+                                      BranchCategory="66"
+                                      FreqBranch="18"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_47"
+                                      BranchCategory="67"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="1"
+                             FreqQuality="657"
+                             Attribute="Repayment"
+                             SplitSignificanceCoef="15.561477"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_48"
+                                      BranchCategory="(0;1&gt;"
+                                      FreqBranch="27"
+                                      ClassCategory="good"
+                                      FreqClass="27"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_49"
+                                      BranchCategory="(1;2&gt;"
+                                      FreqBranch="117"
+                                      ClassCategory="good"
+                                      FreqClass="117"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_50"
+                                      BranchCategory="(2;3&gt;"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="72"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_51"
+                                      BranchCategory="(3;4&gt;"
+                                      FreqBranch="117"
+                                      ClassCategory="good"
+                                      FreqClass="117"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_52"
+                                      BranchCategory="(4;5&gt;"
+                                      FreqBranch="81"
+                                      ClassCategory="good"
+                                      FreqClass="81"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_53"
+                                      BranchCategory="(5;6&gt;"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="63"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_54"
+                                      BranchCategory="(6;7&gt;"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="99"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_55"
+                                      BranchCategory="(7;8&gt;"
+                                      FreqBranch="63"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_56"
+                                      BranchCategory="(8;9&gt;"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="36"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_57"
+                                      BranchCategory="(9;10&gt;"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="2"
+                             FreqQuality="657"
+                             Attribute="Amount"
+                             SplitSignificanceCoef="9.450757"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_58"
+                                      BranchCategory="&lt; 20"
+                                      FreqBranch="45"
+                                      ClassCategory="good"
+                                      FreqClass="45"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_59"
+                                      BranchCategory="&lt;20;50)"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="108"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_60"
+                                      BranchCategory="&lt;50;100)"
+                                      FreqBranch="198"
+                                      ClassCategory="good"
+                                      FreqClass="198"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_61"
+                                      BranchCategory="&lt;100;250)"
+                                      FreqBranch="207"
+                                      ClassCategory="good"
+                                      FreqClass="189"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_62"
+                                      BranchCategory="&lt;250;500)"
+                                      FreqBranch="144"
+                                      ClassCategory="good"
+                                      FreqClass="108"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_63"
+                                      BranchCategory="&gt;= 500"
+                                      FreqBranch="9"
+                                      ClassCategory="good"
+                                      FreqClass="9"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="3"
+                             FreqQuality="657"
+                             Attribute="Duration"
+                             SplitSignificanceCoef="7.867903"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_64"
+                                      BranchCategory="1 year"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="171"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_65"
+                                      BranchCategory="2 years"
+                                      FreqBranch="153"
+                                      ClassCategory="good"
+                                      FreqClass="135"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_66"
+                                      BranchCategory="3 years"
+                                      FreqBranch="162"
+                                      ClassCategory="good"
+                                      FreqClass="153"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_67"
+                                      BranchCategory="4 years"
+                                      FreqBranch="117"
+                                      ClassCategory="good"
+                                      FreqClass="108"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_68"
+                                      BranchCategory="5 years"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="90"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="4"
+                             FreqQuality="657"
+                             Attribute="Age"
+                             SplitSignificanceCoef="7.720686"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_69"
+                                      BranchCategory="&lt;21;31)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="153"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_70"
+                                      BranchCategory="&lt;31;41)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="162"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_71"
+                                      BranchCategory="&lt;41;51)"
+                                      FreqBranch="189"
+                                      ClassCategory="good"
+                                      FreqClass="189"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_72"
+                                      BranchCategory="&lt;51;61)"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="99"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_73"
+                                      BranchCategory="&lt;61;71)"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="54"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                    <ETSplit SplitLevel="0"
+                             SplitIndex="5"
+                             FreqQuality="657"
+                             Attribute="Age"
+                             SplitSignificanceCoef="7.720686"
+                            >
+                        <ETBranchArray>
+                            <ETBranch id="ETBranch_74"
+                                      BranchCategory="&lt;21;31)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="153"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_75"
+                                      BranchCategory="&lt;31;41)"
+                                      FreqBranch="171"
+                                      ClassCategory="good"
+                                      FreqClass="162"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_76"
+                                      BranchCategory="&lt;41;51)"
+                                      FreqBranch="189"
+                                      ClassCategory="good"
+                                      FreqClass="189"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_77"
+                                      BranchCategory="&lt;51;61)"
+                                      FreqBranch="108"
+                                      ClassCategory="good"
+                                      FreqClass="99"
+                                    >
+                            </ETBranch>
+                            <ETBranch id="ETBranch_78"
+                                      BranchCategory="&lt;61;71)"
+                                      FreqBranch="72"
+                                      ClassCategory="good"
+                                      FreqClass="54"
+                                    >
+                            </ETBranch>
+                        </ETBranchArray>
+                    </ETSplit>
+                </ETSplitArray>
+            </ETRule>
+        </ETreeRules>
+    </guha:ETreeModel>
+</PMML>

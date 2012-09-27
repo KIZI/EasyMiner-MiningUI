@@ -1,0 +1,22 @@
+<?php
+
+require_once 'Bootstrap.php';
+
+use IZI\Serializer\ETreeSerializer;
+
+class ETreeSerializerTest extends PHPUnit_Framework_TestCase
+{
+
+    public function testSerialize()
+    {
+        $data = '{"attributes":["Age","Age ","Age_in_years","Amount","Duration","Repayment","Salary","Sex"],"rule0":{"antecedent":{"type":"cedent","connective":{"name":"AND","type":"and"},"level":1,"children":[{"name":"District","category":"One category","fields":[{"name":"category","value":"Praha"}],"sign":"positive"}]},"IMs":[{"name":"CHI","thresholdType":"% of all","compareType":"Greater than or equal","fields":[{"name":"alpha","value":"0.01"}]}],"succedent":{"type":"cedent","connective":{"name":"AND","type":"and"},"level":1,"children":[{"name":"Quality","category":"One category","fields":[{"name":"category","value":"good"}],"sign":"positive"}]}},"rules":1}';
+        $serialized = '<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen SCHSchema="http://sewebar.vse.cz/schemas/GUHARestr0_1.sch"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_0" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pmml="http://www.dmg.org/PMML-4_0" xsi:schemaLocation="http://www.dmg.org/PMML-4_0 http://sewebar.vse.cz/schemas/PMML4.0+GUHA0.1.xsd"><Header copyright="Copyright (c) KIZI UEP"><Extension name="dataset" value="Loans"/><Extension name="author" value="admin"/><Extension name="subsystem" value="4ft-Miner"/><Extension name="module" value="ETResult.exe"/><Extension name="format" value="ETreeMiner.Task"/><Application name="SEWEBAR-CMS" version="0.00.01 '.date('d.m.Y').'"/><Annotation/><Timestamp>'.date('d.m.Y H:i:s').'</Timestamp></Header><DataDictionary/><guha:ETreeModel xmlns="" xsi:schemaLocation="http://keg.vse.cz/ns/GUHA0.1rev1 http://sewebar.vse.cz/schemas/GUHA0.1rev1.xsd" xmlns:guha="http://keg.vse.cz/ns/GUHA0.1rev1" modelName="cfea04998ce82730a7c5a57116f30e03b1f4e30c" functionName="explorationTrees" algorithmName="ETree"><TaskSetting><Extension name="LISp-Miner"><TaskNotice>Succedent|Quality|One category|good</TaskNotice><ETTaskParamSplitAttributesMax>6</ETTaskParamSplitAttributesMax><ETTaskParamTreeDepthMax>1</ETTaskParamTreeDepthMax><ETTaskParamTreeCountMax>500</ETTaskParamTreeCountMax><ETTaskParamFullDepthTreesOnly>Yes</ETTaskParamFullDepthTreesOnly><HypothesesCountMax>150</HypothesesCountMax></Extension><Extension name="metabase" value="LMM-cjIV9HHXaE6-TjYt1k6Ybg"/><InputAttributesGroupSettings><InputAttributesSettings id="1"><Name>Attributes</Name><MinimalLength>1</MinimalLength><MaximalLength>1</MaximalLength><InputAttributeSetting id="2"><FieldRef>Age</FieldRef></InputAttributeSetting><InputAttributeSetting id="3"><FieldRef>Age </FieldRef></InputAttributeSetting><InputAttributeSetting id="4"><FieldRef>Age_in_years</FieldRef></InputAttributeSetting><InputAttributeSetting id="5"><FieldRef>Amount</FieldRef></InputAttributeSetting><InputAttributeSetting id="6"><FieldRef>Duration</FieldRef></InputAttributeSetting><InputAttributeSetting id="7"><FieldRef>Repayment</FieldRef></InputAttributeSetting><InputAttributeSetting id="8"><FieldRef>Salary</FieldRef></InputAttributeSetting><InputAttributeSetting id="9"><FieldRef>Sex</FieldRef></InputAttributeSetting></InputAttributesSettings></InputAttributesGroupSettings><ClassAttributeSettings><ClassAttributeSetting id="10"><FieldRef>Quality</FieldRef></ClassAttributeSetting></ClassAttributeSettings><BBASettings><BBASetting id="14"><Text>District</Text><Name>District</Name><FieldRef>District</FieldRef><Coefficient><Type>One category</Type><Category>Praha</Category></Coefficient></BBASetting></BBASettings><DBASettings><DBASetting id="11" type="Conjunction"><BASettingRef>12</BASettingRef><MinimalLength>1</MinimalLength></DBASetting><DBASetting id="12" type="Conjunction"><BASettingRef>13</BASettingRef><MinimalLength>1</MinimalLength></DBASetting><DBASetting id="13" type="Literal"><BASettingRef>14</BASettingRef><LiteralSign>Positive</LiteralSign></DBASetting></DBASettings><ConditionSetting>11</ConditionSetting><InterestMeasureSetting><NodeFreqMin>1</NodeFreqMin><PerformChiSqTest>Yes</PerformChiSqTest><SplitSignificanceAlpha>0.025</SplitSignificanceAlpha><NodePurityMin>0.924924</NodePurityMin><TreeQualityMin>0.924</TreeQualityMin></InterestMeasureSetting></TaskSetting></guha:ETreeModel></PMML>
+';
+        $serializer = new ETreeSerializer(DD, FA);
+
+        $this->assertXmlStringEqualsXmlString($serialized, $serializer->serialize($data));
+    }
+
+}

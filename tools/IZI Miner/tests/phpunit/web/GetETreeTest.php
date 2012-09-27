@@ -2,11 +2,13 @@
 
 require_once 'Bootstrap.php';
 
-class StopMiningTest extends PHPUnit_Framework_TestCase
+class ETreeTest extends PHPUnit_Framework_TestCase
 {
 
     protected $data = [
-        "limitHits" => 250,
+        "attributes" => [
+            "Age", "Age ", "Age_in_years", "Amount", "Duration", "Repayment", "Salary", "Sex",
+        ],
         "rule0" => [
             "antecedent" => [
                 "type" => "cedent",
@@ -14,7 +16,7 @@ class StopMiningTest extends PHPUnit_Framework_TestCase
                 "level" => 1,
                 "children" => [["name" => "District", "category" => "One category", "fields" => [["name" => "category", "value" => "Praha"]], "sign" => "positive"]],
             ],
-            "IMs" => [["name" => "FUI", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "threshold", "value" => "0.70"]]]],
+            "IMs" => [["name" => "CHI", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "alpha", "value" => "0.01"]]]],
             "succedent" => [
                 "type" => "cedent",
                 "connective" => ["name" => "AND", "type" => "and"],
@@ -25,10 +27,10 @@ class StopMiningTest extends PHPUnit_Framework_TestCase
         "rules" => 1,
     ];
 
-    public function testStopMining()
+    public function testGetETree()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, WEB_PATH.'stopMining.php?id_dm=TEST&lang=en');
+        curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getETree.php?id_dm=TEST&lang=en');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -43,12 +45,13 @@ class StopMiningTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('application/json; charset=UTF-8', $info['content_type']);
         $this->assertEquals(200, $info['http_code']);
         $this->assertSame('ok', $json->status);
+        $this->assertObjectHasAttribute('recommendation', $json);
     }
 
-    public function testStopMiningInvalid()
+    public function testGetETreeInvalidDm()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, WEB_PATH.'stopMining.php?id_dm=INVALID&lang=en');
+        curl_setopt($ch, CURLOPT_URL, WEB_PATH.'getETree.php?id_dm=INVALID&lang=en');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

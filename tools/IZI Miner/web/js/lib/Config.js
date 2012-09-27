@@ -5,7 +5,7 @@ var Config = new Class({
 	// app info
 	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
 	name: 'I<em>:</em>ZI Miner',
-	version: '1.0-pre-alfa',
+	version: '1.0-beta',
 	slogan: 'easy association rule mining',
 	copyright: '<a href="http://kizi.vse.cz" title="Department of Information and Knowledge Engineering - University of Economics Prague">DIKE UEP</a>',
 	

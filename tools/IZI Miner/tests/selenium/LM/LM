@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="Test1.html">Age (*) and District (*) =>conf=0.95 Quality (*)</a></td></tr>
+<tr><td><a href="Test2.html">Age (*Interval 1-2) and District (*Subset 1-2) =>conf=0.95, support=0,01 Quality (good)</a></td></tr>
+<tr><td><a href="Test3.html">¬ District (Praha) and Salary (*Right cut 1-2) =>conf=0.7 Quality (Good)</a></td></tr>
+<tr><td><a href="Test5.html">Age (*Left cut 1-3) and District (*) and Salary (*) =>conf=0.7, Fisher=0.005, Support=0.01, Chi-Square=0.005 Quality (*)</a></td></tr>
+<tr><td><a href="Test6.html">(Age (*) and Sex (*) and District (*) and Salary (*)) and (Duration (*) or Amount (*) or Repayments (*)) =>conf=0,5 Quality (bad)</a></td></tr>
+</tbody></table>
+</body>
+</html>
