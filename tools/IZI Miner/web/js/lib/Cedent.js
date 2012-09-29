@@ -286,7 +286,7 @@ var Cedent = new Class({
 	},
 
     toString: function () {
-        if (this.isEmpty()) { return 'Any'; }
+        if (this.isEmpty()) { return 'Empty'; }
 
         var index = 1;
 

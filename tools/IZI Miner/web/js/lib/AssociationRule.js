@@ -35,7 +35,7 @@ var AssociationRule = new Class({
 		if (this.antecedent !== null) {
 			ident += this.antecedent.toString();
 		} else {
-			ident += 'Any';
+			ident += 'Empty';
 		}
 		
 		ident += ' => ';
@@ -43,7 +43,7 @@ var AssociationRule = new Class({
 		if (this.succedent !== null) {
 			ident += this.succedent.toString();
 		} else {
-			ident += 'Any';
+			ident += 'Empty';
 		}
 		
 		return ident;
