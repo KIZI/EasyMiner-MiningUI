@@ -91,6 +91,18 @@ var NativeTypeExtender = new Class({
 
             return array;
         });
+
+        Array.implement('removeAt', function(position) {
+            var positions = Array.from(position);
+            var array = this;
+            positions.each(function(pos) {
+               array[pos] = undefined;
+            });
+
+            array = array.clean();
+
+            return array;
+        });
 	}
 	
 });
