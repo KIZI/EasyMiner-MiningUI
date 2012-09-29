@@ -92,3 +92,78 @@ test('extendNativeArray - insertAt', function() {
         strictEqual(arr[i], i);
     }
 });
+
+test('Array.removeAt - remove at the start', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5, 7];
+    arr = arr.removeAt(0);
+
+    strictEqual(arr.length, 3);
+    strictEqual(arr[0], 3);
+    strictEqual(arr[1], 5);
+    strictEqual(arr[2], 7);
+});
+
+test('Array.removeAt - remove in the middle', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5, 7];
+    arr = arr.removeAt(1);
+
+    strictEqual(arr.length, 3);
+    strictEqual(arr[0], 1);
+    strictEqual(arr[1], 5);
+    strictEqual(arr[2], 7);
+});
+
+test('Array.removeAt - remove at the end', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5, 7];
+    arr = arr.removeAt(3);
+
+    strictEqual(arr.length, 3);
+    strictEqual(arr[0], 1);
+    strictEqual(arr[1], 3);
+    strictEqual(arr[2], 5);
+});
+
+test('Array.removeAt - remove two the start', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5, 7];
+    arr = arr.removeAt([0, 1]);
+
+    strictEqual(arr.length, 2);
+    strictEqual(arr[0], 5);
+    strictEqual(arr[1], 7);
+});
+
+test('Array.removeAt - remove two in the middle', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5, 7];
+    arr = arr.removeAt([1, 2]);
+
+    strictEqual(arr.length, 2);
+    strictEqual(arr[0], 1);
+    strictEqual(arr[1], 7);
+});
+
+test('Array.removeAt - remove two at the end', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeArray();
+
+    var arr = [1, 3, 5, 7];
+    arr = arr.removeAt([2, 3]);
+
+    strictEqual(arr.length, 2);
+    strictEqual(arr[0], 1);
+    strictEqual(arr[1], 3);
+});

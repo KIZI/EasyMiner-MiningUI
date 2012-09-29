@@ -1,7 +1,5 @@
 TODO
 ==============
-- move settings into config... no reason to have two separate configs
-
 - feedback module
 - onerror
 - clear rules should scroll up

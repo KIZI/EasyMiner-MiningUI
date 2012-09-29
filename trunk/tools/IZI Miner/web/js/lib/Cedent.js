@@ -85,21 +85,23 @@ var Cedent = new Class({
     },
 
 	groupChildren: function (cedent) {
-        var i = 0, replaced = null;
-        Array.from(this.$children).each(function(child) {
+        var cedentPosition = undefined, childrenToBeRemoved = [], that = this;
+        Array.from(this.$children).each(function(child, position) {
             if (!instanceOf(child, Cedent) && child.isMarked()) {
                 child.unMark();
                 cedent.addChild(child);
-                if (replaced === null) {
-                    replaced = child;
-                } else {
-                    this.removeChild(child);
+                if (cedentPosition === undefined) {
+                    cedentPosition = position;
                 }
-                i++;
-            }
-        }.bind(this));
 
-        this.replaceChild(replaced, cedent);
+                childrenToBeRemoved.push(position);
+            }
+        });
+
+        that.$children = that.$children.removeAt(childrenToBeRemoved);
+        that.$children = this.$children.insertAt(cedent, cedentPosition);
+
+        this.update();
 	},
 
 	unmarkChildren: function () {
@@ -109,15 +111,6 @@ var Cedent = new Class({
             }
         }.bind(this));
 	},
-
-    replaceChild: function(child, replace) {
-        for (var i = 0; i < this.$children.length; i++) {
-            if (this.$children[i] === child) {
-                this.$children[i] = replace;
-                return;
-            }
-        }
-    },
 
 	getNumMarkedFields: function () {
         var count = 0;

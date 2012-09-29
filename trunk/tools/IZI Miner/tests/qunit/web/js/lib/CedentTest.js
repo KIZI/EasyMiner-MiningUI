@@ -400,7 +400,7 @@ test('update', function() {
     strictEqual(cedent.getNumChildren(), 2);
 });
 
-test('groupChildren 1', function() {
+test('groupChildren - two fields at the beginning', function() {
     var cedent = new Cedent(1, 1);
     var cedent2 = new Cedent(1, 2);
     var child1 = new FieldAR();
@@ -415,10 +415,11 @@ test('groupChildren 1', function() {
 
     strictEqual(instanceOf(cedent.getChildren()[0], Cedent), true);
     strictEqual(instanceOf(cedent.getChildren()[1], FieldAR), true);
-    strictEqual(cedent.getNumFields(), 3);
+    strictEqual(cedent.getNumFields(1), 1);
+    strictEqual(cedent2.getNumFields(), 2);
 });
 
-test('groupChildren 2', function() {
+test('groupChildren - two fields at the end', function() {
     var cedent = new Cedent(1, 1);
     var cedent2 = new Cedent(1, 2);
     var child1 = new FieldAR();
@@ -433,10 +434,11 @@ test('groupChildren 2', function() {
 
     strictEqual(instanceOf(cedent.getChildren()[0], FieldAR), true);
     strictEqual(instanceOf(cedent.getChildren()[1], Cedent), true);
-    strictEqual(cedent.getNumFields(), 3);
+    strictEqual(cedent.getNumFields(1), 1);
+    strictEqual(cedent2.getNumFields(), 2);
 });
 
-test('groupChildren 3', function() {
+test('groupChildren - two fields in the middle', function() {
     var cedent = new Cedent(1, 1);
     var cedent2 = new Cedent(1, 2);
     var child1 = new FieldAR();
@@ -454,10 +456,11 @@ test('groupChildren 3', function() {
     strictEqual(instanceOf(cedent.getChildren()[0], FieldAR), true);
     strictEqual(instanceOf(cedent.getChildren()[1], Cedent), true);
     strictEqual(instanceOf(cedent.getChildren()[2], FieldAR), true);
-    strictEqual(cedent.getNumFields(), 4);
+    strictEqual(cedent.getNumFields(1), 2);
+    strictEqual(cedent2.getNumFields(), 2);
 });
 
-test('groupChildren 4', function() {
+test('groupChildren - one field in the middle and one field at the end', function() {
     var cedent = new Cedent(1, 1);
     var cedent2 = new Cedent(1, 2);
     var child1 = new FieldAR();
@@ -475,18 +478,80 @@ test('groupChildren 4', function() {
     strictEqual(instanceOf(cedent.getChildren()[0], FieldAR), true);
     strictEqual(instanceOf(cedent.getChildren()[1], Cedent), true);
     strictEqual(instanceOf(cedent.getChildren()[2], FieldAR), true);
-    strictEqual(cedent.getNumFields(), 4);
+    strictEqual(cedent.getNumFields(1), 2);
+    strictEqual(cedent2.getNumFields(), 2);
 });
 
-test('replaceChild', function() {
-    var cedent = new Cedent();
+test('groupChildren - 3 children at the beginning', function() {
+    var cedent = new Cedent(1, 1);
     var child1 = new FieldAR();
-    var child2 = new Cedent();
-
+    child1.mark();
     cedent.addChild(child1);
-    cedent.replaceChild(child1, child2);
-    strictEqual(cedent.getNumChildren(), 1);
+    var child2 = new FieldAR();
+    cedent.addChild(child2);
+    child2.mark();
+    var child3 = new FieldAR();
+    child3.mark();
+    cedent.addChild(child3);
+    var child4 = new FieldAR();
+    cedent.addChild(child4);
+
+    var cedent2 = new Cedent(1, 2);
+    cedent.groupChildren(cedent2);
+
     strictEqual(instanceOf(cedent.getChildren()[0], Cedent), true);
+    strictEqual(instanceOf(cedent.getChildren()[1], FieldAR), true);
+    strictEqual(cedent.getNumFields(1), 1);
+    strictEqual(cedent2.getNumFields(), 3);
+});
+
+test('groupChildren - 3 children in the middle', function() {
+    var cedent = new Cedent(1, 1);
+    var child1 = new FieldAR();
+    cedent.addChild(child1);
+    var child2 = new FieldAR();
+    cedent.addChild(child2);
+    child2.mark();
+    var child3 = new FieldAR();
+    child3.mark();
+    cedent.addChild(child3);
+    var child4 = new FieldAR();
+    child4.mark();
+    cedent.addChild(child4);
+    var child5 = new FieldAR();
+    cedent.addChild(child5);
+
+    var cedent2 = new Cedent(1, 2);
+    cedent.groupChildren(cedent2);
+
+    strictEqual(instanceOf(cedent.getChildren()[0], FieldAR), true);
+    strictEqual(instanceOf(cedent.getChildren()[1], Cedent), true);
+    strictEqual(instanceOf(cedent.getChildren()[2], FieldAR), true);
+    strictEqual(cedent.getNumFields(1), 2);
+    strictEqual(cedent2.getNumFields(), 3);
+});
+
+test('groupChildren - 3 children at the end', function() {
+    var cedent = new Cedent(1, 1);
+    var child1 = new FieldAR();
+    cedent.addChild(child1);
+    var child2 = new FieldAR();
+    cedent.addChild(child2);
+    child2.mark();
+    var child3 = new FieldAR();
+    child3.mark();
+    cedent.addChild(child3);
+    var child4 = new FieldAR();
+    child4.mark();
+    cedent.addChild(child4);
+
+    var cedent2 = new Cedent(1, 2);
+    cedent.groupChildren(cedent2);
+
+    strictEqual(instanceOf(cedent.getChildren()[0], FieldAR), true);
+    strictEqual(instanceOf(cedent.getChildren()[1], Cedent), true);
+    strictEqual(cedent.getNumFields(1), 1);
+    strictEqual(cedent2.getNumFields(), 3);
 });
 
 test('toSettings 1', function() {
