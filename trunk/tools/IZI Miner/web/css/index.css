@@ -649,7 +649,7 @@ li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
 }
 li.rec2 {
-  background: transparent url("../images/sprite-icons.png") -67px -463px no-repeat;
+  background: transparent url("../images/sprite-icons.png") -20px -463px no-repeat;
 }
 li.used {
   color: #aaa;
@@ -931,11 +931,19 @@ section#active-rule .cedent .fields .field:hover a.mark-field {
 section#active-rule .cedent .fields .field:hover a.change-sign.positive {
   visibility: visible;
 }
+section#active-rule .no-restriction {
+  background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
+  padding: 1px 0 0 17px;
+  margin-top: 2px;
+  float: left;
+  clear: left;
+  cursor: help;
+}
 section#active-rule #action-box {
   background: transparent url("../images/sprite-icons.png") -12px -307px no-repeat;
   display: block;
   height: 32px;
-  margin: 15px 0 10px;
+  margin: 25px 0 10px;
   padding: 9px 0 0 38px;
 }
 #pager {
@@ -1057,7 +1065,7 @@ section#active-rule #action-box {
 }
 #found-rules .info {
   font-weight: normal;
-  background: transparent url("../images/sprite-icons.png") -118px -217px no-repeat;
+  background: transparent url("../images/sprite-icons.png") -17px -718px no-repeat;
   display: none;
   width: 16px;
   height: 16px;
@@ -1129,7 +1137,7 @@ section#active-rule #action-box {
   float: left;
 }
 .found-rule .loading {
-  background: transparent url("../images/sprite-icons.png") -18px -408px no-repeat;
+  background: transparent url("../images/icon-loading-small.gif") 0 5px no-repeat;
   display: block;
   width: 20px;
   height: 24px;

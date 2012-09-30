@@ -228,7 +228,22 @@ var UIPainter = new Class({
 			// re-render
 			elementCedent.replaces($(cedent.getCSSID()));
 		}
-		
+
+        var noRestriction = this.ARBuilder.getDefFL().hasCedentNoRestriction(cedent);
+        if (noRestriction) {
+            tips = new Tips('.no-restriction');
+            tips.addEvent('show', function(tip, el){
+                tip.addClass('tip-visible');
+            });
+            tips.addEvent('hide', function(tip, el){
+                tip.removeClass('tip-visible');
+            });
+
+            var elementNoRestriction = Mooml.render('noRestrictionTemplate', {i18n: this.i18n});
+            elementParent.grab(elementNoRestriction);
+            tips.attach(elementNoRestriction);
+        }
+
 		var elementFields = elementCedent.getElement('div.fields');
 
         var index = 1;
@@ -426,9 +441,8 @@ var UIPainter = new Class({
 			elFR.setStyle('cursor', 'help');
 			
 			var elFRInfo = elFR.getElement('.info');
-            // TODO refactor into external CSS style
+            // TODO refactor all into external CSS style
 			elFRInfo.setStyle('display', 'block');
-			elFRInfo.setStyle('background', "rgba(255, 255, 255, 0.5) url('./images/sprite-icons.png') -16px -465px no-repeat");
 			var elFRHelp = elFRInfo.getElement('.help');
 			if (FR.isInteresting()) {
 				if (FR.getInteresting()) { // marked as interesting
@@ -492,7 +506,8 @@ var UIPainter = new Class({
 	
 	/* settings */
 	renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
-		var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: (autoSuggest.length > 0), i18n: this.i18n, reset: reset, settings: settings});
+        var autoSuggestPossible = (autoSuggest.length > 0);
+		var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: autoSuggestPossible, i18n: this.i18n, reset: reset, settings: settings});
 		var elWindow = $('settings-window');
 		if (elWindow) { // re-render (autocomplete)
 			settings.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));

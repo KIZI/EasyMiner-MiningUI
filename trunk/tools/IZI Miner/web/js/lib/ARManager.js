@@ -9,7 +9,7 @@ var ARManager = new Class({
 	settings: null,
 	UIPainter: null,
 	UITemplateRegistrator: null,
-	
+
 	activeRule: null,
 	ETreeValidator: null,
 	maxCedentID: 0,
@@ -177,8 +177,8 @@ var ARManager = new Class({
         var connective = new Connective(this.FL.generateConnectiveID(), connectiveName);
         cedent.setConnective(connective);
 
-		this.UIPainter.renderCedent(cedent, null);
 		this.setActiveRuleChanged();
+        this.UIPainter.renderActiveRule();
 		this.closeEditConnectiveWindow();
 	},
 	

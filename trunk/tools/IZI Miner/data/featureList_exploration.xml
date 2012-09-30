@@ -17,10 +17,10 @@
 	</UserInterface>
 
 	<RulePattern>
-		<Antecedent minNumberOfBBAs="1" />
+		<Antecedent minNumberOfBBAs="0" />
 		<Consequent minNumberOfBBAs="1" />
 		<Condition minNumberOfBBAs="0" maxNumberOfBBAs="0" />
-		<GeneralConstraint minNumberOfBBAs="2" />
+		<GeneralConstraint minNumberOfBBAs="1" />
 	</RulePattern>
 
 	<BuildingBlocks>

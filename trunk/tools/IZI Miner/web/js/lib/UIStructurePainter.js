@@ -19,8 +19,8 @@ var UIStructurePainter = new Class({
     render: function() {
         $(this.$config.getRootElementID()).grab(Mooml.render('overlayTemplate'));
         $(this.$config.getRootElementID()).grab(Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n}));
-        $(this.$config.getRootElementID()).grab(Mooml.render('mainTemplate', {config: this.$config, dateHelper: this.$dateHelper, i18n: this.$i18n}));
-        $(this.$config.getRootElementID()).grab(Mooml.render('footerTemplate', {config: this.$config, i18n: this.$i18n}));
+        $(this.$config.getRootElementID()).grab(Mooml.render('mainTemplate', {i18n: this.$i18n}));
+        $(this.$config.getRootElementID()).grab(Mooml.render('footerTemplate', {config: this.$config, i18n: this.$i18n, dateHelper: this.$dateHelper}));
         this.renderNavigation();
         this.renderActiveRule();
         this.renderMarkedRules();
@@ -71,27 +71,16 @@ var UIStructurePainter = new Class({
 
     renderNewTaskWindow: function () {
         var url = this.$config.getNewTaskURL();
-        var elWindow = Mooml.render('newTaskTemplate', {i18n: this.$i18n, url: url});
-        var overlay = this.$UIStructurePainter().showOverlay();
+        var elWindow = Mooml.render('newTaskTemplate', {url: url});
+        var overlay = this.showOverlay();
         overlay.grab(elWindow);
 
         this.$UIScroller.scrollTo(0, 0);
     },
 
     resizeApplication: function() {
-        var wrapperWidth = $('ar-wrapper').getSize().x;
         var width = $('antecedent').getSize().x + $('interest-measures').getSize().x + $('succedent').getSize().x + 1; // IE9 hack (+1)
-
-//        console.log(width > scrollerWidth, width, scrollerWidth);
-//        return;
-
         $('ar-wrapper').setStyle('width', width);
-
-//        if (width > wrapperWidth) {
-//            $('ar-wrapper').setStyle('overflow-x', 'scroll');
-//        } else {
-//            $('ar-wrapper').setStyle('overflow-x', 'hidden');
-//        }
 
         this.resizeWindow();
     },
