@@ -409,7 +409,7 @@ td {
   padding: 100px 0 40px;
 }
 #overlay #loading-data.error {
-  background: #fff url("../images/sprite-icons.png") 160px -598px no-repeat;
+  background: #fff url("../images/sprite-icons.png") 160px -743px no-repeat;
 }
 #settings-form {
   line-height: 2em;
@@ -428,7 +428,7 @@ td {
   line-height: 1.3em;
 }
 #settings-form .info {
-  background: transparent url("../images/sprite-icons.png") -14px -459px no-repeat;
+  background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
   display: block;
   float: right;
   position: relative;
@@ -456,8 +456,9 @@ td {
   margin-bottom: 90px;
 }
 #settings-form a.autosuggest-on,
-#settings-form a.autofilter-on {
-  color: #434343;
+#settings-form a.autofilter-on,
+#settings-form a.cache-on,
+#settings-form color color {
   background: transparent url("../images/sprite-icons.png") -70px -9px no-repeat;
   text-decoration: none;
   display: block;
@@ -465,7 +466,8 @@ td {
   padding-left: 15px;
 }
 #settings-form a.autosuggest-off,
-#settings-form a.autofilter-off {
+#settings-form a.autofilter-off,
+#settings-form a.cache-off {
   color: #434343;
   background: transparent url("../images/sprite-icons.png") -70px -57px no-repeat;
   text-decoration: none;

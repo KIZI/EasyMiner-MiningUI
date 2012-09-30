@@ -504,27 +504,6 @@ var UIPainter = new Class({
 		el.morph(options);
 	},
 	
-	/* settings */
-	renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
-        var autoSuggestPossible = (autoSuggest.length > 0);
-		var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: autoSuggestPossible, i18n: this.i18n, reset: reset, settings: settings});
-		var elWindow = $('settings-window');
-		if (elWindow) { // re-render (autocomplete)
-			settings.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));
-			this.UIListener.registerSettingsWindowEventHandlers(autoSuggestPossible);
-		} else {
-			var overlay = this.$UIStructurePainter.showOverlay();
-			overlay.grab(settings);
-			this.UIListener.registerSettingsWindowEventHandlers(autoSuggestPossible);
-		}
-		
-		var elSelect = $('fl-select');
-		Object.each(FLs, function (FL) {
-			var isSelected = (FL.getName() === selectedFL.getName());
-			elSelect.grab(Mooml.render('flOptionTemplate', {FL: FL, isSelected: isSelected}));
-		}.bind(this));
-	},
-
     showStopMiningButton: function() {
         $('stop-mining').setStyle('visibility', 'visible');
     },

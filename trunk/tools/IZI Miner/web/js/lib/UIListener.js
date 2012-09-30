@@ -13,55 +13,6 @@ var UIListener = new Class({
 		this.UIPainter = UIPainter;
 	},
 
-	registerSettingsWindowEventHandlers: function (ASPossible) {
-		// change FL
-		var elSelect = $('fl-select');
-		elSelect.addEvent('change', function (e) {
-			e.stop();
-			var FLName = elSelect.options[elSelect.selectedIndex].value;
-			this.ARBuilder.updateSettingsWindow(FLName);
-		}.bind(this));
-		
-		// change autoFilter
-		var elAutoFilter = $('autofilter');
-		elAutoFilter.addEvent('click', function (e) {
-			e.stop();
-			this.ARBuilder.changeSettingsAutoFilter(elAutoFilter);
-		}.bind(this));
-		
-		// change attribute suggestion
-		if (ASPossible) {
-			var elAS = $('as');
-			elAS.addEvent('click', function (e) {
-				e.stop();
-				this.ARBuilder.changeSettingsAS(elAS);
-			}.bind(this));
-		}
-		
-		// save
-		var elSubmit = $('settings-form').getElement('input[type=submit]');
-		elSubmit.removeEvent('click');
-		elSubmit.addEvent('click', function (e) {
-			e.stop();
-			var elRulesCnt = $('rules-cnt'); if (!elRulesCnt) { return; }
-			var rulesCnt = $('rules-cnt').value;
-			var elSelect = $('fl-select');
-			var FLName = elSelect.options[elSelect.selectedIndex].value;
-			var autoSearch = $('autofilter').hasClass('autofilter-on');
-			var autoSuggest = $('as').hasClass('autosuggest-on');
-			
-			this.ARBuilder.saveSettings(rulesCnt, FLName, autoSearch, autoSuggest);
-			
-		}.bind(this));
-		
-		// close
-		var elClose = $('settings-close');
-		elClose.addEvent('click', function (e) {
-			this.ARBuilder.closeSettingsWindow();
-			e.stop();
-		}.bind(this));
-	},
-
 	registerAttributeEventHandler: function (attribute) {
         // drag & drop
         $(attribute.getCSSID()).addEvent('mousedown', function (event) {

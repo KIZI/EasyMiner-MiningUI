@@ -80,7 +80,7 @@ var ARBuilder = new Class({
 
         this.settings = new Settings();
         this.$FRManager = new FRManager(this.$config, new RulesParser(this, this.$DD, this.getDefFL()), this.settings, this.UIPainter, this.UIListener, this.$i18n);
-        this.$miningManager = new MiningManager(this.$config, this.$FRManager);
+        this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper());
         this.$ETreeManager = new ETreeManager(this.$config, this.$DD, this.UIPainter);
         this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
         this.$ETreeManager.setARManager(this.$ARManager);
@@ -123,14 +123,14 @@ var ARBuilder = new Class({
     },
 
 	openSettingsWindow: function () {
-		this.UIPainter.renderSettingsWindow(this.FLs, this.getDefFL(), this.getDefFL().getAutoSuggest(), false, this.settings);
+		this.$UIStructurePainter.renderSettingsWindow(this.FLs, this.getDefFL(), this.getDefFL().getAutoSuggest(), false, this.settings);
 	},
 	
 	updateSettingsWindow: function (FLName) {
 		var FL = this.getFLByName(FLName);
 		var ARValidator = new AssociationRuleValidator(FL.getRulePattern(), FL.getIMCombinations());
 		var reset = this.getDefFL().getName() !== FLName && !ARValidator.isValid(this.$ARManager.getActiveRule()) && this.$ARManager.getActiveRule().isChanged();
-		this.UIPainter.renderSettingsWindow(this.FLs, FL, FL.getAutoSuggest(), reset, this.settings);
+		this.$UIStructurePainter.renderSettingsWindow(this.FLs, FL, FL.getAutoSuggest(), reset, this.settings);
 	},
 	
 	changeSettingsAutoFilter: function (el) {
@@ -146,22 +146,33 @@ var ARBuilder = new Class({
 	changeSettingsAS: function (el) {
 		el.toggleClass('autosuggest-on');
 		el.toggleClass('autosuggest-off');
-		if (el.text === this.UIPainter.i18n.translate('On')) {
-			el.text = this.UIPainter.i18n.translate('Off');
+		if (el.hasClass('autosuggest-on')) {
+			el.text = this.$i18n.translate('On');
 		} else {
-			el.text = this.UIPainter.i18n.translate('On');
+			el.text = this.$i18n.translate('Off');
 		}
 	},
+
+    changeCaching: function(el) {
+        el.toggleClass('cache-on');
+        el.toggleClass('cache-off');
+        if (el.hasClass('cache-on')) {
+            el.text = this.$i18n.translate('On');
+        } else {
+            el.text = this.$i18n.translate('Off');
+        }
+    },
 
 	closeSettingsWindow: function () {
 		this.$UIStructurePainter.hideOverlay();
 	},
 	
-	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest) {
+	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache) {
 		// settings
 		this.settings.setRulesCnt(rulesCnt);
 		this.settings.setBKAutoSearch(autoSearch);
 		this.settings.setRecEnabled(autoSuggest);
+        this.settings.setCaching(cache);
 		
 		// FL switch
 		var FL = this.getFLByName(FLName);
