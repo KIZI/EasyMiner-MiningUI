@@ -7,7 +7,3 @@ TODO
 - pri smazani pravidel zavoalat resize
 - probably a hidden FL bug, serializers / parsers are using the same all the time
 - remove global variables from UITemplateRegistrator
-
-exporter is occupied !!!!!!!
-ošetřit message od kBI - při minování i data description zkoušet znovu
-pri zastaveni stejne ulohy zobrazit tlacitko mine rules

@@ -45,6 +45,7 @@ var MiningManager = new Class({
 	        secure: true,
 	            
 	        onSuccess: function(responseJSON, responseText) {
+                // TODO check if mining is still in progress
                 if (responseJSON.status == 'ok') {
 	        	    this.handleSuccessRequest(data, responseJSON);
                 } else {
@@ -53,6 +54,7 @@ var MiningManager = new Class({
 	        }.bind(this),
 	            
 	        onError: function () {
+                // TODO check if mining is still in progress
 	        	this.handleErrorRequest();
 	        }.bind(this),
 	        
@@ -74,6 +76,8 @@ var MiningManager = new Class({
 	},
 	
 	handleSuccessRequest: function (data, responseJSON) {
+        if (!this.inProgress) { return; }
+
 		var state = responseJSON.taskState;
 		if (this.finishedStates.contains(state)) { // task is finished
 			this.inProgress = false;
@@ -88,6 +92,8 @@ var MiningManager = new Class({
 	},
 	
 	handleErrorRequest: function () {
+        if (!this.inProgress) { return; }
+
 		this.stopMining();
 		this.FRManager.handleError();
 	},
