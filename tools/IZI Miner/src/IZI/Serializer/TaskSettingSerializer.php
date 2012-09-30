@@ -47,8 +47,10 @@ class TaskSettingSerializer
         $this->createBasicStructure();
 
         // Create antecedent
-        $antecedentId = $this->parseCedent($rule->antecedent, 1, $forcedDepth);
-        $this->antecedentSetting->appendChild($this->output->createTextNode($antecedentId));
+        if (!empty($rule->antecedent->children)) {
+            $antecedentId = $this->parseCedent($rule->antecedent, 1, $forcedDepth);
+            $this->antecedentSetting->appendChild($this->output->createTextNode($antecedentId));
+        }
 
         // IMs
         foreach ($rule->IMs as $IM) {

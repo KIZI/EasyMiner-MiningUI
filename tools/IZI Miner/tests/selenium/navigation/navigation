@@ -13,6 +13,7 @@
 <tr><td><a href="test2.html">Remove attribute</a></td></tr>
 <tr><td><a href="test8.html">Load data</a></td></tr>
 <tr><td><a href="test7">Load data error</a></td></tr>
+<tr><td><a href="test09.html">Show new task window</a></td></tr>
 </tbody></table>
 </body>
 </html>

@@ -55,16 +55,25 @@ var UITemplateRegistrator = new Class({
 		});
 		
 		Mooml.register('cedentTemplate', function (data) {
-			rule = data.rule;
-			cedent = data.cedent;
-			$i18n = data.i18n;
-			
-			div({id: cedent.getCSSID(), 'class': 'cedent'+(cedent.getNumFields() === 0 ? ' empty': '')},
+			var rule = data.rule;
+			var cedent = data.cedent;
+			var $i18n = data.i18n;
+
+			div({id: cedent.getCSSID(), 'class': 'cedent' + (cedent.getNumFields() === 0 ? ' empty': '')},
 				div({id: cedent.getCSSFieldsID(), 'class': 'fields'}, !cedent.getNumFields() ? '<span class="info">Drag & Drop<br/>attribute here</span>' : ''),
-				div({'class': 'controls'},
+                div({'class': 'controls'},
 					span({id: cedent.getCSSInfoID(), 'class': 'info'},
-						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + $i18n.translate('Group marked fields') + '</a>' : '')));
+						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + $i18n.translate('Group marked fields') + '</a>' : ''
+                    )
+                )
+            );
 		});
+
+        Mooml.register('noRestrictionTemplate', function(data) {
+            var i18n = data.i18n;
+
+            div({'class': 'no-restriction', 'title': i18n.translate('No restriction box will be considered as empty cedent.')}, i18n.translate('No restriction'));
+        });
 		
 		Mooml.register('fieldTemplate', function (data) {
 			field = data.field;

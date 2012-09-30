@@ -253,6 +253,12 @@ var FeatureList = new Class({
 	
 	generateConnectiveID: function () {
 		return ++this.maxConnectiveID;
-	}
+	},
+
+    hasCedentNoRestriction: function(cedent) {
+        if (cedent.getNumFields() > 0) { return false; } // only empty cedents can have no restriction
+
+        return (this.rulePattern[cedent.getScope().capitalize()].minNumberOfBBAs === 0);
+    }
 	
 });
