@@ -66,11 +66,13 @@ var i18n = new Class({
                62: {'cs': 'Upravit atribut', 'en': 'Edit attribute'},
                63: {'cs': 'Zastavit dolování', 'en': 'Stop mining'},
                64: {'cs': 'Dolování bylo zastaveno.', 'en': 'Mining has been stopped.'},
-                65: {'cs': 'Načítám data aplikace...', 'en': 'Loading application data...'},
-                66: {'cs': 'Při načítání dat aplikace došlo k chybě.', 'en': 'An error occured while loading application data.'},
-                67: {'cs': 'Při dolování došlo k chybě. Zkuste spustit dolování znovu či vytvořit novou úlohu.', 'en': 'An error occured during mining. Try to start mining again or create new data mining task.'},
-                68: {'cs': 'Box se zadáním bez restrikce bude považován za prázdný cedent.', 'en': 'No restriction box will be considered as empty cedent.'},
-                69: {'cs': 'Bez restrikce', 'en': 'No restriction'}},
+               65: {'cs': 'Načítám data aplikace...', 'en': 'Loading application data...'},
+               66: {'cs': 'Při načítání dat aplikace došlo k chybě.', 'en': 'An error occured while loading application data.'},
+               67: {'cs': 'Při dolování došlo k chybě. Zkuste spustit dolování znovu či vytvořit novou úlohu.', 'en': 'An error occured during mining. Try to start mining again or create new data mining task.'},
+               68: {'cs': 'Box se zadáním bez restrikce bude považován za prázdný cedent.', 'en': 'No restriction box will be considered as empty cedent.'},
+               69: {'cs': 'Bez restrikce', 'en': 'No restriction'},
+               70: {'cs': 'Cache', 'en': 'Cache'},
+               70: {'cs': 'Některé výsledky úloh jsou uloženy v cache a příště mohou být vráceny mnohem rychleji.', 'en': 'Some mining results are automatically cached so that they are retrieved much faster next time.'}},
 
 	initialize: function (lang) {
 		this.lang = lang;

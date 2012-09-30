@@ -103,15 +103,25 @@ var UIStructureTemplater = new Class({
                             span({'class': 'help'},
                                 img({src: './images/icon-tooltip-help.png'}),
                                 em(i18n.translate('Limit')),
-                                i18n.translate('Maximal number of association rules to be searched for. If the limit is reached and there are more rules to find, an option to search for the remaining rules pops up.')))),
+                                i18n.translate('Maximal number of association rules to be searched for.')))),
                     div(
-                        label({'for': 'as-select'}, i18n.translate('Auto filter') + ':'),
+                        label(i18n.translate('Auto filter') + ':'),
                         a({id: 'autofilter', 'href': '#', 'class': settings.getBKAutoSearch() ? 'autofilter-on' : 'autofilter-off'}, i18n.translate(settings.getBKAutoSearch() ? 'On': 'Off')),
                         span({'class': 'tooltip info'},
                             span({'class': 'help'},
                                 img({src: './images/icon-tooltip-help.png'}),
                                 em(i18n.translate('Auto filter')),
-                                i18n.translate('Association rules are automaticaly filtered according to expert background knowledge. This guarantees that only interesting association rules are left.')))),
+                                i18n.translate('Association rules are automaticaly filtered according to expert background knowledge. This guarantees that only interesting association rules are left.')))
+                    ),
+                    div(
+                        label(i18n.translate('Cache') + ':'),
+                        a({id: 'cache', 'href': '#', 'class': settings.getCaching() ? 'cache-on' : 'cache-off'}, i18n.translate(settings.getCaching() ? 'On': 'Off')),
+                        span({'class': 'tooltip info'},
+                            span({'class': 'help'},
+                                img({src: './images/icon-tooltip-help.png'}),
+                                em(i18n.translate('Cache')),
+                                i18n.translate('Some mining results are automatically cached so that they are retrieved much faster next time.')))
+                    ),
                     br({'class': 'clearfix'}),
                     input({type: 'submit', value: i18n.translate('Save')})));
         });

@@ -78,6 +78,25 @@ var UIStructurePainter = new Class({
         this.$UIScroller.scrollTo(0, 0);
     },
 
+    renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
+        var autoSuggestPossible = (autoSuggest.length > 0);
+        var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: autoSuggestPossible, i18n: this.$i18n, reset: reset, settings: settings});
+        var elWindow = $('settings-window');
+        if (elWindow) { // re-render (autocomplete)
+            settings.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));
+        } else {
+            var overlay = this.showOverlay();
+            overlay.grab(settings);
+        }
+        this.$UIStructureListener.registerSettingsWindowEventHandlers(autoSuggestPossible);
+
+        var elSelect = $('fl-select');
+        Object.each(FLs, function (FL) {
+            var isSelected = (FL.getName() === selectedFL.getName());
+            elSelect.grab(Mooml.render('flOptionTemplate', {FL: FL, isSelected: isSelected}));
+        }.bind(this));
+    },
+
     resizeApplication: function() {
         var width = $('antecedent').getSize().x + $('interest-measures').getSize().x + $('succedent').getSize().x + 1; // IE9 hack (+1)
         $('ar-wrapper').setStyle('width', width);

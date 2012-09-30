@@ -16,21 +16,12 @@ $lang = $request->query->get('lang');
 if ($id === 'TEST') {
     $responseContent = ['status' => 'ok'];
 } else { // KBI
-    $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
-    if (!file_exists($DDPath)) { goto returnError; }
-
-    $serializer = new TaskSettingSerializer($DDPath);
-    $serialized = $serializer->serialize($data);
-    $matches = [];
-    preg_match('/modelName=\"([a-z0-9A-Z]{1,})\"/', $serialized, $matches);
-    $taskName = $matches[1];
-
     $requestData = [];
 
     // run task
     $encoder = new URLEncoder();
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=cancelQuery&source=".$id."&query=".$taskName."&format=raw");
+    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=cancelQuery&source=".$id."&query=".$encoder->encode($data)."&format=raw");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

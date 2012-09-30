@@ -5,25 +5,7 @@ require_once 'Bootstrap.php';
 class StopMiningTest extends PHPUnit_Framework_TestCase
 {
 
-    protected $data = [
-        "limitHits" => 250,
-        "rule0" => [
-            "antecedent" => [
-                "type" => "cedent",
-                "connective" => ["name" => "AND", "type" => "and"],
-                "level" => 1,
-                "children" => [["name" => "District", "category" => "One category", "fields" => [["name" => "category", "value" => "Praha"]], "sign" => "positive"]],
-            ],
-            "IMs" => [["name" => "FUI", "thresholdType" => "% of all", "compareType" => "Greater than or equal", "fields" => [["name" => "threshold", "value" => "0.70"]]]],
-            "succedent" => [
-                "type" => "cedent",
-                "connective" => ["name" => "AND", "type" => "and"],
-                "level" => 1,
-                "children" => [["name" => "Quality", "category" => "One category", "fields" => [["name" => "category", "value" => "good"]], "sign" => "positive"]],
-            ],
-        ],
-        "rules" => 1,
-    ];
+    protected $data = 'c45599e44ee3b2e9401f15f0992a28a9';
 
     public function testStopMining()
     {

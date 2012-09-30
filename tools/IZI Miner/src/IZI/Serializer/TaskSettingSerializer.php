@@ -13,9 +13,7 @@ class TaskSettingSerializer
 
     // XML document
     protected $output;
-    protected $modelName;
     protected $arQuery;
-    protected $hypotheses;
     protected $bbaSettings;
     protected $dbaSettings;
     protected $antecedentSetting;
@@ -44,7 +42,7 @@ class TaskSettingSerializer
         $rule = $json->rule0;
 
         // Create basic structure of Document.
-        $this->createBasicStructure();
+        $this->createBasicStructure($json->modelName, $json->limitHits);
 
         // Create antecedent
         if (!empty($rule->antecedent->children)) {
@@ -61,17 +59,11 @@ class TaskSettingSerializer
         $consequentId = $this->parseCedent($rule->succedent, 1, $forcedDepth);
         $this->consequentSetting->appendChild($this->output->createTextNode($consequentId));
 
-        // Update TaskSetting - hypothesesCountMax
-        $this->updateTaskSetting($json->limitHits);
-
-        // Update modelName
-        $this->updateModelName();
-
         // Serialize XML
         return $this->output->saveXML();
     }
 
-    protected function createBasicStructure()
+    protected function createBasicStructure($modelName, $hypothesesCountMax)
     {
         $this->output = new \DOMDocument("1.0", "UTF-8");
 
@@ -131,8 +123,7 @@ class TaskSettingSerializer
         $associationModel->setAttribute('xmlns', '');
         $associationModel->setAttribute('xsi:schemaLocation', 'http://keg.vse.cz/ns/GUHA0.1rev1 http://sewebar.vse.cz/schemas/GUHA0.1rev1.xsd');
         $associationModel->setAttribute('xmlns:guha', 'http://keg.vse.cz/ns/GUHA0.1rev1');
-        $this->modelName = $this->output->createAttribute('modelName');
-        $associationModel->setAttributeNode($this->modelName);
+        $associationModel->setAttribute('modelName', $modelName);
         $associationModel->setAttribute('functionName', 'associationRules');
         $associationModel->setAttribute('algorithmName', '4ft');
 
@@ -143,10 +134,8 @@ class TaskSettingSerializer
         // extension LISp-Miner
         $extension = $this->output->createElement('Extension');
         $extension->setAttribute('name', 'LISp-Miner');
-        $hypotheses = $this->output->createElement('HypothesesCountMax');
-        $extension->appendChild($hypotheses);
+        $extension->appendChild($this->output->createElement('HypothesesCountMax', $hypothesesCountMax));
         $this->arQuery->appendChild($extension);
-        $this->hypotheses = $hypotheses;
 
         // extension metabase
         $extension = $this->output->createElement('Extension');
@@ -312,17 +301,5 @@ class TaskSettingSerializer
     {
         return in_array($literal, self::$LITERALS);
     }
-
-    private function updateTaskSetting($hypothesesCountMax)
-    {
-        $this->hypotheses->appendChild($this->output->createTextNode($hypothesesCountMax));
-    }
-
-    private function updateModelName()
-    {
-        $modelName = sha1($this->output->saveXML($this->arQuery));
-        $this->modelName->appendChild($this->output->createTextNode($modelName));
-    }
-
 
 }

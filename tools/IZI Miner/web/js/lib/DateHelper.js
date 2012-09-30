@@ -1,10 +1,15 @@
 var DateHelper = new Class({
-	
-	initialize: function () {},
-	
-	getYear: function () {
+
+	getYear: function() {
 		var today = new Date();
+
 		return today.get('year');
-	}
+	},
+
+    getTime: function() {
+        var today = new Date();
+
+        return today.getTime(); // UNIX time in milliseconds
+    }
 	
 });

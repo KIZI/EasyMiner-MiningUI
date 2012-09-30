@@ -5,10 +5,14 @@ namespace IZI\Encoder;
 class URLEncoder
 {
 
-    public function encode($array) {
+    public function encode($data) {
         $string = '';
-        foreach ($array as $key => $value) {
-            $string .= "{$key}=".urlencode($value).'&';
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $string .= "{$key}=".urlencode($value).'&';
+            }
+        } else {
+            $string .= urlencode($data);
         }
 
         return $string;
