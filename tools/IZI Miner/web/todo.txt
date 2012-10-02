@@ -1,10 +1,7 @@
 TODO
 ==============
+- scrollbar looks like it's broken... needs to be rewritten :(
 - feedback module
-- onerror
-- clear rules should scroll up
-
-- pri smazani pravidel zavoalat resize
 - probably a hidden FL bug, serializers / parsers are using the same all the time
 - refactor pager, it breaks when 49+ pages i present
 
