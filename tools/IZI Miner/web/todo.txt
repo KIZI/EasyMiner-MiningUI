@@ -1,11 +1,5 @@
 TODO
 ==============
-- remove global variables from UITemplateRegistrator
-10.00 - 11.05
-
-- refactor 4tf tests
-11.05 - 11.15
-
 - feedback module
 - onerror
 - clear rules should scroll up

@@ -39,8 +39,7 @@ if ($id === 'TEST') {
 
     $serializer = new TaskSettingSerializer($DDPath);
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => $debug ? '4ftMiner.Task.Template.PMML' : '4ftMiner.Task.ARD.Template.PMML');
-    echo $serializer->serialize($data); die;
-
+    
     // save LM task
     $taskPath = 'temp/4ft_task_'.date('md_His').'.pmml';
     file_put_contents($taskPath, $requestData['query']);
