@@ -15,6 +15,7 @@ $request = Request::createFromGlobals();
 $idDm = $request->query->get('id_dm');
 $idKb = $request->query->get('id_kb');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
+$debug = json_decode($data)->debug;
 $lang = $request->query->get('lang');
 $sleep = (int) $request->query->get('sleep') ?: 0;
 $action = $request->query->get('action');
@@ -67,7 +68,7 @@ if ($idDm === 'TEST' && $idKb === 'TEST') {
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        if (FB_ENABLED) { // log into console
+        if (FB_ENABLED && $debug) { // log into console
             FB::info(['curl request' => $requestData]);
             FB::info(['curl response' => $response]);
             FB::info(['curl info' => $info]);
@@ -101,7 +102,7 @@ if ($idDm === 'TEST' && $idKb === 'TEST') {
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        if (FB_ENABLED) { // log into console
+        if (FB_ENABLED && $debug) { // log into console
             FB::info(['curl request' => $requestData]);
             FB::info(['curl response' => $response]);
             FB::info(['curl info' => $info]);
@@ -150,7 +151,7 @@ if ($idDm === 'TEST' && $idKb === 'TEST') {
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        if (FB_ENABLED) { // log into console
+        if (FB_ENABLED && $debug) { // log into console
             FB::info(['curl request' => $requestData]);
             FB::info(['curl response' => $response]);
             FB::info(['curl info' => $info]);

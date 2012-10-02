@@ -23,6 +23,7 @@ var ARBuilder = new Class({
 	// init basics
 	initialize: function (config) {
 		this.$config = config;
+        this.settings = new Settings();
         this.$i18n = new i18n(this.$config.getLang());
 
         // Paint application structure
@@ -44,7 +45,7 @@ var ARBuilder = new Class({
 
     loadData: function() {
         this.handleLoadData();
-        this.dataParser = new DataParser(this.$config, true);
+        this.dataParser = new DataParser(this.$config, this.settings, true);
         this.dataParser.getData(this.initApplication, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
     },
 
@@ -78,10 +79,9 @@ var ARBuilder = new Class({
         this.FLs = this.dataParser.getFLs();
         this.$FGC = this.dataParser.getFGC();
 
-        this.settings = new Settings();
         this.$FRManager = new FRManager(this.$config, new RulesParser(this, this.$DD, this.getDefFL()), this.settings, this.UIPainter, this.UIListener, this.$i18n);
         this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper());
-        this.$ETreeManager = new ETreeManager(this.$config, this.$DD, this.UIPainter);
+        this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);
         this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
         this.$ETreeManager.setARManager(this.$ARManager);
 
@@ -163,17 +163,28 @@ var ARBuilder = new Class({
         }
     },
 
+    changeDebug: function(el) {
+        el.toggleClass('debug-on');
+        el.toggleClass('debug-off');
+        if (el.hasClass('debug-on')) {
+            el.text = this.$i18n.translate('On');
+        } else {
+            el.text = this.$i18n.translate('Off');
+        }
+    },
+
 	closeSettingsWindow: function () {
 		this.$UIStructurePainter.hideOverlay();
 	},
 	
-	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache) {
+	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug) {
 		// settings
 		this.settings.setRulesCnt(rulesCnt);
 		this.settings.setBKAutoSearch(autoSearch);
 		this.settings.setRecEnabled(autoSuggest);
         this.settings.setCaching(cache);
-		
+        this.settings.setDebug(debug);
+
 		// FL switch
 		var FL = this.getFLByName(FLName);
 		var ARValidator = new AssociationRuleValidator(FL.getRulePattern(), FL.getIMCombinations());

@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
+$taskId = json_decode($data)->taskId;
+$debug = json_decode($data)->debug;
 $lang = $request->query->get('lang');
 
 if ($id === 'TEST') {
@@ -21,7 +23,7 @@ if ($id === 'TEST') {
     // run task
     $encoder = new URLEncoder();
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=cancelQuery&source=".$id."&query=".$encoder->encode($data)."&format=raw");
+    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=cancelQuery&source=".$id."&query=".$encoder->encode($taskId)."&format=raw");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -33,7 +35,7 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
-    if (FB_ENABLED) { // log into console
+    if (FB_ENABLED && $debug) { // log into console
         FB::info(['curl request' => $requestData]);
         FB::info(['curl response' => $response]);
         FB::info(['curl info' => $info]);

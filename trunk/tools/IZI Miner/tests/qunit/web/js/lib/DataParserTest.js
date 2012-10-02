@@ -2,9 +2,10 @@ module('DataParser', {});
 
 test('getDD', function () {
 	var config = new Config();
+    var settings = new Settings();
 	config.setDataGetURL('/izi-miner/web/getData.php');
     config.setParams({id_dm: 'TEST'});
-	var dataParser = new DataParser(config, false);
+	var dataParser = new DataParser(config, settings, false);
 	dataParser.getData();
 
 	strictEqual(instanceOf(dataParser.getDD(), DataDescription), true);
@@ -14,9 +15,10 @@ test('getDD', function () {
 
 test('getFLs', function () {
 	var config = new Config();
+    var settings = new Settings();
 	config.setDataGetURL('/izi-miner/web/getData.php');
     config.setParams({id_dm: 'TEST'});
-	var dataParser = new DataParser(config, false);
+	var dataParser = new DataParser(config, settings, false);
 	dataParser.getData();
 	
 	strictEqual(dataParser.getFLs().length, 2);
@@ -24,9 +26,10 @@ test('getFLs', function () {
 
 test('getFGC', function () {
 	var config = new Config();
+    var settings = new Settings();
     config.setDataGetURL('/izi-miner/web/getData.php');
     config.setParams({id_dm: 'TEST'});
-	var dataParser = new DataParser(config, false);
+	var dataParser = new DataParser(config, settings, false);
 	dataParser.getData();
 
     strictEqual(instanceOf(dataParser.getFGC(), FieldGroupConfig), true);

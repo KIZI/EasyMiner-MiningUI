@@ -72,7 +72,9 @@ var i18n = new Class({
                68: {'cs': 'Box se zadáním bez restrikce bude považován za prázdný cedent.', 'en': 'No restriction box will be considered as empty cedent.'},
                69: {'cs': 'Bez restrikce', 'en': 'No restriction'},
                70: {'cs': 'Cache', 'en': 'Cache'},
-               70: {'cs': 'Některé výsledky úloh jsou uloženy v cache a příště mohou být vráceny mnohem rychleji.', 'en': 'Some mining results are automatically cached so that they are retrieved much faster next time.'}},
+               70: {'cs': 'Některé výsledky úloh jsou uloženy v cache a příště mohou být vráceny mnohem rychleji.', 'en': 'Some mining results are automatically cached so that they are retrieved much faster next time.'},
+               71: {'cs': 'Aplikace v debug módu zobrazuje a loguje více informací.', 'en': 'Application shows and logs more information in debug mode.'},
+               72: {'cs': 'Debug mód', 'en': 'Debug mode'}},
 
 	initialize: function (lang) {
 		this.lang = lang;

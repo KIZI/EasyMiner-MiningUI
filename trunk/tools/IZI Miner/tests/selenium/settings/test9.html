@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/izi-miner/web/" />
-<title>Stop mining</title>
+<title>Change debug mode</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Stop mining</td></tr>
+<tr><td rowspan="1" colspan="3">Change debug mode</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,55 +17,41 @@
 	<td></td>
 </tr>
 <tr>
-	<td>dragAndDropToObject</td>
-	<td>css=#attribute-nav-district</td>
-	<td>css=#antecedent .cedent</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
+	<td>css=#settings-open</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=add-im</td>
+	<td>assertElementPresent</td>
+	<td>css=#debug.debug-on</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
+	<td>css=#debug</td>
 	<td></td>
 </tr>
 <tr>
-	<td>dragAndDropToObject</td>
-	<td>css=#attribute-nav-quality</td>
-	<td>css=#succedent .cedent</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
+	<td>assertElementPresent</td>
+	<td>css=#debug.debug-off</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#mine-rules-confirm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>css=#stop-mining</td>
+	<td>css=input[type='submit']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#stop-mining</td>
+	<td>css=#settings-open</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=.mining-stopped</td>
+	<td>assertElementPresent</td>
+	<td>css=#debug.debug-off</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

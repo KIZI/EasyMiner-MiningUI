@@ -1,9 +1,10 @@
 var Settings = new Class({
 
-    GetterSetter: ['rulesCnt', 'caching', 'BKAutoSearch', 'recEnabled'],
+    GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled'],
 
 	$rulesCnt: 1000,
     $caching: false,
+    $debug: true,
 	$BKAutoSearch: false,
 	$recEnabled: true,
 	foundRules: {
