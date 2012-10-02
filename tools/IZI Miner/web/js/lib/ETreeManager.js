@@ -2,13 +2,15 @@ var ETreeManager = new Class({
 	
 	ARManager: null,
 	config: null,
+    $settings: null,
 	DD: null,
 	inProgress: false,
 	requests: [],
 	UIPainter: null,
 	
-	initialize: function (config, DD, UIPainter) {
+	initialize: function (config, settings, DD, UIPainter) {
 		this.config = config;
+        this.$settings = settings;
 		this.DD = DD;
         this.UIPainter = UIPainter;
 	},
@@ -24,7 +26,8 @@ var ETreeManager = new Class({
 		var requestData = {
 				attributes: attributes,
 				rule0: rule.serialize(),
-				rules: 1};
+				rules: 1,
+                debug: this.$settings.getDebug()};
 		this.makeRequest(JSON.encode(requestData));
 	},
 	

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
+$data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
+$debug = json_decode($data)->debug;
 $lang = $request->query->get('lang');
 $sleep = (int) $request->query->get('sleep') ?: 0;
 
@@ -36,7 +38,7 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
-    if (FB_ENABLED) { // log into console
+    if (FB_ENABLED && $debug) { // log into console
         FB::info(['curl response' => $response]);
         FB::info(['curl info' => $info]);
     }

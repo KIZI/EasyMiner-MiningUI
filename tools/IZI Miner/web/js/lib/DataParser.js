@@ -1,17 +1,23 @@
 var DataParser = new Class({
 	
 	config: null,
+    $settings: null,
     $async: true,
 	DD: null,
 	FLs: [],
 	FGC: null,
 	
-	initialize: function (config, async) {
+	initialize: function (config, settings, async) {
 		this.config = config;
+        this.$settings = settings;
         this.$async = async;
 	},
 	
 	getData: function (callback, errCallback, bind, delay) {
+        var data = JSON.encode({
+            debug: this.$settings.getDebug()
+        });
+
 		new Request.JSON({
 			url: this.config.getDataGetURL(),
 			secure: true,
@@ -33,7 +39,7 @@ var DataParser = new Class({
 				errCallback.delay(delay, bind);
 			}
 		
-		}).get();
+		}).post({'data': data});
 	},
 	
 	parseData: function (data) {

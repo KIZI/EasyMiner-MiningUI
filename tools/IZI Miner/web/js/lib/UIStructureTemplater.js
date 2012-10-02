@@ -122,6 +122,15 @@ var UIStructureTemplater = new Class({
                                 em(i18n.translate('Cache')),
                                 i18n.translate('Some mining results are automatically cached so that they are retrieved much faster next time.')))
                     ),
+                    div(
+                        label(i18n.translate('Debug mode') + ':'),
+                        a({id: 'debug', 'href': '#', 'class': settings.getDebug() ? 'debug-on' : 'debug-off'}, i18n.translate(settings.getDebug() ? 'On': 'Off')),
+                        span({'class': 'tooltip info'},
+                            span({'class': 'help'},
+                                img({src: './images/icon-tooltip-help.png'}),
+                                em(i18n.translate('Debug mode')),
+                                i18n.translate('Application shows and logs more information in debug mode.')))
+                    ),
                     br({'class': 'clearfix'}),
                     input({type: 'submit', value: i18n.translate('Save')})));
         });

@@ -13,9 +13,9 @@ var UITemplateRegistrator = new Class({
 
 	registerNavigation: function () {
 		Mooml.register('attributeByListTemplate', function (data) {
-            $i18n = data.i18n;
-			attribute = data.attribute;
-			isUsed = data.isUsed;
+            var i18n = data.i18n,
+			    attribute = data.attribute,
+			    isUsed = data.isUsed;
 			
 			var className = '';
 			if (attribute.isRecommended()) {
@@ -28,12 +28,12 @@ var UITemplateRegistrator = new Class({
 			
 			li({'class': className},
                 span({id: attribute.getCSSID()}, attribute.getName()),
-                a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': $i18n.translate('Remove')}),
-                a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': $i18n.translate('Edit')}));
+                a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}),
+                a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}));
 		});
 
         Mooml.register('dataFieldTemplate', function (data) {
-            field = data.field;
+            var field = data.field;
 
             li({id: field.getCSSID()}, field.getName());
         });
@@ -41,8 +41,8 @@ var UITemplateRegistrator = new Class({
 	
 	registerActiveRule: function () {
 		Mooml.register('interestMeasureTemplate', function (data) {
-			IM = data.IM;
-			$i18n = data.i18n;
+			var IM = data.IM,
+			    i18n = data.i18n;
 			
 			div({id: IM.getCSSID()},
 				span({'class': 'name', 'title': IM.getFields().localizedName}, 
@@ -50,20 +50,20 @@ var UITemplateRegistrator = new Class({
 					IM.hasThreshold() ? span({'class': 'threshold'}, IM.getThreshold()) : '', 
 					IM.hasThreshold() && IM.hasAlpha() ? ', ' : '',
 					IM.hasAlpha() ? span({'class': 'alpha'}, 'α ' + IM.getAlpha()) : ''),
-				a({id: IM.getCSSEditID(), href: '#', 'class': 'edit-im', 'title': $i18n.translate('Edit')}),
-				a({id: IM.getCSSRemoveID(), href: '#', 'class': 'remove-im', 'title': $i18n.translate('Remove')}));
+				a({id: IM.getCSSEditID(), href: '#', 'class': 'edit-im', 'title': i18n.translate('Edit')}),
+				a({id: IM.getCSSRemoveID(), href: '#', 'class': 'remove-im', 'title': i18n.translate('Remove')}));
 		});
 		
 		Mooml.register('cedentTemplate', function (data) {
-			var rule = data.rule;
-			var cedent = data.cedent;
-			var $i18n = data.i18n;
+			var rule = data.rule,
+			    cedent = data.cedent,
+			    i18n = data.i18n;
 
 			div({id: cedent.getCSSID(), 'class': 'cedent' + (cedent.getNumFields() === 0 ? ' empty': '')},
 				div({id: cedent.getCSSFieldsID(), 'class': 'fields'}, !cedent.getNumFields() ? '<span class="info">Drag & Drop<br/>attribute here</span>' : ''),
                 div({'class': 'controls'},
 					span({id: cedent.getCSSInfoID(), 'class': 'info'},
-						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + $i18n.translate('Group marked fields') + '</a>' : ''
+						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + i18n.translate('Group marked fields') + '</a>' : ''
                     )
                 )
             );
@@ -76,11 +76,11 @@ var UITemplateRegistrator = new Class({
         });
 		
 		Mooml.register('fieldTemplate', function (data) {
-			field = data.field;
-			$i18n = data.i18n;
-			fieldSign = field.getSign().toLowerCase();
-			cedent = data.cedent;
-            markFieldAllowed = data.markFieldAllowed;
+			var field = data.field,
+			    i18n = data.i18n,
+                markFieldAllowed = data.markFieldAllowed;
+
+            var fieldSign = field.getSign().toLowerCase();
 
 			if (field.getType() === null) {
 				div({id: field.getCSSID(), 'class': 'field'},
@@ -90,23 +90,23 @@ var UITemplateRegistrator = new Class({
 						fieldSign === 'negative' ? a({id: field.getCSSChangeSignID(), href: '#', 'class': 'change-sign ' + fieldSign}) : '',
 						span({id: field.getCSSDragID(), 'class': 'field-drag'}, field.toString()),
 						div({'class': 'controls'},
-							a({id: field.getCSSRemoveID(), href: '#', 'class': 'remove-field', 'title': $i18n.translate('Remove')}),
-							a({id: field.getEditCoefficientCSSID(), href: '#', 'class': 'edit-coefficient', 'title': $i18n.translate('Edit')}),
+							a({id: field.getCSSRemoveID(), href: '#', 'class': 'remove-field', 'title': i18n.translate('Remove')}),
+							a({id: field.getEditCoefficientCSSID(), href: '#', 'class': 'edit-coefficient', 'title': i18n.translate('Edit')}),
 							fieldSign === 'positive' ? a({id: field.getCSSChangeSignID(), href: '#', 'class': 'change-sign ' + fieldSign}) : '',
-                            data.markFieldAllowed ? a({id: field.getCSSMarkID(), href: '#', 'class': field.isMarked() === true ? 'marked-field': 'mark-field', 'title': field.isMarked() === true ? $i18n.translate('Unmark') : $i18n.translate('Mark')}) : ''));
+                            markFieldAllowed ? a({id: field.getCSSMarkID(), href: '#', 'class': field.isMarked() === true ? 'marked-field': 'mark-field', 'title': field.isMarked() === true ? i18n.translate('Unmark') : i18n.translate('Mark')}) : ''));
 			}
 		});
 
 		Mooml.register('connectiveTemplate', function (data) {
-			connective = data.connective;
-			$i18n = data.i18n;
+			var connective = data.connective,
+			    i18n = data.i18n;
 			
 			div({id: connective.getCSSID(), 'class': 'connective'},
-				a({id: cedent.getCSSEditConnectiveID(), href: '#', 'class': 'edit-connective', 'title': $i18n.translate('edit connective')}, connective.toString()));
+				a({href: '#', 'class': 'edit-connective', 'title': i18n.translate('edit connective')}, connective.toString()));
 		});
 		
 		Mooml.register('bracketTemplate', function (data) {
-			isLeft = data.isLeft;
+			var isLeft = data.isLeft;
 			
 			if (isLeft === true) {
 				span({'class': 'left-bracket'}, '(');
@@ -118,36 +118,36 @@ var UITemplateRegistrator = new Class({
 	
 	registerIMWindow: function () {
 		Mooml.register('addIMWindowTemplate', function (data) {
-			$i18n = data.i18n;
+			var i18n = data.i18n;
 			
 			div({id: 'add-im-window'},
-				a({id: 'add-im-close', href: '#'}, $i18n.translate('Close')),
-				h2($i18n.translate('Add interest measure')),
+				a({id: 'add-im-close', href: '#'}, i18n.translate('Close')),
+				h2(i18n.translate('Add interest measure')),
 				form({action: '#', method: 'POST', id: 'add-im-form'},
-					label({'for': 'add-im-select'}, $i18n.translate('Interest measure:')),
+					label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
 					select({name: 'add-im-select', id: 'add-im-select'}),
 					div({'class': 'autocomplete'}),
-					input({type: 'submit', value: $i18n.translate('Add')})));
+					input({type: 'submit', value: i18n.translate('Add')})));
 		});
 
 		Mooml.register('editIMWindowTemplate', function (data) {
-			$i18n = data.i18n;
-			IM = data.IM;
+			var i18n = data.i18n,
+			    IM = data.IM;
 			
 			div({id: 'edit-im-window'},
-				a({id: 'edit-im-close', href: '#'}, $i18n.translate('Close')),
-				h2($i18n.translate('Edit interest measure')),
+				a({id: 'edit-im-close', href: '#'}, i18n.translate('Close')),
+				h2(i18n.translate('Edit interest measure')),
 				form({action: '#', method: 'POST', id: 'edit-im-form'},
-					label({'for': 'edit-im-select'}, $i18n.translate('Interest measure:')),
+					label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
 					IM.getLocalizedName(),
 					select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
 					div({'class': 'autocomplete'}),
-					input({type: 'submit', value: $i18n.translate('Edit')})));
+					input({type: 'submit', value: i18n.translate('Edit')})));
 		});
 		
 		Mooml.register('IMWindowSelectOptionTemplate', function (data) {
-			IM = data.IM;
-			isSelected = data.isSelected;
+			var IM = data.IM,
+			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
 				option({'value': IM.name, 'selected': 'selected'}, IM.getLocalizedName());
@@ -159,32 +159,32 @@ var UITemplateRegistrator = new Class({
 
 	registerAddCoefficientWindow: function () {
 		Mooml.register('addCoefficientWindowTemplate', function (data) {
-			$i18n = data.i18n;
+			var i18n = data.i18n;
 			
 			div({id: 'add-coefficient-window'},
-				a({id: 'add-coefficient-close', href: '#'}, $i18n.translate('Close')),
-				h2($i18n.translate('Add coefficient')),
+				a({id: 'add-coefficient-close', href: '#'}, i18n.translate('Close')),
+				h2(i18n.translate('Add coefficient')),
 				form({action: '#', method: 'POST', id: 'add-coefficient-form'},
-					label({'for': 'add-coefficient-select'}, $i18n.translate('Coefficient:')),
+					label({'for': 'add-coefficient-select'}, i18n.translate('Coefficient:')),
 					span({id: 'add-coefficient-autocomplete'})),
 				div({'class': 'clearfix'}));
 		});
 		
 		Mooml.register('editCoefficientWindowTemplate', function (data) {
-			$i18n = data.i18n;
+			var i18n = data.i18n;
 			
 			div({id: 'edit-coefficient-window'},
-				a({id: 'edit-coefficient-close', href: '#'}, $i18n.translate('Close')),
-				h2($i18n.translate('Edit coefficient')),
+				a({id: 'edit-coefficient-close', href: '#'}, i18n.translate('Close')),
+				h2(i18n.translate('Edit coefficient')),
 				form({action: '#', method: 'POST', id: 'edit-coefficient-form'},
-					label({'for': 'edit-coefficient-select'}, $i18n.translate('Coefficient:')),
+					label({'for': 'edit-coefficient-select'}, i18n.translate('Coefficient:')),
 					span({id: 'edit-coefficient-autocomplete'})),
 				div({'class': 'clearfix'}));
 		});
 		
 		Mooml.register('addCoefficientWindowAutocompleteTemplate', function (data) {
-			selectedCoefficient = data.selectedCoefficient;
-			$i18n = data.i18n;
+			var selectedCoefficient = data.selectedCoefficient,
+			    i18n = data.i18n;
 			
 			if (selectedCoefficient.getName() === 'One category') {
 				span({id: 'add-coefficient-autocomplete'},
@@ -192,7 +192,7 @@ var UITemplateRegistrator = new Class({
 					br(),
 					label({'for': 'add-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
 					select({name: 'add-coefficient-category', id: 'add-coefficient-category'}),
-					input({type: 'submit', value: $i18n.translate('Add')}));
+					input({type: 'submit', value: i18n.translate('Add')}));
 			} else {
 				span({id: 'add-coefficient-autocomplete'},
 					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
@@ -219,22 +219,22 @@ var UITemplateRegistrator = new Class({
 								)
 							)
 						),
-						input({type: 'submit', value: $i18n.translate('Add')}));
+						input({type: 'submit', value: i18n.translate('Add')}));
 			}
 		});
 		
 		Mooml.register('editCoefficientWindowAutocompleteTemplate', function (data) {
-			field = data.field;
-			selectedCoefficient = data.selectedCoefficient;
-			$i18n = data.i18n;
+			var field = data.field,
+			    selectedCoefficient = data.selectedCoefficient,
+			    i18n = data.i18n;
 			
 			if (selectedCoefficient.getName() === 'One category') {
 				span({id: 'edit-coefficient-autocomplete'},
 					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
 					br(),
-					label({'for': 'edit-coefficient-category'}, $i18n.translate('Category')),
+					label({'for': 'edit-coefficient-category'}, i18n.translate('Category')),
 					select({name: 'edit-coefficient-category', id: 'edit-coefficient-category'}),
-					input({type: 'submit', value: $i18n.translate('Edit')}));
+					input({type: 'submit', value: i18n.translate('Edit')}));
 			} else {
 				span({id: 'edit-coefficient-autocomplete'},
 					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
@@ -261,13 +261,13 @@ var UITemplateRegistrator = new Class({
 								)
 							)
 						),
-						input({type: 'submit', value: $i18n.translate('Edit')}));
+						input({type: 'submit', value: i18n.translate('Edit')}));
 			}
 		});
 		
 		Mooml.register('addCoefficientWindowSelectOptionTemplate', function (data) {
-			coefficient = data.coefficient;
-			isSelected = data.isSelected;
+			var coefficient = data.coefficient,
+			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
 				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
@@ -308,21 +308,21 @@ var UITemplateRegistrator = new Class({
 	
 	registerEditConnectiveWindow: function() {
 		Mooml.register('editConnectiveWindowTemplate', function (data) {
-			$i18n = data.i18n;
+			var i18n = data.i18n;
 			
 			div({id: 'edit-connective-window'},
-				a({id: 'edit-connective-close', href: '#'}, $i18n.translate('Close')),
-				h2($i18n.translate('Edit connective')),
+				a({id: 'edit-connective-close', href: '#'}, i18n.translate('Close')),
+				h2(i18n.translate('Edit connective')),
 				form({action: '#', method: 'POST', id: 'edit-connective-form'},
-					label({'for': 'edit-connective-select'}, $i18n.translate('Connective')),
+					label({'for': 'edit-connective-select'}, i18n.translate('Connective')),
 					select({name: 'edit-connective-select', id: 'edit-connective-select'}),
-					input({type: 'submit', value: $i18n.translate('Edit')})),
+					input({type: 'submit', value: i18n.translate('Edit')})),
 				div({'class': 'clearfix'}));
 		});
 		
 		Mooml.register('editConnectiveWindowSelectOptionTemplate', function (data) {
-			connective = data.connective;
-			isSelected = data.isSelected;
+			var connective = data.connective,
+			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
 				option({'value': connective, 'selected': 'selected'}, connective);
@@ -334,18 +334,18 @@ var UITemplateRegistrator = new Class({
 	
 	registerFoundRule: function () {
 		Mooml.register('foundRuleTemplate', function (data) {
-			key = data.key;
-			FR = data.FR;
-			rule = FR.getRule();
-			$i18n = data.i18n;
-			BK = data.BK;
+			var key = data.key,
+			    FR = data.FR,
+			    rule = FR.getRule(),
+			    i18n = data.i18n,
+			    BK = data.BK;
 			
 			li({id: FR.getCSSID(), 'class': 'found-rule'},
 				span({'class': 'rule'}, '<span class="id">' + key + '.</span>' + rule.getIdent()),
 				span({'class': 'info'}),
-				!BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': $i18n.translate('Ask background knowledge')}) : '',
-				a({id: rule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': $i18n.translate('Mark rule')}),
-				a({id: rule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': $i18n.translate('Clear rule')}),
+				!BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
+				a({id: rule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
+				a({id: rule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
 				div({'class': 'loading'}, ''),
 				span({'class': 'ims'}, rule.getIMIdent())
 			);
@@ -354,28 +354,26 @@ var UITemplateRegistrator = new Class({
 	
 	registerMarkedRules: function () {
 		Mooml.register('markedRuleTemplate', function (data) {
-			rule = data.rule;
-			$i18n = data.i18n;
+			var rule = data.rule,
+			    i18n = data.i18n;
 
 			li({id: rule.getMarkedRuleCSSID()},
 				span({'class': 'rule'}, rule.getIdent()), 
-				a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': $i18n.translate('Remove')}),
+				a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}),
 				span({'class': 'ims'}, rule.getIMIdent()));
 		});
 	},
 	
     registerAttributeWindow: function() {
         Mooml.register('addAttributeTemplate', function (data) {
-            $i18n = data.i18n;
-            url = data.url;
+            var url = data.url;
 
             div({id: 'add-attribute-window'},
                 iframe({src: url}));
         });
 
         Mooml.register('editAttributeTemplate', function (data) {
-            $i18n = data.i18n;
-            url = data.url;
+            var url = data.url;
 
             div({id: 'edit-attribute-window'},
                 iframe({src: url}));

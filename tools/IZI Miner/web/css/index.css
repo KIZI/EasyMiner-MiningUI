@@ -458,7 +458,8 @@ td {
 #settings-form a.autosuggest-on,
 #settings-form a.autofilter-on,
 #settings-form a.cache-on,
-#settings-form color color {
+#settings-form a.debug-on {
+  color: #434343;
   background: transparent url("../images/sprite-icons.png") -70px -9px no-repeat;
   text-decoration: none;
   display: block;
@@ -467,7 +468,8 @@ td {
 }
 #settings-form a.autosuggest-off,
 #settings-form a.autofilter-off,
-#settings-form a.cache-off {
+#settings-form a.cache-off,
+#settings-form a.debug-off {
   color: #434343;
   background: transparent url("../images/sprite-icons.png") -70px -57px no-repeat;
   text-decoration: none;

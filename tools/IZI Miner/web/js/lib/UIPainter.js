@@ -281,10 +281,10 @@ var UIPainter = new Class({
 	
 	renderField: function (field, elementParent, cedent, markFielsdAllowed) {
         if (elementParent !== null) { // new field
-			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, cedent: cedent, markFieldAllowed: markFielsdAllowed});
+			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, markFieldAllowed: markFielsdAllowed});
 			elementParent.grab(elementField);
 		} else { // re-render
-			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, cedent: cedent, markFieldAllowed: markFielsdAllowed});
+			var elementField = Mooml.render('fieldTemplate', {field: field, i18n: this.i18n, markFieldAllowed: markFielsdAllowed});
 			elementField.replaces($(field.getCSSID()));
 		}
 		

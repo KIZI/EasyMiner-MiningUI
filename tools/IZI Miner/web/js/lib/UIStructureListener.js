@@ -68,6 +68,12 @@ var UIStructureListener = new Class({
             this.$ARBuilder.changeCaching($('cache'));
         }.bind(this));
 
+        // change debug information
+        $('debug').addEvent('click', function (e) {
+            e.stop();
+            this.$ARBuilder.changeDebug($('debug'));
+        }.bind(this));
+
         // save
         var elSubmit = $('settings-form').getElement('input[type=submit]');
         elSubmit.removeEvent('click');
@@ -80,8 +86,9 @@ var UIStructureListener = new Class({
             var autoSearch = $('autofilter').hasClass('autofilter-on');
             var autoSuggest = $('as').hasClass('autosuggest-on');
             var cache = $('cache').hasClass('cache-on');
+            var debug = $('debug').hasClass('debug-on');
 
-            this.$ARBuilder.saveSettings(rulesCnt, FLName, autoSearch, autoSuggest, cache);
+            this.$ARBuilder.saveSettings(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug);
         }.bind(this));
 
         // close

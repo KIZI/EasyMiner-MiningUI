@@ -26,4 +26,4 @@ ini_set('display_errors', 1);
 date_default_timezone_set('Europe/Paris');
 
 // FB logging
-define('FB_ENABLED', true);
+define('FB_ENABLED', class_exists('FB'));

@@ -113,9 +113,11 @@ var FRManager = new Class({
 	
 	buildRequest: function (FR, URL, update) {
 		var reqData = {
-				limitHits: 1,
-					rule0: FR.getRule().serialize(),
-					rules: 1};
+			limitHits: 1,
+			rule0: FR.getRule().serialize(),
+			rules: 1,
+            debug: this.settings.getDebug()
+        };
 		
 		var options = {
 			url: URL,
@@ -233,10 +235,6 @@ var FRManager = new Class({
 		return rule;
 	},
 	
-	getMarkedRules: function () {
-		return this.markedRules;
-	},
-	
 	removeMarkedRule: function(FR) {
 		Object.each(this.markedRules, function (MR, key) {
 			if (FR.getRule().getId() === MR.getRule().getId()) {
@@ -246,11 +244,6 @@ var FRManager = new Class({
 
 		this.UIPainter.renderMarkedRules(null, this.markedRules);
 	},
-
-    removeMarkedRules: function() {
-        this.markedRules = [];
-        this.UIPainter.renderMarkedRules();
-    },
 
 	sortMarkedRules: function (order) {
 		var markedRules = [];

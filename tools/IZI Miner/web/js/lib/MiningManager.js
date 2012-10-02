@@ -26,7 +26,8 @@ var MiningManager = new Class({
 		this.requestData = {
 				limitHits: limitHits,
 				rule0: rule.serialize(),
-				rules: 1
+				rules: 1,
+                debug: this.settings.getDebug()
         };
 
         if (this.settings.getCaching()) { // caching enabled
@@ -112,7 +113,7 @@ var MiningManager = new Class({
 
         // stop remote LM mining
         if (this.inProgress) { // hack around req.cancel(); weird bug
-            this.stopRemoteMining(this.taskId);
+            this.stopRemoteMining(this.taskId, this.settings.getDebug(), this.config.getStopMiningUrl());
             this.FRManager.handleStoppedMining();
         }
 
@@ -126,11 +127,16 @@ var MiningManager = new Class({
 		return this.inProgress;
 	},
 
-    stopRemoteMining: function(taskId) {
+    stopRemoteMining: function(taskId, debug, url) {
+        var data = JSON.encode({
+            taskId: taskId,
+            debug: debug
+        });
+
         var request = new Request.JSON({
-            url: this.config.getStopMiningUrl(),
+            url: url,
             secure: true
-        }).post({'data': taskId});
+        }).post({'data': data});
     }
 	
 });
