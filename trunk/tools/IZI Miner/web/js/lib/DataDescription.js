@@ -7,7 +7,6 @@ var DataDescription = new Class({
     $fields: [],
     $storage: null,
 
-    // TODO rewrite function calls - add parse / load
 	initialize: function (id, storage) {
         this.$id = id;
         this.$storage = storage;
@@ -24,7 +23,6 @@ var DataDescription = new Class({
 
     load: function() {
         var data = this.$storage.getObj('DD_' + this.$id);
-        this.$id = data.$id;
         Array.from(data.$attributes).each(function(obj) {
             var attribute = new Attribute();
             attribute.load(obj);
@@ -45,7 +43,9 @@ var DataDescription = new Class({
     },
 
 	parseAttributes: function (attributes) {
-        var hiddenAttributes = Array.from(this.$storage.getObj('hiddenAttributes'));
+        var allHiddenAttributes = this.$storage.getObj('hiddenAttributes') ? this.$storage.getObj('hiddenAttributes') : {};
+        var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
+
 		Object.each(attributes, function (value, name) {
             var hidden = false;
             hiddenAttributes.each(function(attributeName) {
@@ -58,8 +58,6 @@ var DataDescription = new Class({
 			    this.$attributes.push(attribute);
             }
 		}.bind(this));
-
-        this.$storage.setObj(this.$attributes);
 	},
 	
 	getAttributeByName: function (name) {
@@ -76,11 +74,7 @@ var DataDescription = new Class({
 	getAttributeByPos: function (pos) {
 		return this.$attributes[pos];
 	},
-	
-	countAttributes: function () {
-		return this.$attributes.length;
-	},
-	
+
 	sortAttributes: function (positions) {
 		var attributes = [];
 		Array.each(positions, function (pos) {
@@ -94,9 +88,12 @@ var DataDescription = new Class({
     removeAttribute: function(attribute) {
         this.$attributes.erase(attribute);
 
-        var hiddenAttributes = Array.from(this.$storage.getObj('hiddenAttributes'));
+        var allHiddenAttributes = this.$storage.getObj('hiddenAttributes') ? this.$storage.getObj('hiddenAttributes') : {};
+        var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
         hiddenAttributes.include(attribute.getName());
-        this.$storage.setObj('hiddenAttributes', hiddenAttributes);
+
+        allHiddenAttributes[this.$id] = hiddenAttributes;
+        this.$storage.setObj('hiddenAttributes', allHiddenAttributes);
     },
 
     parseFields: function (fields) {

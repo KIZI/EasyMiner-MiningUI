@@ -1,10 +1,5 @@
 TODO
 ==============
-- scrollbar looks like it's broken... needs to be rewritten :(
-- feedback module
 - probably a hidden FL bug, serializers / parsers are using the same all the time
 - refactor pager, it breaks when 49+ pages i present
-
-- update GC - saving documents: {server}/index.php?option=com_kbi&task=storeDocument&source={Joomla KBI source}&title={Title of document, not required, timestamp default}&format=raw
-
-- bug: narazil jsem na problém u skrývání atributů - pokud je skryju v jednom mineru, tak jsou skryté i ve všech ostatních a není dostupná ani žádná možnost pro zobrazení skrytých atributů.
+  - pager need to be rewritten

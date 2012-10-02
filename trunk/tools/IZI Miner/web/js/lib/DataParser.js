@@ -28,7 +28,7 @@ var DataParser = new Class({
                     errCallback.delay(delay, bind);
                     return;
                 }
-				this.parseData(responseJSON);
+				this.parseData(responseJSON, this.config.getIdDm());
 
                 if (instanceOf(callback, Function)) {
                     callback.delay(delay, bind);
@@ -42,8 +42,8 @@ var DataParser = new Class({
 		}).post({'data': data});
 	},
 	
-	parseData: function (data) {
-		this.DD = new DataDescription(data.DD, new Storage());
+	parseData: function (data, id) {
+		this.DD = new DataDescription(id, new Storage());
         this.DD.parse(data.DD);
 		
 		Array.each(data.FLs, function (iFL) {

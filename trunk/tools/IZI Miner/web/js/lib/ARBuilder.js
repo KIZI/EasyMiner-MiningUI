@@ -33,7 +33,7 @@ var ARBuilder = new Class({
         this.$UIStructurePainter.render();
 
         this.UIListener = new UIListener(this, new UIColorizer());
-        this.UIPainter = new UIPainter(this, this.$config, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementID())), this.$UIStructurePainter);
+        this.UIPainter = new UIPainter(this, this.$config, this.settings, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementID())), this.$UIStructurePainter);
         this.UIListener.setUIPainter(this.UIPainter);
 
         if (this.$config.getIdDm()) {

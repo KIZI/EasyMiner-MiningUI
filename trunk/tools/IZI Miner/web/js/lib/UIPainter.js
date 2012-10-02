@@ -1,7 +1,8 @@
 var UIPainter = new Class({
 	
-	config: null,
     ARBuilder: null,
+	config: null,
+    $settings: null,
 	UIColorizer: null,
 	UIListener: null,
     dateHelper: null,
@@ -23,9 +24,10 @@ var UIPainter = new Class({
 	// dispose element
 	disposeDuration: 750,
 	
-	initialize: function (ARBuilder, config, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator, UIScroller, UIStructurePainter) {
+	initialize: function (ARBuilder, config, settings, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator, UIScroller, UIStructurePainter) {
 		this.ARBuilder = ARBuilder;
         this.config = config;
+        this.$settings = settings;
 		this.rootElement = $(this.config.getRootElementID());
 		this.i18n = i18n;
 		this.UIColorizer = UIColorizer;
@@ -84,8 +86,9 @@ var UIPainter = new Class({
 	
 	renderAttributeByList: function (attribute, elementParent) {
 		if (elementParent) { // insert
-			elementParent.grab(Mooml.render('attributeByListTemplate', {i18n: this.i18n, isUsed: this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute), attribute: attribute}));
-			this.UIListener.registerAttributeEventHandler(attribute);
+            var elementAttribute = Mooml.render('attributeByListTemplate', {i18n: this.i18n, isUsed: this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute), attribute: attribute, showEditAttribute: this.$settings.isAttributeEditAllowed(), showRemoveAttribute: this.$settings.isAttributeDeleteAllowed()});
+			elementParent.grab(elementAttribute);
+			this.UIListener.registerAttributeEventHandler(attribute, this.$settings.isAttributeEditAllowed(), this.$settings.isAttributeDeleteAllowed());
 		} else { // re-render
 			var element = $(attribute.getCSSID());
 			element.set('morph', {duration: this.morphDuration});
