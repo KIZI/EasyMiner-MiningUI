@@ -13,7 +13,7 @@ var UIListener = new Class({
 		this.UIPainter = UIPainter;
 	},
 
-	registerAttributeEventHandler: function (attribute) {
+	registerAttributeEventHandler: function (attribute, showEditAttribute, showRemoveAttribute) {
         // drag & drop
         $(attribute.getCSSID()).addEvent('mousedown', function (event) {
 			event.stop();
@@ -77,17 +77,19 @@ var UIListener = new Class({
 		    
 		}.bind(this));
 
-        // edit
-        $(attribute.getCSSEditID()).addEvent('click', function(event) {
-            event.stop();
-            this.ARBuilder.openEditAttributeWindow(attribute);
-        }.bind(this));
+        if (showEditAttribute) { // edit
+            $(attribute.getCSSEditID()).addEvent('click', function(event) {
+                event.stop();
+                this.ARBuilder.openEditAttributeWindow(attribute);
+            }.bind(this));
+        }
 
-        // remove
-        $(attribute.getCSSRemoveID()).addEvent('click', function(event) {
-            event.stop();
-            this.ARBuilder.removeAttribute(attribute);
-        }.bind(this));
+        if (showRemoveAttribute) { // remove
+            $(attribute.getCSSRemoveID()).addEvent('click', function(event) {
+                event.stop();
+                this.ARBuilder.removeAttribute(attribute);
+            }.bind(this));
+        }
 	},
 
     registerDataFieldEventHandler: function(field) {

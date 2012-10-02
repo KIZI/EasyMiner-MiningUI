@@ -666,7 +666,6 @@ a.edit-attribute {
   visibility: hidden;
   margin-left: 10px;
   float: right;
-  display: none;
 }
 li:hover a.edit-attribute {
   visibility: visible;
@@ -679,7 +678,6 @@ a.remove-attribute {
   visibility: hidden;
   margin-left: 5px;
   float: right;
-  display: none;
 }
 li:hover a.remove-attribute {
   visibility: visible;

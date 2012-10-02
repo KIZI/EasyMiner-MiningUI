@@ -10,6 +10,18 @@ var Settings = new Class({
 	foundRules: {
 		AJAXBalancerLimit: 10,
 		displayLimit: 10
-	}
+	},
+    $attributes: {
+        editAllowed: true,
+        deleteAllowed: true
+    },
+
+    isAttributeEditAllowed: function() {
+        return this.$attributes.editAllowed;
+    },
+
+    isAttributeDeleteAllowed: function() {
+        return this.$attributes.deleteAllowed;
+    }
 
 });

@@ -15,8 +15,10 @@ var UITemplateRegistrator = new Class({
 		Mooml.register('attributeByListTemplate', function (data) {
             var i18n = data.i18n,
 			    attribute = data.attribute,
-			    isUsed = data.isUsed;
-			
+			    isUsed = data.isUsed,
+                showEditAttribute = data.showEditAttribute,
+                showRemoveAttribute = data.showRemoveAttribute;
+
 			var className = '';
 			if (attribute.isRecommended()) {
 				className = 'rec1';
@@ -28,8 +30,9 @@ var UITemplateRegistrator = new Class({
 			
 			li({'class': className},
                 span({id: attribute.getCSSID()}, attribute.getName()),
-                a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}),
-                a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}));
+                showRemoveAttribute ? a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}) : '',
+                showEditAttribute ? a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}) : ''
+            );
 		});
 
         Mooml.register('dataFieldTemplate', function (data) {
