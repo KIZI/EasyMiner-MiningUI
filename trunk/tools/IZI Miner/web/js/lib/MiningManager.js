@@ -10,7 +10,7 @@ var MiningManager = new Class({
     taskId: '',
     requestData: {},
 	finishedStates: ['Solved', 'Interrupted'],
-	reqDelay: 1000,
+	reqDelay: 2500,
 	
 	initialize: function (config, settings, FRManager, dateHelper) {
 		this.config = config;

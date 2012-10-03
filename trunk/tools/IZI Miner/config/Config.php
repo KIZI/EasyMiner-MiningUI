@@ -18,6 +18,14 @@ foreach ($config as $k => $c) {
     is_array($c) ? define($k, serialize($c)) : define($k, $c);
 }
 
+// num curl error requests to be considered as failure
+define('MAX_INITIALIZATION_REQUESTS', 15);
+define('MAX_MINING_REQUESTS', 10);
+define('MAX_ETREE_REQUESTS', 10);
+
+// delay between curl requests
+define('REQUEST_DELAY', 1);
+
 // PHP error reporting
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', 1);

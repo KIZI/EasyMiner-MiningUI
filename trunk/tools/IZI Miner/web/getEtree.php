@@ -37,13 +37,16 @@ if ($id === 'TEST') {
 
     $serializer = new ETreeSerializer($DDPath, FAPath);
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => 'ETreeMiner.Task.Template.PMML');
+    $numRequests = 0;
 
     // save LM task
     $LM_import_path = './temp/etree_task_'.date('md_His').'.pmml';
     file_put_contents($LM_import_path, $requestData['query']);
 
-    // run task
     $encoder = new URLEncoder();
+
+    // run task
+    sendRequest:
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
@@ -55,13 +58,14 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
+    $ok = ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response));
+    if ((++$numRequests < MAX_ETREE_REQUESTS) && !$ok) { sleep(REQUEST_DELAY); goto sendRequest; }
+
     if (FB_ENABLED && $debug) { // log into console
-        FB::info(['curl request' => $requestData]);
-        FB::info(['curl response' => $response]);
-        FB::info(['curl info' => $info]);
+        FB::info(['num requests' => $numRequests, 'curl request' => $requestData, 'curl response' => $response, 'curl info' => $info]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
+    if ($ok) {
         // save LM result
         $LM_export_path = './temp/etree_result_'.date('md_His').'.pmml';
         file_put_contents($LM_export_path, $response);
