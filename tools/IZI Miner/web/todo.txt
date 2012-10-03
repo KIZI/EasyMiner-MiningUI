@@ -3,3 +3,5 @@ TODO
 - probably a hidden FL bug, serializers / parsers are using the same all the time
 - refactor pager, it breaks when 49+ pages i present
   - pager need to be rewritten
+
+- clear rules does not hide task settings and results???

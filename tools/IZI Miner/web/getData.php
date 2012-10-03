@@ -23,9 +23,12 @@ if ($id === 'TEST') {
     $responseContent['status'] = 'ok';
 } else { // KBI
     $requestData = [];
+    $numRequests = 0;
+
+    $encoder = new URLEncoder();
 
     // run export
-    $encoder = new URLEncoder();
+    sendRequest:
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=dataDescription&format=raw&source='.$id);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
@@ -38,12 +41,14 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
+    $ok = ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response));
+    if ((++$numRequests < MAX_INITIALIZATION_REQUESTS) && !$ok) { sleep(REQUEST_DELAY); goto sendRequest; }
+
     if (FB_ENABLED && $debug) { // log into console
-        FB::info(['curl response' => $response]);
-        FB::info(['curl info' => $info]);
+        FB::info(['num requests' => $numRequests, 'curl response' => $response, 'curl info' => $info]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
+    if ($ok) {
         $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
         file_put_contents($DDPath, $response);
 

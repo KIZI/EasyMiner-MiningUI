@@ -39,13 +39,16 @@ if ($id === 'TEST') {
 
     $serializer = new TaskSettingSerializer($DDPath);
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => $debug ? '4ftMiner.Task.Template.PMML' : '4ftMiner.Task.ARD.Template.PMML');
+    $numRequests = 0;
 
     // save LM task
     $taskPath = 'temp/4ft_task_'.date('md_His').'.pmml';
     file_put_contents($taskPath, $requestData['query']);
 
-    // run task
     $encoder = new URLEncoder();
+
+    // run task
+    sendRequest:
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
@@ -54,17 +57,17 @@ if ($id === 'TEST') {
     curl_setopt($ch, CURLOPT_POST, true);
 
     $response = curl_exec($ch);
-    $response = iconv("utf-8", "utf-8//IGNORE", $response);
     $info = curl_getinfo($ch);
     curl_close($ch);
 
+    $ok = ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response));
+    if ((++$numRequests < MAX_MINING_REQUESTS) && !$ok) { sleep(REQUEST_DELAY); goto sendRequest; }
+
     if (FB_ENABLED && $debug) { // log into console
-        FB::info(['curl request' => $requestData]);
-        FB::info(['curl response' => $response]);
-        FB::info(['curl info' => $info]);
+        FB::info(['num requests' => $numRequests, 'curl request' => $requestData, 'curl response' => $response, 'curl info' => $info]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
+    if ($ok) {
         // save LM result
         $resultPath = 'temp/4ft_result_'.date('md_His').'.pmml';
         file_put_contents($resultPath, $response);
