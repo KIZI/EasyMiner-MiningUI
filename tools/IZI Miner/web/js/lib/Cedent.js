@@ -256,18 +256,16 @@ var Cedent = new Class({
 	
 	isValid: function () {
 		var valid = true;
-		Array.each(this.literalRefs, function (literalRef) {
-			if (!literalRef.getType()) {
-				valid = false;
-			}
-		}.bind(this));
-		
-		Array.each(this.childCedents, function (childCedent) {
-			if (!childCedent.isValid()) {
-				valid = false;
-			}
-		}.bind(this));
-		
+        this.$children.each(function(child) {
+            if (instanceOf(child, Cedent)) {
+                if (!child.isValid()) {
+                    valid = false;
+                }
+            } else if (!child.getType()) {
+                valid = false;
+            }
+        });
+
 		return valid;
 	},
 	
