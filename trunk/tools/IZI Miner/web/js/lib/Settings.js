@@ -12,8 +12,8 @@ var Settings = new Class({
 		displayLimit: 10
 	},
     $attributes: {
-        editAllowed: true,
-        deleteAllowed: true
+        editAllowed: false,
+        deleteAllowed: false
     },
 
     isAttributeEditAllowed: function() {

@@ -12,7 +12,7 @@ var DataParser = new Class({
         this.$settings = settings;
         this.$async = async;
 	},
-	
+
 	getData: function (callback, errCallback, bind, delay) {
         var data = JSON.encode({
             debug: this.$settings.getDebug()

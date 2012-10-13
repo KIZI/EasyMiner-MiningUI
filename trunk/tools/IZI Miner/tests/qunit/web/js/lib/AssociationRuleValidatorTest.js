@@ -27,11 +27,11 @@ test('validate - valid', function () {
     var validator = new AssociationRuleValidator(rulePatterns, IMCombinations);
     var rule = new AssociationRule();
     var antecedent = new Cedent(null, 1);
-    antecedent.addChild(new FieldAR());
+    antecedent.addChild(new FieldAR(null, null, 'One category', null, null));
     rule.addAntecedent(antecedent);
     rule.addIM(new InterestMeasureAR());
     var succedent = new Cedent(null, 1);
-    succedent.addChild(new FieldAR());
+    succedent.addChild(new FieldAR(null, null, 'One category', null, null));
     rule.addSuccedent(succedent);
 
     strictEqual(validator.isValid(rule), true);

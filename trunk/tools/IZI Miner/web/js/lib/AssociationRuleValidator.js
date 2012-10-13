@@ -13,7 +13,7 @@ var AssociationRuleValidator = new Class({
 		
 		// antecedent
 		var antecedentNumLiterals = rule.getAntecedent().getNumFields();
-		if (antecedentNumLiterals  < this.rulePatterns.Antecedent.minNumberOfBBAs || antecedentNumLiterals  > this.rulePatterns.Antecedent.maxNumberOfBBAs || !rule.getAntecedent().isValid()) {
+		if (antecedentNumLiterals < this.rulePatterns.Antecedent.minNumberOfBBAs || antecedentNumLiterals > this.rulePatterns.Antecedent.maxNumberOfBBAs || !rule.getAntecedent().isValid()) {
 			valid = false;
 		}
 
@@ -34,14 +34,14 @@ var AssociationRuleValidator = new Class({
 			Object.each(rule.getIMs(), function (IM) {
 				IMs.include(IM.getName());
 			}.bind(this));
-			
+
 			var IMsValid = false;
 			Array.each(this.IMCombinations, function (IMComb) {
 				if (IMs.equalsTo(IMComb)) {
 					IMsValid = true;
 				}
 			}.bind(this));
-			
+
 			valid = valid && IMsValid;
 		} else if (!Object.getLength(rule.getIMs())) {
 			valid = false;
@@ -49,5 +49,5 @@ var AssociationRuleValidator = new Class({
 
 		return valid;
 	}
-	
+
 });

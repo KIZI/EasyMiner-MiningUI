@@ -5,8 +5,9 @@ var UIStructurePainter = new Class({
     $i18n: null,
     $UIStructureListener: null,
     $UIStructureTemplater: null,
+    $elementSizeMeter: null,
 
-    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller) {
+    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller, elementSizeMeter) {
         this.$config = config;
         this.$dateHelper = dateHelper;
         this.$i18n = i18n;
@@ -14,6 +15,7 @@ var UIStructurePainter = new Class({
         this.$UIStructureTemplater = UIStructureTemplater;
         this.$UIStructureTemplater.register();
         this.$UIScroller = UIScroller;
+        this.$elementSizeMeter = elementSizeMeter;
     },
 
     render: function() {
@@ -105,17 +107,21 @@ var UIStructurePainter = new Class({
     },
 
     resizeWindow: function() {
-        var contentWidth = Math.max($$('header')[0].getSize().x + 13, $(window).getSize().x, $('workplace').getSize().x + $('navigation').getSize().x + 40);
-        var contentHeight = Math.max($$('header')[0].getSize().y + $('wrapper').getSize().y + $$('footer')[0].getSize().y + 60, $(window).getSize().y);
-
-        // fix overlay width to 100%
-        $('overlay').setStyle('width', contentWidth);
-
-        // fix overlay height to 100%
-        $('overlay').setStyle('height', contentHeight);
-
         // fix wrapper width to 100%
-        $('wrapper').setStyle('width', contentWidth);
+        var contentWidth = this.$elementSizeMeter.getWidth($('content'));
+        var navigationWidth = this.$elementSizeMeter.getWidth($('navigation'));
+        var wrapperWidth = contentWidth + navigationWidth;
+        if (wrapperWidth > window.getSize().x) {
+            $('wrapper').setStyle('width', wrapperWidth);
+        }
+        else {
+            $('wrapper').removeClass('style');
+        }
+
+        // fix overlay width & height to 100%
+        $('overlay').setStyle('width', wrapperWidth);
+        $('overlay').setStyle('height', window.getScrollSize().y);
+
     },
 
     showLoadData: function() {
