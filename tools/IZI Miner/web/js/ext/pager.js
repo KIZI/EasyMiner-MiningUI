@@ -39,10 +39,8 @@ var Pager = new Class({
     },
     
     reset: function () {
-    	this.label.removeProperty('class');
-    	this.label.addClass('mining-not-started');
-    	this.label.set('text', this.textInit);
-    	
+    	this.setInitialized();
+
     	this.rules = [];
     	this.numPages = 1;
     	this.currentPage = 1;
@@ -51,6 +49,12 @@ var Pager = new Class({
     	this.content.empty();
     	this.paging.empty();
 	},
+
+    setInitialized: function() {
+        this.label.removeProperty('class');
+        this.label.addClass('mining-not-started');
+        this.label.set('text', this.textInit);
+    },
 	
 	setInProgress: function () {
 		this.reset();

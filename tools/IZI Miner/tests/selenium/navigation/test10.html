@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/izi-miner/web/" />
-<title>Edit attribute</title>
+<title>Close add attribute window</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Edit attribute</td></tr>
+<tr><td rowspan="1" colspan="3">Close add attribute window</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -18,24 +18,25 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=#attribute-edit-district</td>
+	<td>css=#field-nav-payments</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#attribute-edit-district</td>
-	<td></td>
+	<td>dragAndDropToObject</td>
+	<td>css=#field-nav-payments</td>
+	<td>css=#attributes</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#edit-attribute-window</td>
+	<td>css=#add-attribute-window</td>
 	<td></td>
 </tr>
 <tr>
 	<td>runScript</td>
-	<td>reload();</td>
+	<td>close();</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

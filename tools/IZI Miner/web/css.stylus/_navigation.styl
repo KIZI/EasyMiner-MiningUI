@@ -1,13 +1,12 @@
 nav
   color color
-  float right
-  width 180px
-  margin-top 30px; margin-right 15px
+  float left
+  width navWidth
+  margin boxMargin boxMargin 0 boxMargin
   line-height 20px
 
 #attributes
     box()
-    width 165px
     margin-bottom 25px
 
   h2
@@ -15,11 +14,11 @@ nav
     margin-bottom 5px
     margin 0 20px 5px
 
-  h2.minimize
-    background transparent url('../images/sprite-icons.png') 88px -212px no-repeat
+  h2.minimize a
+    background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
 
-  h2.maximize
-    background transparent url('../images/sprite-icons.png') 89px -161px no-repeat
+  h2.maximize a
+    background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
 
   ul#attributes-by-group
     background transparent url('../images/icon-group4.png') 0 2px no-repeat
@@ -81,7 +80,6 @@ nav
 
 #data-fields
     box()
-    width 165px
     padding-bottom 20px
     margin-bottom 25px
 
@@ -89,11 +87,11 @@ nav
     h2()
     margin 0 20px 5px
 
-  h2.minimize
-    h2Minimize()
+  h2.minimize a
+    background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
 
-  h2.maximize
-    h2Maximize()
+  h2.maximize a
+    background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
 
   h2 a
     display block; width 12px; height 12px

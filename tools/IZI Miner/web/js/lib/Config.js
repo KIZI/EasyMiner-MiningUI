@@ -23,7 +23,7 @@ var Config = new Class({
     $stopMiningUrl: 'stopMining.php',
 		
 	// root element
-	rootElementID: 'ARBuilder',
+	rootElementID: 'IZIMiner',
 	
 	initialize: function () {},
 

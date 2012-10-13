@@ -28,7 +28,7 @@ var ARBuilder = new Class({
 
         // Paint application structure
         this.$UIStructureListener = new UIStructureListener(this);
-        this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())));
+        this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())), new ElementSizeMeter());
         this.$UIStructureListener.setUIStructurePainter(this.$UIStructurePainter);
         this.$UIStructurePainter.render();
 
@@ -51,7 +51,7 @@ var ARBuilder = new Class({
 
     reloadData: function() {
         this.handleLoadData();
-        this.dataParser = new DataParser(this.$config, true);
+        this.dataParser = new DataParser(this.$config, this.settings, true);
         this.dataParser.getData(this.repaintData, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
     },
 

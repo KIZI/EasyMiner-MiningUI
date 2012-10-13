@@ -195,6 +195,7 @@ var FRManager = new Class({
         this.pager.reset();
 		this.maxIndex = 0;
         this.UIPainter.renderActiveRule();
+        this.UIPainter.hideDownloadButtons();
 	},
 	
 	/* found rules */

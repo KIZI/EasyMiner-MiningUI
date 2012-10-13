@@ -2,7 +2,10 @@
 @import url(http://fonts.googleapis.com/css?family=Average&subset=latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Droid\+Sans:400,700);
 
-contentWidth = 1000px
+minContentWidth = 1100px
+navWidth = 190px
+
+boxMargin = 30px
 
 color = #434343
 linkColor = #126499
@@ -43,21 +46,23 @@ body
   font-family font
   overflow-y scroll
 
+footer
+  width minContentWidth + navWidth + 3*boxMargin
+
 #wrapper
   background transparent url('../images/bg-body.jpg') center -10px repeat
-  min-height 500px
+  min-height 500px; min-width minContentWidth + navWidth + 4.5*boxMargin
 
 section#workplace
-  min-width contentWidth
-  margin 0 auto; padding-bottom 30px
+  margin 0 auto; padding-bottom boxMargin
   float left
 
 section#content
   box()
-  min-width contentWidth
+  min-width minContentWidth
   float left
-  margin-top 30px
-  padding-left 30px
+  margin boxMargin 0 0 boxMargin
+  padding-left boxMargin
 
   h2
     h2AR()
