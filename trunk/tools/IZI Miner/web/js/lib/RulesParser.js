@@ -18,7 +18,11 @@ var RulesParser = new Class({
 			this.FL = FL;
 		}.bind(this));
 	},
-	
+
+    setDD: function(DD) {
+        this.DD = DD;
+    },
+
 	parse: function (data) {
 		var rules = [];
 		Array.each(data, function (iRule) {

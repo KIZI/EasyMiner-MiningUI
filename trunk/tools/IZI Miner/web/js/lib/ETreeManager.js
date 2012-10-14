@@ -14,6 +14,10 @@ var ETreeManager = new Class({
 		this.DD = DD;
         this.UIPainter = UIPainter;
 	},
+
+    setDD: function(DD) {
+        this.DD = DD;
+    },
 	
 	setARManager: function (ARManager) {
 		this.ARManager = ARManager;

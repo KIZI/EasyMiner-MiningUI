@@ -5,6 +5,7 @@ var ARBuilder = new Class({
 	$config: null,
 	settings: null,
 	dataParser: null,
+    $rulesParser: null,
 	$FRManager: null,
 	$miningManager: null,
 	$ETreeManager: null,
@@ -60,6 +61,10 @@ var ARBuilder = new Class({
         this.FLs = this.dataParser.getFLs();
         this.$FGC = this.dataParser.getFGC();
 
+        this.$rulesParser.setDD(this.$DD);
+        this.$ETreeManager.setDD(this.$DD);
+        this.$ARManager.setDD(this.$DD);
+
         this.reset();
         this.$UIStructurePainter.hideOverlay();
     },
@@ -79,7 +84,8 @@ var ARBuilder = new Class({
         this.FLs = this.dataParser.getFLs();
         this.$FGC = this.dataParser.getFGC();
 
-        this.$FRManager = new FRManager(this.$config, new RulesParser(this, this.$DD, this.getDefFL()), this.settings, this.UIPainter, this.UIListener, this.$i18n);
+        this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
+        this.$FRManager = new FRManager(this.$config, this.$rulesParser, this.settings, this.UIPainter, this.UIListener, this.$i18n);
         this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper());
         this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);
         this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
@@ -122,6 +128,7 @@ var ARBuilder = new Class({
         this.$UIStructurePainter.renderNewTaskWindow();
     },
 
+    // TODO hide settings when no data loaded - errorception.com bug http://errorception.com/projects/506ac563d3f654c85c000d91/errors/507aaa88340af6684b1a01a0
 	openSettingsWindow: function () {
 		this.$UIStructurePainter.renderSettingsWindow(this.FLs, this.getDefFL(), this.getDefFL().getAutoSuggest(), false, this.settings);
 	},
