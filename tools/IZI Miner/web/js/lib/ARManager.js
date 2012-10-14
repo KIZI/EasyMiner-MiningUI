@@ -36,6 +36,10 @@ var ARManager = new Class({
 		}.bind(this));
 	},
 
+    setDD: function(DD) {
+        this.DD = DD;
+    },
+
 	initBlankAR: function () {
 		this.maxCedentID = 0;
 		this.maxFieldID = 0;
