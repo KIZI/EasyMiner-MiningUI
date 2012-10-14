@@ -2,7 +2,7 @@ var Settings = new Class({
 
     GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled'],
 
-	$rulesCnt: 1000,
+	$rulesCnt: 500,
     $caching: false,
     $debug: false,
 	$BKAutoSearch: false,
