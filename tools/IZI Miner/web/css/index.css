@@ -962,6 +962,7 @@ section#active-rule #action-box {
   padding-top: 5px;
 }
 #paging .pager-actuator,
+#paging .pager-actuator-empty,
 #paging .pager-prev,
 #paging .pager-next {
   color: #c0c0c0;
