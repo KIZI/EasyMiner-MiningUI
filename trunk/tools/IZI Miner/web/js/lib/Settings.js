@@ -13,7 +13,7 @@ var Settings = new Class({
 	},
     $attributes: {
         editAllowed: false,
-        deleteAllowed: false
+        deleteAllowed: true
     },
 
     isAttributeEditAllowed: function() {
