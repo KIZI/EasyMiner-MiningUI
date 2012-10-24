@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<?oxygen SCHSchema="http://sewebar.vse.cz/schemas/GUHARestr0_1.sch"?>
+<PMML version="4.0" xmlns="http://www.dmg.org/PMML-4_0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:pmml="http://www.dmg.org/PMML-4_0"
+    xsi:schemaLocation="http://www.dmg.org/PMML-4_0 http://sewebar.vse.cz/schemas/PMML4.0+GUHA0.1.xsd"
+>
+
+<!-- 4ftMiner.Task.ARD.PMML.Template, for version see below -->
+
+  <Header copyright="Copyright (c) KIZI UEP">
+    <Extension name="metabase" value="LMM-VaeEg0LLck6IEb_NFhYKCg"/>
+    <Extension name="dataset" value="Loans"/>
+    <Extension name="author" value="PowerUser"/>
+    <Extension name="subsystem" value="LM Sewebar Exporter"/>
+    <Extension name="module" value="LMSwbExporter.exe"/>
+    <Extension name="format" value="4ftMiner.Task"/>    
+    <Extension name="version" value="2012-05-09"/>
+    <Extension name="taskState" value="Solved"/>
+    <Application name="LISp-Miner" version="20.03.01 of 29 Sep 2012"/>
+    <Annotation>-</Annotation>
+    <Timestamp>8.10.2012 13:50:31</Timestamp>
+    
+  </Header>
+
+<!-- DataDictionary is here only formally for validity reasons-->
+
+<DataDictionary>
+<DataField optype="categorical" name="dummy" dataType="string"/>
+</DataDictionary>
+
+<!-- Task -->
+
+  <guha:AssociationModel  xmlns="" xsi:schemaLocation="http://keg.vse.cz/ns/GUHA0.1rev1 http://sewebar.vse.cz/schemas/GUHA0.1rev1.xsd"
+        xmlns:guha="http://keg.vse.cz/ns/GUHA0.1rev1"
+        modelName="95ec10ed9863170fef18ba131b0244591e7de3c2" 
+        functionName="associationRules" 
+        algorithmName="4ft" 
+        numberOfTransactions="6181" 
+        numberOfCategories="82" 
+        numberOfRules="2"
+  >
+
+    <!-- Include Template: 4ftMiner.TaskSetting.Include.Template -->
+    <!-- Version: 2012-01-04 -->
+
+    <TaskSetting>
+      <Extension name="LISp-Miner">
+        <TaskGroup>Default task-group</TaskGroup>
+        <TaskState>Solved</TaskState>
+        <NumberOfVerifications>2</NumberOfVerifications>
+        <TaskStartTime>8.10.2012 13:50:31</TaskStartTime>
+        <TaskDuration>0h 0m 0s</TaskDuration>
+        <FTMissingsType>Delete</FTMissingsType>
+        <FTTaskParamProlong100AFlag>Yes</FTTaskParamProlong100AFlag>
+        <FTTaskParamProlong100SFlag>Yes</FTTaskParamProlong100SFlag>
+        <FTTaskParamPrimeCheckMinLen>Yes</FTTaskParamPrimeCheckMinLen>
+        <FTTaskParamPrimeCheck>No</FTTaskParamPrimeCheck>
+        <FTTaskParamIncludeSymetricFlag>Yes</FTTaskParamIncludeSymetricFlag>
+        <HypothesesCountMax>250</HypothesesCountMax>
+        <TaskNotice>-</TaskNotice>
+      </Extension>
+
+      <!-- Include Template: Task.FTCedentD.Include.Template -->
+      <!-- Version: 2012-01-04 -->
+
+      <BBASettings>
+        <BBASetting 
+           id="Basic_FTLiteralD_159">         
+          <Name>District( Praha)</Name>
+          <FieldRef>District</FieldRef>
+          <Coefficient>
+            <Type>One category</Type>
+            <Category>Praha</Category>
+          </Coefficient>
+        </BBASetting>
+        <BBASetting 
+           id="Basic_FTLiteralD_161">         
+          <Name>Quality( good)</Name>
+          <FieldRef>Quality</FieldRef>
+          <Coefficient>
+            <Type>One category</Type>
+            <Category>good</Category>
+          </Coefficient>
+        </BBASetting>
+        <BBASetting 
+           id="Basic_FTLiteralD_160">         
+          <Name>Salary (rcut), 1 - 2</Name>
+          <FieldRef>Salary</FieldRef>
+          <Coefficient>
+            <Type>Right cut</Type>
+            <MinimalLength>1</MinimalLength>
+            <MaximalLength>2</MaximalLength>
+          </Coefficient>
+        </BBASetting>
+      </BBASettings>
+
+      <DBASettings>
+
+        <DBASetting id="Derived_FTLiteralD_Sign_159" 
+          type="Literal"
+        >
+          <Name>District( Praha)</Name>
+          <BASettingRef>Basic_FTLiteralD_159</BASettingRef>
+          <LiteralSign>Negative</LiteralSign>
+          <LiteralType>Basic</LiteralType>
+          <EquivalenceClass>NULL</EquivalenceClass>           
+        </DBASetting>
+        <DBASetting id="Derived_FTLiteralD_Sign_161" 
+          type="Literal"
+        >
+          <Name>Quality( good)</Name>
+          <BASettingRef>Basic_FTLiteralD_161</BASettingRef>
+          <LiteralSign>Positive</LiteralSign>
+          <LiteralType>Basic</LiteralType>
+          <EquivalenceClass>NULL</EquivalenceClass>           
+        </DBASetting>
+        <DBASetting id="Derived_FTLiteralD_Sign_160" 
+          type="Literal"
+        >
+          <Name>Salary (rcut), 1 - 2</Name>
+          <BASettingRef>Basic_FTLiteralD_160</BASettingRef>
+          <LiteralSign>Positive</LiteralSign>
+          <LiteralType>Basic</LiteralType>
+          <EquivalenceClass>NULL</EquivalenceClass>           
+        </DBASetting>
+        <DBASetting id="Derived_FTCedentD_299"
+          type="Conjunction"
+        >
+          <Name></Name>
+          <BASettingRef>Derived_FTLiteralD_Sign_159</BASettingRef>
+          <MinimalLength>1</MinimalLength>
+          <MaximalLength>99</MaximalLength>
+        </DBASetting>
+        <DBASetting id="Derived_FTCedentD_301"
+          type="Conjunction"
+        >
+          <Name></Name>
+          <BASettingRef>Derived_FTLiteralD_Sign_161</BASettingRef>
+          <MinimalLength>1</MinimalLength>
+          <MaximalLength>99</MaximalLength>
+        </DBASetting>
+        <DBASetting id="Derived_FTCedentD_300"
+          type="Conjunction"
+        >
+          <Name></Name>
+          <BASettingRef>Derived_FTLiteralD_Sign_160</BASettingRef>
+          <MinimalLength>1</MinimalLength>
+          <MaximalLength>99</MaximalLength>
+        </DBASetting>
+        <DBASetting id="Derived_FTCedentBagD_259" 
+          type="Conjunction"
+        >
+          <Name>Antecedent</Name>
+          <BASettingRef>Derived_FTCedentD_299</BASettingRef>
+          <BASettingRef>Derived_FTCedentD_300</BASettingRef>
+          <MinimalLength>1</MinimalLength>
+          <MaximalLength>99</MaximalLength>
+        </DBASetting>
+        <DBASetting id="Derived_FTCedentBagD_260" 
+          type="Conjunction"
+        >
+          <Name>Succedent</Name>
+          <BASettingRef>Derived_FTCedentD_301</BASettingRef>
+          <MinimalLength>1</MinimalLength>
+          <MaximalLength>99</MaximalLength>
+        </DBASetting>
+      </DBASettings>
+
+      <AntecedentSetting>Derived_FTCedentBagD_259</AntecedentSetting>
+      <ConsequentSetting>Derived_FTCedentBagD_260</ConsequentSetting>
+      <InterestMeasureSetting>
+        <InterestMeasureThreshold id="68">
+          <Extension name="LongName">Founded Implication</Extension>
+          <Extension name="Description">a/(a+b) &gt;= p ... at least 100*p [%] of objects satisfying A satisfy also S</Extension>
+          <Extension name="Order">0</Extension>
+          <InterestMeasure>FUI</InterestMeasure>
+          <CompareType>Greater than or equal</CompareType>
+          <Threshold type="Abs">0.700000</Threshold>
+        </InterestMeasureThreshold>    
+      </InterestMeasureSetting>
+
+    </TaskSetting>
+
+  <!-- MiningSchema -->
+
+    <pmml:MiningSchema>
+      <pmml:MiningField name="District"/>
+      <pmml:MiningField name="Salary"/>
+      <pmml:MiningField name="status"/>
+    </pmml:MiningSchema>
+
+    <AssociationRules>
+
+      <!-- Include Template: Task.FTCedentI.Include.Template -->
+      <!-- Version: 2012-02-06 -->
+      <!-- Item: LiteralI -->  
+      <BBA id="BBA_FTLiteralI_64576" literal="false">
+        <Text>&#172;District(Praha)</Text>
+        <FieldRef>District</FieldRef>
+        <CatRef>Praha</CatRef>
+      </BBA>
+      <BBA id="BBA_FTLiteralI_64577" literal="false">
+        <Text>Salary(high)</Text>
+        <FieldRef>Salary</FieldRef>
+        <CatRef>high</CatRef>
+      </BBA>
+      <BBA id="BBA_FTLiteralI_64578" literal="false">
+        <Text>Quality(good)</Text>
+        <FieldRef>Quality</FieldRef>
+        <CatRef>good</CatRef>
+      </BBA>
+      <BBA id="BBA_FTLiteralI_64579" literal="false">
+        <Text>&#172;District(Praha)</Text>
+        <FieldRef>District</FieldRef>
+        <CatRef>Praha</CatRef>
+      </BBA>
+      <BBA id="BBA_FTLiteralI_64580" literal="false">
+        <Text>Salary(avg, high)</Text>
+        <FieldRef>Salary</FieldRef>
+        <CatRef>avg</CatRef>
+        <CatRef>high</CatRef>
+      </BBA>
+      <BBA id="BBA_FTLiteralI_64581" literal="false">
+        <Text>Quality(good)</Text>
+        <FieldRef>Quality</FieldRef>
+        <CatRef>good</CatRef>
+      </BBA>
+      <!-- DBA: Sign (Gace) -->  
+      <DBA id="DBA_FTLiteralI_Sign_64576" connective="Negation" literal="true">
+        <Text>&#172;District(Praha)</Text>
+        <BARef>BBA_FTLiteralI_64576</BARef>
+      </DBA>
+      <DBA id="DBA_FTLiteralI_Sign_64577" connective="Conjunction" literal="true">
+        <Text>Salary(high)</Text>
+        <BARef>BBA_FTLiteralI_64577</BARef>
+      </DBA>
+      <DBA id="DBA_FTLiteralI_Sign_64578" connective="Conjunction" literal="true">
+        <Text>Quality(good)</Text>
+        <BARef>BBA_FTLiteralI_64578</BARef>
+      </DBA>
+      <DBA id="DBA_FTLiteralI_Sign_64579" connective="Negation" literal="true">
+        <Text>&#172;District(Praha)</Text>
+        <BARef>BBA_FTLiteralI_64579</BARef>
+      </DBA>
+      <DBA id="DBA_FTLiteralI_Sign_64580" connective="Conjunction" literal="true">
+        <Text>Salary(avg, high)</Text>
+        <BARef>BBA_FTLiteralI_64580</BARef>
+      </DBA>
+      <DBA id="DBA_FTLiteralI_Sign_64581" connective="Conjunction" literal="true">
+        <Text>Quality(good)</Text>
+        <BARef>BBA_FTLiteralI_64581</BARef>
+      </DBA>
+      <!-- DBA: CedentI -->  
+      <DBA id="DBA_FTCedentI_54590" connective="Conjunction">
+        <Text>&#172;District(Praha)</Text>
+        <BARef>DBA_FTLiteralI_Sign_64576</BARef>
+      </DBA>
+      <DBA id="DBA_FTCedentI_54591" connective="Conjunction">
+        <Text>Salary(high)</Text>
+        <BARef>DBA_FTLiteralI_Sign_64577</BARef>
+      </DBA>
+      <DBA id="DBA_FTCedentI_54592" connective="Conjunction">
+        <Text>Quality(good)</Text>
+        <BARef>DBA_FTLiteralI_Sign_64578</BARef>
+      </DBA>
+      <DBA id="DBA_FTCedentI_54593" connective="Conjunction">
+        <Text>&#172;District(Praha)</Text>
+        <BARef>DBA_FTLiteralI_Sign_64579</BARef>
+      </DBA>
+      <DBA id="DBA_FTCedentI_54594" connective="Conjunction">
+        <Text>Salary(avg, high)</Text>
+        <BARef>DBA_FTLiteralI_Sign_64580</BARef>
+      </DBA>
+      <DBA id="DBA_FTCedentI_54595" connective="Conjunction">
+        <Text>Quality(good)</Text>
+        <BARef>DBA_FTLiteralI_Sign_64581</BARef>
+      </DBA>
+      <!-- DBA: CedentBag -->  
+        <DBA id="DBA_Antecedent_18409" connective="Conjunction">
+          <Text>&#172;District(Praha) &amp; Salary(high)</Text>
+          <BARef>DBA_FTCedentI_54590</BARef>
+          <BARef>DBA_FTCedentI_54591</BARef>
+        </DBA>
+        <DBA id="DBA_Succedent_18409" connective="Conjunction">
+          <Text>Quality(good)</Text>
+          <BARef>DBA_FTCedentI_54592</BARef>
+        </DBA>
+        <DBA id="DBA_Antecedent_18410" connective="Conjunction">
+          <Text>&#172;District(Praha) &amp; Salary(avg, high)</Text>
+          <BARef>DBA_FTCedentI_54593</BARef>
+          <BARef>DBA_FTCedentI_54594</BARef>
+        </DBA>
+        <DBA id="DBA_Succedent_18410" connective="Conjunction">
+          <Text>Quality(good)</Text>
+          <BARef>DBA_FTCedentI_54595</BARef>
+        </DBA>
+
+    <!-- Include Template: 4ftMiner.Task.Hypothesis.Include.Template -->
+    <!-- Version: 2012-07-09 -->
+
+    <!-- Hypothesis -->
+
+      <AssociationRule id="18409"
+        antecedent="DBA_Antecedent_18409"
+        consequent="DBA_Succedent_18409"
+      >
+        <Text>&#172;District(Praha) &amp; Salary(high) &gt;:&lt; Quality(good)</Text>
+  
+        <IMValue imSettingRef="68" name="FUI" type="Abs">0.8630136986</IMValue>
+        <IMValue name="a">1197</IMValue>
+        <IMValue name="b">190</IMValue>
+        <IMValue name="c">4257</IMValue>
+        <IMValue name="d">537</IMValue>
+        <IMValue name="r">1387</IMValue>
+        <IMValue name="n">6181</IMValue>
+        <IMValue name="Conf">0.8630136986</IMValue>
+        <IMValue name="DConf">0.2120836286</IMValue>
+        <IMValue name="EConf">0.2805371299</IMValue>
+        <IMValue name="Supp">0.1936579841</IMValue>
+        <IMValue name="Cmplt">0.2194719472</IMValue>
+        <IMValue name="AvgDf">-0.0219494552</IMValue>
+        <IMValue name="LBound">0.9999951872</IMValue>
+        <IMValue name="UBound">0.0000069995</IMValue>
+        <IMValue name="ELBound">1</IMValue>
+        <IMValue name="EUBound">0</IMValue>
+        <IMValue name="DLBound">1</IMValue>
+        <IMValue name="DUBound">0</IMValue>
+        <IMValue name="Fisher">0.9946891077</IMValue>
+        <IMValue name="Chi-Sq">6.4634648145</IMValue>
+        <IMValue name="bMean">0.8624910007</IMValue>
+        <IMValue name="bVAR">0.8624910007</IMValue>
+        <IMValue name="bStDev">0.0092370958</IMValue>
+        <IMValue name="P(&gt;=90%)">0.000005175</IMValue>
+        <IMValue name="P(&gt;=95%)">0</IMValue>
+        <FourFtTable a="1197" b="190" c="4257" d="537"/>
+       </AssociationRule>
+      <AssociationRule id="18410"
+        antecedent="DBA_Antecedent_18410"
+        consequent="DBA_Succedent_18410"
+      >
+        <Text>&#172;District(Praha) &amp; Salary(avg, high) &gt;:&lt; Quality(good)</Text>
+  
+        <IMValue imSettingRef="68" name="FUI" type="Abs">0.8839520608</IMValue>
+        <IMValue name="a">3024</IMValue>
+        <IMValue name="b">397</IMValue>
+        <IMValue name="c">2430</IMValue>
+        <IMValue name="d">330</IMValue>
+        <IMValue name="r">3421</IMValue>
+        <IMValue name="n">6181</IMValue>
+        <IMValue name="Conf">0.8839520608</IMValue>
+        <IMValue name="DConf">0.5168347291</IMValue>
+        <IMValue name="EConf">0.5426306423</IMValue>
+        <IMValue name="Supp">0.4892412231</IMValue>
+        <IMValue name="Cmplt">0.5544554455</IMValue>
+        <IMValue name="AvgDf">0.0017799208</IMValue>
+        <IMValue name="LBound">0.9990118166</IMValue>
+        <IMValue name="UBound">0.0011859116</IMValue>
+        <IMValue name="ELBound">1</IMValue>
+        <IMValue name="EUBound">0</IMValue>
+        <IMValue name="DLBound">1</IMValue>
+        <IMValue name="DUBound">0</IMValue>
+        <IMValue name="Fisher">0.3490448769</IMValue>
+        <IMValue name="Chi-Sq">0.1820894542</IMValue>
+        <IMValue name="bMean">0.8837277242</IMValue>
+        <IMValue name="bVAR">0.8837277242</IMValue>
+        <IMValue name="bStDev">0.0054781062</IMValue>
+        <IMValue name="P(&gt;=90%)">0.0010422121</IMValue>
+        <IMValue name="P(&gt;=95%)">0</IMValue>
+        <FourFtTable a="3024" b="397" c="2430" d="330"/>
+       </AssociationRule>
+    </AssociationRules>
+  </guha:AssociationModel>
+</PMML>

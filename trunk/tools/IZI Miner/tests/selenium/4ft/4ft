@@ -8,15 +8,12 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="test2.html">District (Praha) => Quality (good) [FUI: 0.90]</a></td></tr>
-<tr><td><a href="test3.html">District (Subset 1-1) => Quality (good) [CHI: 0.05]</a></td></tr>
 <tr><td><a href="test8.html">Ask BK manually</a></td></tr>
-<tr><td><a href="test10.html">Mark rule</a></td></tr>
-<tr><td><a href="test9.html">Clear rule</a></td></tr>
-<tr><td><a href="test11.html">Clear rules</a></td></tr>
-<tr><td><a href="test13.html">Clear marked rule</a></td></tr>
 <tr><td><a href="test14.html">Ask BK automatically</a></td></tr>
-<tr><td><a href="test23.html">Ask BK - autofilter on.</a></td></tr>
+<tr><td><a href="test10.html">Mark found rule</a></td></tr>
+<tr><td><a href="test9.html">Clear found rule</a></td></tr>
+<tr><td><a href="test11.html">Clear found rules</a></td></tr>
+<tr><td><a href="test13.html">Clear marked rule</a></td></tr>
 <tr><td><a href="test24.html">Mining indicator - not started.</a></td></tr>
 <tr><td><a href="test25.html">Mining indicator - in progress.</a></td></tr>
 <tr><td><a href="test48.html">Mining indicator - found rules.</a></td></tr>
