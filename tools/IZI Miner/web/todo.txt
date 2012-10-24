@@ -8,3 +8,10 @@ Standa
   - nevalidní dokument
   - chyba
   - reload
+
+TypeError: elementSelect is null
+[Break On This Error]
+
+var IMName = elementSelect.options[elementSelect.selectedIndex].value;
+
+UIListener.js (line 272)

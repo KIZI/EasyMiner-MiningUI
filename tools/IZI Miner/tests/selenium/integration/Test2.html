@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Serialize - ETree</title>
+<link rel="selenium.base" href="http://localhost/izi-miner/web/" />
+<title>Test2</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Serialize - ETree</td></tr>
+<tr><td rowspan="1" colspan="3">Test2</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -22,18 +23,38 @@
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
+	<td>css=#attribute-nav-age</td>
+	<td>css=#antecedent .cedent</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#add-coefficient-select</td>
+	<td>value=Interval</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-coefficient-maxlength</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>dragAndDropToObject</td>
 	<td>css=#attribute-nav-district</td>
 	<td>css=#antecedent .cedent</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>css=#add-coefficient-select</td>
-	<td>value=One category</td>
+	<td>value=Subset</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>css=#add-coefficient-category</td>
-	<td>value=Praha</td>
+	<td>type</td>
+	<td>css=#add-coefficient-maxlength</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -53,7 +74,27 @@
 <tr>
 	<td>type</td>
 	<td>css=#add-im-threshold-value</td>
-	<td>0.5</td>
+	<td>0.95</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-im</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#add-im-select</td>
+	<td>value=SUPP</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-im-threshold-value</td>
+	<td>0.01</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -81,13 +122,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>css=#im-fui .threshold</td>
-	<td>0.5*</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>css=.found-rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#stop-mining</td>
 	<td></td>
 </tr>
 </tbody></table>

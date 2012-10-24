@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Test5</title>
+<link rel="selenium.base" href="http://localhost/izi-miner/web/" />
+<title>Test7</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test5</td></tr>
+<tr><td rowspan="1" colspan="3">Test7</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -28,16 +29,16 @@
 <tr>
 	<td>select</td>
 	<td>css=#add-coefficient-select</td>
-	<td>value=Left cut</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>css=#add-coefficient-maxlength</td>
-	<td>3</td>
+	<td>value=Subset</td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=#loading-data</td>
 	<td></td>
 </tr>
 <tr>
@@ -56,21 +57,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>dragAndDropToObject</td>
-	<td>css=#attribute-nav-salary</td>
-	<td>css=#antecedent .cedent</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>css=#add-coefficient-select</td>
-	<td>value=Subset</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>id=add-im</td>
 	<td></td>
@@ -78,12 +64,12 @@
 <tr>
 	<td>select</td>
 	<td>css=#add-im-select</td>
-	<td>value=FUI</td>
+	<td>value=FUE</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>css=#add-im-threshold-value</td>
-	<td>0.7</td>
+	<td>0.6</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -98,32 +84,12 @@
 <tr>
 	<td>select</td>
 	<td>css=#add-im-select</td>
-	<td>value=FSH</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>css=#add-im-alpha-value</td>
-	<td>0.005</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input[type=&quot;submit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=add-im</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>css=#add-im-select</td>
-	<td>value=SUPP</td>
+	<td>value=LCE</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>css=#add-im-threshold-value</td>
-	<td>0.01</td>
+	<td>0.6</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -138,12 +104,12 @@
 <tr>
 	<td>select</td>
 	<td>css=#add-im-select</td>
-	<td>value=CHI</td>
+	<td>value=UCE</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>css=#add-im-alpha-value</td>
-	<td>0.005</td>
+	<td>css=#add-im-threshold-value</td>
+	<td>0.6</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -173,6 +139,11 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=.found-rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#stop-mining</td>
 	<td></td>
 </tr>
 </tbody></table>

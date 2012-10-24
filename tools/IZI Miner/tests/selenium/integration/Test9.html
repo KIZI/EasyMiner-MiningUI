@@ -3,13 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Test1</title>
+<link rel="selenium.base" href="http://localhost/izi-miner/web/" />
+<title>Test5</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test1</td></tr>
+<tr><td rowspan="1" colspan="3">Test5</td></tr>
 </thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>?id_dm=102</td>
@@ -22,7 +28,27 @@
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
-	<td>css=#attribute-nav-age</td>
+	<td>css=#attribute-nav-district</td>
+	<td>css=#antecedent .cedent</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#add-coefficient-select</td>
+	<td>value=Subset</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-coefficient-maxlength</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>dragAndDropToObject</td>
+	<td>css=#attribute-nav-amount</td>
 	<td>css=#antecedent .cedent</td>
 </tr>
 <tr>
@@ -37,13 +63,18 @@
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
-	<td>css=#attribute-nav-district</td>
+	<td>css=#attribute-nav-salary</td>
 	<td>css=#antecedent .cedent</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>css=#add-coefficient-select</td>
-	<td>value=Subset</td>
+	<td>value=Right cut</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-coefficient-maxlength</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -63,7 +94,27 @@
 <tr>
 	<td>type</td>
 	<td>css=#add-im-threshold-value</td>
-	<td>0.95</td>
+	<td>0.7</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-im</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#add-im-select</td>
+	<td>value=SUPP</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#add-im-threshold-value</td>
+	<td>0.05</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -86,6 +137,36 @@
 	<td></td>
 </tr>
 <tr>
+	<td>dragAndDropToObject</td>
+	<td>css=#attribute-nav-sex</td>
+	<td>css=#succedent .cedent</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#add-coefficient-select</td>
+	<td>value=Subset</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#connective-1 a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#edit-connective-select</td>
+	<td>Disjunction</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>css=#mine-rules-confirm</td>
 	<td></td>
@@ -93,6 +174,11 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=.found-rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#stop-mining</td>
 	<td></td>
 </tr>
 </tbody></table>
