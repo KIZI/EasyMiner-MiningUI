@@ -4,7 +4,7 @@ var Settings = new Class({
 
 	$rulesCnt: 1000,
     $caching: false,
-    $debug: false,
+    $debug: true,
 	$BKAutoSearch: false,
 	$recEnabled: true,
 	foundRules: {
