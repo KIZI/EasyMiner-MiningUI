@@ -15,9 +15,12 @@ var UIStructureTemplater = new Class({
 
         Mooml.register('headerTemplate', function (data) {
             var i18n = data.i18n,
-                config = data.config;
+                config = data.config,
+                browserDetector = data.browserDetector;
 
-            header(div({id: 'settings'},
+            header(
+                browserDetector.isDeprecated() ? div({id: 'browser-warning'}, i18n.translate('WARNING: You are using an old and deprecated version of web browser') + ' (' + browserDetector.getFullName() + '). ' + i18n.translate('Please upgrade to enjoy this application!')) : '',
+                div({id: 'settings'},
                 a({href: '#', id: 'new-task'}, i18n.translate('New task')),
                 a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),
                 a({href: '#', id: 'settings-open'}, i18n.translate('Settings'))),

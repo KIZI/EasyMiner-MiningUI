@@ -75,7 +75,9 @@ var i18n = new Class({
                70: {'cs': 'Některé výsledky úloh jsou uloženy v cache a příště mohou být vráceny mnohem rychleji.', 'en': 'Some mining results are automatically cached so that they are retrieved much faster next time.'},
                71: {'cs': 'Aplikace v debug módu zobrazuje a loguje více informací.', 'en': 'Application shows and logs more information in debug mode.'},
                72: {'cs': 'Debug mód', 'en': 'Debug mode'},
-               73: {'cs': 'Podpora', 'en': 'Support'}},
+               73: {'cs': 'Podpora', 'en': 'Support'},
+               74: {'cs': 'VAROVÁNÍ: Používáte zastaralý webový prohlížeč.', 'en': 'WARNING: You are using an old and deprecated version of web browser'},
+               75: {'cs': 'Upgradujte na moderní verzi, abyste mohli používat tuto aplikaci.', 'en': 'Please upgrade to enjoy this application!'}},
 
 	initialize: function (lang) {
 		this.lang = lang;

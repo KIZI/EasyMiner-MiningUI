@@ -29,7 +29,7 @@ var ARBuilder = new Class({
 
         // Paint application structure
         this.$UIStructureListener = new UIStructureListener(this);
-        this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())), new ElementSizeMeter());
+        this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())), new ElementSizeMeter(), new BrowserDetector());
         this.$UIStructureListener.setUIStructurePainter(this.$UIStructurePainter);
         this.$UIStructurePainter.render();
 

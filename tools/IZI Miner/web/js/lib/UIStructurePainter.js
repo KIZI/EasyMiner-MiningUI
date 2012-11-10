@@ -6,8 +6,9 @@ var UIStructurePainter = new Class({
     $UIStructureListener: null,
     $UIStructureTemplater: null,
     $elementSizeMeter: null,
+    $browserDetector: null,
 
-    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller, elementSizeMeter) {
+    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller, elementSizeMeter, browserDetector) {
         this.$config = config;
         this.$dateHelper = dateHelper;
         this.$i18n = i18n;
@@ -16,11 +17,12 @@ var UIStructurePainter = new Class({
         this.$UIStructureTemplater.register();
         this.$UIScroller = UIScroller;
         this.$elementSizeMeter = elementSizeMeter;
+        this.$browserDetector = browserDetector;
     },
 
     render: function() {
         $(this.$config.getRootElementID()).grab(Mooml.render('overlayTemplate'));
-        $(this.$config.getRootElementID()).grab(Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n}));
+        $(this.$config.getRootElementID()).grab(Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector}));
         $(this.$config.getRootElementID()).grab(Mooml.render('mainTemplate', {i18n: this.$i18n}));
         $(this.$config.getRootElementID()).grab(Mooml.render('footerTemplate', {config: this.$config, i18n: this.$i18n, dateHelper: this.$dateHelper}));
         this.renderNavigation();
