@@ -2,10 +2,16 @@ header
   height 146px; width minContentWidth + navWidth + 3*boxMargin
   padding-right boxMargin
 
+  #browser-warning
+    margin 0 0 0 2*boxMargin; padding-top 6px
+    color: red
+    float: left
+
   #settings
     text-align right
     height 30px
     padding-top 5px
+    float right
     a
       color #CEE7F7
       font-size 14px
@@ -28,8 +34,9 @@ header
   h1
     color h1Color
     font h1Font
-    margin 10px 0 0 2*boxMargin + feedbackMargin
+    margin 0 0 0 2*boxMargin + feedbackMargin; padding-top: 16px
     letter-spacing 2px
+    clear both
 
     em
       font-style normal

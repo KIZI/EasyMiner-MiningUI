@@ -530,10 +530,17 @@ header {
   width: 1380px;
   padding-right: 30px;
 }
+header #browser-warning {
+  margin: 0 0 0 60px;
+  padding-top: 6px;
+  color: #f00;
+  float: left;
+}
 header #settings {
   text-align: right;
   height: 30px;
   padding-top: 5px;
+  float: right;
 }
 header #settings a {
   color: #cee7f7;
@@ -563,8 +570,10 @@ header #settings a#settings-open {
 header h1 {
   color: #fff;
   font: 48px 'Average', 'serif';
-  margin: 10px 0 0 80px;
+  margin: 0 0 0 80px;
+  padding-top: 16px;
   letter-spacing: 2px;
+  clear: both;
 }
 header h1 em {
   font-style: normal;
