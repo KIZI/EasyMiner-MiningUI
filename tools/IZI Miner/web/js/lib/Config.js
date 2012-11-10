@@ -1,6 +1,6 @@
 var Config = new Class({
 
-    GetterSetter: ['stopMiningUrl'],
+    GetterSetter: ['stopMiningUrl', 'supportUrl'],
 
 	// app info
 	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
@@ -21,6 +21,7 @@ var Config = new Class({
 	ETreeGetURL: 'getEtree.php',
 	rulesGetURL: 'getRules.php',
     $stopMiningUrl: 'stopMining.php',
+    $supportUrl: 'http://www.izi-miner.eu/features',
 		
 	// root element
 	rootElementID: 'IZIMiner',

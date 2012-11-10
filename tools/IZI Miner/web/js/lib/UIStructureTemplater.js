@@ -19,6 +19,7 @@ var UIStructureTemplater = new Class({
 
             header(div({id: 'settings'},
                 a({href: '#', id: 'new-task'}, i18n.translate('New task')),
+                a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),
                 a({href: '#', id: 'settings-open'}, i18n.translate('Settings'))),
                 h1(config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
         });
