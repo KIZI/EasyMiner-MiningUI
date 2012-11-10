@@ -4,10 +4,10 @@ TODO
 - refactor pager, it breaks when 49+ pages i present
   - pager need to be rewritten
 
-Standa
-  - nevalidní dokument
-  - chyba
-  - reload
+•	možnost zobrazit náhled na hodnoty konkrétního data fieldu (ideálně i histogram?)
+•	u otazníku se nezobrazuje nápověda, dokud uživatel nepřesune myš mimo pravidlo a nevrátí ji zpátky (FF, Chrome)
+
+
 
 TypeError: elementSelect is null
 [Break On This Error]
