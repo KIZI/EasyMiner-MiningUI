@@ -4,7 +4,7 @@ var BrowserDetector = new Class({
         var version = Browser.version;
 
         if (Browser.ie) { // Internet Explorer
-            if (version < 8) { return true; }
+            if (version < 9) { return true; }
         } else if (Browser.firefox) { // Firefox
             if (version < 11) { return true; }
         } else if (Browser.chrome) { // Google Chrome
