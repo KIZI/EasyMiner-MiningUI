@@ -49,6 +49,12 @@ var ARManager = new Class({
 		// antecedent
         var antecedent = this.initCedent('antecedent', 1);
         this.activeRule.addAntecedent(antecedent);
+
+        // default interest measures
+        this.FL.getDefaultIMs().each(function(IMPrototype) {
+            var IM = IMPrototype.initIMAR(IMPrototype);
+            this.activeRule.addIM(IM);
+        }.bind(this));
 		
 		// succedent
         var succedent = this.initCedent('consequent', 1);
@@ -90,7 +96,7 @@ var ARManager = new Class({
 	},
 	
 	addIM: function (IMPrototype, thresholdValue, alphaValue) {
-		var IM = new InterestMeasureAR(IMPrototype.getName(), IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), thresholdValue, alphaValue);
+		var IM = new InterestMeasureAR(IMPrototype.getName(), IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), IMPrototype.getDefault(), thresholdValue, alphaValue);
 		this.activeRule.addIM(IM);
         this.setActiveRuleChanged();
         this.UIPainter.hideOverlay();

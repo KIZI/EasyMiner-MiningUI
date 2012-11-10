@@ -10,8 +10,9 @@ class InterestMeasure
     private $compareType;
     private $explanation;
     private $fields;
+    private $default;
 
-    public function __construct ($name, $localizedName, $thresholdType, $compareType, $explanation)
+    public function __construct ($name, $localizedName, $thresholdType, $compareType, $explanation, $default)
     {
         $this->name = $name;
         $this->localizedName = $localizedName;
@@ -19,6 +20,7 @@ class InterestMeasure
         $this->compareType = $compareType;
         $this->explanation = $explanation;
         $this->fields = array();
+        $this->default = $default;
     }
 
     public function addIntervalField ($name, $defaultValue, $localizedName, $minValue, $minValueInclusive, $maxValue, $maxValueInclusive, $dataType)
@@ -50,6 +52,7 @@ class InterestMeasure
     {
         $array = array(
         $this->name => array(
+            'default' => $this->default,
             'localizedName' => $this->localizedName,
             'thresholdType' => $this->thresholdType,
             'compareType' => $this->compareType,

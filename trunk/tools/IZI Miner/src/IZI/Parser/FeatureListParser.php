@@ -101,10 +101,11 @@ class FeatureListParser
             $thresholdType = $this->XPath->evaluate('ThresholdType', $t)->item(0)->nodeValue;
             $compareType = $this->XPath->evaluate('CompareType', $t)->item(0)->nodeValue;
             $explanation = '';
+            $default = ($this->XPath->evaluate('Default', $t)->item(0)->nodeValue === 'true');
             if ($EX = $this->XPath->evaluate('Explanation[@lang="'.$this->lang.'"]', $t)->item(0)) {
                 $explanation = $EX->nodeValue;
             }
-            $IM = new InterestMeasure($name, $localizedName, $thresholdType, $compareType, $explanation);
+            $IM = new InterestMeasure($name, $localizedName, $thresholdType, $compareType, $explanation, $default);
 
             foreach ($this->XPath->evaluate('Field', $t) as $f) {
                 $name = $this->XPath->evaluate('Name', $f)->item(0)->nodeValue;

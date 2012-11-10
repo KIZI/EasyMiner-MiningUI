@@ -28,6 +28,7 @@
 			<Types>
 				<Type>
 					<Name>FUI</Name>
+                    <Default>true</Default>
 					<LocalizedName lang="en">Confidence</LocalizedName>
 					<LocalizedName lang="cs">Spolehlivost</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
@@ -47,6 +48,7 @@
 				</Type>
 				<Type>
 					<Name>SUPP</Name>
+                    <Default>true</Default>
 					<LocalizedName lang="en">Support</LocalizedName>
 					<LocalizedName lang="cs">Podpora</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
@@ -67,6 +69,7 @@
 				</Type>
 				<Type>
 					<Name>CHI</Name>
+                    <Default>false</Default>
 					<LocalizedName lang="en">Chi-Square</LocalizedName>
 					<LocalizedName lang="cs">Chí-kvadrát</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>

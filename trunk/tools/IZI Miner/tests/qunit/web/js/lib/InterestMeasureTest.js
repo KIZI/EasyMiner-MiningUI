@@ -1,5 +1,4 @@
-
-module('InterestMeasure');
+module('InterestMeasure', {});
 
 test('getName', function () {
 	var IM = new InterestMeasure('Support');

@@ -10,6 +10,7 @@ class FLInterestMeasureTest extends PHPUnit_Framework_TestCase
     public function testIntervalFieldToArray()
     {
         $array = array('Support' => array(
+            'default' => true,
             'localizedName' => 'Support',
             'thresholdType' => '% of all',
             'compareType' => 'Greater than or equal',
@@ -24,7 +25,7 @@ class FLInterestMeasureTest extends PHPUnit_Framework_TestCase
                     'maxValue' => 1,
                     'maxValueInclusive' => false,
                     'dataType' => 'double'))));
-        $IM = new InterestMeasure('Support', 'Support', '% of all', 'Greater than or equal', 'Relative support of the rule');
+        $IM = new InterestMeasure('Support', 'Support', '% of all', 'Greater than or equal', 'Relative support of the rule', true);
         $IM->addIntervalField('threshold', 0.05, 'threshold value', 0, true, 1, false, 'double');
 
         $this->assertEquals($array, $IM->toArray());

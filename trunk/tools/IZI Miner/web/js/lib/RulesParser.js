@@ -143,7 +143,7 @@ var RulesParser = new Class({
 	
 	parseIM: function (IM) {
 		var IMPrototype = this.FL.getIM(IM.name);
-		return new InterestMeasureAR(IM.name, IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), IM.fields.value, null);
+		return new InterestMeasureAR(IM.name, IMPrototype.getLocalizedName(), IMPrototype.getExplanation(), IMPrototype.getThresholdType(), IMPrototype.getCompareType(), IMPrototype.getFields(), IMPrototype.getStringHelper(), IMPrototype.getDefault(), IM.fields.value, null);
 	},
 	
 	generateCedentID: function () {

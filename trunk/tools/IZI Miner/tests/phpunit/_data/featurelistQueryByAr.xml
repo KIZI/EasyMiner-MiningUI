@@ -28,6 +28,7 @@
             <Types>
                 <Type>
                     <Name>SUPP</Name>
+                    <Default>true</Default>
                     <LocalizedName lang="en">Support</LocalizedName>
                     <LocalizedName lang="cs">Podpora</LocalizedName>
                     <ThresholdType>% of all</ThresholdType>
@@ -48,6 +49,7 @@
                 </Type>
                 <Type>
                     <Name>FUI</Name>
+                    <Default>true</Default>
                     <LocalizedName lang="en">Confidence</LocalizedName>
                     <LocalizedName lang="cs">Spolehlivost</LocalizedName>
                     <ThresholdType>% of all</ThresholdType>
@@ -66,6 +68,7 @@
                 </Type>
                 <Type>
                     <Name>AAD</Name>
+                    <Default>false</Default>
                     <LocalizedName lang="en">Above Average Dependence</LocalizedName>
                     <LocalizedName lang="cs">Above Average Dependence</LocalizedName>
                     <ThresholdType>% of all</ThresholdType>

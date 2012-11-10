@@ -1,5 +1,3 @@
-/*global Class: false, InterestMeasure: false */ 
-
 var InterestMeasureAR = new Class({
 	Extends: InterestMeasure,
 
@@ -7,8 +5,8 @@ var InterestMeasureAR = new Class({
 	alpha: null,
 	displayPrecision: 6,
 	
-	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, threshold, alpha) {
-		this.parent(name, localizedName, explanation, thresholdType, compareType, fields, stringHelper);
+	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, def, threshold, alpha) {
+		this.parent(name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, def);
 		this.threshold = threshold;
 		this.alpha = alpha;
 	},
