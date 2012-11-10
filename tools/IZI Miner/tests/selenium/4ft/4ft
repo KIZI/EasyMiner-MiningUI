@@ -19,7 +19,6 @@
 <tr><td><a href="test48.html">Mining indicator - found rules.</a></td></tr>
 <tr><td><a href="test49.html">Mining indicator - no rules.</a></td></tr>
 <tr><td><a href="test26.html">Mining indicator - cleared rules.</a></td></tr>
-<tr><td><a href="test46.html">Continuous queries for results.</a></td></tr>
 <tr><td><a href="test50">BUG: A or B => C</a></td></tr>
 <tr><td><a href="test12.html">BUG: A => neg B</a></td></tr>
 <tr><td><a href="test21.html">BUG: A and neg B => C</a></td></tr>

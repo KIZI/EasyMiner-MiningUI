@@ -48,6 +48,10 @@ class FeatureListParserTest extends PHPUnit_Framework_TestCase
         // interest measure name
         $this->assertTrue(isset($data['interestMeasures']['types']['SUPP']));
 
+        // interest measure default
+        $this->assertTrue($data['interestMeasures']['types']['SUPP']['default']);
+        $this->assertFalse($data['interestMeasures']['types']['AAD']['default']);
+
         // interest measure localized name
         $this->assertEquals('Support', $data['interestMeasures']['types']['SUPP']['localizedName']);
 
