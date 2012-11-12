@@ -701,6 +701,11 @@ li:hover a.remove-attribute {
   padding-left: 20px;
   margin: 5px 0 5px 20px;
 }
+#show-hidden-attributes {
+  color: #126499;
+  font-size: 14px;
+  float: right;
+}
 #data-fields {
   color: #434343;
   background-color: #fff;

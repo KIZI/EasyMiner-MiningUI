@@ -57,6 +57,12 @@ var UIPainter = new Class({
 		} else {
 			this.renderAttributesByList();
 		}
+
+        if (this.ARBuilder.getDD().hasHiddenAttributes()) {
+            this.$UIStructurePainter.showHiddenAttributesButton();
+        } else {
+            this.$UIStructurePainter.hideHiddenAttributesButton();
+        }
 	},
 	
 	renderAttributesByGroup: function (elementParent) {
