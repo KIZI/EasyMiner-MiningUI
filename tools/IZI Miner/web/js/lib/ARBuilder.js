@@ -95,6 +95,10 @@ var ARBuilder = new Class({
         this.$FRManager.initPager();
     },
 
+    getDD: function() {
+        return this.$DD;
+    },
+
     getFL: function() {
         return this.getDefFL();  
     },
@@ -257,6 +261,11 @@ var ARBuilder = new Class({
 
     stopMining: function() {
         this.$miningManager.stopMining();
+    },
+
+    showHiddenAttributes: function() {
+        this.$DD.showHiddenAttributes();
+        this.reloadData();
     }
 
 });

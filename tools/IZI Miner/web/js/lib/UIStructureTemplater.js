@@ -155,7 +155,8 @@ var UIStructureTemplater = new Class({
         Mooml.register('attributesStructureTemplate', function (data) {
             var byGroup = data.byGroup,
                 inProgress = data.inProgress,
-                i18n = data.i18n;
+                i18n = data.i18n,
+                hasHiddenAttributes = data.hasHiddenAttributes;
 
             if (byGroup) {
                 section({id: 'attributes'},
@@ -167,9 +168,10 @@ var UIStructureTemplater = new Class({
             } else {
                 section({id: 'attributes'},
                     h2({'class': 'minimize'}, i18n.translate('Attributes'), a({href: '#', 'class': 'toggle'}, '')),
-                    div(
+                    div({'class': 'clearfix'},
                         ul({'class': 'clearfix'}),
-                        span({id: 'etree-progress', styles: {'visibility': inProgress ? 'visible' : 'hidden'}}, i18n.translate('Sort in progress.'))//,
+                        span({id: 'etree-progress', styles: {'visibility': inProgress ? 'visible' : 'hidden'}}, i18n.translate('Sort in progress.')),
+                        a({id: 'show-hidden-attributes', href: '#', styles: {'display': hasHiddenAttributes ? 'inline' : 'none'}}, 'Show hidden attributes')
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
                     ));
             }

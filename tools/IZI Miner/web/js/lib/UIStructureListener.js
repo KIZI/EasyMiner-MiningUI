@@ -133,6 +133,13 @@ var UIStructureListener = new Class({
         }.bind(this));
     },
 
+    registerShowHiddenAttributesEventHandler: function() {
+        $('show-hidden-attributes').addEvent('click', function(e) {
+            e.stop();
+            this.$ARBuilder.showHiddenAttributes();
+        }.bind(this));
+    },
+
     registerDataReloadEventHandlers: function() {
         // called when com_dbconnect window is closed
         var elIZI = $(this.$ARBuilder.getConfig().getRootElementID());

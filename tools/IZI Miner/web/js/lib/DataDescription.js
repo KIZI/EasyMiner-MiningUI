@@ -43,9 +43,9 @@ var DataDescription = new Class({
     },
 
 	parseAttributes: function (attributes) {
-        var allHiddenAttributes = this.$storage.getObj('hiddenAttributes') ? this.$storage.getObj('hiddenAttributes') : {};
+        this.$attributes = [];
+        var allHiddenAttributes = this.getHiddenAttributes();
         var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
-
 		Object.each(attributes, function (value, name) {
             var hidden = false;
             hiddenAttributes.each(function(attributeName) {
@@ -88,7 +88,7 @@ var DataDescription = new Class({
     removeAttribute: function(attribute) {
         this.$attributes.erase(attribute);
 
-        var allHiddenAttributes = this.$storage.getObj('hiddenAttributes') ? this.$storage.getObj('hiddenAttributes') : {};
+        var allHiddenAttributes = this.getHiddenAttributes();
         var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
         hiddenAttributes.include(attribute.getName());
 
@@ -96,11 +96,26 @@ var DataDescription = new Class({
         this.$storage.setObj('hiddenAttributes', allHiddenAttributes);
     },
 
+    showHiddenAttributes: function() {
+        this.$storage.setObj('hiddenAttributes', {});
+    },
+
     parseFields: function (fields) {
         Object.each(fields, function (value, name) {
             var field = new APField(name, value, new StringHelper());
             this.$fields.push(field);
         }.bind(this));
+    },
+
+    getHiddenAttributes: function(id) {
+        return this.$storage.getObj('hiddenAttributes') ? this.$storage.getObj('hiddenAttributes') : {};
+    },
+
+    hasHiddenAttributes: function() {
+        var allHiddenAttributes = this.getHiddenAttributes();
+        var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
+
+        return hiddenAttributes.length;
     }
 	
 });

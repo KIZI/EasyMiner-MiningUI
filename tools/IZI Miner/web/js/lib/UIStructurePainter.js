@@ -1,5 +1,6 @@
 var UIStructurePainter = new Class({
 
+    $ARBuilder: null,
     $config: null,
     $dateHelper: null,
     $i18n: null,
@@ -42,10 +43,11 @@ var UIStructurePainter = new Class({
         // attributes
         var attributes = $('attributes');
         if (attributes) {
-            Mooml.render('attributesStructureTemplate', {i18n: this.$i18n, byGroup: this.$ARBuilder.getARManager().getAttributesByGroup(), inProgress: this.$ARBuilder.getETreeManager().getInProgress()}).replaces(attributes);
+            Mooml.render('attributesStructureTemplate', {i18n: this.$i18n, byGroup: this.$ARBuilder.getARManager().getAttributesByGroup(), inProgress: this.$ARBuilder.getETreeManager().getInProgress(), hasHiddenAttributes: false}).replaces(attributes);
         } else {
-            navigation.grab(Mooml.render('attributesStructureTemplate', {i18n: this.$i18n, byGroup: false, inProgress: false}));
+            navigation.grab(Mooml.render('attributesStructureTemplate', {i18n: this.$i18n, byGroup: false, inProgress: false, hasHiddenAttributes: false}));
         }
+        this.$UIStructureListener.registerShowHiddenAttributesEventHandler();
 
         // data fields
         var dataFields = $('data-fields');
@@ -57,6 +59,14 @@ var UIStructurePainter = new Class({
         }
 
         this.$UIStructureListener.registerNavigationEventHandlers();
+    },
+
+    showHiddenAttributesButton: function() {
+        $('show-hidden-attributes').setStyle('display', 'inline');
+    },
+
+    hideHiddenAttributesButton: function() {
+        $('show-hidden-attributes').setStyle('display', 'none');
     },
 
     renderActiveRule: function() {
