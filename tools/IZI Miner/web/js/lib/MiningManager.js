@@ -113,11 +113,11 @@ var MiningManager = new Class({
 
         // stop remote LM mining
         if (this.inProgress) { // hack around req.cancel(); weird bug
+            this.inProgress = false;
             this.stopRemoteMining(this.taskId, this.settings.getDebug(), this.config.getStopMiningUrl());
             this.FRManager.handleStoppedMining();
         }
 
-        this.inProgress = false;
         this.requestData = {};
         this.requests = [];
         this.taskId = '';
