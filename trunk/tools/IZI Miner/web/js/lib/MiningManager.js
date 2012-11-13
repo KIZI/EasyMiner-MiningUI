@@ -46,7 +46,6 @@ var MiningManager = new Class({
 	        secure: true,
 	            
 	        onSuccess: function(responseJSON, responseText) {
-                // TODO check if mining is still in progress
                 if (responseJSON.status == 'ok') {
 	        	    this.handleSuccessRequest(data, responseJSON);
                 } else {
@@ -55,7 +54,6 @@ var MiningManager = new Class({
 	        }.bind(this),
 	            
 	        onError: function () {
-                // TODO check if mining is still in progress
 	        	this.handleErrorRequest();
 	        }.bind(this),
 	        
