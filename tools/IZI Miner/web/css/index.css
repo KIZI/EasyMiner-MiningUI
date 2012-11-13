@@ -1151,6 +1151,9 @@ section#active-rule #action-box {
   margin: 5px 25px 0 0;
   visibility: hidden;
 }
+.found-rule {
+  cursor: default;
+}
 .found-rule .id {
   width: 25px;
   font-size: 0.8em;
@@ -1221,6 +1224,7 @@ section#active-rule #action-box {
   visibility: visible;
 }
 #marked-rules .rule {
+  cursor: default;
   line-height: 25px;
   float: left;
 }
