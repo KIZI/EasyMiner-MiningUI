@@ -60,6 +60,7 @@ var FRManager = new Class({
 		
 		if (!inProgress && !numRules) {
 			this.pager.setNoRules();
+            this.UIPainter.hideStopMiningButton();
 			this.UIPainter.renderActiveRule();
 		} else if (numRules) {
 			if (numRules > Object.getLength(this.rules)) { // new rules to render
