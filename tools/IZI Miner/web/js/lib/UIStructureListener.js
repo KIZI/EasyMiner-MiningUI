@@ -144,6 +144,7 @@ var UIStructureListener = new Class({
         // called when com_dbconnect window is closed
         var elIZI = $(this.$ARBuilder.getConfig().getRootElementID());
         elIZI.addEvent('reload', function() {
+            this.$UIStructurePainter.hideOverlay();
             this.$ARBuilder.reloadAttributes();
         }.bind(this));
 
