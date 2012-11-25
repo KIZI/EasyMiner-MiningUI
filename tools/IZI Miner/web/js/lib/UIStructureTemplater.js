@@ -95,7 +95,7 @@ var UIStructureTemplater = new Class({
                                     em(i18n.translate('Restrictions')),
                                     i18n.translate('These are predefined association rule pattern restrictions, which do not depend on analysed data. The more expert the looser they are.')))),
                         div(
-                            label({'for': 'as-select', 'class': 'thin'}, i18n.translate('Attribute<br>suggestion') + ':'),
+                            label({'for': 'as-select', 'class': 'thin'}, i18n.translate('Attribute suggestion') + ':'),
                             autoSuggestPossible ? a({id: 'as', 'href': '#', 'class': settings.getRecEnabled() ? 'autosuggest-on' : 'autosuggest-off'}, i18n.translate(settings.getRecEnabled() ? 'On': 'Off')) : span({'class': 'autosuggest-off'}, i18n.translate(settings.getRecEnabled() ? 'On': 'Off')),
                             span({id: 'as-select'}))),
                     div(

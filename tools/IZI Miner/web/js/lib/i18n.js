@@ -45,7 +45,7 @@ var i18n = new Class({
 			   41: {'cs': 'Omezení', 'en': 'Restrictions'},
 			   42: {'cs': 'Zapnuto', 'en': 'On'},
 			   43: {'cs': 'Vypnuto', 'en': 'Off'},
-			   44: {'cs': 'Doporučení<br>atributu', 'en': 'Attribute<br>suggestion'},
+			   44: {'cs': 'Doporučení atributu', 'en': 'Attribute suggestion'},
 			   45: {'cs': 'Předdefinovaná omezení pro hledání asociačních pravidel. Více expertní zadání mají volnější omezení.', 'en' : 'These are predefined association rule pattern restrictions, which do not depend on analysed data. The more expert the looser they are.'},
 			   46: {'cs': 'Limit', 'en': 'Limit'},
 			   47: {'cs': 'Restrikce', 'en': 'Restrictions'},
@@ -77,7 +77,8 @@ var i18n = new Class({
                72: {'cs': 'Debug mód', 'en': 'Debug mode'},
                73: {'cs': 'Podpora', 'en': 'Support'},
                74: {'cs': 'VAROVÁNÍ: Používáte zastaralý webový prohlížeč.', 'en': 'WARNING: You are using an old and deprecated version of web browser'},
-               75: {'cs': 'Upgradujte na moderní verzi, abyste mohli používat tuto aplikaci.', 'en': 'Please upgrade to enjoy this application!'}},
+               75: {'cs': 'Upgradujte na moderní verzi, abyste mohli používat tuto aplikaci.', 'en': 'Please upgrade to enjoy this application!'},
+               76: {'cs': 'Vysvětlení', 'en': 'Explanation'}},
 
 	initialize: function (lang) {
 		this.lang = lang;

@@ -268,7 +268,13 @@ td {
 #overlay form em {
   color: #925213;
   font-size: 14px;
+  float: left;
   padding-left: 5px;
+  position: relative;
+  top: -11px;
+}
+#overlay form em.normal {
+  font-style: normal;
 }
 #overlay form #message {
   color: #a41d1d;
@@ -277,10 +283,16 @@ td {
 #overlay form label {
   font-weight: bold;
   font-size: 14px;
+  text-align: right;
+  line-height: 1.3em;
+  padding-right: 5px;
   display: block;
-  min-width: 130px;
+  width: 140px;
   float: left;
   clear: left;
+}
+#overlay form select {
+  padding: 4px 2px 1px;
 }
 #overlay form input[type='text'],
 #overlay form select {
@@ -288,7 +300,11 @@ td {
   font-size: 14px;
   border: 1px solid #aaa;
   background-color: #fff;
+  float: left;
   padding: 4px 2px 1px;
+  position: relative;
+  top: -4px;
+  margin-bottom: 10px;
 }
 #overlay form input[type='text'].shortnr {
   text-align: right;
@@ -299,6 +315,8 @@ td {
   font-size: 20px;
   border: none;
   font-weight: bold;
+  width: 30px;
+  float: left;
 }
 #overlay form input[type='submit'] {
   color: #fff;
@@ -312,7 +330,7 @@ td {
   text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
   display: block;
   width: 170px;
-  margin-left: 110px;
+  margin-left: 130px;
   margin-top: 50px;
   padding: 10px 28px;
   cursor: pointer;
@@ -325,7 +343,9 @@ td {
   -moz-border-radius: 5px;
   width: 133px;
   height: 5px;
-  margin-top: 5px;
+  position: relative;
+  top: 5px;
+  float: left;
 }
 #overlay form .slider .knob {
   background-color: #0078ae;
@@ -348,6 +368,65 @@ td {
   clear: left;
   margin-top: 1em;
 }
+#overlay form .info {
+  background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
+  display: block;
+  float: right;
+  position: relative;
+  top: -2px;
+  width: 24px;
+  height: 24px;
+}
+#overlay form .tooltip {
+  color: #000;
+  text-decoration: none;
+  outline: none;
+  cursor: help;
+  position: relative;
+}
+#overlay form .tooltip >span {
+  text-align: justify;
+  line-height: 1.25em;
+  margin-left: -999em;
+  padding: 0.5em 0.8em 0.8em 2em;
+  position: absolute;
+}
+#overlay form .tooltip:hover >span {
+  font-family: 'Calibri' 'Tahoma' 'Geneva' sans-serif;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  width: 250px;
+  margin-left: -3em;
+  position: absolute;
+  top: 2em;
+  left: 1em;
+  z-index: 99;
+}
+#overlay form .tooltip:hover img {
+  border: 0;
+  margin: -10px 0 0 -55px;
+  float: left;
+  position: absolute;
+}
+#overlay form .tooltip:hover em {
+  font-family: 'Candara' 'Tahoma' 'Geneva' sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: block;
+  padding: 0.2em 0 0.6em 0;
+}
+#overlay form .tooltip > .help {
+  background-color: #d3e6f4;
+  border: 1px solid #2bb0d7;
+}
+#overlay form .tooltip > .warning {
+  background-color: #ffa;
+  border: 1px solid #ffad33;
+}
 #overlay h2 {
   color: #314e64;
   font: 20px 'Average', 'serif';
@@ -365,7 +444,7 @@ td {
   box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
   -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
   -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
-  width: 400px;
+  width: 435px;
   margin: 10% auto;
   padding: 35px 25px;
 }
@@ -422,58 +501,14 @@ td {
   clear: left;
   margin-top: 1em;
 }
-#settings-form label.thin {
-  line-height: 1.3em;
-}
 #settings-form .info {
   background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
   display: block;
   float: right;
   position: relative;
-  top: 6px;
+  top: -2px;
   width: 24px;
   height: 24px;
-}
-#settings-form div > .warning {
-  background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
-  display: block;
-  float: left;
-  position: relative;
-  top: 6px;
-  left: 5px;
-  width: 24px;
-  height: 24px;
-}
-#settings-form #fl-select {
-  float: left;
-  position: relative;
-  top: 8px;
-  margin-right: 0;
-}
-#settings-form .autocomplete {
-  margin-bottom: 90px;
-}
-#settings-form a.autosuggest-on,
-#settings-form a.autofilter-on,
-#settings-form a.cache-on,
-#settings-form a.debug-on {
-  color: #434343;
-  background: transparent url("../images/sprite-icons.png") -70px -9px no-repeat;
-  text-decoration: none;
-  display: block;
-  float: left;
-  padding-left: 15px;
-}
-#settings-form a.autosuggest-off,
-#settings-form a.autofilter-off,
-#settings-form a.cache-off,
-#settings-form a.debug-off {
-  color: #434343;
-  background: transparent url("../images/sprite-icons.png") -70px -57px no-repeat;
-  text-decoration: none;
-  display: block;
-  float: left;
-  padding-left: 15px;
 }
 #settings-form .tooltip {
   color: #000;
@@ -482,14 +517,14 @@ td {
   cursor: help;
   position: relative;
 }
-#settings-form .tooltip span {
+#settings-form .tooltip >span {
   text-align: justify;
   line-height: 1.25em;
   margin-left: -999em;
   padding: 0.5em 0.8em 0.8em 2em;
   position: absolute;
 }
-#settings-form .tooltip:hover span {
+#settings-form .tooltip:hover >span {
   font-family: 'Calibri' 'Tahoma' 'Geneva' sans-serif;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -524,6 +559,45 @@ td {
 #settings-form .tooltip > .warning {
   background-color: #ffa;
   border: 1px solid #ffad33;
+}
+#settings-form div > .warning {
+  background: transparent url("../images/sprite-icons.png") -16px -361px no-repeat;
+  display: block;
+  float: left;
+  position: relative;
+  top: -3px;
+  left: 5px;
+  width: 24px;
+  height: 24px;
+}
+#settings-form .autocomplete {
+  margin-bottom: 90px;
+}
+#settings-form a.autosuggest-on,
+#settings-form a.autofilter-on,
+#settings-form a.cache-on,
+#settings-form a.debug-on {
+  color: #434343;
+  background: transparent url("../images/sprite-icons.png") -70px -8px no-repeat;
+  text-decoration: none;
+  display: block;
+  float: left;
+  padding-left: 13px;
+  position: relative;
+  top: -9px;
+}
+#settings-form a.autosuggest-off,
+#settings-form a.autofilter-off,
+#settings-form a.cache-off,
+#settings-form a.debug-off {
+  color: #434343;
+  background: transparent url("../images/sprite-icons.png") -70px -56px no-repeat;
+  text-decoration: none;
+  display: block;
+  float: left;
+  padding-left: 13px;
+  position: relative;
+  top: -9px;
 }
 header {
   height: 146px;
