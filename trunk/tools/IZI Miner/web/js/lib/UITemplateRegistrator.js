@@ -129,7 +129,14 @@ var UITemplateRegistrator = new Class({
 				form({action: '#', method: 'POST', id: 'add-im-form'},
 					label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
 					select({name: 'add-im-select', id: 'add-im-select'}),
-					div({'class': 'autocomplete'}),
+                    span({'class': 'tooltip info', 'styles': {display: 'none'}},
+                        span({'class': 'help'},
+                            img({src: './images/icon-tooltip-help.png'}),
+                            em(i18n.translate('Explanation')),
+                            span('')
+                        )
+                    ),
+					div({'class': 'autocomplete clearfix'}),
 					input({type: 'submit', value: i18n.translate('Add')})));
 		});
 
@@ -142,9 +149,16 @@ var UITemplateRegistrator = new Class({
 				h2(i18n.translate('Edit interest measure')),
 				form({action: '#', method: 'POST', id: 'edit-im-form'},
 					label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
-					IM.getLocalizedName(),
+					em({class: 'normal'}, IM.getLocalizedName()),
 					select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
-					div({'class': 'autocomplete'}),
+                    span({'class': 'tooltip info', 'styles': {display: 'none'}},
+                        span({'class': 'help'},
+                            img({src: './images/icon-tooltip-help.png'}),
+                            em(i18n.translate('Explanation')),
+                            span('')
+                        )
+                    ),
+					div({'class': 'autocomplete clearfix'}),
 					input({type: 'submit', value: i18n.translate('Edit')})));
 		});
 		
@@ -199,30 +213,20 @@ var UITemplateRegistrator = new Class({
 			} else {
 				span({id: 'add-coefficient-autocomplete'},
 					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
-						table(
-							tr(
-								td(label({'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':')),
-								td(input({type: 'text', name: 'add-coefficient-minlength', id: 'add-coefficient-minlength', readonly: 'readonly'}))
-							),
-							tr(
-								td({colspan: 2}, 
-									div({id: 'add-coefficient-minlength-slider', 'class': 'slider'},
-										div({'class': 'knob'}))
-								)
-							),
-							tr(td({colspan: 2}, '&nbsp;')),
-							tr(
-								td(label({'for': 'add-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':')),
-								td(input({type: 'text', name: 'add-coefficient-maxlength', id: 'add-coefficient-maxlength', readonly: 'readonly'}))
-							),
-							tr(
-								td({colspan: 2}, 
-									div({id: 'add-coefficient-maxlength-slider', 'class': 'slider'},
-										div({'class': 'knob'}))
-								)
-							)
-						),
-						input({type: 'submit', value: i18n.translate('Add')}));
+                    div({'class': 'autocomplete clearfix'},
+                        label({'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
+                        input({type: 'text', name: 'add-coefficient-minlength', id: 'add-coefficient-minlength', readonly: 'readonly'}),
+                        div({id: 'add-coefficient-minlength-slider', 'class': 'slider'},
+                            div({'class': 'knob'})
+                        ),
+                        label({'for': 'add-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
+                        input({type: 'text', name: 'add-coefficient-maxlength', id: 'add-coefficient-maxlength', readonly: 'readonly'}),
+                        div({id: 'add-coefficient-maxlength-slider', 'class': 'slider'},
+                            div({'class': 'knob'})
+                        )
+
+                    ),
+				    input({type: 'submit', value: i18n.translate('Add')}));
 			}
 		});
 		

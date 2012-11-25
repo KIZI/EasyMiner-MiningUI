@@ -322,7 +322,8 @@ var UIPainter = new Class({
 			var isSelected = (IM.getName() === selectedIM.getName());
 			$('add-im-select').grab(Mooml.render('IMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
 		}.bind(this));
-		
+
+        this.renderIMExplanation(selectedIM);
 		this.renderIMAutocomplete('add', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('add');
@@ -335,7 +336,8 @@ var UIPainter = new Class({
 			var isSelected = (IM.getName() === selectedIM.getName());
 			$('edit-im-select').grab(Mooml.render('IMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
 		}.bind(this));
-		
+
+        this.renderIMExplanation(selectedIM);
 		this.renderIMAutocomplete('edit', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('edit');
@@ -347,6 +349,11 @@ var UIPainter = new Class({
 			var IMSlider = new InterestMeasureSlider(elAutocomplete, f, action, selectedIM);
 		}.bind(this));
 	},
+
+    renderIMExplanation: function(IM) {
+        $$('#overlay .tooltip')[0].setStyle('display', 'inline');
+        $$('#overlay .help span')[0].set('html', IM.getExplanation());
+    },
 	
 	renderAddCoefficientWindow: function (field) {
 		var overlay = this.$UIStructurePainter.showOverlay();
