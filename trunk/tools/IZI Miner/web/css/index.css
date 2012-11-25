@@ -678,7 +678,7 @@ header h1 span {
 nav {
   color: #434343;
   float: left;
-  width: 190px;
+  width: 280px;
   margin: 30px 30px 0 30px;
   line-height: 20px;
 }
@@ -1276,7 +1276,7 @@ section#active-rule #action-box {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  min-width: 1070px;
+  min-width: 980px;
   margin: 30px 0 0 50px;
   padding: 10px 20px;
   float: left;
@@ -1491,7 +1491,7 @@ section#content {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  min-width: 1070px;
+  min-width: 980px;
   float: left;
   margin: 30px 0 0 50px;
   padding-left: 30px;
