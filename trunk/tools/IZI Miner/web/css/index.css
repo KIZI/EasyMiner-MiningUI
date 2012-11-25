@@ -605,7 +605,7 @@ td {
 }
 header {
   height: 146px;
-  width: 1380px;
+  width: 1350px;
   padding-right: 30px;
 }
 header #browser-warning {
@@ -1276,7 +1276,7 @@ section#active-rule #action-box {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  min-width: 1100px;
+  min-width: 1070px;
   margin: 30px 0 0 50px;
   padding: 10px 20px;
   float: left;
@@ -1468,12 +1468,12 @@ body {
   overflow-y: scroll;
 }
 footer {
-  width: 1380px;
+  width: 1350px;
 }
 #wrapper {
   background: transparent url("../images/bg-body.jpg") center -10px repeat;
   min-height: 500px;
-  min-width: 1425px;
+  min-width: 1395px;
 }
 section#workplace {
   margin: 0 auto;
@@ -1491,7 +1491,7 @@ section#content {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  min-width: 1100px;
+  min-width: 1070px;
   float: left;
   margin: 30px 0 0 50px;
   padding-left: 30px;
