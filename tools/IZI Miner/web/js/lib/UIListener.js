@@ -292,7 +292,7 @@ var UIListener = new Class({
 			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
 			var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
 			this.UIPainter.renderIMAutocomplete(action, IM);
-            this.UIPainter.renderIMExplanation(IM);
+            this.UIPainter.renderExplanation(IM);
 		}.bind(this));
 		
 		// close

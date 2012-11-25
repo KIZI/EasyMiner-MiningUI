@@ -65,7 +65,7 @@ var FeatureList = new Class({
 		this.BBACoefficient = data.BBA.coefficient;
 		
 		Object.each(data.BBA.coefficients, function (value, key) {
-			var BBACoef = new BBACoefficient(key, value.localizedName, value.Explanation);
+			var BBACoef = new BBACoefficient(key, value.localizedName, value.explanation);
 			
 			Object.each(value.fields, function (value, key) {
 				BBACoef.addField(key, value);

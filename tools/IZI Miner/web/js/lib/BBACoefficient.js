@@ -1,5 +1,3 @@
-/*global Class: false */ 
-
 var BBACoefficient = new Class({
 
 	name: '',
@@ -16,10 +14,14 @@ var BBACoefficient = new Class({
 	getName: function () {
 		return this.name;
 	},
-	
-	getLocalizedName: function () {
-		return this.localizedName;
-	},
+
+    getLocalizedName: function () {
+        if (this.localizedName.length !== 0) {
+            return this.localizedName;
+        }
+
+        return this.name;
+    },
 	
 	getExplanation: function () {
 		return this.explanation;

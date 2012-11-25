@@ -146,6 +146,7 @@
 				<Type>
 					<Name>One category</Name>
 					<LocalizedName lang="en">One fixed value</LocalizedName>
+                    <Explanation lang="en">Only specified value will be considered for the value of the field. </Explanation>
 					<Field>
 						<Name>category</Name>
 						<LocalizedName lang="en">Value</LocalizedName>

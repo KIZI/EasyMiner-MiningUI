@@ -129,7 +129,7 @@ var UITemplateRegistrator = new Class({
 				form({action: '#', method: 'POST', id: 'add-im-form'},
 					label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
 					select({name: 'add-im-select', id: 'add-im-select'}),
-                    span({'class': 'tooltip info', 'styles': {display: 'none'}},
+                    span({'class': 'tooltip info'},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
                             em(i18n.translate('Explanation')),
@@ -150,7 +150,7 @@ var UITemplateRegistrator = new Class({
 				form({action: '#', method: 'POST', id: 'edit-im-form'},
 					label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
 					em({class: 'normal'}, IM.getLocalizedName()),
-					select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
+					select({name: 'edit-im-select', id: 'edit-im-select'}),
                     span({'class': 'tooltip info', 'styles': {display: 'none'}},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
@@ -206,13 +206,27 @@ var UITemplateRegistrator = new Class({
 			if (selectedCoefficient.getName() === 'One category') {
 				span({id: 'add-coefficient-autocomplete'},
 					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
+                    span({'class': 'tooltip info'},
+                        span({'class': 'help'},
+                            img({src: './images/icon-tooltip-help.png'}),
+                            em(i18n.translate('Explanation')),
+                            span('')
+                        )
+                    ),
 					br(),
 					label({'for': 'add-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
 					select({name: 'add-coefficient-category', id: 'add-coefficient-category'}),
-					input({type: 'submit', value: i18n.translate('Add')}));
+					input({type: 'submit', value: i18n.translate('Addx')}));
 			} else {
 				span({id: 'add-coefficient-autocomplete'},
 					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
+                    span({'class': 'tooltip info'},
+                        span({'class': 'help'},
+                            img({src: './images/icon-tooltip-help.png'}),
+                            em(i18n.translate('Explanation')),
+                            span('')
+                        )
+                    ),
                     div({'class': 'autocomplete clearfix'},
                         label({'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
                         input({type: 'text', name: 'add-coefficient-minlength', id: 'add-coefficient-minlength', readonly: 'readonly'}),
@@ -271,38 +285,38 @@ var UITemplateRegistrator = new Class({
 						input({type: 'submit', value: i18n.translate('Edit')}));
 			}
 		});
-		
+
 		Mooml.register('addCoefficientWindowSelectOptionTemplate', function (data) {
 			var coefficient = data.coefficient,
 			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
-				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
+				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getLocalizedName());
 			} else {
-				option({'value': coefficient.getName()}, coefficient.getName());
+				option({'value': coefficient.getName()}, coefficient.getLocalizedName());
 			}
 		});
 		
 		Mooml.register('editCoefficientWindowSelectOptionTemplate', function (data) {
-			coefficient = data.coefficient;
-			isSelected = data.isSelected;
+			var coefficient = data.coefficient,
+                isSelected = data.isSelected;
 
 			if (isSelected === true) {
-				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
+				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getLocalizedName());
 			} else {
-				option({'value': coefficient.getName()}, coefficient.getName());
+				option({'value': coefficient.getName()}, coefficient.getLocalizedName());
 			}
 		});
 		
 		Mooml.register('addCoefficientWindowSelectOption2Template', function (data) {
-			choice = data.choice;
+			var choice = data.choice;
 
 			option({'value': choice}, choice);
 		});
 		
 		Mooml.register('editCoefficientWindowSelectOption2Template', function (data) {
-			choice = data.choice;
-			isSelected = data.isSelected;
+			var choice = data.choice,
+			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
 				option({'value': choice, 'selected': 'selected'}, choice);
