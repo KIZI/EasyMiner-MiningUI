@@ -385,7 +385,7 @@ td {
   position: relative;
 }
 #overlay form .tooltip >span {
-  text-align: justify;
+  font-size: 0.9em;
   line-height: 1.25em;
   margin-left: -999em;
   padding: 0.5em 0.8em 0.8em 2em;
@@ -418,6 +418,8 @@ td {
   font-weight: bold;
   display: block;
   padding: 0.2em 0 0.6em 0;
+  float: none;
+  top: 0;
 }
 #overlay form .tooltip > .help {
   background-color: #d3e6f4;
@@ -518,7 +520,7 @@ td {
   position: relative;
 }
 #settings-form .tooltip >span {
-  text-align: justify;
+  font-size: 0.9em;
   line-height: 1.25em;
   margin-left: -999em;
   padding: 0.5em 0.8em 0.8em 2em;
@@ -551,6 +553,8 @@ td {
   font-weight: bold;
   display: block;
   padding: 0.2em 0 0.6em 0;
+  float: none;
+  top: 0;
 }
 #settings-form .tooltip > .help {
   background-color: #d3e6f4;

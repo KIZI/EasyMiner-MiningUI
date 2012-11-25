@@ -323,7 +323,7 @@ var UIPainter = new Class({
 			$('add-im-select').grab(Mooml.render('IMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
 		}.bind(this));
 
-        this.renderIMExplanation(selectedIM);
+        this.renderExplanation(selectedIM);
 		this.renderIMAutocomplete('add', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('add');
@@ -337,7 +337,7 @@ var UIPainter = new Class({
 			$('edit-im-select').grab(Mooml.render('IMWindowSelectOptionTemplate', {IM: IM, isSelected: isSelected}));
 		}.bind(this));
 
-        this.renderIMExplanation(selectedIM);
+        this.renderExplanation(selectedIM);
 		this.renderIMAutocomplete('edit', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('edit');
@@ -350,8 +350,7 @@ var UIPainter = new Class({
 		}.bind(this));
 	},
 
-    renderIMExplanation: function(IM) {
-        $$('#overlay .tooltip')[0].setStyle('display', 'inline');
+    renderExplanation: function(IM) {
         $$('#overlay .help span')[0].set('html', IM.getExplanation());
     },
 	
@@ -396,7 +395,8 @@ var UIPainter = new Class({
 				$('add-coefficient-maxlength-slider').setStyles({display: 'none'});
 			}
 		}
-		
+
+        this.renderExplanation(selectedCoefficient);
 		this.UIListener.registerAddCoefficientFormEventHandler(field);
 	},
 	
@@ -428,7 +428,8 @@ var UIPainter = new Class({
 				$('edit-coefficient-maxlength-slider').setStyles({display: 'none'});
 			}
 		}
-		
+
+        this.renderExplanation(selectedCoefficient);
 		this.UIListener.registerEditCoefficientFormEventHandler(field);
 	},
 	

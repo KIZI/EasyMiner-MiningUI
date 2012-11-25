@@ -527,21 +527,10 @@
 						</Validation>
 					</Field>
 				</Type>
-				<!-- <Type> <Name>Subset</Name> <LocalizedName lang="en">Any subset of 
-					values</LocalizedName> <Explanation lang="en">Nominal binning wildcard</Explanation> 
-					<MaxOccurrences>1</MaxOccurrences> <Field hidden="false"> <Name>minLength</Name> 
-					<DefaultValue>1</DefaultValue> <LocalizedName lang="en">Minimum number of 
-					values</LocalizedName> <LocalizedName lang="cs">Minimální délka</LocalizedName> 
-					<Validation> <Required value="yes"/> <MinValue>1</MinValue> <MaxValue>1</MaxValue> 
-					<Datatype>integer</Datatype> </Validation> </Field> <Field hidden="false"> 
-					<Name>maxLength</Name> <DefaultValue>1</DefaultValue> <LocalizedName lang="en">Maximum 
-					number of values</LocalizedName> <LocalizedName lang="cs">Maximální délka</LocalizedName> 
-					<Validation> <Required value="yes"/> <MinValue>1</MinValue> <MaxValue>3</MaxValue> 
-					<Datatype>integer</Datatype> <Previous>isSmallerOrEqual</Previous> </Validation> 
-					</Field> </Type> -->
 				<Type>
 					<Name>One category</Name>
 					<LocalizedName lang="en">One fixed value</LocalizedName>
+                    <Explanation lang="en">Only specified value will be considered for the value of the field. </Explanation>
 					<Field>
 						<Name>category</Name>
 						<LocalizedName lang="en">Value</LocalizedName>
@@ -585,7 +574,7 @@
 				</Type>
 				<Type>
 					<Name>Cyclical intervals</Name>
-					<LocalizedName lang="en">Only consecutive values</LocalizedName>
+					<LocalizedName lang="en">Only cyclical consecutive values</LocalizedName>
 					<Explanation lang="en">Binning wildcard - specified number of consecutive values will be considered for the value of the field. The lowest and highest value are considered as consecutive. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">

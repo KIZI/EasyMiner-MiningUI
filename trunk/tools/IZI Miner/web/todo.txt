@@ -11,11 +11,6 @@ TODO
 
 TypeError: elementSelect is null
 [Break On This Error]
-
 var IMName = elementSelect.options[elementSelect.selectedIndex].value;
-
 UIListener.js (line 272)
 
-// TODO
-- style add IM and add coefficient
-  - sjednotit line-height u labelu, odsazeni, apod.
