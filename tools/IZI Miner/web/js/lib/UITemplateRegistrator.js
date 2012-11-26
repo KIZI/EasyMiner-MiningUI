@@ -150,7 +150,7 @@ var UITemplateRegistrator = new Class({
 				form({action: '#', method: 'POST', id: 'edit-im-form'},
 					label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
 					em({class: 'normal'}, IM.getLocalizedName()),
-					select({name: 'edit-im-select', id: 'edit-im-select'}),
+					select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
                     span({'class': 'tooltip info', 'styles': {display: 'none'}},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
@@ -262,6 +262,7 @@ var UITemplateRegistrator = new Class({
 					label({'for': 'edit-coefficient-category'}, i18n.translate('Category')),
 					select({name: 'edit-coefficient-category', id: 'edit-coefficient-category'}),
                     br({class: 'clearfix'}),
+                    br({class: 'clearfix'}),
 					input({type: 'submit', value: i18n.translate('Edit')}));
 			} else {
 				span({id: 'edit-coefficient-autocomplete'},
@@ -283,7 +284,9 @@ var UITemplateRegistrator = new Class({
 					div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
 					    div({'class': 'knob'})
                     ),
-                    br({class: 'clearfix'}),
+                    br(),
+                    br(),
+                    br(),
 				    input({type: 'submit', value: i18n.translate('Edit')}));
 			}
 		});
