@@ -13,6 +13,7 @@ var UIListener = new Class({
 		this.UIPainter = UIPainter;
 	},
 
+    // TODO
 	registerAttributeEventHandler: function (attribute, showEditAttribute, showRemoveAttribute) {
         // drag & drop
         $(attribute.getCSSID()).addEvent('mousedown', function (event) {
@@ -23,49 +24,55 @@ var UIListener = new Class({
 				return false;
 			}
 			
+            var cloneStyles = {
+                opacity: 0.7,
+                position: 'absolute'
+            };
 			var draggedAttribute = $(attribute.getCSSID());
-			var clone = draggedAttribute.clone().setStyles(draggedAttribute.getCoordinates()).setStyles({
-					opacity: 0.7,
-					position: 'absolute'
-			    }).inject(document.body);
+			var clone = draggedAttribute.clone().setStyles(draggedAttribute.getCoordinates()).setStyles(cloneStyles).inject(document.body);
 			
 		    var drag = new Drag.Move(clone, {
-		        droppables: $$('div.cedent.empty').combine($$('div.field')).combine($$('div.connective')),
+		        droppables: $$('div.cedent'),
+//		        droppables: $$('div.cedent.empty').combine($$('div.field')).combine($$('div.connective')),
 
 		        onDrop: function (dragging, element) {
 		        	dragging.destroy();
 		        	if (element !== null) {
-                        var cedent = {};
-                        var position = undefined;
-                        if (element.getAttribute('class') !== 'cedent empty') {
-                            cedent = element.getParent().getParent();
-                            var position = element.getAllPrevious('.field').length + (element.getAttribute('class') === 'field' ? 1 : 0);
-                        } else {
-                            cedent = element;
-                        }
-		        		cedent.fireEvent('addAttribute', [attribute, position]);
-		        		this.UIColorizer.dragDrop(cedent);
+//                        var cedent = {};
+//                        var position = undefined;
+//                        if (element.getAttribute('class') !== 'cedent empty') {
+//                            cedent = element.getParent().getParent();
+//                            var position = element.getAllPrevious('.field').length + (element.getAttribute('class') === 'field' ? 1 : 0);
+//                        } else {
+//                            cedent = element;
+//                        }
+//		        		cedent.fireEvent('addAttribute', [attribute, position]);
+//		        		this.UIColorizer.dragDrop(cedent);
+		        		element.fireEvent('addAttribute', [attribute, 0]);
+		        		this.UIColorizer.dragDrop(element);
 		        	}
 		        }.bind(this),
 		        
 		        onEnter: function (dragging, element) {
-                    var cedent = {};
-                    if (element.getAttribute('class') !== 'cedent empty') {
-                        cedent = element.getParent().getParent();
-                    } else {
-                        cedent = element;
-                    }
-		        	this.UIColorizer.dragEnter(cedent);
+//                    var cedent = {};
+//                    if (element.getAttribute('class') !== 'cedent empty') {
+//                        cedent = element.getParent().getParent();
+//                    } else {
+//                        cedent = element;
+//                    }
+//		        	this.UIColorizer.dragEnter(cedent);
+		        	this.UIColorizer.dragEnter(element);
 		        }.bind(this),
 		        
 		        onLeave: function (dragging, element) {
-                    var cedent = {};
-                    if (element.getAttribute('class') !== 'cedent empty') {
-                        cedent = element.getParent().getParent();
-                    } else {
-                        cedent = element;
-                    }
-		        	this.UIColorizer.dragLeave(cedent);
+//                    var cedent = {};
+//                    if (element.getAttribute('class') !== 'cedent empty') {
+//                        cedent = element.getParent().getParent();
+//                    } else {
+//                        cedent = element;
+//                    }
+//		        	this.UIColorizer.dragLeave(cedent);
+		        	this.UIColorizer.dragLeave(element);
 		        }.bind(this),
 		        
 		        onCancel: function (dragging) {
@@ -108,27 +115,33 @@ var UIListener = new Class({
                 position: 'absolute'
             }).inject(document.body);
 
+            var droppable = $('attributes');
+            this.UIColorizer.tween(droppable, 'background-color', '#DFC184', 150);
+
+            var me = this;
             var drag = new Drag.Move(clone, {
-                droppables: $('attributes'),
+                droppables: droppable,
 
                 onDrop: function (dragging, element) {
                     dragging.destroy();
                     if (element !== null) {
-                        this.ARBuilder.openAddAttributeWindow(field);
-                        this.UIColorizer.dragLeave(element);
+                        me.ARBuilder.openAddAttributeWindow(field);
+                    } else {
+                        me.UIColorizer.tween(droppable, 'background-color', '#FFFFFF', 150);
                     }
-                }.bind(this),
+                },
 
-                onEnter: function (dragging, element) {
-                    this.UIColorizer.dragEnter(element);
-                }.bind(this),
+                onEnter: function () {
+                    me.UIColorizer.tween(droppable, 'background-color', '#F8E4CC', 150);
+                },
 
-                onLeave: function (dragging, element) {
-                    this.UIColorizer.dragLeave(element);
-                }.bind(this),
+                onLeave: function () {
+                    me.UIColorizer.tween(droppable, 'background-color', '#DFC184', 150);
+                },
 
-                onCancel: function (dragging) {
+                onCancel: function(dragging) {
                     dragging.destroy();
+                    me.UIColorizer.tween(droppable, 'background-color', '#FFFFFF', 150);
                 }
             });
 

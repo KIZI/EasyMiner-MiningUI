@@ -252,37 +252,39 @@ var UITemplateRegistrator = new Class({
 			if (selectedCoefficient.getName() === 'One category') {
 				span({id: 'edit-coefficient-autocomplete'},
 					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
-					br(),
+                    span({'class': 'tooltip info'},
+                        span({'class': 'help'},
+                            img({src: './images/icon-tooltip-help.png'}),
+                            em(i18n.translate('Explanation')),
+                            span('')
+                        )
+                    ),
 					label({'for': 'edit-coefficient-category'}, i18n.translate('Category')),
 					select({name: 'edit-coefficient-category', id: 'edit-coefficient-category'}),
+                    br({class: 'clearfix'}),
 					input({type: 'submit', value: i18n.translate('Edit')}));
 			} else {
 				span({id: 'edit-coefficient-autocomplete'},
 					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
-						table(
-							tr(
-								td(label({'for': 'edit-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':')),
-								td(input({type: 'text', name: 'edit-coefficient-minlength', id: 'edit-coefficient-minlength', readonly: 'readonly', value: field.getMinimalLength()}))
-							),
-							tr(
-								td({colspan: 2}, 
-									div({id: 'edit-coefficient-minlength-slider', 'class': 'slider'},
-										div({'class': 'knob'}))
-								)
-							),
-							tr(td({colspan: 2}, '&nbsp;')),
-							tr(
-								td(label({'for': 'edit-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':')),
-								td(input({type: 'text', name: 'edit-coefficient-maxlength', id: 'edit-coefficient-maxlength', readonly: 'readonly', value: field.getMaximalLength()}))
-							),
-							tr(
-								td({colspan: 2}, 
-									div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
-										div({'class': 'knob'}))
-								)
-							)
-						),
-						input({type: 'submit', value: i18n.translate('Edit')}));
+                    span({'class': 'tooltip info'},
+                        span({'class': 'help'},
+                            img({src: './images/icon-tooltip-help.png'}),
+                            em(i18n.translate('Explanation')),
+                            span('')
+                        )
+                    ),
+					label({'for': 'edit-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
+					input({type: 'text', name: 'edit-coefficient-minlength', id: 'edit-coefficient-minlength', readonly: 'readonly', value: field.getMinimalLength()}),
+					div({id: 'edit-coefficient-minlength-slider', 'class': 'slider'},
+					    div({'class': 'knob'})
+                    ),
+                    label({'for': 'edit-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
+					input({type: 'text', name: 'edit-coefficient-maxlength', id: 'edit-coefficient-maxlength', readonly: 'readonly', value: field.getMaximalLength()}),
+					div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
+					    div({'class': 'knob'})
+                    ),
+                    br({class: 'clearfix'}),
+				    input({type: 'submit', value: i18n.translate('Edit')}));
 			}
 		});
 
