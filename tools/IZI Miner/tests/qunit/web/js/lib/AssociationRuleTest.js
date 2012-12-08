@@ -8,7 +8,7 @@ test('generateIdent - Subset *', function () {
     var antecedent = new Cedent(1, 1, new Connective(1, 'Conjunction'), [field], []);
     AR.addAntecedent(antecedent);
 
-    strictEqual(AR.generateIdent().stripTags(), 'District(*) => Empty');
+    strictEqual(AR.generateIdent().stripTags(), 'District(*)=>Empty');
 });
 
 test('generateIdent - Subset 1-2', function () {
@@ -19,7 +19,7 @@ test('generateIdent - Subset 1-2', function () {
     var antecedent = new Cedent(1, 1, new Connective(1, 'Conjunction'), [field], []);
     AR.addAntecedent(antecedent);
 
-    strictEqual(AR.generateIdent().stripTags(), 'District(*Subset 1-2) => Empty');
+    strictEqual(AR.generateIdent().stripTags(), 'District(*Subset 1-2)=>Empty');
 });
 
 test('generateIdent - antecedent', function () {
@@ -30,7 +30,7 @@ test('generateIdent - antecedent', function () {
 	var antecedent = new Cedent(1, 1, new Connective(1, 'Conjunction'), [field], []);
 	AR.addAntecedent(antecedent);
 	
-	strictEqual(AR.generateIdent().stripTags(), 'District(Praha) => Empty');
+	strictEqual(AR.generateIdent().stripTags(), 'District(Praha)=>Empty');
 });
 
 test('generateIdent - IM', function () {
@@ -39,7 +39,7 @@ test('generateIdent - IM', function () {
 	// IM
 	AR.addIM(new InterestMeasureAR('Support', '', '', null, null, 0.850));
 	
-	strictEqual(AR.generateIdent().stripTags(), 'Empty => Empty');
+	strictEqual(AR.generateIdent().stripTags(), 'Empty=>Empty');
 });
 
 test('generateIdent - succedent', function () {
@@ -50,7 +50,7 @@ test('generateIdent - succedent', function () {
 	var succedent = new Cedent(1, 1, null, [field], []);
 	AR.addSuccedent(succedent);
 	
-	strictEqual(AR.generateIdent().stripTags(), 'Empty => Quality(good)');
+	strictEqual(AR.generateIdent().stripTags(), 'Empty=>Quality(good)');
 });
 
 test('getMarkedRuleCSSID', function () {

@@ -3,85 +3,32 @@ var UIListener = new Class({
 	ARBuilder: null,
 	UIColorizer: null,
 	UIPainter: null,
+    $dragDropHelper: null,
 
-	initialize: function (ARBuilder, UIColorizer) {
+	initialize: function (ARBuilder, UIColorizer, dragDropHelper, colorHelper) {
 		this.ARBuilder = ARBuilder;
 		this.UIColorizer = UIColorizer;
+        this.$dragDropHelper = dragDropHelper;
+        this.$colorHelper = colorHelper;
 	},
 	
 	setUIPainter: function (UIPainter) {
 		this.UIPainter = UIPainter;
 	},
 
-    // TODO
 	registerAttributeEventHandler: function (attribute, showEditAttribute, showRemoveAttribute) {
         // drag & drop
         $(attribute.getCSSID()).addEvent('mousedown', function (event) {
-			event.stop();
-			
-			// disable right click drag & drop
-			if (event.rightClick) {
-				return false;
-			}
-			
-            var cloneStyles = {
-                opacity: 0.7,
-                position: 'absolute'
-            };
-			var draggedAttribute = $(attribute.getCSSID());
-			var clone = draggedAttribute.clone().setStyles(draggedAttribute.getCoordinates()).setStyles(cloneStyles).inject(document.body);
-			
-		    var drag = new Drag.Move(clone, {
-		        droppables: $$('div.cedent'),
-//		        droppables: $$('div.cedent.empty').combine($$('div.field')).combine($$('div.connective')),
+            event.stop();
+            if (event.rightClick) { return false; } // disable right click drag & drop
 
-		        onDrop: function (dragging, element) {
-		        	dragging.destroy();
-		        	if (element !== null) {
-//                        var cedent = {};
-//                        var position = undefined;
-//                        if (element.getAttribute('class') !== 'cedent empty') {
-//                            cedent = element.getParent().getParent();
-//                            var position = element.getAllPrevious('.field').length + (element.getAttribute('class') === 'field' ? 1 : 0);
-//                        } else {
-//                            cedent = element;
-//                        }
-//		        		cedent.fireEvent('addAttribute', [attribute, position]);
-//		        		this.UIColorizer.dragDrop(cedent);
-		        		element.fireEvent('addAttribute', [attribute, 0]);
-		        		this.UIColorizer.dragDrop(element);
-		        	}
-		        }.bind(this),
-		        
-		        onEnter: function (dragging, element) {
-//                    var cedent = {};
-//                    if (element.getAttribute('class') !== 'cedent empty') {
-//                        cedent = element.getParent().getParent();
-//                    } else {
-//                        cedent = element;
-//                    }
-//		        	this.UIColorizer.dragEnter(cedent);
-		        	this.UIColorizer.dragEnter(element);
-		        }.bind(this),
-		        
-		        onLeave: function (dragging, element) {
-//                    var cedent = {};
-//                    if (element.getAttribute('class') !== 'cedent empty') {
-//                        cedent = element.getParent().getParent();
-//                    } else {
-//                        cedent = element;
-//                    }
-//		        	this.UIColorizer.dragLeave(cedent);
-		        	this.UIColorizer.dragLeave(element);
-		        }.bind(this),
-		        
-		        onCancel: function (dragging) {
-		        	dragging.destroy();
-		        }
-		    });
-		    
+            var draggable = this.$dragDropHelper.createDraggable($(attribute.getCSSID()));
+            var droppable = $$('div.cedent');
+            var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getCedentBackgroundColor(), borderColor: this.$colorHelper.getCedentBorderColor(), highlightColor: this.$colorHelper.getCedentHighlightBackgroundColor(), highlightBorderColor: this.$colorHelper.getCedentHighlightBorderColor(), enterColor: this.$colorHelper.getCedentEnterBackgroundColor(), callback: function(element) { element.fireEvent('addAttribute', attribute); }});
+
 		    drag.start(event);
-		    
+            this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
+            this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
 		}.bind(this));
 
         if (showEditAttribute) { // edit
@@ -100,97 +47,31 @@ var UIListener = new Class({
 	},
 
     registerDataFieldEventHandler: function(field) {
-        // drag & drop
         $(field.getCSSID()).addEvent('mousedown', function (event) {
             event.stop();
+            if (event.rightClick) { return false; } // disable right click drag & drop
 
-            // disable right click drag & drop
-            if (event.rightClick) {
-                return false;
-            }
-
-            var draggedField = $(field.getCSSID());
-            var clone = draggedField.clone().setStyles(draggedField.getCoordinates()).setStyles({
-                opacity: 0.7,
-                position: 'absolute'
-            }).inject(document.body);
-
+            var draggable = this.$dragDropHelper.createDraggable($(field.getCSSID()));
             var droppable = $('attributes');
-            this.UIColorizer.tween(droppable, 'background-color', '#DFC184', 150);
-
-            var me = this;
-            var drag = new Drag.Move(clone, {
-                droppables: droppable,
-
-                onDrop: function (dragging, element) {
-                    dragging.destroy();
-                    if (element !== null) {
-                        me.ARBuilder.openAddAttributeWindow(field);
-                    } else {
-                        me.UIColorizer.tween(droppable, 'background-color', '#FFFFFF', 150);
-                    }
-                },
-
-                onEnter: function () {
-                    me.UIColorizer.tween(droppable, 'background-color', '#F8E4CC', 150);
-                },
-
-                onLeave: function () {
-                    me.UIColorizer.tween(droppable, 'background-color', '#DFC184', 150);
-                },
-
-                onCancel: function(dragging) {
-                    dragging.destroy();
-                    me.UIColorizer.tween(droppable, 'background-color', '#FFFFFF', 150);
-                }
-            });
+            var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getAttributesBackgroundColor(), highlightColor: this.$colorHelper.getAttributesHighlightBackgroundColor(), enterColor: this.$colorHelper.getAttributesEnterBackgroundColor(), callback: function() { this.ARBuilder.openAddAttributeWindow(field); }, scope: this});
 
             drag.start(event);
-
+            this.UIColorizer.tween(droppable, this.$colorHelper.getAttributesHighlightBackgroundColor());
         }.bind(this));
     },
 
 	registerFieldEventHandler: function (field) {
 		$(field.getCSSID()).addEvent('mousedown', function (event) {
-			event.stop();
+            event.stop();
+            if (event.rightClick) { return false; } // disable right click drag & drop
 
-			// disable right click drag & drop
-			if (event.rightClick) {
-				return false;
-			}
-			
-			var draggedField = $(field.getCSSID());
-			var clone = draggedField.clone().setStyles(draggedField.getCoordinates()).setStyles({
-				opacity: 0.7,
-				position: 'absolute'
-		    }).inject(document.body);
-
-		    var drag = new Drag.Move(clone, {
-		        droppables: $$('div.cedent'),
-
-		        onDrop: function (dragging, elementCedent) {
-		        	dragging.destroy();
-		        	if (elementCedent !== null) {
-		        		elementCedent.fireEvent('addField', field);
-		        		this.UIColorizer.dragDrop(elementCedent);
-		        	}
-		        }.bind(this),
-		        
-		        onEnter: function (dragging, elementCedent) {
-		        	this.UIColorizer.dragEnter(elementCedent);
-		        }.bind(this),
-		        
-		        onLeave: function (dragging, elementCedent) {
-		        	this.UIColorizer.dragLeave(elementCedent);
-		        }.bind(this),
-		        
-		        onCancel: function (dragging) {
-		        	dragging.destroy();
-		        }
-		    });
+            var draggable = this.$dragDropHelper.createDraggable($(field.getCSSID()));
+            var droppable = $$('div.cedent');
+            var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getCedentBackgroundColor(), borderColor: this.$colorHelper.getCedentBorderColor(), highlightColor: this.$colorHelper.getCedentHighlightBackgroundColor(), highlightBorderColor: this.$colorHelper.getCedentHighlightBorderColor(), enterColor: this.$colorHelper.getCedentEnterBackgroundColor(), callback: function(element) { element.fireEvent('addField', field); }});
 			
 			drag.start(event);
-			
+            this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
+            this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
 		}.bind(this));
 	},
 	
@@ -318,8 +199,8 @@ var UIListener = new Class({
 	
 	registerCedentEventHandlers: function (cedent, rule) {
 		// add attribute (fired by drag & drop)
-		$(cedent.getCSSID()).addEvent('addAttribute', function (attribute, position) {
-			this.ARBuilder.getARManager().addAttribute(cedent, attribute, position);
+		$(cedent.getCSSID()).addEvent('addAttribute', function (attribute) {
+			this.ARBuilder.getARManager().addAttribute(cedent, attribute);
 		}.bind(this));
 		
 		// add preset field (fired by drag & drop)
@@ -475,48 +356,16 @@ var UIListener = new Class({
 		
 		// drag & drop
 		$(field.getCSSDragID()).addEvent('mousedown', function (event) {
-			event.stop();
-			
-			// disable right click drag & drop
-			if (event.rightClick) {
-				return false;
-			}
-			
-			var draggedField = $(field.getCSSDragID());
-			var clone = draggedField.clone().setStyles(draggedField.getCoordinates()).setStyles({
-				opacity: 0.7,
-				position: 'absolute'
-			}).inject(document.body);
-			
-		    var drag = new Drag.Move(clone, {
-//                droppables: $$('div.field or div.connective'),
-		    	droppables: $$('div.cedent'),
+            event.stop();
+            if (event.rightClick) { return false; } // disable right click drag & drop
 
-		        onDrop: function (dragging, elementCedent) {
-		        	dragging.destroy();
-		        	if (elementCedent === $(cedent.getCSSID())) { return; };
-		        	if (elementCedent !== null) {
-		        		elementCedent.fireEvent('addFieldAR', field);
-		        		this.UIColorizer.dragDrop(elementCedent);
-		        	}
-		        }.bind(this),
-		        
-		        onEnter: function (dragging, elementCedent) {
-		        	if (elementCedent === $(cedent.getCSSID())) { return; };
-		        	this.UIColorizer.dragEnter(elementCedent);
-		        }.bind(this),
-		        
-		        onLeave: function (dragging, elementCedent) {
-		        	if (elementCedent === $(cedent.getCSSID())) { return; };
-		        	this.UIColorizer.dragLeave(elementCedent);
-		        }.bind(this),
-		        
-		        onCancel: function (dragging) {
-		        	dragging.destroy();
-		        }
-		    });
-			
+            var draggable = this.$dragDropHelper.createDraggable($(field.getCSSDragID()));
+            var droppable = $$('div.cedent');
+            var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getCedentBackgroundColor(), borderColor: this.$colorHelper.getCedentBorderColor(), highlightColor: this.$colorHelper.getCedentHighlightBackgroundColor(), highlightBorderColor: this.$colorHelper.getCedentHighlightBorderColor(), enterColor: this.$colorHelper.getCedentEnterBackgroundColor(), callback: function(element) { if (element !== $(cedent.getCSSID())) { element.fireEvent('addFieldAR', field); }}});
+
 			drag.start(event);
+            this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
+            this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
 		}.bind(this));
 	},
 

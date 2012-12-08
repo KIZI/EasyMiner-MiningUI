@@ -8,7 +8,7 @@ var Pager = new Class({
     numPages: 0,
     currentPage: 0,
     perPage: 10,
-    lineHeight: 56,
+    lineHeight: 55,
     prevSymbol: '<',
     nextSymbol: '>',
     elControlType: 'span',
@@ -160,18 +160,6 @@ var Pager = new Class({
             this.paging.grab(this.createControlItem(this.numPages));
         }
 
-//        for (i = 1; i <= this.numPages; i++) {
-//            this.paging.grab(new Element(this.elControlType, {
-//                'class': 'pager-actuator',
-//                text: i,
-//                events: {
-//                    click: function(e) {
-//                        this.gotoPage(e);
-//                    }.bind(this)
-//                }
-//            }).store('page', i));
-//        }
-        
         this.paging.grab(new Element(this.elControlType, {
             'class': 'pager-next ' + (this.currentPage === this.numPages ? 'in' : '') + 'active',
             text: this.nextSymbol,
@@ -181,8 +169,6 @@ var Pager = new Class({
 	                    this.gotoPage(e);
 	                }.bind(this)} : {}
         }).store('page', 'next'));
-        
-//        this.paging.getElements('.pager-actuator')[this.currentPage - 1].addClass('active');
 	},
 
     createControlItem: function(pageId) {
@@ -229,9 +215,8 @@ var Pager = new Class({
     	} else {
     		this.currentPage = locator;
     	}
-        
-        var scrollTo = (this.lineHeight * this.perPage) * (this.currentPage - 1);
-//        this.paging.getElements('.pager-actuator')[this.currentPage - 1].addClass('active').getSiblings('.pager-actuator').removeClass('active');
+
+        var scrollTo = Math.max((this.lineHeight * this.perPage) * (this.currentPage - 1) - (2 * (this.currentPage - 1)), 0);
         this.createControls();
         this.content.tween('margin-top', "-" + scrollTo + "px");
         this.fireEvent('onScroll', this.currentPage);

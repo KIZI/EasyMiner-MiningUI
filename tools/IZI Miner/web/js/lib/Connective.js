@@ -28,7 +28,7 @@ var Connective = new Class({
 	},
 	
 	toString: function() {
-		return ('<span class="connective">' + this.toLogical() + '</span>');
+		return ('<div class="connective">' + this.toLogical() + '</div>');
 	}
 
 });

@@ -1,134 +1,44 @@
 section#active-rule
-  #antecedent
+  #antecedent, #interest-measures, #succedent
     float left
-    padding-right 20px
-    > .cedent.empty
-      border 1px dashed h2Color
-      padding 10px
+    height 200px
+
+  #antecedent
+    .cedent
+      cedent()
+    >.cedent
+      firstCedent()
 
   #interest-measures
-    width 200px
-    float left
-    padding-right 20px
-    > div > div
-      float left; clear left
-      margin-bottom 7px
+    margin-left boxMargin
+    width interestMeasuresWidth
     #add-im
       font-size 14px
       background transparent url('../images/sprite-icons.png') -167px -162px no-repeat
-      margin 0 0 0 55px; padding-left 20px
+      margin 0 0 0 10px; padding-left 20px
       float left
-    .name
-      font-size 14px
-      width 160px
-      float left
-    .im-slider
-      margin 5px 0 6px
-    .threshold,
-    .alpha
-      color #7B0D2E
-    .edit-im
-      edit()
-      margin-right 5px
-      float left
-    > div > div:hover .edit-im
-      visibility visible
-    .remove-im
-      remove()
-      float left
-    > div > div:hover .remove-im
-      visibility visible
+    .im
+      interestMeasureMixin()
+      float left; clear left
+      margin-bottom 7px
+      .edit-im
+        edit()
+        margin-right 5px
+        float left
+      &:hover .edit-im
+        visibility visible
+      .remove-im
+        remove()
+        float left
+      &:hover .remove-im
+        visibility visible
 
   #succedent
-    float left
-    > .cedent.empty
-      border 1px dashed h2Color
-      padding 10px
-
-  > span.controls
-    clear both
-
-  .cedent
-    float left
-    > .controls
-      font-size 14px
-      text-align right
-      a.group-fields
-        background transparent url('../images/sprite-icons.png') -168px -215px no-repeat
-        padding-left 17px
-        position relative; top 18px
-        float right
-    .fields
-      text-align center
-      min-height 40px
-      .connective
-        connective()
-        height 40px
-        margin 1px 2px 0 7px
-        float left
-        a
-          color #336600
-      .left-bracket,
-      .right-bracket
-        bracket()
-      .right-bracket
-        margin-left 8px
-      .field
-        height 40px
-        margin-left 5px
-        float left
-        ul li
-          list-style-type none
-        .field-drag
-          cursor move
-          float left
-        .coefficient
-          coefficient()
-        .change-sign.negative
-          background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
-          width 16px; height 20px
-          float left
-        > .controls
-          font-size 12px
-          text-align right
-        .controls
-          height 18px
-          position absolute; top 298px
-          clear left
-          a.edit-coefficient
-            edit()
-            margin-left 2px
-            float right
-          a.remove-field
-            remove()
-            margin-left 5px
-            float right
-          a.mark-field
-            background transparent url('../images/sprite-icons.png') -67px -212px no-repeat
-            display block; width 16px; height 20px
-            margin-right 3px
-            float right
-            visibility hidden
-          a.marked-field
-            background transparent url('../images/sprite-icons.png') -68px -260px no-repeat
-            display block; width 16px; height 20px
-            margin-right 3px
-            float left
-            visibility visible
-          a.change-sign.positive
-            background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
-            display block; width 16px; height 20px
-            float right
-            visibility hidden
-      .field:hover
-        a.remove-field
-          visibility visible
-        a.edit-coefficient
-          visibility visible
-        a.mark-field
-          visibility visible
-        a.change-sign.positive
-          visibility visible
+    margin-left boxMargin
+    .cedent
+      cedent()
+    >.cedent
+      firstCedent()
 
   .no-restriction
     background transparent url('../images/sprite-icons.png') -20px -714px no-repeat

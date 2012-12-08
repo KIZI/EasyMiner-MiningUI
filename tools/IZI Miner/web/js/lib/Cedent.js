@@ -284,11 +284,11 @@ var Cedent = new Class({
 	},
 
     toString: function () {
-        if (this.isEmpty()) { return 'Empty'; }
+        if (this.isEmpty()) { return '<div class="cedent">Empty</div>'; }
 
         var index = 1;
 
-        var string = '';
+        var string = '<div class="cedent"><div class="fields">';
         if (this.hasOpeningBracket(index)) {
             string += '<span class="left-bracket">(</span>';
         }
@@ -305,6 +305,8 @@ var Cedent = new Class({
         if (this.hasClosingBracket(index)) {
             string += '<span class="right-bracket">)</span>';
         }
+
+        string += '</div></div>'
 
         return string;
     },

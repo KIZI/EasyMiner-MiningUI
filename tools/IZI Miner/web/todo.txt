@@ -1,8 +1,7 @@
 TODO
 ==============
 - probably a hidden FL bug, serializers / parsers are using the same all the time
-- refactor pager, it breaks when 49+ pages i present
-  - pager need to be rewritten
+- pager need to be rewritten
 
 •	možnost zobrazit náhled na hodnoty konkrétního data fieldu (ideálně i histogram?)
 •	u otazníku se nezobrazuje nápověda, dokud uživatel nepřesune myš mimo pravidlo a nevrátí ji zpátky (FF, Chrome)
@@ -14,3 +13,20 @@ TypeError: elementSelect is null
 var IMName = elementSelect.options[elementSelect.selectedIndex].value;
 UIListener.js (line 272)
 
+
+
+
+TypeError: this.ARBuilder.getARManager(...).sortMarkedRules is not a function
+[Break On This Error]
+
+this.ARBuilder.getARManager().sortMarkedRules(sortables.serialize());
+
+UIPainter.js (line 188)
+
+
+
+TypeError: $(...) is null
+[Break On This Error]
+
+var elLoading = $(FR.getCSSID()).getElement('.loading');
+UIPainter.js (line 501)

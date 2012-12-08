@@ -13,6 +13,6 @@ test('toString', function () {
 	var connective1 = new Connective(1, 'Conjunction');
 	var connective2 = new Connective(2, 'Disjunction');
 	
-	deepEqual(connective1.toString(), '<span class="connective">and</span>');
-	deepEqual(connective2.toString(), '<span class="connective">or</span>');
+	deepEqual(connective1.toString().stripTags(), 'and');
+	deepEqual(connective2.toString().stripTags(), 'or');
 });
