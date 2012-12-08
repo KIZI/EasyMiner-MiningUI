@@ -5,6 +5,7 @@
 
     <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="DataDictionary" id="1">
         <Identifier  name="dataset">Loans</Identifier>
+        <Identifier  name="recordCount">6181</Identifier>
         <Identifier  name="metabase">LM Barbora.mdb MB</Identifier>
         <Field dataType="integer">
             <Name>Age</Name>

@@ -1,4 +1,4 @@
-module('NumberNormalizer');
+module('NumberNormalizer', {});
 
 test('normalize - float 2 int', function () {
 	var numberNormalizer = new NumberNormalizer(0, 1, 2, 0, 100, 0, 100, true, true);

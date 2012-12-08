@@ -1,8 +1,9 @@
 var DataDescription = new Class({
 
-    GetterSetter: ['attributes', 'fields'],
+    GetterSetter: ['attributes', 'fields', 'recordCount'],
 
     $id: 0,
+    $recordCount: 0,
     $attributes: [],
     $fields: [],
     $storage: null,
@@ -13,6 +14,7 @@ var DataDescription = new Class({
 	},
 
     parse: function(data) {
+        this.parseRecordCount(data.recordCount);
         this.parseAttributes(data.transformationDictionary);
         this.parseFields(data.dataDictionary);
     },
@@ -40,6 +42,14 @@ var DataDescription = new Class({
 
     save: function() {
         this.$storage.setObj('DD_' + this.$id, this);
+    },
+
+    parseRecordCount: function (recordCount) {
+        this.$recordCount = parseInt(recordCount);
+    },
+
+    calculateMinimalSupport: function() {
+        return (1.0 / this.$recordCount).ceilWithPrecision(2);
     },
 
 	parseAttributes: function (attributes) {

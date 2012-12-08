@@ -25,6 +25,8 @@ class DataDescriptionParser
             'dataDictionary' => array()
         );
 
+        $data['DD']['recordCount'] = $this->parseRecordCount();
+
         foreach ($this->parseAttributes() as $a) {
             $data['DD']['transformationDictionary'] = array_merge_recursive($data['DD']['transformationDictionary'], $a->toArray());
         }
@@ -34,6 +36,11 @@ class DataDescriptionParser
         }
 
         return $data;
+    }
+
+    protected function parseRecordCount()
+    {
+        return $this->XPath->evaluate('//dd:DataDescription/Dictionary[@sourceDictType="DataDictionary"]/Identifier[@name="recordCount"]')->item(0)->nodeValue;
     }
 
     protected function parseAttributes()

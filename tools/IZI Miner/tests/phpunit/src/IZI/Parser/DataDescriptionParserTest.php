@@ -15,6 +15,16 @@ class DataDescriptionParserTest extends PHPUnit_Framework_TestCase
         $this->DD = $loader->load(DD);
     }
 
+    public function testParseRecordCount()
+    {
+        $DDP = new DataDescriptionParser($this->DD);
+        $data = $DDP->parseData();
+        $data = $data['DD'];
+
+        // record count is parsed
+        $this->assertEquals(6181, $data['recordCount']);
+    }
+
     public function testParseTransformationDictionary()
     {
         $DDP = new DataDescriptionParser($this->DD);

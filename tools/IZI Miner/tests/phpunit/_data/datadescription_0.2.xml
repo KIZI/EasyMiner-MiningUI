@@ -140,8 +140,10 @@
             <Category>bad</Category>
         </Field>
     </Dictionary>
-    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="DataDictionary" id="2"  sourceName="Loans">
-        <Identifier name="metabase">LMM-cjIV9HHXaE6-TjYt1k6Ybg</Identifier>
+    <Dictionary completeness="All" sourceFormat="PMML" sourceDictType="DataDictionary" id="1">
+        <Identifier  name="dataset">Loans</Identifier>
+        <Identifier  name="recordCount">6181</Identifier>
+        <Identifier  name="metabase">LMM-PYBujVM_Zk-9Cco4kfvUVg</Identifier>
         <Field dataType="Long integer">
             <Name>Age</Name>
         </Field>

@@ -1,5 +1,27 @@
+module('NativeTypeExtender', {});
 
-module('NativeTypeExtender');
+test('extendNativeNumber - ceilWithPrecision', function() {
+    var nativeTypeExtender = new NativeTypeExtender();
+    nativeTypeExtender.extendNativeNumber();
+
+    strictEqual(Number.prototype.hasOwnProperty('ceilWithPrecision'), true);
+
+    strictEqual(Number.ceilWithPrecision(0, 0), 0);
+    strictEqual(Number.ceilWithPrecision(0, 1), 0);
+    strictEqual(Number.ceilWithPrecision(0, 2), 0);
+    strictEqual(Number.ceilWithPrecision(0.1, 0), 1);
+    strictEqual(Number.ceilWithPrecision(0.1, 1), 0.1);
+    strictEqual(Number.ceilWithPrecision(0.1, 2), 0.1);
+    strictEqual(Number.ceilWithPrecision(0.01, 0), 1);
+    strictEqual(Number.ceilWithPrecision(0.01, 1), 0.1);
+    strictEqual(Number.ceilWithPrecision(0.01, 2), 0.01);
+    strictEqual(Number.ceilWithPrecision(0.001, 0), 1);
+    strictEqual(Number.ceilWithPrecision(0.001, 1), 0.1);
+    strictEqual(Number.ceilWithPrecision(0.001, 2), 0.01);
+    strictEqual(Number.ceilWithPrecision(1, 0), 1);
+    strictEqual(Number.ceilWithPrecision(1, 1), 1);
+    strictEqual(Number.ceilWithPrecision(1, 2), 1);
+});
 
 test('extendNativeElement - hasChildren', function () {
 	var nativeTypeExtender = new NativeTypeExtender();
