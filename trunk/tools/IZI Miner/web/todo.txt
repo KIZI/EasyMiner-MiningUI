@@ -30,3 +30,7 @@ TypeError: $(...) is null
 
 var elLoading = $(FR.getCSSID()).getElement('.loading');
 UIPainter.js (line 501)
+
+
+.edit IM - value validation message fails
+  => add validation messages form all forms - HTML5 - numberfields, etc

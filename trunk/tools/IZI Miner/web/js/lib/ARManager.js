@@ -53,6 +53,12 @@ var ARManager = new Class({
         // default interest measures
         this.FL.getDefaultIMs().each(function(IMPrototype) {
             var IM = IMPrototype.initIMAR(IMPrototype);
+            if (IM.getName() === 'SUPP') {
+                var minimalSupport = this.DD.calculateMinimalSupport();
+                if (IM.getThreshold().toFloat() < minimalSupport) {
+                    IM.setThreshold(minimalSupport);
+                }
+            }
             this.activeRule.addIM(IM);
         }.bind(this));
 		

@@ -1,5 +1,18 @@
+module('DataDescription', {});
 
-module('DataDescription');
+test('parseRecordCount', function() {
+    var DD = new DataDescription(1, new Storage());
+    DD.parse({recordCount: 6135});
+
+    strictEqual(DD.getRecordCount(), 6135);
+});
+
+test('calculateMinimalSupport', function() {
+    var DD = new DataDescription(1, new Storage());
+    DD.parse({recordCount: 6135});
+
+    strictEqual(DD.calculateMinimalSupport(), 0.01);
+});
 
 test('parseAttributes', function () {
     var DD = new DataDescription(1, new Storage());

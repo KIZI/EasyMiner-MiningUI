@@ -3,11 +3,21 @@ var NativeTypeExtender = new Class({
 	initialize: function () {},
 	
 	extendAll: function () {
+		this.extendNativeNumber();
 		this.extendNativeElement();
 		this.extendNativeString();
 		this.extendNativeArray();
 	},
-	
+
+    extendNativeNumber: function () {
+        Number.implement('ceilWithPrecision', function (precision) {
+            precision = Math.abs(parseInt(precision)) || 0;
+            var coefficient = Math.pow(10, precision);
+
+            return Math.ceil(this * coefficient) / coefficient;
+        });
+    },
+
 	extendNativeElement: function () {
 		Element.implement('hasChildren', function () {
 			return (this.getChildren().length > 0);

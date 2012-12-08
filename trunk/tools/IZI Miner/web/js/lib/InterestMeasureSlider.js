@@ -22,29 +22,39 @@ var InterestMeasureSlider = new Class({
 	numberNormalizer: null,
 	inverseNumberNormalizer: null,
 	
-	initialize: function (elParent, field, action, IM) {
+	initialize: function (elParent, field, action, IM, minSupport) {
 		this.elParent = elParent;
 		this.field = field;
 		this.action = action;
 		this.IM = IM;
 		this.dataType = this.field.dataType;
+
+        var offset = 0;
+        if (IM.getName() === 'SUPP') {
+            this.field.minValue = minSupport;
+            this.field.minValueInclusive = true;
+            if (this.field.minValue > 0) {
+                offset = this.field.minValue * 100;
+            }
+        }
 		
 		// calculate num
 		this.calculateNumSteps();
-		
+
+
 		// normalizers
 		if (this.dataType !== 'enum') {
-			this.numberNormalizer = new NumberNormalizer(field.minValue, field.maxValue, this.inversePrecision, 0, this.numSteps, this.precision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
-			this.inverseNumberNormalizer = new NumberNormalizer(0, this.numSteps, this.precision, field.minValue, field.maxValue, this.inversePrecision, this.numSteps, field.minValueInclusive, field.maxValueInclusive);
+			this.numberNormalizer = new NumberNormalizer(this.field.minValue, this.field.maxValue, this.inversePrecision, 0 + offset, this.numSteps + offset, this.precision, this.numSteps, this.field.minValueInclusive, this.field.maxValueInclusive);
+			this.inverseNumberNormalizer = new NumberNormalizer(0 + offset, this.numSteps + offset, this.precision, this.field.minValue, this.field.maxValue, this.inversePrecision, this.numSteps, this.field.minValueInclusive, this.field.maxValueInclusive);
 		}
 
 		// create HTML elements
 		this.createInput();
-		
+
 		if (this.sliderEnabled) { // create slider
 			this.createSlider();
 			this.parent(this.elSlider, this.elSlider.getElement('.knob'), {
-				range: [0, this.numSteps],
+				range: [0 + offset, this.numSteps + offset],
 				initialStep: this.getValue(),
 				onChange: function (value) {
 					this.handleChange(value);
@@ -138,9 +148,9 @@ var InterestMeasureSlider = new Class({
 	getValue: function () {
 		if (this.action === 'add') {
 			if (this.sliderEnabled) {
-				return this.dataType !== 'enum' ? this.numberNormalizer.normalize(this.field.defaultValue) : this.field.values.indexOf(this.field.defaultValue);
+				return this.dataType !== 'enum' ? this.numberNormalizer.normalize(Math.max(this.field.minValue, this.field.defaultValue)) : this.field.values.indexOf(this.field.defaultValue);
 			} else {
-				return this.field.defaultValue;
+				return Math.max(this.field.minValue, this.field.defaultValue);
 			}
 		} else { // edit
 			if (this.sliderEnabled) {

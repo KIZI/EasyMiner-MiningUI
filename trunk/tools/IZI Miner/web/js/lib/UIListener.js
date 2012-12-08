@@ -166,8 +166,13 @@ var UIListener = new Class({
 			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
 			var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
 
-			var validator = new IMValidator();
-			var valid = validator.validate(IM, action);
+            var validator = new IMValidator();
+            if (IM.getName() === 'SUPP') {
+                var valid = true;
+            } else {
+                var valid = validator.validate(IM, action);
+            }
+
 			if (valid) {
 				var thresholdValue = IM.hasThreshold() ? $(action + '-im-threshold-value').value : null;
 				var alphaValue = IM.hasAlpha() ? $(action + '-im-alpha-value').value : null;

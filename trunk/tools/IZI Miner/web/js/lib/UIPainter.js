@@ -346,7 +346,7 @@ var UIPainter = new Class({
 	renderIMAutocomplete: function (action, selectedIM) {
 		var elAutocomplete = $(action + '-im-form').getElement('.autocomplete').empty();
 		Array.each(selectedIM.getFields(), function (f) {
-			var IMSlider = new InterestMeasureSlider(elAutocomplete, f, action, selectedIM);
+			var IMSlider = new InterestMeasureSlider(elAutocomplete, f, action, selectedIM, this.ARBuilder.getDD().calculateMinimalSupport());
 		}.bind(this));
 	},
 
