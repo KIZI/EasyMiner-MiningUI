@@ -112,7 +112,7 @@ var UIStructurePainter = new Class({
     },
 
     resizeApplication: function() {
-        var width = $('antecedent').getSize().x + $('interest-measures').getSize().x + $('succedent').getSize().x + 1; // IE9 hack (+1)
+        var width = this.$elementSizeMeter.getWidth([$('antecedent'), $('interest-measures'), $('succedent')]) + 1; // IE9 hack (+1)
         $('ar-wrapper').setStyle('width', width);
 
         this.resizeWindow();
@@ -120,10 +120,8 @@ var UIStructurePainter = new Class({
 
     resizeWindow: function() {
         // fix wrapper width to 100%
-        var contentWidth = this.$elementSizeMeter.getWidth($('content'));
-        var navigationWidth = this.$elementSizeMeter.getWidth($('navigation'));
-        var wrapperWidth = contentWidth + navigationWidth;
-        if (wrapperWidth > window.getSize().x) {
+        var wrapperWidth = this.$elementSizeMeter.getWidth([$('content'), $('navigation')]);
+        if (wrapperWidth > this.$elementSizeMeter.getWidth([window])) {
             $('wrapper').setStyle('width', wrapperWidth);
         }
         else {

@@ -724,7 +724,7 @@ ul#attributes-by-group {
   font-size: 0.85em;
   position: relative;
   top: -1px;
-  left: 3px;
+  margin-left: 3px;
 }
 a#attributes-by-list,
 a#attributes-by-group {
@@ -832,151 +832,52 @@ li {
 li:hover {
   color: #000;
 }
-section#active-rule #antecedent {
-  float: left;
-  padding-right: 20px;
-}
-section#active-rule #antecedent > .cedent.empty {
-  border: 1px dashed #314e64;
-  padding: 10px;
-}
-section#active-rule #interest-measures {
-  width: 200px;
-  float: left;
-  padding-right: 20px;
-}
-section#active-rule #interest-measures > div > div {
-  float: left;
-  clear: left;
-  margin-bottom: 7px;
-}
-section#active-rule #interest-measures #add-im {
-  font-size: 14px;
-  background: transparent url("../images/sprite-icons.png") -167px -162px no-repeat;
-  margin: 0 0 0 55px;
-  padding-left: 20px;
-  float: left;
-}
-section#active-rule #interest-measures .name {
-  font-size: 14px;
-  width: 160px;
-  float: left;
-}
-section#active-rule #interest-measures .im-slider {
-  margin: 5px 0 6px;
-}
-section#active-rule #interest-measures .threshold,
-section#active-rule #interest-measures .alpha {
-  color: #7b0d2e;
-}
-section#active-rule #interest-measures .edit-im {
-  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  margin-right: 5px;
-  float: left;
-}
-section#active-rule #interest-measures > div > div:hover .edit-im {
-  visibility: visible;
-}
-section#active-rule #interest-measures .remove-im {
-  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  float: left;
-}
-section#active-rule #interest-measures > div > div:hover .remove-im {
-  visibility: visible;
-}
+section#active-rule #antecedent,
+section#active-rule #interest-measures,
 section#active-rule #succedent {
   float: left;
+  height: 200px;
 }
-section#active-rule #succedent > .cedent.empty {
-  border: 1px dashed #314e64;
-  padding: 10px;
-}
-section#active-rule > span.controls {
-  clear: both;
-}
-section#active-rule .cedent {
+section#active-rule #antecedent .cedent {
   float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
 }
-section#active-rule .cedent > .controls {
-  font-size: 14px;
-  text-align: right;
+section#active-rule #antecedent .cedent.empty {
+  border: 1px dashed #000;
 }
-section#active-rule .cedent > .controls a.group-fields {
+section#active-rule #antecedent .cedent a.group-fields {
   background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
   padding-left: 17px;
-  position: relative;
-  top: 18px;
   float: right;
 }
-section#active-rule .cedent .fields {
-  text-align: center;
-  min-height: 40px;
-}
-section#active-rule .cedent .fields .connective {
-  color: #360;
-  font-size: 14px;
-  margin: 0 3px 0 6px;
+section#active-rule #antecedent .cedent .fields .field {
+  float: left;
   height: 40px;
-  margin: 1px 2px 0 7px;
-  float: left;
+  margin: 0 2px;
 }
-section#active-rule .cedent .fields .connective a {
-  color: #360;
-}
-section#active-rule .cedent .fields .left-bracket,
-section#active-rule .cedent .fields .right-bracket {
-  font-size: 18px;
-  float: left;
-  position: relative;
-  top: -2px;
-}
-section#active-rule .cedent .fields .right-bracket {
-  margin-left: 8px;
-}
-section#active-rule .cedent .fields .field {
-  height: 40px;
-  margin-left: 5px;
-  float: left;
-}
-section#active-rule .cedent .fields .field ul li {
-  list-style-type: none;
-}
-section#active-rule .cedent .fields .field .field-drag {
-  cursor: move;
-  float: left;
-}
-section#active-rule .cedent .fields .field .coefficient {
+section#active-rule #antecedent .cedent .fields .field .coefficient {
   color: #925213;
   font-size: 0.85em;
   position: relative;
   top: -1px;
-  left: 3px;
+  margin-left: 3px;
 }
-section#active-rule .cedent .fields .field .change-sign.negative {
+section#active-rule #antecedent .cedent .fields .field .field-drag {
+  cursor: move;
+}
+section#active-rule #antecedent .cedent .fields .field .change-sign.negative,
+section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
   background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
-  width: 16px;
+  width: 13px;
   height: 20px;
   float: left;
 }
-section#active-rule .cedent .fields .field > .controls {
-  font-size: 12px;
-  text-align: right;
-}
-section#active-rule .cedent .fields .field .controls {
-  height: 18px;
-  position: absolute;
-  top: 298px;
-  clear: left;
-}
-section#active-rule .cedent .fields .field .controls a.edit-coefficient {
+section#active-rule #antecedent .cedent .fields .field .controls a.edit-coefficient {
   background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
   display: block;
   width: 16px;
@@ -985,7 +886,7 @@ section#active-rule .cedent .fields .field .controls a.edit-coefficient {
   margin-left: 2px;
   float: right;
 }
-section#active-rule .cedent .fields .field .controls a.remove-field {
+section#active-rule #antecedent .cedent .fields .field .controls a.remove-field {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
   display: block;
   width: 16px;
@@ -994,7 +895,7 @@ section#active-rule .cedent .fields .field .controls a.remove-field {
   margin-left: 5px;
   float: right;
 }
-section#active-rule .cedent .fields .field .controls a.mark-field {
+section#active-rule #antecedent .cedent .fields .field .controls a.mark-field {
   background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
   display: block;
   width: 16px;
@@ -1003,16 +904,16 @@ section#active-rule .cedent .fields .field .controls a.mark-field {
   float: right;
   visibility: hidden;
 }
-section#active-rule .cedent .fields .field .controls a.marked-field {
+section#active-rule #antecedent .cedent .fields .field .controls a.marked-field {
   background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
   display: block;
   width: 16px;
   height: 20px;
   margin-right: 3px;
-  float: left;
+  float: right;
   visibility: visible;
 }
-section#active-rule .cedent .fields .field .controls a.change-sign.positive {
+section#active-rule #antecedent .cedent .fields .field .controls a.change-sign.positive {
   background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
   display: block;
   width: 16px;
@@ -1020,17 +921,211 @@ section#active-rule .cedent .fields .field .controls a.change-sign.positive {
   float: right;
   visibility: hidden;
 }
-section#active-rule .cedent .fields .field:hover a.remove-field {
+section#active-rule #antecedent .cedent .fields .field:hover a.remove-field {
   visibility: visible;
 }
-section#active-rule .cedent .fields .field:hover a.edit-coefficient {
+section#active-rule #antecedent .cedent .fields .field:hover a.edit-coefficient {
   visibility: visible;
 }
-section#active-rule .cedent .fields .field:hover a.mark-field {
+section#active-rule #antecedent .cedent .fields .field:hover a.mark-field {
   visibility: visible;
 }
-section#active-rule .cedent .fields .field:hover a.change-sign.positive {
+section#active-rule #antecedent .cedent .fields .field:hover a.change-sign.positive {
   visibility: visible;
+}
+section#active-rule #antecedent .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
+  float: left;
+}
+section#active-rule #antecedent .cedent .fields .left-bracket,
+section#active-rule #antecedent .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+section#active-rule #antecedent .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+section#active-rule #antecedent >.cedent >.fields >.field,
+section#active-rule #antecedent >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+section#active-rule #interest-measures {
+  margin-left: 30px;
+  width: 200px;
+}
+section#active-rule #interest-measures #add-im {
+  font-size: 14px;
+  background: transparent url("../images/sprite-icons.png") -167px -162px no-repeat;
+  margin: 0 0 0 10px;
+  padding-left: 20px;
+  float: left;
+}
+section#active-rule #interest-measures .im {
+  float: left;
+  clear: left;
+  margin-bottom: 7px;
+}
+section#active-rule #interest-measures .im .name {
+  font-size: 14px;
+  width: 160px;
+  float: left;
+}
+section#active-rule #interest-measures .im .threshold,
+section#active-rule #interest-measures .im .alpha {
+  color: #7b0d2e;
+}
+section#active-rule #interest-measures .im .edit-im {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-right: 5px;
+  float: left;
+}
+section#active-rule #interest-measures .im:hover .edit-im {
+  visibility: visible;
+}
+section#active-rule #interest-measures .im .remove-im {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  float: left;
+}
+section#active-rule #interest-measures .im:hover .remove-im {
+  visibility: visible;
+}
+section#active-rule #succedent {
+  margin-left: 30px;
+}
+section#active-rule #succedent .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+section#active-rule #succedent .cedent.empty {
+  border: 1px dashed #000;
+}
+section#active-rule #succedent .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+section#active-rule #succedent .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+section#active-rule #succedent .cedent .fields .field .coefficient {
+  color: #925213;
+  font-size: 0.85em;
+  position: relative;
+  top: -1px;
+  margin-left: 3px;
+}
+section#active-rule #succedent .cedent .fields .field .field-drag {
+  cursor: move;
+}
+section#active-rule #succedent .cedent .fields .field .change-sign.negative,
+section#active-rule #succedent .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
+  float: left;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 2px;
+  float: right;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 5px;
+  float: right;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: hidden;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
+  float: left;
+}
+section#active-rule #succedent .cedent .fields .left-bracket,
+section#active-rule #succedent .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+section#active-rule #succedent .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+section#active-rule #succedent >.cedent >.fields >.field,
+section#active-rule #succedent >.cedent >.fields >.connective {
+  margin-top: 3px;
 }
 section#active-rule .no-restriction {
   background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
@@ -1049,8 +1144,7 @@ section#active-rule #action-box {
 }
 #pager {
   border: 1px solid #cac7bd;
-  line-height: 30px;
-  height: 500px;
+  height: 550px;
   overflow-y: hidden;
   display: none;
 }
@@ -1104,7 +1198,6 @@ section#active-rule #action-box {
 }
 #found-rules {
   clear: left;
-  line-height: 20px;
   padding-top: 20px;
 }
 #found-rules #stop-mining {
@@ -1125,124 +1218,166 @@ section#active-rule #action-box {
   float: left;
   clear: left;
 }
-#found-rules .connective {
-  color: #360;
-  font-size: 14px;
-  margin: 0 3px 0 6px;
+#found-rules .found-rule {
+  cursor: default;
 }
-#found-rules .coefficient {
+#found-rules .found-rule .rule {
+  float: left;
+  height: 38px;
+}
+#found-rules .found-rule .rule .id {
+  font-size: 0.8em;
+  text-align: right;
+  display: block;
+  width: 35px;
+  margin-right: 3px;
+  margin-top: 9px;
+  float: left;
+}
+#found-rules .found-rule .rule .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+#found-rules .found-rule .rule .cedent.empty {
+  border: 1px dashed #000;
+}
+#found-rules .found-rule .rule .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+#found-rules .found-rule .rule .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+#found-rules .found-rule .rule .cedent .fields .field .coefficient {
   color: #925213;
   font-size: 0.85em;
   position: relative;
   top: -1px;
-  left: 3px;
+  margin-left: 3px;
 }
-#found-rules .left-bracket,
-#found-rules .right-bracket {
-  font-size: 18px;
+#found-rules .found-rule .rule .cedent .fields .field .field-drag {
+  cursor: move;
 }
-#found-rules .left-bracket {
-  margin-right: 2px;
-  position: relative;
-  top: -1px;
-}
-#found-rules .right-bracket {
-  margin-left: 5px;
-}
-#found-rules .rule {
-  line-height: 25px;
+#found-rules .found-rule .rule .cedent .fields .field .change-sign.negative,
+#found-rules .found-rule .rule .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
   float: left;
 }
-#found-rules .ims {
-  font-size: 12px;
-  float: left;
-  clear: left;
-  position: relative;
-  top: -5px;
-  left: 27px;
-}
-#found-rules .im-value {
-  color: #7b0d2e;
-  margin-left: 0.5ex;
-}
-#found-rules .info {
-  font-weight: normal;
-  background: transparent url("../images/sprite-icons.png") -17px -718px no-repeat;
-  display: none;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: 6px;
-  left: 3px;
-  margin-right: 10px;
-  float: left;
-}
-#found-rules .bk {
-  background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
+#found-rules .found-rule .rule .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
   display: block;
   width: 16px;
-  height: 16px;
-  position: relative;
-  top: 5px;
-  margin: 0 10px;
+  height: 20px;
   visibility: hidden;
-  float: left;
+  margin-left: 2px;
+  float: right;
 }
-#found-rules li:hover > .bk {
-  visibility: visible;
-}
-#found-rules .mark {
-  background: transparent url("../images/sprite-icons.png") -18px -68px no-repeat;
-  display: block;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: 5px;
-  margin-left: 10px;
-  visibility: hidden;
-  float: left;
-}
-#found-rules li:hover > .mark {
-  visibility: visible;
-}
-#found-rules .clear {
+#found-rules .found-rule .rule .cedent .fields .field .controls a.remove-field {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
   display: block;
   width: 16px;
   height: 20px;
   visibility: hidden;
-  position: relative;
-  top: 2px;
   margin-left: 5px;
-  float: left;
+  float: right;
 }
-#found-rules li:hover > .clear {
-  list-style-type: none;
-  visibility: visible;
-}
-#found-rules #view-task-setting,
-#found-rules #view-task-result {
-  background: transparent url("../images/sprite-icons.png") -11px -557px no-repeat;
-  height: 26px;
-  float: left;
-  padding: 6px 0 0 37px;
-  margin: 5px 25px 0 0;
+#found-rules .found-rule .rule .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
   visibility: hidden;
 }
-.found-rule {
-  cursor: default;
-}
-.found-rule .id {
-  width: 25px;
-  font-size: 0.8em;
-  text-align: right;
+#found-rules .found-rule .rule .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
   display: block;
-  width: 25px;
+  width: 16px;
+  height: 20px;
   margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
   float: left;
 }
-.found-rule .loading {
-  background: transparent url("../images/icon-loading-small.gif") 0 5px no-repeat;
+#found-rules .found-rule .rule .cedent .fields .left-bracket,
+#found-rules .found-rule .rule .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+#found-rules .found-rule .rule .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+#found-rules .found-rule .rule >.cedent >.fields >.field,
+#found-rules .found-rule .rule >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+#found-rules .found-rule .rule .quantifier {
+  float: left;
+  margin-top: 5px;
+}
+#found-rules .found-rule .rule .field {
+  height: auto !important;
+}
+#found-rules .found-rule .rule .left-bracket,
+#found-rules .found-rule .rule right-bracket {
+  top: -3px !important;
+}
+#found-rules .found-rule .ims {
+  font-size: 12px;
+  float: left;
+  clear: left;
+  position: relative;
+  top: -8px;
+  left: 44px;
+}
+#found-rules .found-rule .ims .im-value {
+  color: #7b0d2e;
+  margin-left: 0.5ex;
+}
+#found-rules .found-rule .loading {
+  background: transparent url("../images/icon-loading-small.gif") 0 8px no-repeat;
   display: block;
   width: 20px;
   height: 24px;
@@ -1250,7 +1385,7 @@ section#active-rule #action-box {
   visibility: hidden;
   float: right;
 }
-.found-rule .tip-visible {
+#found-rules .found-rule .tip-visible {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -1261,9 +1396,68 @@ section#active-rule #action-box {
   height: 22px;
   padding: 7px 5px 0 10px;
 }
-.found-rule .field-sign.negative {
-  background: transparent url("../images/sprite-icons.png") -118px -162px no-repeat;
-  padding: 0 2px 0 13px;
+#found-rules .found-rule .bk {
+  background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 9px;
+  margin: 0 10px;
+  visibility: hidden;
+  float: left;
+}
+#found-rules .found-rule:hover > .bk {
+  visibility: visible;
+}
+#found-rules .found-rule .mark {
+  background: transparent url("../images/sprite-icons.png") -18px -68px no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 9px;
+  margin-left: 10px;
+  visibility: hidden;
+  float: left;
+}
+#found-rules .found-rule:hover > .mark {
+  visibility: visible;
+}
+#found-rules .found-rule .clear {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  position: relative;
+  top: 7px;
+  margin-left: 5px;
+  float: left;
+}
+#found-rules .found-rule:hover > .clear {
+  visibility: visible;
+}
+#found-rules .found-rule .info {
+  font-weight: normal;
+  background: transparent url("../images/sprite-icons.png") -17px -718px no-repeat;
+  display: none;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 10px;
+  left: 3px;
+  margin-right: 10px;
+  float: left;
+}
+#found-rules #view-task-setting,
+#found-rules #view-task-result {
+  background: transparent url("../images/sprite-icons.png") -11px -557px no-repeat;
+  height: 26px;
+  float: left;
+  padding: 6px 0 0 37px;
+  margin: 5px 25px 0 0;
+  visibility: hidden;
 }
 #marked-rules {
   color: #434343;
@@ -1290,59 +1484,189 @@ section#active-rule #action-box {
   margin-bottom: 5px;
 }
 #marked-rules ul {
-  list-style-type: none;
+  width: 100%;
   padding-left: 0;
+  float: left;
+  margin-left: 25px;
 }
 #marked-rules ul li {
-  line-height: 30px;
+  width: 100%;
+  padding-left: 0;
   float: left;
   clear: left;
 }
-#marked-rules ul li:hover > .clear {
-  visibility: visible;
-}
-#marked-rules .rule {
+#marked-rules .marked-rule {
   cursor: default;
-  line-height: 25px;
+}
+#marked-rules .marked-rule .rule {
+  float: left;
+  height: 38px;
+}
+#marked-rules .marked-rule .rule .id {
+  font-size: 0.8em;
+  text-align: right;
+  display: block;
+  width: 35px;
+  margin-right: 3px;
+  margin-top: 9px;
   float: left;
 }
-#marked-rules .coefficient {
+#marked-rules .marked-rule .rule .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+#marked-rules .marked-rule .rule .cedent.empty {
+  border: 1px dashed #000;
+}
+#marked-rules .marked-rule .rule .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .coefficient {
   color: #925213;
   font-size: 0.85em;
   position: relative;
   top: -1px;
-  left: 3px;
+  margin-left: 3px;
 }
-#marked-rules .connective {
-  color: #360;
-  font-size: 14px;
-  margin: 0 3px 0 6px;
+#marked-rules .marked-rule .rule .cedent .fields .field .field-drag {
+  cursor: move;
 }
-#marked-rules .ims {
-  font-size: 12px;
+#marked-rules .marked-rule .rule .cedent .fields .field .change-sign.negative,
+#marked-rules .marked-rule .rule .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
   float: left;
-  clear: left;
-  position: relative;
-  top: -5px;
 }
-#marked-rules .im-value {
-  color: #7b0d2e;
-  margin-left: 0.5ex;
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 2px;
+  float: right;
 }
-#marked-rules .clear {
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.remove-field {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
   display: block;
   width: 16px;
   height: 20px;
   visibility: hidden;
-  margin-left: 20px;
+  margin-left: 5px;
+  float: right;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: hidden;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
   position: relative;
-  top: 2px;
+  top: 1px;
+  margin: 0 1px;
   float: left;
 }
-#marked-rules .field-sign.negative {
-  background: transparent url("../images/sprite-icons.png") -118px -173px no-repeat;
-  padding-left: 13px;
+#marked-rules .marked-rule .rule .cedent .fields .left-bracket,
+#marked-rules .marked-rule .rule .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+#marked-rules .marked-rule .rule .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+#marked-rules .marked-rule .rule >.cedent >.fields >.field,
+#marked-rules .marked-rule .rule >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+#marked-rules .marked-rule .rule .quantifier {
+  float: left;
+  margin-top: 5px;
+}
+#marked-rules .marked-rule .rule .field {
+  height: auto !important;
+}
+#marked-rules .marked-rule .rule .left-bracket,
+#marked-rules .marked-rule .rule right-bracket {
+  top: -3px !important;
+}
+#marked-rules .marked-rule .ims {
+  font-size: 12px;
+  float: left;
+  clear: left;
+  position: relative;
+  top: -8px;
+  left: 44px;
+  left: 5px;
+}
+#marked-rules .marked-rule .ims .im-value {
+  color: #7b0d2e;
+  margin-left: 0.5ex;
+}
+#marked-rules .marked-rule .clear {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  position: relative;
+  top: 7px;
+  margin-left: 5px;
+  float: left;
+}
+#marked-rules .marked-rule:hover > .clear {
+  visibility: visible;
 }
 footer {
   color: #434343;

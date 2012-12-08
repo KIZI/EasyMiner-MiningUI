@@ -12,16 +12,17 @@ var FieldFR = new Class({
 	},
 
     toString: function () {
-        var string = '';
+        var string = '<span class="field">';
         if (!this.hasPositiveSign()) {
             string += '<span class="field-sign negative"></span>';
         }
 
-        if (this.category.contains('<') || this.category.contains('>')) {
-            string += this.getAttributeName() + '<span class="coefficient">' + this.category + '</span>';
+        if (this.category.join().contains('<') || this.category.join().contains('>')) {
+            string += this.getAttributeName() + '<span class="coefficient">' + this.category.join(', ') + '</span>';
         } else {
-            string += this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
+            string += this.getAttributeName() + '<span class="coefficient">(' + this.category.join(', ') + ')</span>';
         }
+        string += '</span>';
 
         return string;
     }

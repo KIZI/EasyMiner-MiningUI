@@ -167,7 +167,7 @@ test('getNumFields', function() {
 test('toString - empty', function() {
     var cedent = new Cedent();
 
-    strictEqual(cedent.toString(), 'Empty');
+    strictEqual(cedent.toString().stripTags(), 'Empty');
 });
 
 test('toString - two fields, level one', function() {

@@ -10,36 +10,30 @@
     margin-bottom 5px
 
   ul
-    list-style-type none
+    width 100%
     padding-left 0
-    li
-      line-height 30px
-      float left; clear left
-    li:hover > .clear
-      visibility visible
-
-  .rule
-    cursor default
-    associationRule()
-
-  .coefficient
-    coefficient()
-
-  .connective
-    connective()
-
-  .ims
-    ims()
-
-  .im-value
-    imValue()
-
-  .clear
-    remove()
-    margin-left 20px
-    position relative; top 2px
     float left
+    margin-left 25px
+    li
+      width 100%
+      padding-left 0
+      float left; clear left
 
-  .field-sign.negative
-    background transparent url('../images/sprite-icons.png') -118px -173px no-repeat
-    padding-left 13px
+  .marked-rule
+    cursor default
+    .rule
+      associationRule()
+      .field
+        height auto !important
+      .left-bracket, right-bracket
+       top -3px !important
+    .ims
+      ims()
+      left 5px
+    .clear
+      remove()
+      position relative; top 7px
+      margin-left 5px
+      float left
+    &:hover > .clear
+      visibility visible

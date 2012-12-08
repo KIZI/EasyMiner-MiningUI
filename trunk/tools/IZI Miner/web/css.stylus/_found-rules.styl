@@ -1,8 +1,6 @@
 #found-rules
   clear left
-  line-height 20px
   padding-top 20px
-
   #stop-mining
     background transparent url('../images/sprite-icons.png') -14px -511px  no-repeat
     height 24px
@@ -19,70 +17,55 @@
       padding-left 0
       float left; clear left
 
-  .connective
-    connective()
-
-  .coefficient
-    coefficient()
-
-  .left-bracket,
-  .right-bracket
-    font-size 18px
-  .left-bracket
-    margin-right 2px
-    position relative; top -1px
-  .right-bracket
-    margin-left 5px
-
-  .rule
-    associationRule()
-
-  .ims
-    ims()
-    left 27px
-
-  .im-value
-    imValue()
-
-  .info
-    font-weight normal
-    background transparent url('../images/sprite-icons.png') -17px -718px no-repeat
-    display none; width 16px; height 16px
-    position relative; top 6px; left 3px
-    margin-right 10px
-    float left
-
-  .bk
-    background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
-    display block; width 16px; height 16px
-    position relative; top 5px
-    margin 0 10px
-    visibility hidden
-    float left
-
-  li:hover > .bk
-    visibility visible
-
-  .mark
-    background transparent url('../images/sprite-icons.png') -18px -68px no-repeat
-    display block; width 16px; height 16px
-    position relative; top 5px
-    margin-left 10px
-    visibility hidden
-    float left
-
-  li:hover > .mark
-    visibility visible
-
-  .clear
-    remove()
-    position relative; top 2px
-    margin-left 5px
-    float left
-
-  li:hover > .clear
-    list-style-type none
-    visibility visible
+  .found-rule
+    cursor default
+    .rule
+      associationRule()
+      .field
+        height auto !important
+      .left-bracket, right-bracket
+       top -3px !important
+    .ims
+      ims()
+    .loading
+      background transparent url("../images/icon-loading-small.gif") 0 8px no-repeat
+      display block; width 20px; height 24px
+      opacity 0; visibility hidden
+      float right
+    .tip-visible
+      tip()
+    .bk
+      background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
+      display block; width 16px; height 16px
+      position relative; top 9px
+      margin 0 10px
+      visibility hidden
+      float left
+    &:hover > .bk
+      visibility visible
+    .mark
+      background transparent url('../images/sprite-icons.png') -18px -68px no-repeat
+      display block; width 16px; height 16px
+      position relative; top 9px
+      margin-left 10px
+      visibility hidden
+      float left
+    &:hover > .mark
+      visibility visible
+    .clear
+      remove()
+      position relative; top 7px
+      margin-left 5px
+      float left
+    &:hover > .clear
+      visibility visible
+    .info
+      font-weight normal
+      background transparent url('../images/sprite-icons.png') -17px -718px no-repeat
+      display none; width 16px; height 16px
+      position relative; top 10px; left 3px
+      margin-right 10px
+      float left
 
   #view-task-setting,
   #view-task-result
@@ -91,27 +74,3 @@
     float left
     padding 6px 0 0 37px; margin 5px 25px 0 0
     visibility hidden
-
-.found-rule
-  cursor default
-
-  .id
-    width 25px
-    font-size 0.8em
-    text-align right
-    display block; width 25px
-    margin-right 3px
-    float left
-
-  .loading
-    background transparent url("../images/icon-loading-small.gif") 0 5px no-repeat
-    display block; width 20px; height 24px
-    opacity 0; visibility hidden
-    float right
-
-  .tip-visible
-    tip()
-
-  .field-sign.negative
-    background transparent url('../images/sprite-icons.png') -118px -162px no-repeat
-    padding 0 2px 0 13px

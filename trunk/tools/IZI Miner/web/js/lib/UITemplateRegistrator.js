@@ -47,7 +47,7 @@ var UITemplateRegistrator = new Class({
 			var IM = data.IM,
 			    i18n = data.i18n;
 			
-			div({id: IM.getCSSID()},
+			div({id: IM.getCSSID(), class: 'im'},
 				span({'class': 'name', 'title': IM.getFields().localizedName}, 
 					IM.getLocalizedName() + ': ', 
 					IM.hasThreshold() ? span({'class': 'threshold'}, IM.getThreshold()) : '', 
@@ -64,11 +64,7 @@ var UITemplateRegistrator = new Class({
 
 			div({id: cedent.getCSSID(), 'class': 'cedent' + (cedent.getNumFields() === 0 ? ' empty': '')},
 				div({id: cedent.getCSSFieldsID(), 'class': 'fields'}, !cedent.getNumFields() ? '<span class="info">Drag & Drop<br/>attribute here</span>' : ''),
-                div({'class': 'controls'},
-					span({id: cedent.getCSSInfoID(), 'class': 'info'},
-						 rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + i18n.translate('Group marked fields') + '</a>' : ''
-                    )
-                )
+			    rule.getGroupFields() && cedent.displayGroupButton() ? '<a href="#" id="' + cedent.getCSSGroupFieldsConfirmID() + '" class="group-fields">' + i18n.translate('Group marked fields') + '</a>' : ''
             );
 		});
 
@@ -296,9 +292,9 @@ var UITemplateRegistrator = new Class({
 			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
-				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getLocalizedName());
+				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
 			} else {
-				option({'value': coefficient.getName()}, coefficient.getLocalizedName());
+				option({'value': coefficient.getName()}, coefficient.getName());
 			}
 		});
 		
@@ -307,9 +303,9 @@ var UITemplateRegistrator = new Class({
                 isSelected = data.isSelected;
 
 			if (isSelected === true) {
-				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getLocalizedName());
+				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
 			} else {
-				option({'value': coefficient.getName()}, coefficient.getLocalizedName());
+				option({'value': coefficient.getName()}, coefficient.getName());
 			}
 		});
 		
@@ -340,10 +336,13 @@ var UITemplateRegistrator = new Class({
 				a({id: 'edit-connective-close', href: '#'}, i18n.translate('Close')),
 				h2(i18n.translate('Edit connective')),
 				form({action: '#', method: 'POST', id: 'edit-connective-form'},
-					label({'for': 'edit-connective-select'}, i18n.translate('Connective')),
-					select({name: 'edit-connective-select', id: 'edit-connective-select'}),
-					input({type: 'submit', value: i18n.translate('Edit')})),
-				div({'class': 'clearfix'}));
+					div({class: 'clearfix'},
+                        label({'for': 'edit-connective-select'}, i18n.translate('Connective')),
+					    select({name: 'edit-connective-select', id: 'edit-connective-select'})
+                    ),
+					input({type: 'submit', value: i18n.translate('Edit')})
+                )
+		    );
 		});
 		
 		Mooml.register('editConnectiveWindowSelectOptionTemplate', function (data) {
@@ -383,7 +382,7 @@ var UITemplateRegistrator = new Class({
 			var rule = data.rule,
 			    i18n = data.i18n;
 
-			li({id: rule.getMarkedRuleCSSID()},
+			li({id: rule.getMarkedRuleCSSID(), class: 'marked-rule'},
 				span({'class': 'rule'}, rule.getIdent()), 
 				a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}),
 				span({'class': 'ims'}, rule.getIMIdent()));

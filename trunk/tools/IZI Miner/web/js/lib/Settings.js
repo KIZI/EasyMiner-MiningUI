@@ -4,8 +4,8 @@ var Settings = new Class({
 
 	$rulesCnt: 1000,
     $caching: false,
-    $debug: true,
-	$BKAutoSearch: false,
+    $debug: false,
+	$BKAutoSearch: true,
 	$recEnabled: true,
 	foundRules: {
 		AJAXBalancerLimit: 10,

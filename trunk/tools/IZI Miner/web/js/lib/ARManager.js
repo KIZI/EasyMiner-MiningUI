@@ -116,9 +116,9 @@ var ARManager = new Class({
 		this.UIPainter.renderActiveRule();
 	},
 	
-	addAttribute: function (cedent, attribute, position) {
+	addAttribute: function (cedent, attribute) {
 		var field = new FieldAR(this.generateFieldID(), attribute, null, new StringHelper());
-		cedent.addChild(field, position);
+		cedent.addChild(field);
 
 		this.UIPainter.renderActiveRule();
 		this.openAddCoefficientWindow(field);

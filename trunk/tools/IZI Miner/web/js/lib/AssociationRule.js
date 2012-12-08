@@ -35,15 +35,15 @@ var AssociationRule = new Class({
 		if (this.antecedent !== null) {
 			ident += this.antecedent.toString();
 		} else {
-			ident += 'Empty';
+			ident += '<div class="cedent">Empty</div>';
 		}
 		
-		ident += ' => ';
+		ident += '<span class="quantifier">=></span>';
 		
 		if (this.succedent !== null) {
 			ident += this.succedent.toString();
 		} else {
-			ident += 'Empty';
+			ident += '<div class="cedent">Empty</div>';
 		}
 		
 		return ident;

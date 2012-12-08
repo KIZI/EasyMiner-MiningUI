@@ -34,32 +34,139 @@ h2AR()
   border-bottom none
 
 associationRule()
-  line-height 25px
   float left
+  height 38px
+  .id
+    font-size 0.8em
+    text-align right
+    display block; width 35px
+    margin-right 3px; margin-top 9px
+    float left
+  .cedent
+    cedent()
+  >.cedent
+    firstCedent()
+  .quantifier
+    float left
+    margin-top 5px
+
+cedent()
+  float left
+  border 1px dashed #FFF
+  border-radius(10px)
+  background-color #FFF
+  padding 2px
+  &.empty
+    border 1px dashed #000
+  a.group-fields
+    background transparent url('../images/sprite-icons.png') -168px -215px no-repeat
+    padding-left 17px
+    float right
+  .fields
+    fields()
+  .group-fields
+    font-size 14px
+    position relative; top 23px
+
+fields()
+  .field
+    field()
+  .field:hover
+    a.remove-field
+      visibility visible
+    a.edit-coefficient
+      visibility visible
+    a.mark-field
+      visibility visible
+    a.change-sign.positive
+      visibility visible
+  .connective
+    connective()
+  .left-bracket,
+  .right-bracket
+    bracket()
+
+field()
+  float left
+  height 40px
+  margin 0 2px
+  .coefficient
+    coefficient()
+  .field-drag
+    cursor move
+  .change-sign.negative,
+  .field-sign.negative
+    background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
+    width 13px; height 20px
+    float left
+  .controls
+    fieldControls()
+
+fieldControls()
+  a.edit-coefficient
+    edit()
+    margin-left 2px
+    float right
+  a.remove-field
+    remove()
+    margin-left 5px
+    float right
+  a.mark-field
+    background transparent url('../images/sprite-icons.png') -67px -212px no-repeat
+    display block; width 16px; height 20px
+    margin-right 3px
+    float right
+    visibility hidden
+  a.marked-field
+    background transparent url('../images/sprite-icons.png') -68px -260px no-repeat
+    display block; width 16px; height 20px
+    margin-right 3px
+    float right
+    visibility visible
+  a.change-sign.positive
+    background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
+    display block; width 16px; height 20px
+    float right
+    visibility hidden
+
+firstCedent()
+  >.fields
+    >.field, >.connective
+        margin-top 3px
 
 coefficient()
   color #925213
   font-size 0.85em
-  position relative; top -1px; left 3px
+  position relative; top -1px;
+  margin-left 3px
 
 connective()
   color #336600
   font-size 14px
-  margin 0 3px 0 6px
-
-ims()
-  font-size 12px;
-  float left; clear left
-  position relative; top -5px
-
-imValue()
-  color #7B0D2E
-  margin-left 0.5ex
+  position relative; top 1px
+  margin 0 1px
+  float left
 
 bracket()
   font-size 18px
   float left
   position relative; top -2px
+
+interestMeasureMixin()
+  .name
+    font-size 14px
+    width 160px
+    float left
+  .threshold, .alpha
+    color interestMeasureValueColor
+
+ims()
+  font-size 12px;
+  float left; clear left
+  position relative; top -8px; left 44px
+  .im-value
+    color interestMeasureValueColor
+    margin-left 0.5ex
 
 edit()
   background transparent url('../images/sprite-icons.png') -19px -262px no-repeat
