@@ -23,7 +23,7 @@ var UIListener = new Class({
             if (event.rightClick) { return false; } // disable right click drag & drop
 
             var draggable = this.$dragDropHelper.createDraggable($(attribute.getCSSID()));
-            var droppable = $$('div.cedent');
+            var droppable = $$('#active-rule div.cedent');
             var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getCedentBackgroundColor(), borderColor: this.$colorHelper.getCedentBorderColor(), highlightColor: this.$colorHelper.getCedentHighlightBackgroundColor(), highlightBorderColor: this.$colorHelper.getCedentHighlightBorderColor(), enterColor: this.$colorHelper.getCedentEnterBackgroundColor(), callback: function(element) { element.fireEvent('addAttribute', attribute); }});
 
 		    drag.start(event);
@@ -66,7 +66,7 @@ var UIListener = new Class({
             if (event.rightClick) { return false; } // disable right click drag & drop
 
             var draggable = this.$dragDropHelper.createDraggable($(field.getCSSID()));
-            var droppable = $$('div.cedent');
+            var droppable = $$('#active-rule div.cedent');
             var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getCedentBackgroundColor(), borderColor: this.$colorHelper.getCedentBorderColor(), highlightColor: this.$colorHelper.getCedentHighlightBackgroundColor(), highlightBorderColor: this.$colorHelper.getCedentHighlightBorderColor(), enterColor: this.$colorHelper.getCedentEnterBackgroundColor(), callback: function(element) { element.fireEvent('addField', field); }});
 			
 			drag.start(event);
@@ -365,7 +365,7 @@ var UIListener = new Class({
             if (event.rightClick) { return false; } // disable right click drag & drop
 
             var draggable = this.$dragDropHelper.createDraggable($(field.getCSSDragID()));
-            var droppable = $$('div.cedent');
+            var droppable = $$('#active-rule div.cedent');
             var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getCedentBackgroundColor(), borderColor: this.$colorHelper.getCedentBorderColor(), highlightColor: this.$colorHelper.getCedentHighlightBackgroundColor(), highlightBorderColor: this.$colorHelper.getCedentHighlightBorderColor(), enterColor: this.$colorHelper.getCedentEnterBackgroundColor(), callback: function(element) { if (element !== $(cedent.getCSSID())) { element.fireEvent('addFieldAR', field); }}});
 
 			drag.start(event);
