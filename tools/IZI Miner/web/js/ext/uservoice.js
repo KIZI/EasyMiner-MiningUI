@@ -1,8 +1,8 @@
-window.addEvent('domready', function () {
+//window.addEvent('domready', function () {
     var uvOptions = {};
     (function() {
         var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
         uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/GGnadVA9yewxtwX7QiiPg.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
     })();
-});
+//});
