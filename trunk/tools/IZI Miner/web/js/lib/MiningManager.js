@@ -10,6 +10,7 @@ var MiningManager = new Class({
     taskId: '',
     requestData: {},
 	finishedStates: ['Solved', 'Interrupted'],
+    errorStates: ['Failed'],
 	reqDelay: 2500,
 	
 	initialize: function (config, settings, FRManager, dateHelper) {
@@ -46,7 +47,7 @@ var MiningManager = new Class({
 	        secure: true,
 	            
 	        onSuccess: function(responseJSON, responseText) {
-                if (responseJSON.status == 'ok') {
+                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
 	        	    this.handleSuccessRequest(data, responseJSON);
                 } else {
                     this.handleErrorRequest();
@@ -93,8 +94,10 @@ var MiningManager = new Class({
 	handleErrorRequest: function () {
         if (!this.inProgress) { return; }
 
+        var taskId = this.taskId;
 		this.stopMining();
 		this.FRManager.handleError();
+        throw 'Failed task: ID: ' + taskId + ', source ID: ' + this.config.getIdDm();
 	},
 	
 	addRequest: function (request) {
