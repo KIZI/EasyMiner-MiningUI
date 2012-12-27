@@ -588,7 +588,7 @@ test('serialize - empty children', function() {
 });
 
 test('serialize - children', function() {
-    var cedent = new Cedent(null, 1, new Connective(null, 'Conjunction'), [new FieldAR(null, new Attribute('Age'), 'One category', null, 'low'), new Cedent(null, 1, new Connective(null, 'Conjunction'), [])]);
+    var cedent = new Cedent(null, 1, new Connective(null, 'Conjunction'), [new FieldAR(null, new Attribute('Age'), 'One category', null, null, 'low'), new Cedent(null, 1, new Connective(null, 'Conjunction'), [])]);
     var serialized = cedent.serialize();
 
     strictEqual(serialized.children.length, 2);

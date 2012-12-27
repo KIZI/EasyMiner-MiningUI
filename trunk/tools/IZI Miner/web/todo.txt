@@ -1,9 +1,6 @@
-TODO
-==============
 - probably a hidden FL bug, serializers / parsers are using the same all the time
 - pager need to be rewritten
 
-•	možnost zobrazit náhled na hodnoty konkrétního data fieldu (ideálně i histogram?)
 •	u otazníku se nezobrazuje nápověda, dokud uživatel nepřesune myš mimo pravidlo a nevrátí ji zpátky (FF, Chrome)
 
 

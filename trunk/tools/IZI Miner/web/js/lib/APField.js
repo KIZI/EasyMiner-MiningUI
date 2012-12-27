@@ -20,6 +20,10 @@ var APField = new Class({
         return 'field-nav-' + this.getNormalizedName();
     },
 
+    getCSSAddID: function () {
+        return 'field-nav-add-' + this.getNormalizedName();
+    },
+
     load: function(obj) {
         this.$name = obj.$name;
         this.$value = obj.$value;

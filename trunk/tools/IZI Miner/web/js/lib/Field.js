@@ -3,6 +3,7 @@ var Field = new Class({
 	id: 0,
 	ref: null,
 	type: null,
+	localizedName: null,
 	minimalLength: null,
 	maximalLength: null,
 	category: null,
@@ -13,12 +14,13 @@ var Field = new Class({
 		this.id = arguments[0];
 		this.ref = arguments[1];
 		this.type = arguments[2];
-		this.stringHelper = arguments[3];
-		if (arguments.length === 5) { // One category
-			this.category = arguments[4];
-		} else if (arguments.length === 6) { // Interval, Cut, ...
-			this.minimalLength = arguments[4];
-			this.maximalLength = arguments[5];
+		this.localizedName = arguments[3];
+		this.stringHelper = arguments[4];
+		if (arguments.length === 6) { // One category
+			this.category = arguments[5];
+		} else if (arguments.length === 7) { // Interval, Cut, ...
+			this.minimalLength = arguments[5];
+			this.maximalLength = arguments[6];
 		}
 	},
 	
@@ -33,7 +35,11 @@ var Field = new Class({
 	getType: function () {
 		return this.type;
 	},
-	
+
+    getLocalizedName: function () {
+        return this.localizedName;
+    },
+
 	getMinimalLength: function () {
 		return this.minimalLength;
 	},
@@ -71,15 +77,17 @@ var Field = new Class({
 	},
 	
 	setCoefficient: function () {
-		if (arguments.length === 2) { // One category
+		if (arguments.length === 3) { // One category
 			this.type = arguments[0];
 			this.minimalLength = null;
 			this.maximalLength = null;
-			this.category = arguments[1];
+			this.localizedName = arguments[1];
+			this.category = arguments[2];
 		} else {
 			this.type = arguments[0];
-			this.minimalLength = arguments[1];
-			this.maximalLength = arguments[2];
+			this.localizedName = arguments[1];
+			this.minimalLength = arguments[2];
+			this.maximalLength = arguments[3];
 			this.category = null;
 		}
 	},
@@ -114,7 +122,7 @@ var Field = new Class({
         } else if (this.type == 'Subset' && this.minimalLength == 1 && this.maximalLength == 1) {
             string += this.getAttributeName() + '<span class="coefficient">(*)</span>';
         } else {
-            string += this.getAttributeName() + '<span class="coefficient">(*' + this.type + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
+            string += this.getAttributeName() + '<span class="coefficient">(*' + this.getLocalizedName() + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
 		}
 
         return string;

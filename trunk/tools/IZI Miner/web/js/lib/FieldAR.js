@@ -6,12 +6,12 @@ var FieldAR = new Class({
 	marked: false,
 
 	initialize: function () {
-		if (arguments.length === 5) {
-			this.parent(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
-		} else if (arguments.length === 6) {
+		if (arguments.length === 6) {
 			this.parent(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+		} else if (arguments.length === 7) {
+			this.parent(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6]);
 		} else {
-			this.parent(arguments[0], arguments[1], arguments[2], arguments[3]);
+			this.parent(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
 		}
 	},
 	

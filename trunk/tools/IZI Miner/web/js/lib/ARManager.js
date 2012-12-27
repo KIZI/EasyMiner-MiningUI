@@ -123,12 +123,21 @@ var ARManager = new Class({
 	},
 	
 	addAttribute: function (cedent, attribute) {
-		var field = new FieldAR(this.generateFieldID(), attribute, null, new StringHelper());
+		var field = new FieldAR(this.generateFieldID(), attribute, null, null, new StringHelper());
 		cedent.addChild(field);
 
 		this.UIPainter.renderActiveRule();
 		this.openAddCoefficientWindow(field);
 	},
+
+    addAttributeToCedent: function(attribute) {
+        var field = new FieldAR(this.generateFieldID(), attribute, 'Subset', null, new StringHelper(), 1, 1);
+        this.activeRule.getAntecedent().addChild(field);
+        if (!this.attributesByGroup) {
+            this.sortAttributes();
+        }
+        this.UIPainter.renderActiveRule();
+    },
 	
 	openAddCoefficientWindow: function(field) {
 		this.UIPainter.renderAddCoefficientWindow(field);
@@ -136,10 +145,10 @@ var ARManager = new Class({
 	
 	addCoefficient: function() {
 		var field = arguments[0];
-		if (arguments.length === 3) { // One category
-			field.setCoefficient(arguments[1], arguments[2]);
-		} else {
+		if (arguments.length === 4) { // One category
 			field.setCoefficient(arguments[1], arguments[2], arguments[3]);
+		} else {
+			field.setCoefficient(arguments[1], arguments[2], arguments[3], arguments[4]);
 		}
 
 		if (!this.attributesByGroup) {
@@ -152,10 +161,10 @@ var ARManager = new Class({
 	
 	editCoefficient: function() {
 		var field = arguments[0];
-		if (arguments.length === 3) { // One category
-			field.setCoefficient(arguments[1], arguments[2]);
-		} else {
+		if (arguments.length === 4) { // One category
 			field.setCoefficient(arguments[1], arguments[2], arguments[3]);
+		} else {
+			field.setCoefficient(arguments[1], arguments[2], arguments[3], arguments[4]);
 		}
 		
 		this.setActiveRuleChanged();
@@ -205,9 +214,9 @@ var ARManager = new Class({
 	addField: function (field, cedent) {
         var fieldAR = {};
 		if (field.getType() === 'One category') {
-			fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getCategory());
+			fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), field.getLocalizedName(), new StringHelper(), field.getCategory());
 		} else {
-			fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
+			fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), field.getLocalizedName(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
 		}
 		this.activeRule.addField(fieldAR, cedent);
 		this.UIPainter.renderActiveRule();
@@ -243,9 +252,9 @@ var ARManager = new Class({
         Object.each(FG.getFields(), function (field) {
             var fieldAR = {};
 			if (field.getType() === 'One category') {
-				fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getCategory());
+				fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), field.getLocalizedName(), new StringHelper(), field.getCategory());
 			} else {
-				fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
+				fieldAR = new FieldAR(this.generateFieldID(), field.getRef(), field.getType(), field.getLocalizedName(), new StringHelper(), field.getMinimalLength(), field.getMaximalLength());
 			}
 			this.activeRule.addField(fieldAR, cedent);
 		}.bind(this));

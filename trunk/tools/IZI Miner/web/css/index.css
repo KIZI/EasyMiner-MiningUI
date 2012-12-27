@@ -626,6 +626,9 @@ header #settings a {
   font-weight: bold;
   text-decoration: none;
   padding-right: 12px;
+  display: block;
+  float: left;
+  height: 25px;
 }
 header #settings a:hover {
   color: #fff;
@@ -633,17 +636,17 @@ header #settings a:hover {
 }
 header #settings a#new-task {
   background: transparent url("../images/sprite-icons.png") -113px -262px no-repeat;
-  padding: 3px 0 0 30px;
+  padding: 2px 0 0 30px;
   margin-right: 20px;
 }
 header #settings a#support {
-  background: transparent url("../images/sprite-icons.png") -14px -611px no-repeat;
-  padding: 3px 0 0 30px;
+  background: transparent url("../images/sprite-icons.png") -14px -610px no-repeat;
+  padding: 2px 0 0 30px;
   margin-right: 20px;
 }
 header #settings a#settings-open {
-  background: transparent url("../images/sprite-icons.png") -213px -611px no-repeat;
-  padding: 4px 0 0 30px;
+  background: transparent url("../images/sprite-icons.png") -213px -610px no-repeat;
+  padding: 2px 0 0 30px;
 }
 header h1 {
   color: #fff;
@@ -695,7 +698,7 @@ nav {
   padding: 10px;
   margin-bottom: 25px;
 }
-h2 {
+#attributes h2 {
   color: #314e64;
   font: 20px 'Average', 'serif';
   font-weight: bold;
@@ -703,51 +706,61 @@ h2 {
   margin-bottom: 5px;
   margin: 0 20px 5px;
 }
-h2.minimize a {
+#attributes h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
 }
-h2.maximize a {
+#attributes h2.maximize a {
   background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
 }
-ul#attributes-by-group {
+#attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
 }
-#attributes-by-group > li {
+#attributes #attributes-by-group > li {
   padding-left: 20px;
 }
-#attributes-by-group span {
+#attributes #attributes-by-group span {
   color: #314e64;
   font-size: 14px;
 }
-#attributes-by-group span.coefficient {
+#attributes #attributes-by-group span.coefficient {
   color: #925213;
   font-size: 0.85em;
   position: relative;
   top: -1px;
   margin-left: 3px;
 }
-a#attributes-by-list,
-a#attributes-by-group {
+#attributes a#attributes-by-list,
+#attributes a#attributes-by-group {
   font-size: 13px;
 }
-li {
+#attributes li {
   cursor: move;
-  padding-left: 20px;
   float: left;
+  clear: left;
 }
-li:hover {
-  color: #000;
-}
-li.rec1 {
+#attributes li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
 }
-li.rec2 {
+#attributes li.rec2 {
   background: transparent url("../images/sprite-icons.png") -20px -463px no-repeat;
 }
-li.used {
+#attributes li.used {
   color: #aaa;
 }
-a.edit-attribute {
+#attributes li .add {
+  background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
+  float: left;
+  width: 20px;
+  height: 20px;
+  visibility: hidden;
+}
+#attributes li:hover {
+  color: #000;
+}
+#attributes li:hover .add {
+  visibility: visible;
+}
+#attributes a.edit-attribute {
   background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
   display: block;
   width: 16px;
@@ -756,10 +769,10 @@ a.edit-attribute {
   margin-left: 10px;
   float: right;
 }
-li:hover a.edit-attribute {
+#attributes li:hover a.edit-attribute {
   visibility: visible;
 }
-a.remove-attribute {
+#attributes a.remove-attribute {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
   display: block;
   width: 16px;
@@ -768,10 +781,10 @@ a.remove-attribute {
   margin-left: 5px;
   float: right;
 }
-li:hover a.remove-attribute {
+#attributes li:hover a.remove-attribute {
   visibility: visible;
 }
-#etree-progress {
+#attributes #etree-progress {
   color: #666;
   font-size: 14px;
   background: transparent url("../images/icon-loading-small.gif") 0 3px no-repeat;
@@ -779,7 +792,7 @@ li:hover a.remove-attribute {
   padding-left: 20px;
   margin: 5px 0 5px 20px;
 }
-#show-hidden-attributes {
+#attributes #show-hidden-attributes {
   color: #126499;
   font-size: 14px;
   float: right;
@@ -798,20 +811,20 @@ li:hover a.remove-attribute {
   padding-bottom: 20px;
   margin-bottom: 25px;
 }
-h2 {
+#data-fields h2 {
   color: #314e64;
   font: 20px 'Average', 'serif';
   font-weight: bold;
   border-bottom: 1px solid #314e64;
   margin: 0 20px 5px;
 }
-h2.minimize a {
+#data-fields h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
 }
-h2.maximize a {
+#data-fields h2.maximize a {
   background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
 }
-h2 a {
+#data-fields h2 a {
   display: block;
   width: 12px;
   height: 12px;
@@ -820,17 +833,27 @@ h2 a {
   left: 1px;
   top: 5px;
 }
-ul {
+#data-fields ul {
   margin-bottom: 10px;
 }
-li {
+#data-fields li {
   cursor: move;
-  padding-left: 20px;
+  float: left;
   clear: left;
-  list-style-type: none;
 }
-li:hover {
+#data-fields li .add {
+  background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
+  display: block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  visibility: hidden;
+}
+#data-fields li:hover {
   color: #000;
+}
+#data-fields li:hover .add {
+  visibility: visible;
 }
 section#active-rule #antecedent,
 section#active-rule #interest-measures,

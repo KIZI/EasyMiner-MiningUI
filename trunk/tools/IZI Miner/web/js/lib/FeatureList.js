@@ -73,7 +73,7 @@ var FeatureList = new Class({
 			
 			this.BBACoefficients[key] = BBACoef;
 		}.bind(this));
-		
+
 		// derived boolean attribute
 		this.DBAMaxLevels = data.DBA.maxLevels;
 

@@ -1,14 +1,14 @@
 var ColorHelper = new Class({
 
     $attributesBackgroundColor: '#FFF',
-    $attributesHighlightBackgroundColor: '#DFC184',
-    $attributesEnterBackgroundColor: '#F8E4CC',
+    $attributesHighlightBackgroundColor: '#9DE045',
+    $attributesEnterBackgroundColor: '#DEEBCD',
 
     $cedentBackgroundColor: '#FFF',
     $cedentBorderColor: '#FFF',
-    $cedentHighlightBackgroundColor: '#DFC184',
+    $cedentHighlightBackgroundColor: '#9DE045',
     $cedentHighlightBorderColor: '#000',
-    $cedentEnterBackgroundColor: '#F8E4CC',
+    $cedentEnterBackgroundColor: '#DEEBCD',
 
     getAttributesBackgroundColor: function() {
         return this.$attributesBackgroundColor;

@@ -61,7 +61,7 @@ var RulesParser = new Class({
 				vals.push(f.value);
 			}.bind(this));
 
-	    	var literalRef = new FieldFR(this.generateFieldID(), this.DD.getAttributeByName(attribute.name), attribute.category, new StringHelper(), vals);	
+	    	var literalRef = new FieldFR(this.generateFieldID(), this.DD.getAttributeByName(attribute.name), attribute.category, this.FL.getBBACoefficient(attribute.category).getLocalizedName(), new StringHelper(), vals);
 	    	if (attribute.sign == 'negative') {
                 literalRef.changeSign();
             }

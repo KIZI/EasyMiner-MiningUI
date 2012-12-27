@@ -111,7 +111,7 @@
 		</InterestMeasures>
 
 		<BasicBooleanAttribute coefficient="required">
-			<Coefficient scope="antecedent">
+			<Coefficient scope="all">
 				<Type>
 					<Name>Subset</Name>
 					<LocalizedName lang="en">Any one value</LocalizedName>
@@ -219,21 +219,6 @@
 							<MaxValue>3</MaxValue>
 							<Datatype>integer</Datatype>
 							<Previous>isSmallerOrEqual</Previous>
-						</Validation>
-					</Field>
-				</Type>
-			</Coefficient>
-			<Coefficient scope="consequent">
-				<Type>
-					<Name>One category</Name>
-					<LocalizedName lang="en">Target value</LocalizedName>
-					<Field>
-						<Name>category</Name>
-						<LocalizedName lang="en">Value</LocalizedName>
-						<LocalizedName lang="cs">Kategorie</LocalizedName>
-						<Validation>
-							<Required value="yes" />
-							<Datatype>string</Datatype>
 						</Validation>
 					</Field>
 				</Type>
