@@ -29,6 +29,7 @@ var UITemplateRegistrator = new Class({
 			}
 			
 			li({'class': className},
+                a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add to antecedent')}),
                 span({id: attribute.getCSSID()}, attribute.getName()),
                 showRemoveAttribute ? a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}) : '',
                 showEditAttribute ? a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}) : ''
@@ -36,9 +37,13 @@ var UITemplateRegistrator = new Class({
 		});
 
         Mooml.register('dataFieldTemplate', function (data) {
-            var field = data.field;
+            var i18n = data.i18n,
+                field = data.field;
 
-            li({id: field.getCSSID()}, field.getName());
+            li({id: field.getCSSID()},
+                a({href: '#', id: field.getCSSAddID(), class: 'add', title: i18n.translate('Add to attributes')}),
+                span(field.getName())
+            );
         });
 	},
 	
@@ -292,9 +297,9 @@ var UITemplateRegistrator = new Class({
 			    isSelected = data.isSelected;
 
 			if (isSelected === true) {
-				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
+				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getLocalizedName());
 			} else {
-				option({'value': coefficient.getName()}, coefficient.getName());
+				option({'value': coefficient.getName()}, coefficient.getLocalizedName());
 			}
 		});
 		
@@ -303,9 +308,9 @@ var UITemplateRegistrator = new Class({
                 isSelected = data.isSelected;
 
 			if (isSelected === true) {
-				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getName());
+				option({'value': coefficient.getName(), 'selected': 'selected'}, coefficient.getLocalizedName());
 			} else {
-				option({'value': coefficient.getName()}, coefficient.getName());
+				option({'value': coefficient.getName()}, coefficient.getLocalizedName());
 			}
 		});
 		

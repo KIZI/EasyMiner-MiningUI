@@ -18,11 +18,11 @@ var FieldGroupConfig = new Class({
 			Object.each(value.fieldConfig, function (value, key) { 
 				var F = null;
 				if (value.coefficient === null) {
-					F = new Field(0, this.DD.getAttributeByName(key), null, new StringHelper());
+					F = new Field(0, this.DD.getAttributeByName(key), null, null, new StringHelper());
 				} else if (value.coefficient.type === 'One category') {
-					F = new Field(0, this.DD.getAttributeByName(key), value.coefficient.type, new StringHelper(), value.coefficient.category);	
+					F = new Field(0, this.DD.getAttributeByName(key), value.coefficient.type, value.coefficient.localizedName, new StringHelper(), value.coefficient.category);
 				} else {
-					F = new Field(0, this.DD.getAttributeByName(key), value.coefficient.type, new StringHelper(), value.coefficient.minimalLength, value.coefficient.maximalLength);
+					F = new Field(0, this.DD.getAttributeByName(key), value.coefficient.type, value.coefficient.localizedName, new StringHelper(), value.coefficient.minimalLength, value.coefficient.maximalLength);
 				}
 				
 				FG.addField(F.getRef().getName(), F);

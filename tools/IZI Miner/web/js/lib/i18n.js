@@ -78,7 +78,9 @@ var i18n = new Class({
                73: {'cs': 'Podpora', 'en': 'Support'},
                74: {'cs': 'VAROVÁNÍ: Používáte zastaralý webový prohlížeč.', 'en': 'WARNING: You are using an old and deprecated version of web browser'},
                75: {'cs': 'Upgradujte na moderní verzi, abyste mohli používat tuto aplikaci.', 'en': 'Please upgrade to enjoy this application!'},
-               76: {'cs': 'Vysvětlení', 'en': 'Explanation'}},
+               76: {'cs': 'Vysvětlení', 'en': 'Explanation'},
+               77: {'cs': 'Přidat do antecedentu', 'en': 'Add to antecedent'},
+               78: {'cs': 'Přidat do atributů', 'en': 'Add to attributes'}},
 
 	initialize: function (lang) {
 		this.lang = lang;

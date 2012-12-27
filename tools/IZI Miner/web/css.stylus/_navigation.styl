@@ -6,8 +6,8 @@ nav
   line-height 20px
 
 #attributes
-    box()
-    margin-bottom 25px
+  box()
+  margin-bottom 25px
 
   h2
     h2()
@@ -39,20 +39,22 @@ nav
 
   li
     cursor move
-    padding-left 20px
-    float left
-
-  li:hover
-    color #000
-
-  li.rec1
-    background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
-
-  li.rec2
-    background transparent url('../images/sprite-icons.png') -20px -463px no-repeat
-
-  li.used
-    color #AAA
+    float left; clear left
+    &.rec1
+      background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
+    &.rec2
+      background transparent url('../images/sprite-icons.png') -20px -463px no-repeat
+    &.used
+      color #AAA
+    .add
+      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+      float left
+      width 20px; height 20px
+      visibility hidden
+    &:hover
+      color #000
+      .add
+        visibility visible
 
   a.edit-attribute
     edit()
@@ -84,9 +86,9 @@ nav
     float right
 
 #data-fields
-    box()
-    padding-bottom 20px
-    margin-bottom 25px
+  box()
+  padding-bottom 20px
+  margin-bottom 25px
 
   h2
     h2()
@@ -108,9 +110,14 @@ nav
 
   li
     cursor move
-    padding-left 20px
-    clear left
-    list-style-type none
-
-  li:hover
-    color #000
+    float left; clear left
+    .add
+      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+      display block
+      float left
+      width 20px; height 20px
+      visibility hidden
+    &:hover
+      color #000
+      .add
+        visibility visible

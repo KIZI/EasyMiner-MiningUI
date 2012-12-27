@@ -31,6 +31,11 @@ var UIListener = new Class({
             this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
 		}.bind(this));
 
+        $(attribute.getCSSAddID()).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.getARManager().addAttributeToCedent(attribute);
+        }.bind(this));
+
         if (showEditAttribute) { // edit
             $(attribute.getCSSEditID()).addEvent('click', function(event) {
                 event.stop();
@@ -47,16 +52,23 @@ var UIListener = new Class({
 	},
 
     registerDataFieldEventHandler: function(field) {
+        // drag & drop
         $(field.getCSSID()).addEvent('mousedown', function (event) {
             event.stop();
             if (event.rightClick) { return false; } // disable right click drag & drop
 
-            var draggable = this.$dragDropHelper.createDraggable($(field.getCSSID()));
+            var draggable = this.$dragDropHelper.createDraggable($(field.getCSSID()).getFirst('span'));
             var droppable = $('attributes');
             var drag = this.$dragDropHelper.createDrag(draggable, droppable, {color: this.$colorHelper.getAttributesBackgroundColor(), highlightColor: this.$colorHelper.getAttributesHighlightBackgroundColor(), enterColor: this.$colorHelper.getAttributesEnterBackgroundColor(), callback: function() { this.ARBuilder.openAddAttributeWindow(field); }, scope: this});
 
             drag.start(event);
             this.UIColorizer.tween(droppable, this.$colorHelper.getAttributesHighlightBackgroundColor());
+        }.bind(this));
+
+        // add to attributes
+        $(field.getCSSAddID()).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.openAddAttributeWindow(field);
         }.bind(this));
     },
 
@@ -250,13 +262,14 @@ var UIListener = new Class({
 		elementSubmit.addEvent('click', function (event) {
 			var elementSelect = $('add-coefficient-select');
 			var coefficientName = elementSelect.options[elementSelect.selectedIndex].value;
+            var coefficientLocalizedName = elementSelect.options[elementSelect.selectedIndex].get('text');
 			if (coefficientName === 'One category') {
 				var coefficientCategory = $('add-coefficient-category').value;
-				this.ARBuilder.getARManager().addCoefficient(field, coefficientName, coefficientCategory);
+				this.ARBuilder.getARManager().addCoefficient(field, coefficientName, coefficientLocalizedName, coefficientCategory);
 			} else {
 				var coefficientMinlength = $('add-coefficient-minlength').value;
 				var coefficientMaxlength = $('add-coefficient-maxlength').value;
-				this.ARBuilder.getARManager().addCoefficient(field, coefficientName, coefficientMinlength, coefficientMaxlength);
+				this.ARBuilder.getARManager().addCoefficient(field, coefficientName, coefficientLocalizedName, coefficientMinlength, coefficientMaxlength);
 			}
 			event.stop();
 		}.bind(this));
@@ -290,13 +303,14 @@ var UIListener = new Class({
 		elementSubmit.addEvent('click', function (event) {
 			var elementSelect = $('edit-coefficient-select');
 			var coefficientName = elementSelect.options[elementSelect.selectedIndex].value;
+            var coefficientLocalizedName = elementSelect.options[elementSelect.selectedIndex].get('text');
 			if (coefficientName === 'One category') {
 				var coefficientCategory = $('edit-coefficient-category').value;
-				this.ARBuilder.getARManager().editCoefficient(field, coefficientName, coefficientCategory);
+				this.ARBuilder.getARManager().editCoefficient(field, coefficientName, coefficientLocalizedName, coefficientCategory);
 			} else {
 				var coefficientMinlength = $('edit-coefficient-minlength').value;
 				var coefficientMaxlength = $('edit-coefficient-maxlength').value;
-				this.ARBuilder.getARManager().editCoefficient(field, coefficientName, coefficientMinlength, coefficientMaxlength);
+				this.ARBuilder.getARManager().editCoefficient(field, coefficientName, coefficientLocalizedName, coefficientMinlength, coefficientMaxlength);
 			}
 			event.stop();
 		}.bind(this));

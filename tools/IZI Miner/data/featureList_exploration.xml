@@ -543,7 +543,7 @@
 				</Type>
 				<Type>
 					<Name>Interval</Name>
-					<LocalizedName lang="en">Only consecutive values</LocalizedName>
+					<LocalizedName lang="en">Consecutive values</LocalizedName>
 					<Explanation lang="en">Binning wildcard - specified number of consecutive values will be considered for the value of the field. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">
@@ -574,7 +574,7 @@
 				</Type>
 				<Type>
 					<Name>Cyclical intervals</Name>
-					<LocalizedName lang="en">Only cyclical consecutive values</LocalizedName>
+					<LocalizedName lang="en">Cyclical consecutive values</LocalizedName>
 					<Explanation lang="en">Binning wildcard - specified number of consecutive values will be considered for the value of the field. The lowest and highest value are considered as consecutive. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">

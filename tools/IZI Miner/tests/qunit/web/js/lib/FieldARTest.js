@@ -1,13 +1,13 @@
 module('FieldAR', {});
 
 test('getCSSRemoveID', function () {
-	var field = new FieldAR(1, new Attribute(), null, new StringHelper(), 'Subset', 1, 2);
+	var field = new FieldAR(1, new Attribute(), null, new StringHelper(), 'Subset', null, 1, 2);
 	
 	strictEqual(field.getCSSRemoveID(), 'remove-field-1');
 });
 
 test('serialize - One category', function() {
-    var field = new FieldAR(null, new Attribute('Age'), 'One category', null, 'good');
+    var field = new FieldAR(null, new Attribute('Age'), 'One category', null, null, 'good');
     var serialized = {
         name: 'Age',
         category: 'One category',
@@ -21,7 +21,7 @@ test('serialize - One category', function() {
 });
 
 test('serialize - Subset *', function() {
-    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 1);
+    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, null, 1, 1);
     var serialized = {
         name: "District",
         category: "Subset",
@@ -35,7 +35,7 @@ test('serialize - Subset *', function() {
 });
 
 test('serialize - Subset 1-2', function() {
-    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 2);
+    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, null, 1, 2);
     var serialized = {
         name: "District",
         category: "Subset",
@@ -49,7 +49,7 @@ test('serialize - Subset 1-2', function() {
 });
 
 test('serialize - negation', function() {
-    var field = new FieldAR(null, new Attribute('Age'), 'One category', null, 'good');
+    var field = new FieldAR(null, new Attribute('Age'), 'One category', null, null, 'good');
     field.changeSign(); // to negative
     var serialized = {
         'category': 'One category',

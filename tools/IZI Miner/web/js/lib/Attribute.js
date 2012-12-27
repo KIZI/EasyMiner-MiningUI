@@ -51,6 +51,10 @@ var Attribute = new Class({
 		return 'attribute-nav-' + this.getNormalizedName();
 	},
 
+    getCSSAddID: function() {
+        return 'attribute-add-' + this.getNormalizedName();
+    },
+
     getCSSEditID: function () {
         return 'attribute-edit-' + this.getNormalizedName();
     },

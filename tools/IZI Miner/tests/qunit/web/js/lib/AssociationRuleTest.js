@@ -4,7 +4,7 @@ test('generateIdent - Subset *', function () {
     var AR = new AssociationRule();
 
     // antecedent
-    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 1);
+    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, null, 1, 1);
     var antecedent = new Cedent(1, 1, new Connective(1, 'Conjunction'), [field], []);
     AR.addAntecedent(antecedent);
 
@@ -15,18 +15,18 @@ test('generateIdent - Subset 1-2', function () {
     var AR = new AssociationRule();
 
     // antecedent
-    var field = new FieldAR(1, new Attribute('District'), 'Subset', null, 1, 2);
+    var field = new FieldAR(1, new Attribute('District'), 'Subset', 'Any one value', null, 1, 2);
     var antecedent = new Cedent(1, 1, new Connective(1, 'Conjunction'), [field], []);
     AR.addAntecedent(antecedent);
 
-    strictEqual(AR.generateIdent().stripTags(), 'District(*Subset 1-2)=>Empty');
+    strictEqual(AR.generateIdent().stripTags(), 'District(*Any one value 1-2)=>Empty');
 });
 
 test('generateIdent - antecedent', function () {
 	var AR = new AssociationRule();
 	
 	// antecedent
-	var field = new FieldAR(1, new Attribute('District'), 'One category', null, 'Praha');
+	var field = new FieldAR(1, new Attribute('District'), 'One category', null, null, 'Praha');
 	var antecedent = new Cedent(1, 1, new Connective(1, 'Conjunction'), [field], []);
 	AR.addAntecedent(antecedent);
 	
@@ -46,7 +46,7 @@ test('generateIdent - succedent', function () {
 	var AR = new AssociationRule();
 	
 	// succedent
-	var field = new FieldAR(1, new Attribute('Quality'), 'One category', null, 'good');
+	var field = new FieldAR(1, new Attribute('Quality'), 'One category', null, null, 'good');
 	var succedent = new Cedent(1, 1, null, [field], []);
 	AR.addSuccedent(succedent);
 	

@@ -145,8 +145,7 @@ var UIPainter = new Class({
     },
 
     renderDataField: function(field, elementParent) {
-        var DF = Mooml.render('dataFieldTemplate', {field: field});
-        elementParent.grab(Mooml.render('dataFieldTemplate', {field: field}));
+        elementParent.grab(Mooml.render('dataFieldTemplate', {i18n: this.i18n, field: field}));
     },
 	
 	sortAttributes: function (positions) {
