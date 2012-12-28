@@ -22,7 +22,7 @@ var InterestMeasureSlider = new Class({
 	numberNormalizer: null,
 	inverseNumberNormalizer: null,
 	
-	initialize: function (elParent, field, action, IM, minSupport) {
+	initialize: function (elParent, field, action, IM, value) {
 		this.elParent = elParent;
 		this.field = field;
 		this.action = action;
@@ -31,11 +31,14 @@ var InterestMeasureSlider = new Class({
 
         var offset = 0;
         if (IM.getName() === 'SUPP') {
-            this.field.minValue = minSupport;
+            this.field.minValue = value;
             this.field.minValueInclusive = true;
             if (this.field.minValue > 0) {
                 offset = this.field.minValue * 100;
             }
+        } else if (this.field.maxValue > value) {
+            this.field.maxValue = value;
+            this.field.maxValueInclusive = true;
         }
 		
 		// calculate num

@@ -21,10 +21,14 @@ var Attribute = new Class({
 	getNormalizedName: function () {
 		return this.stringHelper.normalizeString(this.name);
 	},
-	
+
 	getChoices: function () {
 		return this.choices;
 	},
+
+    getNumChoices: function() {
+        return this.getChoices().length;
+    },
 
     getStringHelper: function() {
         return this.stringHelper;

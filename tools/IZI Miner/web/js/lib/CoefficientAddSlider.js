@@ -6,30 +6,36 @@ var CoefficientAddSlider = new Class({
 	inversePrecision: 0,
 	initialStep: 1,
 	
-	constraint: null,
 	elementSlider: null,
 	elementValue: null,
-	previousSlider: null,
+    previousSlider: null,
+    nextSlider: null,
 	numberNormalizer: null,
 	inverseNumberNormalizer: null,
 	
-	initialize: function (elementSlider, elementValue, constraint, previousSlider) {
-		this.numSteps = Math.abs(constraint.minValue - constraint.maxValue) + 1;
-		this.constraint = constraint;
+	initialize: function (elementSlider, elementValue, minValue, minValueInclusive, maxValue, maxValueInclusive) {
+		this.numSteps = Math.abs(minValue - maxValue) + 1;
 		this.elementSlider = elementSlider;
 		this.elementValue = elementValue;
-		this.previousSlider = previousSlider;
-		this.numberNormalizer = new NumberNormalizer(constraint.minValue, constraint.maxValue, this.inversePrecision, constraint.minValue, constraint.maxValue, this.precision, this.numSteps, constraint.minValueInclusive, constraint.maxValueInclusive);
-		this.inverseNumberNormalizer = new NumberNormalizer(constraint.minValue, constraint.maxValue, this.precision, constraint.minValue, constraint.maxValue, this.inversePrecision, this.numSteps, constraint.minValueInclusive, constraint.maxValueInclusive);
+		this.numberNormalizer = new NumberNormalizer(minValue, maxValue, this.inversePrecision, minValue, maxValue, this.precision, this.numSteps, minValueInclusive, maxValueInclusive);
+		this.inverseNumberNormalizer = new NumberNormalizer(minValue, maxValue, this.precision, minValue, maxValue, this.inversePrecision, this.numSteps, minValueInclusive, maxValueInclusive);
 		
 		this.parent(this.elementSlider, this.elementSlider.getElement('.knob'), {
-	        range: [constraint.minValue, constraint.maxValue],
+	        range: [minValue, maxValue],
 	        initialStep: this.numberNormalizer.normalize(this.initialStep),
 	        onChange: function(value) {
 	        	this.handleChange(value);
 	        }
 	    });
 	},
+
+    setPreviousSlider: function(previousSlider) {
+        this.previousSlider = previousSlider;
+    },
+
+    setNextSlider: function(nextSlider) {
+        this.nextSlider = nextSlider;
+    },
 	
 	handleChange: function (value) {
     	var number = this.inverseNumberNormalizer.validate(value);
@@ -37,10 +43,14 @@ var CoefficientAddSlider = new Class({
     	var string = this.inverseNumberNormalizer.format(number);
 
     	this.elementValue.value = string;
-    	
-    	if (this.previousSlider !== undefined && (this.previousSlider.elementValue.value > number)) {
-    		this.previousSlider.set(number);
-    	}
+
+        if (this.previousSlider && (this.previousSlider.elementValue.value > number)) {
+            this.previousSlider.set(number);
+        }
+
+        if (this.nextSlider && (this.nextSlider.elementValue.value < number)) {
+            this.nextSlider.set(number);
+        }
 	}
 
 });
