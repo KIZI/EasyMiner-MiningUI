@@ -342,10 +342,10 @@ var UIPainter = new Class({
 		this.UIListener.registerIMFormEventHandler('edit');
 	},
 	
-	renderIMAutocomplete: function (action, selectedIM) {
+	renderIMAutocomplete: function (action, IM) {
 		var elAutocomplete = $(action + '-im-form').getElement('.autocomplete').empty();
-		Array.each(selectedIM.getFields(), function (f) {
-			var IMSlider = new InterestMeasureSlider(elAutocomplete, f, action, selectedIM, this.ARBuilder.getDD().calculateMinimalSupport());
+		Array.each(IM.getFields(), function (f) {
+			new InterestMeasureSlider(elAutocomplete, f, action, IM, IM.getName() === 'SUPP' ? this.ARBuilder.getDD().calculateMinimalSupport() : this.ARBuilder.getDD().getRecordCount());
 		}.bind(this));
 	},
 
@@ -374,7 +374,6 @@ var UIPainter = new Class({
 			var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
 			$('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
 		}.bind(this));
-		
 		if (selectedCoefficient.getName() === 'One category') {
 			var select = $('add-coefficient-category');
 			Array.each(field.getRef().getChoices(), function (choice) {
@@ -382,24 +381,31 @@ var UIPainter = new Class({
 			});
 		} else {
 			if (selectedCoefficient.fields.minLength.minValue < selectedCoefficient.fields.minLength.maxValue) {
-				var coefficientSlider1 = new CoefficientAddSlider($('add-coefficient-minlength-slider'), $('add-coefficient-minlength'), selectedCoefficient.fields.minLength);
+                var coefData = selectedCoefficient.fields.minLength;
+                var maxChoicesExceeded = (coefData.maxValue > field.getRef().getNumChoices());
+				var slider1 = new CoefficientAddSlider($('add-coefficient-minlength-slider'), $('add-coefficient-minlength'), coefData.minValue, coefData.minValueInclusive, maxChoicesExceeded ? field.getRef().getNumChoices() : coefData.maxValue, maxChoicesExceeded ? true : coefData.maxValueInclusive);
 			} else {
 				$('add-coefficient-minlength').set('value', selectedCoefficient.fields.minLength.minValue);
 				$('add-coefficient-minlength-slider').setStyles({display: 'none'});
 			}
 			if (selectedCoefficient.fields.maxLength.minValue < selectedCoefficient.fields.maxLength.maxValue) {
-				var coefficientSlider2 = new CoefficientAddSlider($('add-coefficient-maxlength-slider'), $('add-coefficient-maxlength'), selectedCoefficient.fields.maxLength);
+                var coefData = selectedCoefficient.fields.maxLength;
+                var maxChoicesExceeded = (coefData.maxValue > field.getRef().getNumChoices());
+                var slider2 = new CoefficientAddSlider($('add-coefficient-maxlength-slider'), $('add-coefficient-maxlength'), coefData.minValue, coefData.minValueInclusive, maxChoicesExceeded ? field.getRef().getNumChoices() : coefData.maxValue, maxChoicesExceeded ? true : coefData.maxValueInclusive);
 			} else {
 				$('add-coefficient-maxlength').set('value', selectedCoefficient.fields.maxLength.minValue);
 				$('add-coefficient-maxlength-slider').setStyles({display: 'none'});
 			}
+
+            slider1.setNextSlider(slider2);
+            slider2.setPreviousSlider(slider1);
 		}
 
         this.renderExplanation(selectedCoefficient);
 		this.UIListener.registerAddCoefficientFormEventHandler(field);
 	},
 	
-	renderEditCoefficientAutocomplete: function(field, selectedCoefficient) { 
+	renderEditCoefficientAutocomplete: function(field, selectedCoefficient) {
 		Mooml.render('editCoefficientWindowAutocompleteTemplate', {field: field, i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('edit-coefficient-autocomplete'));
 		
 		Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
@@ -415,17 +421,26 @@ var UIPainter = new Class({
 			});
 		} else {
 			if (selectedCoefficient.fields.minLength.minValue < selectedCoefficient.fields.minLength.maxValue) {
-				var coefficientSlider1 = new CoefficientEditSlider($('edit-coefficient-minlength-slider'), $('edit-coefficient-minlength'), selectedCoefficient.fields.minLength);
+                var coefData = selectedCoefficient.fields.minLength;
+                var maxChoicesExceeded = (coefData.maxValue > field.getRef().getNumChoices());
+				var slider1 = new CoefficientEditSlider($('edit-coefficient-minlength-slider'), $('edit-coefficient-minlength'), coefData.minValue, coefData.minValueInclusive, maxChoicesExceeded ? field.getRef().getNumChoices() : coefData.maxValue, maxChoicesExceeded ? true : coefData.maxValueInclusive);
 			} else {
 				$('edit-coefficient-minlength').set('value', selectedCoefficient.fields.minLength.minValue);
 				$('edit-coefficient-minlength-slider').setStyles({display: 'none'});
 			}
 			if (selectedCoefficient.fields.maxLength.minValue < selectedCoefficient.fields.maxLength.maxValue) {
-				var coefficientSlider2 = new CoefficientEditSlider($('edit-coefficient-maxlength-slider'), $('edit-coefficient-maxlength'), selectedCoefficient.fields.maxLength, coefficientSlider1);
+                var coefData = selectedCoefficient.fields.maxLength;
+                var maxChoicesExceeded = (coefData.maxValue > field.getRef().getNumChoices());
+                var slider2 = new CoefficientEditSlider($('edit-coefficient-maxlength-slider'), $('edit-coefficient-maxlength'), coefData.minValue, coefData.minValueInclusive, maxChoicesExceeded ? field.getRef().getNumChoices() : coefData.maxValue, maxChoicesExceeded ? true : coefData.maxValueInclusive);
 			} else {
 				$('edit-coefficient-maxlength').set('value', selectedCoefficient.fields.maxLength.minValue);
 				$('edit-coefficient-maxlength-slider').setStyles({display: 'none'});
 			}
+
+            if (slider1 && slider2) {
+                slider1.setNextSlider(slider2);
+                slider2.setPreviousSlider(slider1);
+            }
 		}
 
         this.renderExplanation(selectedCoefficient);
