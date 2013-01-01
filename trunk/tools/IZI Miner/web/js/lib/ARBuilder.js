@@ -184,17 +184,28 @@ var ARBuilder = new Class({
         }
     },
 
+    changeStrict: function(el) {
+        el.toggleClass('strict-on');
+        el.toggleClass('strict-off');
+        if (el.hasClass('strict-on')) {
+            el.text = this.$i18n.translate('On');
+        } else {
+            el.text = this.$i18n.translate('Off');
+        }
+    },
+
 	closeSettingsWindow: function () {
 		this.$UIStructurePainter.hideOverlay();
 	},
 	
-	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug) {
+	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug, strict) {
 		// settings
 		this.settings.setRulesCnt(rulesCnt);
 		this.settings.setBKAutoSearch(autoSearch);
 		this.settings.setRecEnabled(autoSuggest);
         this.settings.setCaching(cache);
         this.settings.setDebug(debug);
+        this.settings.setStrictMatch(strict);
 
 		// FL switch
 		var FL = this.getFLByName(FLName);

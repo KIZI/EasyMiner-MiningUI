@@ -80,7 +80,9 @@ var i18n = new Class({
                75: {'cs': 'Upgradujte na moderní verzi, abyste mohli používat tuto aplikaci.', 'en': 'Please upgrade to enjoy this application!'},
                76: {'cs': 'Vysvětlení', 'en': 'Explanation'},
                77: {'cs': 'Přidat do antecedentu', 'en': 'Add to antecedent'},
-               78: {'cs': 'Přidat do atributů', 'en': 'Add to attributes'}},
+               78: {'cs': 'Přidat do atributů', 'en': 'Add to attributes'},
+               79: {'cs': 'Strict match', 'en': 'Strict match'},
+               80: {'cs': 'All attributes from task setting must appear in discovered rules.', 'en': 'All attributes from task setting must appear in discovered rules.'}},
 
 	initialize: function (lang) {
 		this.lang = lang;

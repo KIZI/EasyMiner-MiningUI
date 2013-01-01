@@ -1,12 +1,13 @@
 var Settings = new Class({
 
-    GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled'],
+    GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled', 'strictMatch'],
 
 	$rulesCnt: 1000,
     $caching: false,
     $debug: false,
 	$BKAutoSearch: false,
 	$recEnabled: false,
+    $strictMatch: false,
 	foundRules: {
 		AJAXBalancerLimit: 10,
 		displayLimit: 10

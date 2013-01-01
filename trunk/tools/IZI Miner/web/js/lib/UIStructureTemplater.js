@@ -135,6 +135,15 @@ var UIStructureTemplater = new Class({
                                 em(i18n.translate('Debug mode')),
                                 i18n.translate('Application shows and logs more information in debug mode.')))
                     ),
+                    div({styles: {display: 'none'}},
+                        label(i18n.translate('Strict match') + ':'),
+                        a({id: 'strict', 'href': '#', 'class': settings.getStrictMatch() ? 'strict-on' : 'strict-off'}, i18n.translate(settings.getStrictMatch() ? 'On': 'Off')),
+                        span({'class': 'tooltip info'},
+                            span({'class': 'help'},
+                                img({src: './images/icon-tooltip-help.png'}),
+                                em(i18n.translate('Strict match')),
+                                i18n.translate('All attributes from task setting must appear in discovered rules.')))
+                    ),
                     br({'class': 'clearfix'}),
                     input({type: 'submit', value: i18n.translate('Save')})));
         });

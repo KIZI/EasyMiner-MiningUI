@@ -397,8 +397,10 @@ var UIPainter = new Class({
 				$('add-coefficient-maxlength-slider').setStyles({display: 'none'});
 			}
 
-            slider1.setNextSlider(slider2);
-            slider2.setPreviousSlider(slider1);
+            if (slider1 && slider2) {
+                slider1.setNextSlider(slider2);
+                slider2.setPreviousSlider(slider1);
+            }
 		}
 
         this.renderExplanation(selectedCoefficient);
