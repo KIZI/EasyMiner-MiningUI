@@ -25,10 +25,11 @@ var MiningManager = new Class({
 		this.FRManager.handleInProgress();
 		
 		this.requestData = {
-				limitHits: limitHits,
-				rule0: rule.serialize(),
-				rules: 1,
-                debug: this.settings.getDebug()
+            limitHits: limitHits,
+            rule0: rule.serialize(),
+            rules: 1,
+            debug: this.settings.getDebug(),
+            strict: this.settings.getStrictMatch()
         };
 
         if (this.settings.getCaching()) { // caching enabled

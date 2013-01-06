@@ -24,7 +24,8 @@ class TaskSettingSerializer
     protected static $FORCE_DEPTH_BOOLEAN = 'Conjunction';
     protected static $LITERAL = 'Literal';
     protected static $LITERALS = ['Literal'];
-    protected static $MINIMAL_LENGTH = 1;
+    protected static $CEDENT_MINIMAL_LENGTH = 1;
+    protected static $PCEDENT_MINIMAL_LENGTH = 0; // partial cedent
 
     public function __construct($DDPath)
     {
@@ -39,6 +40,7 @@ class TaskSettingSerializer
     public function serialize($json, $forcedDepth = 3)
     {
         $json = json_decode($json);
+        $strict = $json->strict;
         $rule = $json->rule0;
 
         // Create basic structure of Document.
@@ -46,7 +48,7 @@ class TaskSettingSerializer
 
         // Create antecedent
         if (!empty($rule->antecedent->children)) {
-            $antecedentId = $this->parseCedent($rule->antecedent, 1, $forcedDepth);
+            $antecedentId = $this->parseCedent($rule->antecedent, 1, $forcedDepth, $strict);
             $this->antecedentSetting->appendChild($this->output->createTextNode($antecedentId));
         }
 
@@ -56,7 +58,7 @@ class TaskSettingSerializer
         }
 
         // Create consequent
-        $consequentId = $this->parseCedent($rule->succedent, 1, $forcedDepth);
+        $consequentId = $this->parseCedent($rule->succedent, 1, $forcedDepth, $strict);
         $this->consequentSetting->appendChild($this->output->createTextNode($consequentId));
 
         // Serialize XML
@@ -184,7 +186,7 @@ class TaskSettingSerializer
         $this->interestMeasureSetting->appendChild($interestMeasureThreshold);
     }
 
-    protected function parseCedent($cedent, $level, $forcedDepth)
+    protected function parseCedent($cedent, $level, $forcedDepth, $strict)
     {
         $connective = $this->getBooleanName($cedent->connective->type);
 
@@ -192,19 +194,19 @@ class TaskSettingSerializer
         $cedentIds = [];
         foreach ($cedent->children as $child) {
             if (isset($child->type) && $child->type === 'cedent') {
-                $cedentId = $this->parseCedent($child, ($level + 1), $forcedDepth);
+                $cedentId = $this->parseCedent($child, ($level + 1), $forcedDepth, $strict);
                 array_push($cedentIds, $cedentId);
             } else {
                 array_push($attributes, $child);
             }
         }
 
-        $cedentId = $this->createDbaSetting($connective, $attributes, $level, $forcedDepth, $cedentIds);
+        $cedentId = $this->createDbaSetting($connective, $attributes, $level, $forcedDepth, $cedentIds, $strict);
 
         return $cedentId;
     }
 
-    protected function createDbaSetting($connective, $attributes, $level, $forcedDepth, $cedentIds)
+    protected function createDbaSetting($connective, $attributes, $level, $forcedDepth, $cedentIds, $strict)
     {
         $dbaId = $this->generateId();
         $dbaSetting = $this->output->createElement("DBASetting");
@@ -215,14 +217,14 @@ class TaskSettingSerializer
             if ($level === 1 && $connective === 'Disjunction') { // Disjunction is not permitted on level 1
                 $dbaSetting->setAttribute("type", self::$FORCE_DEPTH_BOOLEAN);
                 $nextLevel = $level + 1;
-                $baSettingRefId = $this->createDbaSetting($connective, $attributes, $nextLevel, $forcedDepth, $cedentIds);
+                $baSettingRefId = $this->createDbaSetting($connective, $attributes, $nextLevel, $forcedDepth, $cedentIds, $strict);
                 $dbaSetting->appendChild($this->output->createElement("BASettingRef", $baSettingRefId));
             } else {
                 $dbaSetting->setAttribute("type", $connective);
                 foreach ($attributes as $attribute) {
                     $nextLevel = $level + 1;
                     $dbaConnective = $nextLevel === $forcedDepth ? self::$LITERAL : self::$FORCE_DEPTH_BOOLEAN;
-                    $baSettingRefId = $this->createDbaSetting($dbaConnective, [$attribute], $nextLevel, $forcedDepth, []);
+                    $baSettingRefId = $this->createDbaSetting($dbaConnective, [$attribute], $nextLevel, $forcedDepth, [], $strict);
                     $dbaSetting->appendChild($this->output->createElement("BASettingRef", $baSettingRefId));
                 }
 
@@ -231,7 +233,19 @@ class TaskSettingSerializer
                 }
             }
 
-            $dbaSetting->appendChild($this->output->createElement("MinimalLength", self::$MINIMAL_LENGTH));
+            if ($level === 2) {
+                $minimalLength = self::$PCEDENT_MINIMAL_LENGTH;
+                if ($strict) {
+                    if ($connective === 'Conjunction') {
+                        $minimalLength = count($attributes);
+                    } else { // $connective === 'Disjunction'
+                        $minimalLength = 1;
+                    }
+                }
+                $dbaSetting->appendChild($this->output->createElement("MinimalLength", $minimalLength));
+            } else {
+                $dbaSetting->appendChild($this->output->createElement("MinimalLength", self::$CEDENT_MINIMAL_LENGTH));
+            }
         } else  { // literal
             $dbaSetting->setAttribute("type", $connective);
             $attribute = $attributes[0];
@@ -290,7 +304,6 @@ class TaskSettingSerializer
 
         return $coefficient;
     }
-
 
     public function getBooleanName($type)
     {
