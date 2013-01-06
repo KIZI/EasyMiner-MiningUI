@@ -1,6 +1,8 @@
 - probably a hidden FL bug, serializers / parsers are using the same all the time
 - pager need to be rewritten
 
+.errors are not posted
+
 •	u otazníku se nezobrazuje nápověda, dokud uživatel nepřesune myš mimo pravidlo a nevrátí ji zpátky (FF, Chrome)
 
 

@@ -135,7 +135,7 @@ var UIStructureTemplater = new Class({
                                 em(i18n.translate('Debug mode')),
                                 i18n.translate('Application shows and logs more information in debug mode.')))
                     ),
-                    div({styles: {display: 'none'}},
+                    div(
                         label(i18n.translate('Strict match') + ':'),
                         a({id: 'strict', 'href': '#', 'class': settings.getStrictMatch() ? 'strict-on' : 'strict-off'}, i18n.translate(settings.getStrictMatch() ? 'On': 'Off')),
                         span({'class': 'tooltip info'},
