@@ -198,7 +198,7 @@ var ARBuilder = new Class({
 		this.$UIStructurePainter.hideOverlay();
 	},
 	
-	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug, strict) {
+	saveSettings: function(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug, strict, taskMode) {
 		// settings
 		this.settings.setRulesCnt(rulesCnt);
 		this.settings.setBKAutoSearch(autoSearch);
@@ -206,6 +206,7 @@ var ARBuilder = new Class({
         this.settings.setCaching(cache);
         this.settings.setDebug(debug);
         this.settings.setStrictMatch(strict);
+        this.settings.setTaskMode(taskMode);
 
 		// FL switch
 		var FL = this.getFLByName(FLName);
@@ -228,6 +229,10 @@ var ARBuilder = new Class({
 
     openEditAttributeWindow: function (attribute) {
         this.UIPainter.renderEditAttributeWindow(attribute);
+    },
+
+    openShowHistogramWindow: function(name, type) {
+        this.UIPainter.renderShowHistogramWindow(name, type);
     },
 
     // TODO handle load data error

@@ -49,6 +49,12 @@ var UIListener = new Class({
                 this.ARBuilder.removeAttribute(attribute);
             }.bind(this));
         }
+
+        // show histogram
+        $(attribute.getCSSShowHistogramID()).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.openShowHistogramWindow(attribute.getName(), 'attribute');
+        }.bind(this));
 	},
 
     registerDataFieldEventHandler: function(field) {
@@ -69,6 +75,12 @@ var UIListener = new Class({
         $(field.getCSSAddID()).addEvent('click', function(event) {
             event.stop();
             this.ARBuilder.openAddAttributeWindow(field);
+        }.bind(this));
+
+        // show histogram
+        $(field.getCSSShowHistogramID()).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.openShowHistogramWindow(field.getName(), 'datafield');
         }.bind(this));
     },
 

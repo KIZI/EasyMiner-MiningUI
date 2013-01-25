@@ -64,6 +64,14 @@ nav
   li:hover a.edit-attribute
     visibility visible
 
+  a.show-histogram
+    showHistogram()
+    margin-left 10px
+    float right
+
+  li:hover a.show-histogram
+    visibility visible
+
   a.remove-attribute
     remove()
     margin-left 5px
@@ -117,7 +125,13 @@ nav
       float left
       width 20px; height 20px
       visibility hidden
+    .show-histogram
+      showHistogram()
+      margin-left 10px
+      float right
     &:hover
       color #000
       .add
+        visibility visible
+      .show-histogram
         visibility visible

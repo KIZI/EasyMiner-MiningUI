@@ -67,6 +67,10 @@ var Attribute = new Class({
         return 'attribute-remove-' + this.getNormalizedName();
     },
 
+    getCSSShowHistogramID: function () {
+        return 'attribute-show-histogram-' + this.getNormalizedName();
+    },
+
     load: function(obj) {
         this.name = obj.name;
         this.stringHelper = this.stringHelper || new StringHelper();
