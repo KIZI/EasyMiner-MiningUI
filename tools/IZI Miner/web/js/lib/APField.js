@@ -24,6 +24,10 @@ var APField = new Class({
         return 'field-nav-add-' + this.getNormalizedName();
     },
 
+    getCSSShowHistogramID: function () {
+        return 'field-nav-show-histogram-' + this.getNormalizedName();
+    },
+
     load: function(obj) {
         this.$name = obj.$name;
         this.$value = obj.$value;

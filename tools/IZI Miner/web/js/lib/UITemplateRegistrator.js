@@ -32,7 +32,8 @@ var UITemplateRegistrator = new Class({
                 a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add to antecedent')}),
                 span({id: attribute.getCSSID()}, attribute.getName()),
                 showRemoveAttribute ? a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}) : '',
-                showEditAttribute ? a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}) : ''
+                showEditAttribute ? a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}) : '',
+                a({href: '#', id: attribute.getCSSShowHistogramID(), 'class': 'show-histogram', 'title': i18n.translate('Show histogram')})
             );
 		});
 
@@ -42,7 +43,8 @@ var UITemplateRegistrator = new Class({
 
             li({id: field.getCSSID()},
                 a({href: '#', id: field.getCSSAddID(), class: 'add', title: i18n.translate('Add to attributes')}),
-                span(field.getName())
+                span(field.getName()),
+                a({href: '#', id: field.getCSSShowHistogramID(), 'class': 'show-histogram', 'title': i18n.translate('Show histogram')})
             );
         });
 	},
@@ -230,12 +232,12 @@ var UITemplateRegistrator = new Class({
                     ),
                     div({'class': 'autocomplete clearfix'},
                         label({'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
-                        input({type: 'text', name: 'add-coefficient-minlength', id: 'add-coefficient-minlength', readonly: 'readonly'}),
+                        input({type: 'number', min: 1, step: 1, name: 'add-coefficient-minlength', id: 'add-coefficient-minlength', readonly: 'readonly', pattern: '[0-9]+', required: ''}),
                         div({id: 'add-coefficient-minlength-slider', 'class': 'slider'},
                             div({'class': 'knob'})
                         ),
                         label({'for': 'add-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
-                        input({type: 'text', name: 'add-coefficient-maxlength', id: 'add-coefficient-maxlength', readonly: 'readonly'}),
+                        input({type: 'number', min: 1, step: 1, name: 'add-coefficient-maxlength', id: 'add-coefficient-maxlength', readonly: 'readonly', pattern: '[0-9]+', required: ''}),
                         div({id: 'add-coefficient-maxlength-slider', 'class': 'slider'},
                             div({'class': 'knob'})
                         )
@@ -276,12 +278,12 @@ var UITemplateRegistrator = new Class({
                         )
                     ),
 					label({'for': 'edit-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
-					input({type: 'text', name: 'edit-coefficient-minlength', id: 'edit-coefficient-minlength', readonly: 'readonly', value: field.getMinimalLength()}),
+					input({type: 'number', min: 1, step: 1, name: 'edit-coefficient-minlength', id: 'edit-coefficient-minlength', readonly: 'readonly', value: field.getMinimalLength(), pattern: '[0-9]+', required: ''}),
 					div({id: 'edit-coefficient-minlength-slider', 'class': 'slider'},
 					    div({'class': 'knob'})
                     ),
                     label({'for': 'edit-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
-					input({type: 'text', name: 'edit-coefficient-maxlength', id: 'edit-coefficient-maxlength', readonly: 'readonly', value: field.getMaximalLength()}),
+					input({type: 'number', min: 1, step: 1, name: 'edit-coefficient-maxlength', id: 'edit-coefficient-maxlength', readonly: 'readonly', value: field.getMaximalLength(), pattern: '[0-9]+', required: ''}),
 					div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
 					    div({'class': 'knob'})
                     ),
@@ -406,6 +408,13 @@ var UITemplateRegistrator = new Class({
             var url = data.url;
 
             div({id: 'edit-attribute-window'},
+                iframe({src: url}));
+        });
+
+        Mooml.register('showHistogramTemplate', function (data) {
+            var url = data.url;
+
+            div({id: 'show-histogram-window'},
                 iframe({src: url}));
         });
     }

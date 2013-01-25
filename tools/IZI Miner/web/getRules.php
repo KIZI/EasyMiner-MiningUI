@@ -13,6 +13,7 @@ $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
 $debug = json_decode($data)->debug;
+$taskMode = json_decode($data)->taskMode;
 $lang = $request->query->get('lang');
 $sleep = (int) $request->query->get('sleep') ?: 0;
 

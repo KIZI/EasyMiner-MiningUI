@@ -131,6 +131,14 @@ var UIPainter = new Class({
         this.$UIScroller.scrollTo(0, 0);
     },
 
+    renderShowHistogramWindow: function(name, type) {
+        var overlay = this.$UIStructurePainter.showOverlay();
+        var window = Mooml.render('showHistogramTemplate', {i18n: this.i18n, url: this.config.getShowHistogramURL(name, type)});
+        overlay.grab(window);
+
+        this.$UIScroller.scrollTo(0, 0);
+    },
+
     removeAttribute: function(attribute) {
         $(attribute.getCSSID()).getParent().destroy();
     },

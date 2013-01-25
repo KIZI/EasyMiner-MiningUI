@@ -1,6 +1,5 @@
 var Settings = new Class({
-
-    GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled', 'strictMatch'],
+    GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled', 'strictMatch', 'taskMode'],
 
 	$rulesCnt: 1000,
     $caching: false,
@@ -8,6 +7,7 @@ var Settings = new Class({
 	$BKAutoSearch: false,
 	$recEnabled: false,
     $strictMatch: false,
+    $taskMode: 'TaskPool', // Enum: TaskPool, GridPool, ProcPool
 	foundRules: {
 		AJAXBalancerLimit: 10,
 		displayLimit: 10
@@ -24,5 +24,4 @@ var Settings = new Class({
     isAttributeDeleteAllowed: function() {
         return this.$attributes.deleteAllowed;
     }
-
 });

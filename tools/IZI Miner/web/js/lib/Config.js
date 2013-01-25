@@ -119,6 +119,14 @@ var Config = new Class({
     getNewTaskURL: function() {
         return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newDataSource&tmpl=component';
     },
+
+    getShowHistogramURL: function(name, type) {
+        if (type === 'attribute') {
+            return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=previewAttribute&tmpl=component&kbi=' + this.params.id_dm + '&attribute=' + encodeURIComponent(name);
+        } else {
+            return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=previewColumn&tmpl=component&kbi=' + this.params.id_dm + '&col=' + encodeURIComponent(name);
+        }
+    },
 	
 	getRootElementID: function () {
 		return this.rootElementID;

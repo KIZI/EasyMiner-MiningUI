@@ -94,21 +94,30 @@ var UIStructurePainter = new Class({
 
     renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
         var autoSuggestPossible = (autoSuggest.length > 0);
-        var settings = Mooml.render('settingsTemplate', {autoSuggestPossible: autoSuggestPossible, i18n: this.$i18n, reset: reset, settings: settings});
+        var settingsEl = Mooml.render('settingsTemplate', {autoSuggestPossible: autoSuggestPossible, i18n: this.$i18n, reset: reset, settings: settings});
         var elWindow = $('settings-window');
         if (elWindow) { // re-render (autocomplete)
-            settings.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));
+            settingsEl.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));
         } else {
             var overlay = this.showOverlay();
-            overlay.grab(settings);
+            overlay.grab(settingsEl);
         }
         this.$UIStructureListener.registerSettingsWindowEventHandlers(autoSuggestPossible);
 
-        var elSelect = $('fl-select');
+        var elSelect = $('fl-select'),
+            isSelected;
         Object.each(FLs, function (FL) {
-            var isSelected = (FL.getName() === selectedFL.getName());
+            isSelected = (FL.getName() === selectedFL.getName());
             elSelect.grab(Mooml.render('flOptionTemplate', {FL: FL, isSelected: isSelected}));
         }.bind(this));
+
+        var me = this,
+            elTaskMode = $('task-mode'),
+            taskModes = [{value: 'TaskPool', name: 'Single-thread'}, {value: 'GridPool', name: 'Grid'}, {value: 'ProcPool', name: 'Multi-core'}];
+        Array.each(taskModes, function(taskMode) {
+            isSelected = (taskMode.value === settings.getTaskMode());
+            elTaskMode.grab(Mooml.render('taskModeOptionTemplate', { i18n: me.$i18n, taskMode: taskMode, isSelected: isSelected }))
+        });
     },
 
     resizeApplication: function() {

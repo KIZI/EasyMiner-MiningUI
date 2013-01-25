@@ -1,5 +1,4 @@
 var UIStructureTemplater = new Class({
-
     register: function() {
         this.registerStructure();
         this.registerSettings();
@@ -89,11 +88,11 @@ var UIStructureTemplater = new Class({
                                     img({src: './images/icon-tooltip-warning.png'}),
                                     em(i18n.translate('Association rule pattern reset')),
                                     i18n.translate('Association rule pattern has to be reset due to new restrictions.'))) : '',
-                            span({'class': 'tooltip info'},
-                                span({'class': 'help'},
-                                    img({src: './images/icon-tooltip-help.png'}),
-                                    em(i18n.translate('Restrictions')),
-                                    i18n.translate('These are predefined association rule pattern restrictions, which do not depend on analysed data. The more expert the looser they are.')))),
+                                span({'class': 'tooltip info'},
+                                    span({'class': 'help'},
+                                        img({src: './images/icon-tooltip-help.png'}),
+                                        em(i18n.translate('Restrictions')),
+                                        i18n.translate('These are predefined association rule pattern restrictions, which do not depend on analysed data. The more expert the looser they are.')))),
                         div(
                             label({'for': 'as-select', 'class': 'thin'}, i18n.translate('Attribute suggestion') + ':'),
                             autoSuggestPossible ? a({id: 'as', 'href': '#', 'class': settings.getRecEnabled() ? 'autosuggest-on' : 'autosuggest-off'}, i18n.translate(settings.getRecEnabled() ? 'On': 'Off')) : span({'class': 'autosuggest-off'}, i18n.translate(settings.getRecEnabled() ? 'On': 'Off')),
@@ -101,8 +100,12 @@ var UIStructureTemplater = new Class({
                     div(
                         span({'class': 'category'}, i18n.translate('Discovered rules'))),
                     div(
+                        label({'for': 'task-mode'}, i18n.translate('Task mode') + ':'),
+                        select({name: 'task-mode', id: 'task-mode'})
+                    ),
+                    div(
                         label({'for': 'rulesCnt'}, i18n.translate('Limit') + ':'),
-                        input({id: 'rules-cnt', 'type': 'text', 'class': 'shortnr', value: settings.getRulesCnt()}),
+                        input({id: 'rules-cnt', type: 'number', class: 'shortnr', value: settings.getRulesCnt(), min: 0, step: 10, pattern: '[0-9]+', required: ''}),
                         span({'class': 'tooltip info'},
                             span({'class': 'help'},
                                 img({src: './images/icon-tooltip-help.png'}),
@@ -156,6 +159,18 @@ var UIStructureTemplater = new Class({
                 option({'value': FL.getName(), 'selected': 'selected'}, FL.getLocalizedName());
             } else {
                 option({'value': FL.getName()}, FL.getLocalizedName());
+            }
+        });
+
+        Mooml.register('taskModeOptionTemplate', function (data) {
+            var i18n = data.i18n,
+                taskMode = data.taskMode,
+                isSelected = data.isSelected;
+
+            if (isSelected === true) {
+                option({value: taskMode.value, selected: 'selected'}, i18n.translate(taskMode.name));
+            } else {
+                option({value: taskMode.value}, i18n.translate(taskMode.name));
             }
         });
     },
@@ -240,5 +255,4 @@ var UIStructureTemplater = new Class({
                     ul()));
         });
     }
-
 });

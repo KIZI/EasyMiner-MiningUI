@@ -104,16 +104,21 @@ var InterestMeasureSlider = new Class({
 		
 		var width = this.dataType !== 'enum' ? this.field.maxValue.toString().length * 2 + (this.dataType !== 'integer' ? this.inversePrecision + 1 : 0) : this.valueDefaultWidth;
 		this.elValue = new Element('input', {
-			type: 'text',
+			type: 'number',
 			id: this.action + '-im-' + this.field.name + '-value',
 			name: this.action + '-im-' + this.field.name + '-value', 
-			'readonly': this.sliderEnabled ? 'readonly' : '', 
+            pattern: '',
 			'data-validators': 'dataType:"' + this.dataType + '" minValue:' + this.field.minValue + ' minValueInclcusive:' + this.field.minValueInclusive + ' maxValue:' + this.field.maxValue + ' maxValueInclusive:' + this.field.maxValueInclusive,
 			'class': this.action + '-im-value',
 			styles: {
 				width: width + 'ex'
 			}
 		});
+
+        if (this.sliderEnabled) {
+            this.elValue.set('readonly', 'readonly');
+        }
+
 		this.elParent.grab(this.elValue);
 		
 		if (!this.sliderEnabled) {

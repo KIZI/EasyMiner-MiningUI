@@ -87,15 +87,15 @@ var UIStructureListener = new Class({
             e.stop();
             var elRulesCnt = $('rules-cnt'); if (!elRulesCnt) { return; }
             var rulesCnt = $('rules-cnt').value;
-            var elSelect = $('fl-select');
-            var FLName = elSelect.options[elSelect.selectedIndex].value;
+            var FLName = $('fl-select').options[$('fl-select').selectedIndex].value;
             var autoSearch = $('autofilter').hasClass('autofilter-on');
             var autoSuggest = $('as').hasClass('autosuggest-on');
             var cache = $('cache').hasClass('cache-on');
             var debug = $('debug').hasClass('debug-on');
             var strict = $('strict').hasClass('strict-on');
+            var taskMode = $('task-mode').options[$('task-mode').selectedIndex].value;
 
-            this.$ARBuilder.saveSettings(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug, strict);
+            this.$ARBuilder.saveSettings(rulesCnt, FLName, autoSearch, autoSuggest, cache, debug, strict, taskMode);
         }.bind(this));
 
         // close
