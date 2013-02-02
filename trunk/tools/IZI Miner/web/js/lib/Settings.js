@@ -7,7 +7,7 @@ var Settings = new Class({
 	$BKAutoSearch: false,
 	$recEnabled: false,
     $strictMatch: false,
-    $taskMode: 'TaskPool', // Enum: TaskPool, GridPool, ProcPool
+    $taskMode: 'task', // Enum: task, grid, proc
 	foundRules: {
 		AJAXBalancerLimit: 10,
 		displayLimit: 10

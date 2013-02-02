@@ -113,7 +113,7 @@ var UIStructurePainter = new Class({
 
         var me = this,
             elTaskMode = $('task-mode'),
-            taskModes = [{value: 'TaskPool', name: 'Single-thread'}, {value: 'GridPool', name: 'Grid'}, {value: 'ProcPool', name: 'Multi-core'}];
+            taskModes = [{value: 'task', name: 'Single-thread'}, {value: 'grid', name: 'Grid'}, {value: 'proc', name: 'Multi-core'}];
         Array.each(taskModes, function(taskMode) {
             isSelected = (taskMode.value === settings.getTaskMode());
             elTaskMode.grab(Mooml.render('taskModeOptionTemplate', { i18n: me.$i18n, taskMode: taskMode, isSelected: isSelected }))

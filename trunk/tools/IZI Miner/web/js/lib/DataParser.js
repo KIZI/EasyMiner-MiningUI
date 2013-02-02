@@ -14,8 +14,10 @@ var DataParser = new Class({
 	},
 
 	getData: function (callback, errCallback, bind, delay) {
+
         var data = JSON.encode({
-            debug: this.$settings.getDebug()
+            debug: this.$settings.getDebug(),
+            joomlaUrl: this.config.getJoomlaURL()
         });
 
 		new Request.JSON({
@@ -23,7 +25,7 @@ var DataParser = new Class({
 			secure: true,
 			async: this.$async,
 
-			onSuccess: function (responseJSON, responseText) {
+			onSuccess: function (responseJSON) {
                 if (responseJSON.status == 'error') {
                     errCallback.delay(delay, bind);
                     return;
@@ -35,7 +37,7 @@ var DataParser = new Class({
                 }
 			}.bind(this),
 			
-			onError: function (text, error) {
+			onError: function () {
 				errCallback.delay(delay, bind);
 			}
 		

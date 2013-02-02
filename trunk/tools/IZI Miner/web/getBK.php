@@ -18,6 +18,7 @@ $data = $request->request->has('data') ? $request->request->get('data') : $reque
 $debug = json_decode($data)->debug;
 $lang = $request->query->get('lang');
 $sleep = (int) $request->query->get('sleep') ?: 0;
+$joomlaUrl = json_decode($data)->joomlaUrl;
 $action = $request->query->get('action');
 $encoder = new URLEncoder();
 
@@ -57,7 +58,7 @@ if ($idDm === 'TEST' && $idKb === 'TEST') {
         // run task
         $encoder = new URLEncoder();
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=storeDocument&format=raw');
+        curl_setopt($ch, CURLOPT_URL, $joomlaUrl.'index.php?option=com_kbi&task=storeDocument&format=raw');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -91,7 +92,7 @@ if ($idDm === 'TEST' && $idKb === 'TEST') {
 
         // run task
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
+        curl_setopt($ch, CURLOPT_URL, $joomlaUrl."index.php?option=com_kbi&task=query&format=raw");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -117,7 +117,8 @@ var FRManager = new Class({
 			limitHits: 1,
 			rule0: FR.getRule().serialize(),
 			rules: 1,
-            debug: this.settings.getDebug()
+            debug: this.settings.getDebug(),
+            joomlaUrl: this.config.getJoomlaURL()
         };
 		
 		var options = {
