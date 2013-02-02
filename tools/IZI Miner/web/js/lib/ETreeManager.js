@@ -31,7 +31,8 @@ var ETreeManager = new Class({
 				attributes: attributes,
 				rule0: rule.serialize(),
 				rules: 1,
-                debug: this.$settings.getDebug()};
+                debug: this.$settings.getDebug(),
+                joomlaUrl: this.config.getJoomlaURL()};
 		this.makeRequest(JSON.encode(requestData));
 	},
 	
@@ -64,7 +65,7 @@ var ETreeManager = new Class({
 			url: this.config.getETreeGetURL(),
 	        secure: true,
 	            
-	        onSuccess: function(responseJSON, responseText) {
+	        onSuccess: function(responseJSON) {
                 if (responseJSON.status == 'ok') {
 	        	    this.sortAttributes(data, responseJSON.recommendation);
                 } else {
@@ -125,7 +126,7 @@ var ETreeManager = new Class({
 	},
 
     reset: function () {
-        Array.each(this.requests, function (req, key) {
+        Array.each(this.requests, function (req) {
             if (req.running) {
                 req.cancel();
             }

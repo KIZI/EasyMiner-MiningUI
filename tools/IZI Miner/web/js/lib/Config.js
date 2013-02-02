@@ -1,6 +1,6 @@
 var Config = new Class({
 
-    GetterSetter: ['stopMiningUrl', 'supportUrl'],
+    GetterSetter: ['stopMiningUrl', 'supportUrl', 'joomlaURL'],
 
 	// app info
 	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
@@ -17,7 +17,6 @@ var Config = new Class({
     params: {},
 	BKGetURL: 'getBK.php',
 	dataGetURL: 'getData.php',
-	dataSetURL: 'setData.php',
 	ETreeGetURL: 'getEtree.php',
 	rulesGetURL: 'getRules.php',
     $stopMiningUrl: 'stopMining.php',
@@ -90,10 +89,6 @@ var Config = new Class({
 	
 	setDataGetURL: function (url) {
 		this.dataGetURL = url;
-	},
-	
-	getDataSetURL: function () {
-		return this.dataSetURL;
 	},
 	
 	getRulesGetURL: function () {

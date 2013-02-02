@@ -29,6 +29,7 @@ var MiningManager = new Class({
             rule0: rule.serialize(),
             rules: 1,
             debug: this.settings.getDebug(),
+            joomlaUrl: this.config.getJoomlaURL(),
             strict: this.settings.getStrictMatch(),
             taskMode: this.settings.getTaskMode()
         };
@@ -134,6 +135,7 @@ var MiningManager = new Class({
         var data = JSON.encode({
             taskId: taskId,
             debug: debug,
+            joomlaUrl: this.config.getJoomlaURL(),
             taskMode: taskMode
         });
 

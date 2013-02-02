@@ -13,6 +13,7 @@ $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
 $debug = json_decode($data)->debug;
+$joomlaUrl = json_decode($data)->joomlaUrl;
 $taskMode = json_decode($data)->taskMode;
 $lang = $request->query->get('lang');
 $sleep = (int) $request->query->get('sleep') ?: 0;
@@ -39,7 +40,7 @@ if ($id === 'TEST') {
     }
 
     $serializer = new TaskSettingSerializer($DDPath);
-    $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => $debug ? '4ftMiner.Task.Template.PMML' : '4ftMiner.Task.ARD.Template.PMML');
+    $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => $debug ? '4ftMiner.Task.Template.PMML' : '4ftMiner.Task.ARD.Template.PMML', 'pooler' => $taskMode);
     $numRequests = 0;
 
     // save LM task
@@ -51,7 +52,7 @@ if ($id === 'TEST') {
     // run task
     sendRequest:
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://sewebar.lmcloud.vse.cz/index.php?option=com_kbi&task=query&format=raw");
+    curl_setopt($ch, CURLOPT_URL, $joomlaUrl.'index.php?option=com_kbi&task=query&format=raw');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
