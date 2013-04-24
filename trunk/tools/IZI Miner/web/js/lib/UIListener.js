@@ -84,6 +84,14 @@ var UIListener = new Class({
         }.bind(this));
     },
 
+    registerReportEventHandler: function(report) {
+        // show histogram
+        $('report' + report.id).addEvent('click', function(event) {
+            event.stop();
+            this.ARBuilder.openReportWindow(report.id, report.name);
+        }.bind(this));
+    },
+
 	registerFieldEventHandler: function (field) {
 		$(field.getCSSID()).addEvent('mousedown', function (event) {
             event.stop();
@@ -427,5 +435,4 @@ var UIListener = new Class({
 			event.stop();
 		}.bind(this));
 	}
-	
 });

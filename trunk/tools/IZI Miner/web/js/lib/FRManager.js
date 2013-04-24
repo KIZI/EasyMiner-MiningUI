@@ -1,5 +1,6 @@
 var FRManager = new Class({
-	
+    GetterSetter: ['markedRules'],
+
 	config: null,
 	rulesParser: null,
 	settings: null,
@@ -8,7 +9,7 @@ var FRManager = new Class({
 	UIPainter: null,
 	UIListener: null,
 	rules: {},
-	markedRules: [],
+	$markedRules: [],
 	maxIndex: 0,
 	tips: null,
 	
@@ -53,10 +54,10 @@ var FRManager = new Class({
         this.pager.setStopped();
     },
 	
-	renderRules: function (rules, numRules, inProgress) {
+	renderRules: function (rules, numRules, inProgress, task) {
 		// filter new rules
 		rules = this.filterRules(rules);
-		var parsedRules = this.rulesParser.parse(rules);
+		var parsedRules = this.rulesParser.parse(rules, task);
 		
 		if (!inProgress && !numRules) {
 			this.pager.setNoRules();
@@ -68,7 +69,7 @@ var FRManager = new Class({
 				Array.each(parsedRules, function (r) {
 					var FR = new FoundRule(r);
 					this.rules[r.getId()] = FR;
-					els.push(Mooml.render('foundRuleTemplate', {key: ++this.maxIndex, FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
+					els.push(Mooml.render('foundRuleTemplate', {key: r.getId(), FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
 					if (this.settings.getBKAutoSearch()) {
 						this.buildRequest(FR, this.config.getBKAskURL(), true);
 					}
@@ -208,9 +209,9 @@ var FRManager = new Class({
 	
 	markFoundRule: function (FR) {
 		this.AJAXBalancer.stopRequest(FR.getRule().getId());
-		this.markedRules.push(FR);
+		this.$markedRules.push(FR);
 		this.pager.remove(FR.getCSSID());
-		this.UIPainter.renderMarkedRules(null, this.markedRules);
+		this.UIPainter.renderMarkedRules(null, this.$markedRules);
 		
 		// index interesting rule into KB
 		this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
@@ -229,7 +230,7 @@ var FRManager = new Class({
 	/* marked rules */
 	getMarkedRule: function(id) {
 		var rule = null;
-		Object.each(this.markedRules, function (markedRule) {
+		Object.each(this.$markedRules, function (markedRule) {
 			if (id === markedRule.getId()) {
 				rule = markedRule;
 			}
@@ -239,28 +240,32 @@ var FRManager = new Class({
 	},
 	
 	removeMarkedRule: function(FR) {
-		Object.each(this.markedRules, function (MR, key) {
+		Object.each(this.$markedRules, function (MR, key) {
 			if (FR.getRule().getId() === MR.getRule().getId()) {
-				delete this.markedRules[key];
+				delete this.$markedRules[key];
 			}
 		}.bind(this));
 
-		this.UIPainter.renderMarkedRules(null, this.markedRules);
+		this.UIPainter.render$markedRules(null, this.$markedRules);
 	},
 
-	sortMarkedRules: function (order) {
-		var markedRules = [];
+	sort$markedRules: function (order) {
+		var $markedRules = [];
 		Array.each(order, function (CSSID) {
 			if (CSSID !== null) {
 				var ruleId = this.stringHelper.getId(CSSID);
 				var rule = this.getMarkedRule(ruleId);
-				markedRules.push(rule);
+				$markedRules.push(rule);
 			}
 		}.bind(this));
 		
-		this.markedRules = markedRules;
-		this.UIPainter.renderMarkedRules(null);
+		this.$markedRules = $markedRules;
+		this.UIPainter.render$markedRules(null);
 	},
+
+    clearMarkedRules: function() {
+        this.$markedRules = [];
+    },
 
     updateDownloadIcons: function(settingPath, resultPath) {
         this.UIPainter.updateDownloadButtons(settingPath, resultPath);

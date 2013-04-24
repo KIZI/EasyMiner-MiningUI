@@ -131,9 +131,33 @@ var UIPainter = new Class({
         this.$UIScroller.scrollTo(0, 0);
     },
 
+    renderUserLoginWindow: function() {
+        var overlay = this.$UIStructurePainter.showOverlay();
+        var window = Mooml.render('userLoginWindowTemplate', { i18n: this.i18n });
+        overlay.grab(window);
+
+        this.$UIScroller.scrollTo(0, 0);
+    },
+
+    renderUserLogoutWindow: function() {
+        var overlay = this.$UIStructurePainter.showOverlay();
+        var window = Mooml.render('userLogoutWindowTemplate', { i18n: this.i18n });
+        overlay.grab(window);
+
+        this.$UIScroller.scrollTo(0, 0);
+    },
+
     renderShowHistogramWindow: function(name, type) {
         var overlay = this.$UIStructurePainter.showOverlay();
         var window = Mooml.render('showHistogramTemplate', {i18n: this.i18n, url: this.config.getShowHistogramURL(name, type)});
+        overlay.grab(window);
+
+        this.$UIScroller.scrollTo(0, 0);
+    },
+
+    renderReportWindow: function(id, name) {
+        var overlay = this.$UIStructurePainter.showOverlay();
+        var window = Mooml.render('reportWindowTemplate', {i18n: this.i18n, url: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + id } );
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
@@ -172,30 +196,137 @@ var UIPainter = new Class({
 			this.renderAttributes.delay((this.sortDuration + this.morphDuration) * 1.5, this);
 		}.bind(this));
 	},
-	
+
+    renderReports: function(reports) {
+        var elReports = $$('#reports ul')[0];
+        elReports.empty();
+        reports.each(function(report) {
+            this.renderReport(report, elReports);
+        }.bind(this));
+    },
+
+    renderReport: function(report, elParent) {
+        elParent.grab(Mooml.render('reportTemplate', {i18n: this.i18n, report: report}));
+//        this.UIListener.registerReportEventHandler(report);
+    },
+
+    // TODO: odprasit
+    renderUserAccountBox: function(user) {
+        var elUserAccount = new Element('div', {
+            styles: {
+                display: 'inline',
+                float: 'left',
+                'margin-left': '20px'
+            }
+        });
+
+        var me = this;
+        if (user.id !== 0) {
+            var elUser = new Element('span', {
+                id: 'user',
+                html: user.name + ' - ',
+                styles: {
+                    background: 'url("http://icons.iconarchive.com/icons/dryicons/simplistica/24/user-icon.png") no-repeat scroll 0 0 transparent',
+                    color: '#CEE7F7',
+                    float: 'left',
+                    'font-size': '14px',
+                    'font-weight': 'bold',
+                    'line-height': '24px',
+                    'padding-left': '30px'
+                }
+            });
+            elUser.inject(elUserAccount);
+
+            var logout = new Element('a', {
+                href: '#',
+                html: 'logout',
+                styles: {
+                    'padding-top': '2px',
+                    'padding-left': '5px'
+                },
+                events: {
+                    click: function(event) {
+                        event.stop();
+                        me.renderUserLogoutWindow();
+                    }
+                }
+            });
+            logout.inject(elUserAccount);
+        } else {
+            var elUser = new Element('span', {
+                id: 'user',
+                html: 'Anonymous - ',
+                styles: {
+                    background: 'url("http://icons.iconarchive.com/icons/dryicons/simplistica/24/user-icon.png") no-repeat scroll 0 0 transparent',
+                    color: '#CEE7F7',
+                    float: 'left',
+                    'font-size': '14px',
+                    'font-weight': 'bold',
+                    'line-height': '24px',
+                    'padding-left': '30px'
+                }
+            });
+            elUser.inject(elUserAccount);
+
+            var login = new Element('a', {
+                href: '#',
+                html: 'login',
+                styles: {
+                    'padding-top': '2px',
+                    'padding-left': '5px'
+                },
+                events: {
+                    click: function(event) {
+                        event.stop();
+                        me.renderUserLoginWindow();
+                    }
+                }
+            });
+            login.inject(elUserAccount);
+        }
+
+        elUserAccount.inject($('settings'));
+    },
+
 	renderMarkedRules: function (elementParent, markedRules) {
 		if (!elementParent) { // re-render
 			elementParent = $$('#marked-rules ul')[0];
 			elementParent.empty();
 		}
 
-		var i = 0;
+        var taskId,
+            sortedRules = {};
 		Object.each(markedRules, function (FR) {
-			FR.getRule().setId(++i);
-			var elementRule = Mooml.render('markedRuleTemplate', {i18n: this.i18n, rule: FR.getRule()});
-			elementParent.grab(elementRule);
-			this.UIListener.registerMarkedRuleEventHandlers(FR);
+            taskId = FR.getRule().getTask().getId();
+            if (!sortedRules.hasOwnProperty(taskId)) {
+                sortedRules[taskId] = [];
+            }
+            sortedRules[taskId].push(FR);
 		}.bind(this));
 
-		var sortables = new Sortables(elementParent, {
-			clone: true,
-			revert: true,
-			
-			onComplete: function (element) {
-				this.ARBuilder.getARManager().sortMarkedRules(sortables.serialize());
-			}.bind(this)
-		});
-	},
+		var i = 0,
+            taskParent,
+            lastTaskId;
+		Object.each(sortedRules, function (foundRules, taskId) {
+            if (taskId !== lastTaskId) {
+                taskParent = Mooml.render('taskTemplate', { i18n: this.i18n, task: foundRules[0].getRule().getTask() });
+                elementParent.grab(taskParent);
+                lastTaskId = taskId;
+            }
+            Array.each(foundRules, function(FR) {
+//                FR.getRule().setId(++i);
+                var elementRule = Mooml.render('markedRuleTemplate', {i18n: this.i18n, rule: FR.getRule()});
+                taskParent.grab(elementRule);
+                this.UIListener.registerMarkedRuleEventHandlers(FR);
+            }.bind(this));
+		}.bind(this));
+
+        if (Object.keys(sortedRules).length !== 0) {
+            $('createReport').setStyle('visibility', 'visible');
+        } else {
+            $('createReport').setStyle('visibility', 'hidden');
+        }
+    },
 	
 	initFieldGroup: function (id) { // recursive
 		var FG = this.ARBuilder.getFGC().getFieldGroup(id);

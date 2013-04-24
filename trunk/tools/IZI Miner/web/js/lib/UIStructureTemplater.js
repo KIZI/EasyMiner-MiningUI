@@ -209,6 +209,15 @@ var UIStructureTemplater = new Class({
                 div(
                     ul({'class': 'clearfix'})));
         });
+
+        Mooml.register('reportsStructureTemplate', function (data) {
+            var i18n = data.i18n;
+
+            section({id: 'reports'},
+                h2({'class': 'minimize'}, i18n.translate('Reports'), a({href: '#', 'class': 'toggle'}, '')),
+                ul()
+            );
+        });
     },
 
     registerActiveRule: function() {
@@ -251,8 +260,11 @@ var UIStructureTemplater = new Class({
 
             section({id: 'marked-rules'},
                 h2({'class': 'minimize'}, i18n.translate('Rule clipboard'), a({href: '#', 'class': 'toggle'}, '')),
-                div(
-                    ul()));
+                div({ class: 'clearfix' },
+                    ul()
+                ),
+                a({ id: 'createReport', href: '#' }, i18n.translate('Create new report'))
+            );
         });
     }
 });

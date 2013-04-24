@@ -11,9 +11,11 @@ var AssociationRule = new Class({
 	changed: false,
 	groupFields: true,
 	validator: null,
+    task: null,
 	
-	initialize: function (validator) {
+	initialize: function (validator, task) {
 		this.validator = validator;
+		this.task = task;
 	},
 	
 	/* id */
@@ -244,6 +246,9 @@ var AssociationRule = new Class({
         }
 
         return settings;
+    },
+
+    getTask: function() {
+        return this.task;
     }
-	
 });
