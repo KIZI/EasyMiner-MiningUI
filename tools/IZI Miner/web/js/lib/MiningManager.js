@@ -4,44 +4,27 @@ var MiningManager = new Class({
     settings: null,
 	FRManager: null,
     dateHelper: null,
-	
+	$taskManager: null,
+
 	requests: [],
 	inProgress: false,
-    taskId: '',
-    requestData: {},
 	finishedStates: ['Solved', 'Interrupted'],
     errorStates: ['Failed'],
 	reqDelay: 2500,
 	
-	initialize: function (config, settings, FRManager, dateHelper) {
+	initialize: function (config, settings, FRManager, dateHelper, taskManager) {
 		this.config = config;
         this.settings = settings;
 		this.FRManager = FRManager;
         this.dateHelper = dateHelper;
+        this.$taskManager = taskManager;
 	},
 	
 	mineRules: function (rule, limitHits) {
 		this.inProgress = true;
 		this.FRManager.handleInProgress();
-		
-		this.requestData = {
-            limitHits: limitHits,
-            rule0: rule.serialize(),
-            rules: 1,
-            debug: this.settings.getDebug(),
-            joomlaUrl: this.config.getJoomlaURL(),
-            strict: this.settings.getStrictMatch(),
-            taskMode: this.settings.getTaskMode()
-        };
-
-        if (this.settings.getCaching()) { // caching enabled
-            this.taskId = CryptoJS.MD5(JSON.encode(this.requestData)).toString(); // MD5 hash from task setting
-        } else { // caching disabled
-            this.taskId = CryptoJS.MD5(JSON.encode(this.dateHelper.getTime())).toString(); // MD5 hash from unix timestamp
-        }
-        this.requestData.modelName = this.taskId;
-
-		this.makeRequest(JSON.encode(this.requestData));
+        this.$taskManager.addTask(rule.serialize(), limitHits);
+		this.makeRequest(JSON.encode(this.$taskManager.getActiveTask().getRequestData()));
 	},
 	
 	makeRequest: function (data) {
@@ -74,8 +57,8 @@ var MiningManager = new Class({
 	        }.bind(this)
 
 		}).post({'data': data});
-	        
-		this.addRequest(request);
+
+        this.requests.push(request);
 	},
 	
 	handleSuccessRequest: function (data, responseJSON) {
@@ -91,20 +74,15 @@ var MiningManager = new Class({
 		
 		var rules = responseJSON.rules;
 		var numRules = responseJSON.hasOwnProperty('rules') ? Object.getLength(responseJSON.rules) : 0;
-		this.FRManager.renderRules(rules, numRules, this.inProgress);
+		this.FRManager.renderRules(rules, numRules, this.inProgress, this.$taskManager.getActiveTask());
 	},
 	
 	handleErrorRequest: function () {
         if (!this.inProgress) { return; }
 
-        var taskId = this.taskId;
 		this.stopMining();
 		this.FRManager.handleError();
-        throw 'Failed task: ID: ' + taskId + ', source ID: ' + this.config.getIdDm();
-	},
-	
-	addRequest: function (request) {
-		this.requests.push(request);
+//        throw 'Failed task: ID: ' + this.$taskManager.getActiveTask().getId() + ', source ID: ' + this.config.getIdDm();
 	},
 	
 	stopMining: function () {
@@ -118,31 +96,29 @@ var MiningManager = new Class({
         // stop remote LM mining
         if (this.inProgress) { // hack around req.cancel(); weird bug
             this.inProgress = false;
-            this.stopRemoteMining(this.taskId, this.requestData.debug, this.config.getStopMiningUrl(), this.requestData.taskMode);
-            this.FRManager.handleStoppedMining();
+            this.stopRemoteMining(this.$taskManager.getActiveTask().getId(), this.$taskManager.getActiveTask().getDebug(), this.config.getStopMiningUrl(), this.$taskManager.getActiveTask().getTaskMode(), this.config.getJoomlaURL());
         }
 
-        this.requestData = {};
         this.requests = [];
-        this.taskId = '';
+        this.$taskManager.clearActiveTask();
+        this.FRManager.handleStoppedMining();
 	},
 	
 	getInProgress: function () {
 		return this.inProgress;
 	},
 
-    stopRemoteMining: function(taskId, debug, url, taskMode) {
+    stopRemoteMining: function(taskId, debug, url, taskMode, joomlaUrl) {
         var data = JSON.encode({
             taskId: taskId,
             debug: debug,
-            joomlaUrl: this.config.getJoomlaURL(),
+            joomlaUrl: joomlaUrl,
             taskMode: taskMode
         });
 
-        var request = new Request.JSON({
+        new Request.JSON({
             url: url,
             secure: true
         }).post({'data': data});
     }
-	
 });

@@ -58,6 +58,15 @@ var UIStructurePainter = new Class({
             navigation.grab(dataFields);
         }
 
+        // reports
+        var reports = $('reports');
+        if (reports) {
+            Mooml.render('reportsStructureTemplate', {i18n: this.$i18n}).replaces(reports);
+        } else {
+            reports = Mooml.render('reportsStructureTemplate', {i18n: this.$i18n});
+            navigation.grab(reports);
+        }
+
         this.$UIStructureListener.registerNavigationEventHandlers();
     },
 
@@ -123,6 +132,8 @@ var UIStructurePainter = new Class({
     resizeApplication: function() {
         var width = this.$elementSizeMeter.getWidth([$('antecedent'), $('interest-measures'), $('succedent')]) + 1; // IE9 hack (+1)
         $('ar-wrapper').setStyle('width', width);
+
+        $('marked-rules').setStyle('width', $('content').getSize().x - $('content').getStyle('padding-right').replace('px', '').toInt() - $('content').getStyle('padding-left').replace('px', '').toInt() - 2);
 
         this.resizeWindow();
     },

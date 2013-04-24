@@ -11,7 +11,7 @@ var FoundRule = new Class({
 	},
 	
 	getCSSID: function() {
-		return 'found-rule-' + this.getRule().getId();
+		return 'found-rule-' + this.getRule().getTask().getId() + '-' + this.getRule().getId();
 	},
 	
 	isException: function () {
@@ -21,5 +21,4 @@ var FoundRule = new Class({
 	isInteresting: function () {
 		return (this.$interesting !== null);
 	}
-	
 });

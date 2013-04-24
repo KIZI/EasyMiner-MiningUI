@@ -468,14 +468,18 @@ td {
 #overlay #add-attribute-window,
 #overlay #edit-attribute-window,
 #overlay #new-task-window,
-#overlay #show-histogram-window {
+#overlay #show-histogram-window,
+#overlay #user-login-window,
+#overlay #user-logout-window {
   width: 800px;
   margin-top: 45px;
 }
 #overlay #add-attribute-window iframe,
 #overlay #edit-attribute-window iframe,
 #overlay #new-task-window iframe,
-#overlay #show-histogram-window iframe {
+#overlay #show-histogram-window iframe,
+#overlay #user-login-window iframe,
+#overlay #user-logout-window iframe {
   border: none;
   width: 800px;
   height: 500px;
@@ -483,7 +487,9 @@ td {
 #overlay #add-attribute-window form input[type="submit"],
 #overlay #edit-attribute-window form input[type="submit"],
 #overlay #new-task-window form input[type="submit"],
-#overlay #show-histogram-window form input[type="submit"] {
+#overlay #show-histogram-window form input[type="submit"],
+#overlay #user-login-window form input[type="submit"],
+#overlay #user-logout-window form input[type="submit"] {
   margin-left: 310px;
 }
 #overlay #loading-data {
@@ -884,6 +890,45 @@ nav {
 }
 #data-fields li:hover .show-histogram {
   visibility: visible;
+}
+#reports {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+#reports h2 {
+  color: #314e64;
+  font: 20px 'Average', 'serif';
+  font-weight: bold;
+  border-bottom: 1px solid #314e64;
+  margin: 0 20px 5px;
+}
+#reports h2.minimize a {
+  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
+}
+#reports h2.maximize a {
+  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
+}
+#reports h2 a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  position: relative;
+  left: 1px;
+  top: 5px;
+}
+#reports ul {
+  margin-bottom: 10px;
 }
 section#active-rule #antecedent,
 section#active-rule #interest-measures,
@@ -1423,7 +1468,7 @@ section#active-rule #action-box {
   clear: left;
   position: relative;
   top: -8px;
-  left: 44px;
+  left: 6px;
 }
 #found-rules .found-rule .ims .im-value {
   color: #7b0d2e;
@@ -1530,23 +1575,31 @@ section#active-rule #action-box {
   clear: left;
 }
 #marked-rules h2 {
-  color: #314e64;
-  font: 20px 'Average', 'serif';
-  font-weight: bold;
-  border-bottom: 1px solid #314e64;
+  color: #925213;
+  font: 36px 'Droid Sans', 'sans-serif';
+  font-weight: normal;
+  border-bottom: none;
+  margin-left: 10px;
   margin-bottom: 5px;
 }
 #marked-rules ul {
   width: 100%;
   padding-left: 0;
   float: left;
-  margin-left: 25px;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+#marked-rules ul li:first-child {
+  color: #487113;
+  text-decoration: underline;
+  padding-left: 5px;
 }
 #marked-rules ul li {
   width: 100%;
   padding-left: 0;
   float: left;
   clear: left;
+  list-style-type: none;
 }
 #marked-rules .marked-rule {
   cursor: default;
@@ -1700,7 +1753,7 @@ section#active-rule #action-box {
   clear: left;
   position: relative;
   top: -8px;
-  left: 44px;
+  left: 6px;
   left: 5px;
 }
 #marked-rules .marked-rule .ims .im-value {
@@ -1720,6 +1773,14 @@ section#active-rule #action-box {
 }
 #marked-rules .marked-rule:hover > .clear {
   visibility: visible;
+}
+#marked-rules a#createReport {
+  background: transparent url("http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png") 0 0 no-repeat;
+  height: 24px;
+  padding-left: 30px;
+  margin-right: 10px;
+  float: right;
+  visibility: hidden;
 }
 footer {
   color: #434343;

@@ -23,10 +23,10 @@ var RulesParser = new Class({
         this.DD = DD;
     },
 
-	parse: function (data) {
+	parse: function (data, task) {
 		var rules = [];
 		Array.each(data, function (iRule) {
-			var rule = new AssociationRule(null);
+			var rule = new AssociationRule(null, task);
 			rule.setId(iRule.id);
 			rule.addAntecedent(this.parseCedent('antecedent', iRule.antecedent, 1));
 			rule.addSuccedent(this.parseCedent('consequent', iRule.consequent, 1));

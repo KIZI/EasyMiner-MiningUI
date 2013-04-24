@@ -1,5 +1,5 @@
 var ARBuilder = new Class({
-    GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'miningManager'],
+    GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'miningManager', 'reportManager'],
 	Implements: Events,
 
 	$config: null,
@@ -20,6 +20,7 @@ var ARBuilder = new Class({
 	defFLIndex: 0,
 	$FGC: null,
 	$callbackDelay: 1000, // miliseconds
+    $reportManager: null,
 
 	// init basics
 	initialize: function (config) {
@@ -36,6 +37,8 @@ var ARBuilder = new Class({
         this.UIListener = new UIListener(this, new UIColorizer(), new DragDropHelper(new UIColorizer()), new ColorHelper());
         this.UIPainter = new UIPainter(this, this.$config, this.settings, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementID())), this.$UIStructurePainter);
         this.UIListener.setUIPainter(this.UIPainter);
+
+        this.$reportManager = new ReportManager(this.$config, this.settings, this.UIPainter);
 
         if (this.$config.getIdDm()) {
             this.loadData();
@@ -86,13 +89,26 @@ var ARBuilder = new Class({
 
         this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
         this.$FRManager = new FRManager(this.$config, this.$rulesParser, this.settings, this.UIPainter, this.UIListener, this.$i18n);
-        this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper());
+        this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper(), new TaskManager(this.$config, this.settings));
         this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);
         this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
         this.$ETreeManager.setARManager(this.$ARManager);
 
         this.UIPainter.createUI(); // TODO resize window after
         this.$FRManager.initPager();
+
+        // TODO: Odprasit
+        var me = this;
+            new Request.JSON({
+                url: 'getUser.php',
+                secure: true,
+
+                onSuccess: function(responseJSON) {
+                    me.UIPainter.renderUserAccountBox(responseJSON.user);
+                }.bind(this)
+            }).post({data: JSON.encode({})});
+
+        this.$reportManager.loadReports();
     },
 
     getDD: function() {
@@ -235,6 +251,10 @@ var ARBuilder = new Class({
         this.UIPainter.renderShowHistogramWindow(name, type);
     },
 
+    openReportWindow: function(id, name) {
+        this.UIPainter.renderReportWindow(id, name);
+    },
+
     // TODO handle load data error
     reloadAttributes: function() {
         this.reloadData();
@@ -282,6 +302,10 @@ var ARBuilder = new Class({
     showHiddenAttributes: function() {
         this.$DD.showHiddenAttributes();
         this.reloadData();
-    }
+    },
 
+    createReport: function() {
+        this.$reportManager.createReport(this.$FRManager.getMarkedRules());
+        this.$reportManager.loadReports();
+    }
 });

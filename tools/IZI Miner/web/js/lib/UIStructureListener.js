@@ -185,6 +185,10 @@ var UIStructureListener = new Class({
             var elH2 = $$('#marked-rules h2')[0];
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
-    }
 
+        $('createReport').addEvent('click', function(event) {
+            event.stop();
+            this.$ARBuilder.createReport();
+        }.bind(this));
+    }
 });

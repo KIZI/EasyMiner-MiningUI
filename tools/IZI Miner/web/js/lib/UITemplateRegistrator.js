@@ -47,6 +47,13 @@ var UITemplateRegistrator = new Class({
                 a({href: '#', id: field.getCSSShowHistogramID(), 'class': 'show-histogram', 'title': i18n.translate('Show histogram')})
             );
         });
+
+        Mooml.register('reportTemplate', function (data) {
+            var i18n = data.i18n,
+                report = data.report;
+
+            li({ id: 'report' + report.id }, a({ href: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + report.id, target: '_blank'}, report.name));
+        });
 	},
 	
 	registerActiveRule: function () {
@@ -373,7 +380,7 @@ var UITemplateRegistrator = new Class({
 			    BK = data.BK;
 			
 			li({id: FR.getCSSID(), 'class': 'found-rule'},
-				span({'class': 'rule'}, '<span class="id">' + key + '.</span>' + rule.getIdent()),
+				span({'class': 'rule'}, rule.getIdent()),
 				span({'class': 'info'}),
 				!BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
 				a({id: rule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
@@ -385,7 +392,16 @@ var UITemplateRegistrator = new Class({
 	},
 	
 	registerMarkedRules: function () {
-		Mooml.register('markedRuleTemplate', function (data) {
+        Mooml.register('taskTemplate', function (data) {
+            var task = data.task,
+                i18n = data.i18n;
+
+            ul({id: task.getCssId(), class: 'task'},
+                li({}, task.getTime().toLocaleDateString() + ' ' + task.getTime().toLocaleTimeString() + ', ' + i18n.translate('Task ID') + ': ' + task.getId())
+            );
+        });
+
+        Mooml.register('markedRuleTemplate', function (data) {
 			var rule = data.rule,
 			    i18n = data.i18n;
 
@@ -416,6 +432,23 @@ var UITemplateRegistrator = new Class({
 
             div({id: 'show-histogram-window'},
                 iframe({src: url}));
+         });
+
+        Mooml.register('reportWindowTemplate', function (data) {
+            var url = data.url;
+
+            div({id: 'report-window'},
+                iframe({src: url}));
+        });
+
+        Mooml.register('userLoginWindowTemplate', function () {
+            div({id: 'user-login-window'},
+                iframe({src: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=user&task=login&tmpl=component'}));
+        });
+
+        Mooml.register('userLogoutWindowTemplate', function () {
+            div({id: 'user-logout-window'},
+                iframe({src: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=user&task=logout&tmpl=component'}));
         });
     }
 	

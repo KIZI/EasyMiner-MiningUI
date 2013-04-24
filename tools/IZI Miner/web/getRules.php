@@ -40,6 +40,7 @@ if ($id === 'TEST') {
     }
 
     $serializer = new TaskSettingSerializer($DDPath);
+
     $requestData = array('source' => $id, 'query' => $serializer->serialize($data), 'template' => $debug ? '4ftMiner.Task.Template.PMML' : '4ftMiner.Task.ARD.Template.PMML', 'pooler' => $taskMode);
     $numRequests = 0;
 
@@ -82,7 +83,7 @@ if ($id === 'TEST') {
         $responseContent['result'] = $resultPath;
         $responseContent['status'] = 'ok';
     } else {
-        $responseContent = ['status' => 'error'];
+        $responseContent = ['status' => 'error', 'response' => $response];
     }
 }
 

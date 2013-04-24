@@ -19,9 +19,10 @@ var Config = new Class({
 	dataGetURL: 'getData.php',
 	ETreeGetURL: 'getEtree.php',
 	rulesGetURL: 'getRules.php',
+	reportSaveUrl: 'saveReport.php',
     $stopMiningUrl: 'stopMining.php',
     $supportUrl: 'http://www.izi-miner.eu/features',
-		
+
 	// root element
 	rootElementID: 'IZIMiner',
 	
@@ -98,6 +99,10 @@ var Config = new Class({
 	setRulesGetURL: function (URL) {
 		this.rulesGetURL = URL;
 	},
+
+    getReportSaveUrl: function () {
+        return this.reportSaveUrl + "?id_dm=" + this.params.id_dm + (this.params.sleep ? '&sleep=' + this.params.sleep : '') + '&lang=' + this.lang;
+    },
 	
 	getETreeGetURL: function () {
 		return this.ETreeGetURL + "?id_dm=" + this.params.id_dm;
@@ -112,7 +117,7 @@ var Config = new Class({
     },
 
     getNewTaskURL: function() {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newDataSource&tmpl=component';
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newTask&tmpl=component&close=no';
     },
 
     getShowHistogramURL: function(name, type) {
@@ -121,6 +126,14 @@ var Config = new Class({
         } else {
             return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=previewColumn&tmpl=component&kbi=' + this.params.id_dm + '&col=' + encodeURIComponent(name);
         }
+    },
+
+    getCreateReportUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=saveMinerData&format=raw&type=clipboard&kbi=' + this.params.id_dm;
+    },
+
+    getShowReportsUrl: function() {
+        // TODO: URL?
     },
 	
 	getRootElementID: function () {

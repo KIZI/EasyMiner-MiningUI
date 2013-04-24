@@ -44,7 +44,7 @@ class TaskSettingSerializer
         $rule = $json->rule0;
 
         // Create basic structure of Document.
-        $this->createBasicStructure($json->modelName, $json->limitHits);
+        $this->createBasicStructure($json->taskId, $json->limitHits);
 
         // Create antecedent
         if (!empty($rule->antecedent->children)) {
