@@ -10,28 +10,15 @@ var ReportManager = new Class({
         this.$UIPainter = UIPainter;
     },
 
-    createReport: function(markedRules) {
-        var report = this.initReport(markedRules);
+    createReport: function(rules) {
+        var report = this.initReport(rules);
         this.saveReport(report);
     },
 
-    initReport: function(markedRules) {
-        var taskId,
-            rules = {};
-        Object.each(markedRules, function (FR) {
-            taskId = FR.getRule().getTask().getId();
-            if (!rules.hasOwnProperty(taskId)) {
-                rules[taskId] = [];
-            }
-            rules[taskId].push(FR);
-        }.bind(this));
-
-        var report = null;
-        Object.each(rules, function (foundRules, taskId) {
-            report = new Report(taskId);
-            Array.each(foundRules, function(FR) {
-                report.addRule(FR.getRule());
-            }.bind(this));
+    initReport: function(taskId, rules) {
+        var report = new Report(taskId);
+        Array.each(rules, function(FR) {
+            report.addRule(FR.getRule());
         }.bind(this));
 
         return report;

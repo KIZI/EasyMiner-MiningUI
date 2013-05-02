@@ -238,7 +238,18 @@ var FRManager = new Class({
 		
 		return rule;
 	},
-	
+
+    getMarkedRules: function(taskId) {
+        var rules = [];
+        this.$markedRules.each(function(rule) {
+            if (rule.getRule().getTask().getId() === taskId) {
+                rules.push(rule);
+            }
+        });
+
+        return rules;
+    },
+
 	removeMarkedRule: function(FR) {
 		Object.each(this.$markedRules, function (MR, key) {
 			if (FR.getRule().getId() === MR.getRule().getId()) {
@@ -248,24 +259,6 @@ var FRManager = new Class({
 
 		this.UIPainter.render$markedRules(null, this.$markedRules);
 	},
-
-	sort$markedRules: function (order) {
-		var $markedRules = [];
-		Array.each(order, function (CSSID) {
-			if (CSSID !== null) {
-				var ruleId = this.stringHelper.getId(CSSID);
-				var rule = this.getMarkedRule(ruleId);
-				$markedRules.push(rule);
-			}
-		}.bind(this));
-		
-		this.$markedRules = $markedRules;
-		this.UIPainter.render$markedRules(null);
-	},
-
-    clearMarkedRules: function() {
-        this.$markedRules = [];
-    },
 
     updateDownloadIcons: function(settingPath, resultPath) {
         this.UIPainter.updateDownloadButtons(settingPath, resultPath);
