@@ -262,8 +262,7 @@ var UIStructureTemplater = new Class({
                 h2({'class': 'minimize'}, i18n.translate('Rule clipboard'), a({href: '#', 'class': 'toggle'}, '')),
                 div({ class: 'clearfix' },
                     ul()
-                ),
-                a({ id: 'createReport', href: '#' }, i18n.translate('Create new report'))
+                )
             );
         });
     }

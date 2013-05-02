@@ -13,7 +13,7 @@ var Config = new Class({
 	lang: 'en',
 	
 	// URL settings
-	$joomlaURL: 'http://sewebar.lmcloud.vse.cz/',
+	$joomlaURL: 'http://sewebar-dev.lmcloud.vse.cz/',
     params: {},
 	BKGetURL: 'getBK.php',
 	dataGetURL: 'getData.php',

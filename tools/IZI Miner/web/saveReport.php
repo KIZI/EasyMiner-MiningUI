@@ -46,7 +46,10 @@ $lang = $request->query->get('lang');
     if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
         $result = json_decode($response);
         if ($result->result === 'ok') {
-            $responseContent = ['status' => 'ok'];
+            $responseContent = [
+                'status' => 'ok',
+                'reportId' => $result->article
+            ];
         } else {
             $responseContent = ['status' => 'error'];
         }

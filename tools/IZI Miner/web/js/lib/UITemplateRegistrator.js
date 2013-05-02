@@ -397,7 +397,7 @@ var UITemplateRegistrator = new Class({
                 i18n = data.i18n;
 
             ul({id: task.getCssId(), class: 'task'},
-                li({}, task.getTime().toLocaleDateString() + ' ' + task.getTime().toLocaleTimeString() + ', ' + i18n.translate('Task ID') + ': ' + task.getId())
+                li({}, task.getTime().toLocaleDateString() + ' ' + task.getTime().toLocaleTimeString() + ', ' + i18n.translate('Task ID') + ': ' + task.getId(), a({ class: 'createReport', id: 'createReport-' + task.getId(), href: '#' }, i18n.translate('Create new report')))
             );
         });
 

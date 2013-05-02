@@ -1774,13 +1774,12 @@ section#active-rule #action-box {
 #marked-rules .marked-rule:hover > .clear {
   visibility: visible;
 }
-#marked-rules a#createReport {
+#marked-rules a.createReport {
   background: transparent url("http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png") 0 0 no-repeat;
   height: 24px;
   padding-left: 30px;
   margin-right: 10px;
   float: right;
-  visibility: hidden;
 }
 footer {
   color: #434343;

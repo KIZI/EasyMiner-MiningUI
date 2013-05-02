@@ -430,9 +430,16 @@ var UIListener = new Class({
 	},
 	
 	registerMarkedRuleEventHandlers: function (FR) {
-		$(FR.getRule().getMarkedRuleCSSRemoveID()).addEvent('click', function (event) {
-			this.ARBuilder.getFRManager().removeMarkedRule(FR);
+		var me = this;
+
+        $(FR.getRule().getMarkedRuleCSSRemoveID()).addEvent('click', function (event) {
+			me.ARBuilder.getFRManager().removeMarkedRule(FR);
 			event.stop();
-		}.bind(this));
+		});
+
+        $('createReport-' + FR.getRule().getTask().getId()).addEvent('click', function(event) {
+            event.stop();
+            me.ARBuilder.createReport(FR.getRule().getTask().getId());
+        });
 	}
 });

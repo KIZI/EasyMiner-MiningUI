@@ -320,12 +320,6 @@ var UIPainter = new Class({
                 this.UIListener.registerMarkedRuleEventHandlers(FR);
             }.bind(this));
 		}.bind(this));
-
-        if (Object.keys(sortedRules).length !== 0) {
-            $('createReport').setStyle('visibility', 'visible');
-        } else {
-            $('createReport').setStyle('visibility', 'hidden');
-        }
     },
 	
 	initFieldGroup: function (id) { // recursive
