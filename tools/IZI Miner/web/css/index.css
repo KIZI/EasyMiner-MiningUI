@@ -470,7 +470,8 @@ td {
 #overlay #new-task-window,
 #overlay #show-histogram-window,
 #overlay #user-login-window,
-#overlay #user-logout-window {
+#overlay #user-logout-window,
+#overlay #create-user-report-window {
   width: 800px;
   margin-top: 45px;
 }
@@ -479,7 +480,8 @@ td {
 #overlay #new-task-window iframe,
 #overlay #show-histogram-window iframe,
 #overlay #user-login-window iframe,
-#overlay #user-logout-window iframe {
+#overlay #user-logout-window iframe,
+#overlay #create-user-report-window iframe {
   border: none;
   width: 800px;
   height: 500px;
@@ -489,7 +491,8 @@ td {
 #overlay #new-task-window form input[type="submit"],
 #overlay #show-histogram-window form input[type="submit"],
 #overlay #user-login-window form input[type="submit"],
-#overlay #user-logout-window form input[type="submit"] {
+#overlay #user-logout-window form input[type="submit"],
+#overlay #create-user-report-window form input[type="submit"] {
   margin-left: 310px;
 }
 #overlay #loading-data {

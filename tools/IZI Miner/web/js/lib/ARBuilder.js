@@ -255,6 +255,10 @@ var ARBuilder = new Class({
         this.UIPainter.renderReportWindow(id, name);
     },
 
+    openCreateUserReportkWindow: function() {
+        this.UIPainter.renderCreateUserReportWindow();
+    },
+
     // TODO handle load data error
     reloadAttributes: function() {
         this.reloadData();

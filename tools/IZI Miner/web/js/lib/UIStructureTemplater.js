@@ -215,7 +215,8 @@ var UIStructureTemplater = new Class({
 
             section({id: 'reports'},
                 h2({'class': 'minimize'}, i18n.translate('Reports'), a({href: '#', 'class': 'toggle'}, '')),
-                ul()
+                ul(),
+                a({ href: '#', id: 'createUserReport' }, i18n.translate('Create new report'))
             );
         });
     },

@@ -596,7 +596,12 @@ var UIPainter = new Class({
 
 		this.UIListener.registerEditConnectiveFormEventHandler(cedent);
 	},
-	
+
+    renderCreateUserReportWindow: function() {
+        var overlay = this.$UIStructurePainter.showOverlay();
+        overlay.grab(Mooml.render('createUserReportWindowTemplate', {i18n: this.i18n}))
+    },
+
 	/* found rules */
 	updateFoundRule: function (FR) {
 		var elFR = $(FR.getCSSID());
