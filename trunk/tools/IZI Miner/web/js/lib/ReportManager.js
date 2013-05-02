@@ -10,8 +10,8 @@ var ReportManager = new Class({
         this.$UIPainter = UIPainter;
     },
 
-    createReport: function(rules) {
-        var report = this.initReport(rules);
+    createReport: function(taskId, rules) {
+        var report = this.initReport(taskId, rules);
         this.saveReport(report);
     },
 
