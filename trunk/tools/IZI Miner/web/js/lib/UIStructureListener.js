@@ -138,6 +138,11 @@ var UIStructureListener = new Class({
             var elH2 = $$('#data-fields h2')[0];
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
+
+        var me = this;
+        $('createUserReport').addEvent('click', function(event) {
+            me.$ARBuilder.openCreateUserReportkWindow();
+        });
     },
 
     registerShowHiddenAttributesEventHandler: function() {

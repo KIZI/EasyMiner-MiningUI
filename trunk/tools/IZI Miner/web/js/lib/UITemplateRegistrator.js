@@ -52,7 +52,12 @@ var UITemplateRegistrator = new Class({
             var i18n = data.i18n,
                 report = data.report;
 
-            li({ id: 'report' + report.id }, a({ href: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + report.id, target: '_blank'}, report.name));
+            li({ id: 'report' + report.id }, a({ href: 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + report.id, target: '_blank'}, report.name));
+        });
+
+        Mooml.register('createUserReportWindowTemplate', function () {
+            div({id: 'create-user-report-window'},
+                iframe({src: 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component'}));
         });
 	},
 	
@@ -448,7 +453,7 @@ var UITemplateRegistrator = new Class({
 
         Mooml.register('userLogoutWindowTemplate', function () {
             div({id: 'user-logout-window'},
-                iframe({src: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=user&task=logout&tmpl=component'}));
+                iframe({src: 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=user&task=logout&tmpl=component'}));
         });
     }
 	
