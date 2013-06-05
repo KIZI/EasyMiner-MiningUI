@@ -133,7 +133,7 @@ var UIPainter = new Class({
 
     renderUserLoginWindow: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
-        var window = Mooml.render('userLoginWindowTemplate', { i18n: this.i18n });
+        var window = Mooml.render('userLoginWindowTemplate', { i18n: this.i18n, url: this.config.getUserLoginUrl() });
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
@@ -141,7 +141,7 @@ var UIPainter = new Class({
 
     renderUserLogoutWindow: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
-        var window = Mooml.render('userLogoutWindowTemplate', { i18n: this.i18n });
+        var window = Mooml.render('userLogoutWindowTemplate', { i18n: this.i18n, url: this.config.getUserLogoutUrl() });
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
@@ -157,7 +157,7 @@ var UIPainter = new Class({
 
     renderReportWindow: function(id, name) {
         var overlay = this.$UIStructurePainter.showOverlay();
-        var window = Mooml.render('reportWindowTemplate', {i18n: this.i18n, url: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + id } );
+        var window = Mooml.render('reportWindowTemplate', {i18n: this.i18n, url: this.config.getShowReportUrl(id) } );
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
@@ -206,7 +206,7 @@ var UIPainter = new Class({
     },
 
     renderReport: function(report, elParent) {
-        elParent.grab(Mooml.render('reportTemplate', {i18n: this.i18n, report: report}));
+        elParent.grab(Mooml.render('reportTemplate', { i18n: this.i18n, report: report, url: this.config.getShowReportUrl(report.id) }));
 //        this.UIListener.registerReportEventHandler(report);
     },
 
@@ -599,7 +599,7 @@ var UIPainter = new Class({
 
     renderCreateUserReportWindow: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
-        overlay.grab(Mooml.render('createUserReportWindowTemplate', {i18n: this.i18n}))
+        overlay.grab(Mooml.render('createUserReportWindowTemplate', { i18n: this.i18n, url: this.config.getCreateUserReportUrl() }))
     },
 
 	/* found rules */

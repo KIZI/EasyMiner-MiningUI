@@ -50,14 +50,15 @@ var UITemplateRegistrator = new Class({
 
         Mooml.register('reportTemplate', function (data) {
             var i18n = data.i18n,
-                report = data.report;
+                report = data.report,
+                url = data.url;
 
-            li({ id: 'report' + report.id }, a({ href: 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + report.id, target: '_blank'}, report.name));
+            li({ id: 'report' + report.id }, a({ href: url, target: '_blank'}, report.name));
         });
 
-        Mooml.register('createUserReportWindowTemplate', function () {
+        Mooml.register('createUserReportWindowTemplate', function (data) {
             div({id: 'create-user-report-window'},
-                iframe({src: 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component'}));
+                iframe({ src: data.url }));
         });
 	},
 	
@@ -446,14 +447,14 @@ var UITemplateRegistrator = new Class({
                 iframe({src: url}));
         });
 
-        Mooml.register('userLoginWindowTemplate', function () {
+        Mooml.register('userLoginWindowTemplate', function (data) {
             div({id: 'user-login-window'},
-                iframe({src: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=user&task=login&tmpl=component'}));
+                iframe({ src: data.url }));
         });
 
-        Mooml.register('userLogoutWindowTemplate', function () {
+        Mooml.register('userLogoutWindowTemplate', function (data) {
             div({id: 'user-logout-window'},
-                iframe({src: 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=user&task=logout&tmpl=component'}));
+                iframe({ src: data.url }));
         });
     }
 	
