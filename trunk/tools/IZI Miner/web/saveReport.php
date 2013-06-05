@@ -51,7 +51,10 @@ $lang = $request->query->get('lang');
                 'reportId' => $result->article
             ];
         } else {
-            $responseContent = ['status' => 'error'];
+            $responseContent = [
+                'status' => 'error',
+                'message' => $result->message
+            ];
         }
     } else {
         returnError:
