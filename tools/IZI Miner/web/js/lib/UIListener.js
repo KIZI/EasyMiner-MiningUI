@@ -85,7 +85,6 @@ var UIListener = new Class({
     },
 
     registerReportEventHandler: function(report) {
-        // show histogram
         $('report' + report.id).addEvent('click', function(event) {
             event.stop();
             this.ARBuilder.openReportWindow(report.id, report.name);

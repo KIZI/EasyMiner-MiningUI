@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
+$lang = $request->query->get('lang');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
 $debug = json_decode($data)->debug;
 $joomlaUrl = json_decode($data)->joomlaUrl;
-$lang = $request->query->get('lang');
 $sleep = (int) $request->query->get('sleep') ?: 0;
 
 if ($id === 'TEST') {

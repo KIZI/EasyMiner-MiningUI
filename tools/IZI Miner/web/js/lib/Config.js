@@ -103,7 +103,11 @@ var Config = new Class({
     getReportSaveUrl: function () {
         return this.reportSaveUrl + "?id_dm=" + this.params.id_dm + (this.params.sleep ? '&sleep=' + this.params.sleep : '') + '&lang=' + this.lang;
     },
-	
+
+    getListReportsUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=listKBIArticles&format=raw&kbi=' + this.params.id_dm;
+    },
+
 	getETreeGetURL: function () {
 		return this.ETreeGetURL + "?id_dm=" + this.params.id_dm;
 	},
@@ -132,8 +136,20 @@ var Config = new Class({
         return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=saveMinerData&format=raw&type=clipboard&kbi=' + this.params.id_dm;
     },
 
-    getShowReportsUrl: function() {
-        // TODO: URL?
+    getCreateUserReportUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component';
+    },
+
+    getShowReportUrl: function(id) {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + id;
+    },
+
+    getUserLoginUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=user&task=login&tmpl=component';
+    },
+
+    getUserLogoutUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=user&task=logout&tmpl=component';
     },
 	
 	getRootElementID: function () {

@@ -114,6 +114,6 @@ var ReportManager = new Class({
                 this.handleErrorRequest();
             }.bind(this)
 
-        }).post({'data': JSON.encode({ url: 'http://sewebar.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=listKBIArticles&format=raw&kbi=' + this.$config.params.id_dm })});
+        }).post({'data': JSON.encode({ url: this.$config.getListReportsUrl() })});
     }
 });
