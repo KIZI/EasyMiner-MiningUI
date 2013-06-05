@@ -257,7 +257,7 @@ var FRManager = new Class({
 			}
 		}.bind(this));
 
-		this.UIPainter.render$markedRules(null, this.$markedRules);
+		this.UIPainter.renderMarkedRules(null, this.$markedRules);
 	},
 
     updateDownloadIcons: function(settingPath, resultPath) {
