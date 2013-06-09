@@ -314,5 +314,9 @@ var ARBuilder = new Class({
 
     reloadReports: function() {
         this.$reportManager.loadReports();
+    },
+
+    openExportBusinessRulesDialog: function(taskId) {
+        this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));
     }
 });

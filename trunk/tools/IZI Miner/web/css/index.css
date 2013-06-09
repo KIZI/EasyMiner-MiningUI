@@ -471,7 +471,8 @@ td {
 #overlay #show-histogram-window,
 #overlay #user-login-window,
 #overlay #user-logout-window,
-#overlay #create-user-report-window {
+#overlay #create-user-report-window,
+#overlay #export-business-rules-window {
   width: 800px;
   margin-top: 45px;
 }
@@ -481,7 +482,8 @@ td {
 #overlay #show-histogram-window iframe,
 #overlay #user-login-window iframe,
 #overlay #user-logout-window iframe,
-#overlay #create-user-report-window iframe {
+#overlay #create-user-report-window iframe,
+#overlay #export-business-rules-window iframe {
   border: none;
   width: 800px;
   height: 500px;
@@ -492,7 +494,8 @@ td {
 #overlay #show-histogram-window form input[type="submit"],
 #overlay #user-login-window form input[type="submit"],
 #overlay #user-logout-window form input[type="submit"],
-#overlay #create-user-report-window form input[type="submit"] {
+#overlay #create-user-report-window form input[type="submit"],
+#overlay #export-business-rules-window form input[type="submit"] {
   margin-left: 310px;
 }
 #overlay #loading-data {
@@ -1777,12 +1780,22 @@ section#active-rule #action-box {
 #marked-rules .marked-rule:hover > .clear {
   visibility: visible;
 }
-#marked-rules a.createReport {
-  background: transparent url("http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png") 0 0 no-repeat;
+#marked-rules a.createReport,
+#marked-rules a.exportBusinessRules {
   height: 24px;
   padding-left: 30px;
   margin-right: 10px;
   float: right;
+}
+#marked-rules a.createReport {
+  background: transparent url("http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png") 0 0 no-repeat;
+}
+#marked-rules a.exportBusinessRules {
+  background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
+}
+#createUserReport {
+  float: right;
+  margin: 20px 20px 0 0;
 }
 footer {
   color: #434343;

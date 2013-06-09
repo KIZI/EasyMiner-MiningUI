@@ -289,7 +289,9 @@ var UIPainter = new Class({
     },
 
 	renderMarkedRules: function (elementParent, markedRules) {
-		if (!elementParent) { // re-render
+		var me = this;
+
+        if (!elementParent) { // re-render
 			elementParent = $$('#marked-rules ul')[0];
 			elementParent.empty();
 		}
@@ -306,8 +308,11 @@ var UIPainter = new Class({
 
 		var i = 0,
             taskParent,
-            lastTaskId;
+            lastTaskId,
+            taskIds = [];
 		Object.each(sortedRules, function (foundRules, taskId) {
+            taskIds.include(taskId);
+
             if (taskId !== lastTaskId) {
                 taskParent = Mooml.render('taskTemplate', { i18n: this.i18n, task: foundRules[0].getRule().getTask() });
                 elementParent.grab(taskParent);
@@ -320,6 +325,10 @@ var UIPainter = new Class({
                 this.UIListener.registerMarkedRuleEventHandlers(FR);
             }.bind(this));
 		}.bind(this));
+
+        taskIds.each(function(taskId) {
+            me.UIListener.registerMarkedRulesTaskEventHandlers(taskId);
+        });
     },
 	
 	initFieldGroup: function (id) { // recursive
@@ -659,6 +668,16 @@ var UIPainter = new Class({
 			'visibility': 'visible'
 		});
 	},
+
+    renderExportBusinessRulesDialog: function(taskId, rules) {
+        var rulesIds = [];
+        rules.each(function(rule) {
+            rulesIds.push(rule.getRule().getId());
+        });
+
+        var overlay = this.$UIStructurePainter.showOverlay();
+        overlay.grab(Mooml.render('exportBusinessRulesDialogTemplate', { i18n: this.i18n, url: this.config.getExportBusinessRulesUrl(taskId, rulesIds) }))
+    },
 		
 	/* navigation */
 	showETreeProgress: function () {
