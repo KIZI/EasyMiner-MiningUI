@@ -403,7 +403,10 @@ var UITemplateRegistrator = new Class({
                 i18n = data.i18n;
 
             ul({id: task.getCssId(), class: 'task'},
-                li({}, task.getTime().toLocaleDateString() + ' ' + task.getTime().toLocaleTimeString() + ', ' + i18n.translate('Task ID') + ': ' + task.getId(), a({ class: 'createReport', id: 'createReport-' + task.getId(), href: '#' }, i18n.translate('Show task details')))
+                li({}, task.getTime().toLocaleDateString() + ' ' + task.getTime().toLocaleTimeString() + ', ' + i18n.translate('Task ID') + ': ' + task.getId(),
+                    a({ class: 'exportBusinessRules', id: 'exportBusinessRules-' + task.getId(), href: '#' }, i18n.translate('Export Business Rules')),
+                    a({ class: 'createReport', id: 'createReport-' + task.getId(), href: '#' }, i18n.translate('Show task details'))
+                )
             );
         });
 
@@ -416,6 +419,14 @@ var UITemplateRegistrator = new Class({
 				a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}),
 				span({'class': 'ims'}, rule.getIMIdent()));
 		});
+
+        Mooml.register('exportBusinessRulesDialogTemplate', function (data) {
+            var url = data.url;
+
+            div({id: 'export-business-rules-window'},
+                iframe({src: url})
+            );
+        });
 	},
 	
     registerAttributeWindow: function() {

@@ -435,10 +435,19 @@ var UIListener = new Class({
 			me.ARBuilder.getFRManager().removeMarkedRule(FR);
 			event.stop();
 		});
+	},
 
-        $('createReport-' + FR.getRule().getTask().getId()).addEvent('click', function(event) {
+    registerMarkedRulesTaskEventHandlers: function(taskId) {
+        var me = this;
+
+        $('createReport-' + taskId).addEvent('click', function(event) {
             event.stop();
-            me.ARBuilder.createReport(FR.getRule().getTask().getId());
+            me.ARBuilder.createReport(taskId);
         });
-	}
+
+        $('exportBusinessRules-' + taskId).addEvent('click', function(event) {
+            event.stop();
+            me.ARBuilder.openExportBusinessRulesDialog(taskId);
+        });
+    }
 });
