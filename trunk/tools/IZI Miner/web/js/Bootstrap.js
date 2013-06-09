@@ -8,7 +8,11 @@ var reload = function() {
 
 var close = function() {
     $(config.getRootElementID()).fireEvent('closeOverlay');
-}
+};
+
+var reloadReports = function() {
+    $(config.getRootElementID()).fireEvent('reloadReports');
+};
 
 window.addEvent('domready', function () {
     var nativeTypeExtender = new NativeTypeExtender();

@@ -153,17 +153,21 @@ var UIStructureListener = new Class({
     },
 
     registerDataReloadEventHandlers: function() {
-        // called when com_dbconnect window is closed
         var elIZI = $(this.$ARBuilder.getConfig().getRootElementID());
+
+        // called when com_dbconnect window is closed
         elIZI.addEvent('reload', function() {
             this.$UIStructurePainter.hideOverlay();
             this.$ARBuilder.reloadAttributes();
         }.bind(this));
 
-        // TODO refactor into another function
-        var elIZI = $(this.$ARBuilder.getConfig().getRootElementID());
         elIZI.addEvent('closeOverlay', function() {
             this.$ARBuilder.closeOverlay();
+        }.bind(this));
+
+        // called when com_dbconnect reloads reports
+        elIZI.addEvent('reloadReports', function() {
+            this.$ARBuilder.reloadReports();
         }.bind(this));
     },
 
