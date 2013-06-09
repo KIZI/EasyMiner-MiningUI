@@ -137,7 +137,7 @@ var Config = new Class({
     },
 
     getCreateUserReportUrl: function() {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component';
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component&kbi=' + this.params.id_dm;
     },
 
     getShowReportUrl: function(id) {
