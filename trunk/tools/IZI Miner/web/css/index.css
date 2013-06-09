@@ -1324,6 +1324,7 @@ section#active-rule #action-box {
 }
 #found-rules .found-rule {
   cursor: default;
+  list-style-type: none;
 }
 #found-rules .found-rule .rule {
   float: left;
