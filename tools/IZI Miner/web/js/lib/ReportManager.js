@@ -79,10 +79,12 @@ var ReportManager = new Class({
 
     loadReports: function() {
         var request = new Request.JSON({
-            url: 'getReports.php',
+            url: this.$config.getListReportsUrl(),
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
+                console.log(responseJSON);
+
                 var reports = [];
                 Object.each(responseJSON.articles, function(name, id) {
                     reports.push({ id: id, name: name });
@@ -114,6 +116,6 @@ var ReportManager = new Class({
                 this.handleErrorRequest();
             }.bind(this)
 
-        }).post({'data': JSON.encode({ url: this.$config.getListReportsUrl() })});
+        }).get();
     }
 });
