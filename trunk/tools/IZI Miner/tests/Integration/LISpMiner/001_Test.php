@@ -10,7 +10,7 @@ class Integration_LISpMiner_001_Test extends IZI\Selenium\UITestCase
 {
   public function testMyTestCase()
   {
-    $this->open("?id_dm=102");
+    $this->open("?id_dm=5");
     for ($second = 0; ; $second++) {
         if ($second >= 60) $this->fail("timeout");
         try {
