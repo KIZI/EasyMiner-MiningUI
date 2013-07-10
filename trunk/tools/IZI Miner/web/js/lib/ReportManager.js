@@ -43,8 +43,8 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-                $('openWindow-' + this.taskId).href = 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId;
-                $('openWindow-' + this.taskId).fireEvent("click");
+                window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId, '_blank');
+                window.focus();
 
                 // TODO: Odprasit
 //                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
