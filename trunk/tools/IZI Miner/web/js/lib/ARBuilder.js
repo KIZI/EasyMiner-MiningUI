@@ -97,16 +97,16 @@ var ARBuilder = new Class({
         this.UIPainter.createUI(); // TODO resize window after
         this.$FRManager.initPager();
 
+
         // TODO: Odprasit
         var me = this;
-            new Request.JSON({
-                url: 'getUser.php',
-                secure: true,
-
-                onSuccess: function(responseJSON) {
-                    me.UIPainter.renderUserAccountBox(responseJSON.user);
-                }.bind(this)
-            }).post({data: JSON.encode({})});
+        new Request.JSON({
+            url: this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&task=userInfo&format=raw',
+            secure: true,
+            onComplete: function(responseJSON) {
+                me.UIPainter.renderUserAccountBox(responseJSON.user);
+            }
+        }).send();
 
         this.$reportManager.loadReports();
     },
