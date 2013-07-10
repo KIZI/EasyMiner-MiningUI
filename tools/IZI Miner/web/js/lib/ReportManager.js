@@ -41,7 +41,7 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-
+                window.open('http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId, '_blank');
 
 
                 // TODO: Odprasit
