@@ -83,8 +83,6 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-                console.log(responseJSON);
-
                 var reports = [];
                 Object.each(responseJSON.articles, function(name, id) {
                     reports.push({ id: id, name: name });
