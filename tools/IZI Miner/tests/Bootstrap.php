@@ -4,7 +4,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 define('DS', DIRECTORY_SEPARATOR);
 define('APP_PATH', __DIR__.'/..');
-define('WEB_PATH', 'http://sewebar-demo.lmcloud.vse.cz/izi-miner/');
+define('WEB_PATH', 'http://sewebar-dev.lmcloud.vse.cz/izi-miner/');
 
 require_once APP_PATH . '/vendor/autoload.php';
 

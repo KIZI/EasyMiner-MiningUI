@@ -222,6 +222,9 @@ var UIPainter = new Class({
 
         var me = this;
         if (user.id) {
+            // TODO: Odprasit
+            $('reports').show();
+
             var elUser = new Element('span', {
                 id: 'user',
                 html: user.name + ' - ',
@@ -253,6 +256,8 @@ var UIPainter = new Class({
             });
             logout.inject(elUserAccount);
         } else {
+            $('reports').hide();
+
             var elUser = new Element('span', {
                 id: 'user',
                 html: 'Anonymous - ',
