@@ -221,7 +221,7 @@ var UIPainter = new Class({
         });
 
         var me = this;
-        if (user.id !== 0) {
+        if (user.id) {
             var elUser = new Element('span', {
                 id: 'user',
                 html: user.name + ' - ',
