@@ -25,6 +25,8 @@ var ReportManager = new Class({
     },
 
     saveReport: function (report) {
+        // TODO: Odprasit
+        this.taskId = report.getTaskId();
         var requestData = {
             taskId: report.getTaskId(),
             rulesIds: report.getRulesIds(),
@@ -41,8 +43,8 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-                $('openWindow-' + data.taskId).href = 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId;
-                $('openWindow-' + data.taskId).fireEvent("click");
+                $('openWindow-' + this.taskId).href = 'http://sewebar-dev.lmcloud.vse.cz/index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId;
+                $('openWindow-' + this.taskId).fireEvent("click");
 
                 // TODO: Odprasit
 //                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
