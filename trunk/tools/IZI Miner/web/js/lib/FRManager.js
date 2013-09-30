@@ -317,14 +317,7 @@ var FRManager = new Class({
         }).get();
     },
 
-    onMarkedRulesLoadSuccess: function (data) {
-        if (data.result === 'error') {
-            this.onMarkedRulesLoadFailure.apply(this, arguments);
-            return;
-        }
-
-        var rules = JSON.parse(data.data);
-
+    onMarkedRulesLoadSuccess: function (rules) {
         this.$markedRules = rules.hasOwnProperty('length') && rules.length > 0 ? rules : [];
         this.renderMarkedRules();
     },
