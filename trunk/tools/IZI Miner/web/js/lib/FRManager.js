@@ -308,8 +308,12 @@ var FRManager = new Class({
         }).post(data);
     },
 
-    onMarkedRulesLoadSuccess: function (data, responseJSON) {
-        debugger;
+    onMarkedRulesLoadSuccess: function (data) {
+        if (data.result === 'error') {
+            this.onMarkedRulesLoadFailure.apply(this, arguments);
+            return;
+        }
+
         var rules = JSON.parse(data.data);
 
         this.$markedRules = rules.hasOwnProperty('length') && rules.length > 0 ? rules : [];
