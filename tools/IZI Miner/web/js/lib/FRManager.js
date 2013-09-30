@@ -278,7 +278,7 @@ var FRManager = new Class({
         };
 
         var request = new Request.JSON({
-            url: this.$config.getSaveClipboardUrl(),
+            url: this.config.getSaveClipboardUrl(),
             secure: true,
 
             onSuccess: function() { debugger; },
@@ -297,7 +297,7 @@ var FRManager = new Class({
         };
 
         var request = new Request.JSON({
-            url: this.$config.getLoadClipboardUrl(),
+            url: this.config.getLoadClipboardUrl(),
             secure: true,
 
             onSuccess: this.onMarkedRulesLoadSuccess,
