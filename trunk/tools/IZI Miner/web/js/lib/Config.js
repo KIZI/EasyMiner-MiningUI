@@ -108,6 +108,14 @@ var Config = new Class({
         return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=listKBIArticles&format=raw&kbi=' + this.params.id_dm;
     },
 
+    getLoadClipboardUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=loadMinerData&format=raw';
+    },
+
+    getSaveClipboardUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=saveMinerData&format=raw';
+    },
+
 	getETreeGetURL: function () {
 		return this.ETreeGetURL + "?id_dm=" + this.params.id_dm;
 	},

@@ -28,6 +28,8 @@ var FRManager = new Class({
 		this.tips.addEvent('hide', function(tip, el){
 		    tip.removeClass('tip-visible');
 		});
+
+        this.loadMarkedRules();
 	},
 
 	initPager: function () {
@@ -216,7 +218,9 @@ var FRManager = new Class({
 		// index interesting rule into KB
 		this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
 		this.AJAXBalancer.run();
-	},
+
+        this.saveMarkedRules();
+    },
 	
 	removeFoundRule: function (FR) {
 		this.AJAXBalancer.stopRequest(FR.getRule().getId());
@@ -258,10 +262,62 @@ var FRManager = new Class({
 		}.bind(this));
 
 		this.UIPainter.renderMarkedRules(null, this.$markedRules);
-	},
+
+        this.saveMarkedRules();
+    },
 
     updateDownloadIcons: function(settingPath, resultPath) {
         this.UIPainter.updateDownloadButtons(settingPath, resultPath);
+    },
+
+    saveMarkedRules: function() {
+        var data = {
+            kbi: this.config.getIdDm(),
+            type: 'clipboard',
+            data: JSON.stringify(this.$markedRules)
+        };
+
+        var request = new Request.JSON({
+            url: this.$config.getSaveClipboardUrl(),
+            secure: true,
+
+            onSuccess: function() { debugger; },
+            onError: function() { debugger; },
+            onFailure: function() { debugger; },
+            onException: function() { debugger; },
+            onTimeout: function() { debugger; }
+        }).post(data);
+    },
+
+    loadMarkedRules: function() {
+        var data = {
+            kbi: this.config.getIdDm(),
+            type: 'clipboard',
+            decode: true
+        };
+
+        var request = new Request.JSON({
+            url: this.$config.getLoadClipboardUrl(),
+            secure: true,
+
+            onSuccess: this.onMarkedRulesLoadSuccess,
+            onError: this.onMarkedRulesLoadFailure,
+            onFailure: this.onMarkedRulesLoadFailure,
+            onException: this.onMarkedRulesLoadFailure,
+            onTimeout: this.onMarkedRulesLoadFailure
+        }).post(data);
+    },
+
+    onMarkedRulesLoadSuccess: function (data, responseJSON) {
+        debugger;
+        var rules = JSON.parse(data.data);
+
+        this.$markedRules = rules.hasOwnProperty('length') && rules.length > 0 ? rules : [];
+        this.renderMarkedRules();
+    },
+
+    onMarkedRulesLoadFailure: function () {
+        // TODO: Implement
+        debugger;
     }
-	
 });
