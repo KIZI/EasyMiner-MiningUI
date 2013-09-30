@@ -279,26 +279,20 @@ var FRManager = new Class({
 
         var request = new Request.JSON({
             url: this.config.getSaveClipboardUrl(),
-            secure: true,
-
-            onSuccess: function() { debugger; },
-            onError: function() { debugger; },
-            onFailure: function() { debugger; },
-            onException: function() { debugger; },
-            onTimeout: function() { debugger; }
+            secure: true
         }).post(data);
     },
 
     loadMarkedRules: function() {
         var data = {
             kbi: this.config.getIdDm(),
-            type: 'clipboard',
-            decode: true
+            type: 'clipboard'
         };
 
         var request = new Request.JSON({
             url: this.config.getLoadClipboardUrl(),
             secure: true,
+            data: data,
 
             onSuccess: function() {
                 this.onMarkedRulesLoadSuccess.apply(this, arguments);
@@ -320,7 +314,7 @@ var FRManager = new Class({
                 this.onMarkedRulesLoadFailure.apply(this, arguments);
             }.bind(this)
 
-        }).post(data);
+        }).get();
     },
 
     onMarkedRulesLoadSuccess: function (data) {
