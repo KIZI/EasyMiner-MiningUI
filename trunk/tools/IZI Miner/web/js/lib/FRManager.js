@@ -300,11 +300,26 @@ var FRManager = new Class({
             url: this.config.getLoadClipboardUrl(),
             secure: true,
 
-            onSuccess: this.onMarkedRulesLoadSuccess,
-            onError: this.onMarkedRulesLoadFailure,
-            onFailure: this.onMarkedRulesLoadFailure,
-            onException: this.onMarkedRulesLoadFailure,
-            onTimeout: this.onMarkedRulesLoadFailure
+            onSuccess: function() {
+                this.onMarkedRulesLoadSuccess.apply(this, arguments);
+            }.bind(this),
+
+            onError: function() {
+                this.onMarkedRulesLoadFailure.apply(this, arguments);
+            }.bind(this),
+
+            onFailure: function() {
+                this.onMarkedRulesLoadFailure.apply(this, arguments);
+            }.bind(this),
+
+            onException: function() {
+                this.onMarkedRulesLoadFailure.apply(this, arguments);
+            }.bind(this),
+
+            onTimeout: function() {
+                this.onMarkedRulesLoadFailure.apply(this, arguments);
+            }.bind(this)
+
         }).post(data);
     },
 
@@ -322,6 +337,5 @@ var FRManager = new Class({
 
     onMarkedRulesLoadFailure: function () {
         // TODO: Implement
-        debugger;
     }
 });
