@@ -23,19 +23,15 @@ var Cedent = new Class({
         this.$level = data.level;
         this.$connective = new Connective(data.connective.id, data.connective.name);
 
-        var serialized = {};
-        serialized.type = 'cedent';
-        serialized.connective = this.$connective.serialize();
-        serialized.children = [];
-
         this.$children = [];
         Array.each(data.children, function(iChild) {
             if (iChild.type === 'cedent') {
                 child = new Cedent();
                 child.parseFromObject(iChild);
             } else {
-                debugger;
-//                child = new APField(, , new StringHelper());
+                if (iChild.category === 'One category') {
+                    new FieldAR(iChild.id, iChild.ref, iChild.type, iChild.localizedName, new StringHelper(), iChild.fields[0].value[0]);
+                }
             }
 
             this.$children.push(child);
