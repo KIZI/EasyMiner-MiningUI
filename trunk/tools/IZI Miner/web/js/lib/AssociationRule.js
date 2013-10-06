@@ -17,7 +17,36 @@ var AssociationRule = new Class({
 		this.validator = validator;
 		this.task = task;
 	},
-	
+
+    parseFromObject: function(data) {
+        var IM;
+
+        this.id = data.id;
+        this.ident = data.ident;
+
+        this.antecedent = new Cedent();
+        this.antecedent.parseFromObject(data.antecedent);
+
+        this.succedent = new Cedent();
+        this.succedent.parseFromObject(data.succedent);
+
+        this.condition = null;
+
+        this.IMs = {};
+        Array.each(data.IMs, function (iIM) {
+            IM = new InterestMeasure(iIM.name, iIM.localizedName, iIM.explanation, iIM.thresholdType, iIM.compareType, iIM.fields, new StringHelper(), iIM.$default);
+            this.addIM(IM);
+        });
+
+        this.changed = data.changed;
+        this.groupFields = data.groupFields;
+
+        this.task = new Task();
+        this.task.parseFromObject(data.task);
+
+        this.validator = null;
+    },
+
 	/* id */
 	getId: function() {
 		return this.id;

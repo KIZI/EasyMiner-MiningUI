@@ -23,8 +23,11 @@ var Connective = new Class({
     },
 
 	serialize: function () {
-		return {name: this.toLogical().toUpperCase(),
-			type: this.toLogical()};
+		return {
+            id: this.id,
+            name: this.toLogical().toUpperCase(),
+			type: this.toLogical()
+        };
 	},
 	
 	toString: function() {
