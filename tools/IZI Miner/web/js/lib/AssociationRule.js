@@ -19,7 +19,8 @@ var AssociationRule = new Class({
 	},
 
     parseFromObject: function(data) {
-        var IM;
+        var me = this,
+            IM;
 
         this.id = data.id;
         this.ident = data.ident;
@@ -35,7 +36,7 @@ var AssociationRule = new Class({
         this.IMs = {};
         Array.each(data.IMs, function (iIM) {
             IM = new InterestMeasure(iIM.name, iIM.localizedName, iIM.explanation, iIM.thresholdType, iIM.compareType, iIM.fields, new StringHelper(), iIM.$default);
-            this.addIM(IM);
+            me.addIM(IM);
         });
 
         this.changed = data.changed;
