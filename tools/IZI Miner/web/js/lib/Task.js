@@ -24,6 +24,10 @@ var Task = new Class({
         this.$time = new Date();
     },
 
+    parseFromObject: function(data) {
+        this.$requestData = data.$requestData;
+    },
+
     getId: function() {
         return this.$requestData.taskId;
     },

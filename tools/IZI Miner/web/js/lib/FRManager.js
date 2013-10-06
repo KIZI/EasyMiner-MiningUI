@@ -271,10 +271,15 @@ var FRManager = new Class({
     },
 
     saveMarkedRules: function() {
+        var rules = [];
+        Array.each(this.$markedRules, function(rule) {
+            rules.push(rule.serialize());
+        });
+
         var data = {
             kbi: this.config.getIdDm(),
             type: 'clipboard',
-            data: JSON.stringify(this.$markedRules)
+            data: JSON.stringify(rules)
         };
 
         var request = new Request.JSON({
@@ -318,8 +323,16 @@ var FRManager = new Class({
     },
 
     onMarkedRulesLoadSuccess: function (rules) {
-        this.$markedRules = rules.hasOwnProperty('length') && rules.length > 0 ? rules : [];
-        this.renderMarkedRules();
+        var rule;
+
+        this.$markedRules = [];
+        for (var i = 0; i < rules.length; i++) {
+            rule = new FoundRule();
+            rule.parseFromObject(rules[i]);
+            this.$markedRules.push(rule);
+        }
+
+        this.UIPainter.renderMarkedRules(null, this.$markedRules);
     },
 
     onMarkedRulesLoadFailure: function () {

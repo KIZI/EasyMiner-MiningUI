@@ -9,7 +9,12 @@ var FoundRule = new Class({
 	initialize: function (rule) {
 		this.$rule = rule;
 	},
-	
+
+    parseFromObject: function(data) {
+        this.$rule = new AssociationRule();
+        this.$rule.parseFromObject(data.$rule);
+    },
+
 	getCSSID: function() {
 		return 'found-rule-' + this.getRule().getTask().getId() + '-' + this.getRule().getId();
 	},

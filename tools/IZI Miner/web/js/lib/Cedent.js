@@ -15,6 +15,33 @@ var Cedent = new Class({
         this.$children = children || [];
 		this.$scope = scope;
 	},
+
+    parseFromObject: function(data) {
+        var child;
+
+        this.$id = data.id;
+        this.$level = data.level;
+        this.$connective = new Connective(data.connective.id, data.connective.name);
+
+        var serialized = {};
+        serialized.type = 'cedent';
+        serialized.connective = this.$connective.serialize();
+        serialized.children = [];
+
+        this.$children = [];
+        Array.each(data.children, function(iChild) {
+            if (iChild.type === 'cedent') {
+                child = new Cedent();
+                child.parseFromObject(iChild);
+            } else {
+                debugger;
+//                child = new APField(, , new StringHelper());
+            }
+
+            this.$children.push(child);
+        });
+        this.$scope = data.$scope;
+    },
 	
 	getNextLevel: function () {
 		return (this.$level + 1);
