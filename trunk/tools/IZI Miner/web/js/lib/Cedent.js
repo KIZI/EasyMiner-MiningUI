@@ -17,7 +17,8 @@ var Cedent = new Class({
 	},
 
     parseFromObject: function(data) {
-        var child;
+        var me = this,
+            child;
 
         this.$id = data.id;
         this.$level = data.level;
@@ -34,7 +35,7 @@ var Cedent = new Class({
                 }
             }
 
-            this.$children.push(child);
+            me.$children.push(child);
         });
         this.$scope = data.$scope;
     },
