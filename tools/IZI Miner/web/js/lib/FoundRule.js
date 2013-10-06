@@ -12,7 +12,7 @@ var FoundRule = new Class({
 
     parseFromObject: function(data) {
         this.$rule = new AssociationRule();
-        this.$rule.parseFromObject(data.$rule);
+        this.$rule.parseFromObject(data);
     },
 
 	getCSSID: function() {
