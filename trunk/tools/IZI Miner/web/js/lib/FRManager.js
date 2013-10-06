@@ -273,7 +273,7 @@ var FRManager = new Class({
     saveMarkedRules: function() {
         var rules = [];
         Array.each(this.$markedRules, function(rule) {
-            rules.push(rule.serialize());
+            rules.push(rule.getRule().serialize());
         });
 
         var data = {
