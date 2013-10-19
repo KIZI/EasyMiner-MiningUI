@@ -5,7 +5,7 @@ var Config = new Class({
 	// app info
 	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
 	name: 'EasyMiner',
-	version: '1.0-beta',
+	version: '1.0',
 	slogan: 'easy association rule mining',
 	copyright: '<a href="http://kizi.vse.cz" title="Department of Information and Knowledge Engineering - University of Economics Prague">DIKE UEP</a>',
 	
@@ -21,7 +21,7 @@ var Config = new Class({
 	rulesGetURL: 'getRules.php',
 	reportSaveUrl: 'saveReport.php',
     $stopMiningUrl: 'stopMining.php',
-    $supportUrl: 'http://www.izi-miner.eu/features',
+    $supportUrl: 'http://easyminer.eu/',
 
 	// root element
 	rootElementID: 'IZIMiner',
