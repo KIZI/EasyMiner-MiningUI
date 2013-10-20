@@ -408,11 +408,17 @@ var UIListener = new Class({
 	},
 
 	registerFoundRuleEventHandlers: function(FR, autoSearch) {
-		if (!autoSearch) { // ask background knowledge
-			$(FR.getRule().getFoundRuleCSSBKID()).addEvent('click', function (e) {
-				e.stop();
-				this.ARBuilder.getFRManager().askBK(FR);
-			}.bind(this));		
+		var el;
+
+        if (!autoSearch) { // ask background knowledge
+			el = $(FR.getRule().getFoundRuleCSSBKID());
+
+            if (el) {
+                el.addEvent('click', function (e) {
+                    e.stop();
+                    this.ARBuilder.getFRManager().askBK(FR);
+                }.bind(this));
+            }
 		}
 		
 		// mark
