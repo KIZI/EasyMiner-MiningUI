@@ -48,10 +48,12 @@ var UIStructureListener = new Class({
 
         // change autoFilter
         var elAutoFilter = $('autofilter');
-        elAutoFilter.addEvent('click', function (e) {
-            e.stop();
-            this.$ARBuilder.changeSettingsAutoFilter(elAutoFilter);
-        }.bind(this));
+        if (elAutoFilter) {
+            elAutoFilter.addEvent('click', function (e) {
+                e.stop();
+                this.$ARBuilder.changeSettingsAutoFilter(elAutoFilter);
+            }.bind(this));
+        }
 
         // change attribute suggestion
         if (ASPossible) {
