@@ -103,7 +103,7 @@ var UIStructurePainter = new Class({
 
     renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
         var autoSuggestPossible = (autoSuggest.length > 0);
-        var settingsEl = Mooml.render('settingsTemplate', {autoSuggestPossible: autoSuggestPossible, i18n: this.$i18n, reset: reset, settings: settings});
+        var settingsEl = Mooml.render('settingsTemplate', {showFeedback: this.$config.getShowFeedback(), autoSuggestPossible: autoSuggestPossible, i18n: this.$i18n, reset: reset, settings: settings});
         var elWindow = $('settings-window');
         if (elWindow) { // re-render (autocomplete)
             settingsEl.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));

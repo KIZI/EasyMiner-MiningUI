@@ -111,7 +111,7 @@ var UIStructureTemplater = new Class({
                                 img({src: './images/icon-tooltip-help.png'}),
                                 em(i18n.translate('Limit')),
                                 i18n.translate('Maximal number of association rules to be searched for.')))),
-                    div(
+                    data.showFeedback ? div(
                         label(i18n.translate('Auto filter') + ':'),
                         a({id: 'autofilter', 'href': '#', 'class': settings.getBKAutoSearch() ? 'autofilter-on' : 'autofilter-off'}, i18n.translate(settings.getBKAutoSearch() ? 'On': 'Off')),
                         span({'class': 'tooltip info'},
@@ -119,7 +119,7 @@ var UIStructureTemplater = new Class({
                                 img({src: './images/icon-tooltip-help.png'}),
                                 em(i18n.translate('Auto filter')),
                                 i18n.translate('Association rules are automaticaly filtered according to expert background knowledge. This guarantees that only interesting association rules are left.')))
-                    ),
+                    ) : '',
                     div(
                         label(i18n.translate('Cache') + ':'),
                         a({id: 'cache', 'href': '#', 'class': settings.getCaching() ? 'cache-on' : 'cache-off'}, i18n.translate(settings.getCaching() ? 'On': 'Off')),
