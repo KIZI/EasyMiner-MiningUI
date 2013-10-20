@@ -1,6 +1,6 @@
 var Config = new Class({
 
-    GetterSetter: ['stopMiningUrl', 'supportUrl', 'joomlaURL'],
+    GetterSetter: [ 'stopMiningUrl', 'supportUrl', 'joomlaURL', 'showFeedback' ],
 
 	// app info
 	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
@@ -14,6 +14,7 @@ var Config = new Class({
 	
 	// URL settings
 	$joomlaURL: 'http://sewebar-dev.lmcloud.vse.cz/',
+    $showFeedback: false,
     params: {},
 	BKGetURL: 'getBK.php',
 	dataGetURL: 'getData.php',
