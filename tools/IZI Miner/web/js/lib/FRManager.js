@@ -71,7 +71,7 @@ var FRManager = new Class({
 				Array.each(parsedRules, function (r) {
 					var FR = new FoundRule(r);
 					this.rules[r.getId()] = FR;
-					els.push(Mooml.render('foundRuleTemplate', {key: r.getId(), FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
+					els.push(Mooml.render('foundRuleTemplate', { showFeedback: this.config.getShowFeedback(), key: r.getId(), FR: FR, i18n: this.i18n, BK: this.settings.getBKAutoSearch()}));
 					if (this.settings.getBKAutoSearch()) {
 						this.buildRequest(FR, this.config.getBKAskURL(), true);
 					}
