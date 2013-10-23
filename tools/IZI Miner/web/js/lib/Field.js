@@ -73,7 +73,7 @@ var Field = new Class({
 	},
 	
 	getAttributeName: function () {
-		return this.ref.hasOwnProperty('getName') ? this.ref.getName() : this.ref;
+		return this.ref && this.ref.getName ? this.ref.getName() : this.ref;
 	},
 	
 	setCoefficient: function () {
