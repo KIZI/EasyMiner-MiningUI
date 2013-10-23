@@ -251,7 +251,10 @@ var AssociationRule = new Class({
 	},
 	
 	serialize: function () {
-		var serialized = {};
+		var serialized = {
+            changed: this.changed,
+            groupFields: this.groupFields
+        };
         serialized.antecedent = this.antecedent.serialize();
 
         serialized.IMs = [];
@@ -260,7 +263,9 @@ var AssociationRule = new Class({
 		}.bind(this));
 
 		serialized.succedent = this.succedent.serialize();
-		
+
+        serialized.task = this.task;
+
 		return serialized;
 	},
 
