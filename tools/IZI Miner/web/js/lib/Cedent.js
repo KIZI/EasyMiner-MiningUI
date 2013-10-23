@@ -33,7 +33,7 @@ var Cedent = new Class({
                 child.parseFromObject(iChild);
             } else {
                 if (iChild.category === 'One category') {
-                    new FieldAR(iChild.id, iChild.ref, iChild.type, iChild.localizedName, new StringHelper(), iChild.fields[0].value[0]);
+                    child = new FieldAR(new Date().getTime(), iChild.ref, iChild.category, iChild.localizedName, new StringHelper(), iChild.fields[0].value[0]);
                 }
             }
 
