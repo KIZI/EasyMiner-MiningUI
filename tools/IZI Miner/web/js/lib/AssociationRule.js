@@ -22,8 +22,6 @@ var AssociationRule = new Class({
         var me = this,
             IM;
 
-        debugger;
-
         this.id = data.id;
         this.ident = data.ident;
 
