@@ -20,6 +20,8 @@ var Cedent = new Class({
         var me = this,
             child;
 
+        debugger;
+
         this.$id = data.id;
         this.$level = data.level;
         this.$connective = new Connective(data.connective.id, data.connective.name);
