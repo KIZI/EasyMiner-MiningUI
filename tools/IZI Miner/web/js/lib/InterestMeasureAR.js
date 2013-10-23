@@ -33,7 +33,11 @@ var InterestMeasureAR = new Class({
             localizedName: this.localizedName,
 			thresholdType: this.thresholdType,
 			compareType: this.compareType,
-			fields: []};
+			fields: [],
+            threshold: this.threshold,
+            alpha: this.alpha
+        };
+
 		if (this.hasThreshold()) {
 			var tr = {name: 'threshold', value: this.threshold};
 			arr.fields.push(tr);
