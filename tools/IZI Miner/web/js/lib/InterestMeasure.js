@@ -27,7 +27,7 @@ var InterestMeasure = new Class({
 	},
 	
 	getLocalizedName: function () {
-		if (this.localizedName.length !== 0) {
+		if (this.localizedName) {
 			return this.localizedName;
 		}
 		
