@@ -96,7 +96,7 @@ var Field = new Class({
         var serialized = {};
         serialized.name = this.getAttributeName();
         serialized.category = this.type;
-        serialized.ref = this.ref.getName();
+        serialized.ref = this.ref.getName ? this.ref.getName() : this.ref;
         if (this.type === 'One category') {
             serialized.fields = [{name: 'category', value: this.category}];
         } else if (this.type) {
