@@ -26,8 +26,6 @@ var Cedent = new Class({
 
         this.$children = [];
         Array.each(data.children, function(iChild) {
-            debugger;
-
             if (iChild.type === 'cedent') {
                 child = new Cedent();
                 child.parseFromObject(iChild);

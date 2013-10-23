@@ -73,7 +73,7 @@ var Field = new Class({
 	},
 	
 	getAttributeName: function () {
-		return this.ref.getName();
+		return this.ref.hasOwnProperty('getName') ? this.ref.getName() : this.ref;
 	},
 	
 	setCoefficient: function () {
@@ -96,6 +96,7 @@ var Field = new Class({
         var serialized = {};
         serialized.name = this.getAttributeName();
         serialized.category = this.type;
+        serialized.ref = this.ref.getName();
         if (this.type === 'One category') {
             serialized.fields = [{name: 'category', value: this.category}];
         } else if (this.type) {
