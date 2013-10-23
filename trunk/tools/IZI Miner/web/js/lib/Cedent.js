@@ -20,14 +20,14 @@ var Cedent = new Class({
         var me = this,
             child;
 
-        debugger;
-
         this.$id = data.id;
         this.$level = data.level;
         this.$connective = new Connective(data.connective.id, data.connective.name);
 
         this.$children = [];
         Array.each(data.children, function(iChild) {
+            debugger;
+
             if (iChild.type === 'cedent') {
                 child = new Cedent();
                 child.parseFromObject(iChild);
