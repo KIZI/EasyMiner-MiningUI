@@ -18,6 +18,7 @@ var Cedent = new Class({
 
     parseFromObject: function(data) {
         var me = this,
+            category,
             child;
 
         this.$id = data.id;
@@ -31,7 +32,9 @@ var Cedent = new Class({
                 child.parseFromObject(iChild);
             } else {
                 if (iChild.category === 'One category') {
-                    child = new FieldAR(new Date().getTime(), iChild.ref, iChild.category, iChild.localizedName, new StringHelper(), iChild.fields[0].value[0]);
+                    category = Object.prototype.toString.call(iChild.fields[0].value) === '[object Array]' ? iChild.fields[0].value[0] : iChild.fields[0].value;
+
+                    child = new FieldAR(new Date().getTime(), iChild.ref, iChild.category, iChild.localizedName, new StringHelper(), category);
                 }
             }
 
