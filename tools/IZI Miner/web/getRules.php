@@ -63,9 +63,6 @@ if ($id === 'TEST') {
     $info = curl_getinfo($ch);
     curl_close($ch);
 
-var_dump($response, $info);
-die;
-
     $ok = ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response));
     if ((++$numRequests < MAX_MINING_REQUESTS) && !$ok) { sleep(REQUEST_DELAY); goto sendRequest; }
 
