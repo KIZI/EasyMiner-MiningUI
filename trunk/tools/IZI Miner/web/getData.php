@@ -37,6 +37,7 @@ if ($id === 'TEST') {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_COOKIE, session_name() . '=' . session_id());
 
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
