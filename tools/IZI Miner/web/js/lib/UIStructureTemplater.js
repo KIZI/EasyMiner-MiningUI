@@ -105,7 +105,7 @@ var UIStructureTemplater = new Class({
                     ),
                     div(
                         label({'for': 'rulesCnt'}, i18n.translate('Limit') + ':'),
-                        input({id: 'rules-cnt', type: 'number', class: 'shortnr', value: settings.getRulesCnt(), min: 0, step: 10, pattern: '[0-9]+', required: ''}),
+                        input({id: 'rules-cnt', type: 'text', class: 'shortnr', value: settings.getRulesCnt()}),
                         span({'class': 'tooltip info'},
                             span({'class': 'help'},
                                 img({src: './images/icon-tooltip-help.png'}),
