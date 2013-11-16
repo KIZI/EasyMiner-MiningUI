@@ -48,6 +48,9 @@ if ($id === 'TEST') {
     $model = new KbiModelTransformator($config);
     $document = $model->cancelQuery($taskId);
 
+    var_dump($document);
+    die;
+
     $ok = (strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document));
 
     if (FB_ENABLED && $debug) { // log into console
