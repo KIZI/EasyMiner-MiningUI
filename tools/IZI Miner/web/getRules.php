@@ -87,7 +87,7 @@ if ($id === 'TEST') {
         $resultPath = 'temp/4ft_result_'.date('md_His').'.pmml';
         file_put_contents($resultPath, $document);
 
-        $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, $response, null, $lang);
+        $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, $document, null, $lang);
         $DP->loadData();
         $DP->parseData();
         $responseContent = $DP->getER();
