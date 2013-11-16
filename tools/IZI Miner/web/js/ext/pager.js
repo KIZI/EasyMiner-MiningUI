@@ -65,7 +65,13 @@ var Pager = new Class({
     	this.label.addClass('mining-in-progress');
     	this.label.set('text', this.textProgress);
 	},
-	
+
+    setInterrupted: function(limit) {
+        this.label.removeProperty('class');
+        this.label.addClass('mining-stopped');
+        this.label.set('text', 'Mining has been stopped, because maximum number of hypotheses has been found (' + limit + ')'); // TODO: Localize
+    },
+
 	setFinished: function () {
     	this.label.removeProperty('class');
     	this.label.addClass('mining-finished');
