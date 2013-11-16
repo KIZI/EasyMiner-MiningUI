@@ -3,7 +3,6 @@
 require_once './Bootstrap.php';
 require_once '../config/Config.php';
 
-use IZI\Encoder\URLEncoder;
 use IZI\Serializer\TaskSettingSerializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

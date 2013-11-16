@@ -92,7 +92,13 @@ var FRManager = new Class({
 			}
 			
 			if (!inProgress) {
-				this.pager.setFinished();
+                if (numRules === this.settings.getRulesCnt()) {
+                    this.pager.setFinished();
+                } else {
+                    this.pager.setInterrupted(this.settings.getRulesCnt());
+                }
+
+
                 this.UIPainter.hideStopMiningButton();
 			}
 			
