@@ -9,6 +9,21 @@ use IZI\Serializer\TaskSettingSerializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+$joomla = '/home/sewebar/code.google.com/trunk/joomla25/www';
+
+define('_JEXEC', 1);
+define('JPATH_BASE', $joomla);
+
+require_once JPATH_BASE .'/configuration.php';
+require_once JPATH_BASE .'/includes/defines.php';
+require_once JPATH_BASE .'/includes/framework.php';
+require_once JPATH_BASE .'/libraries/joomla/factory.php';
+require_once JPATH_BASE .'/includes/framework.php';
+
+$app = JFactory::getApplication('site');
+
+require_once JPATH_BASE . '/components/com_kbi/models/transformator.php';
+
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
