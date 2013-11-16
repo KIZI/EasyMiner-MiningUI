@@ -48,32 +48,29 @@ if ($id === 'TEST') {
     $taskPath = 'temp/4ft_task_'.date('md_His').'.pmml';
     file_put_contents($taskPath, $requestData['query']);
 
-    $encoder = new URLEncoder();
-
     // run task
     sendRequest:
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $joomlaUrl.'index.php?option=com_kbi&task=query&format=raw');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
-    curl_setopt($ch, CURLOPT_VERBOSE, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
+    $config = array(
+        'source' => intval($id),
+        'query' => '',
+        'xslt' => NULL,
+        'parameters' => NULL
+    );
 
-    $response = curl_exec($ch);
-    $info = curl_getinfo($ch);
-    curl_close($ch);
+    $model = new KbiModelTransformator($config);
+    $document = $model->transform();
 
-    $ok = ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response));
+    $ok = (strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document));
     if ((++$numRequests < MAX_MINING_REQUESTS) && !$ok) { sleep(REQUEST_DELAY); goto sendRequest; }
 
     if (FB_ENABLED && $debug) { // log into console
-        FB::info(['num requests' => $numRequests, 'curl request' => $requestData, 'curl response' => $response, 'curl info' => $info]);
+        FB::info(['num requests' => $numRequests, 'request' => $requestData, 'response' => $document]);
     }
 
     if ($ok) {
         // save LM result
         $resultPath = 'temp/4ft_result_'.date('md_His').'.pmml';
-        file_put_contents($resultPath, $response);
+        file_put_contents($resultPath, $document);
 
         $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, $response, null, $lang);
         $DP->loadData();
@@ -83,7 +80,7 @@ if ($id === 'TEST') {
         $responseContent['result'] = $resultPath;
         $responseContent['status'] = 'ok';
     } else {
-        $responseContent = ['status' => 'error', 'response' => $response];
+        $responseContent = ['status' => 'error', 'response' => $document];
     }
 }
 
