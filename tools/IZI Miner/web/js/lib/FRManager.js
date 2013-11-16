@@ -92,7 +92,7 @@ var FRManager = new Class({
 			}
 			
 			if (!inProgress) {
-                if (numRules === this.settings.getRulesCnt()) {
+                if (numRules < this.settings.getRulesCnt()) {
                     this.pager.setFinished();
                 } else {
                     this.pager.setInterrupted(this.settings.getRulesCnt());
