@@ -67,7 +67,7 @@ if ($id === 'TEST') {
     sendRequest:
     $config = array(
         'source' => intval($id),
-        'query' => '',
+        'query' => $requestData['query'],
         'xslt' => NULL,
         'parameters' => NULL
     );
