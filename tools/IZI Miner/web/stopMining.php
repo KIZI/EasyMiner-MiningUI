@@ -8,6 +8,21 @@ use IZI\Serializer\TaskSettingSerializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+$joomla = '/home/sewebar/code.google.com/trunk/joomla25/www';
+
+define('_JEXEC', 1);
+define('JPATH_BASE', $joomla);
+
+require_once JPATH_BASE .'/configuration.php';
+require_once JPATH_BASE .'/includes/defines.php';
+require_once JPATH_BASE .'/includes/framework.php';
+require_once JPATH_BASE .'/libraries/joomla/factory.php';
+require_once JPATH_BASE .'/includes/framework.php';
+
+$app = JFactory::getApplication('site');
+
+require_once JPATH_BASE . '/components/com_kbi/models/transformator.php';
+
 $request = Request::createFromGlobals();
 $id = $request->query->get('id_dm');
 $data = $request->request->has('data') ? $request->request->get('data') : $request->query->get('data');
@@ -23,28 +38,25 @@ if ($id === 'TEST') {
     $requestData = ['pooler' => $taskMode];
 
     // run task
-    $encoder = new URLEncoder();
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $joomlaUrl.'index.php?option=com_kbi&task=cancelQuery&source='.$id.'&query='.$encoder->encode($taskId).'&format=raw');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $encoder->encode($requestData));
-    curl_setopt($ch, CURLOPT_VERBOSE, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    $config = array(
+        'source' => intval($id),
+        'query' => '',
+        'xslt' => NULL,
+        'parameters' => NULL
+    );
 
-    $response = curl_exec($ch);
-    $response = iconv("utf-8", "utf-8//IGNORE", $response);
-    $info = curl_getinfo($ch);
-    curl_close($ch);
+    $model = new KbiModelTransformator($config);
+    $document = $model->cancelQuery($taskId);
+
+    $ok = (strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document));
 
     if (FB_ENABLED && $debug) { // log into console
         FB::info(['curl request' => $requestData]);
-        FB::info(['curl response' => $response]);
-        FB::info(['curl info' => $info]);
+        FB::info(['response' => $document]);
     }
 
-    if ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response)) {
-        $success = preg_match('/status=\"success\"/', $response);
+    if ($info['http_code'] === 200 && strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document)) {
+        $success = preg_match('/status=\"success\"/', $document);
         if ($success) {
             $responseContent = ['status' => 'ok'];
         } else {
