@@ -46,7 +46,7 @@ if ($id === 'TEST') {
     // run export
     sendRequest:
     $config = array(
-        'source' => 148,
+        'source' => intval($id),
         'query' => '',
         'xslt' => NULL,
         'parameters' => NULL
@@ -55,19 +55,17 @@ if ($id === 'TEST') {
     $model = new KbiModelTransformator($config);
 
     $document = $model->getDataDescription();
-    var_dump($document);
-    die;
 
-    $ok = ($info['http_code'] === 200 && strpos($response, 'kbierror') === false && !preg_match('/status=\"failure\"/', $response));
+    $ok = (strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document));
     if ((++$numRequests < MAX_INITIALIZATION_REQUESTS) && !$ok) { sleep(REQUEST_DELAY); goto sendRequest; }
 
     if (FB_ENABLED && $debug) { // log into console
-        FB::info(['num requests' => $numRequests, 'curl response' => $response, 'curl info' => $info]);
+        FB::info(['num requests' => $numRequests, 'document' => $document]);
     }
 
     if ($ok) {
         $DDPath = APP_PATH.'/web/temp/DD_'.$id.'.pmml';
-        file_put_contents($DDPath, $response);
+        file_put_contents($DDPath, $document);
 
         $DP = new DataParser($DDPath, unserialize(FLPath), FGCPath, null, null, $lang);
         $DP->loadData();
