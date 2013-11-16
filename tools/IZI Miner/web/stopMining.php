@@ -48,9 +48,6 @@ if ($id === 'TEST') {
     $model = new KbiModelTransformator($config);
     $document = $model->cancelQuery($taskId);
 
-    var_dump($document);
-    die;
-
     $ok = (strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document));
 
     if (FB_ENABLED && $debug) { // log into console
@@ -58,7 +55,7 @@ if ($id === 'TEST') {
         FB::info(['response' => $document]);
     }
 
-    if ($info['http_code'] === 200 && strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document)) {
+    if (strpos($document, 'kbierror') === false && !preg_match('/status=\"failure\"/', $document)) {
         $success = preg_match('/status=\"success\"/', $document);
         if ($success) {
             $responseContent = ['status' => 'ok'];
