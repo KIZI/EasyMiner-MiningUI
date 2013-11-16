@@ -46,7 +46,7 @@ if ($id === 'TEST') {
     // run export
     sendRequest:
     $config = array(
-        'source' => $id,
+        'source' => 124,
         'query' => '',
         'xslt' => NULL,
         'parameters' => NULL
