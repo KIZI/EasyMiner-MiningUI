@@ -5,6 +5,14 @@ var Task = new Class({
     $time: null,
 
     initialize: function(serializedRule, limitHits, debug, joomlaUrl, strictMatch, taskMode, cache) {
+        var taskName = "Task ";
+
+        // Create the task name
+        serializedRule.IMs.each(function(e) {
+            taskName += e.name + "(" + e.threshold + "), ";
+        });
+        taskName = taskName.substring(0, taskName.length - 2);
+
         this.$requestData = {
             limitHits: limitHits,
             rule0: serializedRule,
@@ -12,7 +20,8 @@ var Task = new Class({
             debug: debug,
             joomlaUrl: joomlaUrl,
             strict: strictMatch,
-            taskMode: taskMode
+            taskMode: taskMode,
+            taskName: taskName
         };
 
         if (cache) { // caching enabled
@@ -42,5 +51,17 @@ var Task = new Class({
 
     getCssId: function() {
         return 'task-' + this.$requestData.taskId;
+    },
+
+    getName: function() {
+        return this.$requestData.taskName;
+    },
+
+    setName: function(value) {
+        this.$requestData.taskName = value;
+    },
+
+    getChangeNameCssId: function() {
+        return 'rename-task-' + this.$requestData.taskId;
     }
 });

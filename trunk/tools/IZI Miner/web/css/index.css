@@ -280,6 +280,7 @@ td {
   color: #a41d1d;
   line-height: 1em;
 }
+
 #overlay form label {
   font-weight: bold;
   font-size: 14px;
@@ -1794,6 +1795,28 @@ section#active-rule #action-box {
 #marked-rules a.exportBusinessRules {
   background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
 }
+
+/* Task within the rule clipboard */
+#marked-rules .marked-task {
+    position: relative;
+    float: left;
+}
+
+/* Rename task hover */
+#marked-rules .marked-task .rename {
+    background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+    display: block;
+    width: 16px;
+    height: 20px;
+    visibility: hidden;
+    position: relative;
+    margin-left: 5px;
+    float: right;
+}
+#marked-rules .marked-task:hover > .rename {
+    visibility: visible;
+}
+
 #createUserReport {
   float: right;
   margin: 20px 20px 0 0;

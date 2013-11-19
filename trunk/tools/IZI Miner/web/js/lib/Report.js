@@ -1,11 +1,13 @@
 var Report = new Class({
-    GetterSetter: [ 'taskId' ],
+    GetterSetter: [ 'taskId', 'taskName' ],
 
     $taskId: undefined,
     $rules: [],
+    $taskName: undefined,
 
-    initialize: function(taskId) {
+    initialize: function(taskId, taskName) {
         this.$taskId = taskId;
+        this.$taskName = taskName;
     },
 
     addRule: function(rule) {

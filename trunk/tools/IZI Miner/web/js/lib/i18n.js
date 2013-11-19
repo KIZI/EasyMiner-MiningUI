@@ -82,7 +82,12 @@ var i18n = new Class({
                77: {'cs': 'Přidat do antecedentu', 'en': 'Add to antecedent'},
                78: {'cs': 'Přidat do atributů', 'en': 'Add to attributes'},
                79: {'cs': 'Strict match', 'en': 'Strict match'},
-               80: {'cs': 'All attributes from task setting must appear in discovered rules.', 'en': 'All attributes from task setting must appear in discovered rules.'}},
+               80: {'cs': 'All attributes from task setting must appear in discovered rules.', 'en': 'All attributes from task setting must appear in discovered rules.'},
+               81: {'cs': 'Název úlohy', en: 'Task Name'},
+               82: {'cs': 'Přejmenovat', en: 'Rename'},
+               83: {'cs': 'Přejmenovat úlohu', en: 'Rename the Task'},
+               84: {'cs': 'Nový název', en: 'New name'}
+        },
 
 	initialize: function (lang) {
 		this.lang = lang;
