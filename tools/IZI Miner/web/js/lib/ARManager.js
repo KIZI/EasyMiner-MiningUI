@@ -96,6 +96,22 @@ var ARManager = new Class({
 	closeIMWindow: function () {
 		this.UIPainter.hideOverlay();
 	},
+
+    /**
+     * Opens the rename task window overlay.
+     * @param taskId Task ID to rename.
+     */
+    openRenameTaskWindow: function(taskId) {
+        this.UIPainter.renderRenameTaskWindow(taskId);
+    },
+
+    /**
+     * Closes the rename task window overlay.
+     * Closes any overlay window currently shown.
+     */
+    closeRenameTaskWindow: function() {
+        this.UIPainter.hideOverlay();
+    },
 	
 	addAntecedent: function (antecedent) {
 		this.activeRule.addAntecedent(antecedent);
@@ -340,6 +356,16 @@ var ARManager = new Class({
 	recommendAttributesConfirm: function () {
 		this.ETreeManager.recommendAttributes(this.activeRule);
 		this.UIPainter.renderActiveRule();
-	}
+	},
+
+    /**
+     * Renames the task.
+     * @param taskId Task id to be renamed.
+     * @param newTaskName A new task name.
+     */
+    renameTask: function(taskId, newTaskName) {
+        // Rename the task
+        this.$ARBuilder.$FRManager.renameTask(taskId, newTaskName);
+    }
 	
 });

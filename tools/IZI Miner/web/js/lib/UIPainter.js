@@ -496,6 +496,30 @@ var UIPainter = new Class({
 		}.bind(this));
 	},
 
+    /**
+     * Renders the rename task window in an overlay.
+     * @param taskId Task id to rename.
+     */
+    renderRenameTaskWindow: function(taskId) {
+        // Locals
+        var overlay = this.$UIStructurePainter.showOverlay();
+        var taskName = this.ARBuilder.$FRManager.getTask(taskId)
+            .$requestData.taskName;
+
+        // Render
+        overlay.grab(Mooml.render(
+            'renameTaskWindowTemplate',
+            {
+                i18n: this.i18n,
+                taskId: taskId,
+                taskName: taskName
+            }
+        ));
+
+        // Register event handlers for the new controls
+        this.UIListener.registerTaskRenameEventHandlers();
+    },
+
     renderExplanation: function(IM) {
         $$('#overlay .help span')[0].set('html', IM.getExplanation());
     },

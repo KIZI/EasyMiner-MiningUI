@@ -10,13 +10,13 @@ var ReportManager = new Class({
         this.$UIPainter = UIPainter;
     },
 
-    createReport: function(taskId, rules) {
-        var report = this.initReport(taskId, rules);
+    createReport: function(taskId, rules, taskName) {
+        var report = this.initReport(taskId, rules, taskName);
         this.saveReport(report);
     },
 
-    initReport: function(taskId, rules) {
-        var report = new Report(taskId);
+    initReport: function(taskId, rules, taskName) {
+        var report = new Report(taskId, taskName);
         Array.each(rules, function(FR) {
             report.addRule(FR.getRule());
         }.bind(this));
@@ -31,7 +31,8 @@ var ReportManager = new Class({
             taskId: report.getTaskId(),
             rulesIds: report.getRulesIds(),
             debug: this.$settings.getDebug(),
-            joomlaUrl: this.$config.getJoomlaURL()
+            joomlaUrl: this.$config.getJoomlaURL(),
+            taskName: report.getTaskName()
         };
 
         this.makeRequest(JSON.encode(requestData));

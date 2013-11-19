@@ -343,5 +343,42 @@ var FRManager = new Class({
 
     onMarkedRulesLoadFailure: function () {
         // TODO: Implement
+    },
+
+    /**
+     * Gets the task based on its ID.
+     * @param taskId ID of the task to get.
+     */
+    getTask: function(taskId) {
+        // Declarations
+        var task = null;
+
+        // Find the task
+        this.$markedRules.each(function(e) {
+            if (e.$rule.task.$requestData.taskId == taskId) {
+                task = e;
+                return false;
+            }
+        });
+
+        // Return
+        return task.$rule.task;
+    },
+
+    /**
+     * Renames the task.
+     * @param taskId Task id to rename.
+     * @param newTaskName A new task name to set.
+     */
+    renameTask: function(taskId, newTaskName) {
+        // Rename the task
+        var task = this.getTask(taskId);
+        task.setName(newTaskName);
+
+        // Refresh the task name
+        this.UIPainter.renderMarkedRules(null, this.$markedRules);
+
+        // Save the task
+        this.saveMarkedRules();
     }
 });

@@ -309,7 +309,11 @@ var ARBuilder = new Class({
     },
 
     createReport: function(taskId) {
-        this.$reportManager.createReport(taskId, this.$FRManager.getMarkedRules(taskId));
+        this.$reportManager.createReport(
+            taskId,
+            this.$FRManager.getMarkedRules(taskId),
+            this.$FRManager.getTask(taskId).getName()
+        );
     },
 
     reloadReports: function() {

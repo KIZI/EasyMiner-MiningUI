@@ -16,11 +16,17 @@ $rulesIds = json_decode($data)->rulesIds;
 $debug = json_decode($data)->debug;
 $joomlaUrl = json_decode($data)->joomlaUrl;
 $lang = $request->query->get('lang');
+$taskName = json_decode($data)->taskName;
 
 //if ($id === 'TEST') {
 //    $responseContent = ['status' => 'ok'];
 //} else { // KBI
-    $requestData = ['kbi' => $id, 'lmtask' => $taskId, 'rules' => implode(',', $rulesIds)];
+    $requestData = [
+        'kbi' => $id,
+        'lmtask' => $taskId,
+        'rules' => implode(',', $rulesIds),
+        'taskName' => $taskName
+    ];
 
     // run task
     $encoder = new URLEncoder();

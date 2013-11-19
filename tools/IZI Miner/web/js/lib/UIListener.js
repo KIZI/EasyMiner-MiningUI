@@ -455,5 +455,32 @@ var UIListener = new Class({
             event.stop();
             me.ARBuilder.openExportBusinessRulesDialog(taskId);
         });
+
+        // Task renaming
+        $('rename-task-' + taskId).addEvent('click', function(event) {
+            event.stop();
+            me.ARBuilder.getARManager().openRenameTaskWindow(taskId);
+        });
+    },
+
+    registerTaskRenameEventHandlers: function() {
+        // Submit (rename)
+        $$('#rename-task-form input[type=submit]').addEvent('click', function(e) {
+            e.stop();
+
+            var newTaskName = $('rename-task-input')
+                .value
+                .trim();
+            var taskId = $('rename-task-id').value;
+            this.ARBuilder.getARManager().renameTask(taskId, newTaskName);
+            this.ARBuilder.getARManager().closeRenameTaskWindow();
+
+        }.bind(this));
+
+        // Close window (cancel)
+        $('rename-task-close').addEvent('click', function(e) {
+            e.stop();
+            this.ARBuilder.getARManager().closeRenameTaskWindow();
+        }.bind(this));
     }
 });

@@ -398,12 +398,25 @@ var UITemplateRegistrator = new Class({
 	},
 	
 	registerMarkedRules: function () {
+        // Marked task
         Mooml.register('taskTemplate', function (data) {
             var task = data.task,
                 i18n = data.i18n;
 
             ul({id: task.getCssId(), class: 'task'},
-                li({}, task.getTime().toLocaleDateString() + ' ' + task.getTime().toLocaleTimeString() + ', ' + i18n.translate('Task ID') + ': ' + task.getId(),
+                li({},
+                    div({ class: 'marked-task' },
+                        span(
+                            task.getTime().toLocaleDateString() + ' ' +
+                            task.getTime().toLocaleTimeString() + ', ' +
+                            i18n.translate('Task Name') + ': ' + task.getName()
+                        ), a({
+                            id: task.getChangeNameCssId(),
+                            href: '#',
+                            class: 'rename',
+                            title: i18n.translate('Rename')
+                        })
+                    ),
                     a({ styles: { display: 'none'}, id: 'openWindow-' + task.getId(), href: '#', target: '_blank' }, '&nbsp;'),
                     a({ class: 'exportBusinessRules', id: 'exportBusinessRules-' + task.getId(), href: '#' }, i18n.translate('Export Business Rules')),
                     a({ class: 'createReport', id: 'createReport-' + task.getId(), href: '#' }, i18n.translate('Show task details'))
@@ -411,6 +424,7 @@ var UITemplateRegistrator = new Class({
             );
         });
 
+        // Marked rule
         Mooml.register('markedRuleTemplate', function (data) {
 			var rule = data.rule,
 			    i18n = data.i18n;
@@ -426,6 +440,55 @@ var UITemplateRegistrator = new Class({
 
             div({id: 'export-business-rules-window'},
                 iframe({src: url})
+            );
+        });
+
+        // Rename task overlay
+        Mooml.register('renameTaskWindowTemplate', function(data) {
+            var i18n = data.i18n,
+                taskId = data.taskId,
+                taskName = data.taskName
+
+            div({
+                id: 'rename-task-window'
+            },
+                a({
+                    id: 'rename-task-close',
+                    href: '#'
+                },
+                i18n.translate('Close')
+                ),
+                h2(
+                    i18n.translate('Rename the Task')
+                ),
+                form({
+                        action: '#',
+                        method: 'POST',
+                        id: 'rename-task-form'
+                    },
+                    label({
+                        'for': 'rename-task-input'
+                    },
+                    i18n.translate('New name:')),
+                    input({
+                        name: 'rename-task-input',
+                        id: 'rename-task-input',
+                        type: 'text',
+                        value: taskName
+                    }),
+                    input({
+                        type: 'hidden',
+                        id: 'rename-task-id',
+                        value: taskId
+                    }),
+                    div({
+                    'class': 'autocomplete clearfix'
+                    }),
+                    input({
+                        type: 'submit',
+                        value: i18n.translate('Rename')
+                    })
+                )
             );
         });
 	},
