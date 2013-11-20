@@ -279,6 +279,10 @@ var FRManager = new Class({
     saveMarkedRules: function() {
         var rules = [];
         Array.each(this.$markedRules, function(rule) {
+            // TODO Debug: Remove $taskName from a task, needs to be removed.
+            delete rule.getRule().task.$requestData['taskName'];
+            // /Debug
+
             rules.push(rule.getRule().serialize());
         });
 
