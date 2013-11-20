@@ -5,13 +5,18 @@ var Task = new Class({
     $time: null,
 
     initialize: function(serializedRule, limitHits, debug, joomlaUrl, strictMatch, taskMode, cache) {
-        var taskName = "Task ";
+        var taskName = "Task";
 
         // Create the task name
-        serializedRule.IMs.each(function(e) {
-            taskName += e.name + "(" + e.threshold + "), ";
-        });
-        taskName = taskName.substring(0, taskName.length - 2);
+        if (serializedRule !== undefined &&
+            serializedRule.IMs !== undefined) {
+
+            taskName += " ";
+            serializedRule.IMs.each(function (e) {
+                taskName += e.name + "(" + e.threshold + "), ";
+            });
+            taskName = taskName.substring(0, taskName.length - 2);
+        }
 
         this.$requestData = {
             limitHits: limitHits,
