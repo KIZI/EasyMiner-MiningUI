@@ -256,7 +256,7 @@ td {
   color: #434343;
   font: 'Helvetica Neue', 'Arial', 'sans-serif';
   background: none rgba(0,0,0,0.6);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   visibility: hidden;
