@@ -407,9 +407,7 @@ var UITemplateRegistrator = new Class({
                 li({},
                     div({ class: 'marked-task' },
                         span(
-                            task.getTime().toLocaleDateString() + ' ' +
-                            task.getTime().toLocaleTimeString() + ', ' +
-                            i18n.translate('Task Name') + ': ' + task.getName()
+                            task.getName()
                         ), a({
                             id: task.getChangeNameCssId(),
                             href: '#',
@@ -447,7 +445,7 @@ var UITemplateRegistrator = new Class({
         Mooml.register('renameTaskWindowTemplate', function(data) {
             var i18n = data.i18n,
                 taskId = data.taskId,
-                taskName = data.taskName
+                taskName = data.taskName;
 
             div({
                 id: 'rename-task-window'
