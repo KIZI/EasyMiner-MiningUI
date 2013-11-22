@@ -102,7 +102,7 @@ var Config = new Class({
 	},
 
     getReportSaveUrl: function () {
-        return this.reportSaveUrl + "?id_dm=" + this.params.id_dm + (this.params.sleep ? '&sleep=' + this.params.sleep : '') + '&lang=' + this.lang;
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=savePMMLArticle&format=raw';
     },
 
     getListReportsUrl: function() {
