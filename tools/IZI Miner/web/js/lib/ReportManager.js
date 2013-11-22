@@ -10,13 +10,13 @@ var ReportManager = new Class({
         this.$UIPainter = UIPainter;
     },
 
-    createReport: function(taskId, rules, taskName) {
-        var report = this.initReport(taskId, rules, taskName);
+    createReport: function(taskId, rules) {
+        var report = this.initReport(taskId, rules);
         this.saveReport(report);
     },
 
-    initReport: function(taskId, rules, taskName) {
-        var report = new Report(taskId, taskName);
+    initReport: function(taskId, rules) {
+        var report = new Report(taskId);
         Array.each(rules, function(FR) {
             report.addRule(FR.getRule());
         }.bind(this));
