@@ -29,7 +29,7 @@ var ReportManager = new Class({
         this.taskId = report.getTaskId();
         var requestData = {
             taskId: report.getTaskId(),
-            rulesIds: report.getRulesIds(),
+            rulesIds: report.getRulesIds().join(','),
             debug: this.$settings.getDebug(),
             joomlaUrl: this.$config.getJoomlaURL(),
             taskName: report.getTaskName()
