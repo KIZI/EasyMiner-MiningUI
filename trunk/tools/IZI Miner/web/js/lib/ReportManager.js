@@ -25,13 +25,12 @@ var ReportManager = new Class({
     },
 
     saveReport: function (report) {
-        // TODO: Odprasit
         this.taskId = report.getTaskId();
+
         var requestData = {
-            taskId: report.getTaskId(),
-            rulesIds: report.getRulesIds().join(','),
-            debug: this.$settings.getDebug(),
-            joomlaUrl: this.$config.getJoomlaURL(),
+            kbi: this.$config.params.id_dm,
+            lmtask: report.getTaskId(),
+            rules: report.getRulesIds().join(','),
             taskName: report.getTaskName()
         };
 
