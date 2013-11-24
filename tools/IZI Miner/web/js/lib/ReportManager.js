@@ -34,12 +34,12 @@ var ReportManager = new Class({
             taskName: report.getTaskName()
         };
 
-        this.makeRequest(JSON.encode(requestData));
+        this.makeRequest(requestData);
     },
 
     makeRequest: function (data) {
         var request = new Request.JSON({
-            url: this.$config.getReportSaveUrl(),
+            url: this.$config.getReportSaveUrl() + '&kbi=' + data.kbi + '&lmtask=' + data.lmtask + '&rules=' + data.rules + 'taskName=' + data.taskName,
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
@@ -70,7 +70,8 @@ var ReportManager = new Class({
                 this.handleErrorRequest();
             }.bind(this)
 
-        }).post({'data': data});
+//        }).post({'data': data});
+        }).post();
     },
 
     handleSuccessRequest: function (data, responseJSON) {
