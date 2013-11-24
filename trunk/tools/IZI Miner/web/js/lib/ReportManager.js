@@ -3,6 +3,7 @@ var ReportManager = new Class({
     $config: null,
     $settings: null,
     $UIPainter: null,
+    $reports: null,
 
     initialize: function (config, settings, UIPainter) {
         this.$config = config;
@@ -25,14 +26,16 @@ var ReportManager = new Class({
     },
 
     saveReport: function (report) {
-        this.taskId = report.getTaskId();
-
         var requestData = {
             kbi: this.$config.params.id_dm,
             lmtask: report.getTaskId(),
             rules: report.getRulesIds().join(','),
             taskName: report.getTaskName()
         };
+
+        if (this.$reports[report.getTaskId()]) {
+            requestData.article = this.$reports[report.getTaskId()];
+        }
 
         this.makeRequest(requestData);
     },
