@@ -27,6 +27,8 @@ var ReportManager = new Class({
     },
 
     saveReport: function (report) {
+        this.taskId = report.getTaskId();
+
         var requestData = {
             kbi: this.$config.params.id_dm,
             lmtask: report.getTaskId(),
@@ -47,10 +49,12 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
+                this.$reports[this.taskId] = responseJSON.article;
+
                 window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId, '_blank');
                 window.focus();
 
-                // TODO: Odprasit
+                // TODO: Handle failure
 //                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
 //                    this.handleSuccessRequest(data, responseJSON);
 //                } else {
