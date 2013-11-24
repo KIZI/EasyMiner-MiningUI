@@ -9,6 +9,7 @@ var ReportManager = new Class({
         this.$config = config;
         this.$settings = settings;
         this.$UIPainter = UIPainter;
+        this.$reports = {};
     },
 
     createReport: function(taskId, rules) {
