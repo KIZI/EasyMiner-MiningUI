@@ -18,7 +18,7 @@ var i18n = new Class({
 			   12: {'cs': 'atributy', 'en': 'attributes'},
 			   13: {'cs': 'předdefinované atributy', 'en': 'predefined attributes'},
 			   14: {'cs': 'Cedent', 'en': 'Cedent'},
-			   15: {'cs': 'Přidat koeficient', 'en': 'Add coefficient'},
+			   15: {'cs': 'Přidat koeficient', 'en': 'Set value merging'},
 			   16: {'cs': 'Upravit koeficient', 'en': 'Edit value merging'},
 			   17: {'cs': 'Koeficient', 'en': 'Merging type:'},
 			   19: {'cs': 'Upravit', 'en': 'Edit'},
