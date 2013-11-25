@@ -120,7 +120,9 @@
 					<LocalizedName lang="cs">Above Average Dependance</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
 					<CompareType>Greater than or equal</CompareType>
-					<Explanation lang="en">The percentage of instances satisfying the consequent must be a specified number of perecent  higher if the antecedent is specified than is the total percentage of instances satisfying the consequent.</Explanation>
+					<Explanation lang="en">The percentage of instances satisfying the consequent must be a specified number of perecent  higher if the antecedent is specified than is the total percentage of instances satisfying the consequent.
+					The value is decreased by one compared to the formula typically used in the literature.
+					</Explanation>
 					<Field>
 						<Name>threshold</Name>
 						<DefaultValue>0.10</DefaultValue>
@@ -497,8 +499,8 @@
 			<Coefficient scope="all">
 				<Type>
 					<Name>Subset</Name>
-					<LocalizedName lang="en">Any one value</LocalizedName>
-					<Explanation lang="en">Simple wildcard</Explanation>
+					<LocalizedName lang="en">Subset of values</LocalizedName>
+					<Explanation lang="en">The system will try to use all individual attribute values. If maximum number of values parameter is set to a value greater than 1, dynamic binning will be activated. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">
 						<Name>minLength</Name>
@@ -518,6 +520,7 @@
 						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">Maximum number of values</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
+						<Explanation lang="en">If set to a value greater than 2, the system will go through all combinations of up to a specified number of values.</Explanation>
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
@@ -529,8 +532,8 @@
 				</Type>
 				<Type>
 					<Name>One category</Name>
-					<LocalizedName lang="en">One fixed value</LocalizedName>
-                    <Explanation lang="en">Only specified value will be considered for the value of the field. </Explanation>
+					<LocalizedName lang="en">Fixed value</LocalizedName>
+                    <Explanation lang="en">Only the specified value will be considered for the value of the field. </Explanation>
 					<Field>
 						<Name>category</Name>
 						<LocalizedName lang="en">Value</LocalizedName>
@@ -544,7 +547,7 @@
 				<Type>
 					<Name>Interval</Name>
 					<LocalizedName lang="en">Consecutive values</LocalizedName>
-					<Explanation lang="en">Binning wildcard - specified number of consecutive values will be considered for the value of the field. </Explanation>
+					<Explanation lang="en">Dynamic Binning wildcard - specified number of consecutive values will be considered for the value of the field.  </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">
 						<Name>minLength</Name>
@@ -561,8 +564,9 @@
 					<Field>
 						<Name>maxLength</Name>
 						<DefaultValue>1</DefaultValue>
-						<LocalizedName lang="en">Number of values considered as consecutive</LocalizedName>
+						<LocalizedName lang="en">Maximum length</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
+						<Explanation lang="en">Number of values considered as consecutive.</Explanation>
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
@@ -575,7 +579,7 @@
 				<Type>
 					<Name>Cyclical intervals</Name>
 					<LocalizedName lang="en">Cyclical consecutive values</LocalizedName>
-					<Explanation lang="en">Binning wildcard - specified number of consecutive values will be considered for the value of the field. The lowest and highest value are considered as consecutive. </Explanation>
+					<Explanation lang="en">Dynamic Binning - specified number of consecutive values will be considered for the value of the field. The lowest and highest value are considered as consecutive. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">
 						<Name>minLength</Name>
