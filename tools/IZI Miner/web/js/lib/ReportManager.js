@@ -12,13 +12,13 @@ var ReportManager = new Class({
         this.$reports = {};
     },
 
-    createReport: function(taskId, rules) {
-        var report = this.initReport(taskId, rules);
+    createReport: function(taskId, rules, taskName) {
+        var report = this.initReport(taskId, rules, taskName);
         this.saveReport(report);
     },
 
-    initReport: function(taskId, rules) {
-        var report = new Report(taskId);
+    initReport: function(taskId, rules, taskName) {
+        var report = new Report(taskId, taskName);
         Array.each(rules, function(FR) {
             report.addRule(FR.getRule());
         }.bind(this));
@@ -28,7 +28,6 @@ var ReportManager = new Class({
 
     saveReport: function (report) {
         this.taskId = report.getTaskId();
-
         var requestData = {
             kbi: this.$config.params.id_dm,
             lmtask: report.getTaskId(),
@@ -45,13 +44,13 @@ var ReportManager = new Class({
 
     makeRequest: function (data) {
         var request = new Request.JSON({
-            url: this.$config.getReportSaveUrl() + '&kbi=' + data.kbi + '&lmtask=' + data.lmtask + '&rules=' + data.rules + 'taskName=' + data.taskName,
+            url: this.$config.getReportSaveUrl(),
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
                 this.$reports[this.taskId] = responseJSON.article;
 
-                window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.reportId, '_blank');
+                window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article, '_blank');
                 window.focus();
 
                 // TODO: Handle failure
@@ -78,8 +77,7 @@ var ReportManager = new Class({
                 this.handleErrorRequest();
             }.bind(this)
 
-//        }).post({'data': data});
-        }).post();
+        }).post(data);
     },
 
     handleSuccessRequest: function (data, responseJSON) {
