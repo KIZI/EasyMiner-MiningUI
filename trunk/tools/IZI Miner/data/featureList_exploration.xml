@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arf:GUHAFeatureList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_05 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
-	xmlns:arf="http://keg.vse.cz/ns/arfeatures_05" mode="AssociationRules" procedure="4ft">
+	xsi:schemaLocation="http://keg.vse.cz/ns/arfeatures_08 http://sewebar.vse.cz/schemas/GUHAARfeature.xsd"
+	xmlns:arf="http://keg.vse.cz/ns/arfeatures_08" mode="AssociationRules" procedure="4ft">
 	<UserInterface priority="2">
 		<AllowMultipleRules>false</AllowMultipleRules>
 		<Name>Exploration</Name>
@@ -330,7 +330,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>a</Name>
+					<Name>a-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">a-frequency</LocalizedName>
 					<LocalizedName lang="cs">a-frequency</LocalizedName>
@@ -350,7 +350,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>b</Name>
+					<Name>b-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">b-frequency</LocalizedName>
 					<LocalizedName lang="cs">b-frequency</LocalizedName>
@@ -370,7 +370,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>c</Name>
+					<Name>c-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">c-frequency</LocalizedName>
 					<LocalizedName lang="cs">c-frequency</LocalizedName>
@@ -390,7 +390,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>d</Name>
+					<Name>d-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">d-frequency</LocalizedName>
 					<LocalizedName lang="cs">d-frequency</LocalizedName>
@@ -410,7 +410,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>r</Name>
+					<Name>r-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">r-frequency</LocalizedName>
 					<LocalizedName lang="cs">r-frequency</LocalizedName>
@@ -430,7 +430,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>s</Name>
+					<Name>s-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">s-frequency</LocalizedName>
 					<LocalizedName lang="cs">s-frequency</LocalizedName>
@@ -450,7 +450,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>k</Name>
+					<Name>k-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">k-frequency</LocalizedName>
 					<LocalizedName lang="cs">k-frequency</LocalizedName>
@@ -470,7 +470,7 @@
 					</Field>
 				</Type>
 				<Type>
-					<Name>l</Name>
+					<Name>l-frequency</Name>
                     <Default>false</Default>
 					<LocalizedName lang="en">l-frequency</LocalizedName>
 					<LocalizedName lang="cs">l-frequency</LocalizedName>
