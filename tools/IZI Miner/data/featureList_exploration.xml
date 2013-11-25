@@ -499,6 +499,40 @@
 			<Coefficient scope="all">
 				<Type>
 					<Name>Subset</Name>
+					<LocalizedName lang="en">No merging</LocalizedName>
+					<Explanation lang="en">Any one value</Explanation>
+					<MaxOccurrences>1</MaxOccurrences>
+					<Field hidden="true">
+						<Name>minLength</Name>
+						<DefaultValue>1</DefaultValue>
+						<LocalizedName lang="en">Minimum number of values</LocalizedName>
+						<LocalizedName lang="cs">Minimální délka</LocalizedName>
+						<Validation>
+							<Required value="yes" />
+							<MinValue>1</MinValue>
+							<MaxValue>1</MaxValue>
+							<Datatype>integer</Datatype>
+						</Validation>
+					</Field>
+					
+					<Field hidden="true">
+						<Name>maxLength</Name>
+						<DefaultValue>1</DefaultValue>
+						<LocalizedName lang="en">Maximum number of values</LocalizedName>
+						<LocalizedName lang="cs">Maximální délka</LocalizedName>
+						<Explanation lang="en">If set to a value greater than 2, the system will go through all combinations of up to a specified number of values.</Explanation>
+						<Validation>
+							<Required value="yes" />
+							<MinValue>1</MinValue>
+							<MaxValue>1</MaxValue>
+							<Datatype>integer</Datatype>
+							<Previous>isSmallerOrEqual</Previous>
+						</Validation>
+					</Field>
+				</Type>
+				
+				<Type>
+					<Name>Subset</Name>
 					<LocalizedName lang="en">Subset of values</LocalizedName>
 					<Explanation lang="en">The system will try to use all individual attribute values. If maximum number of values parameter is set to a value greater than 1, dynamic binning will be activated. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
