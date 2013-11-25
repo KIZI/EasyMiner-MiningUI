@@ -546,8 +546,8 @@
 				</Type>
 				<Type>
 					<Name>Interval</Name>
-					<LocalizedName lang="en">Consecutive values</LocalizedName>
-					<Explanation lang="en">Dynamic Binning wildcard - specified number of consecutive values will be considered for the value of the field.  </Explanation>
+					<LocalizedName lang="en">Adjacent values</LocalizedName>
+					<Explanation lang="en">Dynamic Binning wildcard - specified number of adjacent values will be  merged and the resulting value considered for the value of the field.  </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">
 						<Name>minLength</Name>
@@ -566,7 +566,7 @@
 						<DefaultValue>1</DefaultValue>
 						<LocalizedName lang="en">Maximum length</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
-						<Explanation lang="en">Number of values considered as consecutive.</Explanation>
+						<Explanation lang="en">Number of values considered as adjacent.</Explanation>
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
@@ -578,8 +578,8 @@
 				</Type>
 				<Type>
 					<Name>Cyclical intervals</Name>
-					<LocalizedName lang="en">Cyclical consecutive values</LocalizedName>
-					<Explanation lang="en">Dynamic Binning - specified number of consecutive values will be considered for the value of the field. The lowest and highest value are considered as consecutive. </Explanation>
+					<LocalizedName lang="en">Cyclical adjacent values</LocalizedName>
+					<Explanation lang="en">Dynamic Binning - specified number of adjacent values will be considered for the value of the field. The lowest and highest value are considered as adjacent. </Explanation>
 					<MaxOccurrences>1</MaxOccurrences>
 					<Field hidden="true">
 						<Name>minLength</Name>
@@ -596,7 +596,7 @@
 					<Field>
 						<Name>maxLength</Name>
 						<DefaultValue>1</DefaultValue>
-						<LocalizedName lang="en">Number of values considered as consecutive</LocalizedName>
+						<LocalizedName lang="en">Number of values considered as adjacent</LocalizedName>
 						<LocalizedName lang="cs">Maximální délka</LocalizedName>
 						<Validation>
 							<Required value="yes" />
