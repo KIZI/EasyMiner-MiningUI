@@ -3,7 +3,7 @@
 $config = [
     'DDPath' => APP_PATH.'/data/datadescription_0.2.xml',
     'FLPath' => [
-        APP_PATH.'/data/featureList_beginner.xml',
+//        APP_PATH.'/data/featureList_beginner.xml',
         APP_PATH.'/data/featureList_exploration.xml'
     ],
     'FGCPath' => APP_PATH.'/data/fieldGroupConfig.xml',
