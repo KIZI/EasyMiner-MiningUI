@@ -524,7 +524,7 @@
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
-							<MaxValue>4</MaxValue>
+							<MaxValue>2</MaxValue>
 							<Datatype>integer</Datatype>
 							<Previous>isSmallerOrEqual</Previous>
 						</Validation>
