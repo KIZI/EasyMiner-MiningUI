@@ -48,15 +48,17 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-                if ((responseJSON.status==='ok') && (responseJSON.article>0)){
+            
+                if ((responseJSON.result==='ok')&&(responseJSON.article>0)){
                   this.$reports[this.taskId] = responseJSON.article;
 
                   window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article, '_blank');
                   window.focus();
                 }else{
-                  //TODO handle failure
                   
+                  //TODO handle error
                 }
+                
             
                 
 
