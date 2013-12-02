@@ -48,10 +48,17 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-                this.$reports[this.taskId] = responseJSON.article;
+                if ((responseJSON.status==='ok') && (responseJSON.article>0)){
+                  this.$reports[this.taskId] = responseJSON.article;
 
-                window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article, '_blank');
-                window.focus();
+                  window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article, '_blank');
+                  window.focus();
+                }else{
+                  //TODO handle failure
+                  
+                }
+            
+                
 
                 // TODO: Handle failure
 //                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
