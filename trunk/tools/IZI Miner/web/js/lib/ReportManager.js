@@ -43,6 +43,7 @@ var ReportManager = new Class({
     },
 
     makeRequest: function (data) {
+        window.open(this.$config.getJoomlaURL()+'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS','pmmlWindow_'+data.lmtask);
         var request = new Request.JSON({
             url: this.$config.getReportSaveUrl(),
             secure: true,
@@ -52,16 +53,14 @@ var ReportManager = new Class({
                 if ((responseJSON.result==='ok')&&(responseJSON.article>0)){
                   this.$reports[this.taskId] = responseJSON.article;
 
-                  window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article, '_blank');
-                  window.focus();
+                  if (!window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article,'pmmlWindow_'+data.lmtask)){
+                    //TODO handle error
+                  }
                 }else{
-                  
-                  //TODO handle error
+                  window.open(this.$config.getJoomlaURL()+'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS_FAILED','pmmlWindow_'+data.lmtask);
                 }
                 
-            
                 
-
                 // TODO: Handle failure
 //                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
 //                    this.handleSuccessRequest(data, responseJSON);
