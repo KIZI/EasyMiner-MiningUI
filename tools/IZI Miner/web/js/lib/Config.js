@@ -3,11 +3,11 @@ var Config = new Class({
     GetterSetter: [ 'stopMiningUrl', 'supportUrl', 'joomlaURL', 'showFeedback' ],
 
 	// app info
-	author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
+	//author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
 	name: 'EasyMiner',
 	version: '1.0',
 	slogan: 'easy association rule mining',
-	copyright: '<a href="http://kizi.vse.cz" title="Department of Information and Knowledge Engineering - University of Economics Prague">DIKE UEP</a>',
+	copyright: '<a href="http://kizi.vse.cz" title="Department of Information and Knowledge Engineering">KIZI</a>, <a href="http://www.vse.cz">University of Economics</a>, Prague',
 	
 	// language
 	lang: 'en',
