@@ -55,7 +55,7 @@ var UIStructureTemplater = new Class({
                 config = data.config,
                 dateHelper = data.dateHelper;
 
-            footer('&copy; ' + dateHelper.getYear() + ' ' + config.getCopyright() + ', ' + i18n.translate('created by') + ' ' + config.getAuthor())
+            footer('Copyright &copy; ' + config.getCopyright() + ',' + dateHelper.getYear())
         });
     },
 
