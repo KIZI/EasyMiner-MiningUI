@@ -321,7 +321,7 @@ var Cedent = new Class({
         }
 
         this.$children.each(function(child) {
-            string += child.toString(); // APField or Cedent
+            string += '<span class="field">'+ child.toString() + '</span>'; // APField or Cedent
 
             if (index < this.getNumChildren()) { // Connective
                 string += this.$connective.toString();
