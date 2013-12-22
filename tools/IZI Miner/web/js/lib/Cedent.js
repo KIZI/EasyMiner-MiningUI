@@ -23,7 +23,7 @@ var Cedent = new Class({
 
         this.$id = data.id;
         this.$level = data.level;
-        this.$connective = new Connective(data.connective.id, data.connective.name);
+        this.$connective = new Connective(data.connective.id, data.connective.name === 'AND' ? 'Conjunction' : 'Disjunction');
 
         this.$children = [];
         Array.each(data.children, function(iChild) {
