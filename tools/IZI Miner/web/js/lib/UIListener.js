@@ -472,6 +472,18 @@ var UIListener = new Class({
                 .value
                 .trim();
             var taskId = $('rename-task-id').value;
+
+            // Check that the name is valid
+            if (newTaskName.trim().length == 0) {
+                this.ARBuilder.getARManager().displayError(
+                    'rename-task-input',
+                    'rename-task-error',
+                    this.ARBuilder.$i18n.translate('Please enter a valid task name.')
+                );
+                return;
+            }
+
+            // Proceed with renaming
             this.ARBuilder.getARManager().renameTask(taskId, newTaskName);
             this.ARBuilder.getARManager().closeRenameTaskWindow();
 

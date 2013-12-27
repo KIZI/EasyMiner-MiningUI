@@ -507,6 +507,11 @@ td {
 #overlay #loading-data.error {
   background: #fff url("../images/sprite-icons.png") 160px -743px no-repeat;
 }
+
+#overlay .invalid-value {
+    background-color: lightsalmon !important;
+}
+
 #settings-form {
   line-height: 2em;
 }
