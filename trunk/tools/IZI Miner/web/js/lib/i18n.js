@@ -86,7 +86,8 @@ var i18n = new Class({
                81: {'cs': 'Název úlohy', en: 'Task Name'},
                82: {'cs': 'Přejmenovat', en: 'Rename'},
                83: {'cs': 'Přejmenovat úlohu', en: 'Rename the Task'},
-               84: {'cs': 'Nový název', en: 'New name'}
+               84: {'cs': 'Nový název', en: 'New name'},
+               85: {'cs': 'Je nutné zadat platný název úlohy.', en: 'Please enter a valid task name.'}
         },
 
 	initialize: function (lang) {

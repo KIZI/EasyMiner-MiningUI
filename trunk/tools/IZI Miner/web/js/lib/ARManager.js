@@ -366,6 +366,16 @@ var ARManager = new Class({
     renameTask: function(taskId, newTaskName) {
         // Rename the task
         this.$ARBuilder.$FRManager.renameTask(taskId, newTaskName);
+    },
+
+    /**
+     * Displays an error
+     * @param elementId
+     * @param errorMessage
+     */
+    displayError: function(sourceElementId, messageElementId, message) {
+        $(sourceElementId).set('class', 'invalid-value');
+        $(messageElementId).set('text', message);
     }
 	
 });

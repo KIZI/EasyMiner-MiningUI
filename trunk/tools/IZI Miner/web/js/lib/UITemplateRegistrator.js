@@ -479,6 +479,12 @@ var UITemplateRegistrator = new Class({
                         id: 'rename-task-id',
                         value: taskId
                     }),
+                    br(),
+                    div(
+                        span({
+                            id: 'rename-task-error'
+                        })
+                    ),
                     div({
                     'class': 'autocomplete clearfix'
                     }),
