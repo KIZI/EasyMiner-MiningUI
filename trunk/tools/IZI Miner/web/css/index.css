@@ -628,9 +628,10 @@ td {
   top: -9px;
 }
 header {
+  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height: 146px;
-  width: 1350px;
-  padding-right: 30px;
+  width: 1302px;
+  padding-right: 15px;
 }
 header #browser-warning {
   margin: 0 0 0 60px;
@@ -706,7 +707,7 @@ nav {
   color: #434343;
   float: left;
   width: 280px;
-  margin: 30px 30px 0 30px;
+  margin: 15px 5px 0 15px;
   line-height: 20px;
 }
 #attributes {
@@ -720,7 +721,7 @@ nav {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 #attributes h2 {
   color: #314e64;
@@ -845,7 +846,7 @@ nav {
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
   padding-bottom: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 #data-fields h2 {
   color: #314e64;
@@ -1582,8 +1583,8 @@ section#active-rule #action-box {
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
   padding: 10px;
   min-width: 980px;
-  margin: 30px 0 0 50px;
-  padding: 10px 20px;
+  margin: 15px 0 0 15px;
+  padding-left: 15px;
   float: left;
   clear: left;
 }
@@ -1827,10 +1828,12 @@ section#active-rule #action-box {
   margin: 20px 20px 0 0;
 }
 footer {
+  background: #ededed;
   color: #434343;
-  margin: 10px 0 10px;
+  margin: 10px 0 0 0;
   text-align: center;
   font-size: 14px;
+  padding: 10px;
 }
 @media only screen and (min-width: 35em) {
 }
@@ -1945,21 +1948,20 @@ footer {
   -ms-user-select: none;
 }
 body {
-  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
+  background: transparent url("../images/bg-body.jpg") center -10px repeat;
   font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
   overflow-y: scroll;
 }
 footer {
-  width: 1350px;
+  width: 1300px;
 }
 #wrapper {
-  background: transparent url("../images/bg-body.jpg") center -10px repeat;
   min-height: 500px;
-  min-width: 1395px;
+  min-width: 1335px;
 }
 section#workplace {
   margin: 0 auto;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   float: left;
 }
 section#content {
@@ -1975,8 +1977,8 @@ section#content {
   padding: 10px;
   min-width: 980px;
   float: left;
-  margin: 30px 0 0 50px;
-  padding-left: 30px;
+  margin: 15px 0 0 15px;
+  padding-left: 15px;
 }
 section#content h2 {
   color: #925213;
