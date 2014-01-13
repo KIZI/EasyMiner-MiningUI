@@ -130,7 +130,19 @@ var UIStructurePainter = new Class({
     },
 
     resizeApplication: function() {
-        var width = this.$elementSizeMeter.getWidth([$('antecedent'), $('interest-measures'), $('succedent')]) + 1; // IE9 hack (+1)
+        // Declarations
+        var measuredElements = [ $('antecedent'), $('interest-measures'), $('succedent') ];
+        var widthFix = 50; // HACK: To prevent reimplementing vast codebase
+
+        // Set antecedent and consequent to max width within its container
+        var ruleWidth = $('ar-wrapper').getWidth() -
+            this.$elementSizeMeter.computeBorderlessWidth($('interest-measures'));
+        ruleWidth = ruleWidth / 2 - widthFix;
+        $('antecedent').setStyle('width', ruleWidth);
+        $('succedent').setStyle('width', ruleWidth);
+
+        // Resize the container
+        var width = this.$elementSizeMeter.getWidth(measuredElements) + 1; // IE9 hack (+1)
         $('ar-wrapper').setStyle('width', width);
 
         $('marked-rules').setStyle('width', $('content').getSize().x - $('content').getStyle('padding-right').replace('px', '').toInt() - $('content').getStyle('padding-left').replace('px', '').toInt() - 2);
