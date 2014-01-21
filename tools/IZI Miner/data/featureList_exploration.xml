@@ -557,7 +557,7 @@
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
-							<MaxValue>100</MaxValue>
+							<MaxValue>1</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
@@ -570,7 +570,7 @@
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
-							<MaxValue>3</MaxValue>
+							<MaxValue>1000</MaxValue>
 							<Datatype>integer</Datatype>
 							<Previous>isSmallerOrEqual</Previous>
 						</Validation>
