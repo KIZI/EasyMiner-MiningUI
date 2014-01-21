@@ -557,7 +557,7 @@
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
-							<MaxValue>1</MaxValue>
+							<MaxValue>100</MaxValue>
 							<Datatype>integer</Datatype>
 						</Validation>
 					</Field>
