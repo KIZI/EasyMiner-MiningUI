@@ -61,7 +61,7 @@
 						<LocalizedName lang="en">min value</LocalizedName>
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
-							<MinValue inclusive="no">0.001</MinValue>
+							<MinValue inclusive="no">0.01</MinValue>
 							<MaxValue inclusive="yes">1</MaxValue>
 							<Datatype>double</Datatype>
 						</Validation>
@@ -524,7 +524,7 @@
 						<Validation>
 							<Required value="yes" />
 							<MinValue>1</MinValue>
-							<MaxValue>2</MaxValue>
+							<MaxValue>5</MaxValue>
 							<Datatype>integer</Datatype>
 							<Previous>isSmallerOrEqual</Previous>
 						</Validation>
