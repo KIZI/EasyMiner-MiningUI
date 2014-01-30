@@ -70,11 +70,17 @@ var InterestMeasureSlider = new Class({
 	
 	calculateNumSteps: function () {
 		if (this.dataType === 'double') {
-			var numSteps = (this.field.maxValue - this.field.minValue) * 100;
+    console.log(this.field.maxValue);
+    console.log(this.field.minValue);
+    console.log(this.sliderMaxWidth)
+			var numSteps = (this.field.maxValue - this.field.minValue) * 100;//TODO Standa
+      /*if ((numSteps + this.sliderBorder) > this.sliderMaxWidth){
+        numSteps=this.sliderMaxWidth-this.sliderBorder;
+      }           */
 			if ((numSteps + this.sliderBorder) <= this.sliderMaxWidth) {
 				this.numSteps = numSteps;
 				this.sliderWidth = this.sliderBorder + this.numSteps;
-				this.inversePrecision = 2;
+				this.inversePrecision = 3;//TODO Standa
 			} else {
 				this.sliderEnabled = false;
 			}

@@ -49,7 +49,7 @@ var DataDescription = new Class({
     },
 
     calculateMinimalSupport: function() {
-        return (1.0 / this.$recordCount).ceilWithPrecision(2);
+        return (1.0 / this.$recordCount).ceilWithPrecision(3);//upravena pøesnost pro povolení i 0.001
     },
 
 	parseAttributes: function (attributes) {
