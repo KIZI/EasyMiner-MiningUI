@@ -134,10 +134,14 @@ var UIStructurePainter = new Class({
         var measuredElements = [ $('antecedent'), $('interest-measures'), $('succedent') ];
         var widthFix = 50; // HACK: To prevent reimplementing vast codebase
 
+        /*
         // Set antecedent and consequent to max width within its container
         var ruleWidth = $('ar-wrapper').getWidth() -
             this.$elementSizeMeter.computeBorderlessWidth($('interest-measures'));
         ruleWidth = ruleWidth / 2 - widthFix;
+        */
+        // FIX: Hardcode antecedent with to 325px to prevent horizontal resizing
+        ruleWidth = "325px";
         $('antecedent').setStyle('width', ruleWidth);
         $('succedent').setStyle('width', ruleWidth);
 
