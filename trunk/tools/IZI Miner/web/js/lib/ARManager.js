@@ -139,7 +139,13 @@ var ARManager = new Class({
 	},
 	
 	addAttribute: function (cedent, attribute) {
-		var field = new FieldAR(this.generateFieldID(), attribute, null, null, new StringHelper());
+		var field = new FieldAR(
+            this.generateFieldID(),
+            attribute,
+            null,
+            null,
+            new StringHelper()
+        );
 		cedent.addChild(field);
 
 		this.UIPainter.renderActiveRule();

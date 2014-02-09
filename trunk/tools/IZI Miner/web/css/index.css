@@ -947,7 +947,9 @@ section#active-rule #antecedent,
 section#active-rule #interest-measures,
 section#active-rule #succedent {
   float: left;
-  height: 200px;
+  height: 300px;
+  padding-bottom: 70px;
+  overflow: auto;
 }
 section#active-rule #antecedent .cedent {
   float: left;
@@ -1246,12 +1248,16 @@ section#active-rule .no-restriction {
   clear: left;
   cursor: help;
 }
+
 section#active-rule #action-box {
   background: transparent url("../images/sprite-icons.png") -12px -307px no-repeat;
   display: block;
   height: 32px;
   margin: 25px 0 10px;
   padding: 9px 0 0 38px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 #pager {
   border: 1px solid #cac7bd;
@@ -1307,6 +1313,12 @@ section#active-rule #action-box {
   margin: 5px 0 0 0;
   padding: 9px 0 0 30px;
 }
+
+/* Allows 'start mining' and 'stop mining' to be visually grouped */
+#active-rule, #found-rules {
+    position: relative;
+}
+
 #found-rules {
   clear: left;
   padding-top: 20px;
@@ -1317,6 +1329,9 @@ section#active-rule #action-box {
   float: right;
   padding-left: 27px;
   visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 #found-rules ul {
   width: 100%;

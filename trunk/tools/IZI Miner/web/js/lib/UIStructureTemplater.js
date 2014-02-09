@@ -243,7 +243,9 @@ var UIStructureTemplater = new Class({
             section({id: 'active-rule'},
                 h2(i18n.translate('Association rule pattern')),
                     div({id: 'ar-wrapper', 'class': 'clearfix'},
-                        div({id: 'antecedent'}, h3(i18n.translate('Antecedent'))),
+                        div({id: 'antecedent'},
+                            h3(i18n.translate('Antecedent'))
+                        ),
                         div({id: 'interest-measures'},
                             h3(i18n.translate('Interest measures')),
                             div(),
