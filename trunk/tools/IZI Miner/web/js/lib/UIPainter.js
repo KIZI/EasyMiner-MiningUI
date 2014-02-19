@@ -23,6 +23,12 @@ var UIPainter = new Class({
 	
 	// dispose element
 	disposeDuration: 750,
+
+    // Overlay height, used when manipulating with its position
+    overlayHeight: null,
+
+    // Settings window top margin, used when manipulating with overlay position
+    settingsWindowTopMargin: null,
 	
 	initialize: function (ARBuilder, config, settings, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator, UIScroller, UIStructurePainter) {
 		this.ARBuilder = ARBuilder;
@@ -746,6 +752,32 @@ var UIPainter = new Class({
 
     hideOverlay: function() {
         this.$UIStructurePainter.hideOverlay();
+    },
+
+    /**
+     * Updates the overlay window css position.
+     * @param isFixed True if the window should be fixed, false otherwise.
+     */
+    updateOverlayPosition: function(isFixed) {
+        var overlay = $('overlay');
+        var newHeight = null;
+
+        // Change the position and size
+        if (isFixed) {
+            overlay.setStyle('height', this.overlayHeight);
+            $('settings-window').setStyle('margin-top', this.settingsWindowTopMargin);
+            overlay.setStyle('position', 'fixed');
+        } else {
+            this.overlayHeight = overlay.getStyle('height');
+            this.settingsWindowTopMargin = $('settings-window').getStyle('margin-top');
+
+            newHeight = $$('body').getStyle('height');
+            overlay.setStyles({
+                height: newHeight,
+                position: 'absolute'
+            });
+            $('settings-window').setStyle('margin-top', '10px');
+        }
     }
 
 });
