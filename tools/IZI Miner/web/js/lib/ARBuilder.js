@@ -150,7 +150,14 @@ var ARBuilder = new Class({
 
     // TODO hide settings when no data loaded - errorception.com bug http://errorception.com/projects/506ac563d3f654c85c000d91/errors/507aaa88340af6684b1a01a0
 	openSettingsWindow: function () {
-		this.$UIStructurePainter.renderSettingsWindow(this.FLs, this.getDefFL(), this.getDefFL().getAutoSuggest(), false, this.settings);
+		this.$UIStructurePainter.renderSettingsWindow(
+            this.FLs,
+            this.getDefFL(),
+            this.getDefFL().getAutoSuggest(),
+            false,
+            this.settings
+        );
+        this.UIPainter.updateOverlayPosition(false);
 	},
 	
 	updateSettingsWindow: function (FLName) {
@@ -211,6 +218,8 @@ var ARBuilder = new Class({
     },
 
 	closeSettingsWindow: function () {
+        // Must be called before the settings window is destroyed
+        this.UIPainter.updateOverlayPosition(true);
 		this.$UIStructurePainter.hideOverlay();
 	},
 	
@@ -235,7 +244,9 @@ var ARBuilder = new Class({
 			this.setDefFL(FLName);
 		}
 		this.UIPainter.renderActiveRule();
-		
+
+        // Must be called before the settings window is destroyed
+        this.UIPainter.updateOverlayPosition(true);
 		this.$UIStructurePainter.hideOverlay();
 	},
 

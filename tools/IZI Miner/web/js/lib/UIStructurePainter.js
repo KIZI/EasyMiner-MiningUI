@@ -103,7 +103,12 @@ var UIStructurePainter = new Class({
 
     renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
         var autoSuggestPossible = (autoSuggest.length > 0);
-        var settingsEl = Mooml.render('settingsTemplate', {showFeedback: this.$config.getShowFeedback(), autoSuggestPossible: autoSuggestPossible, i18n: this.$i18n, reset: reset, settings: settings});
+        var settingsEl = Mooml.render('settingsTemplate', {
+            showFeedback: this.$config.getShowFeedback(),
+            autoSuggestPossible: autoSuggestPossible,
+            i18n: this.$i18n, reset: reset,
+            settings: settings
+        });
         var elWindow = $('settings-window');
         if (elWindow) { // re-render (autocomplete)
             settingsEl.getElement('.autocomplete').replaces(elWindow.getElement('.autocomplete'));
@@ -117,7 +122,12 @@ var UIStructurePainter = new Class({
             isSelected;
         Object.each(FLs, function (FL) {
             isSelected = (FL.getName() === selectedFL.getName());
-            elSelect.grab(Mooml.render('flOptionTemplate', {FL: FL, isSelected: isSelected}));
+            elSelect.grab(Mooml.render('flOptionTemplate',
+                {
+                    FL: FL,
+                    isSelected: isSelected
+                })
+            );
         }.bind(this));
 
         var me = this,
@@ -125,7 +135,11 @@ var UIStructurePainter = new Class({
             taskModes = [{value: 'task', name: 'Single-thread'}, {value: 'grid', name: 'Grid'}, {value: 'proc', name: 'Multi-core'}];
         Array.each(taskModes, function(taskMode) {
             isSelected = (taskMode.value === settings.getTaskMode());
-            elTaskMode.grab(Mooml.render('taskModeOptionTemplate', { i18n: me.$i18n, taskMode: taskMode, isSelected: isSelected }))
+            elTaskMode.grab(Mooml.render('taskModeOptionTemplate', {
+                i18n: me.$i18n,
+                taskMode: taskMode,
+                isSelected: isSelected
+            }))
         });
     },
 
