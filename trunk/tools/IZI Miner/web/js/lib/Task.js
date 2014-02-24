@@ -6,6 +6,7 @@ var Task = new Class({
 
     initialize: function(serializedRule, limitHits, debug, joomlaUrl, strictMatch, taskMode, cache) {
         var taskName = "Task";
+        var articleId;
 
         // Create the task name
         if (serializedRule !== undefined &&
@@ -26,7 +27,8 @@ var Task = new Class({
             joomlaUrl: joomlaUrl,
             strict: strictMatch,
             taskMode: taskMode,
-            taskName: taskName
+            taskName: taskName,
+            articleId: articleId
         };
 
         if (cache) { // caching enabled
@@ -68,5 +70,21 @@ var Task = new Class({
 
     getChangeNameCssId: function() {
         return 'rename-task-' + this.$requestData.taskId;
+    },
+
+    /**
+     * Gets the Sewebar Article ID.
+     * @returns int Article ID.
+     */
+    getArticleId: function() {
+        return this.$requestData.articleId;
+    },
+
+    /**
+     * Sets the Sewebar Article ID.
+     * @param int The Sewebar Article ID.
+     */
+    setArticleId: function(value) {
+        this.$requestData.articleId = value;
     }
 });

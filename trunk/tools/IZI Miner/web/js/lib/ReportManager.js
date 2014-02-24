@@ -17,6 +17,13 @@ var ReportManager = new Class({
         this.saveReport(report);
     },
 
+    /**
+     * Report "factory" method that creates the method object and initializes it.
+     * @param taskId Task ID.
+     * @param rules Association rules list.
+     * @param taskName Task Name
+     * @returns {Report} Initialised report.
+     */
     initReport: function(taskId, rules, taskName) {
         var report = new Report(taskId, taskName);
         Array.each(rules, function(FR) {
@@ -35,6 +42,13 @@ var ReportManager = new Class({
             taskName: report.getTaskName()
         };
 
+        // Load the article ID if present
+        var task = this.$UIPainter.ARBuilder.$FRManager.getTask(report.getTaskId());
+        var articleId = task.getArticleId();
+        if (articleId !== undefined) {
+            this.$reports[report.getTaskId()] = articleId;
+        }
+
         if (this.$reports[report.getTaskId()]) {
             requestData.article = this.$reports[report.getTaskId()];
         }
@@ -43,24 +57,41 @@ var ReportManager = new Class({
     },
 
     makeRequest: function (data) {
-        window.open(this.$config.getJoomlaURL()+'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS','pmmlWindow_'+data.lmtask);
+        window.open(
+            this.$config.getJoomlaURL() +
+                'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS',
+            'pmmlWindow_' + data.lmtask);
+
         var request = new Request.JSON({
             url: this.$config.getReportSaveUrl(),
             secure: true,
 
-            onSuccess: function(responseJSON, responseText) {
-            
-                if ((responseJSON.result==='ok')&&(responseJSON.article>0)){
-                  this.$reports[this.taskId] = responseJSON.article;
+            onSuccess: function (responseJSON, responseText) {
+                if ((responseJSON.result === 'ok') && (responseJSON.article > 0)) {
+                    // Store the article ID
+                    this.$reports[this.taskId] = responseJSON.article;
 
-                  if (!window.open(this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article='+ responseJSON.article,'pmmlWindow_'+data.lmtask)){
-                    //TODO handle error
-                  }
-                }else{
-                  window.open(this.$config.getJoomlaURL()+'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS_FAILED','pmmlWindow_'+data.lmtask);
+                    // Save the task to preserve its Article ID
+                    var task = this.$UIPainter.ARBuilder.$FRManager.getTask(this.taskId);
+                    task.setArticleId(responseJSON.article);
+                    this.$UIPainter.ARBuilder.$FRManager.saveMarkedRules();
+
+                    if (!window.open(
+                        this.$config.getJoomlaURL() +
+                            'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' +
+                            responseJSON.article,
+                        'pmmlWindow_' + data.lmtask)) {
+                        // TODO handle error
+                    }
+
+                } else {
+                    window.open(
+                        this.$config.getJoomlaURL() +
+                            'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS_FAILED',
+                        'pmmlWindow_' + data.lmtask);
                 }
-                
-                
+
+
                 // TODO: Handle failure
 //                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
 //                    this.handleSuccessRequest(data, responseJSON);
