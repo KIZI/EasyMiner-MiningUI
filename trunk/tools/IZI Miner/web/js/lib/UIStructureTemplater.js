@@ -104,13 +104,23 @@ var UIStructureTemplater = new Class({
                         select({name: 'task-mode', id: 'task-mode'})
                     ),
                     div(
-                        label({'for': 'rulesCnt'}, i18n.translate('Limit') + ':'),
-                        input({id: 'rules-cnt', type: 'text', class: 'shortnr', value: settings.getRulesCnt()}),
+                        label({
+                            'for': 'rulesCnt'
+                        }, i18n.translate('Limit') + ':'),
+                        input({
+                            'id': 'rules-cnt',
+                            'type': 'number',
+                            'class': 'shortnr',
+                            'value': settings.getRulesCnt()
+                        }),
                         span({'class': 'tooltip info'},
                             span({'class': 'help'},
                                 img({src: './images/icon-tooltip-help.png'}),
                                 em(i18n.translate('Limit')),
-                                i18n.translate('Maximal number of association rules to be searched for.')))),
+                                i18n.translate('Maximal number of association rules to be searched for.')
+                            )
+                        )
+                    ),
                     data.showFeedback ? div(
                         label(i18n.translate('Auto filter') + ':'),
                         a({id: 'autofilter', 'href': '#', 'class': settings.getBKAutoSearch() ? 'autofilter-on' : 'autofilter-off'}, i18n.translate(settings.getBKAutoSearch() ? 'On': 'Off')),
@@ -148,7 +158,7 @@ var UIStructureTemplater = new Class({
                                 i18n.translate('All attributes from task setting must appear in discovered rules.')))
                     ),
                     br({'class': 'clearfix'}),
-                    input({type: 'submit', value: i18n.translate('Save')})));
+                    input({type: 'submit', 'value': i18n.translate('Save')})));
         });
 
         Mooml.register('flOptionTemplate', function (data) {

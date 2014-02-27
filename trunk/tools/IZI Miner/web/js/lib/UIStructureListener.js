@@ -87,7 +87,13 @@ var UIStructureListener = new Class({
         elSubmit.removeEvent('click');
         elSubmit.addEvent('click', function (e) {
             e.stop();
-            var elRulesCnt = $('rules-cnt'); if (!elRulesCnt) { return; }
+            var elRulesCnt = $('rules-cnt');
+
+            if (!elRulesCnt) {
+                // TODO Martin: Why return?
+                return;
+            }
+
             var rulesCnt = $('rules-cnt').value;
             var FLName = $('fl-select').options[$('fl-select').selectedIndex].value;
             var autoSearch = $('autofilter') ? $('autofilter').hasClass('autofilter-on') : false;
