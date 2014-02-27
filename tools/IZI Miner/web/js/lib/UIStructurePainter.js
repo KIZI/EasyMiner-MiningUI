@@ -103,6 +103,7 @@ var UIStructurePainter = new Class({
 
     renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
         var autoSuggestPossible = (autoSuggest.length > 0);
+
         var settingsEl = Mooml.render('settingsTemplate', {
             showFeedback: this.$config.getShowFeedback(),
             autoSuggestPossible: autoSuggestPossible,
