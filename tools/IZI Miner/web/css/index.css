@@ -1989,11 +1989,12 @@ body {
   position:relative;
 }
 #wrapper #lmLogo{
-  text-align: center;
-  height:20px;
-  bottom:17px;
-  right:20px;
-  width:275px;
+  text-align: right;
+  height:63px;
+  bottom:0px;
+  right:47px;
+  
+  
   position: absolute;
 }
 section#workplace {
