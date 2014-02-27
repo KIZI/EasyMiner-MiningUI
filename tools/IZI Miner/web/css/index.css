@@ -665,6 +665,11 @@ header #settings a#new-task {
   padding: 2px 0 0 30px;
   margin-right: 20px;
 }
+header #settings a#go-to-cms {
+    background: transparent url("../images/sprite-icons.png") -13px -115px no-repeat;
+    padding: 2px 0 0 30px;
+    margin-right: 20px;
+}
 header #settings a#support {
   background: transparent url("../images/sprite-icons.png") -14px -610px no-repeat;
   padding: 2px 0 0 30px;
