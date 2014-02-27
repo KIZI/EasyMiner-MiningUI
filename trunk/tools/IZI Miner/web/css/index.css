@@ -261,8 +261,9 @@ td {
   left: 0;
   visibility: hidden;
   z-index: 1;
+  width:100%;
+  min-width:100%;
 }
-
 #overlay form {
   line-height: 36px;
 }
@@ -631,8 +632,13 @@ td {
 header {
   background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height: 146px;
-  width: 1302px;
-  padding-right: 15px;
+  width:100%;
+}
+header #headerContent{
+  width:1320px;
+  position: relative;
+  padding-right:15px;
+  margin: 0 auto;
 }
 header #browser-warning {
   margin: 0 0 0 60px;
@@ -1851,10 +1857,12 @@ section#active-rule #action-box {
 footer {
   background: #ededed;
   color: #434343;
-  margin: 10px 0 0 0;
+  margin: 10px auto 0 auto;
   text-align: center;
   font-size: 14px;
-  padding: 10px;
+  padding: 10px 0;
+  min-width: 1335px;
+  width:100%;
 }
 @media only screen and (min-width: 35em) {
 }
@@ -1973,12 +1981,20 @@ body {
   font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
   overflow-y: scroll;
 }
-footer {
-  width: 1300px;
-}
 #wrapper {
   min-height: 500px;
-  min-width: 1335px;
+  min-width: 1335px; 
+  width:1335px;
+  margin: 0 auto;
+  position:relative;
+}
+#wrapper #lmLogo{
+  text-align: center;
+  height:20px;
+  bottom:17px;
+  right:20px;
+  width:275px;
+  position: absolute;
 }
 section#workplace {
   margin: 0 auto;

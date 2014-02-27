@@ -51,16 +51,17 @@ var UIStructureTemplater = new Class({
                         )
                     )
                 ),
-                nav({id: 'navigation'})
+                nav({id: 'navigation'}),
+                div({id: 'lmLogo'})
             );
         });
-
+                     
         Mooml.register('footerTemplate', function (data) {
             var i18n = data.i18n,
                 config = data.config,
                 dateHelper = data.dateHelper;
-
-            footer('Copyright &copy; ' + config.getCopyright() + ',' + dateHelper.getYear())
+                
+            footer('Copyright &copy; ' + config.getCopyright() + ', ' + dateHelper.getYear());
         });
     },
 
