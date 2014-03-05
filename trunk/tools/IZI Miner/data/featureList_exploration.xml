@@ -116,7 +116,7 @@
 				<Type>
 					<Name>AAD</Name>
                     <Default>false</Default>
-					<LocalizedName lang="en">Lift</LocalizedName>
+					<LocalizedName lang="en">Lift*</LocalizedName>
 					<LocalizedName lang="cs">Above Average Dependance</LocalizedName>
 					<ThresholdType>% of all</ThresholdType>
 					<CompareType>Greater than or equal</CompareType>
