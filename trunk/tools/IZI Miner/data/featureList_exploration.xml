@@ -130,7 +130,7 @@
 						<LocalizedName lang="cs">prahová hodnota</LocalizedName>
 						<Validation>
 							<MinValue inclusive="no">0</MinValue>
-							<MaxValue inclusive="no">1</MaxValue>
+							<MaxValue inclusive="no">5</MaxValue>
 							<Datatype>double</Datatype>
 						</Validation>
 					</Field>
