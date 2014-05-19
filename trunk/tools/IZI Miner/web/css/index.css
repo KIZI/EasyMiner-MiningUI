@@ -476,7 +476,7 @@ td {
 #overlay #user-logout-window,
 #overlay #create-user-report-window,
 #overlay #export-business-rules-window,
-#overlay #model-tester-window,{
+#overlay #model-tester-window {
   width: 800px;
   margin-top: 45px;
 }
@@ -1820,7 +1820,7 @@ section#active-rule #action-box {
 }
 #marked-rules a.createReport,
 #marked-rules a.exportBusinessRules,
-#marked-rules a.checkModel{
+#marked-rules a.modelTester{
     height: 24px;
     padding-left: 30px;
     margin-right: 10px;
@@ -1832,7 +1832,7 @@ section#active-rule #action-box {
 #marked-rules a.exportBusinessRules {
     background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
 }
-#marked-rules a.checkModel {
+#marked-rules a.modelTester {
     background: transparent url("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png") 0 0 no-repeat;
 }
 
