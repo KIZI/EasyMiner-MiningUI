@@ -417,7 +417,7 @@ var UITemplateRegistrator = new Class({
                     ),
                     a({ styles: { display: 'none'}, id: 'openWindow-' + task.getId(), href: '#', target: '_blank' }, '&nbsp;'),
                     a({ class: 'exportBusinessRules', id: 'exportBusinessRules-' + task.getId(), href: '#', title: i18n.translate('Export Business Rules') }, i18n.translate('Export BR')),
-                    a({ class: 'checkModel', id: 'checkModel-' + task.getId(), href: '#', title:i18n.translate("Check classification model") }, i18n.translate('Check model')),
+                    a({ class: 'modelTester', id: 'modelTester-' + task.getId(), href: '#', title:i18n.translate("Check classification model") }, i18n.translate('Check model')),
                     a({ class: 'createReport', id: 'createReport-' + task.getId(), href: '#' }, i18n.translate('Show task details'))
                 )
             );

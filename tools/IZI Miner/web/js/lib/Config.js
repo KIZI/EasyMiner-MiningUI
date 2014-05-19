@@ -158,7 +158,7 @@ var Config = new Class({
     },
 
     getModelTesterUrl: function(taskId, rulesIds) {//TODO doplnit url pro modelTester
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=exportBR&format=raw&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=modelTester&format=raw&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
     },
 
     getUserLoginUrl: function() {
