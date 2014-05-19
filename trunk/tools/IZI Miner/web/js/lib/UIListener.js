@@ -456,6 +456,11 @@ var UIListener = new Class({
             me.ARBuilder.openExportBusinessRulesDialog(taskId);
         });
 
+        $('modelTester-' + taskId).addEvent('click', function(event) {
+            event.stop();
+            me.ARBuilder.openModelTesterDialog(taskId);
+        });
+
         // Task renaming
         $('rename-task-' + taskId).addEvent('click', function(event) {
             event.stop();

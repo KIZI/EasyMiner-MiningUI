@@ -713,6 +713,16 @@ var UIPainter = new Class({
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('exportBusinessRulesDialogTemplate', { i18n: this.i18n, url: this.config.getExportBusinessRulesUrl(taskId, rulesIds) }))
     },
+
+    renderModelTesterDialog: function(taskId, rules) {
+        var rulesIds = [];
+        rules.each(function(rule) {
+            rulesIds.push(rule.getRule().getId());
+        });
+
+        var overlay = this.$UIStructurePainter.showOverlay();
+        overlay.grab(Mooml.render('modelTesterDialogTemplate', { i18n: this.i18n, url: this.config.getModelTesterUrl(taskId, rulesIds) }))
+    },
 		
 	/* navigation */
 	showETreeProgress: function () {

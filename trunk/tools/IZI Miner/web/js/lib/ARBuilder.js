@@ -336,5 +336,9 @@ var ARBuilder = new Class({
 
     openExportBusinessRulesDialog: function(taskId) {
         this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+    },
+
+    openModelTesterDialog: function(taskId) {
+        this.UIPainter.renderModelTesterDialog(taskId, this.$FRManager.getMarkedRules(taskId));
     }
 });
