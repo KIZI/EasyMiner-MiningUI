@@ -475,7 +475,8 @@ td {
 #overlay #user-login-window,
 #overlay #user-logout-window,
 #overlay #create-user-report-window,
-#overlay #export-business-rules-window {
+#overlay #export-business-rules-window,
+#overlay #model-tester-window,{
   width: 800px;
   margin-top: 45px;
 }
@@ -486,7 +487,8 @@ td {
 #overlay #user-login-window iframe,
 #overlay #user-logout-window iframe,
 #overlay #create-user-report-window iframe,
-#overlay #export-business-rules-window iframe {
+#overlay #export-business-rules-window iframe,
+#overlay #model-tester-window iframe {
   border: none;
   width: 800px;
   height: 500px;
@@ -498,7 +500,8 @@ td {
 #overlay #user-login-window form input[type="submit"],
 #overlay #user-logout-window form input[type="submit"],
 #overlay #create-user-report-window form input[type="submit"],
-#overlay #export-business-rules-window form input[type="submit"] {
+#overlay #export-business-rules-window form input[type="submit"],
+#overlay #model-tester-window form input[type="submit"] {
   margin-left: 310px;
 }
 #overlay #loading-data {
@@ -1816,17 +1819,21 @@ section#active-rule #action-box {
   visibility: visible;
 }
 #marked-rules a.createReport,
-#marked-rules a.exportBusinessRules {
-  height: 24px;
-  padding-left: 30px;
-  margin-right: 10px;
-  float: right;
+#marked-rules a.exportBusinessRules,
+#marked-rules a.checkModel{
+    height: 24px;
+    padding-left: 30px;
+    margin-right: 10px;
+    float: right;
 }
 #marked-rules a.createReport {
-  background: transparent url("http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png") 0 0 no-repeat;
+  background: transparent url("http://icons.iconarchive.com/icons/harwen/pleasant/24/Text-Document-icon.png") 0 0 no-repeat;
 }
 #marked-rules a.exportBusinessRules {
-  background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
+    background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
+}
+#marked-rules a.checkModel {
+    background: transparent url("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png") 0 0 no-repeat;
 }
 
 /* Task within the rule clipboard */
