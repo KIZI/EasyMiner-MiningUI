@@ -453,7 +453,8 @@ var UIListener = new Class({
 
         $('exportBusinessRules-' + taskId).addEvent('click', function(event) {
             event.stop();
-            me.ARBuilder.openExportBusinessRulesDialog(taskId);
+            //me.ARBuilder.openExportBusinessRulesDialog(taskId);
+            me.ARBuilder.exportRulesToBRBase(taskId);//TODO standa
         });
 
         $('modelTester-' + taskId).addEvent('click', function(event) {

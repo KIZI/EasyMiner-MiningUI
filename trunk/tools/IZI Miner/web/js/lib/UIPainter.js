@@ -211,6 +211,15 @@ var UIPainter = new Class({
         }.bind(this));
     },
 
+    renderBRBaseRulesCount: function(count) {
+        if (count>0){
+            $('brBaseCounter').set('html',this.i18n.translate('Saved rules count: ')+count);
+        }else{
+            $('brBaseCounter').set('html',this.i18n.translate('No rules saved yet.'));
+        }
+
+    },
+
     renderReport: function(report, elParent) {
         elParent.grab(Mooml.render('reportTemplate', { i18n: this.i18n, report: report, url: this.config.getShowReportUrl(report.id) }));
 //        this.UIListener.registerReportEventHandler(report);
@@ -712,6 +721,17 @@ var UIPainter = new Class({
 
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('exportBusinessRulesDialogTemplate', { i18n: this.i18n, url: this.config.getExportBusinessRulesUrl(taskId, rulesIds) }))
+    },
+
+    renderBRBaseDialog: function(taskId, rules) {
+        var rulesIds = [];
+        rules.each(function(rule) {
+            rulesIds.push(rule.getRule().getId());
+        });
+
+        var overlay = this.$UIStructurePainter.showOverlay();
+
+        overlay.grab(Mooml.render('showBRBaseDialogTemplate', { i18n: this.i18n, url: this.config.getBRBaseShowUrl(taskId, rulesIds) }))
     },
 
     renderModelTesterDialog: function(taskId, rules) {

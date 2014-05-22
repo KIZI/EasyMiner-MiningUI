@@ -67,6 +67,14 @@ var UIStructurePainter = new Class({
             navigation.grab(reports);
         }
 
+        var brBase = $('brBase');
+        if (brBase) {
+            Mooml.render('brBaseStructureTemplate', {i18n: this.$i18n}).replaces(brBase);
+        } else {
+            brBase = Mooml.render('brBaseStructureTemplate', {i18n: this.$i18n});
+            navigation.grab(brBase);
+        }
+
         this.$UIStructureListener.registerNavigationEventHandlers();
     },
 
@@ -187,6 +195,11 @@ var UIStructurePainter = new Class({
 
     showLoadData: function() {
         $('overlay').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate('Loading application data...')}));
+        this.showOverlay();
+    },
+
+    showLoadingOverlay: function(message) {
+        $('overlay').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate(message)}));
         this.showOverlay();
     },
 

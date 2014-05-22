@@ -125,6 +125,76 @@ var ReportManager = new Class({
     handleErrorRequest: function () {
     },
 
+    exportRulesToBRBase:function(taskId,rules){
+        var rulesIds = [];
+        rules.each(function(rule) {
+            rulesIds.push(rule.getRule().getId());
+        });
+
+        var overlay = this.$UIPainter.$UIStructurePainter.showLoadingOverlay('Exporting rules to BR base...');
+        //region export rules
+        var request = new Request.JSON({//TODO Standa error window...
+            url: this.$config.getBRBaseSaveRulesUrl(taskId,rulesIds),
+            secure: true,
+
+            onSuccess: function(responseJSON, responseText) {
+                this.$UIPainter.renderBRBaseRulesCount(responseJSON.rulesCount);
+                this.$UIPainter.reloadBRBase();
+                this.$UIPainter.$UIStructurePainter.hideOverlay();
+            }.bind(this),
+
+            onError: function () {
+                this.handleErrorRequest();
+                this.$UIPainter.$UIStructurePainter.hideOverlay();
+            }.bind(this),
+
+            onFailure: function () {
+                this.handleErrorRequest();
+                this.$UIPainter.$UIStructurePainter.hideOverlay();
+            }.bind(this),
+
+            onException: function () {
+                this.handleErrorRequest();
+                this.$UIPainter.$UIStructurePainter.hideOverlay();
+            }.bind(this),
+
+            onTimeout: function () {
+                this.handleErrorRequest();
+                this.$UIPainter.$UIStructurePainter.hideOverlay();
+            }.bind(this)
+        }).get();
+        //endregion
+
+    },
+
+    loadBRBase: function(){
+        var request = new Request.JSON({
+            url: this.$config.getBRBaseRulesCountUrl(),
+            secure: true,
+
+            onSuccess: function(responseJSON, responseText) {
+                this.$UIPainter.renderBRBaseRulesCount(responseJSON.rulesCount);
+            }.bind(this),
+
+            onError: function () {
+                this.handleErrorRequest();
+            }.bind(this),
+
+            onFailure: function () {
+                this.handleErrorRequest();
+            }.bind(this),
+
+            onException: function () {
+                this.handleErrorRequest();
+            }.bind(this),
+
+            onTimeout: function () {
+                this.handleErrorRequest();
+            }.bind(this)
+
+        }).get();
+    },
+
     loadReports: function() {
         var request = new Request.JSON({
             url: this.$config.getListReportsUrl(),
