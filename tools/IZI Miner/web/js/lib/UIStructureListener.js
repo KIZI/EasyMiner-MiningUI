@@ -177,6 +177,11 @@ var UIStructureListener = new Class({
         elIZI.addEvent('reloadReports', function() {
             this.$ARBuilder.reloadReports();
         }.bind(this));
+
+        // called when com_dbconnect reloads reports
+        elIZI.addEvent('reloadBRBase', function() {
+            this.$ARBuilder.reloadBRBase();
+        }.bind(this));
     },
 
     registerFoundRulesEventHandlers: function() {

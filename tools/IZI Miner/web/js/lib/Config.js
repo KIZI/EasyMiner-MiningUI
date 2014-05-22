@@ -109,6 +109,20 @@ var Config = new Class({
         return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=listKBIArticles&format=raw&kbi=' + this.params.id_dm;
     },
 
+    getBRBaseRulesCountUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseRulesCount&format=raw&kbi=' + this.params.id_dm;
+    },
+
+    getBRBaseShowUrl: function() {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseShow&format=raw&kbi=' + this.params.id_dm;
+    },
+
+    getBRBaseSaveRulesUrl: function(taskId, rulesIds) {
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseAddRules&tmpl=component&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
+    },
+
+
+
     getLoadClipboardUrl: function() {
         return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=loadMinerData&format=raw';
     },

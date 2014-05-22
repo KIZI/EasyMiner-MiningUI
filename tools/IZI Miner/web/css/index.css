@@ -476,10 +476,22 @@ td {
 #overlay #user-logout-window,
 #overlay #create-user-report-window,
 #overlay #export-business-rules-window,
-#overlay #model-tester-window {
+#overlay #model-tester-window,
+#overlay #show-br-base-window{
   width: 800px;
   margin-top: 45px;
 }
+
+#overlay #add-br-base-window{
+  width:400px;
+  margin-top:45px;
+}
+#overlay #add-br-base-window iframe{
+  height: 100px;
+  width: 400px;
+  border: none;
+}
+
 #overlay #add-attribute-window iframe,
 #overlay #edit-attribute-window iframe,
 #overlay #new-task-window iframe,
@@ -488,7 +500,8 @@ td {
 #overlay #user-logout-window iframe,
 #overlay #create-user-report-window iframe,
 #overlay #export-business-rules-window iframe,
-#overlay #model-tester-window iframe {
+#overlay #model-tester-window iframe,
+#overlay #show-br-base-window iframe{
   border: none;
   width: 800px;
   height: 500px;
@@ -918,6 +931,34 @@ nav {
 }
 #data-fields li:hover .show-histogram {
   visibility: visible;
+}
+#brBase {
+    color: #434343;
+    background-color: #fff;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px solid #dfdfdf;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    padding: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+#brBase h2 {
+    color: #314e64;
+    font: 20px 'Average', 'serif';
+    font-weight: bold;
+    border-bottom: 1px solid #314e64;
+    margin: 0 20px 5px;
+}
+#brBase #brBaseCounter{
+    padding: 5px 20px;
+}
+#brBase a{
+    margin: 5px 20px;
+    display: inline-block;
 }
 #reports {
   color: #434343;

@@ -239,6 +239,16 @@ var UIStructureTemplater = new Class({
                 a({ href: '#', id: 'createUserReport' }, i18n.translate('Create new report'))
             );
         });
+
+        Mooml.register('brBaseStructureTemplate', function (data) {
+            var i18n = data.i18n;
+
+            section({ id: 'brBase', class: 'clearfix' },
+                h2({}, i18n.translate('BR Base'), a({href: '#', 'class': 'toggle'}, '')),
+                div({id:'brBaseCounter'}),
+                a({ href: '#', id: 'showBRBase' }, i18n.translate('Show BR base'))
+            );
+        });
     },
 
     registerActiveRule: function() {

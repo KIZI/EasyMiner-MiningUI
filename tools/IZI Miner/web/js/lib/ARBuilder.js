@@ -109,6 +109,7 @@ var ARBuilder = new Class({
         }).send();
 
         this.$reportManager.loadReports();
+        this.$reportManager.loadBRBase();
     },
 
     getDD: function() {
@@ -334,8 +335,21 @@ var ARBuilder = new Class({
         this.$reportManager.loadReports();
     },
 
+    reloadBRBase: function(){
+        this.$reportManager.loadBRBase();
+    },
+
     openExportBusinessRulesDialog: function(taskId) {
         this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+    },
+
+    openBRBaseDialog: function(taskId) {
+
+        this.UIPainter.renderBRBaseDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+    },
+
+    exportRulesToBRBase: function(taskId){//TODO Standa
+        this.$reportManager.exportRulesToBRBase(taskId, this.$FRManager.getMarkedRules(taskId));
     },
 
     openModelTesterDialog: function(taskId) {
