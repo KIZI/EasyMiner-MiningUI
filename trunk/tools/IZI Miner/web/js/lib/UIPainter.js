@@ -217,7 +217,7 @@ var UIPainter = new Class({
         }else{
             $('brBaseCounter').set('html',this.i18n.translate('No rules saved yet.'));
         }
-
+        this.UIListener.registerBRBaseEventHandler();//TODO přesunout na lepší místo
     },
 
     renderReport: function(report, elParent) {
@@ -723,15 +723,9 @@ var UIPainter = new Class({
         overlay.grab(Mooml.render('exportBusinessRulesDialogTemplate', { i18n: this.i18n, url: this.config.getExportBusinessRulesUrl(taskId, rulesIds) }))
     },
 
-    renderBRBaseDialog: function(taskId, rules) {
-        var rulesIds = [];
-        rules.each(function(rule) {
-            rulesIds.push(rule.getRule().getId());
-        });
-
+    renderBRBaseDialog: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
-
-        overlay.grab(Mooml.render('showBRBaseDialogTemplate', { i18n: this.i18n, url: this.config.getBRBaseShowUrl(taskId, rulesIds) }))
+        overlay.grab(Mooml.render('showBRBaseDialogTemplate', { i18n: this.i18n, url: this.config.getBRBaseShowUrl() }))
     },
 
     renderModelTesterDialog: function(taskId, rules) {

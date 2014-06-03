@@ -16,6 +16,13 @@ var UIListener = new Class({
 		this.UIPainter = UIPainter;
 	},
 
+    registerBRBaseEventHandler: function(){
+        $('showBRBase').addEvent('click',function(event){
+            event.stop();
+            this.ARBuilder.openBRBaseDialog();
+        }.bind(this));
+    },
+
 	registerAttributeEventHandler: function (attribute, showEditAttribute, showRemoveAttribute) {
         // drag & drop
         $(attribute.getCSSID()).addEvent('mousedown', function (event) {

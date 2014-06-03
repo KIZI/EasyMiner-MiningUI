@@ -343,9 +343,8 @@ var ARBuilder = new Class({
         this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));
     },
 
-    openBRBaseDialog: function(taskId) {
-
-        this.UIPainter.renderBRBaseDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+    openBRBaseDialog: function() {
+        this.UIPainter.renderBRBaseDialog();
     },
 
     exportRulesToBRBase: function(taskId){//TODO Standa
