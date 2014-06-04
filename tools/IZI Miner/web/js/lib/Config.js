@@ -114,7 +114,7 @@ var Config = new Class({
     },
 
     getBRBaseShowUrl: function() {
-        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseShow&format=raw&kbi=' + this.params.id_dm;
+        return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseShow&tmpl=component&kbi=' + this.params.id_dm;
     },
 
     getBRBaseSaveRulesUrl: function(taskId, rulesIds) {

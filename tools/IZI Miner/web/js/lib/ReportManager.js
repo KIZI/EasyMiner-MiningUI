@@ -138,28 +138,31 @@ var ReportManager = new Class({
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {
-                this.$UIPainter.renderBRBaseRulesCount(responseJSON.rulesCount);
-                this.$UIPainter.reloadBRBase();
+                //this.$UIPainter.renderBRBaseRulesCount(responseJSON.rulesCount);
+                this.reloadBRBase();
                 this.$UIPainter.$UIStructurePainter.hideOverlay();
             }.bind(this),
 
             onError: function () {
                 this.handleErrorRequest();
+                this.$UIPainter.ARBuilder.reloadBRBase();
                 this.$UIPainter.$UIStructurePainter.hideOverlay();
             }.bind(this),
 
             onFailure: function () {
                 this.handleErrorRequest();
-                this.$UIPainter.$UIStructurePainter.hideOverlay();
+                this.reloadBRBase();
+                this.$UIPainter.ARBuilder.$UIStructurePainter.hideOverlay();
             }.bind(this),
 
             onException: function () {
                 this.handleErrorRequest();
-                this.$UIPainter.$UIStructurePainter.hideOverlay();
+                this.reloadBRBase();
+                this.$UIPainter.ARBuilder.$UIStructurePainter.hideOverlay();
             }.bind(this),
 
             onTimeout: function () {
-                this.handleErrorRequest();
+                this.$UIPainter.ARBuilder.reloadBRBase();
                 this.$UIPainter.$UIStructurePainter.hideOverlay();
             }.bind(this)
         }).get();
