@@ -1,0 +1,56 @@
+#marked-rules
+  box()
+  min-width minContentWidth
+  margin boxMargin 0 0 boxMargin + feedbackMargin
+  padding 10px 20px
+  float left; clear left
+
+  h2
+    h2AR()
+    margin-left 10px
+    margin-bottom 5px
+
+  ul
+    width 100%
+    padding-left 0
+    float left
+    margin-left 5px
+    margin-top 10px
+    li:first-child
+      color darken(#9de045, 55%)
+      text-decoration underline
+      padding-left 5px
+    li
+      width 100%
+      padding-left 0
+      float left; clear left
+      list-style-type none
+
+  .marked-rule
+    cursor default
+    .rule
+      associationRule()
+      .field
+        height auto !important
+      .left-bracket, right-bracket
+       top -3px !important
+    .ims
+      ims()
+      left 5px
+    .clear
+      remove()
+      position relative; top 7px
+      margin-left 5px
+      float left
+    &:hover > .clear
+      visibility visible
+  a.createReport,
+  a.exportBusinessRules
+    height 24px
+    padding-left 30px
+    margin-right 10px
+    float right
+  a.createReport
+    background transparent url('http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png') 0 0 no-repeat
+  a.exportBusinessRules
+    background transparent url('http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png') 0 0 no-repeat
