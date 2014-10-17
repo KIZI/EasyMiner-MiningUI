@@ -100,15 +100,6 @@ var UIStructurePainter = new Class({
         this.$UIStructureListener.registerMarkedRulesEventHandlers();
     },
 
-    renderNewTaskWindow: function () {
-        var url = this.$config.getNewTaskURL();
-        var elWindow = Mooml.render('newTaskTemplate', {url: url});
-        var overlay = this.showOverlay();
-        overlay.grab(elWindow);
-
-        this.$UIScroller.scrollTo(0, 0);
-    },
-
     renderSettingsWindow: function (FLs, selectedFL, autoSuggest, reset, settings) {
         var autoSuggestPossible = (autoSuggest.length > 0);
 
