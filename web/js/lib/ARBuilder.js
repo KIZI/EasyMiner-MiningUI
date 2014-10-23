@@ -47,7 +47,7 @@ var ARBuilder = new Class({
     }
   },
 
-  loadData: function () {//XXX Standa načtení dat
+  loadData: function () {
     this.handleLoadData();
     this.dataParser = new DataParser(this.$config, this.settings, true);
     this.dataParser.getData(this.initApplication, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
