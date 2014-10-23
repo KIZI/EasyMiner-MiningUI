@@ -14,14 +14,15 @@ var DataParser = new Class({
 	},
 
 	getData: function (callback, errCallback, bind, delay) {
-
+console.log('load data');//XXX Standa
         var data = JSON.encode({
             debug: this.$settings.getDebug(),
             joomlaUrl: this.config.getJoomlaURL()
         });
 
 		new Request.JSON({
-			url: this.config.getDataGetURL(),
+      //XXX Standa url: this.config.getDataGetURL(),
+      url: this.config.getGetDataURL(),
 			secure: true,
 			async: this.$async,
 
