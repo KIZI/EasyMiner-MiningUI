@@ -20,6 +20,10 @@ var Config = new Class({//TODO Standa: update URLs
   userLogoutUrl: '/em/user/logout',
   userInfoUrl: '/em/user/info',
   getDataUrl: '/em/izi-ui/get-data',
+  loadMinerDataUrl: '/em/helper/load-data',
+  saveMinerDataUrl: '/em/helper/save-data',
+  showAttributeHistogramUrl: '/em/data/attribute-histogram',
+  showColumnHistogramUrl: '/em/data/column-histogram',
   //endregion
 
   // URL settings
@@ -27,7 +31,6 @@ var Config = new Class({//TODO Standa: update URLs
   $showFeedback: false,
   params: {},
   BKGetURL: 'getBK.php',
-  dataGetURL: 'getData.php',
   ETreeGetURL: 'getEtree.php',
   rulesGetURL: 'getRules.php',
   reportSaveUrl: 'saveReport.php',
@@ -112,33 +115,33 @@ var Config = new Class({//TODO Standa: update URLs
     this.rulesGetURL = URL;
   },
 
-  getReportSaveUrl: function () {
+  getReportSaveUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=savePMMLArticle&format=raw';
   },
 
-  getListReportsUrl: function () {
+  getListReportsUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=listKBIArticles&format=raw&kbi=' + this.params.id_dm;
   },
 
-  getBRBaseRulesCountUrl: function () {
+  getBRBaseRulesCountUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseRulesCount&format=raw&kbi=' + this.params.id_dm;
   },
 
-  getBRBaseShowUrl: function () {
+  getBRBaseShowUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseShow&tmpl=component&kbi=' + this.params.id_dm;
   },
 
-  getBRBaseSaveRulesUrl: function (taskId, rulesIds) {
+  getBRBaseSaveRulesUrl: function (taskId, rulesIds) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseAddRules&tmpl=component&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
   },
 
 
   getLoadClipboardUrl: function () {
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=loadMinerData&format=raw';
+    return this.$easyMinerCenterUrl+this.loadMinerDataUrl;
   },
 
   getSaveClipboardUrl: function () {
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=saveMinerData&format=raw';
+    return this.$easyMinerCenterUrl+this.saveMinerDataUrl;
   },
 
   getETreeGetURL: function () {
@@ -155,29 +158,29 @@ var Config = new Class({//TODO Standa: update URLs
 
   getShowHistogramURL: function (name, type) {
     if (type === 'attribute') {
-      return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=previewAttribute&tmpl=component&kbi=' + this.params.id_dm + '&attribute=' + encodeURIComponent(name);
+      return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&attribute=' + encodeURIComponent(name) + '&layout=iframe';
     } else {
-      return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=previewColumn&tmpl=component&kbi=' + this.params.id_dm + '&col=' + encodeURIComponent(name);
+      return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&column=' + encodeURIComponent(name) + '&layout=iframe';
     }
   },
 
-  getCreateReportUrl: function () {
+  getCreateReportUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=saveMinerData&format=raw&type=clipboard&kbi=' + this.params.id_dm;
   },
 
-  getCreateUserReportUrl: function () {
+  getCreateUserReportUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component&kbi=' + this.params.id_dm;
   },
 
-  getShowReportUrl: function (id) {
+  getShowReportUrl: function (id) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + id;
   },
 
-  getExportBusinessRulesUrl: function (taskId, rulesIds) {
+  getExportBusinessRulesUrl: function (taskId, rulesIds) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=exportBR&format=raw&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
   },
 
-  getModelTesterUrl: function (taskId, rulesIds) {
+  getModelTesterUrl: function (taskId, rulesIds) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=modelTester&tmpl=component&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
   },
 

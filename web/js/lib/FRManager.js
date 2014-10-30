@@ -283,7 +283,7 @@ var FRManager = new Class({
         });
 
         var data = {
-            kbi: this.config.getIdDm(),
+            miner: this.config.getIdDm(),
             type: 'clipboard',
             data: JSON.stringify(rules)
         };
@@ -296,7 +296,7 @@ var FRManager = new Class({
 
     loadMarkedRules: function() {
         var data = {
-            kbi: this.config.getIdDm(),
+            miner: this.config.getIdDm(),
             type: 'clipboard'
         };
 
