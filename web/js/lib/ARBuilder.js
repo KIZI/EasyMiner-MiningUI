@@ -101,7 +101,7 @@ var ARBuilder = new Class({
     // TODO: Odprasit
     var me = this;
     new Request.JSON({
-      url: this.$config.getJoomlaURL() + 'index.php?option=com_dbconnect&task=userInfo&format=raw',
+      url: this.$config.getUserInfoUrl(),
       secure: true,
       onComplete: function (responseJSON) {
         me.UIPainter.renderUserAccountBox(responseJSON);

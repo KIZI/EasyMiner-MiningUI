@@ -137,14 +137,6 @@ var UIPainter = new Class({
         this.$UIScroller.scrollTo(0, 0);
     },
 
-    renderUserLoginWindow: function() {
-        var overlay = this.$UIStructurePainter.showOverlay();
-        var window = Mooml.render('userLoginWindowTemplate', { i18n: this.i18n, url: this.config.getUserLoginUrl() });
-        overlay.grab(window);
-
-        this.$UIScroller.scrollTo(0, 0);
-    },
-
     renderUserLogoutWindow: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
         var window = Mooml.render('userLogoutWindowTemplate', { i18n: this.i18n, url: this.config.getUserLogoutUrl() });
@@ -256,17 +248,11 @@ var UIPainter = new Class({
             elUser.inject(elUserAccount);
 
             var logout = new Element('a', {
-                href: '#',
+                href: this.config.getUserLogoutUrl(),
                 html: 'logout',
                 styles: {
                     'padding-top': '2px',
                     'padding-left': '5px'
-                },
-                events: {
-                    click: function(event) {
-                        event.stop();
-                        me.renderUserLogoutWindow();
-                    }
                 }
             });
             logout.inject(elUserAccount);
@@ -289,18 +275,18 @@ var UIPainter = new Class({
             elUser.inject(elUserAccount);
 
             var login = new Element('a', {
-                href: '#',
+                href: this.config.getUserLoginUrl(),
                 html: 'login',
                 styles: {
                     'padding-top': '2px',
                     'padding-left': '5px'
-                },
+                }/*,
                 events: {
                     click: function(event) {
                         event.stop();
                         me.renderUserLoginWindow();
                     }
-                }
+                }*/
             });
             login.inject(elUserAccount);
         }

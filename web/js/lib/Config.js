@@ -18,6 +18,7 @@ var Config = new Class({//TODO Standa: update URLs
   newMinerUrl: '/em/data/new-miner',
   userLoginUrl: '/em/user/login',
   userLogoutUrl: '/em/user/logout',
+  userInfoUrl: '/em/user/info',
   getDataUrl: '/em/izi-ui/get-data',
   //endregion
 
@@ -187,6 +188,10 @@ var Config = new Class({//TODO Standa: update URLs
 
   getUserLogoutUrl: function () {
     return this.$easyMinerCenterUrl+this.userLogoutUrl;
+  },
+
+  getUserInfoUrl: function(){
+    return this.$easyMinerCenterUrl+this.userInfoUrl;
   },
 
   getNewTaskURL: function () {
