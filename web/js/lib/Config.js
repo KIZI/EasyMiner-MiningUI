@@ -24,6 +24,7 @@ var Config = new Class({//TODO Standa: update URLs
   saveMinerDataUrl: '/em/helper/save-data',
   showAttributeHistogramUrl: '/em/data/attribute-histogram',
   showColumnHistogramUrl: '/em/data/column-histogram',
+  addAttributeUrl: '/em/attributes/add-attribute',
   //endregion
 
   // URL settings
@@ -149,10 +150,10 @@ var Config = new Class({//TODO Standa: update URLs
   },
 
   getAddAttributeURL: function (fieldName) {
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newAttribute&col=' + encodeURIComponent(fieldName) + '&kbi=' + this.params.id_dm + '&tmpl=component';
+    return this.$easyMinerCenterUrl + this.addAttributeUrl + '?column='+encodeURIComponent(fieldName) + '&miner=' + this.params.id_dm + '&layout=iframe';
   },
 
-  getEditAttributeURL: function (attributeName) {
+  getEditAttributeURL: function (attributeName) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName) + '&kbi=' + this.params.id_dm + '&tmpl=component';
   },
 
