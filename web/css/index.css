@@ -790,6 +790,7 @@ nav {
   cursor: move;
   float: left;
   clear: left;
+  padding: 2px 0;
 }
 #attributes li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
@@ -895,7 +896,7 @@ nav {
   height: 12px;
   float: right;
   position: relative;
-  left: 1px;
+  margin-left: 5px;
   top: 5px;
 }
 #data-fields ul {
@@ -905,6 +906,7 @@ nav {
   cursor: move;
   float: left;
   clear: left;
+  padding: 2px 0;
 }
 #data-fields li .add {
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
@@ -931,6 +933,32 @@ nav {
 }
 #data-fields li:hover .show-histogram {
   visibility: visible;
+}
+.datas-filter{
+    display: none;
+    margin: 5px 20px;
+}
+.datas-filter input{
+    width: 180px;
+    padding: 2px 3px;
+    background: none !important;
+    border: 1px solid #aaa;
+}
+.datas-filter a.reset-filter {
+    float: right;
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin: 2px 0 0 5px;
+}
+.filter{
+  display: block;
+  width: 20px !important;
+  height: 20px !important;
+  float: right;
+  top: 3px !important;
+    background-position: -116px -117px !important;
 }
 #brBase {
     color: #434343;

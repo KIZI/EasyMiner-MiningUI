@@ -211,7 +211,13 @@ var UIStructureTemplater = new Class({
                         div(a({id: 'attributes-by-list', href: '#'}, i18n.translate('attributes')))));
             } else {
                 section({id: 'attributes'},
-                    h2({'class': 'minimize'}, i18n.translate('Attributes'), a({href: '#', 'class': 'toggle'}, '')),
+                    h2({'class': 'minimize'}, i18n.translate('Attributes'), a({href: '#', 'class': 'toggle'}, ''), a({href: '#', 'class': 'filter'}, '')),
+                    div({'class': 'datas-filter'},
+                        input({
+                            'id': 'attributes-filter',
+                            'type': 'text'
+                        }),
+                        a({href: '#', 'class': 'reset-filter', 'title': i18n.translate('Remove')})),
                     div({'class': 'clearfix'},
                         ul({'class': 'clearfix'}),
                         span({id: 'etree-progress', styles: {'visibility': inProgress ? 'visible' : 'hidden'}}, i18n.translate('Sort in progress.')),
@@ -225,7 +231,13 @@ var UIStructureTemplater = new Class({
             var i18n = data.i18n;
 
             section({id: 'data-fields'},
-                h2({'class': 'minimize'}, i18n.translate('Data fields'), a({href: '#', 'class': 'toggle'}, '')),
+                h2({'class': 'minimize'}, i18n.translate('Data fields'), a({href: '#', 'class': 'toggle'}, ''), a({href: '#', 'class': 'filter'}, '')),
+                div({'class': 'datas-filter'},
+                    input({
+                        'id': 'data-fields-filter',
+                        'type': 'text'
+                    }),
+                    a({href: '#', 'class': 'reset-filter', 'title': i18n.translate('Remove')})),
                 div(
                     ul({'class': 'clearfix'})));
         });

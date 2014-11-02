@@ -123,6 +123,32 @@ var UIStructureListener = new Class({
             var elH2 = $$('#attributes h2')[0];
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
+        
+        var el = $$('#attributes a.filter')[0];
+        el.addEvent('click', function (event) {
+            event.stop();
+            var elToggle = $$('#attributes > .datas-filter')[0];
+            elToggle.toggle();
+        }.bind(this));
+        
+        var resetA = $$('#attributes a.reset-filter')[0];
+        resetA.addEvent('click', function (event) {
+            event.stop();
+            resetA.getPrevious().set('value', '').fireEvent('keyup');
+        }.bind(this));
+        
+        var el = $$('#data-fields a.filter')[0];
+        el.addEvent('click', function (event) {
+            event.stop();
+            var elToggle = $$('#data-fields > .datas-filter')[0];
+            elToggle.toggle();
+        }.bind(this));
+        
+        var resetD = $$('#data-fields a.reset-filter')[0];
+        resetD.addEvent('click', function (event) {
+            event.stop();
+            resetD.getPrevious().set('value', '').fireEvent('keyup');
+        }.bind(this));
 
 //		if (this.ARBuilder.getARManager().getAttributesByGroup()) {
 //			// attributes by list

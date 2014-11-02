@@ -69,6 +69,16 @@ var UIPainter = new Class({
         } else {
             this.$UIStructurePainter.hideHiddenAttributesButton();
         }
+      var myFilter = new ElementFilter('attributes-filter', '#attributes-by-list li', {
+        trigger: 'keyup',
+        cache: true,
+        onShow: function(element) {
+        element.setStyle('display','list-item');
+        },
+        onHide: function(element) {
+        element.setStyle('display','none');
+        }
+      });
 	},
 	
 	renderAttributesByGroup: function (elementParent) {
@@ -172,6 +182,16 @@ var UIPainter = new Class({
             this.renderDataField(field, dataFields);
             this.UIListener.registerDataFieldEventHandler(field);
         }.bind(this));
+      var myFilter = new ElementFilter('data-fields-filter', '#data-fields li', {
+        trigger: 'keyup',
+        cache: true,
+        onShow: function(element) {
+        element.setStyle('display','list-item');
+        },
+        onHide: function(element) {
+        element.setStyle('display','none');
+        }
+      });
     },
 
     renderDataField: function(field, elementParent) {
