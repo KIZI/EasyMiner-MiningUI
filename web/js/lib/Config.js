@@ -150,7 +150,7 @@ var Config = new Class({//TODO Standa: update URLs
   },
 
   getAddAttributeURL: function (fieldName) {
-    return this.$easyMinerCenterUrl + this.addAttributeUrl + '?column='+encodeURIComponent(fieldName) + '&miner=' + this.params.id_dm + '&layout=iframe';
+    return this.$easyMinerCenterUrl + this.addAttributeUrl + '?columnName='+encodeURIComponent(fieldName) + '&miner=' + this.params.id_dm + '&mode=iframe';
   },
 
   getEditAttributeURL: function (attributeName) {//TODO
@@ -159,9 +159,9 @@ var Config = new Class({//TODO Standa: update URLs
 
   getShowHistogramURL: function (name, type) {
     if (type === 'attribute') {
-      return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&attribute=' + encodeURIComponent(name) + '&layout=iframe';
+      return this.$easyMinerCenterUrl + this.showAttributeHistogramUrl +'?miner='+ this.params.id_dm + '&attribute=' + encodeURIComponent(name) + '&mode=iframe';
     } else {
-      return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&column=' + encodeURIComponent(name) + '&layout=iframe';
+      return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&columnName=' + encodeURIComponent(name) + '&mode=iframe';
     }
   },
 
