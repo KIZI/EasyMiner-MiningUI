@@ -115,17 +115,15 @@ var UIStructureListener = new Class({
     },
 
     registerNavigationEventHandlers: function () {
-        var el = $$('#attributes a.toggle')[0];
-        el.addEvent('click', function (event) {
+        $$('#attributes a.toggle')[0].addEvent('click', function (event) {
             event.stop();
-            var elToggle = $$('#attributes > div')[0];
+            var elToggle = $$('#attributes > div')[1];
             elToggle.toggle();
             var elH2 = $$('#attributes h2')[0];
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
         
-        var el = $$('#attributes a.filter')[0];
-        el.addEvent('click', function (event) {
+        $$('#attributes a.filter')[0].addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#attributes > .datas-filter')[0];
             elToggle.toggle();
@@ -137,8 +135,7 @@ var UIStructureListener = new Class({
             resetA.getPrevious().set('value', '').fireEvent('keyup');
         }.bind(this));
         
-        var el = $$('#data-fields a.filter')[0];
-        el.addEvent('click', function (event) {
+        $$('#data-fields a.filter')[0].addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#data-fields > .datas-filter')[0];
             elToggle.toggle();
@@ -164,10 +161,9 @@ var UIStructureListener = new Class({
 //			}.bind(this));
 //		}
 
-        var el = $$('#data-fields a.toggle')[0];
-        el.addEvent('click', function (event) {
+        $$('#data-fields a.toggle')[0].addEvent('click', function (event) {
             event.stop();
-            var elToggle = $$('#data-fields > div')[0];
+            var elToggle = $$('#data-fields > div')[1];
             elToggle.toggle();
             var elH2 = $$('#data-fields h2')[0];
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
