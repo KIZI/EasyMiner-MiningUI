@@ -25,6 +25,7 @@ var Config = new Class({//TODO Standa: update URLs
   showAttributeHistogramUrl: '/em/data/attribute-histogram',
   showColumnHistogramUrl: '/em/data/column-histogram',
   addAttributeUrl: '/em/attributes/add-attribute',
+  stopMiningUrl: '/em/tasks/stop-mining',
   //endregion
 
   // URL settings
@@ -35,7 +36,7 @@ var Config = new Class({//TODO Standa: update URLs
   ETreeGetURL: 'getEtree.php',
   rulesGetURL: 'getRules.php',
   reportSaveUrl: 'saveReport.php',
-  $stopMiningUrl: 'stopMining.php',
+
   $supportUrl: 'http://easyminer.eu/',
 
   // root element
@@ -212,7 +213,7 @@ var Config = new Class({//TODO Standa: update URLs
   },
 
   getStopMiningUrl: function () {
-    return this.$stopMiningUrl + '?id_dm=' + this.params.id_dm + '&lang=' + this.lang;
+    return this.$easyMinerCenterUrl+this.stopMiningUrl + '?miner=' + this.params.id_dm;
   }
 
 });
