@@ -212,8 +212,8 @@ var Config = new Class({//TODO Standa: update URLs
     return this.rootElementID;
   },
 
-  getStopMiningUrl: function () {
-    return this.$easyMinerCenterUrl+this.stopMiningUrl + '?miner=' + this.params.id_dm;
+  getStopMiningUrl: function (taskId) {
+    return this.$easyMinerCenterUrl+this.stopMiningUrl + '?miner=' + this.params.id_dm+ '&task=' + taskId;
   }
 
 });
