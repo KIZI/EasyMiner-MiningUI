@@ -396,9 +396,9 @@ td {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
-  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
   width: 250px;
   margin-left: -3em;
   position: absolute;
@@ -439,13 +439,9 @@ td {
 }
 #overlay > div {
   background-color: #fff;
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border: 2px solid #aaa;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
-  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
-  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
+  -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
   width: 435px;
   margin: 10% auto;
   padding: 35px 25px;
@@ -561,9 +557,9 @@ td {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
-  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
   width: 250px;
   margin-left: -3em;
   position: absolute;
@@ -731,14 +727,11 @@ nav {
 #attributes {
   color: #434343;
   background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
   margin-bottom: 15px;
 }
 #attributes h2 {
@@ -855,14 +848,11 @@ nav {
 #data-fields {
   color: #434343;
   background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
   padding-bottom: 20px;
   margin-bottom: 15px;
 }
@@ -956,14 +946,11 @@ nav {
 #reports {
   color: #434343;
   background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
   padding-bottom: 20px;
   margin-bottom: 25px;
 }
@@ -995,14 +982,11 @@ nav {
 #brBase {
   color: #434343;
   background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
   padding-bottom: 20px;
   margin-bottom: 25px;
 }
@@ -1590,9 +1574,9 @@ section#active-rule #action-box {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
   background-color: #fff;
   height: 22px;
   padding: 7px 5px 0 10px;
@@ -1663,14 +1647,11 @@ section#active-rule #action-box {
 #marked-rules {
   color: #434343;
   background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
   min-width: 980px;
   margin: 15px 0 0 15px;
   padding-left: 15px;
@@ -1918,10 +1899,10 @@ section#active-rule #action-box {
 footer {
   background: #ededed;
   color: #434343;
-  margin: 10px auto 0 auto;
   text-align: center;
   font-size: 14px;
   padding: 10px 0;
+  margin: 0;
   min-width: 1335px;
   width: 100%;
 }
@@ -1979,9 +1960,9 @@ footer {
 @media print {
   * {
     background: transparent !important;
-    box-shadow: 0 0 0 #fff;
-    -webkit-box-shadow: 0 0 0 #fff;
-    -moz-box-shadow: 0 0 0 #fff;
+    box-shadow: 0 0 0 0 #fff;
+    -webkit-box-shadow: 0 0 0 0 #fff;
+    -moz-box-shadow: 0 0 0 0 #fff;
     text-shadow: none !important;
     filter: none !important;
     -ms-filter: none !important;
@@ -2040,9 +2021,6 @@ body {
   font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
   overflow-y: scroll;
 }
-footer {
-  width: 1305px;
-}
 #wrapper {
   min-height: 500px;
   min-width: 1335px;
@@ -2058,14 +2036,11 @@ section#workplace {
 section#content {
   color: #434343;
   background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border: 1px solid #dfdfdf;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
   min-width: 980px;
   float: left;
   margin: 15px 0 0 15px;

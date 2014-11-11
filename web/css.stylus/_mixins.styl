@@ -1,16 +1,13 @@
 box()
   color color
   background-color #FFF
-  border-radius(5px)
-  border 1px solid boxBorderColor
-  box-shadow(0, 0, 10px, boxShadowColor)
-  padding 10px
+  border none
+  box-shadow(0, 0, 10px, 0, boxShadowColor)
+  padding 20px 10px
 
 overlay()
   background-color #FFF
-  border-radius(15px)
-  border 2px solid overlayBorderColor
-  box-shadow(5px, 5px, 5px, overlayShadowColor)
+  box-shadow(5px, 5px, 5px, 0, overlayShadowColor)/*XXX*/
   width 435px
   margin 10% auto; padding 35px 25px
 
@@ -189,7 +186,7 @@ loading()
 
 tip()
   border-radius(5px)
-  box-shadow(0, 0, 5px, rgba(0, 0, 0, 0.3))
+  box-shadow(0, 0, 5px, 0, boxShadowColor)
   background-color #FFF
   height 22px
   padding 7px 5px 0 10px
@@ -199,10 +196,10 @@ border-radius(n)
   -webkit-border-radius n
   -moz-border-radius n
 
-box-shadow(h, v, blur, color)
-  box-shadow v h blur color
-  -webkit-box-shadow v h blur color
-  -moz-box-shadow v h blur color
+box-shadow(h, v, blur, spread, color)
+  box-shadow v h blur spread color
+  -webkit-box-shadow v h blur spread color
+  -moz-box-shadow v h blur spread color
 
 userSelect(value)
   user-select: value
@@ -233,7 +230,7 @@ tooltip()
     >span
       font-family 'Calibri' 'Tahoma' 'Geneva' sans-serif
       border-radius(5px)
-      box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.1))
+      box-shadow(5px, 5px, 5px, 0, rgba(0, 0, 0, 0.1))
       width 250px
       margin-left -3em
       position absolute; top 2em; left 1em
