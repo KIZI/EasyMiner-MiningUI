@@ -2,17 +2,16 @@ nav
   color color
   float left
   width navWidth
-  margin boxMargin boxMargin 0 boxMargin
+  margin boxMargin 5px 0 boxMargin
   line-height 20px
 
 #attributes
   box()
-  margin-bottom 25px
+  margin-bottom boxMargin
 
   h2
     h2()
-    margin-bottom 5px
-    margin 0 20px 5px
+    margin 0 20px 5px 0
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -40,6 +39,7 @@ nav
   li
     cursor move
     float left; clear left
+    padding paletteLiPadding
     &.rec1
       background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
     &.rec2
@@ -96,7 +96,7 @@ nav
 #data-fields
   box()
   padding-bottom 20px
-  margin-bottom 25px
+  margin-bottom boxMargin
 
   h2
     h2()
@@ -111,7 +111,8 @@ nav
   h2 a
     display block; width 12px; height 12px
     float right
-    position relative; left 1px; top 5px
+    position relative; top 5px
+    margin-left 5px/*FIXME*/
 
   ul
     margin-bottom 10px
@@ -119,6 +120,7 @@ nav
   li
     cursor move
     float left; clear left
+    padding paletteLiPadding
     .add
       background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
       display block

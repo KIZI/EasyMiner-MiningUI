@@ -1,8 +1,8 @@
 #marked-rules
   box()
   min-width minContentWidth
-  margin boxMargin 0 0 boxMargin + feedbackMargin
-  padding 10px 20px
+  margin boxMargin 0 0 boxMargin
+  padding-left boxMargin
   float left; clear left
 
   h2
@@ -44,13 +44,37 @@
       float left
     &:hover > .clear
       visibility visible
+
   a.createReport,
-  a.exportBusinessRules
+  a.exportBusinessRules,
+  a.modelTester
     height 24px
     padding-left 30px
     margin-right 10px
     float right
+
   a.createReport
-    background transparent url('http://icons.iconarchive.com/icons/deleket/soft-scraps/24/Document-Text-icon.png') 0 0 no-repeat
+    background transparent url('http://icons.iconarchive.com/icons/harwen/pleasant/24/Text-Document-icon.png') 0 0 no-repeat
+
   a.exportBusinessRules
     background transparent url('http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png') 0 0 no-repeat
+
+  a.modelTester
+    background transparent url('http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png') 0 0 no-repeat
+
+  .marked-task
+    position relative
+    float left
+
+    .rename
+      background transparent url("../images/sprite-icons.png") -19px -262px no-repeat
+      display block
+      width 16px
+      height 20px
+      visibility hidden
+      position relative
+      margin-left 5px
+      float right
+
+    :hover > .rename
+      visibility visible

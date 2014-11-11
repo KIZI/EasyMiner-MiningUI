@@ -56,9 +56,6 @@ body {
 a {
   color: #00e;
 }
-/*a:visited {
-  color: #551a8b;
-}*/
 a:hover {
   color: #06e;
 }
@@ -261,8 +258,8 @@ td {
   left: 0;
   visibility: hidden;
   z-index: 1;
-  width:100%;
-  min-width:100%;
+  width: 100%;
+  min-width: 100%;
 }
 #overlay form {
   line-height: 36px;
@@ -282,7 +279,6 @@ td {
   color: #a41d1d;
   line-height: 1em;
 }
-
 #overlay form label {
   font-weight: bold;
   font-size: 14px;
@@ -477,21 +473,10 @@ td {
 #overlay #create-user-report-window,
 #overlay #export-business-rules-window,
 #overlay #model-tester-window,
-#overlay #show-br-base-window{
+#overlay #show-br-base-window {
   width: 800px;
   margin-top: 45px;
 }
-
-#overlay #add-br-base-window{
-  width:400px;
-  margin-top:45px;
-}
-#overlay #add-br-base-window iframe{
-  height: 100px;
-  width: 400px;
-  border: none;
-}
-
 #overlay #add-attribute-window iframe,
 #overlay #edit-attribute-window iframe,
 #overlay #new-task-window iframe,
@@ -501,7 +486,7 @@ td {
 #overlay #create-user-report-window iframe,
 #overlay #export-business-rules-window iframe,
 #overlay #model-tester-window iframe,
-#overlay #show-br-base-window iframe{
+#overlay #show-br-base-window iframe {
   border: none;
   width: 800px;
   height: 500px;
@@ -514,8 +499,18 @@ td {
 #overlay #user-logout-window form input[type="submit"],
 #overlay #create-user-report-window form input[type="submit"],
 #overlay #export-business-rules-window form input[type="submit"],
-#overlay #model-tester-window form input[type="submit"] {
+#overlay #model-tester-window form input[type="submit"],
+#overlay #show-br-base-window form input[type="submit"] {
   margin-left: 310px;
+}
+#overlay #add-br-base-window {
+  width: 400px;
+  margin-top: 45px;
+}
+#overlay #add-br-base-window iframe {
+  height: 100px;
+  width: 400px;
+  border: none;
 }
 #overlay #loading-data {
   text-align: center;
@@ -525,11 +520,6 @@ td {
 #overlay #loading-data.error {
   background: #fff url("../images/sprite-icons.png") 160px -743px no-repeat;
 }
-
-#overlay .invalid-value {
-    background-color: lightsalmon !important;
-}
-
 #settings-form {
   line-height: 2em;
 }
@@ -646,18 +636,12 @@ td {
   top: -9px;
 }
 header {
-  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height: 146px;
-  width:100%;
-}
-header #headerContent{
-  width:1320px;
-  position: relative;
-  padding-right:15px;
-  margin: 0 auto;
+  width: 1305px;
+  padding-right: 15px;
 }
 header #browser-warning {
-  margin: 0 0 0 60px;
+  margin: 0 0 0 30px;
   padding-top: 6px;
   color: #f00;
   float: left;
@@ -687,11 +671,6 @@ header #settings a#new-task {
   padding: 2px 0 0 30px;
   margin-right: 20px;
 }
-header #settings a#go-to-cms {
-    background: transparent url("../images/sprite-icons.png") -13px -115px no-repeat;
-    padding: 2px 0 0 30px;
-    margin-right: 20px;
-}
 header #settings a#support {
   background: transparent url("../images/sprite-icons.png") -14px -610px no-repeat;
   padding: 2px 0 0 30px;
@@ -701,10 +680,15 @@ header #settings a#settings-open {
   background: transparent url("../images/sprite-icons.png") -213px -610px no-repeat;
   padding: 2px 0 0 30px;
 }
+header #settings a#go-to-cms {
+  background: transparent url("../images/sprite-icons.png") -13px -115px no-repeat;
+  padding: 2px 0 0 30px;
+  margin-right: 20px;
+}
 header h1 {
   color: #fff;
   font: 48px 'Average', 'serif';
-  margin: 0 0 0 80px;
+  margin: 0 0 0 50px;
   padding-top: 16px;
   letter-spacing: 2px;
   clear: both;
@@ -756,8 +740,7 @@ nav {
   font: 20px 'Average', 'serif';
   font-weight: bold;
   border-bottom: 1px solid #314e64;
-  margin-bottom: 5px;
-  margin: 0 20px 5px;
+  margin: 0 20px 5px 0;
 }
 #attributes h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -896,8 +879,8 @@ nav {
   height: 12px;
   float: right;
   position: relative;
-  margin-left: 5px;
   top: 5px;
+  margin-left: 5px;
 }
 #data-fields ul {
   margin-bottom: 10px;
@@ -933,60 +916,6 @@ nav {
 }
 #data-fields li:hover .show-histogram {
   visibility: visible;
-}
-.datas-filter{
-    display: none;
-    margin: 5px 20px;
-}
-.datas-filter input{
-    width: 180px;
-    padding: 2px 3px;
-    background: none !important;
-    border: 1px solid #aaa;
-}
-.datas-filter a.reset-filter {
-    float: right;
-  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  margin: 2px 0 0 5px;
-}
-.filter{
-  display: block;
-  width: 20px !important;
-  height: 20px !important;
-  float: right;
-  top: 3px !important;
-    background-position: -116px -117px !important;
-}
-#brBase {
-    color: #434343;
-    background-color: #fff;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border: 1px solid #dfdfdf;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    padding: 10px;
-    padding-bottom: 20px;
-    margin-bottom: 25px;
-}
-#brBase h2 {
-    color: #314e64;
-    font: 20px 'Average', 'serif';
-    font-weight: bold;
-    border-bottom: 1px solid #314e64;
-    margin: 0 20px 5px;
-}
-#brBase #brBaseCounter{
-    padding: 5px 20px;
-}
-#brBase a{
-    margin: 5px 20px;
-    display: inline-block;
 }
 #reports {
   color: #434343;
@@ -1026,6 +955,9 @@ nav {
 }
 #reports ul {
   margin-bottom: 10px;
+}
+section#active-rule {
+  position: relative;
 }
 section#active-rule #antecedent,
 section#active-rule #interest-measures,
@@ -1332,7 +1264,6 @@ section#active-rule .no-restriction {
   clear: left;
   cursor: help;
 }
-
 section#active-rule #action-box {
   background: transparent url("../images/sprite-icons.png") -12px -307px no-repeat;
   display: block;
@@ -1397,15 +1328,10 @@ section#active-rule #action-box {
   margin: 5px 0 0 0;
   padding: 9px 0 0 30px;
 }
-
-/* Allows 'start mining' and 'stop mining' to be visually grouped */
-#active-rule, #found-rules {
-    position: relative;
-}
-
 #found-rules {
   clear: left;
   padding-top: 20px;
+  position: relative;
 }
 #found-rules #stop-mining {
   background: transparent url("../images/sprite-icons.png") -14px -511px no-repeat;
@@ -1889,43 +1815,38 @@ section#active-rule #action-box {
 }
 #marked-rules a.createReport,
 #marked-rules a.exportBusinessRules,
-#marked-rules a.modelTester{
-    height: 24px;
-    padding-left: 30px;
-    margin-right: 10px;
-    float: right;
+#marked-rules a.modelTester {
+  height: 24px;
+  padding-left: 30px;
+  margin-right: 10px;
+  float: right;
 }
 #marked-rules a.createReport {
   background: transparent url("http://icons.iconarchive.com/icons/harwen/pleasant/24/Text-Document-icon.png") 0 0 no-repeat;
 }
 #marked-rules a.exportBusinessRules {
-    background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
+  background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
 }
 #marked-rules a.modelTester {
-    background: transparent url("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png") 0 0 no-repeat;
+  background: transparent url("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png") 0 0 no-repeat;
 }
-
-/* Task within the rule clipboard */
 #marked-rules .marked-task {
-    position: relative;
-    float: left;
+  position: relative;
+  float: left;
 }
-
-/* Rename task hover */
 #marked-rules .marked-task .rename {
-    background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
-    display: block;
-    width: 16px;
-    height: 20px;
-    visibility: hidden;
-    position: relative;
-    margin-left: 5px;
-    float: right;
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  position: relative;
+  margin-left: 5px;
+  float: right;
 }
-#marked-rules .marked-task:hover > .rename {
-    visibility: visible;
+#marked-rules .marked-task :hover > .rename {
+  visibility: visible;
 }
-
 #createUserReport {
   float: right;
   margin: 20px 20px 0 0;
@@ -1938,9 +1859,7 @@ footer {
   font-size: 14px;
   padding: 10px 0;
   min-width: 1335px;
-  width:100%;
-}
-@media only screen and (min-width: 35em) {
+  width: 100%;
 }
 .ir {
   display: block;
@@ -2053,25 +1972,17 @@ footer {
   -ms-user-select: none;
 }
 body {
-  background: transparent url("../images/bg-body.jpg") center -10px repeat;
+  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
   overflow-y: scroll;
 }
-#wrapper {
-  min-height: 500px;
-  min-width: 1335px; 
-  width:1335px;
-  margin: 0 auto;
-  position:relative;
+footer {
+  width: 1305px;
 }
-#wrapper #lmLogo{
-  text-align: right;
-  height:63px;
-  bottom:0px;
-  right:47px;
-  
-  
-  position: absolute;
+#wrapper {
+  background: transparent url("../images/bg-body.jpg") center -10px repeat;
+  min-height: 500px;
+  min-width: 1327.5px;
 }
 section#workplace {
   margin: 0 auto;
@@ -2091,7 +2002,7 @@ section#content {
   padding: 10px;
   min-width: 980px;
   float: left;
-  margin: 15px 0 0 15px;
+  margin: 15px 0 0 35px;
   padding-left: 15px;
 }
 section#content h2 {

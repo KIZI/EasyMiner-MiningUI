@@ -1,7 +1,10 @@
 section#active-rule
+  position relative
   #antecedent, #interest-measures, #succedent
     float left
-    height 200px
+    height 300px
+    padding-bottom 70px
+    overflow auto
 
   #antecedent
     .cedent
@@ -10,7 +13,7 @@ section#active-rule
       firstCedent()
 
   #interest-measures
-    margin-left boxMargin
+    margin-left 2*boxMargin
     width interestMeasuresWidth
     #add-im
       font-size 14px
@@ -34,7 +37,7 @@ section#active-rule
         visibility visible
 
   #succedent
-    margin-left boxMargin
+    margin-left 2*boxMargin
     .cedent
       cedent()
     >.cedent
@@ -50,3 +53,6 @@ section#active-rule
     background transparent url('../images/sprite-icons.png') -12px -307px no-repeat
     display block; height 32px
     margin 25px 0 10px; padding 9px 0 0 38px
+    position absolute
+    right 0
+    bottom 0
