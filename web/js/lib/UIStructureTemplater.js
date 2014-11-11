@@ -51,12 +51,7 @@ var UIStructureTemplater = new Class({
                         )
                     )
                 ),
-                nav({id: 'navigation'}),
-                div({id: 'lmLogo'},
-                    a({href:'http://lispminer.vse.cz',target: '_blank', title: i18n.translate('Data mining is powered by LISp-Miner')},
-                      img({src: './images/lmlogo.png',alt: 'LISp-Miner'})
-                    )
-                )
+                nav({id: 'navigation'})
             );
         });
                      

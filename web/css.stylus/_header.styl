@@ -1,9 +1,16 @@
 header
-  height 146px; width minContentWidth + navWidth + 3*boxMargin
-  padding-right boxMargin
+  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
+  height 146px;
+  width 100%
+
+  #headerContent
+    width:1320px;
+    position: relative;
+    padding-right:15px;
+    margin: 0 auto;
 
   #browser-warning
-    margin 0 0 0 2*boxMargin; padding-top 6px
+    margin 0 0 0 4*boxMargin; padding-top 6px
     color: red
     float: left
 
@@ -40,7 +47,8 @@ header
   h1
     color h1Color
     font h1Font
-    margin 0 0 0 2*boxMargin + feedbackMargin; padding-top: 16px
+    margin 0 0 0 80px;
+    padding-top: 16px
     letter-spacing 2px
     clear both
 

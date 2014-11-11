@@ -11,7 +11,7 @@ nav
 
   h2
     h2()
-    margin 0 20px 5px 0
+    margin 0 20px 5px 20px
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -100,7 +100,7 @@ nav
 
   h2
     h2()
-    margin 0 20px 5px
+    margin 0 20px 5px 20px
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -138,6 +138,34 @@ nav
       .show-histogram
         visibility visible
 
+
+
+
+
+#attributes, #data-fields
+  .datas-filter
+    display none
+    margin 5px 20px
+  input
+    width 180px
+    padding 2px 3px
+    background none
+    border 1px solid #aaa /*TODO nahradit parametry!*/
+  a.reset-filter
+    float right
+    background transparent url("../images/sprite-icons.png") -19px -15px no-repeat
+    display block
+    width 16px
+    height 20px
+    margin 2px 0 0 5px
+  .filter
+    display block
+    width 20px
+    height 20px
+    float: right;
+    top: 3px !important;
+    background-position: -116px -117px !important;
+
 #reports
   box()
   padding-bottom 20px
@@ -145,7 +173,7 @@ nav
 
   h2
     h2()
-    margin 0 20px 5px
+    margin 0 20px 5px 20px
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -160,3 +188,19 @@ nav
 
   ul
     margin-bottom 10px
+
+#brBase
+  box()
+  padding-bottom 20px
+  margin-bottom 25px
+
+  h2
+    h2()
+    margin 0 20px 5px 20px
+
+  #brBaseCounter
+    padding 5px 20px
+
+  a
+    margin 5px 20px
+    display inline-block;

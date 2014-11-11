@@ -636,12 +636,18 @@ td {
   top: -9px;
 }
 header {
+  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height: 146px;
-  width: 1305px;
+  width: 100%;
+}
+header #headerContent {
+  width: 1320px;
+  position: relative;
   padding-right: 15px;
+  margin: 0 auto;
 }
 header #browser-warning {
-  margin: 0 0 0 30px;
+  margin: 0 0 0 60px;
   padding-top: 6px;
   color: #f00;
   float: left;
@@ -688,7 +694,7 @@ header #settings a#go-to-cms {
 header h1 {
   color: #fff;
   font: 48px 'Average', 'serif';
-  margin: 0 0 0 50px;
+  margin: 0 0 0 80px;
   padding-top: 16px;
   letter-spacing: 2px;
   clear: both;
@@ -740,7 +746,7 @@ nav {
   font: 20px 'Average', 'serif';
   font-weight: bold;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px 0;
+  margin: 0 20px 5px 20px;
 }
 #attributes h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -865,7 +871,7 @@ nav {
   font: 20px 'Average', 'serif';
   font-weight: bold;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px;
+  margin: 0 20px 5px 20px;
 }
 #data-fields h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -917,6 +923,36 @@ nav {
 #data-fields li:hover .show-histogram {
   visibility: visible;
 }
+#attributes .datas-filter,
+#data-fields .datas-filter {
+  display: none;
+  margin: 5px 20px;
+}
+#attributes input,
+#data-fields input {
+  width: 180px;
+  padding: 2px 3px;
+  background: none;
+  border: 1px solid #aaa;
+}
+#attributes a.reset-filter,
+#data-fields a.reset-filter {
+  float: right;
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin: 2px 0 0 5px;
+}
+#attributes .filter,
+#data-fields .filter {
+  display: block;
+  width: 20px;
+  height: 20px;
+  float: right;
+  top: 3px !important;
+  background-position: -116px -117px !important;
+}
 #reports {
   color: #434343;
   background-color: #fff;
@@ -936,7 +972,7 @@ nav {
   font: 20px 'Average', 'serif';
   font-weight: bold;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px;
+  margin: 0 20px 5px 20px;
 }
 #reports h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -955,6 +991,34 @@ nav {
 }
 #reports ul {
   margin-bottom: 10px;
+}
+#brBase {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+#brBase h2 {
+  color: #314e64;
+  font: 20px 'Average', 'serif';
+  font-weight: bold;
+  border-bottom: 1px solid #314e64;
+  margin: 0 20px 5px 20px;
+}
+#brBase #brBaseCounter {
+  padding: 5px 20px;
+}
+#brBase a {
+  margin: 5px 20px;
+  display: inline-block;
 }
 section#active-rule {
   position: relative;
@@ -1972,7 +2036,7 @@ footer {
   -ms-user-select: none;
 }
 body {
-  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
+  background: transparent url("../images/bg-body.jpg") center -10px repeat;
   font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
   overflow-y: scroll;
 }
@@ -1980,9 +2044,11 @@ footer {
   width: 1305px;
 }
 #wrapper {
-  background: transparent url("../images/bg-body.jpg") center -10px repeat;
   min-height: 500px;
-  min-width: 1327.5px;
+  min-width: 1335px;
+  width: 1335px;
+  margin: 0 auto;
+  position: relative;
 }
 section#workplace {
   margin: 0 auto;
@@ -2002,7 +2068,7 @@ section#content {
   padding: 10px;
   min-width: 980px;
   float: left;
-  margin: 15px 0 0 35px;
+  margin: 15px 0 0 15px;
   padding-left: 15px;
 }
 section#content h2 {

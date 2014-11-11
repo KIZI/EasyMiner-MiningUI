@@ -51,7 +51,7 @@ pagerBorder = 1px solid #cac7bd
   userSelect(none)
 
 body
-  background backgroundColor url('../images/bg-header.png') repeat-x 50% 0
+  background: transparent url("../images/bg-body.jpg") center -10px repeat;
   font-family font
   overflow-y scroll
 
@@ -59,8 +59,11 @@ footer
   width minContentWidth + navWidth + 3*boxMargin
 
 #wrapper
-  background transparent url('../images/bg-body.jpg') center -10px repeat
-  min-height 500px; min-width minContentWidth + navWidth + 4.5*boxMargin
+  min-height 500px
+  min-width minContentWidth2
+  width minContentWidth2
+  margin 0 auto
+  position relative
 
 section#workplace
   margin 0 auto; padding-bottom boxMargin
@@ -70,7 +73,7 @@ section#content
   box()
   min-width minContentWidth
   float left
-  margin boxMargin 0 0 boxMargin + feedbackMargin
+  margin boxMargin 0 0 boxMargin
   padding-left boxMargin
 
   h2
