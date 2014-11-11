@@ -1,0 +1,2113 @@
+@import url("http://fonts.googleapis.com/css?family=Average&subset=latin-ext");
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans:400,700");
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]) {
+  display: none;
+}
+[hidden] {
+  display: none;
+}
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+  color: #222;
+}
+body {
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.4;
+}
+::-moz-selection {
+  background: #fe57a1;
+  color: #fff;
+  text-shadow: none;
+}
+::selection {
+  background: #fe57a1;
+  color: #fff;
+  text-shadow: none;
+}
+a {
+  color: #00e;
+}
+/*a:visited {
+  color: #551a8b;
+}*/
+a:hover {
+  color: #06e;
+}
+a:focus {
+  outline: thin dotted;
+}
+a:hover,
+a:active {
+  outline: 0;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: bold;
+}
+blockquote {
+  margin: 1em 40px;
+}
+dfn {
+  font-style: italic;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+ins {
+  background: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+q {
+  quotes: none;
+}
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+small {
+  font-size: 85%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+ul,
+ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px;
+}
+dd {
+  margin: 0 0 0 40px;
+}
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+figure {
+  margin: 0;
+}
+form {
+  margin: 0;
+}
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+label {
+  cursor: pointer;
+}
+legend {
+  border: 0;
+  *margin-left: -7px;
+  padding: 0;
+  white-space: normal;
+}
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+button,
+input {
+  line-height: normal;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+  *overflow: visible;
+}
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *width: 13px;
+  *height: 13px;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: vertical;
+}
+input:valid,
+textarea:valid,
+input:invalid,
+textarea:invalid {
+  background-color: #f0dddd;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td {
+  vertical-align: top;
+}
+.chromeframe {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+#overlay {
+  color: #434343;
+  font: 'Helvetica Neue', 'Arial', 'sans-serif';
+  background: none rgba(0,0,0,0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 1;
+  width:100%;
+  min-width:100%;
+}
+#overlay form {
+  line-height: 36px;
+}
+#overlay form em {
+  color: #925213;
+  font-size: 14px;
+  float: left;
+  padding-left: 5px;
+  position: relative;
+  top: -11px;
+}
+#overlay form em.normal {
+  font-style: normal;
+}
+#overlay form #message {
+  color: #a41d1d;
+  line-height: 1em;
+}
+
+#overlay form label {
+  font-weight: bold;
+  font-size: 14px;
+  text-align: right;
+  line-height: 1.3em;
+  padding-right: 5px;
+  display: block;
+  width: 140px;
+  float: left;
+  clear: left;
+}
+#overlay form select {
+  padding: 4px 2px 1px;
+}
+#overlay form input[type='text'],
+#overlay form input[type='number'],
+#overlay form select {
+  color: #434343;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  float: left;
+  padding: 4px 2px 1px;
+  position: relative;
+  top: -4px;
+  margin-bottom: 10px;
+}
+#overlay form input[type='number'].shortnr {
+  text-align: right;
+  width: 75px;
+}
+#overlay form input[type='number'][readonly] {
+  color: #7b0d2e;
+  font-size: 20px;
+  border: none;
+  font-weight: bold;
+  width: 30px;
+  float: left;
+}
+#overlay form input[type='submit'] {
+  color: #fff;
+  font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+  font-size: 30px;
+  background: #4c8e0e none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+  display: block;
+  width: 170px;
+  margin-left: 130px;
+  margin-top: 50px;
+  padding: 10px 28px;
+  cursor: pointer;
+}
+#overlay form .slider {
+  background: #fff none;
+  border: 1px solid #a6c9e2;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 133px;
+  height: 5px;
+  position: relative;
+  top: 5px;
+  float: left;
+}
+#overlay form .slider .knob {
+  background-color: #0078ae;
+  border: 1px solid #77d5f7;
+  color: #fff;
+  font-weight: normal;
+  outline: medium none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: -3px;
+  cursor: move;
+}
+#overlay form #add-coefficient-autocomplete table,
+#overlay form #edit-coefficient-autocomplete table {
+  line-height: 1em;
+  clear: left;
+  margin-top: 1em;
+}
+#overlay form .info {
+  background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
+  display: block;
+  float: right;
+  position: relative;
+  top: -2px;
+  width: 24px;
+  height: 24px;
+}
+#overlay form .tooltip {
+  color: #000;
+  text-decoration: none;
+  outline: none;
+  cursor: help;
+  position: relative;
+}
+#overlay form .tooltip >span {
+  font-size: 0.9em;
+  line-height: 1.25em;
+  margin-left: -999em;
+  padding: 0.5em 0.8em 0.8em 2em;
+  position: absolute;
+}
+#overlay form .tooltip:hover >span {
+  font-family: 'Calibri' 'Tahoma' 'Geneva' sans-serif;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  width: 250px;
+  margin-left: -3em;
+  position: absolute;
+  top: 2em;
+  left: 1em;
+  z-index: 99;
+}
+#overlay form .tooltip:hover img {
+  border: 0;
+  margin: -10px 0 0 -55px;
+  float: left;
+  position: absolute;
+}
+#overlay form .tooltip:hover em {
+  font-family: 'Candara' 'Tahoma' 'Geneva' sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: block;
+  padding: 0.2em 0 0.6em 0;
+  float: none;
+  top: 0;
+}
+#overlay form .tooltip > .help {
+  background-color: #d3e6f4;
+  border: 1px solid #2bb0d7;
+}
+#overlay form .tooltip > .warning {
+  background-color: #ffa;
+  border: 1px solid #ffad33;
+}
+#overlay h2 {
+  color: #314e64;
+  font: 20px 'Average', 'serif';
+  font-weight: bold;
+  border-bottom: 1px solid #314e64;
+  font-size: 36px;
+  margin: 0 0 20px 0;
+}
+#overlay > div {
+  background-color: #fff;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border: 2px solid #aaa;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+  width: 435px;
+  margin: 10% auto;
+  padding: 35px 25px;
+}
+#overlay > div > a {
+  color: #126499;
+  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat;
+  padding-left: 20px;
+  float: right;
+  position: relative;
+  top: -20px;
+}
+#overlay #new-task-button {
+  background: transparent;
+  float: none;
+  padding: 0;
+  top: 0;
+}
+#overlay #add-attribute-window,
+#overlay #edit-attribute-window,
+#overlay #new-task-window,
+#overlay #show-histogram-window,
+#overlay #user-login-window,
+#overlay #user-logout-window,
+#overlay #create-user-report-window,
+#overlay #export-business-rules-window,
+#overlay #model-tester-window,
+#overlay #show-br-base-window{
+  width: 800px;
+  margin-top: 45px;
+}
+
+#overlay #add-br-base-window{
+  width:400px;
+  margin-top:45px;
+}
+#overlay #add-br-base-window iframe{
+  height: 100px;
+  width: 400px;
+  border: none;
+}
+
+#overlay #add-attribute-window iframe,
+#overlay #edit-attribute-window iframe,
+#overlay #new-task-window iframe,
+#overlay #show-histogram-window iframe,
+#overlay #user-login-window iframe,
+#overlay #user-logout-window iframe,
+#overlay #create-user-report-window iframe,
+#overlay #export-business-rules-window iframe,
+#overlay #model-tester-window iframe,
+#overlay #show-br-base-window iframe{
+  border: none;
+  width: 800px;
+  height: 500px;
+}
+#overlay #add-attribute-window form input[type="submit"],
+#overlay #edit-attribute-window form input[type="submit"],
+#overlay #new-task-window form input[type="submit"],
+#overlay #show-histogram-window form input[type="submit"],
+#overlay #user-login-window form input[type="submit"],
+#overlay #user-logout-window form input[type="submit"],
+#overlay #create-user-report-window form input[type="submit"],
+#overlay #export-business-rules-window form input[type="submit"],
+#overlay #model-tester-window form input[type="submit"] {
+  margin-left: 310px;
+}
+#overlay #loading-data {
+  text-align: center;
+  background: #fff url("../images/icon-loading-big.gif") center 30px no-repeat;
+  padding: 100px 0 40px;
+}
+#overlay #loading-data.error {
+  background: #fff url("../images/sprite-icons.png") 160px -743px no-repeat;
+}
+
+#overlay .invalid-value {
+    background-color: lightsalmon !important;
+}
+
+#settings-form {
+  line-height: 2em;
+}
+#settings-form div {
+  clear: left;
+}
+#settings-form .category {
+  color: #925213;
+}
+#settings-form br.clearfix {
+  clear: left;
+  margin-top: 1em;
+}
+#settings-form .info {
+  background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
+  display: block;
+  float: right;
+  position: relative;
+  top: -2px;
+  width: 24px;
+  height: 24px;
+}
+#settings-form .tooltip {
+  color: #000;
+  text-decoration: none;
+  outline: none;
+  cursor: help;
+  position: relative;
+}
+#settings-form .tooltip >span {
+  font-size: 0.9em;
+  line-height: 1.25em;
+  margin-left: -999em;
+  padding: 0.5em 0.8em 0.8em 2em;
+  position: absolute;
+}
+#settings-form .tooltip:hover >span {
+  font-family: 'Calibri' 'Tahoma' 'Geneva' sans-serif;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  width: 250px;
+  margin-left: -3em;
+  position: absolute;
+  top: 2em;
+  left: 1em;
+  z-index: 99;
+}
+#settings-form .tooltip:hover img {
+  border: 0;
+  margin: -10px 0 0 -55px;
+  float: left;
+  position: absolute;
+}
+#settings-form .tooltip:hover em {
+  font-family: 'Candara' 'Tahoma' 'Geneva' sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: block;
+  padding: 0.2em 0 0.6em 0;
+  float: none;
+  top: 0;
+}
+#settings-form .tooltip > .help {
+  background-color: #d3e6f4;
+  border: 1px solid #2bb0d7;
+}
+#settings-form .tooltip > .warning {
+  background-color: #ffa;
+  border: 1px solid #ffad33;
+}
+#settings-form div > .warning {
+  background: transparent url("../images/sprite-icons.png") -16px -361px no-repeat;
+  display: block;
+  float: left;
+  position: relative;
+  top: -3px;
+  left: 5px;
+  width: 24px;
+  height: 24px;
+}
+#settings-form .autocomplete {
+  margin-bottom: 90px;
+}
+#settings-form a.autosuggest-on,
+#settings-form a.autofilter-on,
+#settings-form a.cache-on,
+#settings-form a.debug-on,
+#settings-form a.strict-on {
+  color: #434343;
+  background: transparent url("../images/sprite-icons.png") -70px -8px no-repeat;
+  text-decoration: none;
+  display: block;
+  float: left;
+  padding-left: 13px;
+  position: relative;
+  top: -9px;
+}
+#settings-form a.autosuggest-off,
+#settings-form a.autofilter-off,
+#settings-form a.cache-off,
+#settings-form a.debug-off,
+#settings-form a.strict-off {
+  color: #434343;
+  background: transparent url("../images/sprite-icons.png") -70px -56px no-repeat;
+  text-decoration: none;
+  display: block;
+  float: left;
+  padding-left: 13px;
+  position: relative;
+  top: -9px;
+}
+header {
+  background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
+  height: 146px;
+  width:100%;
+}
+header #headerContent{
+  width:1320px;
+  position: relative;
+  padding-right:15px;
+  margin: 0 auto;
+}
+header #browser-warning {
+  margin: 0 0 0 60px;
+  padding-top: 6px;
+  color: #f00;
+  float: left;
+}
+header #settings {
+  text-align: right;
+  height: 30px;
+  padding-top: 5px;
+  float: right;
+}
+header #settings a {
+  color: #cee7f7;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  padding-right: 12px;
+  display: block;
+  float: left;
+  height: 25px;
+}
+header #settings a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+header #settings a#new-task {
+  background: transparent url("../images/sprite-icons.png") -113px -262px no-repeat;
+  padding: 2px 0 0 30px;
+  margin-right: 20px;
+}
+header #settings a#go-to-cms {
+    background: transparent url("../images/sprite-icons.png") -13px -115px no-repeat;
+    padding: 2px 0 0 30px;
+    margin-right: 20px;
+}
+header #settings a#support {
+  background: transparent url("../images/sprite-icons.png") -14px -610px no-repeat;
+  padding: 2px 0 0 30px;
+  margin-right: 20px;
+}
+header #settings a#settings-open {
+  background: transparent url("../images/sprite-icons.png") -213px -610px no-repeat;
+  padding: 2px 0 0 30px;
+}
+header h1 {
+  color: #fff;
+  font: 48px 'Average', 'serif';
+  margin: 0 0 0 80px;
+  padding-top: 16px;
+  letter-spacing: 2px;
+  clear: both;
+}
+header h1 em {
+  font-style: normal;
+  letter-spacing: normal;
+  position: relative;
+  bottom: 5px;
+  margin: 0 2px;
+}
+header h1 sup {
+  color: #9de045;
+  font-size: 0.6em;
+  letter-spacing: normal;
+  margin-left: 10px;
+  position: relative;
+  top: -0.8em;
+}
+header h1 span {
+  display: block;
+  font-size: 19px;
+  letter-spacing: normal;
+  position: relative;
+  top: -8px;
+}
+nav {
+  color: #434343;
+  float: left;
+  width: 280px;
+  margin: 15px 5px 0 15px;
+  line-height: 20px;
+}
+#attributes {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  margin-bottom: 15px;
+}
+#attributes h2 {
+  color: #314e64;
+  font: 20px 'Average', 'serif';
+  font-weight: bold;
+  border-bottom: 1px solid #314e64;
+  margin-bottom: 5px;
+  margin: 0 20px 5px;
+}
+#attributes h2.minimize a {
+  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
+}
+#attributes h2.maximize a {
+  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
+}
+#attributes ul#attributes-by-group {
+  background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
+}
+#attributes #attributes-by-group > li {
+  padding-left: 20px;
+}
+#attributes #attributes-by-group span {
+  color: #314e64;
+  font-size: 14px;
+}
+#attributes #attributes-by-group span.coefficient {
+  color: #925213;
+  font-size: 0.85em;
+  position: relative;
+  top: -1px;
+  margin-left: 3px;
+}
+#attributes a#attributes-by-list,
+#attributes a#attributes-by-group {
+  font-size: 13px;
+}
+#attributes li {
+  cursor: move;
+  float: left;
+  clear: left;
+  padding: 2px 0;
+}
+#attributes li.rec1 {
+  background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
+}
+#attributes li.rec2 {
+  background: transparent url("../images/sprite-icons.png") -20px -463px no-repeat;
+}
+#attributes li.used {
+  color: #aaa;
+}
+#attributes li .add {
+  background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
+  float: left;
+  width: 20px;
+  height: 20px;
+  visibility: hidden;
+}
+#attributes li:hover {
+  color: #000;
+}
+#attributes li:hover .add {
+  visibility: visible;
+}
+#attributes a.edit-attribute {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 10px;
+  float: right;
+}
+#attributes li:hover a.edit-attribute {
+  visibility: visible;
+}
+#attributes a.show-histogram {
+  background: transparent url("../images/sprite-icons.png") -20px -664px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 10px;
+  float: right;
+}
+#attributes li:hover a.show-histogram {
+  visibility: visible;
+}
+#attributes a.remove-attribute {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 5px;
+  float: right;
+}
+#attributes li:hover a.remove-attribute {
+  visibility: visible;
+}
+#attributes #etree-progress {
+  color: #666;
+  font-size: 14px;
+  background: transparent url("../images/icon-loading-small.gif") 0 3px no-repeat;
+  display: block;
+  padding-left: 20px;
+  margin: 5px 0 5px 20px;
+}
+#attributes #show-hidden-attributes {
+  color: #126499;
+  font-size: 14px;
+  float: right;
+}
+#data-fields {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+}
+#data-fields h2 {
+  color: #314e64;
+  font: 20px 'Average', 'serif';
+  font-weight: bold;
+  border-bottom: 1px solid #314e64;
+  margin: 0 20px 5px;
+}
+#data-fields h2.minimize a {
+  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
+}
+#data-fields h2.maximize a {
+  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
+}
+#data-fields h2 a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  position: relative;
+  margin-left: 5px;
+  top: 5px;
+}
+#data-fields ul {
+  margin-bottom: 10px;
+}
+#data-fields li {
+  cursor: move;
+  float: left;
+  clear: left;
+  padding: 2px 0;
+}
+#data-fields li .add {
+  background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
+  display: block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  visibility: hidden;
+}
+#data-fields li .show-histogram {
+  background: transparent url("../images/sprite-icons.png") -20px -664px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 10px;
+  float: right;
+}
+#data-fields li:hover {
+  color: #000;
+}
+#data-fields li:hover .add {
+  visibility: visible;
+}
+#data-fields li:hover .show-histogram {
+  visibility: visible;
+}
+.datas-filter{
+    display: none;
+    margin: 5px 20px;
+}
+.datas-filter input{
+    width: 180px;
+    padding: 2px 3px;
+    background: none !important;
+    border: 1px solid #aaa;
+}
+.datas-filter a.reset-filter {
+    float: right;
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin: 2px 0 0 5px;
+}
+.filter{
+  display: block;
+  width: 20px !important;
+  height: 20px !important;
+  float: right;
+  top: 3px !important;
+    background-position: -116px -117px !important;
+}
+#brBase {
+    color: #434343;
+    background-color: #fff;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px solid #dfdfdf;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    padding: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+#brBase h2 {
+    color: #314e64;
+    font: 20px 'Average', 'serif';
+    font-weight: bold;
+    border-bottom: 1px solid #314e64;
+    margin: 0 20px 5px;
+}
+#brBase #brBaseCounter{
+    padding: 5px 20px;
+}
+#brBase a{
+    margin: 5px 20px;
+    display: inline-block;
+}
+#reports {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+#reports h2 {
+  color: #314e64;
+  font: 20px 'Average', 'serif';
+  font-weight: bold;
+  border-bottom: 1px solid #314e64;
+  margin: 0 20px 5px;
+}
+#reports h2.minimize a {
+  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
+}
+#reports h2.maximize a {
+  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
+}
+#reports h2 a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  position: relative;
+  left: 1px;
+  top: 5px;
+}
+#reports ul {
+  margin-bottom: 10px;
+}
+section#active-rule #antecedent,
+section#active-rule #interest-measures,
+section#active-rule #succedent {
+  float: left;
+  height: 300px;
+  padding-bottom: 70px;
+  overflow: auto;
+}
+section#active-rule #antecedent .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+section#active-rule #antecedent .cedent.empty {
+  border: 1px dashed #000;
+}
+section#active-rule #antecedent .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+section#active-rule #antecedent .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+section#active-rule #antecedent .cedent .fields .field .coefficient {
+  color: #925213;
+  font-size: 0.85em;
+  position: relative;
+  top: -1px;
+  margin-left: 3px;
+}
+section#active-rule #antecedent .cedent .fields .field .field-drag {
+  cursor: move;
+}
+section#active-rule #antecedent .cedent .fields .field .change-sign.negative,
+section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
+  float: left;
+}
+section#active-rule #antecedent .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 2px;
+  float: right;
+}
+section#active-rule #antecedent .cedent .fields .field .controls a.remove-field {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 5px;
+  float: right;
+}
+section#active-rule #antecedent .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: hidden;
+}
+section#active-rule #antecedent .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+section#active-rule #antecedent .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+section#active-rule #antecedent .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+section#active-rule #antecedent .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+section#active-rule #antecedent .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+section#active-rule #antecedent .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+section#active-rule #antecedent .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
+  float: left;
+}
+section#active-rule #antecedent .cedent .fields .left-bracket,
+section#active-rule #antecedent .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+section#active-rule #antecedent .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+section#active-rule #antecedent >.cedent >.fields >.field,
+section#active-rule #antecedent >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+section#active-rule #interest-measures {
+  margin-left: 30px;
+  width: 200px;
+}
+section#active-rule #interest-measures #add-im {
+  font-size: 14px;
+  background: transparent url("../images/sprite-icons.png") -167px -162px no-repeat;
+  margin: 0 0 0 10px;
+  padding-left: 20px;
+  float: left;
+}
+section#active-rule #interest-measures .im {
+  float: left;
+  clear: left;
+  margin-bottom: 7px;
+}
+section#active-rule #interest-measures .im .name {
+  font-size: 14px;
+  width: 160px;
+  float: left;
+}
+section#active-rule #interest-measures .im .threshold,
+section#active-rule #interest-measures .im .alpha {
+  color: #7b0d2e;
+}
+section#active-rule #interest-measures .im .edit-im {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-right: 5px;
+  float: left;
+}
+section#active-rule #interest-measures .im:hover .edit-im {
+  visibility: visible;
+}
+section#active-rule #interest-measures .im .remove-im {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  float: left;
+}
+section#active-rule #interest-measures .im:hover .remove-im {
+  visibility: visible;
+}
+section#active-rule #succedent {
+  margin-left: 30px;
+}
+section#active-rule #succedent .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+section#active-rule #succedent .cedent.empty {
+  border: 1px dashed #000;
+}
+section#active-rule #succedent .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+section#active-rule #succedent .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+section#active-rule #succedent .cedent .fields .field .coefficient {
+  color: #925213;
+  font-size: 0.85em;
+  position: relative;
+  top: -1px;
+  margin-left: 3px;
+}
+section#active-rule #succedent .cedent .fields .field .field-drag {
+  cursor: move;
+}
+section#active-rule #succedent .cedent .fields .field .change-sign.negative,
+section#active-rule #succedent .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
+  float: left;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 2px;
+  float: right;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 5px;
+  float: right;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: hidden;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+section#active-rule #succedent .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
+  float: left;
+}
+section#active-rule #succedent .cedent .fields .left-bracket,
+section#active-rule #succedent .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+section#active-rule #succedent .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+section#active-rule #succedent >.cedent >.fields >.field,
+section#active-rule #succedent >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+section#active-rule .no-restriction {
+  background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
+  padding: 1px 0 0 17px;
+  margin-top: 2px;
+  float: left;
+  clear: left;
+  cursor: help;
+}
+
+section#active-rule #action-box {
+  background: transparent url("../images/sprite-icons.png") -12px -307px no-repeat;
+  display: block;
+  height: 32px;
+  margin: 25px 0 10px;
+  padding: 9px 0 0 38px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+#pager {
+  border: 1px solid #cac7bd;
+  height: 550px;
+  overflow-y: hidden;
+  display: none;
+}
+#paging {
+  width: 850px;
+  height: 24px;
+  padding-top: 5px;
+}
+#paging .pager-actuator,
+#paging .pager-actuator-empty,
+#paging .pager-prev,
+#paging .pager-next {
+  color: #c0c0c0;
+  cursor: pointer;
+  margin-right: 4px;
+}
+#paging .active {
+  color: #000;
+}
+#pager-label {
+  height: 24px;
+  padding: 3px 0 0 35px;
+  margin-bottom: 15px;
+}
+#pager-label.mining-not-started {
+  background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
+}
+#pager-label.mining-in-progress {
+  background: transparent url("../images/icon-loading.gif") 0 0 no-repeat;
+}
+#pager-label.mining-finished {
+  background: transparent url("../images/sprite-icons.png") -164px -16px no-repeat;
+}
+#pager-label.mining-norules {
+  background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
+}
+#pager-label.mining-stopped {
+  background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
+}
+#pager-label.mining-error {
+  background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
+}
+#pager-clear {
+  background: transparent url("../images/sprite-icons.png") -164px -59px no-repeat;
+  display: none;
+  width: 100px;
+  height: 24px;
+  float: right;
+  margin: 5px 0 0 0;
+  padding: 9px 0 0 30px;
+}
+
+/* Allows 'start mining' and 'stop mining' to be visually grouped */
+#active-rule, #found-rules {
+    position: relative;
+}
+
+#found-rules {
+  clear: left;
+  padding-top: 20px;
+}
+#found-rules #stop-mining {
+  background: transparent url("../images/sprite-icons.png") -14px -511px no-repeat;
+  height: 24px;
+  float: right;
+  padding-left: 27px;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#found-rules ul {
+  width: 100%;
+  padding-left: 0;
+  float: left;
+}
+#found-rules ul li {
+  width: 100%;
+  padding-left: 0;
+  float: left;
+  clear: left;
+}
+#found-rules .found-rule {
+  cursor: default;
+  list-style-type: none;
+}
+#found-rules .found-rule .rule {
+  float: left;
+  height: 38px;
+}
+#found-rules .found-rule .rule .id {
+  font-size: 0.8em;
+  text-align: right;
+  display: block;
+  width: 35px;
+  margin-right: 3px;
+  margin-top: 9px;
+  float: left;
+}
+#found-rules .found-rule .rule .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+#found-rules .found-rule .rule .cedent.empty {
+  border: 1px dashed #000;
+}
+#found-rules .found-rule .rule .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+#found-rules .found-rule .rule .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+#found-rules .found-rule .rule .cedent .fields .field .coefficient {
+  color: #925213;
+  font-size: 0.85em;
+  position: relative;
+  top: -1px;
+  margin-left: 3px;
+}
+#found-rules .found-rule .rule .cedent .fields .field .field-drag {
+  cursor: move;
+}
+#found-rules .found-rule .rule .cedent .fields .field .change-sign.negative,
+#found-rules .found-rule .rule .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
+  float: left;
+}
+#found-rules .found-rule .rule .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 2px;
+  float: right;
+}
+#found-rules .found-rule .rule .cedent .fields .field .controls a.remove-field {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 5px;
+  float: right;
+}
+#found-rules .found-rule .rule .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: hidden;
+}
+#found-rules .found-rule .rule .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+#found-rules .found-rule .rule .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
+  float: left;
+}
+#found-rules .found-rule .rule .cedent .fields .left-bracket,
+#found-rules .found-rule .rule .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+#found-rules .found-rule .rule .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+#found-rules .found-rule .rule >.cedent >.fields >.field,
+#found-rules .found-rule .rule >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+#found-rules .found-rule .rule .quantifier {
+  float: left;
+  margin-top: 5px;
+}
+#found-rules .found-rule .rule .field {
+  height: auto !important;
+}
+#found-rules .found-rule .rule .left-bracket,
+#found-rules .found-rule .rule right-bracket {
+  top: -3px !important;
+}
+#found-rules .found-rule .ims {
+  font-size: 12px;
+  float: left;
+  clear: left;
+  position: relative;
+  top: -8px;
+  left: 6px;
+}
+#found-rules .found-rule .ims .im-value {
+  color: #7b0d2e;
+  margin-left: 0.5ex;
+}
+#found-rules .found-rule .loading {
+  background: transparent url("../images/icon-loading-small.gif") 0 8px no-repeat;
+  display: block;
+  width: 20px;
+  height: 24px;
+  opacity: 0;
+  visibility: hidden;
+  float: right;
+}
+#found-rules .found-rule .tip-visible {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  background-color: #fff;
+  height: 22px;
+  padding: 7px 5px 0 10px;
+}
+#found-rules .found-rule .bk {
+  background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 9px;
+  margin: 0 10px;
+  visibility: hidden;
+  float: left;
+}
+#found-rules .found-rule:hover > .bk {
+  visibility: visible;
+}
+#found-rules .found-rule .mark {
+  background: transparent url("../images/sprite-icons.png") -18px -68px no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 9px;
+  margin-left: 10px;
+  visibility: hidden;
+  float: left;
+}
+#found-rules .found-rule:hover > .mark {
+  visibility: visible;
+}
+#found-rules .found-rule .clear {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  position: relative;
+  top: 7px;
+  margin-left: 5px;
+  float: left;
+}
+#found-rules .found-rule:hover > .clear {
+  visibility: visible;
+}
+#found-rules .found-rule .info {
+  font-weight: normal;
+  background: transparent url("../images/sprite-icons.png") -17px -718px no-repeat;
+  display: none;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 10px;
+  left: 3px;
+  margin-right: 10px;
+  float: left;
+}
+#found-rules #view-task-setting,
+#found-rules #view-task-result {
+  background: transparent url("../images/sprite-icons.png") -11px -557px no-repeat;
+  height: 26px;
+  float: left;
+  padding: 6px 0 0 37px;
+  margin: 5px 25px 0 0;
+  visibility: hidden;
+}
+#marked-rules {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  min-width: 980px;
+  margin: 15px 0 0 15px;
+  padding-left: 15px;
+  float: left;
+  clear: left;
+}
+#marked-rules h2 {
+  color: #925213;
+  font: 36px 'Droid Sans', 'sans-serif';
+  font-weight: normal;
+  border-bottom: none;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+#marked-rules ul {
+  width: 100%;
+  padding-left: 0;
+  float: left;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+#marked-rules ul li:first-child {
+  color: #487113;
+  text-decoration: underline;
+  padding-left: 5px;
+}
+#marked-rules ul li {
+  width: 100%;
+  padding-left: 0;
+  float: left;
+  clear: left;
+  list-style-type: none;
+}
+#marked-rules .marked-rule {
+  cursor: default;
+}
+#marked-rules .marked-rule .rule {
+  float: left;
+  height: 38px;
+}
+#marked-rules .marked-rule .rule .id {
+  font-size: 0.8em;
+  text-align: right;
+  display: block;
+  width: 35px;
+  margin-right: 3px;
+  margin-top: 9px;
+  float: left;
+}
+#marked-rules .marked-rule .rule .cedent {
+  float: left;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #fff;
+  padding: 2px;
+}
+#marked-rules .marked-rule .rule .cedent.empty {
+  border: 1px dashed #000;
+}
+#marked-rules .marked-rule .rule .cedent a.group-fields {
+  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
+  padding-left: 17px;
+  float: right;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field {
+  float: left;
+  height: 40px;
+  margin: 0 2px;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .coefficient {
+  color: #925213;
+  font-size: 0.85em;
+  position: relative;
+  top: -1px;
+  margin-left: 3px;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .field-drag {
+  cursor: move;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .change-sign.negative,
+#marked-rules .marked-rule .rule .cedent .fields .field .field-sign.negative {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  width: 13px;
+  height: 20px;
+  float: left;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.edit-coefficient {
+  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 2px;
+  float: right;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.remove-field {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-left: 5px;
+  float: right;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.mark-field {
+  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: hidden;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.marked-field {
+  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  margin-right: 3px;
+  float: right;
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field .controls a.change-sign.positive {
+  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  float: right;
+  visibility: hidden;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.remove-field {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.edit-coefficient {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.mark-field {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .field:hover a.change-sign.positive {
+  visibility: visible;
+}
+#marked-rules .marked-rule .rule .cedent .fields .connective {
+  color: #360;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  margin: 0 1px;
+  float: left;
+}
+#marked-rules .marked-rule .rule .cedent .fields .left-bracket,
+#marked-rules .marked-rule .rule .cedent .fields .right-bracket {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  top: -2px;
+}
+#marked-rules .marked-rule .rule .cedent .group-fields {
+  font-size: 14px;
+  position: relative;
+  top: 23px;
+}
+#marked-rules .marked-rule .rule >.cedent >.fields >.field,
+#marked-rules .marked-rule .rule >.cedent >.fields >.connective {
+  margin-top: 3px;
+}
+#marked-rules .marked-rule .rule .quantifier {
+  float: left;
+  margin-top: 5px;
+}
+#marked-rules .marked-rule .rule .field {
+  height: auto !important;
+}
+#marked-rules .marked-rule .rule .left-bracket,
+#marked-rules .marked-rule .rule right-bracket {
+  top: -3px !important;
+}
+#marked-rules .marked-rule .ims {
+  font-size: 12px;
+  float: left;
+  clear: left;
+  position: relative;
+  top: -8px;
+  left: 6px;
+  left: 5px;
+}
+#marked-rules .marked-rule .ims .im-value {
+  color: #7b0d2e;
+  margin-left: 0.5ex;
+}
+#marked-rules .marked-rule .clear {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  position: relative;
+  top: 7px;
+  margin-left: 5px;
+  float: left;
+}
+#marked-rules .marked-rule:hover > .clear {
+  visibility: visible;
+}
+#marked-rules a.createReport,
+#marked-rules a.exportBusinessRules,
+#marked-rules a.modelTester{
+    height: 24px;
+    padding-left: 30px;
+    margin-right: 10px;
+    float: right;
+}
+#marked-rules a.createReport {
+  background: transparent url("http://icons.iconarchive.com/icons/harwen/pleasant/24/Text-Document-icon.png") 0 0 no-repeat;
+}
+#marked-rules a.exportBusinessRules {
+    background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
+}
+#marked-rules a.modelTester {
+    background: transparent url("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png") 0 0 no-repeat;
+}
+
+/* Task within the rule clipboard */
+#marked-rules .marked-task {
+    position: relative;
+    float: left;
+}
+
+/* Rename task hover */
+#marked-rules .marked-task .rename {
+    background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+    display: block;
+    width: 16px;
+    height: 20px;
+    visibility: hidden;
+    position: relative;
+    margin-left: 5px;
+    float: right;
+}
+#marked-rules .marked-task:hover > .rename {
+    visibility: visible;
+}
+
+#createUserReport {
+  float: right;
+  margin: 20px 20px 0 0;
+}
+footer {
+  background: #ededed;
+  color: #434343;
+  margin: 10px auto 0 auto;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px 0;
+  min-width: 1335px;
+  width:100%;
+}
+@media only screen and (min-width: 35em) {
+}
+.ir {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+  *line-height: 0;
+}
+.ir br {
+  display: none;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.invisible {
+  visibility: hidden;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+@media print {
+  * {
+    background: transparent !important;
+    box-shadow: 0 0 0 #fff;
+    -webkit-box-shadow: 0 0 0 #fff;
+    -moz-box-shadow: 0 0 0 #fff;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+* {
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+body {
+  background: transparent url("../images/bg-body.jpg") center -10px repeat;
+  font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+  overflow-y: scroll;
+}
+#wrapper {
+  min-height: 500px;
+  min-width: 1335px; 
+  width:1335px;
+  margin: 0 auto;
+  position:relative;
+}
+#wrapper #lmLogo{
+  text-align: right;
+  height:63px;
+  bottom:0px;
+  right:47px;
+  
+  
+  position: absolute;
+}
+section#workplace {
+  margin: 0 auto;
+  padding-bottom: 15px;
+  float: left;
+}
+section#content {
+  color: #434343;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  padding: 10px;
+  min-width: 980px;
+  float: left;
+  margin: 15px 0 0 15px;
+  padding-left: 15px;
+}
+section#content h2 {
+  color: #925213;
+  font: 36px 'Droid Sans', 'sans-serif';
+  font-weight: normal;
+  border-bottom: none;
+  margin: 0;
+}
+section#content h3 {
+  color: #314e64;
+  font: 16px;
+  border-bottom: 1px solid #314e64;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+a {
+  color: #126499;
+}
