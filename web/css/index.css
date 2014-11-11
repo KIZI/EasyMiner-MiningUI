@@ -306,6 +306,14 @@ td {
   top: -4px;
   margin-bottom: 10px;
 }
+#overlay form input[type='number'] {
+  -moz-appearance: textfield;
+}
+#overlay form input::-webkit-outer-spin-button,
+#overlay form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 #overlay form input[type='number'].shortnr {
   text-align: right;
   width: 75px;
