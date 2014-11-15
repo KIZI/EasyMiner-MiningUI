@@ -88,7 +88,11 @@ var i18n = new Class({
                83: {'cs': 'Přejmenovat úlohu', en: 'Rename the Task'},
                84: {'cs': 'Nový název', en: 'New name'},
                85: {'cs': 'Je nutné zadat platný název úlohy.', en: 'Please enter a valid task name.'},
-               86: {'cs': 'Přepnout do CMS', en: 'Go to CMS'}
+               86: {'cs': 'Přepnout do CMS', en: 'Go to CMS'},
+               87: {'cs': 'Filtrovat', en: 'Filter'},
+               88: {'cs': 'Zrušit filtr', en: 'Reset filter'},
+               89: {'cs': 'Minimalizovat', en: 'Minimize'},
+               90: {'cs': 'Maximalizovat', en: 'Maximize'}
         },
 
 	initialize: function (lang) {

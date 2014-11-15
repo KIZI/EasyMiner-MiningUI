@@ -75,7 +75,7 @@ var UIStructurePainter = new Class({
             navigation.grab(brBase);
         }
 
-        this.$UIStructureListener.registerNavigationEventHandlers();
+        this.$UIStructureListener.registerNavigationEventHandlers(this.$i18n);
     },
 
     showHiddenAttributesButton: function() {

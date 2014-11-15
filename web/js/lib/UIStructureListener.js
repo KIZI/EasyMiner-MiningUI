@@ -114,12 +114,15 @@ var UIStructureListener = new Class({
         }.bind(this));
     },
 
-    registerNavigationEventHandlers: function () {
-        $$('#attributes a.toggle')[0].addEvent('click', function (event) {
+    registerNavigationEventHandlers: function (i18n) {
+        var attributesToggle = $$('#attributes a.toggle')[0];
+        attributesToggle.addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#attributes > div')[1];
             elToggle.toggle();
             var elH2 = $$('#attributes h2')[0];
+            if(elH2.hasClass('minimize')){ attributesToggle.set('title', i18n.translate('Maximize')); }
+            else{ attributesToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
         
@@ -161,11 +164,14 @@ var UIStructureListener = new Class({
 //			}.bind(this));
 //		}
 
-        $$('#data-fields a.toggle')[0].addEvent('click', function (event) {
+        var dataFieldsToggle = $$('#data-fields a.toggle')[0];
+        dataFieldsToggle.addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#data-fields > div')[1];
             elToggle.toggle();
             var elH2 = $$('#data-fields h2')[0];
+            if(elH2.hasClass('minimize')){ dataFieldsToggle.set('title', i18n.translate('Maximize')); }
+            else{ dataFieldsToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
 
