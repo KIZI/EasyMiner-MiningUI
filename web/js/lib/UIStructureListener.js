@@ -121,8 +121,10 @@ var UIStructureListener = new Class({
             var elToggle = $$('#attributes > div')[1];
             elToggle.toggle();
             var elH2 = $$('#attributes h2')[0];
-            if(elH2.hasClass('minimize')){ attributesToggle.set('title', i18n.translate('Maximize')); }
-            else{ attributesToggle.set('title', i18n.translate('Minimize')); }
+            if(elH2.hasClass('minimize')){
+                attributesToggle.set('title', i18n.translate('Maximize'));
+                $$('#attributes > .datas-filter')[0].hide();
+            } else{ attributesToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
         
@@ -170,7 +172,10 @@ var UIStructureListener = new Class({
             var elToggle = $$('#data-fields > div')[1];
             elToggle.toggle();
             var elH2 = $$('#data-fields h2')[0];
-            if(elH2.hasClass('minimize')){ dataFieldsToggle.set('title', i18n.translate('Maximize')); }
+            if(elH2.hasClass('minimize')){
+                dataFieldsToggle.set('title', i18n.translate('Maximize'));
+                $$('#data-fields > .datas-filter')[0].hide();
+            }
             else{ dataFieldsToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));

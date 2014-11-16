@@ -757,6 +757,15 @@ nav {
 #attributes h2.maximize a {
   background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
 }
+#attributes h2 a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  position: relative;
+  top: 5px;
+  margin-left: 5px;
+}
 #attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
 }
@@ -922,6 +931,9 @@ nav {
 }
 #data-fields li:hover .show-histogram {
   visibility: visible;
+}
+#navigation h2.maximize .filter {
+  display: none;
 }
 #attributes .datas-filter,
 #data-fields .datas-filter {
