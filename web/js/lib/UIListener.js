@@ -208,7 +208,7 @@ var UIListener = new Class({
             if (IM.getName() === 'SUPP') {
                 var valid = true;
             } else {
-                var valid = validator.validate(IM, action);
+                var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
             }
 
 			if (valid) {

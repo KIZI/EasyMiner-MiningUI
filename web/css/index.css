@@ -318,13 +318,15 @@ td {
   text-align: right;
   width: 75px;
 }
-#overlay form input[type='number'][readonly] {
+#overlay form select.alpha,
+#overlay form input[type='number'] {
   color: #7b0d2e;
   font-size: 20px;
-  border: none;
   font-weight: bold;
   width: 30px;
   float: left;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 #overlay form input[type='submit'] {
   color: #fff;

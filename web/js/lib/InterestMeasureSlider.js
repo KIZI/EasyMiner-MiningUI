@@ -7,7 +7,7 @@ var InterestMeasureSlider = new Class({
 	IM: null,
 	dataType: '',
 	
-	sliderEnabled: true,
+	sliderEnabled: false,
 	sliderWidth: 0,
 	sliderBorder: 10,
 	sliderDefaultWidth: 110,
@@ -29,6 +29,7 @@ var InterestMeasureSlider = new Class({
 		this.IM = IM;
 		this.dataType = this.field.dataType;
 
+        console.log(value);
         var offset = 0;
         if (IM.getName() === 'SUPP') {
             this.field.minValue = value;
@@ -47,13 +48,18 @@ var InterestMeasureSlider = new Class({
 
 		// normalizers
 		if (this.dataType !== 'enum') {
+            // create HTML elements
+            this.createInput();
+
 			this.numberNormalizer = new NumberNormalizer(this.field.minValue, this.field.maxValue, this.inversePrecision, 0 + offset, this.numSteps + offset, this.precision, this.numSteps, this.field.minValueInclusive, this.field.maxValueInclusive);
 			this.inverseNumberNormalizer = new NumberNormalizer(0 + offset, this.numSteps + offset, this.precision, this.field.minValue, this.field.maxValue, this.inversePrecision, this.numSteps, this.field.minValueInclusive, this.field.maxValueInclusive);
 		}
+        else{
+            // create HTML elements
+            this.createSelect();
+        }
 
-		// create HTML elements
-		this.createInput();
-
+        //this.elValue.set('value', this.getValue());
 		if (this.sliderEnabled) { // create slider
 			this.createSlider();
 			this.parent(this.elSlider, this.elSlider.getElement('.knob'), {
@@ -100,48 +106,76 @@ var InterestMeasureSlider = new Class({
 			this.sliderWidth = this.sliderDefaultWidth;
 		}
 	},
-	
-	createInput: function () {
-		var elLabel = new Element('label', {
-			'for': 'add-im-' + this.field.name + '-value',
-			html: this.field.localizedName + ':'
-		});
-		this.elParent.grab(elLabel);
-		
-		var width = this.dataType !== 'enum' ? this.field.maxValue.toString().length * 2 + (this.dataType !== 'integer' ? this.inversePrecision + 1 : 0) : this.valueDefaultWidth;
-		this.elValue = new Element('input', {
-			type: 'number',
-			id: this.action + '-im-' + this.field.name + '-value',
-			name: this.action + '-im-' + this.field.name + '-value', 
+
+    createInput: function () {
+        //alert(this.numSteps+' a '+((this.field.maxValue-this.field.minValue))+' a '+this.getValue()+' a '+this.IM.getThreshold());
+        var elLabel = new Element('label', {
+            'for': 'add-im-' + this.field.name + '-value',
+            html: this.field.localizedName + ':'
+        });
+        this.elParent.grab(elLabel);
+
+        var width = this.dataType !== 'enum' ? this.field.maxValue.toString().length * 2 + (this.dataType !== 'integer' ? this.inversePrecision + 1 : 0) : this.valueDefaultWidth;
+        this.elValue = new Element('input', {
+            type: 'number',
+            id: this.action + '-im-' + this.field.name + '-value',
+            name: this.action + '-im-' + this.field.name + '-value',
+            value: this.getValue(),
+            min: this.field.minValue,
+            max: this.field.maxValue,
+            step: ((this.field.maxValue-this.field.minValue)/this.numSteps),
             pattern: '',
-			'data-validators': 'dataType:"' + this.dataType + '" minValue:' + this.field.minValue + ' minValueInclcusive:' + this.field.minValueInclusive + ' maxValue:' + this.field.maxValue + ' maxValueInclusive:' + this.field.maxValueInclusive,
-			'class': this.action + '-im-value',
-			styles: {
-				width: width + 'ex'
-			}
-		});
+            'data-validators': 'dataType:"' + this.dataType + '" minValue:' + this.field.minValue + ' minValueInclusive:' + this.field.minValueInclusive + ' maxValue:' + this.field.maxValue + ' maxValueInclusive:' + this.field.maxValueInclusive,
+            'class': this.action + '-im-value',
+            styles: {
+                width: width + 'ex'
+            }
+        });
 
         if (this.sliderEnabled) {
             this.elValue.set('readonly', 'readonly');
         }
 
-		this.elParent.grab(this.elValue);
-		
-		if (!this.sliderEnabled) {
-			// input comment
-			var comment = new Element('em', {
-				html: this.dataType.capitalize() + ' ' + (this.field.minValueInclusive ? '<' : '(') + this.field.minValue + '; ' + this.field.maxValue.format({group: ' '}) + (this.field.maxValueInclusive ? '>' : ')')
-			});
-			this.elParent.grab(comment);
-			
-			// input validation message
-			var label = new Element('label', {html: '&nbsp;'});
-			this.elParent.grab(label);
-			var error = new Element('div', {
-				id: 'message'
-			});
-			this.elParent.grab(error);
-		}
+        this.elParent.grab(this.elValue);
+
+        if (!this.sliderEnabled) {
+            // input comment
+            var comment = new Element('em', {
+                html: this.dataType.capitalize() + ' ' + (this.field.minValueInclusive ? '<' : '(') + this.field.minValue + '; ' + this.field.maxValue.format({group: ' '}) + (this.field.maxValueInclusive ? '>' : ')')
+            });
+            this.elParent.grab(comment);
+
+            // input validation message
+            var label = new Element('label', {html: '&nbsp;'});
+            this.elParent.grab(label);
+            var error = new Element('div', {
+                id: 'message'
+            });
+            this.elParent.grab(error);
+        }
+    },
+	
+	createSelect: function () {
+		var elLabel = new Element('label', {
+			'for': 'add-im-' + this.field.name + '-value',
+			html: this.field.localizedName + ':'
+		});
+		this.elParent.grab(elLabel);
+
+		this.elValue = new Element('select', {
+			id: this.action + '-im-' + this.field.name + '-value',
+			name: this.action + '-im-' + this.field.name + '-value',
+			class: this.action + '-im-value alpha',
+            style: 'width: auto;'
+		});
+        Array.each(this.field.values, function (f) {
+            this.elValueOption = new Element('option', {
+                value: f,
+                html: f
+            });
+            this.elValue.grab(this.elValueOption);
+        }.bind(this));
+        this.elParent.grab(this.elValue);
 	},
 	
 	createSlider: function () {
