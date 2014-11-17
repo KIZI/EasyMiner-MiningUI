@@ -69,15 +69,22 @@ var UIPainter = new Class({
         } else {
             this.$UIStructurePainter.hideHiddenAttributesButton();
         }
+        var attributesFilter = $$('#attributes a.filter')[0];
       var myFilter = new ElementFilter('attributes-filter', '#attributes-by-list li', {
         trigger: 'keyup',
         cache: true,
         onShow: function(element) {
-        element.setStyle('display','list-item');
+            element.setStyle('display','list-item');
         },
         onHide: function(element) {
-        element.setStyle('display','none');
-        }
+            element.setStyle('display','none');
+        },
+          onComplete: function(element) {
+              attributesFilter.addClass('filter-active');
+          },
+          onNull: function(element) {
+              attributesFilter.removeClass('filter-active');
+          }
       });
 	},
 	
@@ -182,6 +189,7 @@ var UIPainter = new Class({
             this.renderDataField(field, dataFields);
             this.UIListener.registerDataFieldEventHandler(field);
         }.bind(this));
+        var dataFieldsFilter = $$('#data-fields a.filter')[0];
       var myFilter = new ElementFilter('data-fields-filter', '#data-fields li', {
         trigger: 'keyup',
         cache: true,
@@ -190,7 +198,13 @@ var UIPainter = new Class({
         },
         onHide: function(element) {
         element.setStyle('display','none');
-        }
+        },
+          onComplete: function(element) {
+              dataFieldsFilter.addClass('filter-active');
+          },
+          onNull: function(element) {
+              dataFieldsFilter.removeClass('filter-active');
+          }
       });
     },
 

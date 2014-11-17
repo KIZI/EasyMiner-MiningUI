@@ -16,7 +16,8 @@ var ElementFilter = new Class({
     onStart: null,
     onShow: null,
     onHide: null,
-    onComplete: null
+    onComplete: null,
+    onNull: null
 	},
 
 	//initialization
@@ -48,6 +49,7 @@ var ElementFilter = new Class({
 			else{
 				//show all of the elements
 				this.findMatches(this.elements,false);
+                this.fireEvent('null');
 			}
     }.bind(this));
 	},
@@ -62,7 +64,6 @@ var ElementFilter = new Class({
 		var matches = [];				
     //recurse
     elements.each(function(el){
-        alert("ahoj");
         var match = filter.test(el.get(this.options.property));
 			//if this element matches, store it...
 			if(match) { 

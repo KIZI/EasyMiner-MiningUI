@@ -116,6 +116,14 @@ var UIStructureListener = new Class({
 
     registerNavigationEventHandlers: function (i18n) {
         var attributesToggle = $$('#attributes a.toggle')[0];
+        var attributesFilter = $$('#attributes a.filter')[0];
+        var attributesFilterBox = $$('#attributes > .datas-filter')[0];
+        var resetA = $$('#attributes a.reset-filter')[0];
+        var dataFieldsToggle = $$('#data-fields a.toggle')[0];
+        var dataFieldsFilter = $$('#data-fields a.filter')[0];
+        var dataFieldsFilterBox = $$('#data-fields > .datas-filter')[0];
+        var resetD = $$('#data-fields a.reset-filter')[0];
+
         attributesToggle.addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#attributes > div')[1];
@@ -123,30 +131,36 @@ var UIStructureListener = new Class({
             var elH2 = $$('#attributes h2')[0];
             if(elH2.hasClass('minimize')){
                 attributesToggle.set('title', i18n.translate('Maximize'));
-                $$('#attributes > .datas-filter')[0].hide();
+                attributesFilterBox.hide();
             } else{ attributesToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
-        
-        $$('#attributes a.filter')[0].addEvent('click', function (event) {
+
+        attributesFilter.addEvent('click', function (event) {
             event.stop();
-            var elToggle = $$('#attributes > .datas-filter')[0];
-            elToggle.toggle();
+            attributesFilterBox.toggle();
+            attributesFilter.blur();
         }.bind(this));
-        
-        var resetA = $$('#attributes a.reset-filter')[0];
+
+        $$('#attributes-filter')[0].addEvent('keydown', function(event){
+            if(event.key == 'enter'){ attributesFilterBox.hide(); }
+        });
+
         resetA.addEvent('click', function (event) {
             event.stop();
             resetA.getPrevious().set('value', '').fireEvent('keyup');
         }.bind(this));
-        
-        $$('#data-fields a.filter')[0].addEvent('click', function (event) {
+
+        dataFieldsFilter.addEvent('click', function (event) {
             event.stop();
-            var elToggle = $$('#data-fields > .datas-filter')[0];
-            elToggle.toggle();
+            dataFieldsFilterBox.toggle();
+            dataFieldsFilter.blur();
         }.bind(this));
-        
-        var resetD = $$('#data-fields a.reset-filter')[0];
+
+        $$('#data-fields-filter')[0].addEvent('keydown', function(event){
+            if(event.key == 'enter'){ attributesFilterBox.hide(); }
+        });
+
         resetD.addEvent('click', function (event) {
             event.stop();
             resetD.getPrevious().set('value', '').fireEvent('keyup');
@@ -166,7 +180,6 @@ var UIStructureListener = new Class({
 //			}.bind(this));
 //		}
 
-        var dataFieldsToggle = $$('#data-fields a.toggle')[0];
         dataFieldsToggle.addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#data-fields > div')[1];
@@ -174,7 +187,7 @@ var UIStructureListener = new Class({
             var elH2 = $$('#data-fields h2')[0];
             if(elH2.hasClass('minimize')){
                 dataFieldsToggle.set('title', i18n.translate('Maximize'));
-                $$('#data-fields > .datas-filter')[0].hide();
+                dataFieldsFilterBox.hide();
             }
             else{ dataFieldsToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
