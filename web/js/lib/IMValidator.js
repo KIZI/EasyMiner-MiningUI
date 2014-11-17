@@ -26,7 +26,8 @@ var IMValidator = new Class({
 			    		elMessage.set('html', errorText);
 			    		return false;
 			    	}
-			    	
+
+                    elMessage.set('html', '');
 			    	return true;
 			    }
 			});

@@ -196,20 +196,22 @@ var UIListener = new Class({
 	},
 	
 	registerIMFormEventHandler: function (action) {
-		// submit
+        // vars used fot submit and change IM value
+        var elementSelect = $(action + '-im-select');
+        var IMName = elementSelect.options[elementSelect.selectedIndex].value;
+        var validator = new IMValidator();
+
+        // submit
 		var elementSubmit = $(action + '-im-form').getElement('input[type=submit]');
 		elementSubmit.addEvent('click', function (event) {
 			event.stop();
-			var elementSelect = $(action + '-im-select');
-			var IMName = elementSelect.options[elementSelect.selectedIndex].value;
-			var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
+            var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
 
-            var validator = new IMValidator();
-            if (IM.getName() === 'SUPP') {
+            /*if (IM.getName() === 'SUPP') {
                 var valid = true;
-            } else {
+            } else {*/
                 var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
-            }
+            //}
 
 			if (valid) {
 				var thresholdValue = IM.hasThreshold() ? $(action + '-im-threshold-value').value : null;
@@ -231,6 +233,14 @@ var UIListener = new Class({
 			this.UIPainter.renderIMAutocomplete(action, IM);
             this.UIPainter.renderExplanation(IM);
 		}.bind(this));
+
+        // change IM value
+        var elementInput = $(action + '-im-threshold-value');
+        elementInput.addEvent('blur', function (e) {
+            //e.stop();
+            var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
+            var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
+        }.bind(this));
 		
 		// close
 		var elementClose = $(action + '-im-close');

@@ -513,7 +513,7 @@ var UIPainter = new Class({
 	renderIMAutocomplete: function (action, IM) {
 		var elAutocomplete = $(action + '-im-form').getElement('.autocomplete').empty();
 		Array.each(IM.getFields(), function (f) {
-			new InterestMeasureSlider(elAutocomplete, f, action, IM, IM.getName() === 'SUPP' ? this.ARBuilder.getDD().calculateMinimalSupport() : this.ARBuilder.getDD().getRecordCount());
+			new InterestMeasureSlider(elAutocomplete, f, action, IM, IM.getName() === 'SUPP' ? this.ARBuilder.getDD().calculateMinimalSupport() : this.ARBuilder.getDD().getRecordCount(), this.config.lang);
 		}.bind(this));
 	},
 

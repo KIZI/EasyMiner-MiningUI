@@ -22,12 +22,13 @@ var InterestMeasureSlider = new Class({
 	numberNormalizer: null,
 	inverseNumberNormalizer: null,
 	
-	initialize: function (elParent, field, action, IM, value) {
+	initialize: function (elParent, field, action, IM, value, lang) {
 		this.elParent = elParent;
 		this.field = field;
 		this.action = action;
 		this.IM = IM;
 		this.dataType = this.field.dataType;
+        this.lang = lang;
 
         console.log(value);
         var offset = 0;
@@ -141,7 +142,7 @@ var InterestMeasureSlider = new Class({
         if (!this.sliderEnabled) {
             // input comment
             var comment = new Element('em', {
-                html: this.dataType.capitalize() + ' ' + (this.field.minValueInclusive ? '<' : '(') + this.field.minValue + '; ' + this.field.maxValue.format({group: ' '}) + (this.field.maxValueInclusive ? '>' : ')')
+                html: this.dataType.capitalize() + ' ' + (this.field.minValueInclusive ? (this.lang == 'cs' ? '<' : '[') : '(') + this.field.minValue + '; ' + this.field.maxValue.format({group: ' '}) + (this.field.maxValueInclusive ? (this.lang == 'cs' ? '>' : ']') : ')')
             });
             this.elParent.grab(comment);
 
