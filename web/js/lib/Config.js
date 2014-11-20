@@ -25,6 +25,8 @@ var Config = new Class({//TODO Standa: update URLs
   showAttributeHistogramUrl: '/em/data/attribute-histogram',
   showColumnHistogramUrl: '/em/data/column-histogram',
   addAttributeUrl: '/em/attributes/add-attribute',
+  getRulesUrl: '/em/tasks/get-rules',
+  startMiningUrl: '/em/tasks/start-mining',
   stopMiningUrl: '/em/tasks/stop-mining',
   //endregion
 
@@ -153,10 +155,10 @@ var Config = new Class({//TODO Standa: update URLs
   getAddAttributeURL: function (fieldName) {
     return this.$easyMinerCenterUrl + this.addAttributeUrl + '?columnName='+encodeURIComponent(fieldName) + '&miner=' + this.params.id_dm + '&mode=iframe';
   },
-
+/*
   getEditAttributeURL: function (attributeName) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName) + '&kbi=' + this.params.id_dm + '&tmpl=component';
-  },
+  },*/
 
   getShowHistogramURL: function (name, type) {
     if (type === 'attribute') {
@@ -212,6 +214,10 @@ var Config = new Class({//TODO Standa: update URLs
     return this.rootElementID;
   },
 
+
+  getStartMiningUrl: function (taskId) {
+    return this.$easyMinerCenterUrl+this.startMiningUrl + '?miner=' + this.params.id_dm + '&task=' + taskId;
+  },
   getStopMiningUrl: function (taskId) {
     return this.$easyMinerCenterUrl+this.stopMiningUrl + '?miner=' + this.params.id_dm+ '&task=' + taskId;
   }

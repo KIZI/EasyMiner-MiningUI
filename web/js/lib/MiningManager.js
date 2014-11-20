@@ -21,6 +21,7 @@ var MiningManager = new Class({
   },
 
   mineRules: function (rule, limitHits) {
+    console.log('mineRules');//XXX
     this.inProgress = true;
     this.FRManager.handleInProgress();
     this.$taskManager.addTask(rule.serialize(), limitHits);
@@ -28,8 +29,10 @@ var MiningManager = new Class({
   },
 
   makeRequest: function (data) {
+    console.log('makeRequest');//XXX
+    alert('MiningManager:makeRequest');//XXX Standa
     var request = new Request.JSON({
-      url: this.config.getRulesGetURL(),
+      url: this.config.getStartMiningUrl(this.$taskManager.getActiveTask().getId()),
       secure: true,
 
       onSuccess: function (responseJSON, responseText) {
@@ -83,7 +86,7 @@ var MiningManager = new Class({
     if (!this.inProgress) {
       return;
     }
-
+    console.log('handleErrorRequest');//XXX
     this.stopMining();
     this.FRManager.handleError();
 //        throw 'Failed task: ID: ' + this.$taskManager.getActiveTask().getId() + ', source ID: ' + this.config.getIdDm();
@@ -113,6 +116,7 @@ var MiningManager = new Class({
   },
 
   stopRemoteMining: function (url, debug, taskMode) {
+    console.log('stopRemoteMining');//XXX
     var data = JSON.encode({
       //taskId: taskId,
       debug: debug,
