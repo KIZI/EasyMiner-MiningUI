@@ -8,8 +8,8 @@ var MiningManager = new Class({
 
   requests: [],
   inProgress: false,
-  finishedStates: ['Solved', 'Interrupted'],
-  errorStates: ['Failed'],
+  finishedStates: ['solved', 'interrupted'],
+  errorStates: ['failed'],
   reqDelay: 2500,
 
   initialize: function (config, settings, FRManager, dateHelper, taskManager) {
@@ -29,14 +29,14 @@ var MiningManager = new Class({
   },
 
   makeRequest: function (data) {
-    console.log('makeRequest');//XXX
-    alert('MiningManager:makeRequest');//XXX Standa
+    var activeTask=this.$taskManager.getActiveTask();
+    if (!activeTask){return ;/*TODO zobrazení info...*/}
     var request = new Request.JSON({
-      url: this.config.getStartMiningUrl(this.$taskManager.getActiveTask().getId()),
+      url: this.config.getStartMiningUrl(activeTask.getId()),
       secure: true,
 
       onSuccess: function (responseJSON, responseText) {
-        if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
+        if (/*responseJSON.status === 'ok' && */!this.errorStates.contains(responseJSON.state)) {
           this.handleSuccessRequest(data, responseJSON);
         } else {
           this.handleErrorRequest();
@@ -69,8 +69,9 @@ var MiningManager = new Class({
       return;
     }
 
-    var state = responseJSON.taskState;
-    if (this.finishedStates.contains(state)) { // task is finished
+    var state = responseJSON.state;
+    if (this.finishedStates.contains(state)) {
+      // task is finished
       this.inProgress = false;
       this.FRManager.updateDownloadIcons(responseJSON.task, responseJSON.result);
     } else { // task is still running

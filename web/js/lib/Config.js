@@ -8,6 +8,7 @@ var Config = new Class({//TODO Standa: update URLs
   version: '2.0-dev',
   slogan: 'easy association rule mining',
   copyright: '<a href="http://kizi.vse.cz" title="Department of Information and Knowledge Engineering">KIZI</a>, <a href="http://www.vse.cz">University of Economics</a>, Prague',
+  rulesPerPage: 20,
 
   // language
   lang: 'en',
@@ -220,6 +221,18 @@ var Config = new Class({//TODO Standa: update URLs
   },
   getStopMiningUrl: function (taskId) {
     return this.$easyMinerCenterUrl+this.stopMiningUrl + '?miner=' + this.params.id_dm+ '&task=' + taskId;
+  },
+  getGetRulesUrl: function (taskId,offset,limit,order) {
+    offset = (typeof offset === "undefined") ? 0 : offset;
+    limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
+    order = (typeof order === "undefined") ? 'id' : order;
+
+    return this.$easyMinerCenterUrl+this.getRulesUrl
+            + '?miner=' + this.params.id_dm
+            + '&task=' + taskId
+            + '&offset=' + offset
+            + '&limit=' + limit
+            + '&order=' + order;
   }
 
 });
