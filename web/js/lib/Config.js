@@ -29,6 +29,10 @@ var Config = new Class({//TODO Standa: update URLs
   getRulesUrl: '/em/tasks/get-rules',
   startMiningUrl: '/em/tasks/start-mining',
   stopMiningUrl: '/em/tasks/stop-mining',
+  ruleClipboardGetTasksUrl: '/em/rule-clipboard/get-tasks',
+  ruleClipboardGetRulesUrl:'/em/rule-clipboard/get-rules',
+  ruleClipboardAddRuleUrl:'/em/rule-clipboard/add-rule',
+  ruleClipboardRemoveRuleUrl:'/em/rule-clipboard/remove-rule',
   //endregion
 
   // URL settings
@@ -228,11 +232,39 @@ var Config = new Class({//TODO Standa: update URLs
     order = (typeof order === "undefined") ? 'id' : order;
 
     return this.$easyMinerCenterUrl+this.getRulesUrl
-            + '?miner=' + this.params.id_dm
-            + '&task=' + taskId
-            + '&offset=' + offset
-            + '&limit=' + limit
-            + '&order=' + order;
+    + '?miner=' + this.params.id_dm
+    + '&task=' + taskId
+    + '&offset=' + offset
+    + '&limit=' + limit
+    + '&order=' + order;
+  },
+  getRuleClipboardGetRulesUrl: function (taskId,offset,limit,order) {
+    offset = (typeof offset === "undefined") ? 0 : offset;
+    limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
+    order = (typeof order === "undefined") ? 'id' : order;
+
+    return this.$easyMinerCenterUrl+this.ruleClipboardGetRulesUrl
+    + '?miner=' + this.params.id_dm
+    + '&task=' + taskId
+    + '&offset=' + offset
+    + '&limit=' + limit
+    + '&order=' + order;
+  },
+  getRuleClipboardGetTasksUrl: function () {
+    return this.$easyMinerCenterUrl+this.ruleClipboardGetTasksUrl
+    + '?miner=' + this.params.id_dm;
+  },
+  getRuleClipboardAddRuleUrl: function (taskId, ruleId) {
+    return this.$easyMinerCenterUrl+this.ruleClipboardAddRuleUrl
+    + '?miner=' + this.params.id_dm
+    + '&task=' + taskId
+    + '&rule=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+  },
+  getRuleClipboardRemoveRuleUrl: function (taskId, ruleId) {
+    return this.$easyMinerCenterUrl+this.ruleClipboardRemoveRuleUrl
+    + '?miner=' + this.params.id_dm
+    + '&task=' + taskId
+    + '&rule=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
   }
 
 });
