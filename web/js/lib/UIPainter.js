@@ -572,6 +572,12 @@ var UIPainter = new Class({
 		var selectedCoefficient = this.ARBuilder.getFL().getBBACoefficient(field.getType());
 		this.renderEditCoefficientAutocomplete(field, selectedCoefficient);
 	},
+
+    renderClickAddAttributeWindow: function (field) {
+        var overlay = this.$UIStructurePainter.showOverlay();
+        overlay.grab(Mooml.render('clickAddAttributeWindowTemplate', {i18n: this.i18n}));
+        this.UIListener.registerClickAddAttributeFormEventHandler(field);
+    },
 	
 	renderAddCoefficientAutocomplete: function(field, selectedCoefficient) { 
 		Mooml.render('addCoefficientWindowAutocompleteTemplate', {i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('add-coefficient-autocomplete'));

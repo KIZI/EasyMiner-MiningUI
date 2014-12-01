@@ -4,6 +4,7 @@ var UITemplateRegistrator = new Class({
         this.registerNavigation();
         this.registerActiveRule();
         this.registerIMWindow();
+        this.registerClickAddAttributeWindow();
         this.registerAddCoefficientWindow();
         this.registerEditConnectiveWindow();
         this.registerFoundRule();
@@ -189,6 +190,27 @@ var UITemplateRegistrator = new Class({
 			}
 		});
 	},
+
+    registerClickAddAttributeWindow: function() {
+        Mooml.register('clickAddAttributeWindowTemplate', function (data) {
+            var i18n = data.i18n;
+
+            div({id: 'click-add-attribute-window'},
+                a({id: 'click-add-attribute-close', href: '#'}, i18n.translate('Close')),
+                h2(i18n.translate('Add attribute')),
+                form({action: '#', method: 'POST', id: 'click-add-attribute-form'},
+                    div({class: 'clearfix'},
+                        label({'for': 'click-add-attribute-select'}, i18n.translate('Add to')),
+                        select({name: 'click-add-attribute-select', id: 'click-add-attribute-select'},
+                            option({'value': 'antecedent'}, i18n.translate('Antecedent')),
+                            option({'value': 'consequent'}, i18n.translate('Consequent'))
+                        )
+                    ),
+                    input({type: 'submit', value: i18n.translate('Add')})
+                )
+            );
+        });
+    },
 
 	registerAddCoefficientWindow: function () {
 		Mooml.register('addCoefficientWindowTemplate', function (data) {

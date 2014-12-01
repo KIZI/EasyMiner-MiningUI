@@ -40,7 +40,8 @@ var UIListener = new Class({
 
         $(attribute.getCSSAddID()).addEvent('click', function(event) {
             event.stop();
-            this.ARBuilder.getARManager().addAttributeToCedent(attribute);
+            //this.ARBuilder.getARManager().addAttributeToCedent(attribute);
+            this.ARBuilder.openClickAddAttributeWindow(attribute);
         }.bind(this));
 
         if (showEditAttribute) { // edit
@@ -365,6 +366,28 @@ var UIListener = new Class({
 			event.stop();
 		}.bind(this));
 	},
+
+    registerClickAddAttributeFormEventHandler: function(field) {
+        // submit
+        var elementSubmit = $('click-add-attribute-form').getElement('input[type=submit]');
+        elementSubmit.addEvent('click', function (event) {
+            event.stop();
+            var elementSelect = $('click-add-attribute-select');
+            if (elementSelect) {
+                var cedentName = elementSelect.options[elementSelect.selectedIndex].value;
+                var cedent = (cedentName == 'antecedent') ? (this.ARBuilder.getARManager().getActiveRule().getAntecedent()) : (this.ARBuilder.getARManager().getActiveRule().getSuccedent());
+                this.ARBuilder.getARManager().closeEditConnectiveWindow();
+                this.ARBuilder.getARManager().addAttribute(cedent, field);
+            }
+        }.bind(this));
+
+        // close
+        var elementClose = $('click-add-attribute-close');
+        elementClose.addEvent('click', function (event) {
+            event.stop();
+            this.ARBuilder.getARManager().closeEditConnectiveWindow(); // simple hideOverlay function can be used also here
+        }.bind(this));
+    },
 	
 	registerEditConnectiveFormEventHandler: function(cedent) {
 		// submit

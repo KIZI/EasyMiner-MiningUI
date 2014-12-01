@@ -92,7 +92,9 @@ var i18n = new Class({
                87: {'cs': 'Filtrovat', en: 'Filter'},
                88: {'cs': 'Zrušit filtr', en: 'Reset filter'},
                89: {'cs': 'Minimalizovat', en: 'Minimize'},
-               90: {'cs': 'Maximalizovat', en: 'Maximize'}
+               90: {'cs': 'Maximalizovat', en: 'Maximize'},
+               91: {'cs': 'Přidat atribut', en: 'Add attribute'},
+               92: {'cs': 'Přidat do', en: 'Add to'}
         },
 
 	initialize: function (lang) {
