@@ -229,7 +229,7 @@ var Config = new Class({//TODO Standa: update URLs
   getGetRulesUrl: function (taskId,offset,limit,order) {
     offset = (typeof offset === "undefined") ? 0 : offset;
     limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
-    order = (typeof order === "undefined") ? 'id' : order;
+    order = (typeof order === "undefined") ? '' : order;
 
     return this.$easyMinerCenterUrl+this.getRulesUrl
     + '?miner=' + this.params.id_dm
@@ -241,7 +241,7 @@ var Config = new Class({//TODO Standa: update URLs
   getRuleClipboardGetRulesUrl: function (taskId,offset,limit,order) {
     offset = (typeof offset === "undefined") ? 0 : offset;
     limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
-    order = (typeof order === "undefined") ? 'id' : order;
+    order = (typeof order === "undefined") ? '' : order;
 
     return this.$easyMinerCenterUrl+this.ruleClipboardGetRulesUrl
     + '?miner=' + this.params.id_dm

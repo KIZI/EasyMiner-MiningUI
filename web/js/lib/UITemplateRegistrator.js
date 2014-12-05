@@ -402,19 +402,18 @@ var UITemplateRegistrator = new Class({
 	registerFoundRule: function () {
 		Mooml.register('foundRuleTemplate', function (data) {
 			var key = data.key,
-			    FR = data.FR,
-			    rule = FR.getRule(),
+			    foundRule = data.foundRule,
 			    i18n = data.i18n,
-			    BK = data.BK;
+          IMs = data.IMs;
 			
-			li({id: FR.getCSSID(), 'class': 'found-rule'},
-				span({'class': 'rule'}, rule.getIdent()),
+			li({id: foundRule.getCSSID(), 'class': 'found-rule'},
+				span({'class': 'rule'}, foundRule.getIdent()),
 				span({'class': 'info'}),
-				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
-				a({id: rule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
-				a({id: rule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
+//				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
+				a({id: foundRule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
+				a({id: foundRule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
 				div({'class': 'loading'}, ''),
-				span({'class': 'ims'}, rule.getIMIdent())
+				span({'class': 'ims'}, foundRule.getIMIdent(IMs))
 			);
 		});
 	},

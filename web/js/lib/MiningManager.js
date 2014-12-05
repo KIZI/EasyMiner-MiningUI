@@ -70,6 +70,8 @@ var MiningManager = new Class({
     }
 
     var state = responseJSON.state;
+    var rulesCount = responseJSON.rulesCount;
+
     if (this.finishedStates.contains(state)) {
       // task is finished
       this.inProgress = false;
@@ -78,9 +80,7 @@ var MiningManager = new Class({
       this.makeRequest.delay(this.reqDelay, this, data);
     }
 
-    var rules = responseJSON.rules;
-    var numRules = responseJSON.hasOwnProperty('rules') ? Object.getLength(responseJSON.rules) : 0;
-    this.FRManager.renderRules(rules, numRules, this.inProgress, this.$taskManager.getActiveTask());
+    this.FRManager.renderRules(rulesCount, this.inProgress, this.$taskManager.getActiveTask());
   },
 
   handleErrorRequest: function () {

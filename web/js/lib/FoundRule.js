@@ -4,10 +4,15 @@ var FoundRule = new Class({
 	
 	$exception: null,
 	$interesting: null,
-	$rule: null,
+
+  $id: null,
+  $rule: null,
+  $task: null,
 	
-	initialize: function (rule) {
-		this.$rule = rule;
+	initialize: function (id,rule,task) {
+		this.$id=id;
+    this.$rule = rule;
+    this.$task=task;
 	},
 
     parseFromObject: function(data) {
@@ -16,7 +21,7 @@ var FoundRule = new Class({
     },
 
 	getCSSID: function() {
-		return 'found-rule-' + this.getRule().getTask().getId() + '-' + this.getRule().getId();
+		return 'found-rule-' + this.$task.getId() + '-' + this.$id;
 	},
 	
 	isException: function () {
@@ -25,5 +30,22 @@ var FoundRule = new Class({
 	
 	isInteresting: function () {
 		return (this.$interesting !== null);
-	}
+	},
+
+  getIdent: function(){
+    //TODO vrácení záznamu pravidla...
+    return this.$rule.text;
+  },
+
+  getIMIdent: function(IMs){
+    //TODO vrácení výpisu měr zajímavosti...
+  },
+
+  getFoundRuleCSSMarkID:function(){
+    //TODO
+  },
+
+  getFoundRuleCSSRemoveID: function(){
+    //TODO
+  }
 });
