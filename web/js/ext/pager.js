@@ -4,6 +4,7 @@ var Pager = new Class({
 
   task: null,
   config: null,
+  FL:null,
   IMs:[],
   rules:[],
 
@@ -30,9 +31,10 @@ var Pager = new Class({
   $textStopped: '',
   $textError: '',
 
-  initialize: function (label, paging, foundRulesCount, container, clear, task, config, i18n, textInit, textProgress, textFinished, textNoRules, textStopped, textError) {
+  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, i18n, textInit, textProgress, textFinished, textNoRules, textStopped, textError) {
     this.task=task;
     this.config=config;
+    this.FL = FL;
     this.i18n=i18n;
     this.label = label;
     this.paging = paging;

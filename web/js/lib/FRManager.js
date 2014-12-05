@@ -2,6 +2,7 @@ var FRManager = new Class({
   GetterSetter: ['markedRules'],
 
   config: null,
+  FL: null,
   rulesParser: null,
   settings: null,
   i18n: null,
@@ -13,9 +14,9 @@ var FRManager = new Class({
   maxIndex: 0,
   tips: null,
 
-  initialize: function (config, rulesParser, settings, UIPainter, UIListener, i18n) {
-    console.log('FRManager initialize');
+  initialize: function (config, FL, rulesParser, settings, UIPainter, UIListener, i18n) {
     this.config = config;
+    this.FL=FL;
     this.rulesParser = rulesParser;//TODO remove...
     this.settings = settings;
     this.UIPainter = UIPainter;
@@ -37,6 +38,7 @@ var FRManager = new Class({
     this.pager = new Pager($('pager-label'), $('paging'), $('found-rules-count'), $('pager'), $('pager-clear'),
       this.task,
       this.config,
+      this.FL,
       this.i18n,//TODO přesunout překlady až do pageru...
       this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'),
       this.i18n.translate('Mining is in progress, it may take a while to get the results.'),

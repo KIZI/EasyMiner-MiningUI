@@ -88,7 +88,7 @@ var ARBuilder = new Class({
     this.$FGC = this.dataParser.getFGC();
 
     this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
-    this.$FRManager = new FRManager(this.$config, this.$rulesParser, this.settings, this.UIPainter, this.UIListener, this.$i18n);
+    this.$FRManager = new FRManager(this.$config, this.getDefFL(), this.$rulesParser, this.settings, this.UIPainter, this.UIListener, this.$i18n);
     this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper(), new TaskManager(this.$config, this.settings));
     this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);
     this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
