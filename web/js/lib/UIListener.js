@@ -237,11 +237,13 @@ var UIListener = new Class({
 
         // change IM value
         var elementInput = $(action + '-im-threshold-value');
-        elementInput.addEvent('blur', function (e) {
-            //e.stop();
-            var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
-            var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
-        }.bind(this));
+        if(elementInput) {
+            elementInput.addEvent('blur', function (e) {
+                //e.stop();
+                var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
+                var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
+            }.bind(this));
+        }
 		
 		// close
 		var elementClose = $(action + '-im-close');
