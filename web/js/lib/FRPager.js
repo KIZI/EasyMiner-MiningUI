@@ -1,10 +1,11 @@
-//TODO přepracovat...
-var Pager = new Class({
+
+var FRPager = new Class({
   Implements: [Options, Events],
 
   task: null,
   config: null,
   FL:null,
+  FRManager:null,
   IMs:[],
   rules:[],
 
@@ -31,10 +32,11 @@ var Pager = new Class({
   $textStopped: '',
   $textError: '',
 
-  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, i18n, textInit, textProgress, textFinished, textNoRules, textStopped, textError) {
+  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n, textInit, textProgress, textFinished, textNoRules, textStopped, textError) {
     this.task=task;
     this.config=config;
     this.FL = FL;
+    this.FRManager=FRManager;
     this.i18n=i18n;
     this.label = label;
     this.paging = paging;
@@ -123,14 +125,14 @@ var Pager = new Class({
     this.label.set('text', this.$textError);
   },
 
-  /*
-  add: function (rules) {alert('přepracovat!');
+/*
+  add: function (rules) {alert('přidání pravidla do rule clipboard!');
     //Array.each(rules, function (r, key) {
     //  this.rules.push(r);
     //}.bind(this));
     this.createControls();
     this.render(rules);
-  },*/
+  },
 
   remove: function (loc) {alert('přepracovat!');
    /* var el = $(loc);
@@ -141,9 +143,9 @@ var Pager = new Class({
     if (this.numPages < this.currentPage) { // scroll to last page
       this.currentPage = this.numPages;
       this.gotoPage(this.currentPage);
-    }*/
+    }
     this.createControls();
-  },
+  },*/
 
   createControls: function () {
     this.numPages = Math.ceil(this.rulesCount / this.perPage);
@@ -231,8 +233,15 @@ var Pager = new Class({
     this.container.setStyles({display: 'block'});
     this.clear.setStyles({display: 'block'});
     this.content.empty();
-    Array.each(this.rules, function (r, key) {
-      this.content.grab(r);
+    Array.each(this.rules, function (foundRule, key) {
+
+      this.content.grab(Mooml.render('foundRuleTemplate',{
+        foundRule: foundRule,
+        i18n: this.i18n,
+        IMs: this.IMs
+      }));
+
+      this.FRManager.UIListener.registerFoundRuleEventHandlers(foundRule);
     }.bind(this));
   },
 
@@ -249,17 +258,14 @@ var Pager = new Class({
     } else {
       this.currentPage = locator;
     }
-//TODO
+
     var url=this.config.getGetRulesUrl(this.task.getId(),(this.currentPage-1)*this.perPage,this.perPage,this.order);
-    alert('gotoPage '+this.currentPage);
-    alert(url);
 
     //region načtení pravidel ze serveru...
     var request = new Request.JSON({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        alert('success');
         this.handleSuccessRulesRequest(responseJSON);
       }.bind(this),
 
@@ -281,63 +287,15 @@ var Pager = new Class({
 
     }).get();
     //endregion
-
-    ////var scrollTo = Math.max((this.lineHeight * this.perPage) * (this.currentPage - 1) - (2 * (this.currentPage - 1)), 0);
-
-
-    //TODO načtení dané stránky pravidel...
-    ///return;
-
-    //this.content.tween('margin-top', "-" + scrollTo + "px");
-    //this.fireEvent('onScroll', this.currentPage);
-
-    //this.createControls();
   },
 
   handleSuccessRulesRequest: function(data){
-    //TODO vypsání pravidel
-    console.log(data);
-
     this.setIMs(data.task.IMs);
     this.rules=[];
 
     Object.each(data.rules,function(value,key){
-      var foundRule=new FoundRule(key,value,this.task);
-      this.rules.push(Mooml.render('foundRuleTemplate',{
-        foundRule: foundRule,
-        i18n: this.i18n,
-        IMs: this.IMs
-      }));
+      this.rules.push(new FoundRule(key,value,this.task));
     }.bind(this));
-
-/*
-    for(var ruleId in data.task.rules){
-      var r = new FoundRule(data.task.rules[ruleId]);
-      this.rules.push(Mooml.render('foundRuleTemplate', {
-        key: r.getId(),
-        FR: FR,
-        i18n: this.i18n,
-        BK: this.settings.getBKAutoSearch()
-      }));
-    }*/
-    /*
-    Array.each(data., function (r) {
-      var FR = new FoundRule(r);
-      this.rules[r.getId()] = FR;
-      els.push(Mooml.render('foundRuleTemplate', {
-        showFeedback: this.config.getShowFeedback(),
-        key: r.getId(),
-        FR: FR,
-        i18n: this.i18n,
-        BK: this.settings.getBKAutoSearch()
-      }));
-      if (this.settings.getBKAutoSearch()) {
-        this.buildRequest(FR, this.config.getBKAskURL(), true);
-      }
-    }.bind(this));
-*/
-
-
 
     this.createControls();
     this.renderRules();

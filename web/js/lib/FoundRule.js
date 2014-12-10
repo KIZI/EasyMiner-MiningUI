@@ -1,51 +1,51 @@
 var FoundRule = new Class({
-	
-	Properties: ['exception', 'interesting', 'rule'],
-	
-	$exception: null,
-	$interesting: null,
+
+  Properties: ['exception', 'interesting', 'rule'],
+
+  $exception: null,
+  $interesting: null,
 
   $id: null,
   $rule: null,
   $task: null,
-	
-	initialize: function (id,rule,task) {
-		this.$id=id;
+
+  initialize: function (id, rule, task) {
+    this.$id = id;
     this.$rule = rule;
-    this.$task=task;
-	},
+    this.$task = task;
+  },
 
-    parseFromObject: function(data) {
-        this.$rule = new AssociationRule();
-        this.$rule.parseFromObject(data);
-    },
+  parseFromObject: function (data) {
+    this.$rule = new AssociationRule();
+    this.$rule.parseFromObject(data);
+  },
 
-	getCSSID: function() {
-		return 'found-rule-' + this.$task.getId() + '-' + this.$id;
-	},
-	
-	isException: function () {
-		return (this.$exception !== null);
-	},
-	
-	isInteresting: function () {
-		return (this.$interesting !== null);
-	},
+  getCSSID: function () {
+    return 'found-rule-' + this.$task.getId() + '-' + this.$id;
+  },
 
-  getIdent: function(){
+  isException: function () {
+    return (this.$exception !== null);
+  },
+
+  isInteresting: function () {
+    return (this.$interesting !== null);
+  },
+
+  getIdent: function () {
     //TODO vrácení záznamu pravidla...
     return this.$rule.text;
   },
 
-  getIMIdent: function(IMs){
+  getIMIdent: function (IMs) {
     //TODO vrácení výpisu měr zajímavosti...
   },
 
-  getFoundRuleCSSMarkID:function(){
-    //TODO
+  getFoundRuleCSSMarkID: function () {
+    return 'mark-rule-' + this.$task.getId() + '-' + this.$id;
   },
 
-  getFoundRuleCSSRemoveID: function(){
-    //TODO
+  getFoundRuleCSSRemoveID: function () {
+    return 'remove-rule-' + this.$task.getId() + '-' + this.$id;
   }
 });

@@ -31,15 +31,16 @@ var FRManager = new Class({
       tip.removeClass('tip-visible');
     });
 
-    this.loadMarkedRules();
   },
 
   initPager: function () {
-    this.pager = new Pager($('pager-label'), $('paging'), $('found-rules-count'), $('pager'), $('pager-clear'),
+    this.pager = new FRPager($('pager-label'), $('paging'), $('found-rules-count'), $('pager'), $('pager-clear'),
       this.task,
       this.config,
       this.FL,
-      this.i18n,//TODO přesunout překlady až do pageru...
+      this,
+      this.i18n,
+      //TODO přesunout překlady až do pageru...
       this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'),
       this.i18n.translate('Mining is in progress, it may take a while to get the results.'),
       this.i18n.translate('Mining has finished!'),
@@ -238,7 +239,7 @@ var FRManager = new Class({
     this.AJAXBalancer.run();
   },
 
-  markFoundRule: function (FR) {
+  markFoundRule: function (FR) {alert('označení pravidla...');
     this.AJAXBalancer.stopRequest(FR.getRule().getId());
     this.$markedRules.push(FR);
     this.pager.remove(FR.getCSSID());
@@ -251,7 +252,7 @@ var FRManager = new Class({
     this.saveMarkedRules();
   },
 
-  removeFoundRule: function (FR) {
+  removeFoundRule: function (FR) {alert('removeFoundRule');
     this.AJAXBalancer.stopRequest(FR.getRule().getId());
     this.pager.remove(FR.getCSSID());
 
@@ -261,7 +262,7 @@ var FRManager = new Class({
   },
 
   /* marked rules */
-  getMarkedRule: function (id) {
+  getMarkedRule: function (id) {alert('getMarkedRule');
     var rule = null;
     Object.each(this.$markedRules, function (markedRule) {
       if (id === markedRule.getId()) {
@@ -272,7 +273,7 @@ var FRManager = new Class({
     return rule;
   },
 
-  getMarkedRules: function (taskId) {
+  getMarkedRules: function (taskId) {alert('getMarkedRules');
     var rules = [];
     this.$markedRules.each(function (rule) {
       if (rule.getRule().getTask().getId() === taskId) {
@@ -283,7 +284,7 @@ var FRManager = new Class({
     return rules;
   },
 
-  removeMarkedRule: function (FR) {
+  removeMarkedRule: function (FR) {alert('removeMarkedRules');
     Object.each(this.$markedRules, function (MR, key) {
       if (FR.getRule().getId() === MR.getRule().getId()) {
         delete this.$markedRules[key];
@@ -299,7 +300,7 @@ var FRManager = new Class({
     this.UIPainter.updateDownloadButtons(settingPath, resultPath);
   },
 
-  saveMarkedRules: function () {
+  saveMarkedRules: function () {alert('saveMarkedRules');
     var rules = [];
     Array.each(this.$markedRules, function (rule) {
       rules.push(rule.getRule().serialize());
@@ -315,57 +316,6 @@ var FRManager = new Class({
       url: this.config.getSaveClipboardUrl(),
       secure: true
     }).post(data);
-  },
-
-  loadMarkedRules: function () {
-    var data = {
-      miner: this.config.getIdDm(),
-      type: 'clipboard'
-    };
-
-    var request = new Request.JSON({
-      url: this.config.getLoadClipboardUrl(),
-      secure: true,
-      data: data,
-
-      onSuccess: function () {
-        this.onMarkedRulesLoadSuccess.apply(this, arguments);
-      }.bind(this),
-
-      onError: function () {
-        this.onMarkedRulesLoadFailure.apply(this, arguments);
-      }.bind(this),
-
-      onFailure: function () {
-        this.onMarkedRulesLoadFailure.apply(this, arguments);
-      }.bind(this),
-
-      onException: function () {
-        this.onMarkedRulesLoadFailure.apply(this, arguments);
-      }.bind(this),
-
-      onTimeout: function () {
-        this.onMarkedRulesLoadFailure.apply(this, arguments);
-      }.bind(this)
-
-    }).get();
-  },
-
-  onMarkedRulesLoadSuccess: function (rules) {
-    var rule;
-
-    this.$markedRules = [];
-    for (var i = 0; i < rules.length; i++) {
-      rule = new FoundRule();
-      rule.parseFromObject(rules[i]);
-      this.$markedRules.push(rule);
-    }
-
-    this.UIPainter.renderMarkedRules(null, this.$markedRules);
-  },
-
-  onMarkedRulesLoadFailure: function () {
-    // TODO: Implement
   },
 
   /**
