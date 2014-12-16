@@ -225,10 +225,14 @@ var UIStructurePainter = new Class({
         if(inner.length > 0) {
             if (top[0]['y'] + 20 > window.innerHeight) {
                 inner.addClass("bigger");
-                elementOverlay.style.position = "absolute";
+                elementOverlay.setStyles({
+                    position: 'absolute'
+                });
             } else {
                 inner.removeClass("bigger");
-                elementOverlay.style.position = "fixed";
+                elementOverlay.setStyles({
+                    position: 'fixed'
+                });
             }
         }
     }
