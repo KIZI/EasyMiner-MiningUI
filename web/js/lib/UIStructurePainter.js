@@ -141,6 +141,8 @@ var UIStructurePainter = new Class({
                 isSelected: isSelected
             }))
         });
+
+        this.posOverlay();
     },
 
     resizeApplication: function() {
