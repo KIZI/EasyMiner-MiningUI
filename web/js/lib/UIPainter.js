@@ -143,6 +143,9 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     renderEditAttributeWindow: function (attribute) {
@@ -152,6 +155,9 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     renderUserLogoutWindow: function() {
@@ -160,6 +166,9 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     renderShowHistogramWindow: function(name, type) {
@@ -168,6 +177,9 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     renderReportWindow: function(id, name) {
@@ -176,6 +188,9 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     removeAttribute: function(attribute) {
@@ -508,6 +523,9 @@ var UIPainter = new Class({
 		this.renderIMAutocomplete('add', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('add');
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
 	},
 	
 	renderEditIMWindow: function(IMs, selectedIM) {
@@ -522,6 +540,9 @@ var UIPainter = new Class({
 		this.renderIMAutocomplete('edit', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('edit');
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
 	},
 	
 	renderIMAutocomplete: function (action, IM) {
@@ -551,6 +572,9 @@ var UIPainter = new Class({
             }
         ));
 
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
+
         // Register event handlers for the new controls
         this.UIListener.registerTaskRenameEventHandlers();
     },
@@ -564,6 +588,9 @@ var UIPainter = new Class({
 		overlay.grab(Mooml.render('addCoefficientWindowTemplate', {i18n: this.i18n}));
 		var selectedCoefficient = this.ARBuilder.getFL().getDefaultBBACoef();
 		this.renderAddCoefficientAutocomplete(field, selectedCoefficient);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
 	},
 	
 	renderEditCoefficientWindow: function (field) {
@@ -571,12 +598,18 @@ var UIPainter = new Class({
 		overlay.grab(Mooml.render('editCoefficientWindowTemplate', {i18n: this.i18n}));
 		var selectedCoefficient = this.ARBuilder.getFL().getBBACoefficient(field.getType());
 		this.renderEditCoefficientAutocomplete(field, selectedCoefficient);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
 	},
 
     renderClickAddAttributeWindow: function (field) {
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('clickAddAttributeWindowTemplate', {i18n: this.i18n}));
         this.UIListener.registerClickAddAttributeFormEventHandler(field);
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 	
 	renderAddCoefficientAutocomplete: function(field, selectedCoefficient) { 
@@ -673,12 +706,18 @@ var UIPainter = new Class({
             $('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {isSelected: cedent.getConnective().getName() === 'Disjunction', connective: 'Disjunction'}));
         }
 
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
+
 		this.UIListener.registerEditConnectiveFormEventHandler(cedent);
 	},
 
     renderCreateUserReportWindow: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('createUserReportWindowTemplate', { i18n: this.i18n, url: this.config.getCreateUserReportUrl() }))
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
 	/* found rules */
@@ -747,11 +786,17 @@ var UIPainter = new Class({
 
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('exportBusinessRulesDialogTemplate', { i18n: this.i18n, url: this.config.getExportBusinessRulesUrl(taskId, rulesIds) }))
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     renderBRBaseDialog: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('showBRBaseDialogTemplate', { i18n: this.i18n, url: this.config.getBRBaseShowUrl() }))
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 
     renderModelTesterDialog: function(taskId, rules) {
@@ -762,6 +807,9 @@ var UIPainter = new Class({
 
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('modelTesterDialogTemplate', { i18n: this.i18n, url: this.config.getModelTesterUrl(taskId, rulesIds) }))
+
+        // Positioning of Overlay after rendering
+        this.$UIStructurePainter.posOverlay();
     },
 		
 	/* navigation */

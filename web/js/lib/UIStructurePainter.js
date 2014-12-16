@@ -182,6 +182,8 @@ var UIStructurePainter = new Class({
         $('overlay').setStyle('width', wrapperWidth);
         $('overlay').setStyle('height', window.getScrollSize().y);
 
+        // check correct positioning of overlay
+        this.posOverlay();
     },
 
     showLoadData: function() {
@@ -213,6 +215,22 @@ var UIStructurePainter = new Class({
         elementOverlay.empty();
 
         return elementOverlay;
+    },
+
+    posOverlay: function () {
+        var elementOverlay = $('overlay'),
+            inner = elementOverlay.getChildren('div'),
+            top = inner.getScrollSize();
+
+        if(inner.length > 0) {
+            if (top[0]['y'] + 20 > window.innerHeight) {
+                inner.addClass("bigger");
+                elementOverlay.style.position = "absolute";
+            } else {
+                inner.removeClass("bigger");
+                elementOverlay.style.position = "fixed";
+            }
+        }
     }
 
 });
