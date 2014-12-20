@@ -30,7 +30,7 @@ var InterestMeasureSlider = new Class({
 		this.dataType = this.field.dataType;
         this.lang = lang;
 
-        console.log(value);
+        //console.log(value);
         var offset = 0;
         if (IM.getName() === 'SUPP') {
             this.field.minValue = value;
@@ -77,9 +77,9 @@ var InterestMeasureSlider = new Class({
 	
 	calculateNumSteps: function () {
 		if (this.dataType === 'double') {
-    console.log(this.field.maxValue);
+    /*console.log(this.field.maxValue);
     console.log(this.field.minValue);
-    console.log(this.sliderMaxWidth)
+    console.log(this.sliderMaxWidth)*/
 			var numSteps = (this.field.maxValue - this.field.minValue) * 100;//TODO Standa
       /*if ((numSteps + this.sliderBorder) > this.sliderMaxWidth){
         numSteps=this.sliderMaxWidth-this.sliderBorder;

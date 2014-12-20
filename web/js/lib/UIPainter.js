@@ -551,6 +551,11 @@ var UIPainter = new Class({
 		var elAutocomplete = $(action + '-im-form').getElement('.autocomplete').empty();
 		Array.each(IM.getFields(), function (f) {
 			new InterestMeasureSlider(elAutocomplete, f, action, IM, IM.getName() === 'SUPP' ? this.ARBuilder.getDD().calculateMinimalSupport() : this.ARBuilder.getDD().getRecordCount(), this.config.lang);
+            if(f.dataType !== 'enum'){
+                var $input = $(action + '-im-threshold-value');
+                $input.focus();
+                $input.select();
+            }
 		}.bind(this));
 	},
 
