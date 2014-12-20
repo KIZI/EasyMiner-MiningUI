@@ -178,6 +178,8 @@ var UIPainter = new Class({
 
         this.$UIScroller.scrollTo(0, 0);
 
+        this.UIListener.registerIframeOverlayEventHandlers();
+
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
     },

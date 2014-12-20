@@ -30,7 +30,7 @@ var UITemplateRegistrator = new Class({
 			}
 			
 			li({'class': className},
-                a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add to antecedent')}),
+                a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add attribute')}),
                 span({id: attribute.getCSSID()}, attribute.getName()),
                 showRemoveAttribute ? a({href: '#', id: attribute.getCSSRemoveID(), 'class': 'remove-attribute', 'title': i18n.translate('Remove')}) : '',
                 showEditAttribute ? a({href: '#', id: attribute.getCSSEditID(), 'class': 'edit-attribute', 'title': i18n.translate('Edit')}) : '',
@@ -551,9 +551,16 @@ var UITemplateRegistrator = new Class({
         });
 
         Mooml.register('showHistogramTemplate', function (data) {
-            var url = data.url;
+            var i18n = data.i18n,
+				url = data.url;
 
             div({id: 'show-histogram-window'},
+				a({
+						id: 'iframe-overlay-close',
+						href: '#'
+					},
+					i18n.translate('Close')
+				),
                 iframe({src: url}));
          });
 

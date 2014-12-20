@@ -587,5 +587,13 @@ var UIListener = new Class({
       e.stop();
       this.ARBuilder.getARManager().closeRenameTaskWindow();
     }.bind(this));
+  },
+
+  registerIframeOverlayEventHandlers: function () {
+    // Close window (cancel)
+    $('iframe-overlay-close').addEvent('click', function (e) {
+      e.stop();
+      this.UIPainter.hideOverlay();
+    }.bind(this));
   }
 });

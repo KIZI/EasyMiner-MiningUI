@@ -181,7 +181,8 @@ var UIStructurePainter = new Class({
         }
 
         // fix overlay width & height to 100%
-        $('overlay').setStyle('width', wrapperWidth);
+        //$('overlay').setStyle('width', wrapperWidth);
+        $('overlay').setStyle('width', '100%');
         $('overlay').setStyle('height', window.getScrollSize().y);
 
         // check correct positioning of overlay
