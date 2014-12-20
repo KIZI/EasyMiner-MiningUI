@@ -231,13 +231,13 @@ var UIListener = new Class({
   registerIMFormEventHandler: function (action) {
     // vars used fot submit and change IM value
     var elementSelect = $(action + '-im-select');
-    var IMName = elementSelect.options[elementSelect.selectedIndex].value;
     var validator = new IMValidator();
 
     // submit
     var elementSubmit = $(action + '-im-form').getElement('input[type=submit]');
     elementSubmit.addEvent('click', function (event) {
       event.stop();
+      var IMName = elementSelect.options[elementSelect.selectedIndex].value;
       var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
 
       /*if (IM.getName() === 'SUPP') {
