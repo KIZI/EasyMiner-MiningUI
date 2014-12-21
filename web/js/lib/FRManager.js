@@ -240,16 +240,18 @@ var FRManager = new Class({
   },
 
   markFoundRule: function (FR) {alert('označení pravidla...');
-    this.AJAXBalancer.stopRequest(FR.getRule().getId());
-    this.$markedRules.push(FR);
-    this.pager.remove(FR.getCSSID());
-    this.UIPainter.renderMarkedRules(null, this.$markedRules);
+    this.AJAXBalancer.stopRequest(FR.getId());
+
+    //TODO odeslání ajaxového požadavku pro přidání do rule clipboard
+    //TODO vykreslení pravidla v rule clipboard
+    //this.UIPainter.renderMarkedRules(null, this.$markedRules);
 
     // index interesting rule into KB
+    /*
     this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
     this.AJAXBalancer.run();
 
-    this.saveMarkedRules();
+    this.saveMarkedRules();*/
   },
 
   removeFoundRule: function (FR) {alert('removeFoundRule');
