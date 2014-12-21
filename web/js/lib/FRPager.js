@@ -32,7 +32,7 @@ var FRPager = new Class({
   $textStopped: '',
   $textError: '',
 
-  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n, textInit, textProgress, textFinished, textNoRules, textStopped, textError) {
+  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n){
     this.task=task;
     this.config=config;
     this.FL = FL;
@@ -43,12 +43,17 @@ var FRPager = new Class({
     this.foundRulesCount = foundRulesCount;
     this.container = container;
     this.clear = clear;
-    this.textInit = textInit;
-    this.textProgress = textProgress;
-    this.textFinished = textFinished;
-    this.textNoRules = textNoRules;
-    this.$textStopped = textStopped;
-    this.$textError = textError;
+
+    //region localization texts
+    this.textInit     = this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.');
+    this.textProgress = this.i18n.translate('Mining is in progress, it may take a while to get the results.');
+    this.textFinished = this.i18n.translate('Mining has finished!');
+    this.textNoRules  = this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.');
+    this.$textStopped = this.i18n.translate('Mining has been stopped.');
+    this.$textError   = this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.');
+    //endregion
+
+
     this.content = this.container.getElement(this.innerElement);
     this.content.set('tween', {transition: this.transition, duration: this.duration});
 

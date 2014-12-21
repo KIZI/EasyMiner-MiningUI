@@ -39,14 +39,7 @@ var FRManager = new Class({
       this.config,
       this.FL,
       this,
-      this.i18n,
-      //TODO přesunout překlady až do pageru...
-      this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'),
-      this.i18n.translate('Mining is in progress, it may take a while to get the results.'),
-      this.i18n.translate('Mining has finished!'),
-      this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'),
-      this.i18n.translate('Mining has been stopped.'),
-      this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
+      this.i18n);
   },
 
   handleInProgress: function () {
