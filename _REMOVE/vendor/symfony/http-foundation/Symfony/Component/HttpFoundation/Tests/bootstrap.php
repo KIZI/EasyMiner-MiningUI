@@ -11,7 +11,7 @@
 
 spl_autoload_register(function ($class) {
     if (ltrim('SessionHandlerInterface', '/') === $class) {
-        require_once __DIR__.'/../Resources/stubs/SessionHandlerInterface.php';
+        require_once __DIR__ . '/../Resources/stubs/SessionHandlerInterface.php';
     }
 
     if (0 !== strpos(ltrim($class, '/'), 'Symfony\Component\HttpFoundation')) {
