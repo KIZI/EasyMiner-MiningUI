@@ -216,7 +216,7 @@ var UIStructureListener = new Class({
         }.bind(this));
 
         elIZI.addEvent('closeOverlay', function() {
-            this.$ARBuilder.closeOverlay();
+            this.$ARBuilder.closeOverlay(); /* TODO voláno z iframe, propojit s obecným close */
         }.bind(this));
 
         // called when com_dbconnect reloads reports

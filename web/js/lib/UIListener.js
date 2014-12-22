@@ -276,13 +276,6 @@ var UIListener = new Class({
         var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
       }.bind(this));
     }
-
-    // close
-    var elementClose = $(action + '-im-close');
-    elementClose.addEvent('click', function (event) {
-      this.ARBuilder.getARManager().closeIMWindow();
-      event.stop();
-    }.bind(this));
   },
 
   registerCedentEventHandlers: function (cedent, rule) {
@@ -355,7 +348,7 @@ var UIListener = new Class({
     // close
     var elementClose = $('add-coefficient-close');
     elementClose.addEvent('click', function (event) {
-      this.ARBuilder.getARManager().closeAddCoefficientWindow();
+      this.UIPainter.hideOverlay();
       this.ARBuilder.getARManager().removeField(field);
       event.stop();
     }.bind(this));
@@ -392,13 +385,6 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.getARManager().updateEditCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
     }.bind(this));
-
-    // close
-    var elementClose = $('edit-coefficient-close');
-    elementClose.addEvent('click', function (event) {
-      this.ARBuilder.getARManager().closeEditCoefficientWindow();
-      event.stop();
-    }.bind(this));
   },
 
   registerClickAddAttributeFormEventHandler: function (field) {
@@ -410,16 +396,9 @@ var UIListener = new Class({
       if (elementSelect) {
         var cedentName = elementSelect.options[elementSelect.selectedIndex].value;
         var cedent = (cedentName == 'antecedent') ? (this.ARBuilder.getARManager().getActiveRule().getAntecedent()) : (this.ARBuilder.getARManager().getActiveRule().getSuccedent());
-        this.ARBuilder.getARManager().closeEditConnectiveWindow();
+        this.UIPainter.hideOverlay();
         this.ARBuilder.getARManager().addAttribute(cedent, field);
       }
-    }.bind(this));
-
-    // close
-    var elementClose = $('click-add-attribute-close');
-    elementClose.addEvent('click', function (event) {
-      event.stop();
-      this.ARBuilder.getARManager().closeEditConnectiveWindow(); // simple hideOverlay function can be used also here
     }.bind(this));
   },
 
@@ -433,13 +412,6 @@ var UIListener = new Class({
         var connectiveName = elementSelect.options[elementSelect.selectedIndex].value;
         this.ARBuilder.getARManager().editConnective(cedent, connectiveName);
       }
-    }.bind(this));
-
-    // close
-    var elementClose = $('edit-connective-close');
-    elementClose.addEvent('click', function (event) {
-      event.stop();
-      this.ARBuilder.getARManager().closeEditConnectiveWindow();
     }.bind(this));
   },
 
@@ -578,20 +550,14 @@ var UIListener = new Class({
 
       // Proceed with renaming
       this.ARBuilder.getARManager().renameTask(taskId, newTaskName);
-      this.ARBuilder.getARManager().closeRenameTaskWindow();
+      this.UIPainter.hideOverlay();
 
-    }.bind(this));
-
-    // Close window (cancel)
-    $('rename-task-close').addEvent('click', function (e) {
-      e.stop();
-      this.ARBuilder.getARManager().closeRenameTaskWindow();
     }.bind(this));
   },
 
-  registerIframeOverlayEventHandlers: function () {
+  registerOverlayEventHandlers: function () {
     // Close window (cancel)
-    $('iframe-overlay-close').addEvent('click', function (e) {
+    $('overlay-close').addEvent('click', function (e) {
       e.stop();
       this.UIPainter.hideOverlay();
     }.bind(this));

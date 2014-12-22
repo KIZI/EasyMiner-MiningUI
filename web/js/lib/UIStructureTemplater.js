@@ -9,7 +9,9 @@ var UIStructureTemplater = new Class({
 
     registerStructure: function() {
         Mooml.register('overlayTemplate', function () {
-            section({id: 'overlay'});
+            section({id: 'overlay'},
+                div({id: 'overlay-inner'})
+            );
         });
 
         Mooml.register('headerTemplate', function (data) {

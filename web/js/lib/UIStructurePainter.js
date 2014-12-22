@@ -172,30 +172,32 @@ var UIStructurePainter = new Class({
 
     resizeWindow: function() {
         // fix wrapper width to 100%
-        var wrapperWidth = this.$elementSizeMeter.getWidth([$('content'), $('navigation')]);
+        var wrapperWidth = this.$elementSizeMeter.getWidth([$('content'), $('navigation')]),
+            $wrapper = $('wrapper'),
+            $overlay = $('overlay');
         if (wrapperWidth > this.$elementSizeMeter.getWidth([window])) {
-            $('wrapper').setStyle('width', wrapperWidth);
+            $wrapper.setStyle('width', wrapperWidth);
         }
         else {
-            $('wrapper').removeClass('style');
+            $wrapper.removeClass('style');
         }
 
         // fix overlay width & height to 100%
-        //$('overlay').setStyle('width', wrapperWidth);
-        $('overlay').setStyle('width', '100%');
-        $('overlay').setStyle('height', window.getScrollSize().y);
+        $overlay.setStyle('width', wrapperWidth);
+        //$('overlay').setStyle('height', '100%');
+        $overlay.setStyle('height', window.getScrollSize().y);
 
         // check correct positioning of overlay
         this.posOverlay();
     },
 
     showLoadData: function() {
-        $('overlay').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate('Loading application data...')}));
+        $('overlay-inner').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate('Loading application data...')}));
         this.showOverlay();
     },
 
     showLoadingOverlay: function(message) {
-        $('overlay').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate(message)}));
+        $('overlay-inner').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate(message)}));
         this.showOverlay();
     },
 
@@ -206,34 +208,45 @@ var UIStructurePainter = new Class({
     },
 
     showOverlay: function () {
-        var elementOverlay = $('overlay');
-        elementOverlay.fade('in');
+        $('overlay').fade('in');
+        var elementOverlay = $('overlay-inner');
 
         return elementOverlay;
     },
 
     hideOverlay: function () {
-        var elementOverlay = $('overlay');
-        elementOverlay.fade('out');
+        $('overlay').fade('out');
+        var elementOverlay = $('overlay-inner');
         elementOverlay.empty();
 
         return elementOverlay;
     },
 
     posOverlay: function () {
-        var elementOverlay = $('overlay'),
-            inner = elementOverlay.getChildren('div'),
-            top = inner.getScrollSize();
+        var $elementOverlay = $('overlay'),
+            $elementOverlayInner = $('overlay-inner'),
+            $content = $elementOverlayInner.getChildren('div'),
+            top = $content.getScrollSize();
 
-        if(inner.length > 0) {
+        $elementOverlayInner.setStyles({
+            width: window.innerWidth
+        });
+
+        if($content.length > 0) {
             if (top[0]['y'] + 20 > window.innerHeight) {
-                inner.addClass("bigger");
-                elementOverlay.setStyles({
+                $content.addClass("bigger");
+                $elementOverlay.setStyles({
+                    position: 'absolute'
+                });
+                $elementOverlayInner.setStyles({
                     position: 'absolute'
                 });
             } else {
-                inner.removeClass("bigger");
-                elementOverlay.setStyles({
+                $content.removeClass("bigger");
+                $elementOverlay.setStyles({
+                    position: 'fixed'
+                });
+                $elementOverlayInner.setStyles({
                     position: 'fixed'
                 });
             }

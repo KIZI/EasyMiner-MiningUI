@@ -144,6 +144,8 @@ var UIPainter = new Class({
 
         this.$UIScroller.scrollTo(0, 0);
 
+        this.UIListener.registerOverlayEventHandlers();
+
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
     },
@@ -156,6 +158,8 @@ var UIPainter = new Class({
 
         this.$UIScroller.scrollTo(0, 0);
 
+        this.UIListener.registerOverlayEventHandlers();
+
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
     },
@@ -166,6 +170,8 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
@@ -178,7 +184,7 @@ var UIPainter = new Class({
 
         this.$UIScroller.scrollTo(0, 0);
 
-        this.UIListener.registerIframeOverlayEventHandlers();
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
@@ -190,6 +196,8 @@ var UIPainter = new Class({
         overlay.grab(window);
 
         this.$UIScroller.scrollTo(0, 0);
+
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
@@ -525,6 +533,7 @@ var UIPainter = new Class({
 		this.renderIMAutocomplete('add', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('add');
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
@@ -584,6 +593,7 @@ var UIPainter = new Class({
 
         // Register event handlers for the new controls
         this.UIListener.registerTaskRenameEventHandlers();
+        this.UIListener.registerOverlayEventHandlers();
     },
 
     renderExplanation: function(IM) {
@@ -614,6 +624,7 @@ var UIPainter = new Class({
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('clickAddAttributeWindowTemplate', {i18n: this.i18n}));
         this.UIListener.registerClickAddAttributeFormEventHandler(field);
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
@@ -699,6 +710,7 @@ var UIPainter = new Class({
 
         this.renderExplanation(selectedCoefficient);
 		this.UIListener.registerEditCoefficientFormEventHandler(field);
+        this.UIListener.registerOverlayEventHandlers();
 	},
 	
 	renderEditConnectiveWindow: function (cedent) {
@@ -717,11 +729,14 @@ var UIPainter = new Class({
         this.$UIStructurePainter.posOverlay();
 
 		this.UIListener.registerEditConnectiveFormEventHandler(cedent);
+        this.UIListener.registerOverlayEventHandlers();
 	},
 
     renderCreateUserReportWindow: function() {
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('createUserReportWindowTemplate', { i18n: this.i18n, url: this.config.getCreateUserReportUrl() }))
+
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();

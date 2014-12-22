@@ -93,9 +93,10 @@ var ARManager = new Class({
 		this.UIPainter.renderEditIMWindow(IMs, selectedIM);
 	},
 	
+	/* unused since 21/12/14 PVD
 	closeIMWindow: function () {
 		this.UIPainter.hideOverlay();
-	},
+	},*/
 
     /**
      * Opens the rename task window overlay.
@@ -108,10 +109,10 @@ var ARManager = new Class({
     /**
      * Closes the rename task window overlay.
      * Closes any overlay window currently shown.
-     */
+     * unused since 21/12/14 PVD
     closeRenameTaskWindow: function() {
         this.UIPainter.hideOverlay();
-    },
+    },*/
 	
 	addAntecedent: function (antecedent) {
 		this.activeRule.addAntecedent(antecedent);
@@ -178,7 +179,7 @@ var ARManager = new Class({
 		}
 		this.setActiveRuleChanged();
 		this.UIPainter.renderActiveRule();
-		this.closeAddCoefficientWindow();
+		this.UIPainter.hideOverlay();
 	},
 	
 	editCoefficient: function() {
@@ -191,17 +192,18 @@ var ARManager = new Class({
 		
 		this.setActiveRuleChanged();
 		this.UIPainter.renderActiveRule();
-		this.closeEditCoefficientWindow();
+		this.UIPainter.hideOverlay();
 	},
 	
 	updateAddCoefficientAutocomplete: function (field, name) {
 		var coefficient = this.FL.getBBACoefficient(name);
 		this.UIPainter.renderAddCoefficientAutocomplete(field, coefficient);
 	},
-	
+
+	/* unused since 21/12/14 PVD
 	closeAddCoefficientWindow: function () {
 		this.UIPainter.hideOverlay();
-	},
+	},*/
 	
 	openEditCoefficientWindow: function(field) {
 		this.UIPainter.renderEditCoefficientWindow(field);
@@ -212,9 +214,10 @@ var ARManager = new Class({
 		this.UIPainter.renderEditCoefficientAutocomplete(field, coefficient);
 	},
 	
+	/* unused since 21/12/14 PVD
 	closeEditCoefficientWindow: function () {
 		this.UIPainter.hideOverlay();
-	},
+	},*/
 	
 	openEditConnectiveWindow: function (cedent) {
 		this.UIPainter.renderEditConnectiveWindow(cedent);
@@ -226,12 +229,13 @@ var ARManager = new Class({
 
 		this.setActiveRuleChanged();
         this.UIPainter.renderActiveRule();
-		this.closeEditConnectiveWindow();
-	},
-	
-	closeEditConnectiveWindow: function () {
 		this.UIPainter.hideOverlay();
 	},
+	
+	/* unused since 21/12/14 PVD
+	closeEditConnectiveWindow: function () {
+		this.UIPainter.hideOverlay();
+	},*/
 	
 	addField: function (field, cedent) {
         var fieldAR = {};

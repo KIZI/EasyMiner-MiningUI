@@ -224,7 +224,7 @@ var ARBuilder = new Class({
 
   closeSettingsWindow: function () {
     // Must be called before the settings window is destroyed
-    this.UIPainter.updateOverlayPosition(true);
+    //this.UIPainter.updateOverlayPosition(true);
     this.$UIStructurePainter.hideOverlay();
   },
 
@@ -251,7 +251,7 @@ var ARBuilder = new Class({
     this.UIPainter.renderActiveRule();
 
     // Must be called before the settings window is destroyed
-    this.UIPainter.updateOverlayPosition(true);
+    //this.UIPainter.updateOverlayPosition(true);
     this.$UIStructurePainter.hideOverlay();
   },
 

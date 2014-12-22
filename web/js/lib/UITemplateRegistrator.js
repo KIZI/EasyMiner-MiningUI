@@ -59,6 +59,12 @@ var UITemplateRegistrator = new Class({
 
         Mooml.register('createUserReportWindowTemplate', function (data) {
             div({id: 'create-user-report-window'},
+				a({
+						id: 'overlay-close',
+						href: '#'
+					},
+					data.i18n.translate('Close')
+				),
                 iframe({ src: data.url }));
         });
 	},
@@ -141,7 +147,7 @@ var UITemplateRegistrator = new Class({
 			var i18n = data.i18n;
 			
 			div({id: 'add-im-window'},
-				a({id: 'add-im-close', href: '#'}, i18n.translate('Close')),
+				a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
 				h2(i18n.translate('Add interest measure')),
 				form({action: '#', method: 'POST', id: 'add-im-form', novalidate: ''},
 					label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
@@ -162,7 +168,7 @@ var UITemplateRegistrator = new Class({
 			    IM = data.IM;
 			
 			div({id: 'edit-im-window'},
-				a({id: 'edit-im-close', href: '#'}, i18n.translate('Close')),
+				a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
 				h2(i18n.translate('Edit interest measure')),
 				form({action: '#', method: 'POST', id: 'edit-im-form', novalidate: ''},
 					label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
@@ -196,7 +202,7 @@ var UITemplateRegistrator = new Class({
             var i18n = data.i18n;
 
             div({id: 'click-add-attribute-window'},
-                a({id: 'click-add-attribute-close', href: '#'}, i18n.translate('Close')),
+                a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
                 h2(i18n.translate('Add attribute')),
                 form({action: '#', method: 'POST', id: 'click-add-attribute-form'},
                     div({class: 'clearfix'},
@@ -229,7 +235,7 @@ var UITemplateRegistrator = new Class({
 			var i18n = data.i18n;
 			
 			div({id: 'edit-coefficient-window'},
-				a({id: 'edit-coefficient-close', href: '#'}, i18n.translate('Close')),
+				a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
 				h2(i18n.translate('Edit value merging')),
 				form({action: '#', method: 'POST', id: 'edit-coefficient-form'},
 					label({'for': 'edit-coefficient-select'}, i18n.translate('Merging type:')),
@@ -375,7 +381,7 @@ var UITemplateRegistrator = new Class({
 			var i18n = data.i18n;
 			
 			div({id: 'edit-connective-window'},
-				a({id: 'edit-connective-close', href: '#'}, i18n.translate('Close')),
+				a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
 				h2(i18n.translate('Edit connective')),
 				form({action: '#', method: 'POST', id: 'edit-connective-form'},
 					div({class: 'clearfix'},
@@ -489,7 +495,7 @@ var UITemplateRegistrator = new Class({
                 id: 'rename-task-window'
             },
                 a({
-                    id: 'rename-task-close',
+                    id: 'overlay-close',
                     href: '#'
                 },
                 i18n.translate('Close')
@@ -537,16 +543,30 @@ var UITemplateRegistrator = new Class({
 	
     registerAttributeWindow: function() {
         Mooml.register('addAttributeTemplate', function (data) {
-            var url = data.url;
+            var i18n = data.i18n,
+				url = data.url;
 
             div({id: 'add-attribute-window'},
+				a({
+						id: 'overlay-close',
+						href: '#'
+					},
+					i18n.translate('Close')
+				),
                 iframe({src: url}));
         });
 
         Mooml.register('editAttributeTemplate', function (data) {
-            var url = data.url;
+            var i18n = data.i18n,
+				url = data.url;
 
             div({id: 'edit-attribute-window'},
+				a({
+						id: 'overlay-close',
+						href: '#'
+					},
+					i18n.translate('Close')
+				),
                 iframe({src: url}));
         });
 
@@ -556,7 +576,7 @@ var UITemplateRegistrator = new Class({
 
             div({id: 'show-histogram-window'},
 				a({
-						id: 'iframe-overlay-close',
+						id: 'overlay-close',
 						href: '#'
 					},
 					i18n.translate('Close')
@@ -565,9 +585,16 @@ var UITemplateRegistrator = new Class({
          });
 
         Mooml.register('reportWindowTemplate', function (data) {
-            var url = data.url;
+            var i18n = data.i18n,
+				url = data.url;
 
             div({id: 'report-window'},
+				a({
+						id: 'overlay-close',
+						href: '#'
+					},
+					i18n.translate('Close')
+				),
                 iframe({src: url}));
         });
 
@@ -577,8 +604,17 @@ var UITemplateRegistrator = new Class({
         });
 
         Mooml.register('userLogoutWindowTemplate', function (data) {
-            div({id: 'user-logout-window'},
-                iframe({ src: data.url }));
+			var i18n = data.i18n,
+				url = data.url;
+
+			div({id: 'user-logout-window'},
+				a({
+						id: 'overlay-close',
+						href: '#'
+					},
+					i18n.translate('Close')
+				),
+                iframe({ src: url }));
         });
     }
 	
