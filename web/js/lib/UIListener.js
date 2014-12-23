@@ -272,6 +272,7 @@ var UIListener = new Class({
     if (elementInput) {
       elementInput.addEvent('blur', function (e) {
         //e.stop();
+        var IMName = elementSelect.options[elementSelect.selectedIndex].value;
         var IM = this.ARBuilder.getARManager().getIMPrototype(IMName);
         var valid = validator.validate(IM, action, this.ARBuilder.$i18n.translate('Invalid value'));
       }.bind(this));

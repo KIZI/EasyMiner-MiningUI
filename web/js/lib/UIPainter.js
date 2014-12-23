@@ -551,6 +551,7 @@ var UIPainter = new Class({
 		this.renderIMAutocomplete('edit', selectedIM);
 
 		this.UIListener.registerIMFormEventHandler('edit');
+        this.UIListener.registerOverlayEventHandlers();
 
         // Positioning of Overlay after rendering
         this.$UIStructurePainter.posOverlay();
