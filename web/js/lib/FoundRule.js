@@ -38,6 +38,7 @@ var FoundRule = new Class({
   },
 
   getIMIdent: function (IMs) {
+    console.log(IMs);
     //TODO vrácení výpisu měr zajímavosti...
   },
 
@@ -47,5 +48,9 @@ var FoundRule = new Class({
 
   getFoundRuleCSSRemoveID: function () {
     return 'remove-rule-' + this.$task.getId() + '-' + this.$id;
+  },
+
+  getFoundRuleCSSDetailsID: function () {
+    return 'rule-details-' + this.$task.getId() + '-' + this.$id;
   }
 });
