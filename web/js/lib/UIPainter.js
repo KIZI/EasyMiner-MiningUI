@@ -631,13 +631,18 @@ var UIPainter = new Class({
         this.$UIStructurePainter.posOverlay();
     },
 	
-	renderAddCoefficientAutocomplete: function(field, selectedCoefficient) { 
+	renderAddCoefficientAutocomplete: function(field, selectedCoefficient) {
+        if(field.ref.choices.length === 1){
+            selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
+            $('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: selectedCoefficient, isSelected: true}));
+        } else{
+            Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
+                var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
+                $('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
+            }.bind(this));
+        }
 		Mooml.render('addCoefficientWindowAutocompleteTemplate', {i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('add-coefficient-autocomplete'));
-		
-		Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
-			var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
-			$('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
-		}.bind(this));
+
 		if (selectedCoefficient.getName() === 'One category') {
 			var select = $('add-coefficient-category');
 			Array.each(field.getRef().getChoices(), function (choice) {
@@ -672,12 +677,16 @@ var UIPainter = new Class({
 	},
 	
 	renderEditCoefficientAutocomplete: function(field, selectedCoefficient) {
+        if(field.ref.choices.length === 1){
+            selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
+            $('edit-coefficient-select').grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: selectedCoefficient, isSelected: true}));
+        } else{
+            Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
+                var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
+                $('edit-coefficient-select').grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
+            }.bind(this));
+        }
 		Mooml.render('editCoefficientWindowAutocompleteTemplate', {field: field, i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('edit-coefficient-autocomplete'));
-		
-		Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
-			var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
-			$('edit-coefficient-select').grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
-		}.bind(this));
 		
 		if (selectedCoefficient.getName() === 'One category') {
 			var select = $('edit-coefficient-category');

@@ -227,6 +227,7 @@ var UITemplateRegistrator = new Class({
 				h2(i18n.translate('Set value merging')),
 				form({action: '#', method: 'POST', id: 'add-coefficient-form'},
 					label({'for': 'add-coefficient-select'}, i18n.translate('Merging type:')),
+					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
 					span({id: 'add-coefficient-autocomplete'})),
 				div({'class': 'clearfix'}));
 		});
@@ -239,6 +240,7 @@ var UITemplateRegistrator = new Class({
 				h2(i18n.translate('Edit value merging')),
 				form({action: '#', method: 'POST', id: 'edit-coefficient-form'},
 					label({'for': 'edit-coefficient-select'}, i18n.translate('Merging type:')),
+					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
 					span({id: 'edit-coefficient-autocomplete'})),
 				div({'class': 'clearfix'}));
 		});
@@ -249,7 +251,7 @@ var UITemplateRegistrator = new Class({
 			
 			if (selectedCoefficient.getName() === 'One category') {
 				span({id: 'add-coefficient-autocomplete'},
-					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
+					//select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
                     span({'class': 'tooltip info'},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
@@ -263,7 +265,7 @@ var UITemplateRegistrator = new Class({
 					input({type: 'submit', value: i18n.translate('Add')}));
 			} else {
 				span({id: 'add-coefficient-autocomplete'},
-					select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
+					//select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
                     span({'class': 'tooltip info'},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
@@ -295,7 +297,7 @@ var UITemplateRegistrator = new Class({
 			
 			if (selectedCoefficient.getName() === 'One category') {
 				span({id: 'edit-coefficient-autocomplete'},
-					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
+					//select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
                     span({'class': 'tooltip info'},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
@@ -310,7 +312,7 @@ var UITemplateRegistrator = new Class({
 					input({type: 'submit', value: i18n.translate('Edit')}));
 			} else {
 				span({id: 'edit-coefficient-autocomplete'},
-					select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
+					//select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
                     span({'class': 'tooltip info'},
                         span({'class': 'help'},
                             img({src: './images/icon-tooltip-help.png'}),
