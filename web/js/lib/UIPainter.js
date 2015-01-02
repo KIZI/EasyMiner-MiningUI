@@ -624,6 +624,7 @@ var UIPainter = new Class({
     renderClickAddAttributeWindow: function (field) {
         var overlay = this.$UIStructurePainter.showOverlay();
         overlay.grab(Mooml.render('clickAddAttributeWindowTemplate', {i18n: this.i18n}));
+        $('click-add-attribute-select').focus();
         this.UIListener.registerClickAddAttributeFormEventHandler(field);
         this.UIListener.registerOverlayEventHandlers();
 
@@ -632,13 +633,15 @@ var UIPainter = new Class({
     },
 	
 	renderAddCoefficientAutocomplete: function(field, selectedCoefficient) {
+        var selectBox = $('add-coefficient-select');
+        selectBox.focus();
         if(field.ref.choices.length === 1){
             selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
-            $('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: selectedCoefficient, isSelected: true}));
+            selectBox.grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: selectedCoefficient, isSelected: true}));
         } else{
             Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
                 var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
-                $('add-coefficient-select').grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
+                selectBox.grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
             }.bind(this));
         }
 		Mooml.render('addCoefficientWindowAutocompleteTemplate', {i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('add-coefficient-autocomplete'));
@@ -677,13 +680,15 @@ var UIPainter = new Class({
 	},
 	
 	renderEditCoefficientAutocomplete: function(field, selectedCoefficient) {
+        var selectBox = $('edit-coefficient-select');
+        selectBox.focus();
         if(field.ref.choices.length === 1){
             selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
-            $('edit-coefficient-select').grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: selectedCoefficient, isSelected: true}));
+            selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: selectedCoefficient, isSelected: true}));
         } else{
             Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
                 var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
-                $('edit-coefficient-select').grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
+                selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {coefficient: BBACoefficient, isSelected: isSelected}));
             }.bind(this));
         }
 		Mooml.render('editCoefficientWindowAutocompleteTemplate', {field: field, i18n: this.i18n, selectedCoefficient: selectedCoefficient}).replaces($('edit-coefficient-autocomplete'));
