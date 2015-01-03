@@ -230,6 +230,8 @@ var Config = new Class({//TODO Standa: update URLs
     offset = (typeof offset === "undefined") ? 0 : offset;
     limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
     order = (typeof order === "undefined") ? '' : order;
+    //TODO
+    order='';
 
     return this.$easyMinerCenterUrl+this.getRulesUrl
     + '?miner=' + this.params.id_dm

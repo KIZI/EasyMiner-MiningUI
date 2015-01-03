@@ -2,6 +2,7 @@
 var FRPager = new Class({
   Implements: [Options, Events],
 
+  perPageOptions:[10,20,50,100],
   task: null,
   config: null,
   FL:null,
@@ -17,7 +18,7 @@ var FRPager = new Class({
   currentPage: 0,
   perPage: 10,//TODO dodělat select...
   rulesCount: 0,
-  rulesOrder: null, //TODO dodělat select...
+  rulesOrder: null,
 
   lineHeight: 55,
   prevSymbol: '<',
@@ -153,8 +154,11 @@ var FRPager = new Class({
   },*/
 
   createControls: function () {
-    this.numPages = Math.ceil(this.rulesCount / this.perPage);
     this.paging.empty();
+
+    this.paging.grab(this.createOrderSelect());
+
+    this.numPages = Math.ceil(this.rulesCount / this.perPage);
     this.paging.grab(new Element(this.elControlType, {
       'class': 'pager-prev ' + (this.currentPage === 1 ? 'in' : '') + 'active',
       text: this.prevSymbol,
@@ -209,6 +213,58 @@ var FRPager = new Class({
         }.bind(this)
       } : {}
     }).store('page', 'next'));
+
+  },
+
+  createOrderSelect: function(){//FIXME
+    var orderElement = new Element('span',{'id':'fr-order-count'});
+
+    orderElement.grab(new Element('label',{for:'fr-order',html:this.i18n.translate('order:')}));
+    var orderSelect=new Element('select',
+      {'id':'fr-order',
+        events: {
+          change: function (e){
+            this.order=e.target.get('value');
+            e.stop();
+            this.gotoPage(1);
+          }.bind(this)
+        }
+      }
+    );
+    var IMs=this.getIMs();
+    var order=this.order;
+    Array.each(IMs,function(IM){
+      var option=new Element('option',{value:IM.getName(),text:IM.getLocalizedName()});
+      if (IM.getName()==order){
+        option.setAttribute('selected','selected');
+      }
+      orderSelect.grab(option);
+    }.bind([order,orderSelect]));
+    orderElement.grab(orderSelect);
+
+    orderElement.grab(new Element('label',{for:'fr-per-page',html:this.i18n.translate('Rules per page:')}));
+    var perPageSelect = new Element('select',
+      {
+        id:'fr-per-page',
+        events: {
+          change: function (e){
+            this.perPage=e.target.get('value');
+            e.stop();
+            this.gotoPage(1);
+          }.bind(this)
+        }
+      }
+    );
+    var perPage=this.perPage;
+    Array.each(this.perPageOptions,function(perPageCount){
+      var option=new Element('option',{value:perPageCount,text:perPageCount});
+      if (perPage==perPageCount){
+        option.setAttribute('selected','selected');
+      }
+      perPageSelect.grab(option)
+    }.bind([perPageSelect,perPage]));
+    orderElement.grab(perPageSelect);
+    return orderElement
   },
 
   createControlItem: function (pageId) {
@@ -238,8 +294,8 @@ var FRPager = new Class({
     this.container.setStyles({display: 'block'});
     this.clear.setStyles({display: 'block'});
     this.content.empty();
-    Array.each(this.rules, function (foundRule, key) {
 
+    Array.each(this.rules, function (foundRule, key) {
       this.content.grab(Mooml.render('foundRuleTemplate',{
         foundRule: foundRule,
         i18n: this.i18n,
@@ -260,7 +316,7 @@ var FRPager = new Class({
       } else {
         this.currentPage = page;
       }
-    } else {
+    } else if (locator != null){
       this.currentPage = locator;
     }
 
@@ -295,7 +351,8 @@ var FRPager = new Class({
   },
 
   handleSuccessRulesRequest: function(data){
-    this.setIMs(data.task.IMs);
+    //zjištění aktuálních měr zajímavosti
+    this.setIMs(this.FL.getRulesIMs(data.task.IMs));
     this.rules=[];
 
     Object.each(data.rules,function(value,key){
@@ -312,8 +369,11 @@ var FRPager = new Class({
   },
 
   setIMs:function(IMs){
-    //TODO doplnění výchozích měr zajímavosti...
     this.IMs=IMs;
+  },
+
+  getIMs:function(){
+    return this.IMs;
   }
 
 });

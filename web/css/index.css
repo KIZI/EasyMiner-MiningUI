@@ -1676,6 +1676,20 @@ section#active-rule #action-box {
   margin-right: 10px;
   float: left;
 }
+#found-rules .found-rule .details {
+  background: transparent url("../images/sprite/icon-details.png") center center no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 9px;
+  margin-left: 10px;
+  visibility: hidden;
+  float: left;
+}
+#found-rules .found-rule:hover > .details {
+  visibility: visible;
+}
 #found-rules #view-task-setting,
 #found-rules #view-task-result {
   background: transparent url("../images/sprite-icons.png") -11px -557px no-repeat;

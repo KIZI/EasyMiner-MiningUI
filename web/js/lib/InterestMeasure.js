@@ -7,11 +7,13 @@ var InterestMeasure = new Class({
 	explanation: '',
 	thresholdType: '',
 	compareType: '',
+	calculate: function(){return '';},
+	calculation:'',
 	fields: [],
 	stringHelper: null,
     $default: false,
 
-	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, def) {
+	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, calculation, def) {
 		this.name = name;
 		this.localizedName = localizedName;
 		this.explanation = explanation;
@@ -19,7 +21,11 @@ var InterestMeasure = new Class({
 		this.compareType = compareType;
 		this.fields = fields;
 		this.stringHelper = stringHelper;
-        this.$default = def || false;
+		this.calculation=calculation;
+		if (calculation!=''){
+			eval('this.calculate=function(a,b,c,d){return '+calculation+';};')
+		}
+    this.$default = def || false;
 	},
 	
 	getName: function () {
