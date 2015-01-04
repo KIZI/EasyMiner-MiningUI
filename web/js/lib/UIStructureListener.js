@@ -232,11 +232,12 @@ var UIStructureListener = new Class({
 
     registerFoundRulesEventHandlers: function() {
         // stop mining
-        $('stop-mining').addEvent('click', function (e) {
+        /*$('stop-mining').addEvent('click', function (e) {
             e.stop();
             this.$ARBuilder.getMiningManager().stopMining();
         }.bind(this));
-
+*/
+        //TODO nebude mít smysl...
         // clear rules
         $('pager-clear').addEvent('click', function (e) {
             e.stop();

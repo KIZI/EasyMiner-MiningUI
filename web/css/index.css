@@ -341,6 +341,7 @@ div#overlay-inner form input[type='submit'] {
   font-size: 14px;
   font-family: 'Droid Sans', 'Arial', 'sans-serif';
   font-weight: normal;
+  text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
@@ -353,7 +354,7 @@ div#overlay-inner form input[type='submit'] {
   text-align: center;
   display: block;
   margin: 15px auto;
-  font-size: 19.599999999999998px;
+  font-size: 18.2px;
   min-width: 150px;
   margin-bottom: 5px;
 /*
@@ -369,15 +370,14 @@ div#overlay-inner form input[type='submit'] {
       cursor pointer*/
 }
 div#overlay-inner form input[type='submit']:hover,
-div#overlay-inner form input[type='submit']:focus,
-div#overlay-inner form input[type='submit']:active {
+div#overlay-inner form input[type='submit']:focus {
   background: #2d83be;
   color: #fff;
   border: 1px solid #314e64;
+  text-decoration: none;
 }
 div#overlay-inner form input[type='submit']:hover,
-div#overlay-inner form input[type='submit']:focus,
-div#overlay-inner form input[type='submit']:active {
+div#overlay-inner form input[type='submit']:focus {
   background: #64ba12;
   color: #fff;
   border: 1px solid #4c8e0e;
@@ -509,6 +509,10 @@ div#overlay-inner > div > a {
   float: right;
   position: relative;
   top: -20px;
+  text-decoration: none;
+}
+div#overlay-inner > div > a:hover {
+  text-decoration: underline;
 }
 div#overlay-inner #new-task-button {
   background: transparent;
@@ -1110,14 +1114,13 @@ section#active-rule #succedent {
 section#active-rule #antecedent .cedent {
   float: left;
   border: 1px dashed #fff;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+/*border-radius(10px)*/
   background-color: #fff;
   padding: 2px;
 }
 section#active-rule #antecedent .cedent.empty {
   border: 1px dashed #000;
+  color: #808080;
 }
 section#active-rule #antecedent .cedent a.group-fields {
   background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
@@ -1280,14 +1283,13 @@ section#active-rule #succedent {
 section#active-rule #succedent .cedent {
   float: left;
   border: 1px dashed #fff;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+/*border-radius(10px)*/
   background-color: #fff;
   padding: 2px;
 }
 section#active-rule #succedent .cedent.empty {
   border: 1px dashed #000;
+  color: #808080;
 }
 section#active-rule #succedent .cedent a.group-fields {
   background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
@@ -1411,8 +1413,91 @@ section#active-rule #action-box {
   margin: 25px 0 10px;
   padding: 9px 0 0 38px;
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 0;
+}
+section#active-rule #stop-mining {
+  background: #075783;
+  font-size: 14px;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-weight: normal;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-align: left;
+  display: inline-block;
+  padding: 12px 15px;
+  background: #4c8e0e;
+  color: #fff;
+  border: 1px solid #4c8e0e;
+  text-align: center;
+  display: block;
+  margin: 15px auto;
+  font-size: 18.2px;
+  min-width: 150px;
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  border-color: #800000;
+  background: #800000;
+}
+section#active-rule #stop-mining:hover,
+section#active-rule #stop-mining:focus {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-decoration: none;
+}
+section#active-rule #stop-mining:hover,
+section#active-rule #stop-mining:focus {
+  background: #64ba12;
+  color: #fff;
+  border: 1px solid #4c8e0e;
+}
+section#active-rule #stop-mining:hover,
+section#active-rule #stop-mining:focus {
+  border-color: #800000;
+  background: #d50000;
+}
+section#active-rule #start-mining {
+  background: #075783;
+  font-size: 14px;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-weight: normal;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-align: left;
+  display: inline-block;
+  padding: 12px 15px;
+  background: #4c8e0e;
+  color: #fff;
+  border: 1px solid #4c8e0e;
+  text-align: center;
+  display: block;
+  margin: 15px auto;
+  font-size: 18.2px;
+  min-width: 150px;
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+section#active-rule #start-mining:hover,
+section#active-rule #start-mining:focus {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-decoration: none;
+}
+section#active-rule #start-mining:hover,
+section#active-rule #start-mining:focus {
+  background: #64ba12;
+  color: #fff;
+  border: 1px solid #4c8e0e;
 }
 #pager {
   border: 1px solid #cac7bd;
@@ -1514,14 +1599,13 @@ section#active-rule #action-box {
 #found-rules .found-rule .rule .cedent {
   float: left;
   border: 1px dashed #fff;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+/*border-radius(10px)*/
   background-color: #fff;
   padding: 2px;
 }
 #found-rules .found-rule .rule .cedent.empty {
   border: 1px dashed #000;
+  color: #808080;
 }
 #found-rules .found-rule .rule .cedent a.group-fields {
   background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
@@ -1810,14 +1894,13 @@ section#active-rule #action-box {
 #marked-rules .marked-rule .rule .cedent {
   float: left;
   border: 1px dashed #fff;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+/*border-radius(10px)*/
   background-color: #fff;
   padding: 2px;
 }
 #marked-rules .marked-rule .rule .cedent.empty {
   border: 1px dashed #000;
+  color: #808080;
 }
 #marked-rules .marked-rule .rule .cedent a.group-fields {
   background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;

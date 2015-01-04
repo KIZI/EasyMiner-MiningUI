@@ -354,6 +354,10 @@ var ARManager = new Class({
 	display4ftTaskBox: function () {
 		return (this.activeRule.isValid() && (true || this.activeRule.isChanged()) && !this.miningManager.getInProgress());
 	},
+
+	miningInProgress: function(){
+		return this.miningManager.getInProgress();
+	},
 	
 	displayETreeTaskBox: function () {
 		return this.settings.getRecEnabled() && ((true || this.activeRule.isChanged()) && !this.ETreeManager.getInProgress() && this.ETreeValidator.isValid(this.activeRule));

@@ -418,7 +418,16 @@ var UIPainter = new Class({
 	},
 	
 	renderActiveRule: function () {
-        Mooml.render('activeRuleTemplate', {rules: this.ARBuilder.getARManager().display4ftTaskBox(), attributes: this.ARBuilder.getARManager().displayETreeTaskBox(), i18n: this.i18n, displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs()}).replaces($('active-rule'));
+        Mooml.render(
+          'activeRuleTemplate',
+          {
+              rules: this.ARBuilder.getARManager().display4ftTaskBox(),
+              attributes: this.ARBuilder.getARManager().displayETreeTaskBox(),
+              i18n: this.i18n,
+              displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs(),
+              miningInProgress: this.ARBuilder.getARManager().miningInProgress()
+          }
+        ).replaces($('active-rule'));
 
         var elementParent = $('antecedent');
 		this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);
@@ -864,13 +873,13 @@ var UIPainter = new Class({
 		el.morph(options);
 	},
 	
-    showStopMiningButton: function() {
+    /*showStopMiningButton: function() {
         $('stop-mining').setStyle('visibility', 'visible');
     },
 
     hideStopMiningButton: function() {
         $('stop-mining').setStyle('visibility', 'hidden');
-    },
+    },*/
 
     updateDownloadButtons: function(settingPath, resultPath) {
         $('view-task-setting').setStyle('visibility', 'visible');

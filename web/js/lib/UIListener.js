@@ -204,6 +204,17 @@ var UIListener = new Class({
         event.stop();
         this.ARBuilder.getARManager().mineRulesConfirm();
       }.bind(this));
+      $('start-mining').addEvent('click', function (event) {
+        event.stop();
+        this.ARBuilder.getARManager().mineRulesConfirm();
+      }.bind(this));
+    }
+    if (this.ARBuilder.getARManager().miningInProgress()){
+      // stop mining
+      $('stop-mining').addEvent('click', function (event) {
+        event.stop();
+        this.ARBuilder.getMiningManager().stopMining();
+      }.bind(this));
     }
 
     if (this.ARBuilder.getARManager().displayETreeTaskBox()) {

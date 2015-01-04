@@ -13,6 +13,7 @@ var FRManager = new Class({
   //$markedRules: [],
   maxIndex: 0,
   tips: null,
+  miningInProgress: false,
 
   initialize: function (config, FL, rulesParser, settings, UIPainter, UIListener, i18n) {
     this.config = config;
@@ -43,31 +44,31 @@ var FRManager = new Class({
   },
 
   handleInProgress: function () {
-    console.log('FRManager handleInProgress');
-    this.reset();
+    this.reset();//TODO ??
+    this.miningInProgress=true;
     this.UIPainter.renderActiveRule();
-    this.UIPainter.showStopMiningButton();
+    /*this.UIPainter.showStopMiningButton();*/
     this.UIPainter.hideDownloadButtons();
     this.pager.setInProgress();
   },
 
   handleStoppedMining: function () {
-    console.log('FRManager handleStoppedMining');
-    this.UIPainter.hideStopMiningButton();
+    /*this.UIPainter.hideStopMiningButton();*/
+    this.miningInProgress=false;
     this.UIPainter.renderActiveRule();
     this.pager.setStopped();
   },
 
   renderRules: function (rulesCount, inProgress, task) {
-    console.log('FRManager renderRules');
     this.pager.task=task;
+    this.miningInProgress=inProgress;
     // filter new rules
     //TODO remove: rules = this.filterRules(rules);
     /////var parsedRules = this.rulesParser.parse(rules, task);
 
     if (!inProgress && !rulesCount) {
       this.pager.setNoRules();
-      this.UIPainter.hideStopMiningButton();
+      /*this.UIPainter.hideStopMiningButton();*/
       this.UIPainter.renderActiveRule();
     } else{
       this.pager.setRulesCount(rulesCount);
@@ -109,12 +110,10 @@ var FRManager = new Class({
         } else {
           this.pager.setInterrupted(this.settings.getRulesCnt());
         }
-
-
-        this.UIPainter.hideStopMiningButton();
       }
 
       this.UIPainter.renderActiveRule();
+
     }
   },
 /*
@@ -214,6 +213,7 @@ var FRManager = new Class({
     console.log('FRManager handleError');
     this.pager.reset();
     this.pager.setError();
+    this.miningInProgress=false;
     this.UIPainter.renderActiveRule();
   },
 
@@ -348,5 +348,6 @@ var FRManager = new Class({
 
     // Save the task
     this.saveMarkedRules();
-  }
+  },
+
 });
