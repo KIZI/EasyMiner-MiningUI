@@ -5,13 +5,19 @@ nav
   margin boxMargin 5px 0 boxMargin
   line-height 20px
 
+navigationH2()
+  h2()
+  font-size 0.8*h2FontSize
+  margin 5px 20px 15px 20px
+  padding-bottom 5px
+  border-bottom 1px solid h2Color
+
 #attributes
   box()
   margin-bottom boxMargin
 
   h2
-    h2()
-    margin 0 20px 5px 20px
+    navigationH2()
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -105,8 +111,7 @@ nav
   margin-bottom boxMargin
 
   h2
-    h2()
-    margin 0 20px 5px 20px
+    navigationH2()
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -179,8 +184,7 @@ nav
   margin-bottom 25px
 
   h2
-    h2()
-    margin 0 20px 5px 20px
+    navigationH2()
 
   h2.minimize a
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -202,8 +206,7 @@ nav
   margin-bottom 25px
 
   h2
-    h2()
-    margin 0 20px 5px 20px
+    navigationH2()
 
   #brBaseCounter
     padding 5px 20px

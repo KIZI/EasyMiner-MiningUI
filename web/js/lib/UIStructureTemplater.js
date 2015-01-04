@@ -44,7 +44,7 @@ var UIStructureTemplater = new Class({
                             h2(i18n.translate('Discovered rules')),
                             div({id: 'pager-label'}),
                             div({id: 'found-rules-count'}),
-                            a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')),
+                            a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')),//TODO úprava stopovacího tlačítka
                             div({id: 'paging'}),
                             div({id: 'pager'},
                                 ul({'class': 'scroller'})),
@@ -289,11 +289,12 @@ var UIStructureTemplater = new Class({
                         div({id: 'interest-measures'},
                             h3(i18n.translate('Interest measures')),
                             div(),
-                            displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add IM')) : ''),
+                            displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add interest measure')) : ''),
                         div({id: 'succedent'}, h3(i18n.translate('Consequent')))
                     ),
                 div({'class': 'clearfix'}),
                 span({id: 'action-box', styles: {'visibility': taskBox ? 'visible' : 'hidden'}}, taskText));
+                //TODO přidání tlačítka pro spuštění minování...
         });
     },
 

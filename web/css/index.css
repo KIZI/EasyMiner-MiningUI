@@ -1,5 +1,6 @@
 @import url("http://fonts.googleapis.com/css?family=Average&subset=latin-ext");
 @import url("http://fonts.googleapis.com/css?family=Droid+Sans:400,700");
+/*úprava pro sjednocení fontů*/
 article,
 aside,
 details,
@@ -335,21 +336,51 @@ div#overlay-inner form input[type='number'] {
   -ms-user-select: text;
 }
 div#overlay-inner form input[type='submit'] {
-  color: #fff;
-  font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
-  font-size: 30px;
-  background: #4c8e0e none;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-  display: block;
-  width: 170px;
-  margin-left: 130px;
-  margin-top: 50px;
-  padding: 10px 28px;
+/* TODO */
+  background: #075783;
+  font-size: 14px;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-weight: normal;
   cursor: pointer;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-align: left;
+  display: inline-block;
+  padding: 12px 15px;
+  background: #4c8e0e;
+  color: #fff;
+  border: 1px solid #4c8e0e;
+  text-align: center;
+  display: block;
+  margin: 15px auto;
+  font-size: 19.599999999999998px;
+  min-width: 150px;
+  margin-bottom: 5px;
+/*
+      color #FFFFFF
+      font-family font
+      font-size 30px
+      background #4C8E0E none
+      border 1px solid #AAA
+      border-radius(5px)
+      text-shadow 0 -1px 0 rgba(0, 0, 0, 0.3)
+      display block; width 170px
+      margin-left 130px; margin-top 50px; padding 10px 28px
+      cursor pointer*/
+}
+div#overlay-inner form input[type='submit']:hover,
+div#overlay-inner form input[type='submit']:focus,
+div#overlay-inner form input[type='submit']:active {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #314e64;
+}
+div#overlay-inner form input[type='submit']:hover,
+div#overlay-inner form input[type='submit']:focus,
+div#overlay-inner form input[type='submit']:active {
+  background: #64ba12;
+  color: #fff;
+  border: 1px solid #4c8e0e;
 }
 div#overlay-inner form .slider {
   background: #fff none;
@@ -447,11 +478,11 @@ div#overlay-inner form .tooltip > .warning {
 }
 div#overlay-inner h2 {
   color: #314e64;
-  font: 20px 'Average', 'serif';
-  font-weight: bold;
-  border-bottom: 1px solid #314e64;
-  font-size: 36px;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
   margin: 0 0 20px 0;
+/*border-bottom 1px solid h2Color*/
 }
 div#overlay-inner > div {
   background-color: #fff;
@@ -761,10 +792,15 @@ nav {
 }
 #attributes h2 {
   color: #314e64;
-  font: 20px 'Average', 'serif';
-  font-weight: bold;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+/*border-bottom 1px solid h2Color*/
+  font-size: 22.400000000000002px;
+  margin: 5px 20px 15px 20px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px 20px;
 }
 #attributes h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -892,10 +928,15 @@ nav {
 }
 #data-fields h2 {
   color: #314e64;
-  font: 20px 'Average', 'serif';
-  font-weight: bold;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+/*border-bottom 1px solid h2Color*/
+  font-size: 22.400000000000002px;
+  margin: 5px 20px 15px 20px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px 20px;
 }
 #data-fields h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -997,10 +1038,15 @@ nav {
 }
 #reports h2 {
   color: #314e64;
-  font: 20px 'Average', 'serif';
-  font-weight: bold;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+/*border-bottom 1px solid h2Color*/
+  font-size: 22.400000000000002px;
+  margin: 5px 20px 15px 20px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px 20px;
 }
 #reports h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -1033,10 +1079,15 @@ nav {
 }
 #brBase h2 {
   color: #314e64;
-  font: 20px 'Average', 'serif';
-  font-weight: bold;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+/*border-bottom 1px solid h2Color*/
+  font-size: 22.400000000000002px;
+  margin: 5px 20px 15px 20px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #314e64;
-  margin: 0 20px 5px 20px;
 }
 #brBase #brBaseCounter {
   padding: 5px 20px;

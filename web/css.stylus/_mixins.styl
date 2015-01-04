@@ -16,17 +16,6 @@ overlay()
   transform: translate(-50%, -50%)
   padding 35px 25px
 
-overlay()
-  background-color #FFF
-  box-shadow(5px, 5px, 5px, 0, overlayShadowColor)/*XXX*/
-  width 435px
-  /*margin 10% auto*/
-  position: fixed
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
-  padding 35px 25px
-
 overlay-close()
   color #126499
   background transparent url('../images/sprite-icons.png') -67px -116px no-repeat
@@ -36,15 +25,52 @@ overlay-close()
 
 h2()
   color h2Color
-  font h2Font
-  font-weight bold
-  border-bottom 1px solid h2Color
+  font-family h2FontFamily
+  font-size h2FontSize
+  font-weight h2FontWeight
+  margin 0 0 20px 0
+  /*border-bottom 1px solid h2Color*/
 
 h2AR()
   color h2ARColor
   font h2ARFont
   font-weight normal
   border-bottom none
+
+button()
+  background buttonBackground
+  font-size buttonFontSize
+  font-family buttonFontFamily
+  font-weight buttonFontWeight
+  cursor pointer
+  color buttonColor
+  border buttonBorder
+  text-align left
+  display inline-block
+  padding 12px 15px
+  &:hover
+  &:focus
+  &:active
+    background buttonHoverBackground
+    color buttonHoverColor
+    border buttonHoverBorder
+
+mainButton()
+  button()
+  background mainButtonBackground
+  color mainButtonColor
+  border mainButtonBorder
+  text-align center
+  display block
+  margin 15px auto
+  font-size 1.4*buttonFontSize
+  min-width 150px
+  &:hover
+  &:focus
+  &:active
+    background mainButtonHoverBackground
+    color mainButtonHoverColor
+    border mainButtonHoverBorder
 
 associationRule()
   float left
