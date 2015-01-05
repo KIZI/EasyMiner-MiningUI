@@ -239,7 +239,7 @@ var UIStructureListener = new Class({
 */
         //TODO nebude mít smysl...
         // clear rules
-        $('pager-clear').addEvent('click', function (e) {
+        $('found-rules-pager-clear').addEvent('click', function (e) {
             e.stop();
             this.$ARBuilder.getFRManager().reset();
         }.bind(this));

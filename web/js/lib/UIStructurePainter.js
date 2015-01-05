@@ -86,7 +86,7 @@ var UIStructurePainter = new Class({
         $('show-hidden-attributes').setStyle('display', 'none');
     },
 
-    renderActiveRule: function() {//TODO
+    renderActiveRule: function() {
         Mooml.render('activeRuleTemplate', {rules: false, attributes: false, i18n: this.$i18n, displayAddIM: false}).replaces($('active-rule'));
     },
 

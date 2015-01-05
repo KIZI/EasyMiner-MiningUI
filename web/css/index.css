@@ -1511,52 +1511,52 @@ section#active-rule #ar-action-box #start-mining:focus {
   color: #fff;
   border: 1px solid #4c8e0e;
 }
-#pager {
+#found-rules-pager {
   border: 1px solid #cac7bd;
   height: 550px;
   overflow-y: hidden;
   display: none;
 }
-#paging {
+#found-rules-paging {
   width: 850px;
   height: 24px;
   padding-top: 5px;
 }
-#paging .pager-actuator,
-#paging .pager-actuator-empty,
-#paging .pager-prev,
-#paging .pager-next {
+#found-rules-paging .pager-actuator,
+#found-rules-paging .pager-actuator-empty,
+#found-rules-paging .pager-prev,
+#found-rules-paging .pager-next {
   color: #c0c0c0;
   cursor: pointer;
   margin-right: 4px;
 }
-#paging .active {
+#found-rules-paging .active {
   color: #000;
 }
-#pager-label {
+#found-rules-pager-label {
   height: 24px;
   padding: 3px 0 0 35px;
   margin-bottom: 15px;
 }
-#pager-label.mining-not-started {
+#found-rules-pager-label.mining-not-started {
   background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
 }
-#pager-label.mining-in-progress {
+#found-rules-pager-label.mining-in-progress {
   background: transparent url("../images/icon-loading.gif") 0 0 no-repeat;
 }
-#pager-label.mining-finished {
+#found-rules-pager-label.mining-finished {
   background: transparent url("../images/sprite-icons.png") -164px -16px no-repeat;
 }
-#pager-label.mining-norules {
+#found-rules-pager-label.mining-norules {
   background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
 }
-#pager-label.mining-stopped {
+#found-rules-pager-label.mining-stopped {
   background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
 }
-#pager-label.mining-error {
+#found-rules-pager-label.mining-error {
   background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
 }
-#pager-clear {
+#found-rules-pager-clear {
   background: transparent url("../images/sprite-icons.png") -164px -59px no-repeat;
   display: none;
   width: 100px;

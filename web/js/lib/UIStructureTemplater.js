@@ -43,15 +43,14 @@ var UIStructureTemplater = new Class({
             section({id: 'found-rules'},
               h2(i18n.translate('Discovered rules')),
               div({id: 'found-rules-task-name'}),
-              div({id: 'pager-label'}),
+              div({id: 'found-rules-pager-label'}),
               div({id: 'found-rules-count'}),
-              //a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')),//TODO úprava stopovacího tlačítka
-              div({id: 'paging'}),
-              div({id: 'pager'},
+              div({id: 'found-rules-paging'}),
+              div({id: 'found-rules-pager'},
                 ul({'class': 'scroller'})),
-              a({id: 'view-task-setting', href: '#', target: '_blank'}, i18n.translate('Task setting')),
+              a({id: 'view-task-setting', href: '#', target: '_blank'}, i18n.translate('Task setting')),//TODO remove
               a({id: 'view-task-result', href: '#', target: '_blank'}, i18n.translate('Task result')),
-              a({id: 'pager-clear', href: '#'}, i18n.translate('Clear rules'))
+              a({id: 'found-rules-pager-clear', href: '#'}, i18n.translate('Clear rules'))
             )
           )
         ),

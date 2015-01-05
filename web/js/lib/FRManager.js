@@ -35,7 +35,7 @@ var FRManager = new Class({
   },
 
   initPager: function () {
-    this.pager = new FRPager($('pager-label'), $('paging'), $('found-rules-count'), $('pager'), $('pager-clear'),
+    this.pager = new FRPager($('found-rules-pager-label'), $('found-rules-paging'), $('found-rules-count'), $('found-rules-pager'), $('found-rules-pager-clear'),
       this.task,
       this.config,
       this.FL,
