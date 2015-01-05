@@ -200,14 +200,21 @@ var UIListener = new Class({
     }
 
     if (this.ARBuilder.getARManager().display4ftTaskBox()) {
-      $('mine-rules-confirm').addEvent('click', function (event) {
-        event.stop();
-        this.ARBuilder.getARManager().mineRulesConfirm();
-      }.bind(this));
-      $('start-mining').addEvent('click', function (event) {
-        event.stop();
-        this.ARBuilder.getARManager().mineRulesConfirm();
-      }.bind(this));
+      var mineRulesConfirm=$('mine-rules-confirm');
+      if (mineRulesConfirm){
+        mineRulesConfirm.addEvent('click', function (event) {
+          event.stop();
+          this.ARBuilder.getARManager().mineRulesConfirm();
+        }.bind(this));
+      }
+      var startMining=$('start-mining');
+      if (startMining){
+        startMining.addEvent('click', function (event) {
+          event.stop();
+          this.ARBuilder.getARManager().mineRulesConfirm();
+        }.bind(this));
+      }
+
     }
     if (this.ARBuilder.getARManager().miningInProgress()){
       // stop mining

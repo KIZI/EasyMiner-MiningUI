@@ -49,30 +49,37 @@ section#active-rule
     float left; clear left
     cursor help
 
-  #action-box
-    background transparent url('../images/sprite-icons.png') -12px -307px no-repeat
-    display block; height 32px
-    margin 25px 0 10px; padding 9px 0 0 38px
-    position absolute
-    left 0
-    bottom 0
+  #ar-action-box
+    position relative
+    clear both
+    overflow auto
+    > div
+      padding 20px 0 20px 55px
+      &.in_progress
+        background boxBackgroundColor url('../images/icon-loading-big.gif') left center no-repeat
+      &.question
+        background boxBackgroundColor url('../images/icon_help_48.png') left center no-repeat
+      &.solved
+        background boxBackgroundColor url('../images/icon_ok_48.png') left center no-repeat
+      &.interrupted
+        background boxBackgroundColor url('../images/icon_stop_48.png') left center no-repeat
+      &.failed
+        background boxBackgroundColor url('../images/icon_warning_48.png') left center no-repeat
+      &.info
+        background boxBackgroundColor url('../images/icon_info_48.png') left center no-repeat
 
-  #stop-mining
-    mainButton()
-    visibility hidden
-    position absolute
-    bottom 0
-    right 10px
-    border-color #800000
-    background #800000
-    &:hover
-    &:focus
+    #stop-mining
+      mainButton()
+      float right
+      margin 5px 0 5px 10px
       border-color #800000
-      background #d50000
+      background #800000
+      &:hover
+      &:focus
+        border-color #800000
+        background #d50000
 
-  #start-mining
-    mainButton()
-    visibility hidden
-    position absolute
-    bottom 0
-    right 10px
+    #start-mining
+      mainButton()
+      margin 5px 0 5px 10px
+      float right

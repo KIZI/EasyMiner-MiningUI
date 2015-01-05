@@ -9,6 +9,7 @@ var FRPager = new Class({
   FRManager:null,
   IMs:[],
   rules:[],
+  state: null,
 
   innerElement: '.scroller',
   transition: Fx.Transitions.Cubic.easeOut,
@@ -25,14 +26,6 @@ var FRPager = new Class({
   nextSymbol: '>',
   elControlType: 'span',
 
-  // labels
-  textInit: '',
-  textProgress: '',
-  textFinished: '',
-  textNoRules: '',
-  $textStopped: '',
-  $textError: '',
-
   initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n){
     this.task=task;
     this.config=config;
@@ -44,16 +37,6 @@ var FRPager = new Class({
     this.foundRulesCount = foundRulesCount;
     this.container = container;
     this.clear = clear;
-
-    //region localization texts
-    this.textInit     = this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.');
-    this.textProgress = this.i18n.translate('Mining is in progress, it may take a while to get the results.');
-    this.textFinished = this.i18n.translate('Mining has finished!');
-    this.textNoRules  = this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.');
-    this.$textStopped = this.i18n.translate('Mining has been stopped.');
-    this.$textError   = this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.');
-    //endregion
-
 
     this.content = this.container.getElement(this.innerElement);
     this.content.set('tween', {transition: this.transition, duration: this.duration});
@@ -78,7 +61,8 @@ var FRPager = new Class({
   setInitialized: function () {
     this.label.removeProperty('class');
     this.label.addClass('mining-not-started');
-    this.label.set('text', this.textInit);
+    this.state='not_started';
+    this.label.set('text', this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'));
   },
 
   setInProgress: function () {
@@ -87,8 +71,9 @@ var FRPager = new Class({
     this.fireEvent('onScroll', this.currentPage);
 
     this.label.removeProperty('class');
+    this.state='in_progress';
     this.label.addClass('mining-in-progress');
-    this.label.set('text', this.textProgress);
+    this.label.set('text', this.i18n.translate('Mining is in progress, it may take a while to get the results.'));
   },
 
   setRulesCount: function(rulesCount){//TODO
@@ -101,34 +86,41 @@ var FRPager = new Class({
   },
 
   setInterrupted: function (limit) {
+    console.log('setInterrupted');
     this.label.removeProperty('class');
     this.label.addClass('mining-stopped');
+    this.state='stopped';
     this.label.set('text', 'Mining has been stopped, because maximum number of hypotheses has been found (' + limit + ').'); // TODO: Localize
   },
 
-  setFinished: function () {
+  setFinished: function (){
+    console.log('setFinished');
     this.label.removeProperty('class');
     this.label.addClass('mining-finished');
-    this.label.set('text', this.textFinished);
+    this.state='finished';
+    this.label.set('text', this.i18n.translate('Mining has finished!'));
   },
 
-  setNoRules: function () {
+  setNoRules: function (){
     this.label.removeProperty('class');
     this.label.addClass('mining-norules');
-    this.label.set('text', this.textNoRules);
+    this.state='no_rules';
+    this.label.set('text', this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'));
     //TODO rulesCount content...
   },
 
   setStopped: function () {
+    console.log('setStopped');
     this.label.removeProperty('class');
     this.label.addClass('mining-stopped');
-    this.label.set('text', this.$textStopped);
+    this.state='stopped';
+    this.label.set('text', this.i18n.translate('Mining has been stopped.'));
   },
 
   setError: function () {
     this.label.removeProperty('class');
     this.label.addClass('mining-error');
-    this.label.set('text', this.$textError);
+    this.label.set('text', this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
   },
 
 /*

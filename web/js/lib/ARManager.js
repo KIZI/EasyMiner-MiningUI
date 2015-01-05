@@ -321,7 +321,7 @@ var ARManager = new Class({
 
 	setActiveRuleChanged: function () {
 		this.activeRule.setChanged(true);
-        this.$ARBuilder.stopMining();
+    this.$ARBuilder.stopMining();
 	},
 	
 	getIMPrototype: function (name) {
@@ -358,12 +358,17 @@ var ARManager = new Class({
 	miningInProgress: function(){
 		return this.miningManager.getInProgress();
 	},
+
+	getMiningState: function(){
+		return this.miningManager.getMiningState();
+	},
 	
 	displayETreeTaskBox: function () {
 		return this.settings.getRecEnabled() && ((true || this.activeRule.isChanged()) && !this.ETreeManager.getInProgress() && this.ETreeValidator.isValid(this.activeRule));
 	},
 	
 	mineRulesConfirm: function () {
+		this.activeRule.setChanged(false);//pravidlo není změněno (je právě spuštěno dolování)
 		this.miningManager.mineRules(this.activeRule, this.settings.getRulesCnt());
 	},
 

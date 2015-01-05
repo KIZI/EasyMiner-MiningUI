@@ -425,7 +425,9 @@ var UIPainter = new Class({
               attributes: this.ARBuilder.getARManager().displayETreeTaskBox(),
               i18n: this.i18n,
               displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs(),
-              miningInProgress: this.ARBuilder.getARManager().miningInProgress()
+              miningInProgress: this.ARBuilder.getARManager().miningInProgress(),
+              activeRuleChanged: this.ARBuilder.getARManager().getActiveRule().isChanged(),
+              miningState: this.ARBuilder.getARManager().getMiningState()
           }
         ).replaces($('active-rule'));
 

@@ -42,6 +42,7 @@ var UIStructureTemplater = new Class({
             section({id: 'active-rule'}),
             section({id: 'found-rules'},
               h2(i18n.translate('Discovered rules')),
+              div({id: 'found-rules-task-name'}),
               div({id: 'pager-label'}),
               div({id: 'found-rules-count'}),
               //a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')),//TODO úprava stopovacího tlačítka
@@ -297,13 +298,15 @@ var UIStructureTemplater = new Class({
 
   registerActiveRule: function () {
     Mooml.register('activeRuleTemplate', function (data) {
-      console.log(data);//XXX
       var rules = data.rules,
         attributes = data.attributes,
         taskBox = rules || attributes,
         i18n = data.i18n,
         displayAddIM = data.displayAddIM,
-        miningInProgress = data.miningInProgress || false;
+        miningInProgress = data.miningInProgress || false,
+        activeRuleChanged = data.activeRuleChanged || false,
+        miningState = data.miningState || '',
+        miningProgressText = '';
 
       if (taskBox) {
         var taskText = i18n.translate('Do you want to');
@@ -314,6 +317,21 @@ var UIStructureTemplater = new Class({
         } else if (attributes) {
           taskText += ' <a href="#" id="recommend-attributes-confirm">' + i18n.translate('recommend next attribute') + '</a>' + '?';
         }
+        taskText += ' ' + i18n.translate('Or edit the rule pattern...') + ' ' + miningState;
+      }
+
+      if (miningInProgress) {
+        miningProgressText = div({'class': 'in_progress'}, i18n.translate('Mining is in progress, it may take a while to get the results.'));
+      } else if (activeRuleChanged && taskBox && taskText != '') {
+        miningProgressText = div({'class': 'question'}, taskText);
+      } else if (miningState == 'solved') {
+        miningProgressText = div({'class': 'solved'}, i18n.translate('Mining has finished!') + ' ' + i18n.translate('Work with discovered rules, or modify the rule pattern...'));
+      } else if (miningState == 'failed'){
+        miningProgressText = div({'class': 'failed'}, i18n.translate('Mining has failed! Please try to modify the rule pattern...'));
+      } else if (miningState == 'interrupted'){
+        miningProgressText = div({'class': 'interrupted'}, i18n.translate('Mining was interrupted. Please try to modify the rule pattern...'));
+      } else {
+        miningProgressText = div({'class':'info'},i18n.translate('Create an association rule pattern to start mining...')+' '+miningState);
       }
 
       section({id: 'active-rule'},
@@ -329,11 +347,13 @@ var UIStructureTemplater = new Class({
           div({id: 'succedent'}, h3(i18n.translate('Consequent')))
         ),
         div({'class': 'clearfix'}),
-        span({id: 'action-box', styles: {'visibility': taskBox ? 'visible' : 'hidden'}}, taskText),
-        a({id: 'start-mining', href: '#', styles: {'visibility': rules ? 'visible' : 'hidden'}}, i18n.translate('Mine rules...')),
-        a({id: 'stop-mining', href: '#', styles: {'visibility': miningInProgress ? 'visible' : 'hidden'}}, i18n.translate('Stop mining'))
+        div({id:'ar-action-box'},
+          //blok s akcemi pro AR Pattern
+          (rules ? a({id: 'start-mining', href: '#'}, i18n.translate('Mine rules...')) : ''),
+          (miningInProgress ? a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')) : ''),
+          miningProgressText
+        )
       );
-      //TODO přidání tlačítka pro spuštění minování...
     });
   },
 

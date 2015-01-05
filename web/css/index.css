@@ -1406,17 +1406,33 @@ section#active-rule .no-restriction {
   clear: left;
   cursor: help;
 }
-section#active-rule #action-box {
-  background: transparent url("../images/sprite-icons.png") -12px -307px no-repeat;
-  display: block;
-  height: 32px;
-  margin: 25px 0 10px;
-  padding: 9px 0 0 38px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
+section#active-rule #ar-action-box {
+  position: relative;
+  clear: both;
+  overflow: auto;
 }
-section#active-rule #stop-mining {
+section#active-rule #ar-action-box > div {
+  padding: 20px 0 20px 55px;
+}
+section#active-rule #ar-action-box > div.in_progress {
+  background: #fff url("../images/icon-loading-big.gif") left center no-repeat;
+}
+section#active-rule #ar-action-box > div.question {
+  background: #fff url("../images/icon_help_48.png") left center no-repeat;
+}
+section#active-rule #ar-action-box > div.solved {
+  background: #fff url("../images/icon_ok_48.png") left center no-repeat;
+}
+section#active-rule #ar-action-box > div.interrupted {
+  background: #fff url("../images/icon_stop_48.png") left center no-repeat;
+}
+section#active-rule #ar-action-box > div.failed {
+  background: #fff url("../images/icon_warning_48.png") left center no-repeat;
+}
+section#active-rule #ar-action-box > div.info {
+  background: #fff url("../images/icon_info_48.png") left center no-repeat;
+}
+section#active-rule #ar-action-box #stop-mining {
   background: #075783;
   font-size: 14px;
   font-family: 'Droid Sans', 'Arial', 'sans-serif';
@@ -1436,32 +1452,30 @@ section#active-rule #stop-mining {
   margin: 15px auto;
   font-size: 18.2px;
   min-width: 150px;
-  visibility: hidden;
-  position: absolute;
-  bottom: 0;
-  right: 10px;
+  float: right;
+  margin: 5px 0 5px 10px;
   border-color: #800000;
   background: #800000;
 }
-section#active-rule #stop-mining:hover,
-section#active-rule #stop-mining:focus {
+section#active-rule #ar-action-box #stop-mining:hover,
+section#active-rule #ar-action-box #stop-mining:focus {
   background: #2d83be;
   color: #fff;
   border: 1px solid #314e64;
   text-decoration: none;
 }
-section#active-rule #stop-mining:hover,
-section#active-rule #stop-mining:focus {
+section#active-rule #ar-action-box #stop-mining:hover,
+section#active-rule #ar-action-box #stop-mining:focus {
   background: #64ba12;
   color: #fff;
   border: 1px solid #4c8e0e;
 }
-section#active-rule #stop-mining:hover,
-section#active-rule #stop-mining:focus {
+section#active-rule #ar-action-box #stop-mining:hover,
+section#active-rule #ar-action-box #stop-mining:focus {
   border-color: #800000;
   background: #d50000;
 }
-section#active-rule #start-mining {
+section#active-rule #ar-action-box #start-mining {
   background: #075783;
   font-size: 14px;
   font-family: 'Droid Sans', 'Arial', 'sans-serif';
@@ -1481,20 +1495,18 @@ section#active-rule #start-mining {
   margin: 15px auto;
   font-size: 18.2px;
   min-width: 150px;
-  visibility: hidden;
-  position: absolute;
-  bottom: 0;
-  right: 10px;
+  margin: 5px 0 5px 10px;
+  float: right;
 }
-section#active-rule #start-mining:hover,
-section#active-rule #start-mining:focus {
+section#active-rule #ar-action-box #start-mining:hover,
+section#active-rule #ar-action-box #start-mining:focus {
   background: #2d83be;
   color: #fff;
   border: 1px solid #314e64;
   text-decoration: none;
 }
-section#active-rule #start-mining:hover,
-section#active-rule #start-mining:focus {
+section#active-rule #ar-action-box #start-mining:hover,
+section#active-rule #ar-action-box #start-mining:focus {
   background: #64ba12;
   color: #fff;
   border: 1px solid #4c8e0e;

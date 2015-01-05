@@ -11,6 +11,7 @@ var MiningManager = new Class({
   finishedStates: ['solved', 'interrupted'],
   errorStates: ['failed'],
   reqDelay: 2500,
+  miningState: null,
 
   initialize: function (config, settings, FRManager, dateHelper, taskManager) {
     this.config = config;
@@ -21,8 +22,8 @@ var MiningManager = new Class({
   },
 
   mineRules: function (rule, limitHits) {
-    console.log('mineRules');//XXX
     this.inProgress = true;
+    this.miningState=null;
     this.FRManager.handleInProgress();
     this.$taskManager.addTask(rule.serialize(), limitHits);
     this.makeRequest(JSON.encode(this.$taskManager.getActiveTask().getRequestData()));
@@ -71,6 +72,7 @@ var MiningManager = new Class({
 
     var state = responseJSON.state;
     var rulesCount = responseJSON.rulesCount;
+    this.miningState=state;
 
     if (this.finishedStates.contains(state)) {
       // task is finished
@@ -87,7 +89,7 @@ var MiningManager = new Class({
     if (!this.inProgress) {
       return;
     }
-    console.log('handleErrorRequest');//XXX
+    this.miningState='failed';
     this.stopMining();
     this.FRManager.handleError();
 //        throw 'Failed task: ID: ' + this.$taskManager.getActiveTask().getId() + ', source ID: ' + this.config.getIdDm();
@@ -104,6 +106,7 @@ var MiningManager = new Class({
     // stop remote LM mining
     if (this.inProgress) { // hack around req.cancel(); weird bug
       this.inProgress = false;
+      this.miningState='interrupted';
       this.stopRemoteMining(this.config.getStopMiningUrl(this.$taskManager.getActiveTask().getId()), this.$taskManager.getActiveTask().getDebug(), this.$taskManager.getActiveTask().getTaskMode());
     }
 
@@ -116,8 +119,11 @@ var MiningManager = new Class({
     return this.inProgress;
   },
 
+  getMiningState: function(){
+    return this.miningState;
+  },
+
   stopRemoteMining: function (url, debug, taskMode) {
-    console.log('stopRemoteMining');//XXX
     var data = JSON.encode({
       //taskId: taskId,
       debug: debug,
