@@ -47,8 +47,6 @@ var FRManager = new Class({
     this.reset();//TODO ??
     this.miningInProgress=true;
     this.UIPainter.renderActiveRule();
-    /*this.UIPainter.showStopMiningButton();*/
-    this.UIPainter.hideDownloadButtons();
     this.pager.setInProgress();
   },
 
@@ -223,7 +221,6 @@ var FRManager = new Class({
     this.pager.reset();
     this.maxIndex = 0;
     this.UIPainter.renderActiveRule();
-    this.UIPainter.hideDownloadButtons();
   },
 
   /* found rules */
@@ -291,10 +288,6 @@ var FRManager = new Class({
     this.saveMarkedRules();
   },
 
-  updateDownloadIcons: function (settingPath, resultPath) {
-    this.UIPainter.updateDownloadButtons(settingPath, resultPath);
-  },
-
   saveMarkedRules: function () {alert('saveMarkedRules');
     var rules = [];
     Array.each(this.$markedRules, function (rule) {
@@ -348,6 +341,6 @@ var FRManager = new Class({
 
     // Save the task
     this.saveMarkedRules();
-  },
+  }
 
 });

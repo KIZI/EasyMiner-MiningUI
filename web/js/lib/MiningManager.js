@@ -77,7 +77,6 @@ var MiningManager = new Class({
     if (this.finishedStates.contains(state)) {
       // task is finished
       this.inProgress = false;
-      this.FRManager.updateDownloadIcons(responseJSON.task, responseJSON.result);
     } else { // task is still running
       this.makeRequest.delay(this.reqDelay, this, data);
     }

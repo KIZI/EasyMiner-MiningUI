@@ -874,27 +874,6 @@ var UIPainter = new Class({
 		el.set('morph', {duration: duration});
 		el.morph(options);
 	},
-	
-    /*showStopMiningButton: function() {
-        $('stop-mining').setStyle('visibility', 'visible');
-    },
-
-    hideStopMiningButton: function() {
-        $('stop-mining').setStyle('visibility', 'hidden');
-    },*/
-
-    updateDownloadButtons: function(settingPath, resultPath) {
-        $('view-task-setting').setStyle('visibility', 'visible');
-        $('view-task-setting').set('href', settingPath);
-
-        $('view-task-result').setStyle('visibility', 'visible');
-        $('view-task-result').set('href', resultPath);
-    },
-
-    hideDownloadButtons: function() {
-        $('view-task-setting').setStyle('visibility', 'hidden');
-        $('view-task-result').setStyle('visibility', 'hidden');
-    },
 
     hideOverlay: function() {
         this.$UIStructurePainter.hideOverlay();

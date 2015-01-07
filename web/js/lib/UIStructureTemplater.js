@@ -48,8 +48,6 @@ var UIStructureTemplater = new Class({
               div({id: 'found-rules-paging'}),
               div({id: 'found-rules-pager'},
                 ul({'class': 'scroller'})),
-              a({id: 'view-task-setting', href: '#', target: '_blank'}, i18n.translate('Task setting')),//TODO remove
-              a({id: 'view-task-result', href: '#', target: '_blank'}, i18n.translate('Task result')),
               a({id: 'found-rules-pager-clear', href: '#'}, i18n.translate('Clear rules'))
             )
           )

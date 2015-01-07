@@ -1837,15 +1837,6 @@ section#active-rule #ar-action-box #start-mining:focus {
 #found-rules .found-rule:hover > .details {
   visibility: visible;
 }
-#found-rules #view-task-setting,
-#found-rules #view-task-result {
-  background: transparent url("../images/sprite-icons.png") -11px -557px no-repeat;
-  height: 26px;
-  float: left;
-  padding: 6px 0 0 37px;
-  margin: 5px 25px 0 0;
-  visibility: hidden;
-}
 #marked-rules {
   color: #434343;
   background-color: #fff;
