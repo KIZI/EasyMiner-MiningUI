@@ -26,6 +26,8 @@ var FRPager = new Class({
   elControlType: 'span',
 
   initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n) {
+    console.log('REFACTOR FRPager');
+    /*
     this.task = task;
     this.config = config;
     this.FL = FL;
@@ -38,12 +40,12 @@ var FRPager = new Class({
     this.clear = clear;
 
     this.content = this.container.getElement(this.innerElement);
-    this.content.set('tween', {transition: this.transition, duration: this.duration});
+    this.content.set('tween', {transition: this.transition, duration: this.duration});*/
 
     this.reset();
   },
 
-  reset: function () {
+  reset: function () {/*
     this.setInitialized();
 
     this.rulesCount = 0;
@@ -54,35 +56,17 @@ var FRPager = new Class({
     this.clear.setStyles({display: 'none'});
     this.content.empty();
     this.paging.empty();
-    this.foundRulesCount.empty();
+    this.foundRulesCount.empty();*/
   },
 
   setInitialized: function () {
+    /*
     this.label.removeProperty('class');
     this.label.addClass('mining-not-started');
     this.state = 'not_started';
-    this.label.set('text', this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'));
+    this.label.set('text', this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'));*/
   },
 
-  setInProgress: function () {
-    this.reset();
-    this.content.tween('margin-top', "-0px");
-    this.fireEvent('onScroll', this.currentPage);
-
-    this.label.removeProperty('class');
-    this.state = 'in_progress';
-    this.label.addClass('mining-in-progress');
-    this.label.set('text', this.i18n.translate('Mining is in progress, it may take a while to get the results.'));
-  },
-
-  setRulesCount: function (rulesCount) {//TODO
-    this.rulesCount = rulesCount;
-    this.foundRulesCount.set('text', 'found rules: ' + rulesCount);
-
-    if (this.rulesCount > 0) {
-      this.gotoPage(1);//FIXME
-    }
-  },
 
   setInterrupted: function (limit) {
     console.log('setInterrupted');
@@ -90,36 +74,6 @@ var FRPager = new Class({
     this.label.addClass('mining-stopped');
     this.state = 'stopped';
     this.label.set('text', 'Mining has been stopped, because maximum number of hypotheses has been found (' + limit + ').'); // TODO: Localize
-  },
-
-  setFinished: function () {
-    console.log('setFinished');
-    this.label.removeProperty('class');
-    this.label.addClass('mining-finished');
-    this.state = 'finished';
-    this.label.set('text', this.i18n.translate('Mining has finished!'));
-  },
-
-  setNoRules: function () {
-    this.label.removeProperty('class');
-    this.label.addClass('mining-norules');
-    this.state = 'no_rules';
-    this.label.set('text', this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'));
-    //TODO rulesCount content...
-  },
-
-  setStopped: function () {
-    console.log('setStopped');
-    this.label.removeProperty('class');
-    this.label.addClass('mining-stopped');
-    this.state = 'stopped';
-    this.label.set('text', this.i18n.translate('Mining has been stopped.'));
-  },
-
-  setError: function () {
-    this.label.removeProperty('class');
-    this.label.addClass('mining-error');
-    this.label.set('text', this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
   },
 
   /*
@@ -298,49 +252,6 @@ var FRPager = new Class({
     }.bind(this));
   },
 
-  gotoPage: function (locator) {
-    if (typeof locator === 'object') {
-      var page = $(locator.target).retrieve('page');
-      if (page === 'next') {
-        this.currentPage++;
-      } else if (page === 'prev') {
-        this.currentPage--;
-      } else {
-        this.currentPage = page;
-      }
-    } else if (locator != null) {
-      this.currentPage = locator;
-    }
-
-    var url = this.config.getGetRulesUrl(this.task.getId(), (this.currentPage - 1) * this.perPage, this.perPage, this.order);
-
-    //region načtení pravidel ze serveru...
-    var request = new Request.JSON({
-      url: url,
-      secure: true,
-      onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessRulesRequest(responseJSON);
-      }.bind(this),
-
-      onError: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this),
-
-      onFailure: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this),
-
-      onException: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this),
-
-      onTimeout: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this)
-
-    }).get();
-    //endregion
-  },
 
   handleSuccessRulesRequest: function (data) {
     //zjištění aktuálních měr zajímavosti

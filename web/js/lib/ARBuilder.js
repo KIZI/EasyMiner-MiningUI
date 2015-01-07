@@ -88,14 +88,14 @@ var ARBuilder = new Class({
     this.$FGC = this.dataParser.getFGC();
 
     this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
-    this.$FRManager = new FRManager(this.$config, this.getDefFL(), this.$rulesParser, this.settings, this.UIPainter, this.UIListener, this.$i18n);
+    this.$FRManager = new FRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$i18n);
     this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper(), new TaskManager(this.$config, this.settings));
     this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);
     this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
     this.$ETreeManager.setARManager(this.$ARManager);
 
     this.UIPainter.createUI(); // TODO resize window after
-    this.$FRManager.initPager();
+    //this.$FRManager.initPager();//TODO...
 
 
     // TODO: Odprasit
@@ -328,10 +328,9 @@ var ARBuilder = new Class({
     this.reloadData();
   },
 
-  createReport: function (taskId) {
+  createReport: function (taskId) {//TODO předělat
     this.$reportManager.createReport(
       taskId,
-      this.$FRManager.getMarkedRules(taskId),
       this.$FRManager.getTask(taskId).getName()
     );
   },
@@ -345,7 +344,8 @@ var ARBuilder = new Class({
   },
 
   openExportBusinessRulesDialog: function (taskId) {
-    this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+    alert('openExportBusinessRulesDialog');
+    //this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));
   },
 
   openBRBaseDialog: function () {
@@ -353,10 +353,12 @@ var ARBuilder = new Class({
   },
 
   exportRulesToBRBase: function (taskId) {//TODO Standa
-    this.$reportManager.exportRulesToBRBase(taskId, this.$FRManager.getMarkedRules(taskId));
+    alert('exportRulesToBRBase');
+    ///this.$reportManager.exportRulesToBRBase(taskId, this.$FRManager.getMarkedRules(taskId));
   },
 
   openModelTesterDialog: function (taskId) {
-    this.UIPainter.renderModelTesterDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+    alert('openModelTesterDialog');
+    ///this.UIPainter.renderModelTesterDialog(taskId, this.$FRManager.getMarkedRules(taskId));
   }
 });

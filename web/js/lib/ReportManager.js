@@ -12,23 +12,19 @@ var ReportManager = new Class({
         this.$reports = {};
     },
 
-    createReport: function(taskId, rules, taskName) {
-        var report = this.initReport(taskId, rules, taskName);
+    createReport: function(taskId, taskName) {
+        var report = this.initReport(taskId, taskName);
         this.saveReport(report);
     },
 
     /**
      * Report "factory" method that creates the method object and initializes it.
      * @param taskId Task ID.
-     * @param rules Association rules list.
      * @param taskName Task Name
      * @returns {Report} Initialised report.
      */
-    initReport: function(taskId, rules, taskName) {
+    initReport: function(taskId, taskName) {
         var report = new Report(taskId, taskName);
-        Array.each(rules, function(FR) {
-            report.addRule(FR.getRule());
-        }.bind(this));
 
         return report;
     },

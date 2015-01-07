@@ -368,7 +368,7 @@ var UIPainter = new Class({
     elUserAccount.inject($('settings'));
   },
 
-  renderMarkedRules: function (elementParent, markedRules) {
+  renderMarkedRules: function (elementParent/*, markedRules*/) {//TODO P. Duben
     var me = this;
 
     if (!elementParent) { // re-render
@@ -930,6 +930,39 @@ var UIPainter = new Class({
     // Positioning of Overlay after rendering
     this.$UIStructurePainter.posOverlay();
   },
+
+  //region FoundRules
+  renderFoundRules: function () {
+    //TODO funkce pro vykreslování sekce Discovered Rules
+    Mooml.render(
+      'foundRulesTemplate',
+      {
+        //rules: this.ARBuilder.getARManager().display4ftTaskBox(),
+        //attributes: this.ARBuilder.getARManager().displayETreeTaskBox(),
+        i18n: this.i18n,
+        FRManager: this.ARBuilder.$FRManager //,
+        //displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs(),
+        //miningInProgress: this.ARBuilder.getARManager().miningInProgress(),
+        //activeRuleChanged: this.ARBuilder.getARManager().getActiveRule().isChanged(),
+        //miningState: this.ARBuilder.getARManager().getMiningState()
+      }
+    ).replaces($('found-rules'));
+/*
+    var elementParent = $('antecedent');
+    this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);
+
+    Object.each(this.ARBuilder.getARManager().getActiveRule().getIMs(), function (IM, key) {
+      this.renderIM(IM);
+    }.bind(this));
+
+    var elementParent = $('succedent');
+    this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getSuccedent(), elementParent);
+
+    this.UIListener.registerActiveRuleEventHandlers(this.ARBuilder.getARManager().getActiveRule());
+*/
+    ///this.$UIStructurePainter.resizeApplication();
+  },
+  //endregion FoundRules
 
   /* navigation */
   showETreeProgress: function () {

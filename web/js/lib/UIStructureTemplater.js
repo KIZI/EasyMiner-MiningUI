@@ -4,6 +4,7 @@ var UIStructureTemplater = new Class({
     this.registerSettings();
     this.registerNavigation();
     this.registerActiveRule();
+    this.registerFoundRules();
     this.registerMarkedRules();
   },
 
@@ -40,16 +41,7 @@ var UIStructureTemplater = new Class({
         section({id: 'workplace', 'class': 'clearfix'},
           section({id: 'content'},
             section({id: 'active-rule'}),
-            section({id: 'found-rules'},
-              h2(i18n.translate('Discovered rules')),
-              div({id: 'found-rules-task-name'}),
-              div({id: 'found-rules-pager-label'}),
-              div({id: 'found-rules-count'}),
-              div({id: 'found-rules-paging'}),
-              div({id: 'found-rules-pager'},
-                ul({'class': 'scroller'})),
-              a({id: 'found-rules-pager-clear', href: '#'}, i18n.translate('Clear rules'))
-            )
+            section({id: 'found-rules'})
           )
         ),
         nav({id: 'navigation'})
@@ -359,6 +351,26 @@ var UIStructureTemplater = new Class({
         )
       );
     });
+  },
+
+  registerFoundRules: function () {
+    Mooml.register('foundRulesTemplate', function (data) {
+      var i18n = data.i18n;
+      var FRManager=data.FRManager;
+
+      section({id: 'found-rules'},//TODO předělat
+        h2(i18n.translate('Discovered rules')),
+        div({id: 'found-rules-task-name'})/*,
+        div({id: 'found-rules-pager'}),
+        div({id: 'found-rules-count'}),
+        div({id: 'found-rules-paging'}),
+        div({id: 'found-rules-pager'},
+          ul({'class': 'scroller'})),
+        a({id: 'found-rules-pager-clear', href: '#'}, i18n.translate('Clear rules'))*/
+      );
+    });
+
+
   },
 
   registerMarkedRules: function () {

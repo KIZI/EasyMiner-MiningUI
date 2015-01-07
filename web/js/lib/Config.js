@@ -149,10 +149,6 @@ var Config = new Class({//TODO Standa: update URLs
     return this.$easyMinerCenterUrl+this.loadMinerDataUrl;
   },
 
-  getSaveClipboardUrl: function () {
-    return this.$easyMinerCenterUrl+this.saveMinerDataUrl;
-  },
-
   getETreeGetURL: function () {
     return this.ETreeGetURL + "?id_dm=" + this.params.id_dm;
   },

@@ -6,7 +6,7 @@ var UITemplateRegistrator = new Class({
     this.registerClickAddAttributeWindow();
     this.registerAddCoefficientWindow();
     this.registerEditConnectiveWindow();
-    this.registerFoundRule();
+    this.registerFoundRules();
     this.registerMarkedRules();
     this.registerRuleIMs();
     this.registerAttributeWindow();
@@ -488,7 +488,10 @@ var UITemplateRegistrator = new Class({
     });
   },
 
-  registerFoundRule: function () {
+  registerFoundRules: function () {
+    /**
+     * Template for 1 found rule
+     */
     Mooml.register('foundRuleTemplate', function (data) {
       var key = data.key,
         foundRule = data.foundRule,
@@ -511,6 +514,31 @@ var UITemplateRegistrator = new Class({
         span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
       );
     });
+
+    Mooml.register('foundRuleTemplate', function (data) {
+      var key = data.key,
+        foundRule = data.foundRule,
+        i18n = data.i18n,
+        IMs = data.IMs;
+
+      li({id: foundRule.getCSSID(), 'class': 'found-rule'},
+        span({'class': 'rule'}, foundRule.getIdent()),
+        span({'class': 'info'}),
+//				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
+        a({id: foundRule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
+//				a({id: foundRule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
+        a({
+          id: foundRule.getFoundRuleCSSDetailsID(),
+          href: '#',
+          'class': 'details',
+          'title': i18n.translate('Rule details')
+        }),
+        div({'class': 'loading'}, ''),
+        span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
+      );
+    });
+    //TODO další dílčí šablony
+
   },
 
   registerRuleIMs: function () {

@@ -1,24 +1,33 @@
 var FRManager = new Class({
-  GetterSetter: ['markedRules'],
 
   config: null,
   FL: null,
-  rulesParser: null,
   settings: null,
   i18n: null,
   AJAXBalancer: null,
   UIPainter: null,
   UIListener: null,
-  //rules: {},
-  //$markedRules: [],
-  maxIndex: 0,
   tips: null,
+  //TODO dočasně
+  perPageOptions: [10, 20, 50, 100],
+
+  //nově používané proměnné s informacemi o stavu
+  task: null,
   miningInProgress: false,
 
-  initialize: function (config, FL, rulesParser, settings, UIPainter, UIListener, i18n) {
+  IMs: [],
+  rules: [],
+
+  rulesCount: 0,
+  rulesOrder: null,
+  rulesPerPage: null,
+  currentPage: null,
+  pagesCount: 0,
+
+
+  initialize: function (config, FL, settings, UIPainter, UIListener, i18n) {
     this.config = config;
     this.FL = FL;
-    this.rulesParser = rulesParser;//TODO remove...
     this.settings = settings;
     this.UIPainter = UIPainter;
     this.UIListener = UIListener;
@@ -34,42 +43,104 @@ var FRManager = new Class({
 
   },
 
-  initPager: function () {
-    this.pager = new FRPager($('found-rules-pager-label'), $('found-rules-paging'), $('found-rules-count'), $('found-rules-pager'), $('found-rules-pager-clear'),
-      this.task,
-      this.config,
-      this.FL,
-      this,
-      this.i18n);
-  },
-
-  handleInProgress: function () {
+  handleInProgress: function () {//xxx má fungovat
     this.reset();//TODO ??
     this.miningInProgress = true;
     this.UIPainter.renderActiveRule();
-    this.pager.setInProgress();
+    this.UIPainter.renderFoundRules();
   },
 
-  handleStoppedMining: function () {
+  handleStoppedMining: function () {//xxx má fungovat....
     /*this.UIPainter.hideStopMiningButton();*/
     this.miningInProgress = false;
     this.UIPainter.renderActiveRule();
-    this.pager.setStopped();
+    this.UIPainter.renderFoundRules();
   },
 
-  renderRules: function (rulesCount, inProgress, task) {
-    this.pager.task = task;
+  gotoPage: function(page){
+    //TODO zkontrolovat a vyčistit
+    if (typeof locator === 'object') {
+      var page = $(locator.target).retrieve('page');
+      if (page === 'next') {
+        this.currentPage++;
+      } else if (page === 'prev') {
+        this.currentPage--;
+      } else {
+        this.currentPage = page;
+      }
+    } else if (locator != null) {
+      this.currentPage = locator;
+    }
+
+    var url = this.config.getGetRulesUrl(this.task.getId(), (this.currentPage - 1) * this.perPage, this.perPage, this.order);
+
+    //region načtení pravidel ze serveru...
+    var request = new Request.JSON({
+      url: url,
+      secure: true,
+      onSuccess: function (responseJSON, responseText) {
+        this.handleSuccessRulesRequest(responseJSON);
+      }.bind(this),
+
+      onError: function () {
+        this.handleErrorRulesRequest();
+      }.bind(this),
+
+      onFailure: function () {
+        this.handleErrorRulesRequest();
+      }.bind(this),
+
+      onException: function () {
+        this.handleErrorRulesRequest();
+      }.bind(this),
+
+      onTimeout: function () {
+        this.handleErrorRulesRequest();
+      }.bind(this)
+
+    }).get();
+    //endregion
+  },
+
+  handleSuccessRulesRequest: function (data) {//FIXME
+    //zjištění aktuálních měr zajímavosti
+    this.IMs = this.FL.getRulesIMs(data.task.IMs);
+    this.rules = [];
+
+    Object.each(data.rules, function (value, key) {
+      this.rules.push(new FoundRule(key, value, this.task));
+    }.bind(this));
+
+    this.createControls();
+    this.renderRules();
+  },
+
+  handleErrorRulesRequest: function () {
+    alert('error while loading rules from server...');//FIXME dodělat nějakou smysluplnou hlášku
+    this.createControls();
+  },
+
+  setRulesCount: function(rulesCount){
+    this.rulesCount = rulesCount;
+    //XXX this.foundRulesCount.set('text', 'found rules: ' + rulesCount);
+
+    if (this.rulesCount > 0) {
+      this.gotoPage(1);//FIXME
+    }
+  },
+
+
+  renderRules: function (rulesCount, inProgress, task) {///xxx má fungovat...
+    this.task = task;
     this.miningInProgress = inProgress;
     // filter new rules
     //TODO remove: rules = this.filterRules(rules);
     /////var parsedRules = this.rulesParser.parse(rules, task);
 
     if (!inProgress && !rulesCount) {
-      this.pager.setNoRules();
-      /*this.UIPainter.hideStopMiningButton();*/
       this.UIPainter.renderActiveRule();
     } else {
-      this.pager.setRulesCount(rulesCount);
+      this.setRulesCount(rulesCount);
       /*if (numRules) {
        if (numRules > Object.getLength(this.rules)) { // new rules to render
        var els = [];
@@ -104,32 +175,16 @@ var FRManager = new Class({
 
       if (!inProgress) {
         if (rulesCount < this.settings.getRulesCnt()) {
-          this.pager.setFinished();
+          this.setFinished();
         } else {
-          this.pager.setInterrupted(this.settings.getRulesCnt());
+          this.setInterrupted(this.settings.getRulesCnt());
         }
       }
 
       this.UIPainter.renderActiveRule();
-
+      this.UIPainter.renderFoundRules();
     }
   },
-  /*
-   filterRules: function (rules) {
-   console.log('FRManager filterRules');
-   var filtered = [];
-   var i = 0;
-   Array.each(rules, function (rule, key) {
-   // TODO one rule
-   //if (!value.hasOwnProperty('value')) { return true; } // if one rule is returned, it does not have id
-
-   if (++i > this.maxIndex) {
-   filtered.push(rule);
-   }
-   }.bind(this));
-
-   return filtered;
-   },*/
 
   buildRequest: function (FR, URL, update) {
     console.log('FRManager buildRequest');
@@ -184,6 +239,11 @@ var FRManager = new Class({
   },
 
   // TODO refactor into single class
+  handleErrorRequest: function (FR) {//TODO ???
+    console.log('FRManager handleErrorRequest');
+    this.UIPainter.updateFoundRule(FR);
+  },
+
   handleSuccessRequest: function (FR, data) {
     console.log('FRManager handleSuccessRequest');
     if (data.confirmation.hits > 0 || data.exception.hits > 0) {
@@ -202,25 +262,19 @@ var FRManager = new Class({
     this.UIPainter.updateFoundRule(FR);
   },
 
-  handleErrorRequest: function (FR) {
-    console.log('FRManager handleErrorRequest');
-    this.UIPainter.updateFoundRule(FR);
-  },
 
   handleError: function () {
-    console.log('FRManager handleError');
-    this.pager.reset();
-    this.pager.setError();
     this.miningInProgress = false;
     this.UIPainter.renderActiveRule();
+    this.UIPainter.renderFoundRules();
   },
 
   reset: function () {
     this.AJAXBalancer.stopAllRequests();
-    this.rules = {};
-    this.pager.reset();
-    this.maxIndex = 0;
-    this.UIPainter.renderActiveRule();
+    this.setRulesCount(0);
+    this.miningInProgress = false;
+    //this.UIPainter.renderActiveRule();
+    //this.UIPainter.renderFoundRules();
   },
 
   /* found rules */
@@ -248,68 +302,10 @@ var FRManager = new Class({
   removeFoundRule: function (FR) {
     alert('removeFoundRule');
     this.AJAXBalancer.stopRequest(FR.getRule().getId());
-    this.pager.remove(FR.getCSSID());
 
     // index not interesting rule into KB
     this.buildRequest(FR, this.config.getBKSaveNotInterestingURL(), false);
     this.AJAXBalancer.run();
-  },
-
-  /* marked rules */
-  getMarkedRule: function (id) {
-    alert('getMarkedRule');
-    var rule = null;
-    Object.each(this.$markedRules, function (markedRule) {
-      if (id === markedRule.getId()) {
-        rule = markedRule;
-      }
-    }.bind(this));
-
-    return rule;
-  },
-
-  getMarkedRules: function (taskId) {
-    alert('getMarkedRules');
-    var rules = [];
-    this.$markedRules.each(function (rule) {
-      if (rule.getRule().getTask().getId() === taskId) {
-        rules.push(rule);
-      }
-    });
-
-    return rules;
-  },
-
-  removeMarkedRule: function (FR) {
-    alert('removeMarkedRules');
-    Object.each(this.$markedRules, function (MR, key) {
-      if (FR.getRule().getId() === MR.getRule().getId()) {
-        delete this.$markedRules[key];
-      }
-    }.bind(this));
-
-    this.UIPainter.renderMarkedRules(null, this.$markedRules);
-
-    this.saveMarkedRules();
-  },
-
-  saveMarkedRules: function () {
-    alert('saveMarkedRules');
-    var rules = [];
-    Array.each(this.$markedRules, function (rule) {
-      rules.push(rule.getRule().serialize());
-    });
-
-    var data = {
-      miner: this.config.getIdDm(),
-      type: 'clipboard',
-      data: JSON.stringify(rules)
-    };
-
-    var request = new Request.JSON({
-      url: this.config.getSaveClipboardUrl(),
-      secure: true
-    }).post(data);
   },
 
   /**
@@ -317,16 +313,17 @@ var FRManager = new Class({
    * @param taskId ID of the task to get.
    */
   getTask: function (taskId) {
+  //TODO ???
     // Declarations
     var task = null;
-
+/*
     // Find the task
     this.$markedRules.each(function (e) {
       if (e.$rule.task.$requestData.taskId == taskId) {
         task = e;
         return false;
       }
-    });
+    });*/
 
     // Return
     return task.$rule.task;
@@ -338,15 +335,14 @@ var FRManager = new Class({
    * @param newTaskName A new task name to set.
    */
   renameTask: function (taskId, newTaskName) {
+  //TODO Standa: předělat...
     // Rename the task
     var task = this.getTask(taskId);
     task.setName(newTaskName);
 
     // Refresh the task name
-    this.UIPainter.renderMarkedRules(null, this.$markedRules);
+    this.UIPainter.renderMarkedRules(null);
 
-    // Save the task
-    this.saveMarkedRules();
   }
 
 });
