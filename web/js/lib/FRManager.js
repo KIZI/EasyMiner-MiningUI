@@ -17,7 +17,7 @@ var FRManager = new Class({
 
   initialize: function (config, FL, rulesParser, settings, UIPainter, UIListener, i18n) {
     this.config = config;
-    this.FL=FL;
+    this.FL = FL;
     this.rulesParser = rulesParser;//TODO remove...
     this.settings = settings;
     this.UIPainter = UIPainter;
@@ -45,21 +45,21 @@ var FRManager = new Class({
 
   handleInProgress: function () {
     this.reset();//TODO ??
-    this.miningInProgress=true;
+    this.miningInProgress = true;
     this.UIPainter.renderActiveRule();
     this.pager.setInProgress();
   },
 
   handleStoppedMining: function () {
     /*this.UIPainter.hideStopMiningButton();*/
-    this.miningInProgress=false;
+    this.miningInProgress = false;
     this.UIPainter.renderActiveRule();
     this.pager.setStopped();
   },
 
   renderRules: function (rulesCount, inProgress, task) {
-    this.pager.task=task;
-    this.miningInProgress=inProgress;
+    this.pager.task = task;
+    this.miningInProgress = inProgress;
     // filter new rules
     //TODO remove: rules = this.filterRules(rules);
     /////var parsedRules = this.rulesParser.parse(rules, task);
@@ -68,39 +68,39 @@ var FRManager = new Class({
       this.pager.setNoRules();
       /*this.UIPainter.hideStopMiningButton();*/
       this.UIPainter.renderActiveRule();
-    } else{
+    } else {
       this.pager.setRulesCount(rulesCount);
-    /*if (numRules) {
-      if (numRules > Object.getLength(this.rules)) { // new rules to render
-        var els = [];
-        Array.each(parsedRules, function (r) {
-          var FR = new FoundRule(r);
-          this.rules[r.getId()] = FR;
-          els.push(Mooml.render('foundRuleTemplate', {
-            showFeedback: this.config.getShowFeedback(),
-            key: r.getId(),
-            FR: FR,
-            i18n: this.i18n,
-            BK: this.settings.getBKAutoSearch()
-          }));
-          if (this.settings.getBKAutoSearch()) {
-            this.buildRequest(FR, this.config.getBKAskURL(), true);
-          }
-        }.bind(this));
+      /*if (numRules) {
+       if (numRules > Object.getLength(this.rules)) { // new rules to render
+       var els = [];
+       Array.each(parsedRules, function (r) {
+       var FR = new FoundRule(r);
+       this.rules[r.getId()] = FR;
+       els.push(Mooml.render('foundRuleTemplate', {
+       showFeedback: this.config.getShowFeedback(),
+       key: r.getId(),
+       FR: FR,
+       i18n: this.i18n,
+       BK: this.settings.getBKAutoSearch()
+       }));
+       if (this.settings.getBKAutoSearch()) {
+       this.buildRequest(FR, this.config.getBKAskURL(), true);
+       }
+       }.bind(this));
 
-        // render
-        this.pager.add(els);
+       // render
+       this.pager.add(els);
 
-        // register handlers
-        Object.each(this.rules, function (FR) {
-          this.UIListener.registerFoundRuleEventHandlers(FR, this.settings.getBKAutoSearch());
-        }.bind(this));
+       // register handlers
+       Object.each(this.rules, function (FR) {
+       this.UIListener.registerFoundRuleEventHandlers(FR, this.settings.getBKAutoSearch());
+       }.bind(this));
 
 
-        if (this.settings.getBKAutoSearch()) {
-          this.AJAXBalancer.run.delay(500, this.AJAXBalancer);
-        }
-      }*/
+       if (this.settings.getBKAutoSearch()) {
+       this.AJAXBalancer.run.delay(500, this.AJAXBalancer);
+       }
+       }*/
 
       if (!inProgress) {
         if (rulesCount < this.settings.getRulesCnt()) {
@@ -114,22 +114,22 @@ var FRManager = new Class({
 
     }
   },
-/*
-  filterRules: function (rules) {
-    console.log('FRManager filterRules');
-    var filtered = [];
-    var i = 0;
-    Array.each(rules, function (rule, key) {
-      // TODO one rule
-      //if (!value.hasOwnProperty('value')) { return true; } // if one rule is returned, it does not have id
+  /*
+   filterRules: function (rules) {
+   console.log('FRManager filterRules');
+   var filtered = [];
+   var i = 0;
+   Array.each(rules, function (rule, key) {
+   // TODO one rule
+   //if (!value.hasOwnProperty('value')) { return true; } // if one rule is returned, it does not have id
 
-      if (++i > this.maxIndex) {
-        filtered.push(rule);
-      }
-    }.bind(this));
+   if (++i > this.maxIndex) {
+   filtered.push(rule);
+   }
+   }.bind(this));
 
-    return filtered;
-  },*/
+   return filtered;
+   },*/
 
   buildRequest: function (FR, URL, update) {
     console.log('FRManager buildRequest');
@@ -211,7 +211,7 @@ var FRManager = new Class({
     console.log('FRManager handleError');
     this.pager.reset();
     this.pager.setError();
-    this.miningInProgress=false;
+    this.miningInProgress = false;
     this.UIPainter.renderActiveRule();
   },
 
@@ -229,7 +229,8 @@ var FRManager = new Class({
     this.AJAXBalancer.run();
   },
 
-  markFoundRule: function (FR) {alert('označení pravidla...');
+  markFoundRule: function (FR) {
+    alert('označení pravidla...');
     this.AJAXBalancer.stopRequest(FR.getId());
 
     //TODO odeslání ajaxového požadavku pro přidání do rule clipboard
@@ -238,13 +239,14 @@ var FRManager = new Class({
 
     // index interesting rule into KB
     /*
-    this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
-    this.AJAXBalancer.run();
+     this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
+     this.AJAXBalancer.run();
 
-    this.saveMarkedRules();*/
+     this.saveMarkedRules();*/
   },
 
-  removeFoundRule: function (FR) {alert('removeFoundRule');
+  removeFoundRule: function (FR) {
+    alert('removeFoundRule');
     this.AJAXBalancer.stopRequest(FR.getRule().getId());
     this.pager.remove(FR.getCSSID());
 
@@ -254,7 +256,8 @@ var FRManager = new Class({
   },
 
   /* marked rules */
-  getMarkedRule: function (id) {alert('getMarkedRule');
+  getMarkedRule: function (id) {
+    alert('getMarkedRule');
     var rule = null;
     Object.each(this.$markedRules, function (markedRule) {
       if (id === markedRule.getId()) {
@@ -265,7 +268,8 @@ var FRManager = new Class({
     return rule;
   },
 
-  getMarkedRules: function (taskId) {alert('getMarkedRules');
+  getMarkedRules: function (taskId) {
+    alert('getMarkedRules');
     var rules = [];
     this.$markedRules.each(function (rule) {
       if (rule.getRule().getTask().getId() === taskId) {
@@ -276,7 +280,8 @@ var FRManager = new Class({
     return rules;
   },
 
-  removeMarkedRule: function (FR) {alert('removeMarkedRules');
+  removeMarkedRule: function (FR) {
+    alert('removeMarkedRules');
     Object.each(this.$markedRules, function (MR, key) {
       if (FR.getRule().getId() === MR.getRule().getId()) {
         delete this.$markedRules[key];
@@ -288,7 +293,8 @@ var FRManager = new Class({
     this.saveMarkedRules();
   },
 
-  saveMarkedRules: function () {alert('saveMarkedRules');
+  saveMarkedRules: function () {
+    alert('saveMarkedRules');
     var rules = [];
     Array.each(this.$markedRules, function (rule) {
       rules.push(rule.getRule().serialize());

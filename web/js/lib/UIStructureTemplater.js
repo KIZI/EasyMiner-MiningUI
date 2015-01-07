@@ -319,22 +319,22 @@ var UIStructureTemplater = new Class({
 
       if (activeRuleChanged) {
         //došlo ke změně vzoru pravidla
-        if(taskBox && taskText != '') {
+        if (taskBox && taskText != '') {
           miningProgressText = div({'class': 'question'}, taskText);
-        }else {
-          miningProgressText = div({'class':'info'},i18n.translate('Create an association rule pattern to start mining...'));
+        } else {
+          miningProgressText = div({'class': 'info'}, i18n.translate('Create an association rule pattern to start mining...'));
         }
-      }else{
+      } else {
         if (miningInProgress) {
           miningProgressText = div({'class': 'in_progress'}, i18n.translate('Mining is in progress, it may take a while to get the results.'));
         } else if (miningState == 'solved') {
           miningProgressText = div({'class': 'solved'}, i18n.translate('Mining has finished!') + ' ' + i18n.translate('Work with discovered rules, or modify the rule pattern...'));
-        } else if (miningState == 'failed'){
+        } else if (miningState == 'failed') {
           miningProgressText = div({'class': 'failed'}, i18n.translate('Mining has failed! Please try to modify the rule pattern...'));
-        } else if (miningState == 'interrupted'){
+        } else if (miningState == 'interrupted') {
           miningProgressText = div({'class': 'interrupted'}, i18n.translate('Mining was interrupted. Please try to modify the rule pattern...'));
         } else {
-          miningProgressText = div({'class':'info'},i18n.translate('Create an association rule pattern to start mining...'));
+          miningProgressText = div({'class': 'info'}, i18n.translate('Create an association rule pattern to start mining...'));
         }
       }
 
@@ -351,7 +351,7 @@ var UIStructureTemplater = new Class({
           div({id: 'succedent'}, h3(i18n.translate('Consequent')))
         ),
         div({'class': 'clearfix'}),
-        div({id:'ar-action-box'},
+        div({id: 'ar-action-box'},
           //blok s akcemi pro AR Pattern
           (rules ? a({id: 'start-mining', href: '#'}, i18n.translate('Mine rules...')) : ''),
           (miningInProgress ? a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')) : ''),

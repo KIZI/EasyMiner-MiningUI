@@ -23,15 +23,18 @@ var MiningManager = new Class({
 
   mineRules: function (rule, limitHits) {
     this.inProgress = true;
-    this.miningState=null;
+    this.miningState = null;
     this.FRManager.handleInProgress();
     this.$taskManager.addTask(rule.serialize(), limitHits);
     this.makeRequest(JSON.encode(this.$taskManager.getActiveTask().getRequestData()));
   },
 
   makeRequest: function (data) {
-    var activeTask=this.$taskManager.getActiveTask();
-    if (!activeTask){return ;/*TODO zobrazení info...*/}
+    var activeTask = this.$taskManager.getActiveTask();
+    if (!activeTask) {
+      return;
+      /*TODO zobrazení info...*/
+    }
     var request = new Request.JSON({
       url: this.config.getStartMiningUrl(activeTask.getId()),
       secure: true,
@@ -72,7 +75,7 @@ var MiningManager = new Class({
 
     var state = responseJSON.state;
     var rulesCount = responseJSON.rulesCount;
-    this.miningState=state;
+    this.miningState = state;
 
     if (this.finishedStates.contains(state)) {
       // task is finished
@@ -88,7 +91,7 @@ var MiningManager = new Class({
     if (!this.inProgress) {
       return;
     }
-    this.miningState='failed';
+    this.miningState = 'failed';
     this.stopMining();
     this.FRManager.handleError();
 //        throw 'Failed task: ID: ' + this.$taskManager.getActiveTask().getId() + ', source ID: ' + this.config.getIdDm();
@@ -105,7 +108,7 @@ var MiningManager = new Class({
     // stop remote LM mining
     if (this.inProgress) { // hack around req.cancel(); weird bug
       this.inProgress = false;
-      this.miningState='interrupted';
+      this.miningState = 'interrupted';
       this.stopRemoteMining(this.config.getStopMiningUrl(this.$taskManager.getActiveTask().getId()), this.$taskManager.getActiveTask().getDebug(), this.$taskManager.getActiveTask().getTaskMode());
     }
 
@@ -118,7 +121,7 @@ var MiningManager = new Class({
     return this.inProgress;
   },
 
-  getMiningState: function(){
+  getMiningState: function () {
     return this.miningState;
   },
 

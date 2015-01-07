@@ -1,14 +1,13 @@
-
 var FRPager = new Class({
   Implements: [Options, Events],
 
-  perPageOptions:[10,20,50,100],
+  perPageOptions: [10, 20, 50, 100],
   task: null,
   config: null,
-  FL:null,
-  FRManager:null,
-  IMs:[],
-  rules:[],
+  FL: null,
+  FRManager: null,
+  IMs: [],
+  rules: [],
   state: null,
 
   innerElement: '.scroller',
@@ -26,12 +25,12 @@ var FRPager = new Class({
   nextSymbol: '>',
   elControlType: 'span',
 
-  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n){
-    this.task=task;
-    this.config=config;
+  initialize: function (label, paging, foundRulesCount, container, clear, task, config, FL, FRManager, i18n) {
+    this.task = task;
+    this.config = config;
     this.FL = FL;
-    this.FRManager=FRManager;
-    this.i18n=i18n;
+    this.FRManager = FRManager;
+    this.i18n = i18n;
     this.label = label;
     this.paging = paging;
     this.foundRulesCount = foundRulesCount;
@@ -48,7 +47,7 @@ var FRPager = new Class({
     this.setInitialized();
 
     this.rulesCount = 0;
-    this.rules=[];
+    this.rules = [];
     this.numPages = 1;
     this.currentPage = 1;
     this.container.setStyles({display: 'none'});
@@ -61,7 +60,7 @@ var FRPager = new Class({
   setInitialized: function () {
     this.label.removeProperty('class');
     this.label.addClass('mining-not-started');
-    this.state='not_started';
+    this.state = 'not_started';
     this.label.set('text', this.i18n.translate('No discovered rules yet. Create an association rule pattern to start mining.'));
   },
 
@@ -71,16 +70,16 @@ var FRPager = new Class({
     this.fireEvent('onScroll', this.currentPage);
 
     this.label.removeProperty('class');
-    this.state='in_progress';
+    this.state = 'in_progress';
     this.label.addClass('mining-in-progress');
     this.label.set('text', this.i18n.translate('Mining is in progress, it may take a while to get the results.'));
   },
 
-  setRulesCount: function(rulesCount){//TODO
-    this.rulesCount=rulesCount;
-    this.foundRulesCount.set('text','found rules: '+rulesCount);
+  setRulesCount: function (rulesCount) {//TODO
+    this.rulesCount = rulesCount;
+    this.foundRulesCount.set('text', 'found rules: ' + rulesCount);
 
-    if (this.rulesCount>0){
+    if (this.rulesCount > 0) {
       this.gotoPage(1);//FIXME
     }
   },
@@ -89,22 +88,22 @@ var FRPager = new Class({
     console.log('setInterrupted');
     this.label.removeProperty('class');
     this.label.addClass('mining-stopped');
-    this.state='stopped';
+    this.state = 'stopped';
     this.label.set('text', 'Mining has been stopped, because maximum number of hypotheses has been found (' + limit + ').'); // TODO: Localize
   },
 
-  setFinished: function (){
+  setFinished: function () {
     console.log('setFinished');
     this.label.removeProperty('class');
     this.label.addClass('mining-finished');
-    this.state='finished';
+    this.state = 'finished';
     this.label.set('text', this.i18n.translate('Mining has finished!'));
   },
 
-  setNoRules: function (){
+  setNoRules: function () {
     this.label.removeProperty('class');
     this.label.addClass('mining-norules');
-    this.state='no_rules';
+    this.state = 'no_rules';
     this.label.set('text', this.i18n.translate('No discovered rules. Try to change the association rule pattern and start mining again.'));
     //TODO rulesCount content...
   },
@@ -113,7 +112,7 @@ var FRPager = new Class({
     console.log('setStopped');
     this.label.removeProperty('class');
     this.label.addClass('mining-stopped');
-    this.state='stopped';
+    this.state = 'stopped';
     this.label.set('text', this.i18n.translate('Mining has been stopped.'));
   },
 
@@ -123,27 +122,27 @@ var FRPager = new Class({
     this.label.set('text', this.i18n.translate('An error occured during mining. Try to start mining again or create new data mining task.'));
   },
 
-/*
-  add: function (rules) {alert('přidání pravidla do rule clipboard!');
-    //Array.each(rules, function (r, key) {
-    //  this.rules.push(r);
-    //}.bind(this));
-    this.createControls();
-    this.render(rules);
-  },
+  /*
+   add: function (rules) {alert('přidání pravidla do rule clipboard!');
+   //Array.each(rules, function (r, key) {
+   //  this.rules.push(r);
+   //}.bind(this));
+   this.createControls();
+   this.render(rules);
+   },
 
-  remove: function (loc) {alert('přepracovat!');
+   remove: function (loc) {alert('přepracovat!');
    /* var el = $(loc);
-    this.rules.erase(el);
-    el.destroy();
+   this.rules.erase(el);
+   el.destroy();
 
-    this.numPages = Math.max(Math.ceil(this.rulesCount / this.perPage), 1);
-    if (this.numPages < this.currentPage) { // scroll to last page
-      this.currentPage = this.numPages;
-      this.gotoPage(this.currentPage);
-    }
-    this.createControls();
-  },*/
+   this.numPages = Math.max(Math.ceil(this.rulesCount / this.perPage), 1);
+   if (this.numPages < this.currentPage) { // scroll to last page
+   this.currentPage = this.numPages;
+   this.gotoPage(this.currentPage);
+   }
+   this.createControls();
+   },*/
 
   createControls: function () {
     this.paging.empty();
@@ -208,53 +207,54 @@ var FRPager = new Class({
 
   },
 
-  createOrderSelect: function(){//FIXME
-    var orderElement = new Element('span',{'id':'fr-order-count'});
+  createOrderSelect: function () {//FIXME
+    var orderElement = new Element('span', {'id': 'fr-order-count'});
 
-    orderElement.grab(new Element('label',{for:'fr-order',html:this.i18n.translate('order:')}));
-    var orderSelect=new Element('select',
-      {'id':'fr-order',
+    orderElement.grab(new Element('label', {for: 'fr-order', html: this.i18n.translate('order:')}));
+    var orderSelect = new Element('select',
+      {
+        'id': 'fr-order',
         events: {
-          change: function (e){
-            this.order=e.target.get('value');
+          change: function (e) {
+            this.order = e.target.get('value');
             e.stop();
             this.gotoPage(1);
           }.bind(this)
         }
       }
     );
-    var IMs=this.getIMs();
-    var order=this.order;
-    Array.each(IMs,function(IM){
-      var option=new Element('option',{value:IM.getName(),text:IM.getLocalizedName()});
-      if (IM.getName()==order){
-        option.setAttribute('selected','selected');
+    var IMs = this.getIMs();
+    var order = this.order;
+    Array.each(IMs, function (IM) {
+      var option = new Element('option', {value: IM.getName(), text: IM.getLocalizedName()});
+      if (IM.getName() == order) {
+        option.setAttribute('selected', 'selected');
       }
       orderSelect.grab(option);
-    }.bind([order,orderSelect]));
+    }.bind([order, orderSelect]));
     orderElement.grab(orderSelect);
 
-    orderElement.grab(new Element('label',{for:'fr-per-page',html:this.i18n.translate('Rules per page:')}));
+    orderElement.grab(new Element('label', {for: 'fr-per-page', html: this.i18n.translate('Rules per page:')}));
     var perPageSelect = new Element('select',
       {
-        id:'fr-per-page',
+        id: 'fr-per-page',
         events: {
-          change: function (e){
-            this.perPage=e.target.get('value');
+          change: function (e) {
+            this.perPage = e.target.get('value');
             e.stop();
             this.gotoPage(1);
           }.bind(this)
         }
       }
     );
-    var perPage=this.perPage;
-    Array.each(this.perPageOptions,function(perPageCount){
-      var option=new Element('option',{value:perPageCount,text:perPageCount});
-      if (perPage==perPageCount){
-        option.setAttribute('selected','selected');
+    var perPage = this.perPage;
+    Array.each(this.perPageOptions, function (perPageCount) {
+      var option = new Element('option', {value: perPageCount, text: perPageCount});
+      if (perPage == perPageCount) {
+        option.setAttribute('selected', 'selected');
       }
       perPageSelect.grab(option)
-    }.bind([perPageSelect,perPage]));
+    }.bind([perPageSelect, perPage]));
     orderElement.grab(perPageSelect);
     return orderElement
   },
@@ -288,7 +288,7 @@ var FRPager = new Class({
     this.content.empty();
 
     Array.each(this.rules, function (foundRule, key) {
-      this.content.grab(Mooml.render('foundRuleTemplate',{
+      this.content.grab(Mooml.render('foundRuleTemplate', {
         foundRule: foundRule,
         i18n: this.i18n,
         IMs: this.IMs
@@ -308,11 +308,11 @@ var FRPager = new Class({
       } else {
         this.currentPage = page;
       }
-    } else if (locator != null){
+    } else if (locator != null) {
       this.currentPage = locator;
     }
 
-    var url=this.config.getGetRulesUrl(this.task.getId(),(this.currentPage-1)*this.perPage,this.perPage,this.order);
+    var url = this.config.getGetRulesUrl(this.task.getId(), (this.currentPage - 1) * this.perPage, this.perPage, this.order);
 
     //region načtení pravidel ze serveru...
     var request = new Request.JSON({
@@ -342,29 +342,29 @@ var FRPager = new Class({
     //endregion
   },
 
-  handleSuccessRulesRequest: function(data){
+  handleSuccessRulesRequest: function (data) {
     //zjištění aktuálních měr zajímavosti
     this.setIMs(this.FL.getRulesIMs(data.task.IMs));
-    this.rules=[];
+    this.rules = [];
 
-    Object.each(data.rules,function(value,key){
-      this.rules.push(new FoundRule(key,value,this.task));
+    Object.each(data.rules, function (value, key) {
+      this.rules.push(new FoundRule(key, value, this.task));
     }.bind(this));
 
     this.createControls();
     this.renderRules();
   },
 
-  handleErrorRulesRequest: function(){
+  handleErrorRulesRequest: function () {
     alert('error while loading rules from server...');//FIXME dodělat nějakou smysluplnou hlášku
     this.createControls();
   },
 
-  setIMs:function(IMs){
-    this.IMs=IMs;
+  setIMs: function (IMs) {
+    this.IMs = IMs;
   },
 
-  getIMs:function(){
+  getIMs: function () {
     return this.IMs;
   }
 
