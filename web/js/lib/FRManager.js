@@ -57,7 +57,7 @@ var FRManager = new Class({
     this.UIPainter.renderFoundRules();
   },
 
-  gotoPage: function(page){
+  gotoPage: function(locator){
     //TODO zkontrolovat a vyčistit
     if (typeof locator === 'object') {
       var page = $(locator.target).retrieve('page');
@@ -72,7 +72,7 @@ var FRManager = new Class({
       this.currentPage = locator;
     }
 
-    var url = this.config.getGetRulesUrl(this.task.getId(), (this.currentPage - 1) * this.perPage, this.perPage, this.order);
+    var url = this.config.getGetRulesUrl(this.task.getId(), (this.currentPage - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
 
     //region načtení pravidel ze serveru...
     var request = new Request.JSON({
@@ -111,13 +111,12 @@ var FRManager = new Class({
       this.rules.push(new FoundRule(key, value, this.task));
     }.bind(this));
 
-    this.createControls();
-    this.renderRules();
+    this.UIPainter.renderFoundRules();
   },
 
   handleErrorRulesRequest: function () {
     alert('error while loading rules from server...');//FIXME dodělat nějakou smysluplnou hlášku
-    this.createControls();
+    this.UIPainter.renderFoundRules();
   },
 
   setRulesCount: function(rulesCount){
@@ -125,7 +124,10 @@ var FRManager = new Class({
     //XXX this.foundRulesCount.set('text', 'found rules: ' + rulesCount);
 
     if (this.rulesCount > 0) {
-      this.gotoPage(1);//FIXME
+      this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
+      this.gotoPage(1);
+    }else{
+      this.pagesCount=0;
     }
   },
 
@@ -174,11 +176,13 @@ var FRManager = new Class({
        }*/
 
       if (!inProgress) {
+        /*TODO
         if (rulesCount < this.settings.getRulesCnt()) {
           this.setFinished();
         } else {
           this.setInterrupted(this.settings.getRulesCnt());
         }
+        */
       }
 
       this.UIPainter.renderActiveRule();

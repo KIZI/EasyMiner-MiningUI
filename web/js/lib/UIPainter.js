@@ -447,9 +447,10 @@ var UIPainter = new Class({
         displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs(),
         miningInProgress: this.ARBuilder.getARManager().miningInProgress(),
         activeRuleChanged: this.ARBuilder.getARManager().getActiveRule().isChanged(),
-        miningState: this.ARBuilder.getARManager().getMiningState()
+        miningState: this.ARBuilder.getARManager().getMiningState(),
+        foundRulesCount: this.ARBuilder.$FRManager.rulesCount
       }
-    ).replaces($('active-rule'));
+    ).replaces($('active-rule'));//XXX
 
     var elementParent = $('antecedent');
     this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);
@@ -935,31 +936,14 @@ var UIPainter = new Class({
   renderFoundRules: function () {
     //TODO funkce pro vykreslování sekce Discovered Rules
     Mooml.render(
-      'foundRulesTemplate',
+      'foundRulesStructureTemplate',
       {
-        //rules: this.ARBuilder.getARManager().display4ftTaskBox(),
-        //attributes: this.ARBuilder.getARManager().displayETreeTaskBox(),
         i18n: this.i18n,
-        FRManager: this.ARBuilder.$FRManager //,
-        //displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs(),
-        //miningInProgress: this.ARBuilder.getARManager().miningInProgress(),
-        //activeRuleChanged: this.ARBuilder.getARManager().getActiveRule().isChanged(),
-        //miningState: this.ARBuilder.getARManager().getMiningState()
+        FRManager: this.ARBuilder.$FRManager,
+        UIListener: this.UIListener
       }
     ).replaces($('found-rules'));
-/*
-    var elementParent = $('antecedent');
-    this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);
 
-    Object.each(this.ARBuilder.getARManager().getActiveRule().getIMs(), function (IM, key) {
-      this.renderIM(IM);
-    }.bind(this));
-
-    var elementParent = $('succedent');
-    this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getSuccedent(), elementParent);
-
-    this.UIListener.registerActiveRuleEventHandlers(this.ARBuilder.getARManager().getActiveRule());
-*/
     ///this.$UIStructurePainter.resizeApplication();
   },
   //endregion FoundRules

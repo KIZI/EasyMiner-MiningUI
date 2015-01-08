@@ -486,6 +486,7 @@ var UIListener = new Class({
   },
 
   registerFoundRuleEventHandlers: function (FR/*, autoSearch*/) {
+    console.log('registerFoundRuleEventHandlers');
     var el;
 /*
     if (!autoSearch) { // ask background knowledge

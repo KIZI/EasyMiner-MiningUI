@@ -230,21 +230,6 @@ var UIStructureListener = new Class({
         }.bind(this));
     },
 
-    registerFoundRulesEventHandlers: function() {
-        // stop mining
-        /*$('stop-mining').addEvent('click', function (e) {
-            e.stop();
-            this.$ARBuilder.getMiningManager().stopMining();
-        }.bind(this));
-*/
-        //TODO nebude mít smysl...
-        // clear rules
-        /*
-        $('found-rules-pager-clear').addEvent('click', function (e) {
-            e.stop();
-            this.$ARBuilder.getFRManager().reset();
-        }.bind(this));*/
-    },
 
     registerMarkedRulesEventHandlers: function () {
         var elDropdown = $$('#marked-rules a.toggle')[0];

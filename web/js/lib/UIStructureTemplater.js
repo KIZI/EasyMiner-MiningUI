@@ -320,7 +320,11 @@ var UIStructureTemplater = new Class({
         if (miningInProgress) {
           miningProgressText = div({'class': 'in_progress'}, i18n.translate('Mining is in progress, it may take a while to get the results.'));
         } else if (miningState == 'solved') {
-          miningProgressText = div({'class': 'solved'}, i18n.translate('Mining has finished!') + ' ' + i18n.translate('Work with discovered rules, or modify the rule pattern...'));
+          if (data.foundRulesCount==0){
+            miningProgressText = div({'class': 'solved'}, i18n.translate('Mining has finished, but no rules were found!'),' ', i18n.translate('Try to modify the rule pattern...'));
+          }else{
+            miningProgressText = div({'class': 'solved'}, i18n.translate('Mining has finished!'), ' ', i18n.translate('Work with discovered rules, or modify the rule pattern...'));
+          }
         } else if (miningState == 'failed') {
           miningProgressText = div({'class': 'failed'}, i18n.translate('Mining has failed! Please try to modify the rule pattern...'));
         } else if (miningState == 'interrupted') {
@@ -354,20 +358,21 @@ var UIStructureTemplater = new Class({
   },
 
   registerFoundRules: function () {
-    Mooml.register('foundRulesTemplate', function (data) {
-      var i18n = data.i18n;
+    Mooml.register('foundRulesStructureTemplate', function (data) {
       var FRManager=data.FRManager;
+      if (FRManager.rulesCount>0){
+        //máme nějaká pravidla pro zobrazení
+        section({id: 'found-rules'},
+          h2(data.i18n.translate('Discovered rules')),
+          div({id: 'found-rules-task-name'},'TODO: task name'),//TODO task name...
+          div({id: 'found-rules-rules-count'},data.i18n.translate('Found rules:'),' ',strong(FRManager.rulesCount)),
+          Mooml.render('foundRulesControlsTemplate',data),
+          Mooml.render('foundRulesTemplate',data)
+        );
+      }else{
+        section({id:'found-rules'});
+      }
 
-      section({id: 'found-rules'},//TODO předělat
-        h2(i18n.translate('Discovered rules')),
-        div({id: 'found-rules-task-name'})/*,
-        div({id: 'found-rules-pager'}),
-        div({id: 'found-rules-count'}),
-        div({id: 'found-rules-paging'}),
-        div({id: 'found-rules-pager'},
-          ul({'class': 'scroller'})),
-        a({id: 'found-rules-pager-clear', href: '#'}, i18n.translate('Clear rules'))*/
-      );
     });
 
 

@@ -493,7 +493,7 @@ var UITemplateRegistrator = new Class({
      * Template for 1 found rule
      */
     Mooml.register('foundRuleTemplate', function (data) {
-      var key = data.key,
+      var
         foundRule = data.foundRule,
         i18n = data.i18n,
         IMs = data.IMs;
@@ -515,29 +515,79 @@ var UITemplateRegistrator = new Class({
       );
     });
 
-    Mooml.register('foundRuleTemplate', function (data) {
-      var key = data.key,
-        foundRule = data.foundRule,
-        i18n = data.i18n,
-        IMs = data.IMs;
+    Mooml.register('foundRulesTemplate',function(data){
+      console.log(data);
+      //TODO bez pravidel by tu měla být informace o načítání...
+      var FRManager = data.FRManager;
+      var foundRulesContainer = ul({id:'found-rules-rules'});
 
-      li({id: foundRule.getCSSID(), 'class': 'found-rule'},
-        span({'class': 'rule'}, foundRule.getIdent()),
-        span({'class': 'info'}),
-//				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
-        a({id: foundRule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
-//				a({id: foundRule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
-        a({
-          id: foundRule.getFoundRuleCSSDetailsID(),
-          href: '#',
-          'class': 'details',
-          'title': i18n.translate('Rule details')
-        }),
-        div({'class': 'loading'}, ''),
-        span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
+      Array.each(FRManager.rules,function(foundRule){
+        foundRulesContainer.grab(Mooml.render('foundRuleTemplate',{
+          IMs: data.FRManager.IMs,
+          foundRule: foundRule,
+          i18n: data.i18n
+        }));
+
+        data.UIListener.registerFoundRuleEventHandlers(foundRule);
+
+      }.bind([data,foundRulesContainer]));
+
+    });
+
+    Mooml.register('foundRulesPaginator',function(data){div('found rules paginator...')});
+
+    Mooml.register('foundRulesControlsTemplate', function (data) {
+      var i18n = data.i18n,
+          IMs = data.FRManager.IMs,
+          FRManager = data.FRManager;
+
+      var orderSelect=select({
+        id:'found-rules-order',
+        events: {
+          change: function (e) {
+            FRManager.rulesOrder = e.target.get('value');
+            e.stop();
+            FRManager.gotoPage(1);
+          }.bind(FRManager)
+        }
+      });
+      Array.each(IMs, function (IM) {
+        var option = new Element('option', {value: IM.getName(), text: IM.getLocalizedName()});
+        if (IM.getName() == FRManager.rulesOrder) {
+          option.setAttribute('selected', 'selected');
+        }
+        orderSelect.grab(option);
+      }.bind([FRManager, orderSelect]));
+
+      var perPageSelect = new Element('select',
+        {
+          id: 'found-rules-per-page',
+          events: {
+            change: function (e) {
+              FRManager.perPage = e.target.get('value');
+              e.stop();
+              FRManager.gotoPage(1);
+            }.bind(FRManager)
+          }
+        }
+      );
+      var perPage = FRManager.perPage;
+      Array.each(FRManager.perPageOptions, function (perPageCount) {
+        var option = new Element('option', {value: perPageCount, text: perPageCount});
+        if (perPage == perPageCount) {
+          option.setAttribute('selected', 'selected');
+        }
+        perPageSelect.grab(option)
+      }.bind([perPageSelect, perPage]));
+
+      div({'class':'found-rules-controls'},
+        (FRManager.pagesCount>1 ? div(Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n})) : ''),
+        label({'for':'found-rules-order'},i18n.translate('Rules order:')),
+        orderSelect,
+        label({'for':'found-rules-per-page'},i18n.translate('Rules per page:')),
+        perPageSelect
       );
     });
-    //TODO další dílčí šablony
 
   },
 
