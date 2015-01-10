@@ -8,8 +8,6 @@ var FRManager = new Class({
   UIPainter: null,
   UIListener: null,
   tips: null,
-  //TODO dočasně
-  perPageOptions: [10, 20, 50, 100],
 
   //nově používané proměnné s informacemi o stavu
   task: null,
@@ -27,6 +25,10 @@ var FRManager = new Class({
 
   initialize: function (config, FL, settings, UIPainter, UIListener, i18n) {
     this.config = config;
+    var perPageOptions=this.getPerPageOptions();
+    this.rulesPerPage=perPageOptions[0];
+    console.log(config);
+
     this.FL = FL;
     this.settings = settings;
     this.UIPainter = UIPainter;
@@ -43,21 +45,21 @@ var FRManager = new Class({
 
   },
 
-  handleInProgress: function () {//xxx má fungovat
-    this.reset();//TODO ??
+  handleInProgress: function () {
+    this.reset();
     this.miningInProgress = true;
     this.UIPainter.renderActiveRule();
     this.UIPainter.renderFoundRules();
   },
 
-  handleStoppedMining: function () {//xxx má fungovat....
-    /*this.UIPainter.hideStopMiningButton();*/
+  handleStoppedMining: function () {
     this.miningInProgress = false;
     this.UIPainter.renderActiveRule();
     this.UIPainter.renderFoundRules();
   },
 
   gotoPage: function(locator){
+    console.log('gotoPage '+locator);
     //TODO zkontrolovat a vyčistit
     if (typeof locator === 'object') {
       var page = $(locator.target).retrieve('page');
@@ -121,18 +123,14 @@ var FRManager = new Class({
 
   setRulesCount: function(rulesCount){
     this.rulesCount = rulesCount;
-    //XXX this.foundRulesCount.set('text', 'found rules: ' + rulesCount);
-
+    this.calculatePagesCount();
     if (this.rulesCount > 0) {
-      this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
       this.gotoPage(1);
-    }else{
-      this.pagesCount=0;
     }
   },
 
 
-  renderRules: function (rulesCount, inProgress, task) {///xxx má fungovat...
+  renderRules: function (rulesCount, inProgress, task) {
     this.task = task;
     this.miningInProgress = inProgress;
     // filter new rules
@@ -190,56 +188,49 @@ var FRManager = new Class({
     }
   },
 
-  buildRequest: function (FR, URL, update) {
+  buildRequest: function (foundRule, URL, update) {//TODO předělat ajax balancer
     console.log('FRManager buildRequest');
-    var reqData = {
-      limitHits: 1,
-      rule0: FR.getRule().serialize(),
-      rules: 1,
-      debug: this.settings.getDebug(),
-      joomlaUrl: this.config.getJoomlaURL()
-    };
 
     var options = {
       url: URL,
       secure: true,
 
       onRequest: function () {
-        if (update) {
-          this.UIPainter.showFRLoading(FR);
+        if (update){
+          this.UIPainter.showFRLoading(foundRule);
         }
       }.bind(this),
 
       onSuccess: function (responseJSON, responseText) {
         if (update && responseJSON.status == 'ok') {
-          this.handleSuccessRequest(FR, responseJSON);
+          this.handleSuccessRequest(foundRule, responseJSON);
         } else {
-          this.handleErrorRequest(FR);
+          this.handleErrorRequest(foundRule);
         }
       }.bind(this),
 
       onError: function () {
-        this.handleErrorRequest(FR);
+        this.handleErrorRequest(foundRule);
       }.bind(this),
 
       onCancel: function () {
-        this.handleErrorRequest(FR);
+        this.handleErrorRequest(foundRule);
       }.bind(this),
 
       onFailure: function () {
-        this.handleErrorRequest(FR);
+        this.handleErrorRequest(foundRule);
       }.bind(this),
 
       onException: function () {
-        this.handleErrorRequest(FR);
+        this.handleErrorRequest(foundRule);
       }.bind(this),
 
       onTimeout: function () {
-        this.handleErrorRequest(FR);
+        this.handleErrorRequest(foundRule);
       }.bind(this)
     };
 
-    this.AJAXBalancer.addRequest(options, JSON.encode(reqData), FR.getRule().getId());
+    this.AJAXBalancer.addRequest(options, JSON.encode(reqData), foundRule.getCSSID());
   },
 
   // TODO refactor into single class
@@ -277,8 +268,6 @@ var FRManager = new Class({
     this.AJAXBalancer.stopAllRequests();
     this.setRulesCount(0);
     this.miningInProgress = false;
-    //this.UIPainter.renderActiveRule();
-    //this.UIPainter.renderFoundRules();
   },
 
   /* found rules */
@@ -287,9 +276,25 @@ var FRManager = new Class({
     this.AJAXBalancer.run();
   },
 
-  markFoundRule: function (FR) {
+  markFoundRule: function (foundRule) {
     alert('označení pravidla...');
-    this.AJAXBalancer.stopRequest(FR.getId());
+    this.AJAXBalancer.stopRequest(foundRule.getId());
+
+    //TODO odeslání ajaxového požadavku pro přidání do rule clipboard
+    //TODO vykreslení pravidla v rule clipboard
+    //this.UIPainter.renderMarkedRules(null, this.$markedRules);
+
+    // index interesting rule into KB
+    /*
+     this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
+     this.AJAXBalancer.run();
+
+     this.saveMarkedRules();*/
+  },
+
+  unmarkFoundRule: function (foundRule) {
+    alert('odznačení pravidla...');
+    this.AJAXBalancer.stopRequest(foundRule.getId());
 
     //TODO odeslání ajaxového požadavku pro přidání do rule clipboard
     //TODO vykreslení pravidla v rule clipboard
@@ -347,6 +352,24 @@ var FRManager = new Class({
     // Refresh the task name
     this.UIPainter.renderMarkedRules(null);
 
+  },
+
+  getPerPageOptions: function(){
+    return this.config.getPerPageOptions();
+  },
+
+  getPaginatorType: function(){
+    return this.config.getPaginatorType();
+  },
+
+  setRulesPerPage: function(count){
+    this.rulesPerPage=count;
+    this.calculatePagesCount();
+    this.gotoPage(1);
+  },
+
+  calculatePagesCount: function(){
+    this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
   }
 
 });

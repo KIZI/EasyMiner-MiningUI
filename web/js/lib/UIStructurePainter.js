@@ -34,7 +34,6 @@ var UIStructurePainter = new Class({
         this.$UIStructureListener.registerResizeEventHandler();
         this.$UIStructureListener.registerSettingsEventHandlers();
         this.$UIStructureListener.registerDataReloadEventHandlers();
-        this.$UIStructureListener.registerFoundRulesEventHandlers();
     },
 
     renderNavigation: function() {

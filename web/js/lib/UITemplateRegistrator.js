@@ -498,25 +498,21 @@ var UITemplateRegistrator = new Class({
         i18n = data.i18n,
         IMs = data.IMs;
 
-      li({id: foundRule.getCSSID(), 'class': 'found-rule'},
+      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')},
         span({'class': 'rule'}, foundRule.getIdent()),
-        span({'class': 'info'}),
 //				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
-        a({id: foundRule.getFoundRuleCSSMarkID(), href: '#', 'class': 'mark', 'title': i18n.translate('Mark rule')}),
-//				a({id: foundRule.getFoundRuleCSSRemoveID(),href: '#', 'class': 'clear', 'title': i18n.translate('Clear rule')}),
-        a({
-          id: foundRule.getFoundRuleCSSDetailsID(),
-          href: '#',
-          'class': 'details',
-          'title': i18n.translate('Rule details')
-        }),
+        (foundRule.isSelected()?
+          a({id: foundRule.getMarkCSSID(), href: '#', 'class': 'mark', 'title': i18n.translate('Add to Rule Clipboard')})
+          :
+          a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})
+        ),
+        a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
         div({'class': 'loading'}, ''),
         span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
       );
     });
 
     Mooml.register('foundRulesTemplate',function(data){
-      console.log(data);
       //TODO bez pravidel by tu měla být informace o načítání...
       var FRManager = data.FRManager;
       var foundRulesContainer = ul({id:'found-rules-rules'});
@@ -527,14 +523,143 @@ var UITemplateRegistrator = new Class({
           foundRule: foundRule,
           i18n: data.i18n
         }));
-
-        data.UIListener.registerFoundRuleEventHandlers(foundRule);
-
       }.bind([data,foundRulesContainer]));
-
     });
 
-    Mooml.register('foundRulesPaginator',function(data){div('found rules paginator...')});
+    Mooml.register('linksPaginator',function(data){
+      var gotoFunction = data.gotoFunction,
+          pagesCount = data.pagesCount,
+          currentPage = data.currentPage;
+      var pageSteps=4;
+
+      if (pagesCount>1){
+        var pageStart=Math.max(1,currentPage-pageSteps);
+        var pageEnd=Math.min(pagesCount,currentPage+pageSteps);
+        pageEnd=Math.min(pagesCount,pageEnd+2);
+
+        if (pageStart>3){
+          a({href:'#',events:{
+            click: function (e) {
+              e.stop();
+              gotoFunction(1);
+            }.bind(gotoFunction)
+          }},1);
+          span('...');
+        }else{
+          pageStart=1;
+        }
+        for(var i=pageStart;i<=pageEnd;i++){
+          a({
+            href:'#',
+            events:{
+              click: function (e) {
+                e.stop();
+                gotoFunction(e.target.get('text'));
+              }.bind(gotoFunction)
+            },
+            class: (currentPage==i?'selected':'')
+          },i);
+        }
+        if (pageEnd<pagesCount){
+          span('...');
+          a({href:'#',events:{
+            click: function (e) {
+              e.stop();
+              gotoFunction(e.target.get('text'));
+            }.bind(gotoFunction)
+          }},pagesCount);
+        }
+      }
+    });
+
+    Mooml.register('selectPaginator',function(data) {
+      var gotoFunction = data.gotoFunction,
+        pagesCount = data.pagesCount,
+        currentPage = data.currentPage;
+
+      if (pagesCount > 1) {
+        //left arrow
+        if (currentPage > 1) {
+          a({
+            href: '#',
+            events:{
+              click: function(e){
+                e.stop();
+                gotoFunction(currentPage-1);
+              }.bind([gotoFunction,currentPage])
+            }
+          },'&lt;');
+        } else {
+          a({
+            href: '#',
+            class: 'disabled',
+            events:{
+              click: function(e){
+                e.stop();
+              }
+            }
+          },'&lt;');
+        }
+        //select
+        var options=[];
+        for(var i=1;i<=pagesCount;i++){
+          var option=new Element('option', {value: i, text: i+' / '+pagesCount});
+          if (i==currentPage){
+            option.setAttribute('selected', 'selected');
+          }
+          options.push(option);
+        }
+        select({
+          events: {
+            change: function (e) {
+              var page = e.target.get('value');
+              e.stop();
+              gotoFunction(page);
+            }.bind(gotoFunction)
+          }
+        },options);
+        //right arrow
+        if (currentPage < pagesCount) {
+          a({
+            href: '#',
+            events:{
+              click: function(e){
+                e.stop();
+                gotoFunction(currentPage+1);
+              }.bind([gotoFunction,currentPage])
+            }
+          },'&gt;');
+        } else {
+          a({
+            href: '#',
+            class: 'disabled',
+            events:{
+              click: function(e){
+                e.stop();
+              }
+            }
+          },'&gt;');
+        }
+      }
+    });
+
+    Mooml.register('foundRulesPaginator',function(data){
+        var FRManager = data.FRManager,
+          i18n = data.i18n;
+        var pageSteps=4;
+        var gotoFunction = function(page){
+          FRManager.gotoPage(page);
+        }.bind(FRManager);
+
+        div({class:'paginator'},
+          Mooml.render(FRManager.getPaginatorType(),{
+            gotoFunction: gotoFunction,
+            pagesCount: FRManager.pagesCount,
+            currentPage: FRManager.currentPage
+          })
+        );
+      }
+    );
 
     Mooml.register('foundRulesControlsTemplate', function (data) {
       var i18n = data.i18n,
@@ -564,15 +689,14 @@ var UITemplateRegistrator = new Class({
           id: 'found-rules-per-page',
           events: {
             change: function (e) {
-              FRManager.perPage = e.target.get('value');
               e.stop();
-              FRManager.gotoPage(1);
+              FRManager.setRulesPerPage(e.target.get('value'));
             }.bind(FRManager)
           }
         }
       );
-      var perPage = FRManager.perPage;
-      Array.each(FRManager.perPageOptions, function (perPageCount) {
+      var perPage = FRManager.rulesPerPage;
+      Array.each(FRManager.getPerPageOptions(), function (perPageCount) {
         var option = new Element('option', {value: perPageCount, text: perPageCount});
         if (perPage == perPageCount) {
           option.setAttribute('selected', 'selected');
@@ -581,7 +705,7 @@ var UITemplateRegistrator = new Class({
       }.bind([perPageSelect, perPage]));
 
       div({'class':'found-rules-controls'},
-        (FRManager.pagesCount>1 ? div(Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n})) : ''),
+        (FRManager.pagesCount>1 ? (Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n})) : ''),
         label({'for':'found-rules-order'},i18n.translate('Rules order:')),
         orderSelect,
         label({'for':'found-rules-per-page'},i18n.translate('Rules per page:')),

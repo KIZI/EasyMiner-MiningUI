@@ -20,8 +20,12 @@ var FoundRule = new Class({
     this.$rule.parseFromObject(data);
   },
 
+  getId: function(){
+    return this.$task.getId() + '-' + this.$id;
+  },
+
   getCSSID: function () {
-    return 'found-rule-' + this.$task.getId() + '-' + this.$id;
+    return 'found-rule-' + this.getId();
   },
 
   isException: function () {
@@ -42,16 +46,16 @@ var FoundRule = new Class({
     //TODO vrácení výpisu měr zajímavosti...
   },
 
-  getFoundRuleCSSMarkID: function () {
-    return 'mark-rule-' + this.$task.getId() + '-' + this.$id;
+  getMarkCSSID: function () {
+    return 'mark-' + this.getCSSID();
   },
 
-  getFoundRuleCSSRemoveID: function () {
-    return 'remove-rule-' + this.$task.getId() + '-' + this.$id;
+  getUnmarkCSSID: function(){
+    return 'unmark-' + this.getCSSID();
   },
 
-  getFoundRuleCSSDetailsID: function () {
-    return 'rule-details-' + this.$task.getId() + '-' + this.$id;
+  getDetailsCSSID: function () {
+    return 'details-' + this.getCSSID();
   },
 
   getRuleValues: function(){
@@ -61,5 +65,14 @@ var FoundRule = new Class({
       c:this.$rule.c,
       d:this.$rule.d
     };
+  },
+
+  isSelected: function(){
+    return this.$rule.selected;
+  },
+
+  setSelected: function(value){
+    this.$rule.selected = value;
   }
+
 });

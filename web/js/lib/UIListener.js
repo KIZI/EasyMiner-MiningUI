@@ -485,32 +485,50 @@ var UIListener = new Class({
     }.bind(this));
   },
 
-  registerFoundRuleEventHandlers: function (FR/*, autoSearch*/) {
-    console.log('registerFoundRuleEventHandlers');
+  registerFoundRuleEventHandlers: function (foundRule, autoSearch) {
     var el;
-/*
-    if (!autoSearch) { // ask background knowledge
-      el = $(FR.getRule().getFoundRuleCSSBKID());
+    /*
+     if (!autoSearch) { // ask background knowledge
+     el = $(FR.getRule().getFoundRuleCSSBKID());
 
-      if (el) {
-        el.addEvent('click', function (e) {
-          e.stop();
-          this.ARBuilder.getFRManager().askBK(FR);
-        }.bind(this));
-      }
-    }*/
+     if (el) {
+     el.addEvent('click', function (e) {
+     e.stop();
+     this.ARBuilder.getFRManager().askBK(FR);
+     }.bind(this));
+     }
+     }*/
 
-    // mark
-    $(FR.getFoundRuleCSSMarkID()).addEvent('click', function (event) {
-      event.stop();
-      this.ARBuilder.getFRManager().markFoundRule(FR);
-    }.bind(this));
+    var FRManager = this.ARBuilder.getFRManager();
 
-    // remove
-/*    $(FR.getFoundRuleCSSRemoveID()).addEvent('click', function (event) {
-      event.stop();
-      this.ARBuilder.getFRManager().removeFoundRule(FR);
-    }.bind(this));*/
+    /*region mark*/
+    var markLink = $(foundRule.getMarkCSSID());
+    if (markLink) {
+      markLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.markFoundRule(foundRule);
+      }.bind(FRManager));
+    }
+    /*endregion mark*/
+    /*region unmark*/
+    var unmarkLink = $(foundRule.getUnmarkCSSID());
+    if (unmarkLink) {
+      unmarkLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.unmarkFoundRule(foundRule);
+      }.bind(FRManager));
+    }
+    /*endregion unmark*/
+    /*region details*/
+    var detailsLink = $(foundRule.getDetailsCSSID());
+    if (detailsLink) {
+      detailsLink.addEvent('click', function (event) {
+        event.stop();
+        //TODO
+        alert('TODO: show rule details...');
+      }.bind(FRManager));
+    }
+    /*endregion details*/
   },
 
   registerMarkedRuleEventHandlers: function (FR) {

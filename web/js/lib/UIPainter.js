@@ -883,8 +883,8 @@ var UIPainter = new Class({
     }
   },
 
-  showFRLoading: function (FR) {
-    var elLoading = $(FR.getCSSID()).getElement('.loading');
+  showFRLoading: function (foundRule) {
+    var elLoading = $(foundRule.getCSSID()).getElement('.loading');
     elLoading.set('morph', {duration: this.morphDuration});
     elLoading.morph({
       'opacity': '1',
@@ -944,6 +944,10 @@ var UIPainter = new Class({
       }
     ).replaces($('found-rules'));
 
+    var foundRules=this.ARBuilder.$FRManager.rules;
+    Array.each(foundRules,function(foundRule){
+      this.UIListener.registerFoundRuleEventHandlers(foundRule);
+    }.bind(this));
     ///this.$UIStructurePainter.resizeApplication();
   },
   //endregion FoundRules

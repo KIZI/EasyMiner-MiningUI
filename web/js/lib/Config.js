@@ -39,12 +39,14 @@ var Config = new Class({//TODO Standa: update URLs
   $joomlaURL: 'http://sewebar-dev.lmcloud.vse.cz/',
   $showFeedback: false,
   params: {},
-  BKGetURL: 'getBK.php',
+  ////BKGetURL: 'getBK.php',
   ETreeGetURL: 'getEtree.php',
   rulesGetURL: 'getRules.php',
   reportSaveUrl: 'saveReport.php',
 
   $supportUrl: 'http://easyminer.eu/',
+
+  perPageOptions: [2/*TODO for testing only...*/, 10, 20, 50, 100],
 
   // root element
   rootElementID: 'IZIMiner',
@@ -92,7 +94,7 @@ var Config = new Class({//TODO Standa: update URLs
     return this.params.id_dm;
   },
 
-  getBKAskURL: function () {
+  /*getBKAskURL: function () {
     return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=ask&lang=' + this.lang;
   },
 
@@ -106,7 +108,7 @@ var Config = new Class({//TODO Standa: update URLs
 
   setBKGetURL: function (url) {
     this.BKGetURL = url;
-  },
+  },*/
 
   getDataGetURL: function () {
     return this.dataGetURL + "?id_dm=" + this.params.id_dm + '&lang=' + this.lang;
@@ -263,6 +265,14 @@ var Config = new Class({//TODO Standa: update URLs
     + '?miner=' + this.params.id_dm
     + '&task=' + taskId
     + '&rule=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+  },
+
+  getPerPageOptions: function(){
+    return this.perPageOptions;
+  },
+
+  getPaginatorType: function(){
+    return 'selectPaginator';
   }
 
 });
