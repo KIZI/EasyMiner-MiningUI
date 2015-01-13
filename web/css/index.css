@@ -482,7 +482,6 @@ div#overlay-inner h2 {
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
-/*border-bottom 1px solid h2Color*/
 }
 div#overlay-inner > div {
   background-color: #fff;
@@ -800,7 +799,6 @@ nav {
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
-/*border-bottom 1px solid h2Color*/
   font-size: 22.400000000000002px;
   margin: 5px 20px 15px 20px;
   padding-bottom: 5px;
@@ -936,7 +934,6 @@ nav {
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
-/*border-bottom 1px solid h2Color*/
   font-size: 22.400000000000002px;
   margin: 5px 20px 15px 20px;
   padding-bottom: 5px;
@@ -1046,7 +1043,6 @@ nav {
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
-/*border-bottom 1px solid h2Color*/
   font-size: 22.400000000000002px;
   margin: 5px 20px 15px 20px;
   padding-bottom: 5px;
@@ -1087,7 +1083,6 @@ nav {
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
-/*border-bottom 1px solid h2Color*/
   font-size: 22.400000000000002px;
   margin: 5px 20px 15px 20px;
   padding-bottom: 5px;
@@ -1511,330 +1506,167 @@ section#active-rule #ar-action-box #start-mining:focus {
   color: #fff;
   border: 1px solid #4c8e0e;
 }
-#found-rules-pager {
-  border: 1px solid #cac7bd;
-  height: 550px;
-  overflow-y: hidden;
-  display: none;
-}
-#found-rules-paging {
-  width: 850px;
-  height: 24px;
-  padding-top: 5px;
-}
-#found-rules-paging .pager-actuator,
-#found-rules-paging .pager-actuator-empty,
-#found-rules-paging .pager-prev,
-#found-rules-paging .pager-next {
-  color: #c0c0c0;
+.paginator a {
+  background: #075783;
+  font-size: 14px;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-weight: normal;
+  text-decoration: none;
   cursor: pointer;
-  margin-right: 4px;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-align: left;
+  display: inline-block;
+  padding: 12px 15px;
+  background: #fff;
+  color: #075783;
+  border: 1px solid #ededed;
+  text-align: center;
+  display: block;
+  display: inline-block;
+  padding: 3px 6px;
+  min-width: 16px;
+  margin: 0 1px;
 }
-#found-rules-paging .active {
-  color: #000;
+.paginator a:hover,
+.paginator a:focus {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-decoration: none;
 }
-#found-rules-pager-label {
-  height: 24px;
-  padding: 3px 0 0 35px;
-  margin-bottom: 15px;
+.paginator a:hover,
+.paginator a:focus {
+  background: #fff;
+  color: #2d83be;
+  border: 1px solid #2d83be;
 }
-#found-rules-pager-label.mining-not-started {
-  background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
+.paginator a.active {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #2d83be;
 }
-#found-rules-pager-label.mining-in-progress {
-  background: transparent url("../images/icon-loading.gif") 0 0 no-repeat;
-}
-#found-rules-pager-label.mining-finished {
-  background: transparent url("../images/sprite-icons.png") -164px -16px no-repeat;
-}
-#found-rules-pager-label.mining-norules {
-  background: transparent url("../images/sprite-icons.png") -16px -360px no-repeat;
-}
-#found-rules-pager-label.mining-stopped {
-  background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
-}
-#found-rules-pager-label.mining-error {
-  background: transparent url("../images/sprite-icons.png") -14px -509px no-repeat;
-}
-#found-rules-pager-clear {
-  background: transparent url("../images/sprite-icons.png") -164px -59px no-repeat;
-  display: none;
-  width: 100px;
-  height: 24px;
-  float: right;
-  margin: 5px 0 0 0;
-  padding: 9px 0 0 30px;
+.paginator a.disabled {
+  cursor: no-drop;
+  border: 1px solid #ededed;
+  color: #ededed;
 }
 #found-rules {
   clear: left;
   padding-top: 20px;
   position: relative;
 }
-#found-rules #stop-mining {
-  background: transparent url("../images/sprite-icons.png") -14px -511px no-repeat;
-  height: 24px;
-  float: right;
-  padding-left: 27px;
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
+#found-rules #found-rules-task-name {
+  color: #314e64;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  font-size: 22.400000000000002px;
+  margin: 10px 0;
+}
+#found-rules #found-rules-task-name .count {
+  color: #888;
+  margin-left: 20px;
+  font-size: 16px;
+}
+#found-rules #found-rules-task-name .count strong {
+  font-weight: normal;
+  color: #888;
+}
+#found-rules p.error {
+  color: #a41d1d;
+  margin: 10px 0;
+}
+#found-rules .found-rules-controls {
+  position: relative;
+  overflow: auto;
+  text-align: right;
+  color: #888;
+  font-size: 12.8px;
+}
+#found-rules .found-rules-controls .paginator {
+  float: left;
+}
+#found-rules .found-rules-controls label {
+  display: inline-block;
+  padding: 0 5px 0 15px;
+  margin: 0;
+}
+#found-rules .found-rules-controls select {
+  padding: 5px;
 }
 #found-rules ul {
-  width: 100%;
   padding-left: 0;
-  float: left;
 }
 #found-rules ul li {
-  width: 100%;
-  padding-left: 0;
-  float: left;
-  clear: left;
-}
-#found-rules .found-rule {
+  margin: 0 0 5px 0;
+  padding: 0 0 5px 20px;
+  list-style: none;
   cursor: default;
-  list-style-type: none;
-}
-#found-rules .found-rule .rule {
-  float: left;
-  height: 38px;
-}
-#found-rules .found-rule .rule .id {
-  font-size: 0.8em;
-  text-align: right;
-  display: block;
-  width: 35px;
-  margin-right: 3px;
-  margin-top: 9px;
-  float: left;
-}
-#found-rules .found-rule .rule .cedent {
-  float: left;
-  border: 1px dashed #fff;
-/*border-radius(10px)*/
-  background-color: #fff;
-  padding: 2px;
-}
-#found-rules .found-rule .rule .cedent.empty {
-  border: 1px dashed #000;
-  color: #808080;
-}
-#found-rules .found-rule .rule .cedent a.group-fields {
-  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
-  padding-left: 17px;
-  float: right;
-}
-#found-rules .found-rule .rule .cedent .fields .field {
-  float: left;
-  height: 40px;
-  margin: 0 2px;
-}
-#found-rules .found-rule .rule .cedent .fields .field .coefficient {
-  color: #925213;
-  font-size: 0.85em;
   position: relative;
-  top: -1px;
-  margin-left: 3px;
+  border-bottom: 1px solid #ededed;
 }
-#found-rules .found-rule .rule .cedent .fields .field .field-drag {
-  cursor: move;
+#found-rules ul li input.found-rule-checkbox {
+  position: absolute;
+  left: 0;
+  top: 8px;
 }
-#found-rules .found-rule .rule .cedent .fields .field .change-sign.negative,
-#found-rules .found-rule .rule .cedent .fields .field .field-sign.negative {
-  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
-  width: 13px;
+#found-rules ul li .rule {
+  color: #434343;
+  cursor: default;
+}
+#found-rules ul li .ruleActions {
+  display: inline-block;
+  overflow: auto;
+  position: relative;
+  width: 100px;
   height: 20px;
-  float: left;
+  margin-left: 15px;
+  top: 5px;
 }
-#found-rules .found-rule .rule .cedent .fields .field .controls a.edit-coefficient {
-  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
+#found-rules ul li .ruleActions > a {
   display: block;
   width: 16px;
   height: 20px;
-  visibility: hidden;
-  margin-left: 2px;
-  float: right;
-}
-#found-rules .found-rule .rule .cedent .fields .field .controls a.remove-field {
-  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  margin-left: 5px;
-  float: right;
-}
-#found-rules .found-rule .rule .cedent .fields .field .controls a.mark-field {
-  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  margin-right: 3px;
-  float: right;
-  visibility: hidden;
-}
-#found-rules .found-rule .rule .cedent .fields .field .controls a.marked-field {
-  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  margin-right: 3px;
-  float: right;
-  visibility: visible;
-}
-#found-rules .found-rule .rule .cedent .fields .field .controls a.change-sign.positive {
-  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  float: right;
-  visibility: hidden;
-}
-#found-rules .found-rule .rule .cedent .fields .field:hover a.remove-field {
-  visibility: visible;
-}
-#found-rules .found-rule .rule .cedent .fields .field:hover a.edit-coefficient {
-  visibility: visible;
-}
-#found-rules .found-rule .rule .cedent .fields .field:hover a.mark-field {
-  visibility: visible;
-}
-#found-rules .found-rule .rule .cedent .fields .field:hover a.change-sign.positive {
-  visibility: visible;
-}
-#found-rules .found-rule .rule .cedent .fields .connective {
-  color: #360;
-  font-size: 14px;
-  position: relative;
-  top: 1px;
-  margin: 0 1px;
   float: left;
-}
-#found-rules .found-rule .rule .cedent .fields .left-bracket,
-#found-rules .found-rule .rule .cedent .fields .right-bracket {
-  font-size: 18px;
-  float: left;
-  position: relative;
-  top: -2px;
-}
-#found-rules .found-rule .rule .cedent .group-fields {
-  font-size: 14px;
-  position: relative;
-  top: 23px;
-}
-#found-rules .found-rule .rule >.cedent >.fields >.field,
-#found-rules .found-rule .rule >.cedent >.fields >.connective {
-  margin-top: 3px;
-}
-#found-rules .found-rule .rule .quantifier {
-  float: left;
-  margin-top: 5px;
-}
-#found-rules .found-rule .rule .field {
-  height: auto !important;
-}
-#found-rules .found-rule .rule .left-bracket,
-#found-rules .found-rule .rule right-bracket {
-  top: -3px !important;
-}
-#found-rules .found-rule .ims {
-  font-size: 12px;
-  float: left;
-  clear: left;
-  position: relative;
-  top: -8px;
-  left: 6px;
-}
-#found-rules .found-rule .ims .im-value {
-  color: #7b0d2e;
-  margin-left: 0.5ex;
-}
-#found-rules .found-rule .loading {
-  background: transparent url("../images/icon-loading-small.gif") 0 8px no-repeat;
-  display: block;
-  width: 20px;
-  height: 24px;
-  opacity: 0;
+  margin-right: 8px;
   visibility: hidden;
-  float: right;
 }
-#found-rules .found-rule .tip-visible {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
-  background-color: #fff;
-  height: 22px;
-  padding: 7px 5px 0 10px;
-}
-#found-rules .found-rule .bk {
+#found-rules ul li .ruleActions a.bk {
   background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
-  display: block;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: 9px;
-  margin: 0 10px;
-  visibility: hidden;
-  float: left;
 }
-#found-rules .found-rule:hover > .bk {
-  visibility: visible;
-}
-#found-rules .found-rule .mark {
+#found-rules ul li .ruleActions a.mark,
+#found-rules ul li .ruleActions a.unmark {
   background: transparent url("../images/sprite-icons.png") -18px -68px no-repeat;
-  display: block;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: 9px;
-  margin-left: 10px;
-  visibility: hidden;
-  float: left;
 }
-#found-rules .found-rule:hover > .mark {
-  visibility: visible;
-}
-#found-rules .found-rule .clear {
-  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  position: relative;
-  top: 7px;
-  margin-left: 5px;
-  float: left;
-}
-#found-rules .found-rule:hover > .clear {
-  visibility: visible;
-}
-#found-rules .found-rule .info {
-  font-weight: normal;
-  background: transparent url("../images/sprite-icons.png") -17px -718px no-repeat;
-  display: none;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: 10px;
-  left: 3px;
-  margin-right: 10px;
-  float: left;
-}
-#found-rules .found-rule .details {
+#found-rules ul li .ruleActions a.details {
   background: transparent url("../images/sprite/icon-details.png") center center no-repeat;
-  display: block;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: 9px;
-  margin-left: 10px;
-  visibility: hidden;
-  float: left;
 }
-#found-rules .found-rule:hover > .details {
+#found-rules ul li .ims {
+  display: block;
+  font-size: 12.8px;
+  color: #888;
+}
+#found-rules ul li .ims >span {
+  border-right: 1px solid #ededed;
+  padding-right: 5px;
+  margin-right: 5px;
+}
+#found-rules ul li .ims >span:last-child {
+  border-right: none;
+}
+#found-rules ul li .ims >span .value {
+  color: #7b0d2e;
+}
+#found-rules ul li.selected .rule {
+  color: #4c8e0e;
+}
+#found-rules ul li.selected .ruleActions a.mark,
+#found-rules ul li.selected .ruleActions a.unmark {
+  visibility: visible;
+}
+#found-rules ul li:hover .ruleActions >a {
   visibility: visible;
 }
 #marked-rules {
@@ -2024,17 +1856,20 @@ section#active-rule #ar-action-box #start-mining:focus {
   top: -3px !important;
 }
 #marked-rules .marked-rule .ims {
-  font-size: 12px;
-  float: left;
-  clear: left;
-  position: relative;
-  top: -8px;
-  left: 6px;
+  font-size: 12.8px;
+  color: #888;
   left: 5px;
 }
-#marked-rules .marked-rule .ims .im-value {
+#marked-rules .marked-rule .ims >span {
+  border-right: 1px solid #ededed;
+  padding-right: 5px;
+  margin-right: 5px;
+}
+#marked-rules .marked-rule .ims >span:last-child {
+  border-right: none;
+}
+#marked-rules .marked-rule .ims >span .value {
   color: #7b0d2e;
-  margin-left: 0.5ex;
 }
 #marked-rules .marked-rule .clear {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
@@ -2211,6 +2046,7 @@ footer {
 body {
   background: transparent url("../images/bg-body.jpg") center -10px repeat;
   font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+  font-size: 16px;
   overflow-y: scroll;
 }
 #wrapper {

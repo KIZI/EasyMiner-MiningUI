@@ -11,11 +11,15 @@ paletteLiPadding = 2px 0
 boxMargin = 15px
 feedbackMargin = 20px
 
+baseFontSize = 16px
+
 color = #434343
 linkColor = #126499
 backgroundColor = #EDEDED
 font = 'Helvetica Neue', 'Arial', 'sans-serif'
 
+foundRuleColor = color
+selectedFoundRuleColor = #4C8E0E
 
 errorColor = #A41D1D
 h1Color = #FFF
@@ -40,6 +44,13 @@ buttonHoverBackground = #2d83be
 buttonHoverBorder = buttonBorder
 buttonHoverColor = buttonColor
 
+invisButtonBorder = 1px solid #EDEDED
+invisButtonColor = #075783
+invisButtonBackground = #fff
+invisButtonHoverColor = buttonHoverBackground
+invisButtonHoverBorder = 1px solid buttonHoverBackground
+invisButtonHoverBackground = invisButtonBackground
+
 mainButtonBackground = #4C8E0E
 mainButtonColor = #ffffff
 mainButtonBorder = 1px solid #4C8E0E
@@ -56,10 +67,12 @@ overlayBorderColor = #AAA
 overlayShadowColor = rgba(0, 0, 0, 0.6)
 boxBorderColor = #DFDFDF
 boxShadowColor = rgba(0, 0, 0, 0.4)
-interestMeasureValueColor = #7B0D2E
 
-// pager
-pagerBorder = 1px solid #cac7bd
+unimportantTextColor = #888
+
+interestMeasureValueColor = #7B0D2E
+interestMeasureColor = unimportantTextColor
+
 
 @import '_boilerplate.styl'
 @import '_mixins.styl'
@@ -68,7 +81,7 @@ pagerBorder = 1px solid #cac7bd
 @import '_header.styl'
 @import '_navigation.styl'
 @import '_ar_pattern.styl'
-@import '_pager.styl'
+@import '_paginator.styl'
 @import '_found-rules.styl'
 @import '_marked-rules.styl'
 @import '_reports.styl'
@@ -81,6 +94,7 @@ pagerBorder = 1px solid #cac7bd
 body
   background: transparent url("../images/bg-body.jpg") center -10px repeat;
   font-family font
+  font-size baseFontSize
   overflow-y scroll
 
 

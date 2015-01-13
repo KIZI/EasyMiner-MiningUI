@@ -499,37 +499,44 @@ var UITemplateRegistrator = new Class({
         IMs = data.IMs;
 
       li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')},
-        span({'class': 'rule'}, foundRule.getIdent()),
+        input({type:'checkbox',id:foundRule.getCSSID()+'-checkbox', class:'found-rule-checkbox'}),
+        label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
 //				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
-        (foundRule.isSelected()?
-          a({id: foundRule.getMarkCSSID(), href: '#', 'class': 'mark', 'title': i18n.translate('Add to Rule Clipboard')})
-          :
-          a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})
+        span({class:'ruleActions'},
+          (foundRule.isSelected()?
+            a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})
+            :
+            a({id: foundRule.getMarkCSSID(), href: '#', 'class': 'mark', 'title': i18n.translate('Add to Rule Clipboard')})
+          ),
+          a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
+          div({'class': 'loading'}, '')
         ),
-        a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
-        div({'class': 'loading'}, ''),
         span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
       );
     });
 
     Mooml.register('foundRulesTemplate',function(data){
-      //TODO bez pravidel by tu měla být informace o načítání...
       var FRManager = data.FRManager;
       var foundRulesContainer = ul({id:'found-rules-rules'});
 
-      Array.each(FRManager.rules,function(foundRule){
-        foundRulesContainer.grab(Mooml.render('foundRuleTemplate',{
-          IMs: data.FRManager.IMs,
-          foundRule: foundRule,
-          i18n: data.i18n
-        }));
-      }.bind([data,foundRulesContainer]));
+      if (FRManager.errorMessage!='' && FRManager.errorMessage!=null){
+        p({'class':'error'},"XXX"+FRManager.errorMessage+'XXX');
+      }else{
+        Array.each(FRManager.rules,function(foundRule){
+          foundRulesContainer.grab(Mooml.render('foundRuleTemplate',{
+            IMs: data.FRManager.IMs,
+            foundRule: foundRule,
+            i18n: data.i18n
+          }));
+        }.bind([data,foundRulesContainer]));
+      }
+
     });
 
     Mooml.register('linksPaginator',function(data){
       var gotoFunction = data.gotoFunction,
           pagesCount = data.pagesCount,
-          currentPage = data.currentPage;
+          currentPage = data.currentPage || 1;
       var pageSteps=4;
 
       if (pagesCount>1){
@@ -557,7 +564,7 @@ var UITemplateRegistrator = new Class({
                 gotoFunction(e.target.get('text'));
               }.bind(gotoFunction)
             },
-            class: (currentPage==i?'selected':'')
+            class: (currentPage==i?'active':'')
           },i);
         }
         if (pageEnd<pagesCount){
@@ -720,7 +727,7 @@ var UITemplateRegistrator = new Class({
       var imValuesPrecision = 1000;
 
       Array.each(data.IMs, function (IM) {
-        var str = IM.getLocalizedName() + ': ' + (Math.round(IM.calculate(data.ruleValues.a, data.ruleValues.b, data.ruleValues.c, data.ruleValues.d) * imValuesPrecision) / imValuesPrecision);
+        var str = IM.getLocalizedName() + ': <span class="value">' + (Math.round(IM.calculate(data.ruleValues.a, data.ruleValues.b, data.ruleValues.c, data.ruleValues.d) * imValuesPrecision) / imValuesPrecision)+'</span>';
         span({}, str);
       }.bind([data, this]));
     })

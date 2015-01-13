@@ -272,7 +272,8 @@ var Config = new Class({//TODO Standa: update URLs
   },
 
   getPaginatorType: function(){
-    return 'selectPaginator';
+    //return 'selectPaginator';
+    return 'linksPaginator';
   }
 
 });

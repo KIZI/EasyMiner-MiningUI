@@ -33,7 +33,10 @@ h2()
   font-size h2FontSize
   font-weight h2FontWeight
   margin 0 0 20px 0
-  /*border-bottom 1px solid h2Color*/
+
+h2Small()
+  h2()
+  font-size 0.8*h2FontSize
 
 h2AR()
   color h2ARColor
@@ -75,6 +78,19 @@ mainButton()
     background mainButtonHoverBackground
     color mainButtonHoverColor
     border mainButtonHoverBorder
+
+invisButton()
+  button()
+  background invisButtonBackground
+  color invisButtonColor
+  border invisButtonBorder
+  text-align center
+  display block
+  &:hover
+  &:focus
+    background invisButtonHoverBackground
+    color invisButtonHoverColor
+    border invisButtonHoverBorder
 
 associationRule()
   float left
@@ -204,13 +220,33 @@ interestMeasureMixin()
   .threshold, .alpha
     color interestMeasureValueColor
 
-ims()
-  font-size 12px;
-  float left; clear left
-  position relative; top -8px; left 6px
-  .im-value
-    color interestMeasureValueColor
-    margin-left 0.5ex
+ruleIMs()
+  font-size 0.8*baseFontSize
+  color interestMeasureColor
+  >span
+    border-right 1px solid backgroundColor
+    padding-right 5px
+    margin-right 5px
+    &:last-child
+      border-right none
+
+    .value
+      color interestMeasureValueColor
+
+ruleActions() //TODO
+  display inline-block
+  overflow auto
+  position relative
+  width 100px
+  height 20px
+  margin-left 15px
+  > a
+    display block
+    width 16px
+    height 20px
+    float left
+    margin-right 8px
+    visibility hidden
 
 edit()
   background transparent url('../images/sprite-icons.png') -19px -262px no-repeat

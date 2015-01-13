@@ -68,7 +68,7 @@ var FoundRule = new Class({
   },
 
   isSelected: function(){
-    return this.$rule.selected;
+    return this.$rule.selected==1;
   },
 
   setSelected: function(value){

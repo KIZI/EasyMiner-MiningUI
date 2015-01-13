@@ -2,79 +2,88 @@
   clear left
   padding-top 20px
   position relative
-  #stop-mining //TODO remove
-    background transparent url('../images/sprite-icons.png') -14px -511px  no-repeat
-    height 24px
-    float right
-    padding-left 27px
-    visibility hidden
-    position: absolute; top: 0; right: 0
+
+  #found-rules-task-name
+    h2Small()
+    margin 10px 0
+    .count
+      color unimportantTextColor
+      margin-left 20px
+      font-size baseFontSize
+      strong
+        font-weight normal
+        color interestMeasureColor
+
+  p.error
+    color errorColor
+    margin 10px 0
+
+  .found-rules-controls
+    position relative
+    overflow auto
+    text-align right
+    color unimportantTextColor
+    font-size 0.8*baseFontSize
+    
+    .paginator
+      float left
+
+    label
+      display inline-block
+      padding 0 5px 0 15px
+      margin 0
+
+    select
+      padding 5px
 
   ul
-    width 100%
     padding-left 0
-    float left
     li
-      width 100%
-      padding-left 0
-      float left; clear left
+      margin 0 0 5px 0
+      padding 0 0 5px 20px
+      list-style none
+      cursor default
+      position relative
+      border-bottom  1px solid backgroundColor
 
-  .found-rule
-    cursor default
-    list-style-type none
-    .rule
-      associationRule()
-      .field
-        height auto !important
-      .left-bracket, right-bracket
-       top -3px !important
-    .ims
-      ims()
-    .loading
-      background transparent url("../images/icon-loading-small.gif") 0 8px no-repeat
-      display block; width 20px; height 24px
-      opacity 0; visibility hidden
-      float right
-    .tip-visible
-      tip()
-    .bk
-      background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
-      display block; width 16px; height 16px
-      position relative; top 9px
-      margin 0 10px
-      visibility hidden
-      float left
-    &:hover > .bk
-      visibility visible
-    .mark
-      background transparent url('../images/sprite-icons.png') -18px -68px no-repeat
-      display block; width 16px; height 16px
-      position relative; top 9px
-      margin-left 10px
-      visibility hidden
-      float left
-    &:hover > .mark
-      visibility visible
-    .clear
-      remove()
-      position relative; top 7px
-      margin-left 5px
-      float left
-    &:hover > .clear
-      visibility visible
-    .info
-      font-weight normal
-      background transparent url('../images/sprite-icons.png') -17px -718px no-repeat
-      display none; width 16px; height 16px
-      position relative; top 10px; left 3px
-      margin-right 10px
-      float left
-    .details
-      background transparent url('../images/sprite/icon-details.png') center center no-repeat
-      display block; width 16px; height 16px
-      position relative; top 9px
-      margin-left 10px
-      visibility hidden
-      float left
-    &:hover > .details
-      visibility visible
+      input.found-rule-checkbox
+        position absolute
+        left 0
+        top 8px
+
+      .rule
+        color foundRuleColor
+        cursor default
+
+      .ruleActions
+        ruleActions()
+        top 5px
+
+        a.bk
+          background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
+
+        a.mark
+        a.unmark
+          background transparent url('../images/sprite-icons.png') -18px -68px no-repeat
+
+        a.details
+          background transparent url('../images/sprite/icon-details.png') center center no-repeat
+
+      .ims
+        display block
+        ruleIMs()
+
+      &.selected
+        .rule
+          color selectedFoundRuleColor
+
+        .ruleActions
+          a.mark
+          a.unmark
+            visibility visible
+
+      &:hover
+        .ruleActions
+          >a
+            visibility visible
+

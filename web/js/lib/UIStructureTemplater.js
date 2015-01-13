@@ -361,11 +361,20 @@ var UIStructureTemplater = new Class({
     Mooml.register('foundRulesStructureTemplate', function (data) {
       var FRManager=data.FRManager;
       if (FRManager.rulesCount>0){
+
+        var rulesCountInfo = '('+data.i18n.translate('rules: ')+' <strong>'+FRManager.rulesCount+'</strong>';
+        if (FRManager.miningInProgress){
+          rulesCountInfo+=', '+data.i18n.translate('mining in progress...');
+        }
+        rulesCountInfo+=')';
         //máme nějaká pravidla pro zobrazení
         section({id: 'found-rules'},
           h2(data.i18n.translate('Discovered rules')),
-          div({id: 'found-rules-task-name'},'TODO: task name'),//TODO task name...
-          div({id: 'found-rules-rules-count'},data.i18n.translate('Found rules:'),' ',strong(FRManager.rulesCount)),
+          div(
+            {id: 'found-rules-task-name'},
+            FRManager.getTaskName(),
+            span({class: 'count'},rulesCountInfo)
+          ),
           Mooml.render('foundRulesControlsTemplate',data),
           Mooml.render('foundRulesTemplate',data)
         );

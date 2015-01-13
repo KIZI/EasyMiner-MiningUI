@@ -8,6 +8,7 @@ var FRManager = new Class({
   UIPainter: null,
   UIListener: null,
   tips: null,
+  errorMessage: '',
 
   //nově používané proměnné s informacemi o stavu
   task: null,
@@ -58,53 +59,39 @@ var FRManager = new Class({
     this.UIPainter.renderFoundRules();
   },
 
-  gotoPage: function(locator){
-    console.log('gotoPage '+locator);
-    //TODO zkontrolovat a vyčistit
-    if (typeof locator === 'object') {
-      var page = $(locator.target).retrieve('page');
-      if (page === 'next') {
-        this.currentPage++;
-      } else if (page === 'prev') {
-        this.currentPage--;
-      } else {
-        this.currentPage = page;
-      }
-    } else if (locator != null) {
-      this.currentPage = locator;
-    }
-
-    var url = this.config.getGetRulesUrl(this.task.getId(), (this.currentPage - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
+  gotoPage: function(page){
+    var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
 
     //region načtení pravidel ze serveru...
     var request = new Request.JSON({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
+        this.currentPage=page;
         this.handleSuccessRulesRequest(responseJSON);
-      }.bind(this),
+      }.bind(this).bind(page),
 
       onError: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this),
+        this.handleErrorRulesRequest(page);
+      }.bind(this).bind(page),
 
       onFailure: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this),
+        this.handleErrorRulesRequest(page);
+      }.bind(this).bind(page),
 
       onException: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this),
+        this.handleErrorRulesRequest(page);
+      }.bind(this).bind(page),
 
       onTimeout: function () {
-        this.handleErrorRulesRequest();
-      }.bind(this)
+        this.handleErrorRulesRequest(page);
+      }.bind(this).bind(page)
 
     }).get();
     //endregion
   },
 
-  handleSuccessRulesRequest: function (data) {//FIXME
+  handleSuccessRulesRequest: function (data) {
     //zjištění aktuálních měr zajímavosti
     this.IMs = this.FL.getRulesIMs(data.task.IMs);
     this.rules = [];
@@ -116,8 +103,8 @@ var FRManager = new Class({
     this.UIPainter.renderFoundRules();
   },
 
-  handleErrorRulesRequest: function () {
-    alert('error while loading rules from server...');//FIXME dodělat nějakou smysluplnou hlášku
+  handleErrorRulesRequest: function (page){
+    this.errorMessage=this.i18n.translate('Loading of rules failed...');
     this.UIPainter.renderFoundRules();
   },
 
@@ -133,9 +120,6 @@ var FRManager = new Class({
   renderRules: function (rulesCount, inProgress, task) {
     this.task = task;
     this.miningInProgress = inProgress;
-    // filter new rules
-    //TODO remove: rules = this.filterRules(rules);
-    /////var parsedRules = this.rulesParser.parse(rules, task);
 
     if (!inProgress && !rulesCount) {
       this.UIPainter.renderActiveRule();
@@ -266,21 +250,19 @@ var FRManager = new Class({
 
   reset: function () {
     this.AJAXBalancer.stopAllRequests();
+    this.errorMessage='';
     this.setRulesCount(0);
     this.miningInProgress = false;
-  },
-
-  /* found rules */
-  askBK: function (rule) {
-    this.buildRequest(rule, this.config.getBKAskURL(), true);
-    this.AJAXBalancer.run();
   },
 
   markFoundRule: function (foundRule) {
     alert('označení pravidla...');
     this.AJAXBalancer.stopRequest(foundRule.getId());
-
-    //TODO odeslání ajaxového požadavku pro přidání do rule clipboard
+    console.log(this.task.getId());
+    console.log(this.task.getName());
+    ///this.buildRequest(FR, this.config.getRuleClipboardAddRuleUrl(,foundRule.getId()), false);
+    ///this.AJAXBalancer.run();
+    /////TODO odeslání ajaxového požadavku pro přidání do rule clipboard
     //TODO vykreslení pravidla v rule clipboard
     //this.UIPainter.renderMarkedRules(null, this.$markedRules);
 
@@ -370,6 +352,14 @@ var FRManager = new Class({
 
   calculatePagesCount: function(){
     this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
+  },
+
+  getTaskName: function(){
+    return this.task.getName();
+  },
+
+  getTaskId: function(){
+    return this.task.getId();
   }
 
 });
