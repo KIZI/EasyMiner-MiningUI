@@ -28,7 +28,6 @@ var FRManager = new Class({
     this.config = config;
     var perPageOptions=this.getPerPageOptions();
     this.rulesPerPage=perPageOptions[0];
-    console.log(config);
 
     this.FL = FL;
     this.settings = settings;
@@ -288,6 +287,14 @@ var FRManager = new Class({
      this.AJAXBalancer.run();
 
      this.saveMarkedRules();*/
+  },
+
+  multiMarkFoundRules:function(){
+    //TODO
+  },
+
+  multiUnmarkFoundRules:function(){
+    //TODO
   },
 
   removeFoundRule: function (FR) {

@@ -720,6 +720,37 @@ var UITemplateRegistrator = new Class({
       );
     });
 
+    Mooml.register('foundRulesMultiControlsTemplate', function (data) {
+      var i18n = data.i18n,
+        IMs = data.FRManager.IMs,
+        FRManager = data.FRManager;
+      div({id:'found-rules-multi-controls'},
+        a({
+          class: 'all',
+          title: i18n.translate('Select all')
+        }),
+        a({
+          class: 'invert',
+          title: i18n.translate('Invert selection')
+        }),
+        a({
+          class:'none',
+          title: i18n.translate('Select none')
+        }),
+        span({class:'actions'},
+          a({
+              href:'#',
+              class:'mark',
+              title:i18n.translate('Add to Rule Clipboard')
+          },i18n.translate('Add selected...')),
+          a({
+              href:'#',
+              class:'unmark',
+              title:i18n.translate('Remove from Rule Clipboard')
+          },i18n.translate('Remove...'))
+        )
+      );
+    });
   },
 
   registerRuleIMs: function () {

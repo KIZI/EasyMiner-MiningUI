@@ -5,7 +5,7 @@ var Task = new Class({
     $time: null,
 
     initialize: function(serializedRule, limitHits, debug, joomlaUrl, strictMatch, taskMode, cache) {
-        var taskName = "Task";
+        var taskName = "";
         var articleId;
 
         // Create the task name
@@ -16,11 +16,9 @@ var Task = new Class({
             IMs do závorky na konci
             PVD 1/12/14
          */
-        console.log(serializedRule.antecedent.children);
         if (serializedRule !== undefined &&
             serializedRule.IMs !== undefined) {
 
-            taskName += " ";
             serializedRule.antecedent.children.each(function (e) {
                 taskName += e.name;
                 if (e.category === 'One category') {

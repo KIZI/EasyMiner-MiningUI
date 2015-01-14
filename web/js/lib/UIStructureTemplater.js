@@ -376,7 +376,8 @@ var UIStructureTemplater = new Class({
             span({class: 'count'},rulesCountInfo)
           ),
           Mooml.render('foundRulesControlsTemplate',data),
-          Mooml.render('foundRulesTemplate',data)
+          Mooml.render('foundRulesTemplate',data),
+          Mooml.render('foundRulesMultiControlsTemplate',data)
         );
       }else{
         section({id:'found-rules'});

@@ -63,11 +63,15 @@
           background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
 
         a.mark
+          background transparent url('../images/icon-ok-20.png') left center no-repeat
+
         a.unmark
-          background transparent url('../images/sprite-icons.png') -18px -68px no-repeat
+          background transparent url('../images/icon-ok-20.png') left center no-repeat
+          &:hover
+            background transparent url('../images/icon-stop-20.png') left center no-repeat
 
         a.details
-          background transparent url('../images/sprite/icon-details.png') center center no-repeat
+          background transparent url('../images/icon-info-20.png') left center no-repeat
 
       .ims
         display block
@@ -87,3 +91,30 @@
           >a
             visibility visible
 
+
+  #found-rules-multi-controls
+    min-height 10px
+    .all
+      iconLink()
+      background transparent url('../images/icon-select-all.png') center center no-repeat
+    .none
+      iconLink()
+      background transparent url('../images/icon-select-none.png') center center no-repeat
+    .invert
+      iconLink()
+      background transparent url('../images/icon-select-invert.png') center center no-repeat
+
+    .actions
+      margin-left 10px
+      >a
+        display none
+        padding-left 24px
+        height 20px
+        padding-top 2px
+        font-size actionLinkFontSize
+        &.mark
+          background transparent url('../images/icon-ok-20.png') left center no-repeat
+        &.unmark
+          background transparent url('../images/icon-stop-20.png') left center no-repeat
+        &.visible
+          display inline-block

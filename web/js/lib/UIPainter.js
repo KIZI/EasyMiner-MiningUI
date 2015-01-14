@@ -948,6 +948,9 @@ var UIPainter = new Class({
     Array.each(foundRules,function(foundRule){
       this.UIListener.registerFoundRuleEventHandlers(foundRule);
     }.bind(this));
+
+    this.UIListener.registerFoundRulesMultiControlsEventHandlers();
+
     ///this.$UIStructurePainter.resizeApplication();
   },
   //endregion FoundRules
