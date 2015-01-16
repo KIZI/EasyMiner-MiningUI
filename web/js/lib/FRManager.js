@@ -7,12 +7,12 @@ var FRManager = new Class({
   AJAXBalancer: null,
   UIPainter: null,
   UIListener: null,
-  tips: null,
   errorMessage: '',
 
   //nově používané proměnné s informacemi o stavu
   task: null,
   miningInProgress: false,
+  pageLoading:false,
 
   IMs: [],
   rules: [],
@@ -35,14 +35,6 @@ var FRManager = new Class({
     this.UIListener = UIListener;
     this.i18n = i18n;
     this.AJAXBalancer = new AJAXBalancer();
-    this.tips = new Tips('.found-rule');
-    this.tips.addEvent('show', function (tip, el) {
-      tip.addClass('tip-visible');
-    });
-    this.tips.addEvent('hide', function (tip, el) {
-      tip.removeClass('tip-visible');
-    });
-
   },
 
   handleInProgress: function () {
@@ -59,6 +51,8 @@ var FRManager = new Class({
   },
 
   gotoPage: function(page){
+    this.pageLoading=true;
+    this.UIPainter.renderFoundRules();
     var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
 
     //region načtení pravidel ze serveru...
@@ -92,6 +86,7 @@ var FRManager = new Class({
 
   handleSuccessRulesRequest: function (data) {
     //zjištění aktuálních měr zajímavosti
+    this.pageLoading=false;
     this.IMs = this.FL.getRulesIMs(data.task.IMs);
     this.rules = [];
 
@@ -103,6 +98,7 @@ var FRManager = new Class({
   },
 
   handleErrorRulesRequest: function (page){
+    this.pageLoading=false;
     this.errorMessage=this.i18n.translate('Loading of rules failed...');
     this.UIPainter.renderFoundRules();
   },
@@ -115,129 +111,83 @@ var FRManager = new Class({
     }
   },
 
-
   renderRules: function (rulesCount, inProgress, task) {
     this.task = task;
     this.miningInProgress = inProgress;
-
-    if (!inProgress && !rulesCount) {
-      this.UIPainter.renderActiveRule();
-    } else {
-      this.setRulesCount(rulesCount);
-      /*if (numRules) {
-       if (numRules > Object.getLength(this.rules)) { // new rules to render
-       var els = [];
-       Array.each(parsedRules, function (r) {
-       var FR = new FoundRule(r);
-       this.rules[r.getId()] = FR;
-       els.push(Mooml.render('foundRuleTemplate', {
-       showFeedback: this.config.getShowFeedback(),
-       key: r.getId(),
-       FR: FR,
-       i18n: this.i18n,
-       BK: this.settings.getBKAutoSearch()
-       }));
-       if (this.settings.getBKAutoSearch()) {
-       this.buildRequest(FR, this.config.getBKAskURL(), true);
-       }
-       }.bind(this));
-
-       // render
-       this.pager.add(els);
-
-       // register handlers
-       Object.each(this.rules, function (FR) {
-       this.UIListener.registerFoundRuleEventHandlers(FR, this.settings.getBKAutoSearch());
-       }.bind(this));
-
-
-       if (this.settings.getBKAutoSearch()) {
-       this.AJAXBalancer.run.delay(500, this.AJAXBalancer);
-       }
-       }*/
-
-      if (!inProgress) {
-        /*TODO
-        if (rulesCount < this.settings.getRulesCnt()) {
-          this.setFinished();
-        } else {
-          this.setInterrupted(this.settings.getRulesCnt());
-        }
-        */
-      }
-
-      this.UIPainter.renderActiveRule();
-      this.UIPainter.renderFoundRules();
-    }
+    this.setRulesCount(rulesCount);
+    this.UIPainter.renderActiveRule();
+    this.UIPainter.renderFoundRules();
   },
 
-  buildRequest: function (foundRule, URL, update) {//TODO předělat ajax balancer
-    console.log('FRManager buildRequest');
-
+  buildFoundRulesRequest: function (foundRules, URL) {
     var options = {
       url: URL,
       secure: true,
 
       onRequest: function () {
-        if (update){
-          this.UIPainter.showFRLoading(foundRule);
-        }
+        Array.each(foundRules,function(foundRule){
+          foundRule.setLoading(true);
+          this.UIPainter.updateFoundRule(foundRule);
+        }.bind(this));
       }.bind(this),
 
       onSuccess: function (responseJSON, responseText) {
-        if (update && responseJSON.status == 'ok') {
-          this.handleSuccessRequest(foundRule, responseJSON);
-        } else {
-          this.handleErrorRequest(foundRule);
-        }
+        this.handleSuccessFoundRulesRequest(responseJSON,foundRules);
       }.bind(this),
 
       onError: function () {
-        this.handleErrorRequest(foundRule);
+        this.handleErrorFoundRulesRequest(foundRules);
       }.bind(this),
 
       onCancel: function () {
-        this.handleErrorRequest(foundRule);
+        Array.each(foundRules,function(foundRule){
+          foundRule.setLoading(false);
+          this.UIPainter.updateFoundRule(foundRule);
+        }.bind(this));
       }.bind(this),
 
       onFailure: function () {
-        this.handleErrorRequest(foundRule);
+        this.handleErrorFoundRulesRequest(foundRules);
       }.bind(this),
 
       onException: function () {
-        this.handleErrorRequest(foundRule);
+        this.handleErrorFoundRulesRequest(foundRules);
       }.bind(this),
 
       onTimeout: function () {
-        this.handleErrorRequest(foundRule);
+        this.handleErrorFoundRulesRequest(foundRules);
       }.bind(this)
     };
-
-    this.AJAXBalancer.addRequest(options, JSON.encode(reqData), foundRule.getCSSID());
-  },
-
-  // TODO refactor into single class
-  handleErrorRequest: function (FR) {//TODO ???
-    console.log('FRManager handleErrorRequest');
-    this.UIPainter.updateFoundRule(FR);
-  },
-
-  handleSuccessRequest: function (FR, data) {
-    console.log('FRManager handleSuccessRequest');
-    if (data.confirmation.hits > 0 || data.exception.hits > 0) {
-      if (data.confirmation.hits > 0) {
-        FR.setInteresting(false);
-      } else if (data.exception.hits > 0) {
-        FR.setException(true);
-      }
-    } else {
-      FR.setInteresting(true);
+    var reqData=null;
+    if(foundRules.length==1){
+      this.AJAXBalancer.addRequest(options, JSON.encode(reqData), foundRules[0].getId());
+    }else{
+      this.AJAXBalancer.addRequest(options, JSON.encode(reqData));
     }
+  },
 
-    // TODO refactor into UIPainter
-    this.tips.attach($(FR.getCSSID()));
+  handleErrorFoundRulesRequest: function (foundRules) {
+    if (foundRules.length>0){
+      Array.each(foundRules,function(foundRule){
+        foundRule.setLoading(false);
+        this.UIPainter.updateFoundRule(foundRule);
+      }.bind(this));
+    }
+  },
 
-    this.UIPainter.updateFoundRule(FR);
+
+
+  handleSuccessFoundRulesRequest: function (jsonData,foundRules){
+    if ((foundRules == undefined)||(foundRules.length==0)){return;}
+
+    Array.each(foundRules,function(foundRule){
+      if (jsonData.rules[foundRule.$id]){
+        foundRule.initialize(foundRule.$id,jsonData.rules[foundRule.$id],this.task);
+      }
+      foundRule.setLoading(false);
+      this.UIPainter.updateFoundRule(foundRule);
+    }.bind(this));
+
   },
 
 
@@ -251,58 +201,78 @@ var FRManager = new Class({
     this.AJAXBalancer.stopAllRequests();
     this.errorMessage='';
     this.setRulesCount(0);
+    this.IMs = this.FL.getRulesIMs([]);
     this.miningInProgress = false;
   },
 
   markFoundRule: function (foundRule) {
-    alert('označení pravidla...');
     this.AJAXBalancer.stopRequest(foundRule.getId());
-    console.log(this.task.getId());
-    console.log(this.task.getName());
-    ///this.buildRequest(FR, this.config.getRuleClipboardAddRuleUrl(,foundRule.getId()), false);
-    ///this.AJAXBalancer.run();
-    /////TODO odeslání ajaxového požadavku pro přidání do rule clipboard
-    //TODO vykreslení pravidla v rule clipboard
-    //this.UIPainter.renderMarkedRules(null, this.$markedRules);
-
-    // index interesting rule into KB
-    /*
-     this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
-     this.AJAXBalancer.run();
-
-     this.saveMarkedRules();*/
+    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),foundRule.$id));
+    this.AJAXBalancer.run();
   },
 
   unmarkFoundRule: function (foundRule) {
-    alert('odznačení pravidla...');
     this.AJAXBalancer.stopRequest(foundRule.getId());
-
-    //TODO odeslání ajaxového požadavku pro přidání do rule clipboard
-    //TODO vykreslení pravidla v rule clipboard
-    //this.UIPainter.renderMarkedRules(null, this.$markedRules);
-
-    // index interesting rule into KB
-    /*
-     this.buildRequest(FR, this.config.getBKSaveInterestingURL(), false);
-     this.AJAXBalancer.run();
-
-     this.saveMarkedRules();*/
+    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),foundRule.$id));
+    this.AJAXBalancer.run();
   },
 
-  multiMarkFoundRules:function(){
-    //TODO
+  cleanFoundRulesIds: function(foundRulesCSSIDs){
+    var result=[];
+    if (!(foundRulesCSSIDs.length>0)){
+      return result;
+    }
+    var taskId=this.getTaskId();
+    Array.each(foundRulesCSSIDs,function(id){
+      var regExp=/^found-rule-(.+)-(\d+)-checkbox$/;
+      var idArr=id.split('-');
+      if(regExp.test(id)){
+        if(taskId!=idArr[2]){
+          return;
+        }
+        result.push(idArr[3]);
+      }
+    }.bind([taskId,result]));
+    return result;
   },
 
-  multiUnmarkFoundRules:function(){
-    //TODO
+  getFoundRulesByIds: function(foundRulesIds){
+    var result=[];
+    if (this.rules.length>0){
+      Array.each(this.rules,function(rule){
+        if (foundRulesIds.indexOf(rule.$id)>-1){
+          result.push(rule);
+        }
+      }.bind([foundRulesIds,result]));
+    }
+    return result;
   },
 
-  removeFoundRule: function (FR) {
-    alert('removeFoundRule');
-    this.AJAXBalancer.stopRequest(FR.getRule().getId());
+  multiMarkFoundRules:function(foundRulesIds){
+    var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
+    if (selectedFoundRules.length==0){return;}
+    var urlIds=[];
+    Array.each(selectedFoundRules,function(foundRule){
+      urlIds.push(foundRule.$id);
+      this.AJAXBalancer.stopRequest(foundRule.getId());
+      foundRule.setLoading(true);
+    }.bind(this));
+    urlIds=urlIds.join(',');
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),urlIds));
+    this.AJAXBalancer.run();
+  },
 
-    // index not interesting rule into KB
-    this.buildRequest(FR, this.config.getBKSaveNotInterestingURL(), false);
+  multiUnmarkFoundRules:function(foundRulesIds){
+    var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
+    if (selectedFoundRules.length==0){return;}
+    var urlIds=[];
+    Array.each(selectedFoundRules,function(foundRule){
+      urlIds.push(foundRule.$id);
+      this.AJAXBalancer.stopRequest(foundRule.getId());
+      foundRule.setLoading(true);
+    }.bind(this));
+    urlIds=urlIds.join(',');
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),urlIds));
     this.AJAXBalancer.run();
   },
 

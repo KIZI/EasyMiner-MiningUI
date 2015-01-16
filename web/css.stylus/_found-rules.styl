@@ -55,6 +55,10 @@
         color foundRuleColor
         cursor default
 
+      .loading
+        display none
+        //TODO
+
       .ruleActions
         ruleActions()
         top 5px
@@ -85,6 +89,12 @@
           a.mark
           a.unmark
             visibility visible
+
+      &.loading
+        .ruleActions
+          background transparent url('../images/icon-loading-20.gif') left center no-repeat
+          >a
+            visibility hidden !important
 
       &:hover
         .ruleActions

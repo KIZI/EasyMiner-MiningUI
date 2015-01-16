@@ -832,64 +832,21 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
-  /* found rules */
-  updateFoundRule: function (FR) {
-    var elFR = $(FR.getCSSID());
-    if (!elFR) {
-      return;
-    }
+  /**
+   * Funkce pro samostatné vykreslení jednoho nalezeného pravidla
+   * @param foundRule
+   */
+  updateFoundRule:function(foundRule){
+    var foundRuleElement = $(foundRule.getCSSID());
+    if (!foundRuleElement){return;}
 
-    if (FR.isInteresting() || FR.isException()) {
-      elFR.set('morph', {duration: this.morphDuration});
-      elFR.setStyle('cursor', 'help');
+    Mooml.render('foundRuleTemplate',{
+      IMs: this.ARBuilder.$FRManager.IMs,
+      foundRule: foundRule,
+      i18n: this.i18n
+    }).replaces(foundRuleElement);
 
-      var elFRInfo = elFR.getElement('.info');
-      // TODO refactor all into external CSS style
-      elFRInfo.setStyle('display', 'block');
-      var elFRHelp = elFRInfo.getElement('.help');
-      if (FR.isInteresting()) {
-        if (FR.getInteresting()) { // marked as interesting
-          elFR.setStyle('font-weight', 'bold');
-
-          elFR.store('tip:text', this.i18n.translate('Association rule is novel.'));
-        } else { // marked as not interesting
-          Array.each(elFR.getChildren('*:not(span.info)'), function (child) {
-            child.set('morph', {duration: this.morphDuration});
-            child.morph({'opacity': '0.3'});
-          }.bind(this));
-
-          elFR.store('tip:text', this.i18n.translate('Association rule confirms an already known rule.'));
-        }
-      } else if (FR.isException()) {
-        elFR.setStyle('font-weight', 'bold');
-        elFR.morph({'color': '#C91E1D'});
-
-        elFR.store('tip:text', this.i18n.translate('This rule is an exception to a rule stored in knowledge base.'));
-      }
-
-      if (!this.ARBuilder.getFL().getAutoSuggest()) {
-        var elBK = elFR.getElement('.bk');
-        elBK.morph({'display': 'none'});
-      }
-
-    }
-
-    var elLoading = elFR.getElement('.loading');
-    if (elLoading) {
-      elLoading.set('morph', {duration: this.morphDuration});
-      elLoading.morph({
-        'opacity': '0.0'
-      });
-    }
-  },
-
-  showFRLoading: function (foundRule) {
-    var elLoading = $(foundRule.getCSSID()).getElement('.loading');
-    elLoading.set('morph', {duration: this.morphDuration});
-    elLoading.morph({
-      'opacity': '1',
-      'visibility': 'visible'
-    });
+    this.UIListener.registerFoundRuleEventHandlers(foundRule);
   },
 
   renderExportBusinessRulesDialog: function (taskId, rules) {
@@ -933,8 +890,7 @@ var UIPainter = new Class({
   },
 
   //region FoundRules
-  renderFoundRules: function () {
-    //TODO funkce pro vykreslování sekce Discovered Rules
+  renderFoundRules: function (data) {
     Mooml.render(
       'foundRulesStructureTemplate',
       {

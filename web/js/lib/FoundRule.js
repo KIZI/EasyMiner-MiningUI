@@ -4,6 +4,7 @@ var FoundRule = new Class({
 
   $exception: null,
   $interesting: null,
+  $loading: false,
 
   $id: null,
   $rule: null,
@@ -14,14 +15,18 @@ var FoundRule = new Class({
     this.$rule = rule;
     this.$task = task;
   },
-
+/*
   parseFromObject: function (data) {
     this.$rule = new AssociationRule();
     this.$rule.parseFromObject(data);
-  },
+  },*/
 
-  getId: function(){
-    return this.$task.getId() + '-' + this.$id;
+  getId: function(onlyRuleId){
+    if (onlyRuleId){
+      return this.$id;
+    }else{
+      return this.$task.getId() + '-' + this.$id;
+    }
   },
 
   getCSSID: function () {
@@ -73,6 +78,14 @@ var FoundRule = new Class({
 
   setSelected: function(value){
     this.$rule.selected = value;
+  },
+
+  isLoading: function(){
+    return (this.$loading || false);
+  },
+
+  setLoading: function(loading){
+    this.$loading=loading;
   }
 
 });

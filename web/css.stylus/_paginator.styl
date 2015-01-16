@@ -18,3 +18,13 @@ pagerButton()
       color backgroundColor
     &.active
       border
+
+  .loading
+    background transparent url('../images/icon-loading-20.gif') left center no-repeat
+    padding 3px 0 3px 25px
+    margin-left 10px
+    display none
+
+  &.loading
+    .loading
+      display inline-block

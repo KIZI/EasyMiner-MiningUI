@@ -498,18 +498,16 @@ var UITemplateRegistrator = new Class({
         i18n = data.i18n,
         IMs = data.IMs;
 
-      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')},
+      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+(foundRule.isLoading()?' loading':'')},
         input({type:'checkbox',id:foundRule.getCSSID()+'-checkbox', class:'found-rule-checkbox'}),
         label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
-//				data.showFeedback && !BK ? a({id: rule.getFoundRuleCSSBKID(), href: '#', 'class': 'bk', 'title': i18n.translate('Ask background knowledge')}) : '',
         span({class:'ruleActions'},
           (foundRule.isSelected()?
             a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})
             :
             a({id: foundRule.getMarkCSSID(), href: '#', 'class': 'mark', 'title': i18n.translate('Add to Rule Clipboard')})
           ),
-          a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
-          div({'class': 'loading'}, '')
+          a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
         ),
         span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
       );
@@ -652,18 +650,20 @@ var UITemplateRegistrator = new Class({
 
     Mooml.register('foundRulesPaginator',function(data){
         var FRManager = data.FRManager,
-          i18n = data.i18n;
-        var pageSteps=4;
+          i18n = data.i18n,
+          pageLoading = data.FRManager.pageLoading;
+
         var gotoFunction = function(page){
           FRManager.gotoPage(page);
         }.bind(FRManager);
 
-        div({class:'paginator'},
-          Mooml.render(FRManager.getPaginatorType(),{
+        div({class:('paginator'+(pageLoading?' loading':''))},
+          (FRManager.pagesCount>1 ? (Mooml.render(FRManager.getPaginatorType(),{
             gotoFunction: gotoFunction,
             pagesCount: FRManager.pagesCount,
             currentPage: FRManager.currentPage
-          })
+          })):''),
+          span({class:'loading'},i18n.translate('loading...'))
         );
       }
     );
@@ -712,7 +712,7 @@ var UITemplateRegistrator = new Class({
       }.bind([perPageSelect, perPage]));
 
       div({'class':'found-rules-controls'},
-        (FRManager.pagesCount>1 ? (Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n})) : ''),
+        Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n}),
         label({'for':'found-rules-order'},i18n.translate('Rules order:')),
         orderSelect,
         label({'for':'found-rules-per-page'},i18n.translate('Rules per page:')),

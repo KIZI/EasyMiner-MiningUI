@@ -1551,6 +1551,15 @@ section#active-rule #ar-action-box #start-mining:focus {
   border: 1px solid #ededed;
   color: #ededed;
 }
+.paginator .loading {
+  background: transparent url("../images/icon-loading-20.gif") left center no-repeat;
+  padding: 3px 0 3px 25px;
+  margin-left: 10px;
+  display: none;
+}
+.paginator.loading .loading {
+  display: inline-block;
+}
 #found-rules {
   clear: left;
   padding-top: 20px;
@@ -1616,6 +1625,9 @@ section#active-rule #ar-action-box #start-mining:focus {
   color: #434343;
   cursor: default;
 }
+#found-rules ul li .loading {
+  display: none;
+}
 #found-rules ul li .ruleActions {
   display: inline-block;
   overflow: auto;
@@ -1623,6 +1635,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   width: 100px;
   height: 20px;
   margin-left: 15px;
+  background: transparent;
   top: 5px;
 }
 #found-rules ul li .ruleActions > a {
@@ -1670,6 +1683,12 @@ section#active-rule #ar-action-box #start-mining:focus {
 #found-rules ul li.selected .ruleActions a.mark,
 #found-rules ul li.selected .ruleActions a.unmark {
   visibility: visible;
+}
+#found-rules ul li.loading .ruleActions {
+  background: transparent url("../images/icon-loading-20.gif") left center no-repeat;
+}
+#found-rules ul li.loading .ruleActions >a {
+  visibility: hidden !important;
 }
 #found-rules ul li:hover .ruleActions >a {
   visibility: visible;

@@ -258,13 +258,13 @@ var Config = new Class({//TODO Standa: update URLs
     return this.$easyMinerCenterUrl+this.ruleClipboardAddRuleUrl
     + '?miner=' + this.params.id_dm
     + '&task=' + taskId
-    + '&rule=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+    + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
   },
   getRuleClipboardRemoveRuleUrl: function (taskId, ruleId) {
     return this.$easyMinerCenterUrl+this.ruleClipboardRemoveRuleUrl
     + '?miner=' + this.params.id_dm
     + '&task=' + taskId
-    + '&rule=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+    + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
   },
 
   getPerPageOptions: function(){

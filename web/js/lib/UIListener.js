@@ -485,22 +485,14 @@ var UIListener = new Class({
     }.bind(this));
   },
 
-  registerFoundRuleEventHandlers: function (foundRule, autoSearch) {
+  registerFoundRuleEventHandlers: function (foundRule) {
     var el;
-    /*
-     if (!autoSearch) { // ask background knowledge
-     el = $(FR.getRule().getFoundRuleCSSBKID());
-
-     if (el) {
-     el.addEvent('click', function (e) {
-     e.stop();
-     this.ARBuilder.getFRManager().askBK(FR);
-     }.bind(this));
-     }
-     }*/
-
     var FRManager = this.ARBuilder.getFRManager();
-
+    /*region checkbox*/
+    $(foundRule.getCSSID()+'-checkbox').addEvent('click', function(){
+      this.checkFoundRulesSelectedCheckboxes();
+    }.bind(this));
+    /*endregion checkbox*/
     /*region mark*/
     var markLink = $(foundRule.getMarkCSSID());
     if (markLink) {
@@ -531,23 +523,36 @@ var UIListener = new Class({
     /*endregion details*/
   },
 
-  checkSelectedCheckboxes : function(){
+  checkFoundRulesSelectedCheckboxes : function(){
     //function for checking of checkboxes selection
     var foundRulesRules=$('found-rules-rules');
     var multiControls=$('found-rules-multi-controls');
-    var markAction=(foundRulesRules.getElements('.found-rule-checkbox:checked').length>0);
-    var unmarkAction=(foundRulesRules.getElements('.selected .found-rule-checkbox:checked').length>0);
+    var markAction=(foundRulesRules.getElements('.found-rule-checkbox:checked').length);
+    var unmarkAction=(foundRulesRules.getElements('.selected .found-rule-checkbox:checked').length);
+    markAction=((markAction-unmarkAction)>0);
+    unmarkAction=(unmarkAction>0);
 
     if (markAction){
       multiControls.getElements('.actions .mark').addClass('visible');
     }else{
       multiControls.getElements('.actions .mark').removeClass('visible');
     }
-    if (markAction){
-      multiControls.getElements('.actions .mark').addClass('visible');
+    if (unmarkAction){
+      multiControls.getElements('.actions .unmark').addClass('visible');
     }else{
-      multiControls.getElements('.actions .mark').removeClass('visible');
+      multiControls.getElements('.actions .unmark').removeClass('visible');
     }
+  },
+
+  getFoundRulesSelectedIds: function(){
+    var selectedCheckboxes=$$('#found-rules-rules .found-rule-checkbox:checked');
+    if (selectedCheckboxes.length>0){
+      var result=[];
+      Array.each(selectedCheckboxes,function(checkbox){
+        result.push(checkbox.get('id'));
+      }.bind(result))
+    }
+    return result;
   },
 
   registerFoundRulesMultiControlsEventHandlers: function () {
@@ -561,7 +566,7 @@ var UIListener = new Class({
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
           checkbox.checked=true;
         });
-        this.checkSelectedCheckboxes();
+        this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
       multiControls.getElements('.none').addEvent('click',function(event){
         //select all checkboxes
@@ -569,7 +574,7 @@ var UIListener = new Class({
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
           checkbox.checked=false;
         });
-        this.checkSelectedCheckboxes();
+        this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
       multiControls.getElements('.invert').addEvent('click',function(event){
         //select all checkboxes
@@ -577,26 +582,31 @@ var UIListener = new Class({
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
           checkbox.checked=!checkbox.checked;
         });
-        this.checkSelectedCheckboxes();
+        this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
-
-      $$('#found-rules-rules .found-rule-checkbox').addEvent('click', function(){
-        this.checkSelectedCheckboxes();
-      }.bind(this));
-
-      var FRManager = this.ARBuilder.getFRManager();
 
       multiControls.getElements('.actions .mark').addEvent('click',function(event){
         event.stop();
-        FRManager.multiMarkFoundRules();
-      }.bind(FRManager));
+        var selectedFoundRulesIds = [];
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.multiMarkFoundRules(this.getFoundRulesSelectedIds());
+        $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
 
       multiControls.getElements('.actions .unmark').addEvent('click',function(event){
         event.stop();
-        FRManager.multiUnmarkFoundRules();
-      }.bind(FRManager));
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
+        $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
 
-      this.checkSelectedCheckboxes();
+      this.checkFoundRulesSelectedCheckboxes();
     }
   },
 
