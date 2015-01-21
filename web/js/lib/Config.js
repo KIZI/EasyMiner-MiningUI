@@ -193,7 +193,7 @@ var Config = new Class({//TODO Standa: update URLs
 
   //region easyMinerCenterUrls
   getUserLoginUrl: function () {
-    return this.$easyMinerCenterUrl+this.userLoginUrl;
+    return this.$easyMinerCenterUrl+this.userLoginUrl+'?url='+encodeURIComponent(location.href);
   },
 
   getUserLogoutUrl: function () {

@@ -1,3 +1,16 @@
+headerLinkItem()
+  color #CEE7F7
+  font-size buttonFontSize
+  font-weight bold
+  font-family buttonFontFamily
+  display inline-block
+  padding 2px 0 2px 30px
+  margin 0 10px
+
+headerLinkItemHover()
+  color #ffffff
+  text-decoration underline
+
 header
   background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height 146px;
@@ -19,30 +32,27 @@ header
     height 30px
     padding-top 5px
     float right
+
     a
-      color #CEE7F7
-      font-size 14px
-      font-weight bold
-      text-decoration none
-      padding-right 12px
-      display block; float left
-      height 25px
-    a:hover
-      color #FFF
-      text-decoration underline
-    a#new-task
-      background transparent url('../images/sprite-icons.png') -113px -262px no-repeat
-      padding 2px 0 0 30px; margin-right: 20px
-    a#support
-      background transparent url('../images/sprite-icons.png') -14px -610px no-repeat
-      padding 2px 0 0 30px; margin-right: 20px
-    a#settings-open
-      background transparent url('../images/sprite-icons.png') -213px -610px no-repeat
-      padding 2px 0 0 30px
-    a#go-to-cms
-      background transparent url('../images/sprite-icons.png') -13px -115px no-repeat
-      padding 2px 0 0 30px
-      margin-right 20px
+      headerLinkItem()
+      &:hover
+        headerLinkItemHover()
+      &#new-task
+        background transparent url('../images/sprite-icons.png') -113px -262px no-repeat
+      &#support
+        background transparent url('../images/sprite-icons.png') -14px -610px no-repeat
+      &#settings-open
+        background transparent url('../images/sprite-icons.png') -213px -610px no-repeat
+
+    span
+      headerLinkItem()
+      a
+        padding 0
+        margin 0
+        display inline
+      &#current-user
+        background transparent url('../images/icon-user-24.png') no-repeat
+
 
   h1
     color h1Color

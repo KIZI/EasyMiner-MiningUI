@@ -172,19 +172,6 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
-  renderUserLogoutWindow: function () {
-    var overlay = this.$UIStructurePainter.showOverlay();
-    var window = Mooml.render('userLogoutWindowTemplate', {i18n: this.i18n, url: this.config.getUserLogoutUrl()});
-    overlay.grab(window);
-
-    this.$UIScroller.scrollTo(0, 0);
-
-    this.UIListener.registerOverlayEventHandlers();
-
-    // Positioning of Overlay after rendering
-    this.$UIStructurePainter.posOverlay();
-  },
-
   renderShowHistogramWindow: function (name, type) {
     var overlay = this.$UIStructurePainter.showOverlay();
     var window = Mooml.render('showHistogramTemplate', {
@@ -289,83 +276,6 @@ var UIPainter = new Class({
       url: this.config.getShowReportUrl(report.id)
     }));
 //        this.UIListener.registerReportEventHandler(report);
-  },
-
-  // TODO: odprasit
-  renderUserAccountBox: function (user) {
-    var elUserAccount = new Element('div', {
-      styles: {
-        display: 'inline',
-        float: 'left',
-        'margin-left': '20px'
-      }
-    });
-
-    var me = this;
-    if (user.id) {
-      // TODO: Odprasit
-      $('reports').show();
-
-      var elUser = new Element('span', {
-        id: 'user',
-        html: user.name + ' - ',
-        styles: {
-          background: 'url("http://icons.iconarchive.com/icons/dryicons/simplistica/24/user-icon.png") no-repeat scroll 0 0 transparent',
-          color: '#CEE7F7',
-          float: 'left',
-          'font-size': '14px',
-          'font-weight': 'bold',
-          'line-height': '24px',
-          'padding-left': '30px'
-        }
-      });
-      elUser.inject(elUserAccount);
-
-      var logout = new Element('a', {
-        href: this.config.getUserLogoutUrl(),
-        html: 'logout',
-        styles: {
-          'padding-top': '2px',
-          'padding-left': '5px'
-        }
-      });
-      logout.inject(elUserAccount);
-    } else {
-      $('reports').hide();
-
-      var elUser = new Element('span', {
-        id: 'user',
-        html: 'Anonymous - ',
-        styles: {
-          background: 'url("http://icons.iconarchive.com/icons/dryicons/simplistica/24/user-icon.png") no-repeat scroll 0 0 transparent',
-          color: '#CEE7F7',
-          float: 'left',
-          'font-size': '14px',
-          'font-weight': 'bold',
-          'line-height': '24px',
-          'padding-left': '30px'
-        }
-      });
-      elUser.inject(elUserAccount);
-
-      var login = new Element('a', {
-        href: this.config.getUserLoginUrl(),
-        html: 'login',
-        styles: {
-          'padding-top': '2px',
-          'padding-left': '5px'
-        }/*,
-         events: {
-         click: function(event) {
-         event.stop();
-         me.renderUserLoginWindow();
-         }
-         }*/
-      });
-      login.inject(elUserAccount);
-    }
-
-    elUserAccount.inject($('settings'));
   },
 
   renderMarkedRules: function (elementParent/*, markedRules*/) {//TODO P. Duben
@@ -954,6 +864,22 @@ var UIPainter = new Class({
       });
       $('settings-window').setStyle('margin-top', '10px');
     }
+  },
+
+  renderCurrentUserWarning: function(message, url) {
+    var overlay = this.$UIStructurePainter.showOverlay();
+    var window = Mooml.render('userWarningWindowTemplate', {message: message, url: url});
+    overlay.grab(window);
+    this.$UIScroller.scrollTo(0, 0);
+    this.$UIStructurePainter.posOverlay();
+  },
+
+  renderCurrentUserBox: function (user, logoutUrl) {//TODO Standa
+    Mooml.render('currentUserTemplate',{
+      user: user,
+      logoutUrl: logoutUrl,
+      i18n: this.i18n
+    }).replaces($('current-user'));
   }
 
 });

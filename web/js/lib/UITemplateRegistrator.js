@@ -948,24 +948,26 @@ var UITemplateRegistrator = new Class({
         iframe({src: url}));
     });
 
-    Mooml.register('userLoginWindowTemplate', function (data) {
-      div({id: 'user-login-window'},
-        iframe({src: data.url}));
+    Mooml.register('userWarningWindowTemplate', function (data) {
+      div({id: 'user-warning-window'},
+        p(data.message),
+        div(
+          a({href:data.url},'OK')
+        )
+      );
     });
 
-    Mooml.register('userLogoutWindowTemplate', function (data) {
-      var i18n = data.i18n,
-        url = data.url;
+    Mooml.register('currentUserTemplate', function (data) {
+      var user      = data.user;
+      var logoutUrl = data.logoutUrl;
+      var i18n      = data.i18n;
 
-      div({id: 'user-logout-window'},
-        a({
-            id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
-        ),
-        iframe({src: url}));
+      span({id: 'current-user'},
+        user.name,' - ',
+        a({href:logoutUrl},i18n.translate('logout'))
+      );
     });
+
   }
 
 });

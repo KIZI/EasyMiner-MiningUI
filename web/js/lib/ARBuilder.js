@@ -21,6 +21,7 @@ var ARBuilder = new Class({
   $FGC: null,
   $callbackDelay: 1000, // miliseconds
   $reportManager: null,
+  $currentUser:null,
 
   // init basics
   initialize: function (config) {
@@ -39,6 +40,8 @@ var ARBuilder = new Class({
     this.UIListener.setUIPainter(this.UIPainter);
 
     this.$reportManager = new ReportManager(this.$config, this.settings, this.UIPainter);
+
+    this.$currentUser = new CurrentUser(this, this.UIPainter, this.$config, this.$i18n);
 
     if (this.$config.getIdDm()) {
       this.loadData();
@@ -94,22 +97,14 @@ var ARBuilder = new Class({
     this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
     this.$ETreeManager.setARManager(this.$ARManager);
 
-    this.UIPainter.createUI(); // TODO resize window after
-    //this.$FRManager.initPager();//TODO...
+    this.UIPainter.createUI();
+    this.$UIStructurePainter.resizeApplication();
 
-
-    // TODO: Odprasit
-    var me = this;
-    new Request.JSON({
-      url: this.$config.getUserInfoUrl(),
-      secure: true,
-      onComplete: function (responseJSON) {
-        me.UIPainter.renderUserAccountBox(responseJSON);
-      }
-    }).send();
+    this.$currentUser.loadUser();
 
     this.$reportManager.loadReports();
-    this.$reportManager.loadBRBase();
+    //TODO
+    //this.$reportManager.loadBRBase();
   },
 
   getDD: function () {

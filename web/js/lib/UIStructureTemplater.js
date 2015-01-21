@@ -24,13 +24,10 @@ var UIStructureTemplater = new Class({
         browserDetector.isDeprecated() ? div({id: 'browser-warning'}, i18n.translate('WARNING: You are using an old and deprecated version of web browser') + ' (' + browserDetector.getFullName() + '). ' + i18n.translate('Please upgrade to enjoy this application!')) : '',
         div({id: 'settings'},
           a({href: '#', id: 'new-task'}, i18n.translate('New task')),
-          a({
-            'id': 'go-to-cms',
-            'href': '..',
-            'target': 'blank'
-          }, i18n.translate('Go to CMS')),
-          a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),
-          a({href: '#', id: 'settings-open'}, i18n.translate('Settings'))),
+          /*TODO a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),*/
+          a({href: '#', id: 'settings-open'}, i18n.translate('Settings')),
+          span({id:'current-user'})
+        ),
         h1(config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
     });
 
