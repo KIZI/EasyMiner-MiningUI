@@ -334,10 +334,6 @@ var ARBuilder = new Class({
     this.$reportManager.loadReports();
   },
 
-  reloadBRBase: function () {
-    this.$reportManager.loadBRBase();
-  },
-
   openExportBusinessRulesDialog: function (taskId) {
     alert('openExportBusinessRulesDialog');
     //this.UIPainter.renderExportBusinessRulesDialog(taskId, this.$FRManager.getMarkedRules(taskId));

@@ -66,14 +66,6 @@ var UIStructurePainter = new Class({
             navigation.grab(reports);
         }
 
-        var brBase = $('brBase');
-        if (brBase) {
-            Mooml.render('brBaseStructureTemplate', {i18n: this.$i18n}).replaces(brBase);
-        } else {
-            brBase = Mooml.render('brBaseStructureTemplate', {i18n: this.$i18n});
-            navigation.grab(brBase);
-        }
-
         this.$UIStructureListener.registerNavigationEventHandlers(this.$i18n);
     },
 

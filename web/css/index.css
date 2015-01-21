@@ -1108,35 +1108,6 @@ nav {
 #reports ul {
   margin-bottom: 10px;
 }
-#brBase {
-  color: #434343;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
-  padding-bottom: 20px;
-  margin-bottom: 25px;
-}
-#brBase h2 {
-  color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
-  font-size: 28px;
-  font-weight: normal;
-  margin: 0 0 20px 0;
-  font-size: 22.400000000000002px;
-  margin: 5px 20px 15px 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #314e64;
-}
-#brBase #brBaseCounter {
-  padding: 5px 20px;
-}
-#brBase a {
-  margin: 5px 20px;
-  display: inline-block;
-}
 section#active-rule {
   position: relative;
 }

@@ -121,7 +121,7 @@ var ReportManager = new Class({
     handleErrorRequest: function () {
     },
 
-    exportRulesToBRBase:function(taskId,rules){
+    exportRulesToBRBase:function(taskId,rules){/*
         var rulesIds = [];
         rules.each(function(rule) {
             rulesIds.push(rule.getRule().getId());
@@ -163,7 +163,7 @@ var ReportManager = new Class({
             }.bind(this)
         }).get();
         //endregion
-
+*/
     },
 
     loadBRBase: function(){

@@ -13,9 +13,6 @@ var close = function() {
 var reloadReports = function() {
     $(config.getRootElementID()).fireEvent('reloadReports');
 };
-var reloadBRBase = function(){
-    $(config.getRootElementID()).fireEvent('reloadBRBase');
-}
 
 window.addEvent('domready', function () {
     var nativeTypeExtender = new NativeTypeExtender();

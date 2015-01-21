@@ -10,6 +10,7 @@ var UITemplateRegistrator = new Class({
     this.registerMarkedRules();
     this.registerRuleIMs();
     this.registerAttributeWindow();
+    this.registerCurrentUser();
   },
 
   registerNavigation: function () {
@@ -948,6 +949,9 @@ var UITemplateRegistrator = new Class({
         iframe({src: url}));
     });
 
+  },
+
+  registerCurrentUser: function () {
     Mooml.register('userWarningWindowTemplate', function (data) {
       div({id: 'user-warning-window'},
         p(data.message),
@@ -967,7 +971,6 @@ var UITemplateRegistrator = new Class({
         a({href:logoutUrl},i18n.translate('logout'))
       );
     });
-
   }
 
 });
