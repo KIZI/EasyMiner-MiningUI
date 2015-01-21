@@ -775,10 +775,9 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
-  renderBRBaseDialog: function () {
+  renderRuleDetailsDialog: function (taskId,ruleId) {
     var overlay = this.$UIStructurePainter.showOverlay();
-    overlay.grab(Mooml.render('showBRBaseDialogTemplate', {i18n: this.i18n, url: this.config.getBRBaseShowUrl()}))
-
+    overlay.grab(Mooml.render('showRuleDetailsDialogTemplate', {i18n: this.i18n, url: this.config.getRuleDetailsUrl(taskId,ruleId)}));
     // Positioning of Overlay after rendering
     this.$UIStructurePainter.posOverlay();
   },

@@ -166,37 +166,9 @@ var ReportManager = new Class({
 */
     },
 
-    loadBRBase: function(){
-        var request = new Request.JSON({
-            url: this.$config.getBRBaseRulesCountUrl(),
-            secure: true,
-
-            onSuccess: function(responseJSON, responseText) {
-                this.$UIPainter.renderBRBaseRulesCount(responseJSON.rulesCount);
-            }.bind(this),
-
-            onError: function () {
-                this.handleErrorRequest();
-            }.bind(this),
-
-            onFailure: function () {
-                this.handleErrorRequest();
-            }.bind(this),
-
-            onException: function () {
-                this.handleErrorRequest();
-            }.bind(this),
-
-            onTimeout: function () {
-                this.handleErrorRequest();
-            }.bind(this)
-
-        }).get();
-    },
-
     loadReports: function() {
         var request = new Request.JSON({
-            url: this.$config.getListReportsUrl(),
+            url: this.$config.getListAnalyticalReportsUrl(),
             secure: true,
 
             onSuccess: function(responseJSON, responseText) {

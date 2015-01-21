@@ -516,9 +516,8 @@ var UIListener = new Class({
     if (detailsLink) {
       detailsLink.addEvent('click', function (event) {
         event.stop();
-        //TODO
-        alert('TODO: show rule details...');
-      }.bind(FRManager));
+        this.UIPainter.renderRuleDetailsDialog(foundRule.getTaskId(),foundRule.getId(true));
+      }.bind(this));
     }
     /*endregion details*/
   },

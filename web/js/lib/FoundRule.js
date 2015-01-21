@@ -86,6 +86,10 @@ var FoundRule = new Class({
 
   setLoading: function(loading){
     this.$loading=loading;
+  },
+
+  getTaskId: function(){
+    return this.$task.getId();
   }
 
 });

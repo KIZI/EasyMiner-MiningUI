@@ -103,8 +103,6 @@ var ARBuilder = new Class({
     this.$currentUser.loadUser();
 
     this.$reportManager.loadReports();
-    //TODO
-    //this.$reportManager.loadBRBase();
   },
 
   getDD: function () {

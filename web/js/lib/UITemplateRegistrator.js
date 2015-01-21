@@ -820,10 +820,17 @@ var UITemplateRegistrator = new Class({
       );
     });
 
-    Mooml.register('showBRBaseDialogTemplate', function (data) {
-      var url = data.url;
+    Mooml.register('showRuleDetailsDialogTemplate', function (data) {//TODO Standa
+      var i18n = data.i18n,
+        url = data.url;
 
-      div({id: 'show-br-base-window'},
+      div({id: 'show-rule-details-window'},
+        a({
+            id: 'overlay-close',
+            href: '#'
+          },
+          i18n.translate('Close')
+        ),
         iframe({src: url})
       );
     });

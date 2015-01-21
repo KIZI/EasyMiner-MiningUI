@@ -33,6 +33,9 @@ var Config = new Class({//TODO Standa: update URLs
   ruleClipboardGetRulesUrl:'/em/rule-clipboard/get-rules',
   ruleClipboardAddRuleUrl:'/em/rule-clipboard/add-rule',
   ruleClipboardRemoveRuleUrl:'/em/rule-clipboard/remove-rule',
+
+  showRuleDetailsUrl: '/em/data/attribute-histogram',//FIXME Standa
+  getAnalyticalReportsUrl: '/em/reports/get-analytical-reports',//FIXME Standa
   //endregion
 
   // URL settings
@@ -46,7 +49,7 @@ var Config = new Class({//TODO Standa: update URLs
 
   $supportUrl: 'http://easyminer.eu/',
 
-  perPageOptions: [2/*TODO for testing only...*/, 10, 20, 50, 100],
+  perPageOptions: [10, 20, 50, 100],
 
   // root element
   rootElementID: 'IZIMiner',
@@ -130,25 +133,12 @@ var Config = new Class({//TODO Standa: update URLs
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=savePMMLArticle&format=raw';
   },
 
-  getListReportsUrl: function () {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=listKBIArticles&format=raw&kbi=' + this.params.id_dm;
+  getListAnalyticalReportsUrl: function () {
+    return this.$easyMinerCenterUrl+this.loadMinerDataUrl+'?miner='+this.params.id_dm;
   },
-
-  getBRBaseRulesCountUrl: function () {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseRulesCount&format=raw&kbi=' + this.params.id_dm;
-  },
-
-  getBRBaseShowUrl: function () {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseShow&tmpl=component&kbi=' + this.params.id_dm;
-  },
-
-  getBRBaseSaveRulesUrl: function (taskId, rulesIds) {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=brBaseAddRules&tmpl=component&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
-  },
-
 
   getLoadClipboardUrl: function () {
-    return this.$easyMinerCenterUrl+this.loadMinerDataUrl;
+    return this.$easyMinerCenterUrl+this.loadMinerDataUrl+'?miner='+this.params.id_dm;;
   },
 
   getETreeGetURL: function () {
@@ -179,8 +169,8 @@ var Config = new Class({//TODO Standa: update URLs
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component&kbi=' + this.params.id_dm;
   },
 
-  getShowReportUrl: function (id) {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + id;
+  getShowReportUrl: function (reportId) {//TODO
+    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' + reportId;
   },
 
   getExportBusinessRulesUrl: function (taskId, rulesIds) {//TODO
@@ -206,6 +196,13 @@ var Config = new Class({//TODO Standa: update URLs
 
   getNewTaskURL: function () {
     return this.$easyMinerCenterUrl+this.newMinerUrl;
+  },
+
+  getRuleDetailsUrl:function(taskId,ruleId){
+    return this.$easyMinerCenterUrl+this.showRuleDetailsUrl
+      + '?miner=' + this.params.id_dm
+      + '&task=' + taskId
+      + '&rule=' + ruleId;
   },
 
   getGetDataURL: function () {
