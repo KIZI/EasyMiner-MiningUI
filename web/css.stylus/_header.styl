@@ -11,7 +11,7 @@ headerLinkItemHover()
   color #ffffff
   text-decoration underline
 
-header
+header#mainHeader
   background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height 146px;
   width 100%
@@ -22,61 +22,71 @@ header
     padding-right:15px;
     margin: 0 auto;
 
-  #browser-warning
-    margin 0 0 0 4*boxMargin; padding-top 6px
-    color: red
-    float: left
+    #browser-warning
+      margin 0 0 0 4*boxMargin; padding-top 6px
+      color: red
+      float: left
 
-  #settings
-    text-align right
-    height 30px
-    padding-top 5px
-    float right
+    #headerLinks
+      text-align right
+      height 30px
+      padding-top 5px
+      float right
 
-    a
-      headerLinkItem()
-      &:hover
-        headerLinkItemHover()
-      &#new-task
-        background transparent url('../images/sprite-icons.png') -113px -262px no-repeat
-      &#support
-        background transparent url('../images/sprite-icons.png') -14px -610px no-repeat
-      &#settings-open
-        background transparent url('../images/sprite-icons.png') -213px -610px no-repeat
-
-    span
-      headerLinkItem()
       a
-        padding 0
-        margin 0
-        display inline
-      &#current-user
-        background transparent url('../images/icon-user-24.png') no-repeat
+        headerLinkItem()
+        &:hover
+          headerLinkItemHover()
+        &#new-task
+          background transparent url('../images/sprite-icons.png') -113px -262px no-repeat
+        &#support
+          background transparent url('../images/sprite-icons.png') -14px -610px no-repeat
+        &#settings-open
+          background transparent url('../images/sprite-icons.png') -213px -610px no-repeat
+
+      span
+        headerLinkItem()
+        a
+          padding 0
+          margin 0
+          display inline
+        &#current-user
+          background transparent url('../images/icon-user-24.png') no-repeat
 
 
-  h1
-    color h1Color
-    font h1Font
-    margin 0 0 0 80px;
-    padding-top: 16px
-    letter-spacing 2px
-    clear both
+    h1
+      color h1Color
+      font h1Font
+      margin 0 0 0 30px
+      padding-top: 16px
+      letter-spacing 2px
+      clear both
+      float left
 
-    em
-      font-style normal
-      letter-spacing normal
-      position relative; bottom 5px
-      margin 0 2px
+      &.typeR
+        padding-right 90px
+        background transparent url('../images/logo-r.png') right 6px no-repeat
 
-    sup
-      color #9de045
-      font-size 0.6em
-      letter-spacing normal
-      margin-left 10px
-      position relative; top -0.8em
+      &.typeLM
+        padding-right 200px
+        background transparent url('../images/logo-lm.png') right 38px no-repeat
 
-    span
-      display block
-      font-size 19px
-      letter-spacing normal
-      position relative; top -8px
+      em
+        font-style normal
+        letter-spacing normal
+        position relative; bottom 5px
+        margin 0 2px
+
+      sup
+        display none
+        color #9de045
+        font-size 0.6em
+        letter-spacing normal
+        margin-left 10px
+        position relative; top -0.8em
+
+      span
+        display block
+        font-size 19px
+        letter-spacing normal
+        position relative; top -8px

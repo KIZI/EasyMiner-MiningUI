@@ -729,30 +729,30 @@ div#overlay-inner #user-warning-window a:focus {
   position: relative;
   top: -9px;
 }
-header {
+header#mainHeader {
   background: #ededed url("../images/bg-header.png") repeat-x 50% 0;
   height: 146px;
   width: 100%;
 }
-header #headerContent {
+header#mainHeader #headerContent {
   width: 1320px;
   position: relative;
   padding-right: 15px;
   margin: 0 auto;
 }
-header #browser-warning {
+header#mainHeader #headerContent #browser-warning {
   margin: 0 0 0 60px;
   padding-top: 6px;
   color: #f00;
   float: left;
 }
-header #settings {
+header#mainHeader #headerContent #headerLinks {
   text-align: right;
   height: 30px;
   padding-top: 5px;
   float: right;
 }
-header #settings a {
+header#mainHeader #headerContent #headerLinks a {
   color: #cee7f7;
   font-size: 14px;
   font-weight: bold;
@@ -761,20 +761,20 @@ header #settings a {
   padding: 2px 0 2px 30px;
   margin: 0 10px;
 }
-header #settings a:hover {
+header#mainHeader #headerContent #headerLinks a:hover {
   color: #fff;
   text-decoration: underline;
 }
-header #settings a#new-task {
+header#mainHeader #headerContent #headerLinks a#new-task {
   background: transparent url("../images/sprite-icons.png") -113px -262px no-repeat;
 }
-header #settings a#support {
+header#mainHeader #headerContent #headerLinks a#support {
   background: transparent url("../images/sprite-icons.png") -14px -610px no-repeat;
 }
-header #settings a#settings-open {
+header#mainHeader #headerContent #headerLinks a#settings-open {
   background: transparent url("../images/sprite-icons.png") -213px -610px no-repeat;
 }
-header #settings span {
+header#mainHeader #headerContent #headerLinks span {
   color: #cee7f7;
   font-size: 14px;
   font-weight: bold;
@@ -783,30 +783,40 @@ header #settings span {
   padding: 2px 0 2px 30px;
   margin: 0 10px;
 }
-header #settings span a {
+header#mainHeader #headerContent #headerLinks span a {
   padding: 0;
   margin: 0;
   display: inline;
 }
-header #settings span#current-user {
+header#mainHeader #headerContent #headerLinks span#current-user {
   background: transparent url("../images/icon-user-24.png") no-repeat;
 }
-header h1 {
+header#mainHeader #headerContent h1 {
   color: #fff;
   font: 48px 'Average', 'serif';
-  margin: 0 0 0 80px;
+  margin: 0 0 0 30px;
   padding-top: 16px;
   letter-spacing: 2px;
   clear: both;
+  float: left;
 }
-header h1 em {
+header#mainHeader #headerContent h1.typeR {
+  padding-right: 90px;
+  background: transparent url("../images/logo-r.png") right 6px no-repeat;
+}
+header#mainHeader #headerContent h1.typeLM {
+  padding-right: 200px;
+  background: transparent url("../images/logo-lm.png") right 38px no-repeat;
+}
+header#mainHeader #headerContent h1 em {
   font-style: normal;
   letter-spacing: normal;
   position: relative;
   bottom: 5px;
   margin: 0 2px;
 }
-header h1 sup {
+header#mainHeader #headerContent h1 sup {
+  display: none;
   color: #9de045;
   font-size: 0.6em;
   letter-spacing: normal;
@@ -814,7 +824,7 @@ header h1 sup {
   position: relative;
   top: -0.8em;
 }
-header h1 span {
+header#mainHeader #headerContent h1 span {
   display: block;
   font-size: 19px;
   letter-spacing: normal;
