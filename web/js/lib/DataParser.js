@@ -13,9 +13,7 @@ var DataParser = new Class({
     this.$async = async;
   },
 
-  getData: function (callback, errCallback, bind, delay) {
-    console.log('load data');//XXX Standa
-    var data = JSON.encode({
+  getData: function (callback, errCallback, bind, delay) {var data = JSON.encode({
       debug: this.$settings.getDebug()
     });
 
@@ -35,11 +33,18 @@ var DataParser = new Class({
           callback.delay(delay, bind);
         }
       }.bind(this),
-
       onError: function () {
         errCallback.delay(delay, bind);
+      },
+      onFailure: function () {
+        errCallback.delay(delay, bind);
+      },
+      onException: function () {
+        errCallback.delay(delay, bind);
+      },
+      onTimeout: function () {
+        errCallback.delay(delay, bind);
       }
-
     }).post({'data': data});
   },
 

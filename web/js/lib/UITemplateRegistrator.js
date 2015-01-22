@@ -820,7 +820,7 @@ var UITemplateRegistrator = new Class({
       );
     });
 
-    Mooml.register('showRuleDetailsDialogTemplate', function (data) {//TODO Standa
+    Mooml.register('showRuleDetailsDialogTemplate', function (data) {
       var i18n = data.i18n,
         url = data.url;
 
@@ -976,6 +976,15 @@ var UITemplateRegistrator = new Class({
       span({id: 'current-user'},
         user.name,' - ',
         a({href:logoutUrl},i18n.translate('logout'))
+      );
+    });
+
+    Mooml.register('loadingErrorWindowTemplate', function (data) {
+      div({id: 'loading-data-window', class:'error'},
+        p(data.i18n.translate('An error occured while loading application data.')),
+        div(
+          a({href:data.url},'OK')
+        )
       );
     });
   }

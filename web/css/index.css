@@ -336,7 +336,6 @@ div#overlay-inner form input[type='number'] {
   -ms-user-select: text;
 }
 div#overlay-inner form input[type='submit'] {
-/* TODO */
   background: #075783;
   font-size: 14px;
   font-family: 'Droid Sans', 'Arial', 'sans-serif';
@@ -357,17 +356,6 @@ div#overlay-inner form input[type='submit'] {
   font-size: 18.2px;
   min-width: 150px;
   margin-bottom: 5px;
-/*
-      color #FFFFFF
-      font-family font
-      font-size 30px
-      background #4C8E0E none
-      border 1px solid #AAA
-      border-radius(5px)
-      text-shadow 0 -1px 0 rgba(0, 0, 0, 0.3)
-      display block; width 170px
-      margin-left 130px; margin-top 50px; padding 10px 28px
-      cursor pointer*/
 }
 div#overlay-inner form input[type='submit']:hover,
 div#overlay-inner form input[type='submit']:focus {
@@ -570,20 +558,17 @@ div#overlay-inner #add-br-base-window iframe {
   width: 400px;
   border: none;
 }
-div#overlay-inner #loading-data {
-  text-align: center;
-  background: #fff url("../images/icon-loading-big.gif") center 30px no-repeat;
-  padding: 100px 0 40px;
-}
-div#overlay-inner #loading-data.error {
-  background: #fff url("../images/sprite-icons.png") 160px -743px no-repeat;
-}
+div#overlay-inner #loading-data-window,
 div#overlay-inner #user-warning-window {
   text-align: center;
+  background: #fff url("../images/icon-stop-72.png") center 30px no-repeat;
+  padding: 120px 0 20px 0;
 }
+div#overlay-inner #loading-data-window p,
 div#overlay-inner #user-warning-window p {
   margin: 10px 0 20px 0;
 }
+div#overlay-inner #loading-data-window a,
 div#overlay-inner #user-warning-window a {
   background: #075783;
   font-size: 14px;
@@ -604,21 +589,62 @@ div#overlay-inner #user-warning-window a {
   margin: 15px auto;
   font-size: 18.2px;
   min-width: 150px;
+  background: #075783;
+  font-size: 14px;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-weight: normal;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-align: left;
+  display: inline-block;
+  padding: 12px 15px;
+  background: #fff;
+  color: #075783;
+  border: 1px solid #ededed;
+  text-align: center;
+  display: block;
   width: 100px;
   margin-bottom: 0;
 }
+div#overlay-inner #loading-data-window a:hover,
 div#overlay-inner #user-warning-window a:hover,
+div#overlay-inner #loading-data-window a:focus,
 div#overlay-inner #user-warning-window a:focus {
   background: #2d83be;
   color: #fff;
   border: 1px solid #314e64;
   text-decoration: none;
 }
+div#overlay-inner #loading-data-window a:hover,
 div#overlay-inner #user-warning-window a:hover,
+div#overlay-inner #loading-data-window a:focus,
 div#overlay-inner #user-warning-window a:focus {
   background: #64ba12;
   color: #fff;
   border: 1px solid #4c8e0e;
+}
+div#overlay-inner #loading-data-window a:hover,
+div#overlay-inner #user-warning-window a:hover,
+div#overlay-inner #loading-data-window a:focus,
+div#overlay-inner #user-warning-window a:focus {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-decoration: none;
+}
+div#overlay-inner #loading-data-window a:hover,
+div#overlay-inner #user-warning-window a:hover,
+div#overlay-inner #loading-data-window a:focus,
+div#overlay-inner #user-warning-window a:focus {
+  background: #fff;
+  color: #2d83be;
+  border: 1px solid #2d83be;
+}
+div#overlay-inner #loading-data-window.loading {
+  padding-bottom: 40px;
+  background: #fff url("../images/icon-loading-big.gif") center 30px no-repeat;
 }
 #settings-form {
   line-height: 2em;

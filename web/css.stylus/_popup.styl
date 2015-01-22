@@ -80,20 +80,8 @@ div#overlay-inner
       -ms-user-select text
 
     input[type='submit']
-      /* TODO */
       mainButton()
       margin-bottom 5px
-      /*
-      color #FFFFFF
-      font-family font
-      font-size 30px
-      background #4C8E0E none
-      border 1px solid #AAA
-      border-radius(5px)
-      text-shadow 0 -1px 0 rgba(0, 0, 0, 0.3)
-      display block; width 170px
-      margin-left 130px; margin-top 50px; padding 10px 28px
-      cursor pointer*/
 
     .slider
       background #FFF none
@@ -180,18 +168,21 @@ div#overlay-inner
       width 400px
       border none
 
-  #loading-data
-    text-align center
-    background #FFF url('../images/icon-loading-big.gif') center 30px no-repeat
-    padding 100px 0 40px
-    &.error
-      background #FFF url('../images/sprite-icons.png') 160px -743px no-repeat
 
+  #loading-data-window
   #user-warning-window
     text-align center
+    background #FFF url('../images/icon-stop-72.png') center 30px no-repeat
+    padding 120px 0 20px 0
     p
       margin 10px 0 20px 0
     a
       mainButton()
+      invisButton()
       width 100px
       margin-bottom 0
+
+  #loading-data-window
+    &.loading
+      padding-bottom 40px
+      background #FFF url('../images/icon-loading-big.gif') center 30px no-repeat

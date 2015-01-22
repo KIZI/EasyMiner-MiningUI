@@ -17,14 +17,6 @@ var UIStructureListener = new Class({
         }.bind(this));
     },
 
-    registerNewTaskEventHandler: function() {
-        $('new-task-button').addEvent('click', function (e) {
-            e.stop();
-            this.$UIStructurePainter.hideOverlay();
-            this.$ARBuilder.openNewTaskWindow();
-        }.bind(this));
-    },
-
     registerSettingsEventHandlers: function () {
         $('new-task').addEvent('click', function (e) {
             e.stop();

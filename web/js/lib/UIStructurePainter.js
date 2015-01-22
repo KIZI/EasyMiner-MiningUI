@@ -184,19 +184,16 @@ var UIStructurePainter = new Class({
     },
 
     showLoadData: function() {
-        $('overlay-inner').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate('Loading application data...')}));
-        this.showOverlay();
+        this.showLoadingOverlay('Loading application data...');
     },
 
     showLoadingOverlay: function(message) {
-        $('overlay-inner').grab(new Element('div', {id: 'loading-data', html: this.$i18n.translate(message)}));
+        $('overlay-inner').grab(new Element('div', {id: 'loading-data-window', class: 'loading', html: this.$i18n.translate(message)}));
         this.showOverlay();
     },
 
     showLoadDataError: function() {
-        $('loading-data').set('html', this.$i18n.translate('An error occured while loading application data.<br/>Please create a <a href="#" id="new-task-button">new task</a>.'));
-        $('loading-data').addClass('error');
-        this.$UIStructureListener.registerNewTaskEventHandler();
+        Mooml.render('loadingErrorWindowTemplate',{i18n:this.$i18n, url: this.$config.getNewTaskURL()}).replaces($('loading-data-window'));
     },
 
     showOverlay: function () {
