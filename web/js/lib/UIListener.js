@@ -563,7 +563,8 @@ var UIListener = new Class({
     var renameTaskLink=taskNameElement.getElements('.rename-task');
     var taskId=FRManager.getTaskId();
     var taskName=FRManager.getTaskName();
-    renameTaskLink.addEvent('click',function(link){
+    renameTaskLink.addEvent('click',function(event){
+      event.stop();
       this.ARBuilder.getARManager().openRenameTaskWindow(taskId,taskName);
     }.bind(this));
   },
