@@ -29,6 +29,7 @@ var Config = new Class({//TODO Standa: update URLs
   getRulesUrl: '/em/tasks/get-rules',
   startMiningUrl: '/em/tasks/start-mining',
   stopMiningUrl: '/em/tasks/stop-mining',
+  taskRenameUrl: '/em/tasks/rename-task',
   ruleClipboardGetTasksUrl: '/em/rule-clipboard/get-tasks',
   ruleClipboardGetRulesUrl:'/em/rule-clipboard/get-rules',
   ruleClipboardAddRuleUrl:'/em/rule-clipboard/add-rule',
@@ -264,6 +265,14 @@ var Config = new Class({//TODO Standa: update URLs
     + '&task=' + taskId
     + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
   },
+
+  getTaskRenameUrl: function (taskId, newName) {
+    return this.$easyMinerCenterUrl+this.ruleClipboardRemoveRuleUrl
+      + '?miner=' + this.params.id_dm
+      + '&task=' + taskId
+      + '&name=' + newName;
+  },
+
 
   getPerPageOptions: function(){
     return this.perPageOptions;

@@ -365,7 +365,8 @@ var UIStructureTemplater = new Class({
           div(
             {id: 'found-rules-task-name'},
             FRManager.getTaskName(),
-            span({class: 'count'},rulesCountInfo)
+            span({class: 'count'},rulesCountInfo),
+            a({href: '#', class: 'rename-task' , title: data.i18n.translate('Rename task') })
           ),
           Mooml.render('foundRulesControlsTemplate',data),
           Mooml.render('foundRulesTemplate',data),

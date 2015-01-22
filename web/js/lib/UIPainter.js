@@ -250,15 +250,6 @@ var UIPainter = new Class({
     }.bind(this));
   },
 
-  renderBRBaseRulesCount: function (count) {
-    if (count > 0) {
-      $('brBaseCounter').set('html', this.i18n.translate('Saved rules count: ') + count);
-    } else {
-      $('brBaseCounter').set('html', this.i18n.translate('No rules saved yet.'));
-    }
-    this.UIListener.registerBRBaseEventHandler();//TODO přesunout na lepší místo
-  },
-
   renderReport: function (report, elParent) {
     elParent.grab(Mooml.render('reportTemplate', {
       i18n: this.i18n,
@@ -516,12 +507,11 @@ var UIPainter = new Class({
   /**
    * Renders the rename task window in an overlay.
    * @param taskId Task id to rename.
+   * @param taskName original name of the task
    */
-  renderRenameTaskWindow: function (taskId) {
+  renderRenameTaskWindow: function (taskId, taskName) {
     // Locals
     var overlay = this.$UIStructurePainter.showOverlay();
-    var taskName = this.ARBuilder.$FRManager.getTask(taskId)
-      .$requestData.taskName;
 
     // Render
     overlay.grab(Mooml.render(
@@ -805,6 +795,7 @@ var UIPainter = new Class({
       this.UIListener.registerFoundRuleEventHandlers(foundRule);
     }.bind(this));
 
+    this.UIListener.registerFoundRulesEventHandlers(this.ARBuilder.$FRManager);
     this.UIListener.registerFoundRulesMultiControlsEventHandlers();
 
     ///this.$UIStructurePainter.resizeApplication();

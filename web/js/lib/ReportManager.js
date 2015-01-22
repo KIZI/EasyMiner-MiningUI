@@ -68,7 +68,7 @@ var ReportManager = new Class({
                     this.$reports[this.taskId] = responseJSON.article;
 
                     // Save the task to preserve its Article ID
-                    var task = this.$UIPainter.ARBuilder.$FRManager.getTask(this.taskId);
+                    var task = this.$UIPainter.ARBuilder.$FRManager.getTask(this.taskId);//XXX
                     task.setArticleId(responseJSON.article);
                     this.$UIPainter.ARBuilder.$FRManager.saveMarkedRules();
 

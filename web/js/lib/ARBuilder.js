@@ -321,7 +321,7 @@ var ARBuilder = new Class({
     this.reloadData();
   },
 
-  createReport: function (taskId) {//TODO předělat
+  createReport: function (taskId) {//TODO Standa předělat
     this.$reportManager.createReport(
       taskId,
       this.$FRManager.getTask(taskId).getName()

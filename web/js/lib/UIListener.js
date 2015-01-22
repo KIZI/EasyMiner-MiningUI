@@ -557,6 +557,17 @@ var UIListener = new Class({
     return result;
   },
 
+  registerFoundRulesEventHandlers: function(FRManager){
+    var taskNameElement=$('found-rules-task-name');
+    if (!taskNameElement){return;}
+    var renameTaskLink=taskNameElement.getElements('.rename-task');
+    var taskId=FRManager.getTaskId();
+    var taskName=FRManager.getTaskName();
+    renameTaskLink.addEvent('click',function(link){
+      this.ARBuilder.getARManager().openRenameTaskWindow(taskId,taskName);
+    }.bind(this));
+  },
+
   registerFoundRulesMultiControlsEventHandlers: function () {
     var multiControls = $('found-rules-multi-controls');
     if (multiControls){

@@ -8,11 +8,25 @@
     margin 10px 0
     .count
       color unimportantTextColor
-      margin-left 20px
+      margin-left 15px
       font-size baseFontSize
       strong
         font-weight normal
         color interestMeasureColor
+
+    a.rename-task
+      margin-left 10px
+      width 20px
+      height 25px
+      position relative
+      top 5px
+      display inline-block
+      background transparent url('../images/sprite/icon-edit.png') center bottom no-repeat
+      visibility hidden
+
+    &:hover
+      a.rename-task
+        visibility visible
 
   p.error
     color errorColor

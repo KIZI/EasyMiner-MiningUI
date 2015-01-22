@@ -1634,12 +1634,25 @@ section#active-rule #ar-action-box #start-mining:focus {
 }
 #found-rules #found-rules-task-name .count {
   color: #888;
-  margin-left: 20px;
+  margin-left: 15px;
   font-size: 16px;
 }
 #found-rules #found-rules-task-name .count strong {
   font-weight: normal;
   color: #888;
+}
+#found-rules #found-rules-task-name a.rename-task {
+  margin-left: 10px;
+  width: 20px;
+  height: 25px;
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  background: transparent url("../images/sprite/icon-edit.png") center bottom no-repeat;
+  visibility: hidden;
+}
+#found-rules #found-rules-task-name:hover a.rename-task {
+  visibility: visible;
 }
 #found-rules p.error {
   color: #a41d1d;

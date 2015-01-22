@@ -56,29 +56,29 @@ var FRManager = new Class({
     var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
 
     //region načtení pravidel ze serveru...
-    var request = new Request.JSON({
+    new Request.JSON({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
         this.currentPage=page;
         this.handleSuccessRulesRequest(responseJSON);
-      }.bind(this).bind(page),
+      }.bind(this),
 
       onError: function () {
         this.handleErrorRulesRequest(page);
-      }.bind(this).bind(page),
+      }.bind(this),
 
       onFailure: function () {
         this.handleErrorRulesRequest(page);
-      }.bind(this).bind(page),
+      }.bind(this),
 
       onException: function () {
         this.handleErrorRulesRequest(page);
-      }.bind(this).bind(page),
+      }.bind(this),
 
       onTimeout: function () {
         this.handleErrorRulesRequest(page);
-      }.bind(this).bind(page)
+      }.bind(this)
 
     }).get();
     //endregion
@@ -277,40 +277,43 @@ var FRManager = new Class({
   },
 
   /**
-   * Gets the task based on its ID.
-   * @param taskId ID of the task to get.
-   */
-  getTask: function (taskId) {
-  //TODO ???
-    // Declarations
-    var task = null;
-/*
-    // Find the task
-    this.$markedRules.each(function (e) {
-      if (e.$rule.task.$requestData.taskId == taskId) {
-        task = e;
-        return false;
-      }
-    });*/
-
-    // Return
-    return task.$rule.task;
-  },
-
-  /**
    * Renames the task.
    * @param taskId Task id to rename.
    * @param newTaskName A new task name to set.
    */
   renameTask: function (taskId, newTaskName) {
-  //TODO Standa: předělat...
-    // Rename the task
-    var task = this.getTask(taskId);
-    task.setName(newTaskName);
 
-    // Refresh the task name
-    this.UIPainter.renderMarkedRules(null);
+    new Request.JSON({
+      url: this.config.getTaskRenameUrl(taskId,newTaskName),
+      secure: true,
+      onSuccess: function () {
+        this.handleRenameTaskFinished(taskId);
+      }.bind(this),
 
+      onError: function () {
+        this.handleRenameTaskFinished(taskId);
+      }.bind(this),
+
+      onFailure: function () {
+        this.handleRenameTaskFinished(taskId);
+      }.bind(this),
+
+      onException: function () {
+        this.handleRenameTaskFinished(taskId);
+      }.bind(this),
+
+      onTimeout: function () {
+        this.handleRenameTaskFinished(taskId);
+      }.bind(this)
+    }).get();
+
+  },
+
+  handleRenameTaskFinished: function(taskId){
+    if (this.getTaskId()==taskId){
+      //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
+      this.gotoPage(this.currentPage);
+    }
   },
 
   getPerPageOptions: function(){
