@@ -8,6 +8,7 @@ var UIStructurePainter = new Class({
     $UIStructureTemplater: null,
     $elementSizeMeter: null,
     $browserDetector: null,
+    $UIScroller: null,
 
     initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller, elementSizeMeter, browserDetector) {
         this.$config = config;
@@ -201,7 +202,7 @@ var UIStructurePainter = new Class({
     showOverlay: function () {
         $('overlay').fade('in');
         var elementOverlay = $('overlay-inner');
-
+        this.$UIScroller.rememberLastScroll();
         return elementOverlay;
     },
 
@@ -209,7 +210,7 @@ var UIStructurePainter = new Class({
         $('overlay').fade('out');
         var elementOverlay = $('overlay-inner');
         elementOverlay.empty();
-
+        this.$UIScroller.restoreLastScroll();
         return elementOverlay;
     },
 
@@ -232,6 +233,7 @@ var UIStructurePainter = new Class({
                 $elementOverlayInner.setStyles({
                     position: 'absolute'
                 });
+                this.$UIScroller.scrollTo(0, 0);
             } else {
                 $content.removeClass("bigger");
                 $elementOverlay.setStyles({

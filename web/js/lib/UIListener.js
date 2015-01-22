@@ -489,9 +489,12 @@ var UIListener = new Class({
     var el;
     var FRManager = this.ARBuilder.getFRManager();
     /*region checkbox*/
-    $(foundRule.getCSSID()+'-checkbox').addEvent('click', function(){
-      this.checkFoundRulesSelectedCheckboxes();
-    }.bind(this));
+    var checkbox=$(foundRule.getCSSID()+'-checkbox');
+    if (checkbox){
+      checkbox.addEvent('click', function(){
+        this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
+    }
     /*endregion checkbox*/
     /*region mark*/
     var markLink = $(foundRule.getMarkCSSID());

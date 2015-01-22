@@ -150,11 +150,7 @@ var UIPainter = new Class({
     var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n, url: url});
     overlay.grab(window);
 
-    this.$UIScroller.scrollTo(0, 0);
-
     this.UIListener.registerOverlayEventHandlers();
-
-    // Positioning of Overlay after rendering
     this.$UIStructurePainter.posOverlay();
   },
 
@@ -163,8 +159,6 @@ var UIPainter = new Class({
     var url = this.config.getEditAttributeURL(attribute.getName());
     var window = Mooml.render('editAttributeTemplate', {i18n: this.i18n, url: url});
     overlay.grab(window);
-
-    this.$UIScroller.scrollTo(0, 0);
 
     this.UIListener.registerOverlayEventHandlers();
 
@@ -180,8 +174,6 @@ var UIPainter = new Class({
     });
     overlay.grab(window);
 
-    this.$UIScroller.scrollTo(0, 0);
-
     this.UIListener.registerOverlayEventHandlers();
 
     // Positioning of Overlay after rendering
@@ -192,8 +184,6 @@ var UIPainter = new Class({
     var overlay = this.$UIStructurePainter.showOverlay();
     var window = Mooml.render('reportWindowTemplate', {i18n: this.i18n, url: this.config.getShowReportUrl(id)});
     overlay.grab(window);
-
-    this.$UIScroller.scrollTo(0, 0);
 
     this.UIListener.registerOverlayEventHandlers();
 
@@ -778,7 +768,6 @@ var UIPainter = new Class({
   renderRuleDetailsDialog: function (taskId,ruleId) {
     var overlay = this.$UIStructurePainter.showOverlay();
     overlay.grab(Mooml.render('showRuleDetailsDialogTemplate', {i18n: this.i18n, url: this.config.getRuleDetailsUrl(taskId,ruleId)}));
-    this.$UIScroller.scrollTo(0, 0);
     this.UIListener.registerOverlayEventHandlers();
     // Positioning of Overlay after rendering
     this.$UIStructurePainter.posOverlay();
@@ -871,11 +860,10 @@ var UIPainter = new Class({
     var overlay = this.$UIStructurePainter.showOverlay();
     var window = Mooml.render('userWarningWindowTemplate', {message: message, url: url});
     overlay.grab(window);
-    this.$UIScroller.scrollTo(0, 0);
     this.$UIStructurePainter.posOverlay();
   },
 
-  renderCurrentUserBox: function (user, logoutUrl) {//TODO Standa
+  renderCurrentUserBox: function (user, logoutUrl) {
     Mooml.render('currentUserTemplate',{
       user: user,
       logoutUrl: logoutUrl,
