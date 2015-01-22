@@ -34,7 +34,7 @@ var Config = new Class({//TODO Standa: update URLs
   ruleClipboardAddRuleUrl:'/em/rule-clipboard/add-rule',
   ruleClipboardRemoveRuleUrl:'/em/rule-clipboard/remove-rule',
 
-  showRuleDetailsUrl: '/em/data/attribute-histogram',//FIXME Standa
+  showRuleDetailsUrl: '/em/rules/rule-details',
   getAnalyticalReportsUrl: '/em/reports/get-analytical-reports',//FIXME Standa
   //endregion
 
@@ -202,7 +202,8 @@ var Config = new Class({//TODO Standa: update URLs
     return this.$easyMinerCenterUrl+this.showRuleDetailsUrl
       + '?miner=' + this.params.id_dm
       + '&task=' + taskId
-      + '&rule=' + ruleId;
+      + '&rule=' + ruleId
+      + '&mode=iframe';
   },
 
   getGetDataURL: function () {

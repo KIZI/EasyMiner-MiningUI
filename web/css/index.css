@@ -523,7 +523,6 @@ div#overlay-inner #add-attribute-window,
 div#overlay-inner #edit-attribute-window,
 div#overlay-inner #new-task-window,
 div#overlay-inner #show-histogram-window,
-div#overlay-inner #show-rule-details-window,
 div#overlay-inner #create-user-report-window,
 div#overlay-inner #export-business-rules-window,
 div#overlay-inner #model-tester-window,
@@ -535,7 +534,6 @@ div#overlay-inner #add-attribute-window iframe,
 div#overlay-inner #edit-attribute-window iframe,
 div#overlay-inner #new-task-window iframe,
 div#overlay-inner #show-histogram-window iframe,
-div#overlay-inner #show-rule-details-window iframe,
 div#overlay-inner #create-user-report-window iframe,
 div#overlay-inner #export-business-rules-window iframe,
 div#overlay-inner #model-tester-window iframe,
@@ -548,12 +546,20 @@ div#overlay-inner #add-attribute-window form input[type="submit"],
 div#overlay-inner #edit-attribute-window form input[type="submit"],
 div#overlay-inner #new-task-window form input[type="submit"],
 div#overlay-inner #show-histogram-window form input[type="submit"],
-div#overlay-inner #show-rule-details-window form input[type="submit"],
 div#overlay-inner #create-user-report-window form input[type="submit"],
 div#overlay-inner #export-business-rules-window form input[type="submit"],
 div#overlay-inner #model-tester-window form input[type="submit"],
 div#overlay-inner #show-br-base-window form input[type="submit"] {
   margin-left: 310px;
+}
+div#overlay-inner #show-rule-details-window {
+  width: 800px;
+  padding-bottom: 10px;
+}
+div#overlay-inner #show-rule-details-window iframe {
+  width: 800px;
+  height: 380px;
+  border: none;
 }
 div#overlay-inner #add-br-base-window {
   width: 400px;

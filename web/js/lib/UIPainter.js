@@ -778,6 +778,8 @@ var UIPainter = new Class({
   renderRuleDetailsDialog: function (taskId,ruleId) {
     var overlay = this.$UIStructurePainter.showOverlay();
     overlay.grab(Mooml.render('showRuleDetailsDialogTemplate', {i18n: this.i18n, url: this.config.getRuleDetailsUrl(taskId,ruleId)}));
+    this.$UIScroller.scrollTo(0, 0);
+    this.UIListener.registerOverlayEventHandlers();
     // Positioning of Overlay after rendering
     this.$UIStructurePainter.posOverlay();
   },
