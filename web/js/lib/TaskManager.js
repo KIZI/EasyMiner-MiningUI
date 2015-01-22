@@ -11,7 +11,7 @@ var TaskManager = new Class({
     },
 
     addTask: function(serializedRule, limitHits) {
-        this.$activeTask = new Task(serializedRule, limitHits, this.$settings.getDebug(), this.$config.getJoomlaURL(), this.$settings.getStrictMatch(), this.$settings.getTaskMode(), this.$settings.getCaching());
+        this.$activeTask = new Task(serializedRule, limitHits, this.$settings.getDebug(), this.$settings.getStrictMatch(), this.$settings.getTaskMode(), this.$settings.getCaching());
         this.$tasks.push(this.$activeTask);
 
         return this.$activeTask;

@@ -31,8 +31,7 @@ var ETreeManager = new Class({
 				attributes: attributes,
 				rule0: rule.serialize(),
 				rules: 1,
-                debug: this.$settings.getDebug(),
-                joomlaUrl: this.config.getJoomlaURL()};
+				debug: this.$settings.getDebug()};
 		this.makeRequest(JSON.encode(requestData));
 	},
 	

@@ -52,9 +52,9 @@ var ReportManager = new Class({
         this.makeRequest(requestData);
     },
 
-    makeRequest: function (data) {
+    makeRequest: function (data) {//TODO Standa
         window.open(
-            this.$config.getJoomlaURL() +
+           // this.$config.getJoomlaURL() +
                 'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS',
             'pmmlWindow_' + data.lmtask);
 
@@ -72,28 +72,21 @@ var ReportManager = new Class({
                     task.setArticleId(responseJSON.article);
                     this.$UIPainter.ARBuilder.$FRManager.saveMarkedRules();
 
-                    if (!window.open(
-                        this.$config.getJoomlaURL() +
+                    if (!window.open( //TODO Standa
+                       // this.$config.getJoomlaURL() +
                             'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' +
                             responseJSON.article,
                         'pmmlWindow_' + data.lmtask)) {
-                        // TODO handle error
                     }
 
                 } else {
+                    //TODO Standa
                     window.open(
-                        this.$config.getJoomlaURL() +
+//                        this.$config.getJoomlaURL() +
                             'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS_FAILED',
                         'pmmlWindow_' + data.lmtask);
                 }
 
-
-                // TODO: Handle failure
-//                if (responseJSON.status === 'ok' && !this.errorStates.contains(responseJSON.taskState)) {
-//                    this.handleSuccessRequest(data, responseJSON);
-//                } else {
-//                    this.handleErrorRequest();
-//                }
             }.bind(this),
 
             onError: function () {

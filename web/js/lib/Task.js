@@ -4,7 +4,7 @@ var Task = new Class({
     $requestData: null,
     $time: null,
 
-    initialize: function(serializedRule, limitHits, debug, joomlaUrl, strictMatch, taskMode, cache) {
+    initialize: function(serializedRule, limitHits, debug, strictMatch, taskMode, cache) {
         var taskName = "";
         var articleId;
 
@@ -65,7 +65,6 @@ var Task = new Class({
             rule0: serializedRule,
             rules: 1,
             debug: debug,
-            joomlaUrl: joomlaUrl,
             strict: strictMatch,
             taskMode: taskMode,
             taskName: taskName,
