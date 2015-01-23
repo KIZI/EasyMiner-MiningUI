@@ -1766,6 +1766,7 @@ section#active-rule #ar-action-box #start-mining:focus {
 }
 #found-rules #found-rules-multi-controls {
   min-height: 10px;
+  position: relative;
 }
 #found-rules #found-rules-multi-controls .all {
   display: inline-block;
@@ -1801,11 +1802,13 @@ section#active-rule #ar-action-box #start-mining:focus {
   margin-left: 10px;
 }
 #found-rules #found-rules-multi-controls .actions >a {
-  display: none;
   padding-left: 24px;
   height: 20px;
   padding-top: 2px;
+  margin: 0 5px;
   font-size: 14px;
+  display: inline-block;
+  display: none;
 }
 #found-rules #found-rules-multi-controls .actions >a.mark {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
@@ -1815,6 +1818,24 @@ section#active-rule #ar-action-box #start-mining:focus {
 }
 #found-rules #found-rules-multi-controls .actions >a.visible {
   display: inline-block;
+}
+#found-rules #found-rules-multi-controls .task-actions {
+  float: right;
+  margin-top: 3px;
+}
+#found-rules #found-rules-multi-controls .task-actions >a {
+  padding-left: 24px;
+  height: 20px;
+  padding-top: 2px;
+  margin: 0 5px;
+  font-size: 14px;
+  display: inline-block;
+}
+#found-rules #found-rules-multi-controls .task-actions >a.mark-all {
+  background: transparent url("../images/icon-ok-20.png") left center no-repeat;
+}
+#found-rules #found-rules-multi-controls .task-actions >a.task-details {
+  background: transparent url("../images/icon-goreport-20.png") left center no-repeat;
 }
 #marked-rules {
   color: #434343;

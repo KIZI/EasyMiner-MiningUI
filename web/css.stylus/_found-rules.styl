@@ -1,3 +1,11 @@
+taskActionLink()
+  padding-left 24px
+  height 20px
+  padding-top 2px
+  margin 0 5px
+  font-size actionLinkFontSize
+  display inline-block
+
 #found-rules
   clear left
   padding-top 20px
@@ -71,7 +79,6 @@
 
       .loading
         display none
-        //TODO
 
       .ruleActions
         ruleActions()
@@ -118,6 +125,7 @@
 
   #found-rules-multi-controls
     min-height 10px
+    position relative
     .all
       iconLink()
       background transparent url('../images/icon-select-all.png') center center no-repeat
@@ -131,14 +139,21 @@
     .actions
       margin-left 10px
       >a
+        taskActionLink()
         display none
-        padding-left 24px
-        height 20px
-        padding-top 2px
-        font-size actionLinkFontSize
         &.mark
           background transparent url('../images/icon-ok-20.png') left center no-repeat
         &.unmark
           background transparent url('../images/icon-stop-20.png') left center no-repeat
         &.visible
           display inline-block
+
+    .task-actions
+      float right
+      margin-top 3px
+      >a
+        taskActionLink()
+        &.mark-all
+          background transparent url('../images/icon-ok-20.png') left center no-repeat
+        &.task-details
+          background transparent url('../images/icon-goreport-20.png') left center no-repeat

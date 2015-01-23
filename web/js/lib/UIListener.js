@@ -573,7 +573,6 @@ var UIListener = new Class({
     var multiControls = $('found-rules-multi-controls');
     if (multiControls){
       //events for multi-controls links
-
       multiControls.getElements('.all').addEvent('click',function(event){
         //select all checkboxes
         event.stop();
@@ -618,6 +617,26 @@ var UIListener = new Class({
           checkbox.checked=false;
         });
         this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
+
+      multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
+        alert('markAll');
+        event.stop();/*TODO Standa
+         var FRManager = this.ARBuilder.getFRManager();
+         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
+         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+         checkbox.checked=false;
+         });*/
+      }.bind(this));
+
+      multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
+        alert('taskDetails');
+        event.stop();/*TODO Standa
+         var FRManager = this.ARBuilder.getFRManager();
+         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
+         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+         checkbox.checked=false;
+         });*/
       }.bind(this));
 
       this.checkFoundRulesSelectedCheckboxes();

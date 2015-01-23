@@ -740,15 +740,27 @@ var UITemplateRegistrator = new Class({
         }),
         span({class:'actions'},
           a({
-              href:'#',
-              class:'mark',
-              title:i18n.translate('Add to Rule Clipboard')
+            href:'#',
+            class:'mark',
+            title:i18n.translate('Add to Rule Clipboard')
           },i18n.translate('Add selected...')),
           a({
-              href:'#',
-              class:'unmark',
-              title:i18n.translate('Remove from Rule Clipboard')
+            href:'#',
+            class:'unmark',
+            title:i18n.translate('Remove from Rule Clipboard')
           },i18n.translate('Remove...'))
+        ),
+        span({class:'task-actions'},
+          a({
+            href:'#',
+            class:'mark-all',
+            title:i18n.translate('Add all rules to Rule Clipboard')
+          },i18n.translate('Add all rules')),
+          a({
+            href:'#',
+            class:'task-details',
+            title:i18n.translate('Show task details')
+          },i18n.translate('Task details'))
         )
       );
     });
