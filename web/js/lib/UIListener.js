@@ -419,6 +419,15 @@ var UIListener = new Class({
         this.ARBuilder.getARManager().addAttribute(cedent, field);
       }
     }.bind(this));
+
+    // enter submit
+    var elementSelect = $('click-add-attribute-form').getElement('click-add-attribute-select');
+    elementSelect.addEvent('keypress',function(e) {
+      if(e.key == 'enter'){
+        e.stop();
+        elementSubmit.click();
+      }
+    });
   },
 
   registerEditConnectiveFormEventHandler: function (cedent) {
@@ -573,6 +582,7 @@ var UIListener = new Class({
     var multiControls = $('found-rules-multi-controls');
     if (multiControls){
       //events for multi-controls links
+
       multiControls.getElements('.all').addEvent('click',function(event){
         //select all checkboxes
         event.stop();

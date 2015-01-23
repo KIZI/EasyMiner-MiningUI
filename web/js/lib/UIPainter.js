@@ -539,6 +539,22 @@ var UIPainter = new Class({
     var overlay = this.$UIStructurePainter.showOverlay();
     overlay.grab(Mooml.render('addCoefficientWindowTemplate', {i18n: this.i18n}));
     var selectedCoefficient = this.ARBuilder.getFL().getDefaultBBACoef();
+    var selectBox = $('add-coefficient-select');
+    if (field.ref.choices.length === 1) {
+      selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
+      selectBox.grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {
+        coefficient: selectedCoefficient,
+        isSelected: true
+      }));
+    } else {
+      Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
+        var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
+        selectBox.grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {
+          coefficient: BBACoefficient,
+          isSelected: isSelected
+        }));
+      }.bind(this));
+    }
     this.renderAddCoefficientAutocomplete(field, selectedCoefficient);
 
     // Positioning of Overlay after rendering
@@ -549,6 +565,22 @@ var UIPainter = new Class({
     var overlay = this.$UIStructurePainter.showOverlay();
     overlay.grab(Mooml.render('editCoefficientWindowTemplate', {i18n: this.i18n}));
     var selectedCoefficient = this.ARBuilder.getFL().getBBACoefficient(field.getType());
+    var selectBox = $('edit-coefficient-select');
+    if (field.ref.choices.length === 1) {
+      selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
+      selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {
+        coefficient: selectedCoefficient,
+        isSelected: true
+      }));
+    } else {
+      Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
+        var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
+        selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {
+          coefficient: BBACoefficient,
+          isSelected: isSelected
+        }));
+      }.bind(this));
+    }
     this.renderEditCoefficientAutocomplete(field, selectedCoefficient);
 
     // Positioning of Overlay after rendering
@@ -569,7 +601,7 @@ var UIPainter = new Class({
   renderAddCoefficientAutocomplete: function (field, selectedCoefficient) {
     var selectBox = $('add-coefficient-select');
     selectBox.focus();
-    if (field.ref.choices.length === 1) {
+    /*if (field.ref.choices.length === 1) {
       selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
       selectBox.grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {
         coefficient: selectedCoefficient,
@@ -583,7 +615,7 @@ var UIPainter = new Class({
           isSelected: isSelected
         }));
       }.bind(this));
-    }
+    }*/
     Mooml.render('addCoefficientWindowAutocompleteTemplate', {
       i18n: this.i18n,
       selectedCoefficient: selectedCoefficient
@@ -625,7 +657,7 @@ var UIPainter = new Class({
   renderEditCoefficientAutocomplete: function (field, selectedCoefficient) {
     var selectBox = $('edit-coefficient-select');
     selectBox.focus();
-    if (field.ref.choices.length === 1) {
+    /*if (field.ref.choices.length === 1) {
       selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
       selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {
         coefficient: selectedCoefficient,
@@ -639,7 +671,7 @@ var UIPainter = new Class({
           isSelected: isSelected
         }));
       }.bind(this));
-    }
+    }*/
     Mooml.render('editCoefficientWindowAutocompleteTemplate', {
       field: field,
       i18n: this.i18n,
