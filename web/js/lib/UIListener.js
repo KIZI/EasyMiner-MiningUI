@@ -371,6 +371,15 @@ var UIListener = new Class({
       this.ARBuilder.getARManager().removeField(field);
       event.stop();
     }.bind(this));
+
+    // enter submit TODO momentálně hlásí chybu při výběru jiného merging type než prvního, řešení nenalezeno
+    /*var elementForm = $('add-coefficient-form');
+    elementForm.addEvent('keydown', function(event){
+      if(event.key == 'enter'){
+        event.preventDefault();
+        elementSubmit.click();
+      }
+    }.bind(this));*/
   },
 
   registerEditCoefficientEventHandler: function (field) {
@@ -404,6 +413,15 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.getARManager().updateEditCoefficientAutocomplete(field, elementSelect.options[elementSelect.selectedIndex].value);
     }.bind(this));
+
+    // enter submit TODO momentálně hlásí chybu při výběru jiného merging type než prvního, řešení nenalezeno
+    /*var elementForm = $('edit-coefficient-form');
+    elementForm.addEvent('keydown', function(event){
+      if(event.key == 'enter'){
+        event.preventDefault();
+        elementSubmit.click();
+      }
+    });*/
   },
 
   registerClickAddAttributeFormEventHandler: function (field) {
@@ -421,10 +439,10 @@ var UIListener = new Class({
     }.bind(this));
 
     // enter submit
-    var elementSelect = $('click-add-attribute-form').getElement('click-add-attribute-select');
-    elementSelect.addEvent('keypress',function(e) {
-      if(e.key == 'enter'){
-        e.stop();
+    var elementSelect = $('click-add-attribute-form');
+    elementSelect.addEvent('keydown', function(event){
+      if(event.key == 'enter'){
+        event.preventDefault();
         elementSubmit.click();
       }
     });
