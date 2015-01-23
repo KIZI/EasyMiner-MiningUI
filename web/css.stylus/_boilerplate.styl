@@ -9,8 +9,14 @@ html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10
 html, button, input, select, textarea { font-family: sans-serif; color: #222; }
 body { margin: 0; font-size: 1em; line-height: 1.4; }
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+//textSelectionColor = #fe57a1
+textSelectionBackground = #2BB0D7
+textSelectionColor = #fff
+//textSelectionBackground = #9de045
+//textSelectionColor = black
+
+::-moz-selection { background: textSelectionBackground; color: textSelectionColor; text-shadow: none; }
+::selection { background: textSelectionBackground; color: textSelectionColor; text-shadow: none; }
 
 a { color: #00e;}
 a:hover { color: #06e; }

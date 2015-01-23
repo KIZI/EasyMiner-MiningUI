@@ -262,6 +262,17 @@ var FRManager = new Class({
     this.AJAXBalancer.run();
   },
 
+  markAllFoundRules: function(){
+    this.AJAXBalancer.stopAllRequests();
+    var urlIds=[];
+    Array.each(this.rules,function(foundRule){
+      urlIds.push(foundRule.$id);
+      foundRule.setLoading(true);
+    }.bind(this));
+    this.buildFoundRulesRequest(this.rules,this.config.getRuleClipboardAddAllRulesUrl(this.getTaskId(),urlIds));
+    this.AJAXBalancer.run();
+  },
+
   multiUnmarkFoundRules:function(foundRulesIds){
     var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
     if (selectedFoundRules.length==0){return;}

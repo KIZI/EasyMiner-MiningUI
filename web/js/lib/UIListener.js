@@ -620,13 +620,13 @@ var UIListener = new Class({
       }.bind(this));
 
       multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
-        alert('markAll');
-        event.stop();/*TODO Standa
-         var FRManager = this.ARBuilder.getFRManager();
-         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
-         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
-         checkbox.checked=false;
-         });*/
+        event.stop();
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.markAllFoundRules();
+        $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
 
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){

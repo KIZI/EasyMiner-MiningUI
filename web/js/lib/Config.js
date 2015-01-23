@@ -33,10 +33,11 @@ var Config = new Class({//TODO Standa: update URLs
   ruleClipboardGetTasksUrl: '/em/rule-clipboard/get-tasks',
   ruleClipboardGetRulesUrl:'/em/rule-clipboard/get-rules',
   ruleClipboardAddRuleUrl:'/em/rule-clipboard/add-rule',
+  ruleClipboardAddAllRulesUrl:'/em/rule-clipboard/add-all-rules',
   ruleClipboardRemoveRuleUrl:'/em/rule-clipboard/remove-rule',
 
   showRuleDetailsUrl: '/em/rules/rule-details',
-  getAnalyticalReportsUrl: '/em/reports/get-analytical-reports',//FIXME Standa
+  getAnalyticalReportsUrl: '/em/reports/reports-articles',//FIXME Standa
   //endregion
 
   // URL settings
@@ -258,6 +259,15 @@ var Config = new Class({//TODO Standa: update URLs
     + '?miner=' + this.params.id_dm
     + '&task=' + taskId
     + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+  },
+  getRuleClipboardAddAllRulesUrl: function(taskId,ruleIds){
+    if (ruleIds == undefined){
+      ruleIds='';
+    }
+    return this.$easyMinerCenterUrl+this.ruleClipboardAddAllRulesUrl
+      + '?miner=' + this.params.id_dm
+      + '&task=' + taskId
+      + '&returnRules=' + ruleIds;//jako parametr je možné zadat i více ID oddělených čárkou
   },
   getRuleClipboardRemoveRuleUrl: function (taskId, ruleId) {
     return this.$easyMinerCenterUrl+this.ruleClipboardRemoveRuleUrl

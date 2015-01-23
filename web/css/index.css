@@ -45,12 +45,12 @@ body {
   line-height: 1.4;
 }
 ::-moz-selection {
-  background: #fe57a1;
+  background: #2bb0d7;
   color: #fff;
   text-shadow: none;
 }
 ::selection {
-  background: #fe57a1;
+  background: #2bb0d7;
   color: #fff;
   text-shadow: none;
 }
