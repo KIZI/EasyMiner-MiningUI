@@ -529,6 +529,8 @@ var UIPainter = new Class({
     // Register event handlers for the new controls
     this.UIListener.registerTaskRenameEventHandlers();
     this.UIListener.registerOverlayEventHandlers();
+
+    $('rename-task-input').select();
   },
 
   renderExplanation: function (IM) {

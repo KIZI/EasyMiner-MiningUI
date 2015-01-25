@@ -89,6 +89,9 @@ var FRManager = new Class({
     this.pageLoading=false;
     this.IMs = this.FL.getRulesIMs(data.task.IMs);
     this.rules = [];
+    if (data.task && data.task.name!=''){
+      this.setTaskName(data.task.name);
+    }
 
     Object.each(data.rules, function (value, key) {
       this.rules.push(new FoundRule(key, value, this.task));
@@ -112,7 +115,6 @@ var FRManager = new Class({
   },
 
   renderRules: function (rulesCount, taskName, inProgress, task) {
-    console.log([rulesCount, taskName, inProgress, task]);
     this.task = task;
     this.miningInProgress = inProgress;
     if (taskName!=''){
