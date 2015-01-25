@@ -312,6 +312,8 @@ div#overlay-inner form select {
   position: relative;
   top: -4px;
   margin-bottom: 10px;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 div#overlay-inner form input[type='number'] {
   -moz-appearance: textfield;
@@ -332,8 +334,6 @@ div#overlay-inner form input[type='number'] {
   font-weight: bold;
   width: 30px;
   float: left;
-  -moz-user-select: text;
-  -ms-user-select: text;
 }
 div#overlay-inner form input[type='submit'] {
   background: #075783;

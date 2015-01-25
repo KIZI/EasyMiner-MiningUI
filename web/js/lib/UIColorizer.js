@@ -10,5 +10,5 @@ var UIColorizer = new Class({
         elements.each(function(element) {
             new Fx.Tween(element, {duration: duration}).start(property, value);
         });
-    },
+    }
 });
