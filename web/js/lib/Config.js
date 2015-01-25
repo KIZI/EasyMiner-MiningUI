@@ -277,7 +277,7 @@ var Config = new Class({//TODO Standa: update URLs
   },
 
   getTaskRenameUrl: function (taskId, newName) {
-    return this.$easyMinerCenterUrl+this.ruleClipboardRemoveRuleUrl
+    return this.$easyMinerCenterUrl+this.taskRenameUrl
       + '?miner=' + this.params.id_dm
       + '&task=' + taskId
       + '&name=' + newName;

@@ -111,9 +111,13 @@ var FRManager = new Class({
     }
   },
 
-  renderRules: function (rulesCount, inProgress, task) {
+  renderRules: function (rulesCount, taskName, inProgress, task) {
+    console.log([rulesCount, taskName, inProgress, task]);
     this.task = task;
     this.miningInProgress = inProgress;
+    if (taskName!=''){
+      this.setTaskName(taskName);
+    }
     this.setRulesCount(rulesCount);
     this.UIPainter.renderActiveRule();
     this.UIPainter.renderFoundRules();
@@ -343,6 +347,10 @@ var FRManager = new Class({
 
   calculatePagesCount: function(){
     this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
+  },
+
+  setTaskName: function(name){
+    this.task.setName(name);
   },
 
   getTaskName: function(){
