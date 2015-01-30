@@ -781,7 +781,7 @@ var UITemplateRegistrator = new Class({
     // same as foundRulesMultiControlsTemplate - differences only in task-actions TODO merge
     Mooml.register('markedRulesMultiControlsTemplate', function (data) {
       var i18n = data.i18n;
-      div({id:'found-rules-multi-controls'},
+      div({id:'marked-rules-multi-controls'},
           a({
             class: 'all',
             title: i18n.translate('Select all')
