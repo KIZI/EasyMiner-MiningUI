@@ -778,12 +778,64 @@ var UITemplateRegistrator = new Class({
   },
 
   registerMarkedRules: function () {
+    // same as foundRulesMultiControlsTemplate - differences only in task-actions TODO merge
+    Mooml.register('markedRulesMultiControlsTemplate', function (data) {
+      var i18n = data.i18n;
+      div({id:'found-rules-multi-controls'},
+          a({
+            class: 'all',
+            title: i18n.translate('Select all')
+          }),
+          a({
+            class: 'invert',
+            title: i18n.translate('Invert selection')
+          }),
+          a({
+            class:'none',
+            title: i18n.translate('Select none')
+          }),
+          span({class:'actions'},
+              a({
+                href:'#',
+                class:'mark',
+                title:i18n.translate('Add to Rule Clipboard')
+              },i18n.translate('Add selected...')),
+              a({
+                href:'#',
+                class:'unmark',
+                title:i18n.translate('Remove from Rule Clipboard')
+              },i18n.translate('Remove...'))
+          ),
+          span({class:'task-actions'},
+              /*a({
+                href:'#',
+                class:'mark-all',
+                title:i18n.translate('Add all rules to Rule Clipboard')
+              },i18n.translate('Add all rules')),*/
+              a({
+                href:'#',
+                class:'task-details',
+                title:i18n.translate('Show task details')
+              },i18n.translate('Task details'))
+          )
+      );
+    });
     // Marked task
     Mooml.register('taskTemplate', function (data) {
-      var task = data.task,
-        i18n = data.i18n;
-
-      ul({id: task.getCssId(), class: 'task'},
+      var task = data.FRManager;
+      div(
+          {id: 'task-'+task.id},
+          div(
+              {class: 'marked-rules-task-name'},
+              task.name,
+              span({class: 'count'}, '(rules:  ', strong(), ')'),
+              a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
+          ),
+          Mooml.render('foundRulesControlsTemplate',data),
+          ul(),
+          Mooml.render('markedRulesMultiControlsTemplate',data)
+      )
+      /*ul({id: task.getCssId(), class: 'task'},
         li({},
           div({class: 'marked-task'},
             span(
@@ -810,18 +862,29 @@ var UITemplateRegistrator = new Class({
           }, i18n.translate('Check model')),
           a({class: 'createReport', id: 'createReport-' + task.getId(), href: '#'}, i18n.translate('Show task details'))
         )
-      );
+      );*/
     });
 
     // Marked rule
     Mooml.register('markedRuleTemplate', function (data) {
-      var rule = data.rule,
-        i18n = data.i18n;
+      var markedRule = data.rule,
+          i18n = data.i18n,
+          IMs = data.IMs;
 
-      li({id: rule.getMarkedRuleCSSID(), class: 'marked-rule'},
+      /*li({id: ruleId, class: 'marked-rule'},
         span({'class': 'rule'}, rule.getIdent()),
         a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}),
-        span({'class': 'ims'}, rule.getIMIdent()));
+        span({'class': 'ims'}, rule.getIMIdent()));*/
+      
+      li({id: markedRule.getCSSID(), 'class': 'marked-rule'+(markedRule.isLoading()?' loading':'')},
+          input({type:'checkbox',id:markedRule.getCSSID()+'-checkbox', class:'marked-rule-checkbox'}),
+          label({for: markedRule.getCSSID()+'-checkbox', 'class': 'rule'}, markedRule.getIdent()),
+          span({class:'ruleActions'},
+              a({id: markedRule.getUnmarkCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Rule Clipboard')}),
+              a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
+          ),
+          span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
+      );
     });
 
     Mooml.register('exportBusinessRulesDialogTemplate', function (data) {

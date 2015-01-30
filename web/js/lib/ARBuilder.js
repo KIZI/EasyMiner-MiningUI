@@ -1,5 +1,5 @@
 var ARBuilder = new Class({
-  GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'miningManager', 'reportManager'],
+  GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'MRManager', 'miningManager', 'reportManager'],
   Implements: Events,
 
   $config: null,
@@ -7,6 +7,7 @@ var ARBuilder = new Class({
   dataParser: null,
   $rulesParser: null,
   $FRManager: null,
+  $MRManager: null,
   $miningManager: null,
   $ETreeManager: null,
   $ARManager: null,
@@ -92,6 +93,7 @@ var ARBuilder = new Class({
 
     this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
     this.$FRManager = new FRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$i18n);
+    this.$MRManager = new MRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$i18n);
     this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper(), new TaskManager(this.$config, this.settings));
     this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);
     this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);

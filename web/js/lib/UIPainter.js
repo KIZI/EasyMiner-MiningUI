@@ -47,6 +47,7 @@ var UIPainter = new Class({
   createUI: function () {
     this.renderNavigation();
     this.renderActiveRule();
+    //this.renderMarkedRules();
   },
 
   renderNavigation: function () {
@@ -259,8 +260,47 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
-  renderMarkedRules: function (elementParent/*, markedRules*/) {//TODO P. Duben
-    var me = this;
+  // to render only task as groups
+  renderMarkedTask: function (task) {
+    var mrElement = $$('#marked-rules div.clearfix')[0],
+        taskElm = Mooml.render('taskTemplate',
+        {
+          i18n: this.i18n,
+          FRManager: task
+        }
+    );
+    mrElement.grab(taskElm);
+    //this.UIListener.registerFoundRulesEventHandlers(this.ARBuilder.$FRManager);
+    //this.UIListener.registerFoundRulesMultiControlsEventHandlers();
+  },
+
+  // to render only tasks count
+  renderMarkedTaskCount: function (taskId, rulesCount) {
+    var countElm = $$('#task-'+taskId+' span.count strong')[0];
+    countElm.set('text', rulesCount);
+  },
+
+  renderMarkedRules: function (task) {
+    var listElm = $$('#task-'+task.id+' ul')[0];
+    Object.each(task.rules, function (MR) {
+      listElm.grab(Mooml.render('markedRuleTemplate',
+          {
+            i18n: this.i18n,
+            IMs: task.IMs,
+            rule: MR,
+            UIListener: this.UIListener
+          }
+      ));
+      //this.UIListener.registerFoundRuleEventHandlers(foundRule);
+    }.bind(this));
+
+    /*var foundRules=this.ARBuilder.$FRManager.rules;
+    Array.each(foundRules,function(foundRule){
+    }.bind(this));
+*/
+
+    //console.log(url);
+    /*var me = this;
 
     if (!elementParent) { // re-render
       elementParent = $$('#marked-rules ul')[0];
@@ -299,7 +339,7 @@ var UIPainter = new Class({
 
     taskIds.each(function (taskId) {
       me.UIListener.registerMarkedRulesTaskEventHandlers(taskId);
-    });
+    });*/
   },
 
   initFieldGroup: function (id) { // recursive

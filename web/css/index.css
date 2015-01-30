@@ -1856,236 +1856,211 @@ section#active-rule #ar-action-box #start-mining:focus {
   font: 36px 'Droid Sans', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
-  margin-left: 10px;
+/*margin-left 10px*/
   margin-bottom: 5px;
 }
-#marked-rules ul {
-  width: 100%;
-  padding-left: 0;
-  float: left;
-  margin-left: 5px;
-  margin-top: 10px;
+#marked-rules .marked-rules-task-name {
+  color: #314e64;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  font-size: 22.400000000000002px;
+  margin: 10px 0;
+  padding: 5px 0;
+  border-top: 2px solid #126499;
 }
-#marked-rules ul li:first-child {
-  color: #487113;
-  text-decoration: underline;
-  padding-left: 5px;
+#marked-rules .marked-rules-task-name .count {
+  color: #888;
+  margin-left: 15px;
+  font-size: 16px;
+}
+#marked-rules .marked-rules-task-name .count strong {
+  font-weight: normal;
+  color: #888;
+}
+#marked-rules .marked-rules-task-name a.rename-task {
+  margin-left: 10px;
+  width: 20px;
+  height: 25px;
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  background: transparent url("../images/sprite/icon-edit.png") center bottom no-repeat;
+  visibility: hidden;
+}
+#marked-rules .marked-rules-task-name:hover a.rename-task {
+  visibility: visible;
+}
+#marked-rules p.error {
+  color: #a41d1d;
+  margin: 10px 0;
+}
+#marked-rules .found-rules-controls {
+  position: relative;
+  overflow: auto;
+  text-align: right;
+  color: #888;
+  font-size: 12.8px;
+}
+#marked-rules .found-rules-controls .paginator {
+  float: left;
+}
+#marked-rules .found-rules-controls label {
+  display: inline-block;
+  padding: 0 5px 0 15px;
+  margin: 0;
+}
+#marked-rules .found-rules-controls select {
+  padding: 5px;
+}
+#marked-rules ul {
+  padding-left: 0;
 }
 #marked-rules ul li {
-  width: 100%;
-  padding-left: 0;
-  float: left;
-  clear: left;
-  list-style-type: none;
+  margin: 0 0 5px 0;
+  padding: 0 0 5px 20px;
+  list-style: none;
+  cursor: default;
+  position: relative;
+  border-bottom: 1px solid #ededed;
 }
-#marked-rules .marked-rule {
+#marked-rules ul li input.marked-rule-checkbox {
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+#marked-rules ul li .rule {
+  color: #434343;
   cursor: default;
 }
-#marked-rules .marked-rule .rule {
-  float: left;
-  height: 38px;
+#marked-rules ul li .loading {
+  display: none;
 }
-#marked-rules .marked-rule .rule .id {
-  font-size: 0.8em;
-  text-align: right;
-  display: block;
-  width: 35px;
-  margin-right: 3px;
-  margin-top: 9px;
-  float: left;
-}
-#marked-rules .marked-rule .rule .cedent {
-  float: left;
-  border: 1px dashed #fff;
-/*border-radius(10px)*/
-  background-color: #fff;
-  padding: 2px;
-}
-#marked-rules .marked-rule .rule .cedent.empty {
-  border: 1px dashed #000;
-  color: #808080;
-}
-#marked-rules .marked-rule .rule .cedent a.group-fields {
-  background: transparent url("../images/sprite-icons.png") -168px -215px no-repeat;
-  padding-left: 17px;
-  float: right;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field {
-  float: left;
-  height: 40px;
-  margin: 0 2px;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field .coefficient {
-  color: #925213;
-  font-size: 0.85em;
+#marked-rules ul li .ruleActions {
+  display: inline-block;
+  overflow: auto;
   position: relative;
-  top: -1px;
-  margin-left: 3px;
+  width: 100px;
+  height: 20px;
+  margin-left: 15px;
+  background: transparent;
+  top: 5px;
 }
-#marked-rules .marked-rule .rule .cedent .fields .field .field-drag {
-  cursor: move;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field .change-sign.negative,
-#marked-rules .marked-rule .rule .cedent .fields .field .field-sign.negative {
-  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
-  width: 13px;
+#marked-rules ul li .ruleActions > a {
+  display: block;
+  width: 20px;
   height: 20px;
   float: left;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field .controls a.edit-coefficient {
-  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  margin-left: 2px;
-  float: right;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field .controls a.remove-field {
-  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  margin-left: 5px;
-  float: right;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field .controls a.mark-field {
-  background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  margin-right: 3px;
-  float: right;
+  margin-right: 5px;
   visibility: hidden;
 }
-#marked-rules .marked-rule .rule .cedent .fields .field .controls a.marked-field {
-  background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
+#marked-rules ul li .ruleActions a.bk {
+  background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
+}
+#marked-rules ul li .ruleActions a.clear {
+  background: transparent url("../images/icon-stop-20.png") left center no-repeat;
+}
+#marked-rules ul li .ruleActions a.details {
+  background: transparent url("../images/icon-info-20.png") left center no-repeat;
+}
+#marked-rules ul li .ims {
   display: block;
-  width: 16px;
-  height: 20px;
-  margin-right: 3px;
-  float: right;
-  visibility: visible;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field .controls a.change-sign.positive {
-  background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  float: right;
-  visibility: hidden;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field:hover a.remove-field {
-  visibility: visible;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field:hover a.edit-coefficient {
-  visibility: visible;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field:hover a.mark-field {
-  visibility: visible;
-}
-#marked-rules .marked-rule .rule .cedent .fields .field:hover a.change-sign.positive {
-  visibility: visible;
-}
-#marked-rules .marked-rule .rule .cedent .fields .connective {
-  color: #360;
-  font-size: 14px;
-  position: relative;
-  top: 1px;
-  margin: 0 1px;
-  float: left;
-}
-#marked-rules .marked-rule .rule .cedent .fields .left-bracket,
-#marked-rules .marked-rule .rule .cedent .fields .right-bracket {
-  font-size: 18px;
-  float: left;
-  position: relative;
-  top: -2px;
-}
-#marked-rules .marked-rule .rule .cedent .group-fields {
-  font-size: 14px;
-  position: relative;
-  top: 23px;
-}
-#marked-rules .marked-rule .rule >.cedent >.fields >.field,
-#marked-rules .marked-rule .rule >.cedent >.fields >.connective {
-  margin-top: 3px;
-}
-#marked-rules .marked-rule .rule .quantifier {
-  float: left;
-  margin-top: 5px;
-}
-#marked-rules .marked-rule .rule .field {
-  height: auto !important;
-}
-#marked-rules .marked-rule .rule .left-bracket,
-#marked-rules .marked-rule .rule right-bracket {
-  top: -3px !important;
-}
-#marked-rules .marked-rule .ims {
   font-size: 12.8px;
   color: #888;
-  left: 5px;
 }
-#marked-rules .marked-rule .ims >span {
+#marked-rules ul li .ims >span {
   border-right: 1px solid #ededed;
   padding-right: 5px;
   margin-right: 5px;
 }
-#marked-rules .marked-rule .ims >span:last-child {
+#marked-rules ul li .ims >span:last-child {
   border-right: none;
 }
-#marked-rules .marked-rule .ims >span .value {
+#marked-rules ul li .ims >span .value {
   color: #7b0d2e;
 }
-#marked-rules .marked-rule .clear {
-  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
-  visibility: hidden;
-  position: relative;
-  top: 7px;
-  margin-left: 5px;
-  float: left;
+#marked-rules ul li.loading .ruleActions {
+  background: transparent url("../images/icon-loading-20.gif") left center no-repeat;
 }
-#marked-rules .marked-rule:hover > .clear {
+#marked-rules ul li.loading .ruleActions >a {
+  visibility: hidden !important;
+}
+#marked-rules ul li:hover .ruleActions >a {
   visibility: visible;
 }
-#marked-rules a.createReport,
-#marked-rules a.exportBusinessRules,
-#marked-rules a.modelTester {
-  height: 24px;
-  padding-left: 30px;
-  margin-right: 10px;
-  float: right;
-}
-#marked-rules a.createReport {
-  background: transparent url("http://icons.iconarchive.com/icons/harwen/pleasant/24/Text-Document-icon.png") 0 0 no-repeat;
-}
-#marked-rules a.exportBusinessRules {
-  background: transparent url("http://icons.iconarchive.com/icons/itzikgur/my-seven/24/Briefcase-icon.png") 0 0 no-repeat;
-}
-#marked-rules a.modelTester {
-  background: transparent url("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/24/speed-test-icon.png") 0 0 no-repeat;
-}
-#marked-rules .marked-task {
+#marked-rules #found-rules-multi-controls {
+  min-height: 10px;
   position: relative;
-  float: left;
 }
-#marked-rules .marked-task .rename {
-  background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
-  display: block;
-  width: 16px;
+#marked-rules #found-rules-multi-controls .all {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
   height: 20px;
-  visibility: hidden;
-  position: relative;
-  margin-left: 5px;
-  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+  background: transparent url("../images/icon-select-all.png") center center no-repeat;
 }
-#marked-rules .marked-task :hover > .rename {
-  visibility: visible;
+#marked-rules #found-rules-multi-controls .none {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  background: transparent url("../images/icon-select-none.png") center center no-repeat;
+}
+#marked-rules #found-rules-multi-controls .invert {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  background: transparent url("../images/icon-select-invert.png") center center no-repeat;
+}
+#marked-rules #found-rules-multi-controls .actions {
+  margin-left: 10px;
+}
+#marked-rules #found-rules-multi-controls .actions >a {
+  padding-left: 24px;
+  height: 20px;
+  padding-top: 2px;
+  margin: 0 5px;
+  font-size: 14px;
+  display: inline-block;
+  display: none;
+}
+#marked-rules #found-rules-multi-controls .actions >a.mark {
+  background: transparent url("../images/icon-ok-20.png") left center no-repeat;
+}
+#marked-rules #found-rules-multi-controls .actions >a.unmark {
+  background: transparent url("../images/icon-stop-20.png") left center no-repeat;
+}
+#marked-rules #found-rules-multi-controls .actions >a.visible {
+  display: inline-block;
+}
+#marked-rules #found-rules-multi-controls .task-actions {
+  float: right;
+  margin-top: 3px;
+}
+#marked-rules #found-rules-multi-controls .task-actions >a {
+  padding-left: 24px;
+  height: 20px;
+  padding-top: 2px;
+  margin: 0 5px;
+  font-size: 14px;
+  display: inline-block;
+}
+#marked-rules #found-rules-multi-controls .task-actions >a.mark-all {
+  background: transparent url("../images/icon-ok-20.png") left center no-repeat;
+}
+#marked-rules #found-rules-multi-controls .task-actions >a.task-details {
+  background: transparent url("../images/icon-goreport-20.png") left center no-repeat;
 }
 #createUserReport {
   float: right;

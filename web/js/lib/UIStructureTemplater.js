@@ -387,8 +387,8 @@ var UIStructureTemplater = new Class({
 
       section({id: 'marked-rules'},
         h2({'class': 'minimize'}, i18n.translate('Rule clipboard'), a({href: '#', 'class': 'toggle'}, '')),
-        div({class: 'clearfix'},
-          ul()
+        div({class: 'clearfix'}/*,
+          ul()*/
         )
       );
     });
