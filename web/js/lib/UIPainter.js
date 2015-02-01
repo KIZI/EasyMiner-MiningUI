@@ -260,38 +260,53 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
-  // to render only task as groups
+  // to render only task
   renderMarkedTask: function (task) {
-    var mrElement = $$('#marked-rules div.clearfix')[0],
-        taskElm = Mooml.render('taskTemplate',
+    var taskElm = $('task-'+task.id),
+        mrElement = $$('#marked-rules div.clearfix')[0],
+        newTaskElm = Mooml.render('taskTemplate',
         {
           i18n: this.i18n,
           FRManager: task
         }
     );
-    mrElement.grab(taskElm);
-    //this.UIListener.registerFoundRulesEventHandlers(this.ARBuilder.$FRManager);
-    //this.UIListener.registerFoundRulesMultiControlsEventHandlers();
+    if(taskElm != undefined){
+      newTaskElm.replaces(taskElm);
+    } else{
+      mrElement.grab(newTaskElm);
+    }
+    this.UIListener.registerMarkedRulesEventHandlers(task);
+    this.UIListener.registerMarkedRulesMultiControlsEventHandlers(task.id);
   },
 
-  // to render only tasks count
-  renderMarkedTaskCount: function (taskId, rulesCount) {
-    var countElm = $$('#task-'+taskId+' span.count strong')[0];
-    countElm.set('text', rulesCount);
+  // same as updateFoundRule only template difference TODO merge
+  updateMarkedRule:function(foundRule){
+    var foundRuleElement = $(foundRule.getCSSID());
+    if (!foundRuleElement){return;}
+
+    Mooml.render('markedRuleTemplate',{
+      i18n: this.i18n,
+      IMs: foundRule.$task.IMs,
+      rule: foundRule
+    }).replaces(foundRuleElement);
+
+    this.UIListener.registerMarkedRuleEventHandlers(foundRule);
   },
 
   renderMarkedRules: function (task) {
+    Mooml.render('markedRulesOrderTemplate',{FRManager: task}).replaces($('marked-rules-order-'+task.id));
     var listElm = $$('#task-'+task.id+' ul')[0];
+    listElm.empty();
+    //console.log(task);
     Object.each(task.rules, function (MR) {
       listElm.grab(Mooml.render('markedRuleTemplate',
           {
             i18n: this.i18n,
             IMs: task.IMs,
-            rule: MR,
-            UIListener: this.UIListener
+            rule: MR
           }
       ));
-      //this.UIListener.registerFoundRuleEventHandlers(foundRule);
+      this.UIListener.registerMarkedRuleEventHandlers(MR);
     }.bind(this));
 
     /*var foundRules=this.ARBuilder.$FRManager.rules;

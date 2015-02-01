@@ -595,7 +595,17 @@ var UIListener = new Class({
   },
 
   registerFoundRulesMultiControlsEventHandlers: function () {
-    var multiControls = $('found-rules-multi-controls');
+    var controls = $$('.found-rules-controls')[0],
+        multiControls = $('found-rules-multi-controls');
+    if (controls){
+      controls.getElement('.paginator').getElements('a').addEvent('click', function(e){
+        e.stop();
+        var link = e.target;
+        link.getSiblings('a.active').removeClass('active');
+        link.addClass('active');
+        this.ARBuilder.$FRManager.gotoPage(link.get('text'));
+      }.bind(this));
+    }
     if (multiControls){
       //events for multi-controls links
 
@@ -676,6 +686,183 @@ var UIListener = new Class({
       me.ARBuilder.getFRManager().removeMarkedRule(FR);
       event.stop();
     });
+  },
+
+  // same as registerFoundRulesEventHandlers, only ids differences TODO merge
+  registerMarkedRulesEventHandlers: function(task){
+    var taskNameElement = $('task-'+task.id).getElement('.marked-rules-task-name');
+    if (!taskNameElement){return;}
+    var renameTaskLink = taskNameElement.getElements('.rename-task');
+    renameTaskLink.addEvent('click',function(event){
+      event.stop();
+      this.ARBuilder.getARManager().openRenameTaskWindow(task.id,task.name);
+    }.bind(this));
+  },
+
+  // same as registerFoundRuleEventHandlers, only ids differences TODO merge
+  registerMarkedRuleEventHandlers: function (foundRule) {
+    var FRManager = this.ARBuilder.getMRManager();
+    /*region checkbox*/
+    var checkbox=$(foundRule.getCSSID()+'-checkbox');
+    if (checkbox){
+      checkbox.addEvent('click', function(){
+        this.checkMarkedRulesSelectedCheckboxes(foundRule.getTaskId());
+      }.bind(this));
+    }
+    /*endregion checkbox*/
+    /*region mark*
+    var markLink = $(foundRule.getMarkCSSID());
+    if (markLink) {
+      markLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.markFoundRule(foundRule);
+      }.bind(FRManager));
+    }
+    *endregion mark*/
+    /*region unmark*/
+    var unmarkLink = $(foundRule.getUnmarkCSSID());
+    if (unmarkLink) {
+      unmarkLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.unmarkMarkedRule(foundRule);
+      }.bind(FRManager));
+    }
+    /*endregion unmark*/
+    /*region details*/
+    var detailsLink = $(foundRule.getDetailsCSSID());
+    if (detailsLink) {
+      detailsLink.addEvent('click', function (event) {
+        event.stop();
+        this.UIPainter.renderRuleDetailsDialog(foundRule.getTaskId(),foundRule.getId(true));
+      }.bind(this));
+    }
+    /*endregion details*/
+  },
+
+  // same as checkFoundRulesSelectedCheckboxes, only ids differences TODO merge
+  checkMarkedRulesSelectedCheckboxes : function(taskId){
+    //function for checking of checkboxes selection
+    var taskElm = $('task-'+taskId),
+        rulesElm = taskElm.getElement('ul'),
+        multiControls = taskElm.getElement('.marked-rules-multi-controls');
+    /*var foundRulesRules=$('found-rules-rules');
+    var multiControls=$('found-rules-multi-controls');
+    var markAction=(foundRulesRules.getElements('.found-rule-checkbox:checked').length);*/
+    var unmarkAction=(rulesElm.getElements('.marked-rule-checkbox:checked').length);
+    //markAction=((markAction-unmarkAction)>0);
+    unmarkAction=(unmarkAction>0);
+
+    /*if (markAction){
+      multiControls.getElements('.actions .mark').addClass('visible');
+    }else{
+      multiControls.getElements('.actions .mark').removeClass('visible');
+    }*/
+    if (unmarkAction){
+      multiControls.getElements('.actions .unmark').addClass('visible');
+    }else{
+      multiControls.getElements('.actions .unmark').removeClass('visible');
+    }
+  },
+
+  // same as getFoundRulesSelectedIds, only ids differences TODO merge
+  getMarkedRulesSelectedIds: function(rulesElm){
+    var selectedCheckboxes = rulesElm.getElements('.marked-rule-checkbox:checked');
+    if (selectedCheckboxes.length > 0){
+      var result = [];
+      Array.each(selectedCheckboxes, function(checkbox){
+        result.push(checkbox.get('id'));
+      }.bind(result))
+    }
+    return result;
+  },
+
+  // same as registerFoundRulesMultiControlsEventHandlers, only ids differences TODO merge
+  registerMarkedRulesMultiControlsEventHandlers: function (taskId) {
+    var task = this.ARBuilder.$MRManager.tasks[taskId],
+        taskElm = $('task-'+taskId),
+        rulesElm = taskElm.getElement('ul'),
+        controls = taskElm.getElement('.marked-rules-controls'),
+        multiControls = taskElm.getElement('.marked-rules-multi-controls');
+    if (controls){
+      controls.getElement('.paginator').getElements('a').addEvent('click', function(e){
+        e.stop();
+        var link = e.target;
+        link.getSiblings('a.active').removeClass('active');
+        link.addClass('active');
+        task.gotoPage(link.get('text'));
+      }.bind(this));
+    }
+    if (multiControls){
+      //events for multi-controls links
+
+      multiControls.getElements('.all').addEvent('click',function(event){
+        //select all checkboxes
+        event.stop();
+        rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
+          checkbox.checked=true;
+        });
+        this.checkMarkedRulesSelectedCheckboxes(taskId);
+      }.bind(this));
+      multiControls.getElements('.none').addEvent('click',function(event){
+        //select all checkboxes
+        event.stop();
+        rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkMarkedRulesSelectedCheckboxes(taskId);
+      }.bind(this));
+      multiControls.getElements('.invert').addEvent('click',function(event){
+        //select all checkboxes
+        event.stop();
+        rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
+          checkbox.checked=!checkbox.checked;
+        });
+        this.checkMarkedRulesSelectedCheckboxes(taskId);
+      }.bind(this));
+
+      /*multiControls.getElements('.actions .mark').addEvent('click',function(event){
+        event.stop();
+        var selectedFoundRulesIds = [];
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.multiMarkFoundRules(this.getFoundRulesSelectedIds());
+        rulesCheckboxes.each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkMarkedRulesSelectedCheckboxes();
+      }.bind(this));*/
+
+      multiControls.getElements('.actions .unmark').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getMRManager();
+        FRManager.multiUnmarkFoundRules(this.getMarkedRulesSelectedIds(rulesElm), taskId);
+        rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkMarkedRulesSelectedCheckboxes(taskId);
+      }.bind(this));
+
+      /*multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.markAllFoundRules();
+        rulesCheckboxes.each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkMarkedRulesSelectedCheckboxes();
+      }.bind(this));*/
+
+      multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
+        alert('taskDetails');
+        event.stop();/*TODO Standa
+         var FRManager = this.ARBuilder.getFRManager();
+         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
+         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+         checkbox.checked=false;
+         });*/
+      }.bind(this));
+
+      this.checkMarkedRulesSelectedCheckboxes(taskId);
+    }
   },
 
   registerMarkedRulesTaskEventHandlers: function (taskId) {

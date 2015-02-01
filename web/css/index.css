@@ -1867,8 +1867,6 @@ section#active-rule #ar-action-box #start-mining:focus {
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
   margin: 10px 0;
-  padding: 5px 0;
-  border-top: 2px solid #126499;
 }
 #marked-rules .marked-rules-task-name .count {
   color: #888;
@@ -1896,22 +1894,22 @@ section#active-rule #ar-action-box #start-mining:focus {
   color: #a41d1d;
   margin: 10px 0;
 }
-#marked-rules .found-rules-controls {
+#marked-rules .marked-rules-controls {
   position: relative;
   overflow: auto;
   text-align: right;
   color: #888;
   font-size: 12.8px;
 }
-#marked-rules .found-rules-controls .paginator {
+#marked-rules .marked-rules-controls .paginator {
   float: left;
 }
-#marked-rules .found-rules-controls label {
+#marked-rules .marked-rules-controls label {
   display: inline-block;
   padding: 0 5px 0 15px;
   margin: 0;
 }
-#marked-rules .found-rules-controls select {
+#marked-rules .marked-rules-controls select {
   padding: 5px;
 }
 #marked-rules ul {
@@ -1989,11 +1987,13 @@ section#active-rule #ar-action-box #start-mining:focus {
 #marked-rules ul li:hover .ruleActions >a {
   visibility: visible;
 }
-#marked-rules #found-rules-multi-controls {
+#marked-rules .marked-rules-multi-controls {
   min-height: 10px;
   position: relative;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #126499;
 }
-#marked-rules #found-rules-multi-controls .all {
+#marked-rules .marked-rules-multi-controls .all {
   display: inline-block;
   position: relative;
   top: 5px;
@@ -2003,7 +2003,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   cursor: pointer;
   background: transparent url("../images/icon-select-all.png") center center no-repeat;
 }
-#marked-rules #found-rules-multi-controls .none {
+#marked-rules .marked-rules-multi-controls .none {
   display: inline-block;
   position: relative;
   top: 5px;
@@ -2013,7 +2013,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   cursor: pointer;
   background: transparent url("../images/icon-select-none.png") center center no-repeat;
 }
-#marked-rules #found-rules-multi-controls .invert {
+#marked-rules .marked-rules-multi-controls .invert {
   display: inline-block;
   position: relative;
   top: 5px;
@@ -2023,10 +2023,10 @@ section#active-rule #ar-action-box #start-mining:focus {
   cursor: pointer;
   background: transparent url("../images/icon-select-invert.png") center center no-repeat;
 }
-#marked-rules #found-rules-multi-controls .actions {
+#marked-rules .marked-rules-multi-controls .actions {
   margin-left: 10px;
 }
-#marked-rules #found-rules-multi-controls .actions >a {
+#marked-rules .marked-rules-multi-controls .actions >a {
   padding-left: 24px;
   height: 20px;
   padding-top: 2px;
@@ -2035,20 +2035,20 @@ section#active-rule #ar-action-box #start-mining:focus {
   display: inline-block;
   display: none;
 }
-#marked-rules #found-rules-multi-controls .actions >a.mark {
+#marked-rules .marked-rules-multi-controls .actions >a.mark {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
 }
-#marked-rules #found-rules-multi-controls .actions >a.unmark {
+#marked-rules .marked-rules-multi-controls .actions >a.unmark {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
 }
-#marked-rules #found-rules-multi-controls .actions >a.visible {
+#marked-rules .marked-rules-multi-controls .actions >a.visible {
   display: inline-block;
 }
-#marked-rules #found-rules-multi-controls .task-actions {
+#marked-rules .marked-rules-multi-controls .task-actions {
   float: right;
   margin-top: 3px;
 }
-#marked-rules #found-rules-multi-controls .task-actions >a {
+#marked-rules .marked-rules-multi-controls .task-actions >a {
   padding-left: 24px;
   height: 20px;
   padding-top: 2px;
@@ -2056,10 +2056,10 @@ section#active-rule #ar-action-box #start-mining:focus {
   font-size: 14px;
   display: inline-block;
 }
-#marked-rules #found-rules-multi-controls .task-actions >a.mark-all {
+#marked-rules .marked-rules-multi-controls .task-actions >a.mark-all {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
 }
-#marked-rules #found-rules-multi-controls .task-actions >a.task-details {
+#marked-rules .marked-rules-multi-controls .task-actions >a.task-details {
   background: transparent url("../images/icon-goreport-20.png") left center no-repeat;
 }
 #createUserReport {

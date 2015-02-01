@@ -2,47 +2,61 @@ var MarkedTask = new Class({
 
   /*
   AJAXBalancer: null,
-  errorMessage: '',
 
   //nově používané proměnné s informacemi o stavu
   miningInProgress: false,
-  pageLoading:false,
 
 
-  rulesCount: 0,
-  currentPage: null,
-  pagesCount: 0,
 
-  i18n: null,
   settings: null,
   task: null,
-  UIListener: null,
-  UIPainter: null,*/
+  UIListener: null,*/
 
   // používané proměnné MarkedTask
   config: null,
+  currentPage: null,
+  errorMessage: '',
+  i18n: null,
   id: null,
   IMs: [],
   FL: null,
   name: null,
+  pagesCount: 0,
+  pageLoading:false,
   rules: [],
-  rulesOrder: null,
+  rulesCount: 0,
+  rulesOrder: '',
   rulesPerPage: null,
+  UIPainter: null,
 
-  initialize: function (id, name, FL, config) {
+  initialize: function (id, name, count, i18n, FL, UIPainter, config) {
     this.config = config;
+    this.i18n = i18n;
     this.id = id;
     this.FL = FL;
-    this.IMs = this.FL.getRulesIMs([]);
-    var perPageOptions=this.getPerPageOptions();
-    this.rulesPerPage=perPageOptions[0];
+    this.UIPainter = UIPainter;
+    var perPageOptions = this.getPerPageOptions();
+    this.rulesPerPage = perPageOptions[0];
     this.name = name;
+
+    this.gotoPage(1);
   },
 
   // used
 
-  addRule: function(rule){
-    this.rules.push(rule);
+  calculatePagesCount: function(){
+    var newPagesCount = Math.ceil(this.rulesCount/this.rulesPerPage);
+    if(this.pagesCount != newPagesCount){
+      if(this.currentPage > newPagesCount){
+        this.gotoPage(newPagesCount); // go to the last page if we out of range
+      }
+      this.pagesCount = newPagesCount;
+    }
+    this.UIPainter.renderMarkedTask(this);
+  },
+
+  getPaginatorType: function(){
+    return this.config.getPaginatorType();
   },
 
   getPerPageOptions: function(){
@@ -50,16 +64,16 @@ var MarkedTask = new Class({
   },
 
   gotoPage: function(page){
-    this.pageLoading=true;
-    this.UIPainter.renderMarkedRules();
-    /*var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
+    //this.pageLoading = true;
+    //this.UIPainter.renderMarkedRules(this);
+    var url = this.config.getRuleClipboardGetRulesUrl(this.id, (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
 
     //region načtení pravidel ze serveru...
     new Request.JSON({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.currentPage=page;
+        this.currentPage = page;
         this.handleSuccessRulesRequest(responseJSON);
       }.bind(this),
 
@@ -79,23 +93,56 @@ var MarkedTask = new Class({
         this.handleErrorRulesRequest(page);
       }.bind(this)
 
-    }).get();*/
+    }).get();
     //endregion
   },
 
-  setIMs: function(IMs){
-    this.IMs = IMs;
+  handleErrorRulesRequest: function (page){
+    this.pageLoading = false;
+    this.errorMessage=this.i18n.translate('Loading of tasks rules failed...');
+    //this.UIPainter.renderFoundRules();
+  },
+
+  handleSuccessRulesRequest: function (data) {
+    this.pageLoading = false;
+    //var task = this.tasks[taskId];
+    this.IMs = this.FL.getRulesIMs(data.task.IMs);
+    this.rules = [];
+    this.setRulesCount(data.task.rulesCount);
+
+    /*if (data.task && data.task.name!=''){
+     this.setTaskName(data.task.name);
+     }*/
+
+    Object.each(data.rules, function (MRdata, MRid) {
+      this.rules.push(new MarkedRule(MRid, MRdata, this));
+    }.bind(this));
+    this.UIPainter.renderMarkedRules(this);
+  },
+
+  reload: function(){
+    this.gotoPage(this.currentPage);
   },
 
   setName: function(name){
     this.name = name;
   },
 
+  setRulesCount: function(rulesCount){
+    if(this.rulesCount != rulesCount){
+      if(rulesCount == 0){
+
+      }
+      this.rulesCount = rulesCount;
+      this.calculatePagesCount();
+    }
+  },
+
   setRulesPerPage: function(count){
     this.rulesPerPage = count;
     this.calculatePagesCount();
     this.gotoPage(1);
-  },
+  }/*,
 
 
   // not used yet
@@ -143,17 +190,6 @@ var MarkedTask = new Class({
     if (this.rulesCount > 0) {
       this.gotoPage(1);
     }
-  },
-
-  renderRules: function (rulesCount, taskName, inProgress, task) {
-    this.task = task;
-    this.miningInProgress = inProgress;
-    if (taskName!=''){
-      this.setTaskName(taskName);
-    }
-    this.setRulesCount(rulesCount);
-    this.UIPainter.renderActiveRule();
-    this.UIPainter.renderFoundRules();
   },
 
   buildFoundRulesRequest: function (foundRules, URL) {
@@ -240,136 +276,6 @@ var MarkedTask = new Class({
     this.setRulesCount(0);
     this.IMs = this.FL.getRulesIMs([]);
     this.miningInProgress = false;
-  },
-
-  markFoundRule: function (foundRule) {
-    this.AJAXBalancer.stopRequest(foundRule.getId());
-    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),foundRule.$id));
-    this.AJAXBalancer.run();
-  },
-
-  unmarkFoundRule: function (foundRule) {
-    this.AJAXBalancer.stopRequest(foundRule.getId());
-    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),foundRule.$id));
-    this.AJAXBalancer.run();
-  },
-
-  cleanFoundRulesIds: function(foundRulesCSSIDs){
-    var result=[];
-    if (!(foundRulesCSSIDs.length>0)){
-      return result;
-    }
-    var taskId=this.getTaskId();
-    Array.each(foundRulesCSSIDs,function(id){
-      var regExp=/^found-rule-(.+)-(\d+)-checkbox$/;
-      var idArr=id.split('-');
-      if(regExp.test(id)){
-        if(taskId!=idArr[2]){
-          return;
-        }
-        result.push(idArr[3]);
-      }
-    }.bind([taskId,result]));
-    return result;
-  },
-
-  getFoundRulesByIds: function(foundRulesIds){
-    var result=[];
-    if (this.rules.length>0){
-      Array.each(this.rules,function(rule){
-        if (foundRulesIds.indexOf(rule.$id)>-1){
-          result.push(rule);
-        }
-      }.bind([foundRulesIds,result]));
-    }
-    return result;
-  },
-
-  multiMarkFoundRules:function(foundRulesIds){
-    var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
-    if (selectedFoundRules.length==0){return;}
-    var urlIds=[];
-    Array.each(selectedFoundRules,function(foundRule){
-      urlIds.push(foundRule.$id);
-      this.AJAXBalancer.stopRequest(foundRule.getId());
-      foundRule.setLoading(true);
-    }.bind(this));
-    urlIds=urlIds.join(',');
-    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),urlIds));
-    this.AJAXBalancer.run();
-  },
-
-  markAllFoundRules: function(){
-    this.AJAXBalancer.stopAllRequests();
-    var urlIds=[];
-    Array.each(this.rules,function(foundRule){
-      urlIds.push(foundRule.$id);
-      foundRule.setLoading(true);
-    }.bind(this));
-    this.buildFoundRulesRequest(this.rules,this.config.getRuleClipboardAddAllRulesUrl(this.getTaskId(),urlIds));
-    this.AJAXBalancer.run();
-  },
-
-  multiUnmarkFoundRules:function(foundRulesIds){
-    var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
-    if (selectedFoundRules.length==0){return;}
-    var urlIds=[];
-    Array.each(selectedFoundRules,function(foundRule){
-      urlIds.push(foundRule.$id);
-      this.AJAXBalancer.stopRequest(foundRule.getId());
-      foundRule.setLoading(true);
-    }.bind(this));
-    urlIds=urlIds.join(',');
-    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),urlIds));
-    this.AJAXBalancer.run();
-  },
-
-  /**
-   * Renames the task.
-   * @param taskId Task id to rename.
-   * @param newTaskName A new task name to set.
-   */
-  renameTask: function (taskId, newTaskName) {
-
-    new Request.JSON({
-      url: this.config.getTaskRenameUrl(taskId,newTaskName),
-      secure: true,
-      onSuccess: function () {
-        this.handleRenameTaskFinished(taskId);
-      }.bind(this),
-
-      onError: function () {
-        this.handleRenameTaskFinished(taskId);
-      }.bind(this),
-
-      onFailure: function () {
-        this.handleRenameTaskFinished(taskId);
-      }.bind(this),
-
-      onException: function () {
-        this.handleRenameTaskFinished(taskId);
-      }.bind(this),
-
-      onTimeout: function () {
-        this.handleRenameTaskFinished(taskId);
-      }.bind(this)
-    }).get();
-
-  },
-
-  handleRenameTaskFinished: function(taskId){
-    if (this.getTaskId()==taskId){
-      //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
-      this.gotoPage(this.currentPage);
-    }
-  },
-
-  getPaginatorType: function(){
-    return this.config.getPaginatorType();
-  },
-
-  calculatePagesCount: function(){
-    this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
-  }
+  },*/
 
 });

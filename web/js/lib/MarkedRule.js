@@ -3,12 +3,12 @@ var MarkedRule = new Class({
   /*Properties: ['exception', 'interesting', 'rule'],
 
   $exception: null,
-  $interesting: null,
-  $loading: false,*/
+  $interesting: null,*/
 
 
   // používané proměnné MarkedRule
   $id: null,
+  $loading: false,
   $rule: null,
   $task: null,
 
@@ -23,6 +23,10 @@ var MarkedRule = new Class({
     return 'marked-rule-' + this.getId();
   },
 
+  getDetailsCSSID: function () {
+    return 'details-' + this.getCSSID();
+  },
+
   getId: function(onlyRuleId){
     if (onlyRuleId){
       return this.$id;
@@ -35,10 +39,6 @@ var MarkedRule = new Class({
     return this.$rule.text;
   },
 
-  getTaskId: function(){
-    return this.$task.getId();
-  },
-
   getRuleValues: function(){
     return {
       a:this.$rule.a,
@@ -48,12 +48,28 @@ var MarkedRule = new Class({
     };
   },
 
+  getTaskId: function(){
+    return this.$task.id;
+  },
+
+  getUnmarkCSSID: function(){
+    return 'unmark-' + this.getCSSID();
+  },
+
+  isLoading: function(){
+    return (this.$loading || false);
+  },
+
+  setLoading: function(loading){
+    this.$loading = loading;
+  }/*,
+
   // not used yet
-/*
+
   parseFromObject: function (data) {
     this.$rule = new AssociationRule();
     this.$rule.parseFromObject(data);
-  },*/
+  },
 
 
   isException: function () {
@@ -73,28 +89,12 @@ var MarkedRule = new Class({
     return 'mark-' + this.getCSSID();
   },
 
-  getUnmarkCSSID: function(){
-    return 'unmark-' + this.getCSSID();
-  },
-
-  getDetailsCSSID: function () {
-    return 'details-' + this.getCSSID();
-  },
-
   isSelected: function(){
     return this.$rule.selected==1;
   },
 
   setSelected: function(value){
     this.$rule.selected = value;
-  },
-
-  isLoading: function(){
-    return (this.$loading || false);
-  },
-
-  setLoading: function(loading){
-    this.$loading=loading;
-  }
+  }*/
 
 });

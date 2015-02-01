@@ -7,6 +7,7 @@ var FRManager = new Class({
   AJAXBalancer: null,
   UIPainter: null,
   UIListener: null,
+  MRManager: null,
   errorMessage: '',
 
   //nově používané proměnné s informacemi o stavu
@@ -24,7 +25,7 @@ var FRManager = new Class({
   pagesCount: 0,
 
 
-  initialize: function (config, FL, settings, UIPainter, UIListener, i18n) {
+  initialize: function (config, FL, settings, UIPainter, UIListener, MRManager, i18n) {
     this.config = config;
     var perPageOptions=this.getPerPageOptions();
     this.rulesPerPage=perPageOptions[0];
@@ -33,6 +34,7 @@ var FRManager = new Class({
     this.settings = settings;
     this.UIPainter = UIPainter;
     this.UIListener = UIListener;
+    this.MRManager = MRManager;
     this.i18n = i18n;
     this.AJAXBalancer = new AJAXBalancer();
   },
@@ -304,30 +306,39 @@ var FRManager = new Class({
       url: this.config.getTaskRenameUrl(taskId,newTaskName),
       secure: true,
       onSuccess: function () {
-        this.handleRenameTaskFinished(taskId);
+        this.handleRenameTaskFinished(taskId,newTaskName);
       }.bind(this),
 
       onError: function () {
-        this.handleRenameTaskFinished(taskId);
+        this.handleRenameTaskError(taskId);
       }.bind(this),
 
       onFailure: function () {
-        this.handleRenameTaskFinished(taskId);
+        this.handleRenameTaskError(taskId);
       }.bind(this),
 
       onException: function () {
-        this.handleRenameTaskFinished(taskId);
+        this.handleRenameTaskError(taskId);
       }.bind(this),
 
       onTimeout: function () {
-        this.handleRenameTaskFinished(taskId);
+        this.handleRenameTaskError(taskId);
       }.bind(this)
     }).get();
 
   },
 
-  handleRenameTaskFinished: function(taskId){
-    if (this.getTaskId()==taskId){
+  handleRenameTaskFinished: function(taskId, newTaskName){
+    if (this.getTaskId() == taskId){
+      //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
+      this.gotoPage(this.currentPage);
+    }
+    this.MRManager.setTaskName(taskId, newTaskName)
+  },
+
+  // duplicated handleRenameTaskFinished due to difference of result for MRManager
+  handleRenameTaskError: function(taskId){
+    if (this.getTaskId() == taskId){
       //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
       this.gotoPage(this.currentPage);
     }
@@ -360,7 +371,7 @@ var FRManager = new Class({
   },
 
   getTaskId: function(){
-    return this.task.getId();
+    return (this.task == undefined) ? 0 : this.task.getId();
   }
 
 });

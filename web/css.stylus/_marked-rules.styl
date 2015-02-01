@@ -14,8 +14,6 @@
   .marked-rules-task-name
     h2Small()
     margin 10px 0
-    padding 5px 0
-    border-top 2px solid linkColor
 
     .count
       color unimportantTextColor
@@ -43,7 +41,7 @@
     color errorColor
     margin 10px 0
 
-  .found-rules-controls
+  .marked-rules-controls
     position relative
     overflow auto
     text-align right
@@ -111,9 +109,11 @@
           >a
             visibility visible
 
-  #found-rules-multi-controls
+  .marked-rules-multi-controls
     min-height 10px
     position relative
+    padding-bottom 10px
+    border-bottom 2px solid linkColor
     .all
       iconLink()
       background transparent url('../images/icon-select-all.png') center center no-repeat

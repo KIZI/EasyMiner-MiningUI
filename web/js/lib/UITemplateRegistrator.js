@@ -557,12 +557,12 @@ var UITemplateRegistrator = new Class({
         for(var i=pageStart;i<=pageEnd;i++){
           a({
             href:'#',
-            events:{
+            /*events:{ moved to UIListener TODO also in other cases?
               click: function (e) {
                 e.stop();
                 gotoFunction(e.target.get('text'));
               }.bind(gotoFunction)
-            },
+            },*/
             class: (currentPage==i?'active':'')
           },i);
         }
@@ -659,7 +659,7 @@ var UITemplateRegistrator = new Class({
         }.bind(FRManager);
 
         div({class:('paginator'+(pageLoading?' loading':''))},
-          (FRManager.pagesCount>1 ? (Mooml.render(FRManager.getPaginatorType(),{
+          (FRManager.pagesCount > 1 ? (Mooml.render(FRManager.getPaginatorType(),{
             gotoFunction: gotoFunction,
             pagesCount: FRManager.pagesCount,
             currentPage: FRManager.currentPage
@@ -778,10 +778,70 @@ var UITemplateRegistrator = new Class({
   },
 
   registerMarkedRules: function () {
-    // same as foundRulesMultiControlsTemplate - differences only in task-actions TODO merge
+    // to be able to re-render IMs in selectbox TODO merge be aware of id vs. class
+    Mooml.register('markedRulesOrderTemplate', function (data) {
+      var IMs = data.FRManager.IMs,
+          FRManager = data.FRManager,
+          taskId = FRManager.id;
+
+      var orderSelect=select({
+        id:'marked-rules-order-'+taskId,
+        events: {
+          change: function (e) {
+            FRManager.rulesOrder = e.target.get('value');
+            e.stop();
+            FRManager.gotoPage(1);
+          }.bind(FRManager)
+        }
+      });
+      Array.each(IMs, function (IM) {
+        var option = new Element('option', {value: IM.getName(), text: IM.getLocalizedName()});
+        if (IM.getName() == FRManager.rulesOrder) {
+          option.setAttribute('selected', 'selected');
+        }
+        orderSelect.grab(option);
+      }.bind([FRManager, orderSelect]));
+    });
+    // same as foundRulesControlsTemplate - differences only in ids and adding markedRulesOrderTemplate TODO merge be aware of id vs. class
+    Mooml.register('markedRulesControlsTemplate', function (data) {
+      var i18n = data.i18n,
+          IMs = data.FRManager.IMs,
+          FRManager = data.FRManager,
+          taskId = FRManager.id;
+
+      var perPageSelect = new Element('select',
+          {
+            id: 'marked-rules-per-page-'+taskId,
+            events: {
+              change: function (e) {
+                e.stop();
+                FRManager.setRulesPerPage(e.target.get('value'));
+              }.bind(FRManager)
+            }
+          }
+      );
+      var perPage = FRManager.rulesPerPage;
+      Array.each(FRManager.getPerPageOptions(), function (perPageCount) {
+        var option = new Element('option', {value: perPageCount, text: perPageCount});
+        if (perPage == perPageCount) {
+          option.setAttribute('selected', 'selected');
+        }
+        perPageSelect.grab(option)
+      }.bind([perPageSelect, perPage]));
+
+      div({'class':'marked-rules-controls'},
+          Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n}),
+          label({'for':'marked-rules-order-'+taskId},i18n.translate('Rules order:')),
+          Mooml.render('markedRulesOrderTemplate',data),
+          label({'for':'marked-rules-per-page-'+taskId},i18n.translate('Rules per page:')),
+          perPageSelect
+      );
+    });
+
+    // same as foundRulesMultiControlsTemplate - differences only in task-actions TODO merge be aware of id vs. class
     Mooml.register('markedRulesMultiControlsTemplate', function (data) {
       var i18n = data.i18n;
-      div({id:'marked-rules-multi-controls'},
+      div({class:'marked-rules-multi-controls'},
           a({
             class: 'all',
             title: i18n.translate('Select all')
@@ -795,11 +855,11 @@ var UITemplateRegistrator = new Class({
             title: i18n.translate('Select none')
           }),
           span({class:'actions'},
-              a({
+              /*a({
                 href:'#',
                 class:'mark',
                 title:i18n.translate('Add to Rule Clipboard')
-              },i18n.translate('Add selected...')),
+              },i18n.translate('Add selected...')),*/
               a({
                 href:'#',
                 class:'unmark',
@@ -828,10 +888,10 @@ var UITemplateRegistrator = new Class({
           div(
               {class: 'marked-rules-task-name'},
               task.name,
-              span({class: 'count'}, '(rules:  ', strong(), ')'),
+              span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
               a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
           ),
-          Mooml.render('foundRulesControlsTemplate',data),
+          Mooml.render('markedRulesControlsTemplate',data),
           ul(),
           Mooml.render('markedRulesMultiControlsTemplate',data)
       )
