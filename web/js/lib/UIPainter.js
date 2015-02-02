@@ -45,6 +45,7 @@ var UIPainter = new Class({
   },
 
   createUI: function () {
+    this.$UIStructurePainter.renderHeader();
     this.renderNavigation();
     this.renderActiveRule();
     //this.renderMarkedRules();

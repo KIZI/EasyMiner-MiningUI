@@ -18,8 +18,8 @@ var UIStructureTemplater = new Class({
     Mooml.register('headerTemplate', function (data) {
       var i18n = data.i18n,
         config = data.config,
-        browserDetector = data.browserDetector;
-
+        browserDetector = data.browserDetector,
+        minerType = data.minerType;
       header(
         {id:'mainHeader'},
         div(
@@ -31,7 +31,7 @@ var UIStructureTemplater = new Class({
             a({href: '#', id: 'settings-open'}, i18n.translate('Settings')),
             span({id:'current-user'})
           ),
-          h1({class:'typeR'/*TODO Standa*/},config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
+          h1({class:'type'+minerType.toUpperCase()},config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
         )
     });
 

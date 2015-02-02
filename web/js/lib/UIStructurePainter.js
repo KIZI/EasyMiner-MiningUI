@@ -10,7 +10,7 @@ var UIStructurePainter = new Class({
     $browserDetector: null,
     $UIScroller: null,
 
-    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller, elementSizeMeter, browserDetector) {
+    initialize: function(config, dateHelper, i18n, UIStructureListener, UIStructureTemplater, UIScroller, elementSizeMeter, browserDetector, ARBuilder) {
         this.$config = config;
         this.$dateHelper = dateHelper;
         this.$i18n = i18n;
@@ -20,11 +20,12 @@ var UIStructurePainter = new Class({
         this.$UIScroller = UIScroller;
         this.$elementSizeMeter = elementSizeMeter;
         this.$browserDetector = browserDetector;
+        this.$ARBuilder=ARBuilder;
     },
 
     render: function() {
         $(this.$config.getRootElementID()).grab(Mooml.render('overlayTemplate'));
-        $(this.$config.getRootElementID()).grab(Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector}));
+        $(this.$config.getRootElementID()).grab(Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector, minerType: this.$ARBuilder.getMinerType()}));
         $(this.$config.getRootElementID()).grab(Mooml.render('mainTemplate', {i18n: this.$i18n}));
         $(this.$config.getRootElementID()).grab(Mooml.render('footerTemplate', {config: this.$config, i18n: this.$i18n, dateHelper: this.$dateHelper}));
         this.renderNavigation();
@@ -35,6 +36,13 @@ var UIStructurePainter = new Class({
         this.$UIStructureListener.registerResizeEventHandler();
         this.$UIStructureListener.registerSettingsEventHandlers();
         this.$UIStructureListener.registerDataReloadEventHandlers();
+    },
+
+    renderHeader: function(){
+        var header=$('mainHeader');
+        if (header){
+            Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector, minerType: this.$ARBuilder.getMinerType()}).replaces(header);
+        }
     },
 
     renderNavigation: function() {

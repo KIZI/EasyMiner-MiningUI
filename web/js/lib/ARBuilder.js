@@ -6,6 +6,7 @@ var ARBuilder = new Class({
   settings: null,
   dataParser: null,
   $rulesParser: null,
+  $minerType:'',
   $FRManager: null,
   $MRManager: null,
   $miningManager: null,
@@ -32,7 +33,7 @@ var ARBuilder = new Class({
 
     // Paint application structure
     this.$UIStructureListener = new UIStructureListener(this);
-    this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())), new ElementSizeMeter(), new BrowserDetector());
+    this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())), new ElementSizeMeter(), new BrowserDetector(), this);
     this.$UIStructureListener.setUIStructurePainter(this.$UIStructurePainter);
     this.$UIStructurePainter.render();
 
@@ -65,6 +66,7 @@ var ARBuilder = new Class({
 
   repaintData: function () {
     this.$DD = this.dataParser.getDD();
+    this.$minerType=this.dataParser.getMinerType();
     this.FLs = this.dataParser.getFLs();
     this.$FGC = this.dataParser.getFGC();
 
@@ -88,6 +90,7 @@ var ARBuilder = new Class({
     this.$UIStructurePainter.hideOverlay();
 
     this.$DD = this.dataParser.getDD();
+    this.$minerType=this.dataParser.getMinerType();
     this.FLs = this.dataParser.getFLs();
     this.$FGC = this.dataParser.getFGC();
 
@@ -109,6 +112,10 @@ var ARBuilder = new Class({
 
   getDD: function () {
     return this.$DD;
+  },
+
+  getMinerType: function(){
+    return this.$minerType;
   },
 
   getFL: function () {
