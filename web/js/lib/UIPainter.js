@@ -279,6 +279,11 @@ var UIPainter = new Class({
     this.UIListener.registerMarkedRulesMultiControlsEventHandlers(task.id);
   },
 
+  // removes marked tasks div
+  removeMarkedTask:function(taskId){
+    $('task-'+taskId).destroy();
+  },
+
   // same as updateFoundRule only template difference TODO merge
   updateMarkedRule:function(foundRule){
     var foundRuleElement = $(foundRule.getCSSID());

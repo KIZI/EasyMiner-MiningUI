@@ -224,7 +224,7 @@ var MRManager = new Class({
     //console.log(Object.keys(data).length);
 
     Object.each(data, function (value, id) {
-      this.tasks[id] = new MarkedTask(id, value.name, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this.config);
+      this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this);
       this.UIPainter.renderMarkedTask(this.tasks[id]);
       //this.getRulesRequest(id);
     }.bind(this));
@@ -241,6 +241,11 @@ var MRManager = new Class({
     }.bind(this));
     urlIds = urlIds.join(',');
     this.getUnmarkRequest(selectedFoundRules,this.config.getRuleClipboardRemoveRuleUrl(taskId,urlIds));
+  },
+
+  removeTask: function(task){
+    Object.erase(this.tasks, task.id);
+    this.UIPainter.removeMarkedTask(task.id);
   },
 
   setTaskName: function(taskId, newTaskName){

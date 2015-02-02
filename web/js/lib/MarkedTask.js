@@ -20,6 +20,7 @@ var MarkedTask = new Class({
   id: null,
   IMs: [],
   FL: null,
+  MRManager: null,
   name: null,
   pagesCount: 0,
   pageLoading:false,
@@ -29,15 +30,16 @@ var MarkedTask = new Class({
   rulesPerPage: null,
   UIPainter: null,
 
-  initialize: function (id, name, count, i18n, FL, UIPainter, config) {
+  initialize: function (id, name, config, count, i18n, FL, UIPainter, MRManager) {
     this.config = config;
     this.i18n = i18n;
     this.id = id;
     this.FL = FL;
-    this.UIPainter = UIPainter;
+    this.MRManager = MRManager;
+    this.name = name;
     var perPageOptions = this.getPerPageOptions();
     this.rulesPerPage = perPageOptions[0];
-    this.name = name;
+    this.UIPainter = UIPainter;
 
     this.gotoPage(1);
   },
@@ -48,7 +50,8 @@ var MarkedTask = new Class({
     var newPagesCount = Math.ceil(this.rulesCount/this.rulesPerPage);
     if(this.pagesCount != newPagesCount){
       if(this.currentPage > newPagesCount){
-        this.gotoPage(newPagesCount); // go to the last page if we out of range
+        this.gotoPage(newPagesCount); // go to the last page if we were out of range
+        this.currentPage = newPagesCount;
       }
       this.pagesCount = newPagesCount;
     }
@@ -106,18 +109,18 @@ var MarkedTask = new Class({
   handleSuccessRulesRequest: function (data) {
     this.pageLoading = false;
     //var task = this.tasks[taskId];
-    this.IMs = this.FL.getRulesIMs(data.task.IMs);
     this.rules = [];
-    this.setRulesCount(data.task.rulesCount);
+    if(data.task.rulesCount == 0) {
+      this.MRManager.removeTask(this);
+    } else{
+      this.IMs = this.FL.getRulesIMs(data.task.IMs);
+      this.setRulesCount(data.task.rulesCount);
 
-    /*if (data.task && data.task.name!=''){
-     this.setTaskName(data.task.name);
-     }*/
-
-    Object.each(data.rules, function (MRdata, MRid) {
-      this.rules.push(new MarkedRule(MRid, MRdata, this));
-    }.bind(this));
-    this.UIPainter.renderMarkedRules(this);
+      Object.each(data.rules, function (MRdata, MRid) {
+        this.rules.push(new MarkedRule(MRid, MRdata, this));
+      }.bind(this));
+      this.UIPainter.renderMarkedRules(this);
+    }
   },
 
   reload: function(){
@@ -130,9 +133,6 @@ var MarkedTask = new Class({
 
   setRulesCount: function(rulesCount){
     if(this.rulesCount != rulesCount){
-      if(rulesCount == 0){
-
-      }
       this.rulesCount = rulesCount;
       this.calculatePagesCount();
     }
