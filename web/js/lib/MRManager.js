@@ -1,25 +1,13 @@
 var MRManager = new Class({
 
-  //nově používané proměnné s informacemi o stavu
-  /*task: null,
-  miningInProgress: false,
-  pageLoading:false,
-
-  IMs: [],
-
-  rulesCount: 0,
-  rulesOrder: null,
-  currentPage: null,
-  pagesCount: 0,*/
-
   // používané proměnné MRManager
   config: null,
   errorMessage: '',
   i18n: null,
   FL: null,
-  tasks: {},
-  //rulesPerPage: null,
+  FRManager: null,
   settings: null,
+  tasks: {},
   UIPainter: null,
   UIListener: null,
 
@@ -34,14 +22,12 @@ var MRManager = new Class({
 
     this.getTasksRequest();
   },
-  // used
 
   cleanMarkedRulesIds: function(foundRulesCSSIDs, taskId){
     var result=[];
     if (!(foundRulesCSSIDs.length>0)){
       return result;
     }
-    //var taskId = this.getTaskId();
     Array.each(foundRulesCSSIDs, function(id){
       var regExp = /^marked-rule-(.+)-(\d+)-checkbox$/;
       var idArr = id.split('-');
@@ -96,39 +82,7 @@ var MRManager = new Class({
     }).get();
   },
 
-  /*getRulesRequest: function(taskId,offset,limit,order){
-    var url = this.config.getRuleClipboardGetRulesUrl(taskId,offset,limit,order);
-
-    //region načtení pravidel úlohy ze serveru
-    new Request.JSON({
-      url: url,
-      secure: true,
-      onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRRulesRequest(taskId, responseJSON);
-      }.bind(this),
-
-      onError: function () {
-        this.handleErrorMRRulesRequest();
-      }.bind(this),
-
-      onFailure: function () {
-        this.handleErrorMRRulesRequest();
-      }.bind(this),
-
-      onException: function () {
-        this.handleErrorMRRulesRequest();
-      }.bind(this),
-
-      onTimeout: function () {
-        this.handleErrorMRRulesRequest();
-      }.bind(this)
-
-    }).get();
-    //endregion
-  },*/
-
   getTasksRequest: function(){
-    //this.UIPainter.renderFoundRules();
     var url = this.config.getRuleClipboardGetTasksUrl();
 
     //region načtení úloh ze serveru
@@ -181,52 +135,28 @@ var MRManager = new Class({
     }
   },
 
-  /*handleErrorMRRulesRequest: function (){
-    this.pageLoading=false;
-    this.errorMessage=this.i18n.translate('Loading of tasks rules failed...');
-    //this.UIPainter.renderFoundRules();
-  },*/
-
   handleErrorMRTasksRequest: function (){
     this.pageLoading=false;
     this.errorMessage=this.i18n.translate('Loading of rule clipboard failed...');
-    //this.UIPainter.renderFoundRules();
   },
 
   handleSuccessMRUnmarkRequest: function (jsonData, foundRules){
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
-
-    //console.log(foundRules);
-    /*Array.each(foundRules,function(foundRule){ we don't need to remove from array - it will be reloaded
-      Object.erase(task, foundRule.$id);
-    }.bind(this));*/
-    this.tasks[foundRules[0].$task.id].reload();
+    var taskId = foundRules[0].$task.id;
+    this.tasks[taskId].reload();
+    if(this.FRManager.getTaskId() == taskId){
+      this.FRManager.gotoPage(1); // reloads FRManager if we unmark in current FR Task
+    }
   },
 
-  /*handleSuccessMRRulesRequest: function (taskId, data) {
-    //this.pageLoading=false;
-    var task = this.tasks[taskId];
-    task.setIMs(this.FL.getRulesIMs(data.task.IMs));
-    task.emptyRules();*/
-
-    /*if (data.task && data.task.name!=''){
-      this.setTaskName(data.task.name);
-    }*/
-
-    /*Object.each(data.rules, function (MRdata, MRid) {
-      task.addRule(new MarkedRule(MRid, MRdata, task));
-    }.bind(this));
-    this.UIPainter.renderMarkedRules(task);
-  },*/
-
   handleSuccessMRTasksRequest: function (data) {
-    //console.log(data);
-    //console.log(Object.keys(data).length);
-
     Object.each(data, function (value, id) {
-      this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this);
-      this.UIPainter.renderMarkedTask(this.tasks[id]);
-      //this.getRulesRequest(id);
+      if(!this.tasks[id]){
+        this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this);
+        this.UIPainter.renderMarkedTask(this.tasks[id]);
+      } else if(this.tasks[id].name != value.name){
+        this.setTaskName(id, value.name);
+      }
     }.bind(this));
   },
 
@@ -241,6 +171,16 @@ var MRManager = new Class({
     }.bind(this));
     urlIds = urlIds.join(',');
     this.getUnmarkRequest(selectedFoundRules,this.config.getRuleClipboardRemoveRuleUrl(taskId,urlIds));
+  },
+
+  reload: function(taskId, taskName){ // called only from FRManager
+    if(this.tasks[taskId]){
+      this.tasks[taskId].reload();
+    } else{
+      this.tasks[taskId] = new MarkedTask(taskId, taskName, this.config, 0, this.i18n, this.FL, this.UIPainter, this);
+      this.UIPainter.renderMarkedTask(this.tasks[taskId]);
+      //this.getTasksRequest();
+    }
   },
 
   removeTask: function(task){
@@ -259,123 +199,6 @@ var MRManager = new Class({
 
   unmarkMarkedRule: function (foundRule) {
     this.getUnmarkRequest([foundRule],this.config.getRuleClipboardRemoveRuleUrl(foundRule.getTaskId(),foundRule.$id));
-  }/*,
-
-
-  // not used yet
-
-  getPerPageOptions: function(){
-    return this.config.getPerPageOptions();
-  },
-
-  handleInProgress: function () {
-    this.reset();
-    this.miningInProgress = true;
-    this.UIPainter.renderActiveRule();
-    this.UIPainter.renderFoundRules();
-  },
-
-  handleStoppedMining: function () {
-    this.miningInProgress = false;
-    this.UIPainter.renderActiveRule();
-    this.UIPainter.renderFoundRules();
-  },
-
-  gotoPage: function(page){
-    this.pageLoading=true;
-    this.UIPainter.renderFoundRules();
-    var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
-
-    //region načtení pravidel ze serveru...
-    new Request.JSON({
-      url: url,
-      secure: true,
-      onSuccess: function (responseJSON, responseText) {
-        this.currentPage=page;
-        this.handleSuccessMarkedRulesRequest(responseJSON);
-      }.bind(this),
-
-      onError: function () {
-        this.handleErrorMarkedRulesRequest(page);
-      }.bind(this),
-
-      onFailure: function () {
-        this.handleErrorMarkedRulesRequest(page);
-      }.bind(this),
-
-      onException: function () {
-        this.handleErrorMarkedRulesRequest(page);
-      }.bind(this),
-
-      onTimeout: function () {
-        this.handleErrorMarkedRulesRequest(page);
-      }.bind(this)
-
-    }).get();
-    //endregion
-  },
-
-  setRulesCount: function(rulesCount){
-    this.rulesCount = rulesCount;
-    this.calculatePagesCount();
-    if (this.rulesCount > 0) {
-      this.gotoPage(1);
-    }
-  },
-
-  renderRules: function (rulesCount, taskName, inProgress, task) {
-    this.task = task;
-    this.miningInProgress = inProgress;
-    if (taskName!=''){
-      this.setTaskName(taskName);
-    }
-    this.setRulesCount(rulesCount);
-    this.UIPainter.renderActiveRule();
-    this.UIPainter.renderFoundRules();
-  },
-
-  handleError: function () {
-    this.miningInProgress = false;
-    this.UIPainter.renderActiveRule();
-    this.UIPainter.renderFoundRules();
-  },
-
-  reset: function () {
-    this.AJAXBalancer.stopAllRequests();
-    this.errorMessage='';
-    this.setRulesCount(0);
-    this.IMs = this.FL.getRulesIMs([]);
-    this.miningInProgress = false;
-  },
-
-  handleRenameTaskFinished: function(taskId){
-    if (this.getTaskId()==taskId){
-      //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
-      this.gotoPage(this.currentPage);
-    }
-  },
-
-
-  getPaginatorType: function(){
-    return this.config.getPaginatorType();
-  },
-
-  setRulesPerPage: function(count){
-    this.rulesPerPage=count;
-    this.calculatePagesCount();
-    this.gotoPage(1);
-  },
-
-  calculatePagesCount: function(){
-    this.pagesCount=Math.ceil(this.rulesCount/this.rulesPerPage);
-  },
-
-  getTaskName: function(){
-    return this.task.getName();
-  },
-
-  getTaskId: function(){
-    return this.task.getId();
-  }*/
+  }
 
 });

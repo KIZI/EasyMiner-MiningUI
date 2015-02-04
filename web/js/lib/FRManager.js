@@ -37,6 +37,8 @@ var FRManager = new Class({
     this.MRManager = MRManager;
     this.i18n = i18n;
     this.AJAXBalancer = new AJAXBalancer();
+
+    this.MRManager.FRManager = this; // MRManager has to know FRManager
   },
 
   handleInProgress: function () {
@@ -195,6 +197,8 @@ var FRManager = new Class({
       foundRule.setLoading(false);
       this.UIPainter.updateFoundRule(foundRule);
     }.bind(this));
+
+    this.MRManager.reload(this.getTaskId(), this.getTaskName());
 
   },
 

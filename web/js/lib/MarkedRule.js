@@ -1,11 +1,5 @@
 var MarkedRule = new Class({
 
-  /*Properties: ['exception', 'interesting', 'rule'],
-
-  $exception: null,
-  $interesting: null,*/
-
-
   // používané proměnné MarkedRule
   $id: null,
   $loading: false,
@@ -17,7 +11,6 @@ var MarkedRule = new Class({
     this.$rule = rule;
     this.$task = task;
   },
-  // used
 
   getCSSID: function () {
     return 'marked-rule-' + this.getId();
@@ -62,39 +55,6 @@ var MarkedRule = new Class({
 
   setLoading: function(loading){
     this.$loading = loading;
-  }/*,
-
-  // not used yet
-
-  parseFromObject: function (data) {
-    this.$rule = new AssociationRule();
-    this.$rule.parseFromObject(data);
-  },
-
-
-  isException: function () {
-    return (this.$exception !== null);
-  },
-
-  isInteresting: function () {
-    return (this.$interesting !== null);
-  },
-
-  getIMIdent: function (IMs) {
-
-    //TODO vrácení výpisu měr zajímavosti...
-  },
-
-  getMarkCSSID: function () {
-    return 'mark-' + this.getCSSID();
-  },
-
-  isSelected: function(){
-    return this.$rule.selected==1;
-  },
-
-  setSelected: function(value){
-    this.$rule.selected = value;
-  }*/
+  }
 
 });
