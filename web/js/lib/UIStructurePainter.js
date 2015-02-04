@@ -42,6 +42,7 @@ var UIStructurePainter = new Class({
         var header=$('mainHeader');
         if (header){
             Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector, minerType: this.$ARBuilder.getMinerType()}).replaces(header);
+            this.$UIStructureListener.registerSettingsEventHandlers();
         }
     },
 
