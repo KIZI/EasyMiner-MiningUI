@@ -274,6 +274,10 @@ var UIPainter = new Class({
     if(taskElm != undefined){
       newTaskElm.replaces(taskElm);
     } else{
+      if(mrElement.hasClass('empty')){
+        mrElement.removeClass('empty');
+        //mrElement.getElement('div#marked-rules-empty').destroy();
+      }
       mrElement.grab(newTaskElm);
     }
     this.UIListener.registerMarkedRulesEventHandlers(task);
@@ -282,7 +286,11 @@ var UIPainter = new Class({
 
   // removes marked tasks div
   removeMarkedTask:function(taskId){
+    var mrElement = $$('#marked-rules div.clearfix')[0];
     $('task-'+taskId).destroy();
+    if(mrElement.getElements('div.marked-rules-task-name').length <= 1){
+      mrElement.addClass('empty');
+    }
   },
 
   // same as updateFoundRule only template difference TODO merge

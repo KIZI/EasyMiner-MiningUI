@@ -387,8 +387,11 @@ var UIStructureTemplater = new Class({
 
       section({id: 'marked-rules'},
         h2({'class': 'minimize'}, i18n.translate('Rule clipboard'), a({href: '#', 'class': 'toggle'}, '')),
-        div({class: 'clearfix'}/*,
-          ul()*/
+        div({class: 'clearfix empty'},
+            div(
+                {id: 'marked-rules-empty', class: 'marked-rules-task-name'},
+                data.i18n.translate('Here you can collect interesting rules...')
+            )
         )
       );
     });
