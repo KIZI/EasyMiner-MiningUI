@@ -4,11 +4,11 @@ var BrowserDetector = new Class({
         var version = Browser.version;
 
         if (Browser.ie) { // Internet Explorer
-            if (version < 9) { return true; }
+            if (version < 10) { return true; }
         } else if (Browser.firefox) { // Firefox
-            if (version < 11) { return true; }
+            if (version < 15) { return true; }
         } else if (Browser.chrome) { // Google Chrome
-            if (version < 18) { return true; }
+            if (version < 25) { return true; }
         } else if (Browser.safari) { // Apple Safari
             if (version < 5) { return true; }
         } else if (Browser.opera) { // Opera
