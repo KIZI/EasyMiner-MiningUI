@@ -12,7 +12,7 @@ var MarkedTask = new Class({
   name: null,
   pagesCount: 0,
   pageLoading:false,
-  rules: [],
+  rules: {},
   rulesCount: 0,
   rulesOrder: '',
   rulesPerPage: null,
@@ -94,7 +94,7 @@ var MarkedTask = new Class({
 
   handleSuccessRulesRequest: function (data) {
     this.pageLoading = false;
-    this.rules = [];
+    this.rules = {};
     if(data.task.rulesCount == 0) {
       this.MRManager.removeTask(this);
     } else{
@@ -102,7 +102,7 @@ var MarkedTask = new Class({
       this.setRulesCount(data.task.rulesCount);
 
       Object.each(data.rules, function (MRdata, MRid) {
-        this.rules.push(new MarkedRule(MRid, MRdata, this));
+        this.rules[MRid] = new MarkedRule(MRid, MRdata, this);
       }.bind(this));
       this.UIPainter.renderMarkedRules(this);
     }

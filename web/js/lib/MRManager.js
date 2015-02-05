@@ -54,7 +54,7 @@ var MRManager = new Class({
       }.bind(this),
 
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRUnmarkRequest(responseJSON,foundRules);
+        this.handleSuccessMRUnmarkRequest(responseJSON, foundRules);
       }.bind(this),
 
       onError: function () {
@@ -116,10 +116,10 @@ var MRManager = new Class({
   getMarkedRulesByIds: function(foundRulesIds, taskId){
     var result = [],
         rules = this.tasks[taskId].rules;
-    if (rules.length > 0){
-      Array.each(rules, function(rule){
-        if (foundRulesIds.indexOf(rule.$id) > -1){
-          result.push(rule);
+    if (rules){
+      Object.each(rules, function(value, ruleId){
+        if (foundRulesIds.indexOf(ruleId) > -1){
+          result.push(value);
         }
       }.bind([foundRulesIds, result]));
     }
@@ -142,8 +142,24 @@ var MRManager = new Class({
 
   handleSuccessMRUnmarkRequest: function (jsonData, foundRules){
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
-    var taskId = foundRules[0].$task.id;
-    this.tasks[taskId].reload();
+    var taskId = foundRules[0].$task.id,
+        task = this.tasks[taskId];
+    if(task.pagesCount > 1){
+      task.reload();
+    } else{
+      Object.each(jsonData.rules, function(value, id){
+        if(value.selected == 0){
+          Object.erase(task.rules, id);
+        }
+      }.bind(this));
+      task.rulesCount = (task.rulesCount - foundRules.length);
+      if(task.rulesCount == 0) {
+        this.removeTask(task);
+      } else{
+        this.UIPainter.renderMarkedTask(task);
+        this.UIPainter.renderMarkedRules(task);
+      }
+    }
     if(this.FRManager.getTaskId() == taskId){
       this.FRManager.gotoPage(1); // reloads FRManager if we unmark in current FR Task
     }
