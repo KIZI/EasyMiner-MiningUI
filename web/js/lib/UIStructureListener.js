@@ -29,6 +29,15 @@ var UIStructureListener = new Class({
         }.bind(this));
     },
 
+    registerUnsupportedBrowserEventHandler: function (field) {
+        // submit
+        var elementSubmit = $('unsupported-browser-form').getElement('input[type=submit]');
+        elementSubmit.addEvent('click', function (event) {
+            event.stop();
+            this.$UIStructurePainter.hideOverlay();
+        }.bind(this));
+    },
+
     registerSettingsWindowEventHandlers: function (ASPossible) {
         // change FL
         var elSelect = $('fl-select');

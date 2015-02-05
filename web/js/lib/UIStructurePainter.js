@@ -41,8 +41,17 @@ var UIStructurePainter = new Class({
     renderHeader: function(){
         var header=$('mainHeader');
         if (header){
-            Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector, minerType: this.$ARBuilder.getMinerType()}).replaces(header);
+            Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, minerType: this.$ARBuilder.getMinerType()}).replaces(header);
             this.$UIStructureListener.registerSettingsEventHandlers();
+        }
+        if (this.$browserDetector.isDeprecated()){
+            var overlay = this.showOverlay();
+            overlay.grab(Mooml.render('unsupportedBrowserWindowTemplate', {i18n: this.$i18n, browserName: this.$browserDetector.getFullName()}));
+            this.$UIStructureListener.registerUnsupportedBrowserEventHandler();
+
+            //this.UIListener.registerOverlayEventHandlers();
+            // Positioning of Overlay after rendering
+            this.posOverlay();
         }
     },
 

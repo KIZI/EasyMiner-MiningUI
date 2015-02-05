@@ -6,6 +6,7 @@ var UIStructureTemplater = new Class({
     this.registerActiveRule();
     this.registerFoundRules();
     this.registerMarkedRules();
+    this.registerUnsupportedBrowserWindow();
   },
 
   registerStructure: function () {
@@ -18,13 +19,11 @@ var UIStructureTemplater = new Class({
     Mooml.register('headerTemplate', function (data) {
       var i18n = data.i18n,
         config = data.config,
-        browserDetector = data.browserDetector,
         minerType = data.minerType;
       header(
         {id:'mainHeader'},
         div(
           {id:'headerContent'},
-          browserDetector.isDeprecated() ? div({id: 'browser-warning'}, i18n.translate('WARNING: You are using an old and deprecated version of web browser') + ' (' + browserDetector.getFullName() + '). ' + i18n.translate('Please upgrade to enjoy this application!')) : '',
           div({id: 'headerLinks'},
             a({href: '#', id: 'new-task'}, i18n.translate('New task')),
             /*TODO a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),*/
@@ -55,6 +54,24 @@ var UIStructureTemplater = new Class({
         dateHelper = data.dateHelper;
 
       footer('Copyright &copy; ' + config.getCopyright() + ', ' + dateHelper.getYear());
+    });
+  },
+
+  registerUnsupportedBrowserWindow: function () {
+    Mooml.register('unsupportedBrowserWindowTemplate', function (data) {
+      var i18n = data.i18n,
+          name = data.browserName;
+
+      div({id: 'unsupported-browser-window'},
+          //a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+          h2(i18n.translate('Unsupported browser')),
+          form({action: '#', method: 'POST', id: 'unsupported-browser-form'},
+              div({class: 'clearfix'},
+                  span(i18n.translate('WARNING: You are using an old and deprecated version of web browser') + ' (' + name + '). ' + i18n.translate('Please upgrade to enjoy this application!'))
+              ),
+              input({type: 'submit', value: i18n.translate('I understand')})
+          )
+      );
     });
   },
 
