@@ -194,8 +194,8 @@ var MRManager = new Class({
     if(!task){
       task = new MarkedTask(taskId, taskName, this.config, 0, this.i18n, this.FL, this.UIPainter, this);
       this.tasks[taskId] = task;
-      this.UIPainter.renderMarkedTask(task, 'minimize');
     }
+    this.UIPainter.renderMarkedTask(task, 'minimize');
     task.reload();
   },
 

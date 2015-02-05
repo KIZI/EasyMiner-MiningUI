@@ -12,7 +12,7 @@
     margin-bottom 5px
 
   .maximize
-    ul,.marked-rules-multi-controls,.marked-rules-controls
+    ul,.marked-rules-checkbox-controls,.marked-rules-controls
       display none
     a.toggle
       background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
@@ -133,7 +133,7 @@
             visibility visible
 
   .marked-rules-multi-controls
-    min-height 10px
+    min-height 25px
     position relative
     padding-bottom 10px
     border-bottom 2px solid linkColor
@@ -146,6 +146,9 @@
     .invert
       iconLink()
       background transparent url('../images/icon-select-invert.png') center center no-repeat
+
+    .marked-rules-checkbox-controls
+      float left
 
     .actions
       margin-left 10px

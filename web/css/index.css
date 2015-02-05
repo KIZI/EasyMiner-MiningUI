@@ -1860,7 +1860,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   margin-bottom: 5px;
 }
 #marked-rules .maximize ul,
-#marked-rules .maximize .marked-rules-multi-controls,
+#marked-rules .maximize .marked-rules-checkbox-controls,
 #marked-rules .maximize .marked-rules-controls {
   display: none;
 }
@@ -2015,7 +2015,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   visibility: visible;
 }
 #marked-rules .marked-rules-multi-controls {
-  min-height: 10px;
+  min-height: 25px;
   position: relative;
   padding-bottom: 10px;
   border-bottom: 2px solid #126499;
@@ -2049,6 +2049,9 @@ section#active-rule #ar-action-box #start-mining:focus {
   margin-right: 5px;
   cursor: pointer;
   background: transparent url("../images/icon-select-invert.png") center center no-repeat;
+}
+#marked-rules .marked-rules-multi-controls .marked-rules-checkbox-controls {
+  float: left;
 }
 #marked-rules .marked-rules-multi-controls .actions {
   margin-left: 10px;
