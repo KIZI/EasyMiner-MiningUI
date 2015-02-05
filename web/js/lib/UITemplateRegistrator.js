@@ -882,14 +882,16 @@ var UITemplateRegistrator = new Class({
     });
     // Marked task
     Mooml.register('taskTemplate', function (data) {
-      var task = data.FRManager;
+      var task = data.FRManager,
+          status = data.status;
       div(
-          {id: 'task-'+task.id},
+          {id: 'task-'+task.id, class: status},
           div(
               {class: 'marked-rules-task-name'},
               task.name,
               span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
-              a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
+              a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')}),
+              a({href: '#', class: 'toggle'}, '')
           ),
           Mooml.render('markedRulesControlsTemplate',data),
           ul(),

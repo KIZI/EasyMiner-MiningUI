@@ -679,6 +679,7 @@ var UIListener = new Class({
     }
   },
 
+  /*
   registerMarkedRuleEventHandlers: function (FR) {
     var me = this;
 
@@ -686,16 +687,23 @@ var UIListener = new Class({
       me.ARBuilder.getFRManager().removeMarkedRule(FR);
       event.stop();
     });
-  },
+  },*/
 
   // same as registerFoundRulesEventHandlers, only ids differences TODO merge
   registerMarkedRulesEventHandlers: function(task){
-    var taskNameElement = $('task-'+task.id).getElement('.marked-rules-task-name');
+    var taskElm = $('task-'+task.id),
+        taskNameElement = taskElm.getElement('.marked-rules-task-name');
     if (!taskNameElement){return;}
     var renameTaskLink = taskNameElement.getElements('.rename-task');
     renameTaskLink.addEvent('click',function(event){
       event.stop();
       this.ARBuilder.getARManager().openRenameTaskWindow(task.id,task.name);
+    }.bind(this));
+
+    taskNameElement.getElements('.toggle').addEvent('click', function (event) {
+      event.stop();
+      if(taskElm.hasClass('maximize')){ task.reload(); }
+      taskElm.toggleClass('minimize'); taskElm.toggleClass('maximize');
     }.bind(this));
   },
 
@@ -865,6 +873,7 @@ var UIListener = new Class({
     }
   },
 
+  /*
   registerMarkedRulesTaskEventHandlers: function (taskId) {
     var me = this;
 
@@ -889,7 +898,7 @@ var UIListener = new Class({
       event.stop();
       me.ARBuilder.getARManager().openRenameTaskWindow(taskId);
     });
-  },
+  },*/
 
   registerTaskRenameEventHandlers: function () {
     // Submit (rename)

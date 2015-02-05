@@ -2,7 +2,7 @@ var MarkedTask = new Class({
 
   // používané proměnné MarkedTask
   config: null,
-  currentPage: null,
+  currentPage: 1,
   errorMessage: '',
   i18n: null,
   id: null,
@@ -25,11 +25,12 @@ var MarkedTask = new Class({
     this.FL = FL;
     this.MRManager = MRManager;
     this.name = name;
+    this.rulesCount = count;
     var perPageOptions = this.getPerPageOptions();
     this.rulesPerPage = perPageOptions[0];
     this.UIPainter = UIPainter;
 
-    this.gotoPage(1);
+    //this.gotoPage(1);
   },
 
   calculatePagesCount: function(){

@@ -169,7 +169,7 @@ var MRManager = new Class({
     Object.each(data, function (value, id) {
       if(!this.tasks[id]){
         this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this);
-        this.UIPainter.renderMarkedTask(this.tasks[id]);
+        this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
       } else if(this.tasks[id].name != value.name){
         this.setTaskName(id, value.name);
       }
@@ -190,13 +190,13 @@ var MRManager = new Class({
   },
 
   reload: function(taskId, taskName){ // called only from FRManager
-    if(this.tasks[taskId]){
-      this.tasks[taskId].reload();
-    } else{
-      this.tasks[taskId] = new MarkedTask(taskId, taskName, this.config, 0, this.i18n, this.FL, this.UIPainter, this);
-      this.UIPainter.renderMarkedTask(this.tasks[taskId]);
-      //this.getTasksRequest();
+    var task = this.tasks[taskId];
+    if(!task){
+      task = new MarkedTask(taskId, taskName, this.config, 0, this.i18n, this.FL, this.UIPainter, this);
+      this.tasks[taskId] = task;
+      this.UIPainter.renderMarkedTask(task, 'minimize');
     }
+    task.reload();
   },
 
   removeTask: function(task){

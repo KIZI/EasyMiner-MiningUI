@@ -262,13 +262,15 @@ var UIPainter = new Class({
   },
 
   // to render only task
-  renderMarkedTask: function (task) {
+  renderMarkedTask: function (task, status) {
     var taskElm = $('task-'+task.id),
+        taskStatus = (typeof status == 'undefined') ? taskElm.getProperty('class') : status;
         mrElement = $$('#marked-rules div.clearfix')[0],
         newTaskElm = Mooml.render('taskTemplate',
         {
           i18n: this.i18n,
-          FRManager: task
+          FRManager: task,
+          status: taskStatus
         }
     );
     if(taskElm != undefined){
