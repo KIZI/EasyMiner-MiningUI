@@ -199,8 +199,16 @@ var UIPainter = new Class({
 
   renderDataFields: function () {
     var dataFields = $$('#data-fields ul')[0];
+    var dataFieldsList = this.ARBuilder.getDD().getFields();
+    // sort data fields by name
+    dataFieldsList.sort(function(a, b){
+      if (a.$name.toLowerCase() < b.$name.toLowerCase()){ return -1; }
+      if (a.$name.toLowerCase() > b.$name.toLowerCase()){ return 1; }
+      return 0;
+    });
+
     dataFields.empty();
-    this.ARBuilder.getDD().getFields().each(function (field) {
+    dataFieldsList.each(function (field) {
       this.renderDataField(field, dataFields);
       this.UIListener.registerDataFieldEventHandler(field);
     }.bind(this));

@@ -30,9 +30,21 @@ var AttributeSorter = new Class({
 				attributes[key].setValue(0);
 			}
 		}.bind(this));
+
+		// sort attributes by name
+		positions.sort(function(a, b){
+			if (attributes[a].name.toLowerCase() < attributes[b].name.toLowerCase()){ return -1; }
+			if (attributes[a].name.toLowerCase() > attributes[b].name.toLowerCase()){ return 1; }
+			return 0;
+		});
+		usedPositions.sort(function(a, b){
+			if (attributes[a].name.toLowerCase() < attributes[b].name.toLowerCase()){ return -1; }
+			if (attributes[a].name.toLowerCase() > attributes[b].name.toLowerCase()){ return 1; }
+			return 0;
+		});
+
 		positions.append(usedPositions);
 		
 		return positions;
 	}
-	
 });
