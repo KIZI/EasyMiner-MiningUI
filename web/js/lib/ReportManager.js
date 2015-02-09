@@ -12,6 +12,15 @@ var ReportManager = new Class({
         this.$reports = {};
     },
 
+    /**
+     * Funkce pro zobrazení detailů úlohy na serveru (HTML verze z PMML)
+     * @param taskId
+     */
+    showTaskDetails: function(taskId){
+        window.open(this.$config.getTaskDetailsUrl(taskId),'task-details-'+taskId);
+    },
+
+
     createReport: function(taskId, taskName) {
         var report = this.initReport(taskId, taskName);
         this.saveReport(report);
@@ -50,62 +59,6 @@ var ReportManager = new Class({
         }
 
         this.makeRequest(requestData);
-    },
-
-    makeRequest: function (data) {//TODO Standa
-        window.open(
-           // this.$config.getJoomlaURL() +
-                'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS',
-            'pmmlWindow_' + data.lmtask);
-
-        var request = new Request.JSON({
-            url: this.$config.getReportSaveUrl(),
-            secure: true,
-
-            onSuccess: function (responseJSON, responseText) {
-                if ((responseJSON.result === 'ok') && (responseJSON.article > 0)) {
-                    // Store the article ID
-                    this.$reports[this.taskId] = responseJSON.article;
-
-                    // Save the task to preserve its Article ID
-                    var task = this.$UIPainter.ARBuilder.$FRManager.getTask(this.taskId);//XXX
-                    task.setArticleId(responseJSON.article);
-                    this.$UIPainter.ARBuilder.$FRManager.saveMarkedRules();
-
-                    if (!window.open( //TODO Standa
-                       // this.$config.getJoomlaURL() +
-                            'index.php?option=com_dbconnect&controller=data&task=showArticle&article=' +
-                            responseJSON.article,
-                        'pmmlWindow_' + data.lmtask)) {
-                    }
-
-                } else {
-                    //TODO Standa
-                    window.open(
-//                        this.$config.getJoomlaURL() +
-                            'index.php?option=com_dbconnect&controller=data&task=showInfo&message=GENERATING_TASK_DETAILS_FAILED',
-                        'pmmlWindow_' + data.lmtask);
-                }
-
-            }.bind(this),
-
-            onError: function () {
-                this.handleErrorRequest();
-            }.bind(this),
-
-            onFailure: function () {
-                this.handleErrorRequest();
-            }.bind(this),
-
-            onException: function () {
-                this.handleErrorRequest();
-            }.bind(this),
-
-            onTimeout: function () {
-                this.handleErrorRequest();
-            }.bind(this)
-
-        }).post(data);
     },
 
     handleSuccessRequest: function (data, responseJSON) {

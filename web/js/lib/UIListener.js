@@ -827,17 +827,6 @@ var UIListener = new Class({
         this.checkMarkedRulesSelectedCheckboxes(taskId);
       }.bind(this));
 
-      /*multiControls.getElements('.actions .mark').addEvent('click',function(event){
-        event.stop();
-        var selectedFoundRulesIds = [];
-        var FRManager = this.ARBuilder.getFRManager();
-        FRManager.multiMarkFoundRules(this.getFoundRulesSelectedIds());
-        rulesCheckboxes.each(function(checkbox){
-          checkbox.checked=false;
-        });
-        this.checkMarkedRulesSelectedCheckboxes();
-      }.bind(this));*/
-
       multiControls.getElements('.actions .unmark').addEvent('click',function(event){
         event.stop();
         var FRManager = this.ARBuilder.getMRManager();
@@ -848,24 +837,10 @@ var UIListener = new Class({
         this.checkMarkedRulesSelectedCheckboxes(taskId);
       }.bind(this));
 
-      /*multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
-        event.stop();
-        var FRManager = this.ARBuilder.getFRManager();
-        FRManager.markAllFoundRules();
-        rulesCheckboxes.each(function(checkbox){
-          checkbox.checked=false;
-        });
-        this.checkMarkedRulesSelectedCheckboxes();
-      }.bind(this));*/
-
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
-        alert('taskDetails');
-        event.stop();/*TODO Standa
-         var FRManager = this.ARBuilder.getFRManager();
-         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
-         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
-         checkbox.checked=false;
-         });*/
+        event.stop();
+        var reportManager = this.ARBuilder.getReportManager();
+        reportManager.showTaskDetails(taskId);
       }.bind(this));
 
       this.checkMarkedRulesSelectedCheckboxes(taskId);
