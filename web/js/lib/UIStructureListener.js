@@ -23,10 +23,12 @@ var UIStructureListener = new Class({
             this.$ARBuilder.openNewTaskWindow();
         }.bind(this));
 
+        /*TODO
         $('settings-open').addEvent('click', function (e) {
             e.stop();
             this.$ARBuilder.openSettingsWindow();
         }.bind(this));
+        */
     },
 
     registerUnsupportedBrowserEventHandler: function (field) {

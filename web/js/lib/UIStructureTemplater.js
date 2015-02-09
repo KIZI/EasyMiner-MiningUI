@@ -27,7 +27,7 @@ var UIStructureTemplater = new Class({
           div({id: 'headerLinks'},
             a({href: '#', id: 'new-task'}, i18n.translate('New task')),
             /*TODO a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),*/
-            a({href: '#', id: 'settings-open'}, i18n.translate('Settings')),
+            /*TODO a({href: '#', id: 'settings-open'}, i18n.translate('Settings')),*/
             span({id:'current-user'})
           ),
           h1({class:'type'+minerType.toUpperCase()},config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
