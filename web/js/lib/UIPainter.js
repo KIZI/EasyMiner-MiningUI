@@ -284,11 +284,13 @@ var UIPainter = new Class({
     if(taskElm != undefined){
       newTaskElm.replaces(taskElm);
     } else{
+      var where = 'bottom';
       if(mrElement.hasClass('empty')){
         mrElement.removeClass('empty');
         //mrElement.getElement('div#marked-rules-empty').destroy();
       }
-      mrElement.grab(newTaskElm);
+      if(status = 'minimize'){ where = 'top' }
+      mrElement.grab(newTaskElm, where);
     }
     this.UIListener.registerMarkedRulesEventHandlers(task);
     this.UIListener.registerMarkedRulesMultiControlsEventHandlers(task.id);
