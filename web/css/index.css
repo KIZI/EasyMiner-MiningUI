@@ -1695,6 +1695,9 @@ section#active-rule #ar-action-box #start-mining:focus {
 #found-rules ul li .rule {
   color: #434343;
   cursor: default;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-select: text;
 }
 #found-rules ul li .loading {
   display: none;
@@ -1736,6 +1739,11 @@ section#active-rule #ar-action-box #start-mining:focus {
   display: block;
   font-size: 12.8px;
   color: #888;
+}
+#found-rules ul li .ims * {
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-select: text;
 }
 #found-rules ul li .ims >span {
   border-right: 1px solid #ededed;
@@ -1958,6 +1966,9 @@ section#active-rule #ar-action-box #start-mining:focus {
 #marked-rules ul li .rule {
   color: #434343;
   cursor: default;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-select: text;
 }
 #marked-rules ul li .loading {
   display: none;
@@ -1993,6 +2004,11 @@ section#active-rule #ar-action-box #start-mining:focus {
   display: block;
   font-size: 12.8px;
   color: #888;
+}
+#marked-rules ul li .ims * {
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-select: text;
 }
 #marked-rules ul li .ims >span {
   border-right: 1px solid #ededed;
