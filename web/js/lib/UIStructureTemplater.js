@@ -285,7 +285,7 @@ var UIStructureTemplater = new Class({
     Mooml.register('reportsStructureTemplate', function (data) {
       var i18n = data.i18n;
 
-      section({id: 'reports', class: 'clearfix'},
+      section({id: 'reports', class: 'clearfix', style: "display:none;"/*TODO pracovní skrytí bloku s analytickými zprávami*/},
         h2({'class': 'minimize'}, i18n.translate('Analytical Reports'), a({href: '#', 'class': 'toggle'}, '')),
         ul(),
         a({href: '#', id: 'createUserReport'}, i18n.translate('Create new report'))
