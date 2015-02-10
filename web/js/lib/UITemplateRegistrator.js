@@ -304,9 +304,10 @@ var UITemplateRegistrator = new Class({
               span('')
             )
           ),
-          br(),
-          label({'for': 'add-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
-          select({name: 'add-coefficient-category', id: 'add-coefficient-category'}),
+            div({'class': 'autocomplete clearfix'},
+                label({'for': 'add-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
+                select({name: 'add-coefficient-category', id: 'add-coefficient-category'})
+            ),
           input({type: 'submit', value: i18n.translate('Add')}));
       } else {
         span({id: 'add-coefficient-autocomplete'},
