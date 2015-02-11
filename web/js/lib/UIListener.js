@@ -667,11 +667,9 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
         event.stop();
-         /*var FRManager = this.ARBuilder.getFRManager();
-         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
-         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
-         checkbox.checked=false;
-         });*/
+        var FRManager = this.ARBuilder.getFRManager()
+        var reportManager = this.ARBuilder.getReportManager();
+        reportManager.showTaskDetails(FRManager.getTaskId());
       }.bind(this));
 
       this.checkFoundRulesSelectedCheckboxes();
