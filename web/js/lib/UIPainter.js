@@ -969,9 +969,10 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
-  renderCurrentUserBox: function (user, logoutUrl) {
+  renderCurrentUserBox: function (user,detailsUrl, logoutUrl) {
     Mooml.render('currentUserTemplate',{
       user: user,
+      detailsUrl: detailsUrl,
       logoutUrl: logoutUrl,
       i18n: this.i18n
     }).replaces($('current-user'));

@@ -1110,11 +1110,12 @@ var UITemplateRegistrator = new Class({
 
     Mooml.register('currentUserTemplate', function (data) {
       var user      = data.user;
+      var detailsUrl= data.detailsUrl;
       var logoutUrl = data.logoutUrl;
       var i18n      = data.i18n;
 
       span({id: 'current-user'},
-        user.name,' - ',
+        a({href: detailsUrl,title: i18n.translate('My account details...')},user.name),' - ',
         a({href:logoutUrl},i18n.translate('logout'))
       );
     });

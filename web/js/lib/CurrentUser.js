@@ -53,7 +53,7 @@ var CurrentUser = new Class({
 				id: this.id,
 				name: this.name,
 				email: this.email
-			},this.$config.getUserLogoutUrl());
+			},this.$config.getUserDetailsUrl(),this.$config.getUserLogoutUrl());
 		}else{
 			if (responseJSON.id != this.id){
 				this.$UIPainter.renderCurrentUserWarning(this.$i18n.translate('Have you changed the user account? The application have to been reloaded...'),location.href);
