@@ -14,7 +14,7 @@ var MarkedTask = new Class({
   pageLoading:false,
   rules: {},
   rulesCount: 0,
-  rulesOrder: '',
+  rulesOrder: 'FUI',
   rulesPerPage: null,
   UIPainter: null,
 

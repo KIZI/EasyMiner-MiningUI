@@ -214,6 +214,9 @@ var FRManager = new Class({
     this.errorMessage='';
     this.setRulesCount(0);
     this.IMs = this.FL.getRulesIMs([]);
+    if(this.rulesOrder==null || this.rulesOrder==''){
+      this.rulesOrder=this.IMs[0].getName();
+    }
     this.miningInProgress = false;
   },
 
