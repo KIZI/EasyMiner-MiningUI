@@ -215,6 +215,7 @@ var UIStructurePainter = new Class({
     },
 
     showOverlay: function () {
+        this.resizeWindow();
         $('overlay').fade('in');
         var elementOverlay = $('overlay-inner');
         this.$UIScroller.rememberLastScroll();
