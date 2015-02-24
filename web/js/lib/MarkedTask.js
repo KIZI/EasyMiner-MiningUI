@@ -101,6 +101,9 @@ var MarkedTask = new Class({
     } else{
       this.IMs = this.FL.getRulesIMs(data.task.IMs);
       this.setRulesCount(data.task.rulesCount);
+      if(this.pagesCount > 7){
+        this.UIPainter.renderMarkedTask(this, 'minimize');
+      }
 
       Object.each(data.rules, function (MRdata, MRid) {
         this.rules[MRid] = new MarkedRule(MRid, MRdata, this);

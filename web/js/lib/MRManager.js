@@ -170,6 +170,7 @@ var MRManager = new Class({
       if(!this.tasks[id]){
         this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this);
         this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
+        this.tasks[id].calculatePagesCount();
       } else if(this.tasks[id].name != value.name){
         this.setTaskName(id, value.name);
       }
