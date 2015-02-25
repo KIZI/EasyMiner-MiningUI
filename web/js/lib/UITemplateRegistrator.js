@@ -536,15 +536,23 @@ var UITemplateRegistrator = new Class({
     Mooml.register('linksPaginator',function(data){
       var gotoFunction = data.gotoFunction,
           pagesCount = data.pagesCount,
-          currentPage = data.currentPage || 1;
+          currentPage = parseInt(data.currentPage || 1);
       var pageSteps=4;
 
       if (pagesCount>1){
-        var pageStart=Math.max(1,currentPage-pageSteps);
-        var pageEnd=Math.min(pagesCount,currentPage+pageSteps);
-        pageEnd=Math.min(pagesCount,pageEnd+2);
-
+        var pageStart=currentPage-pageSteps;
+        if (pageStart<1){
+          pageEnd=currentPage+pageSteps-(pageStart-1);//připočtění položek nepoužitých vlevo
+          pageStart=1;
+        }else{
+          var pageEnd=currentPage+pageSteps;
+        }
+        if ((pageEnd+2)>=pagesCount){
+          pageStart=pageStart-(pageEnd-pagesCount);//připočtení položek nepoužitých vpravo
+          pageEnd=pagesCount;
+        }
         if (pageStart>3){
+          //odkaz na první stránku (pokud není v základním přehledu)
           a({href:'#',events:{
             click: function (e) {
               e.stop();
@@ -558,16 +566,17 @@ var UITemplateRegistrator = new Class({
         for(var i=pageStart;i<=pageEnd;i++){
           a({
             href:'#',
-            /*events:{ moved to UIListener TODO also in other cases?
+            events:{
               click: function (e) {
                 e.stop();
                 gotoFunction(e.target.get('text'));
               }.bind(gotoFunction)
-            },*/
+            },
             class: (currentPage==i?'active':'')
           },i);
         }
         if (pageEnd<pagesCount){
+          //odkaz na poslední stránku (pokud není v základním přehledu)
           span('...');
           a({href:'#',events:{
             click: function (e) {

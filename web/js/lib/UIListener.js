@@ -595,17 +595,9 @@ var UIListener = new Class({
   },
 
   registerFoundRulesMultiControlsEventHandlers: function () {
-    var controls = $$('.found-rules-controls')[0],
+    var //controls = $$('.found-rules-controls')[0],
         multiControls = $('found-rules-multi-controls');
-    if (controls){
-      controls.getElement('.paginator').getElements('a').addEvent('click', function(e){
-        e.stop();
-        var link = e.target;
-        link.getSiblings('a.active').removeClass('active');
-        link.addClass('active');
-        this.ARBuilder.$FRManager.gotoPage(link.get('text'));
-      }.bind(this));
-    }
+
     if (multiControls){
       //events for multi-controls links
 
@@ -786,17 +778,9 @@ var UIListener = new Class({
     var task = this.ARBuilder.$MRManager.tasks[taskId],
         taskElm = $('task-'+taskId),
         rulesElm = taskElm.getElement('ul'),
-        controls = taskElm.getElement('.marked-rules-controls'),
+        //controls = taskElm.getElement('.marked-rules-controls'),
         multiControls = taskElm.getElement('.marked-rules-multi-controls');
-    if (controls){
-      controls.getElement('.paginator').getElements('a').addEvent('click', function(e){
-        e.stop();
-        var link = e.target;
-        link.getSiblings('a.active').removeClass('active');
-        link.addClass('active');
-        task.gotoPage(link.get('text'));
-      }.bind(this));
-    }
+
     if (multiControls){
       //events for multi-controls links
 
