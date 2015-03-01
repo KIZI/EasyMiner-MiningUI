@@ -121,10 +121,12 @@ var UIStructureListener = new Class({
         var attributesToggle = $$('#attributes a.toggle')[0];
         var attributesFilter = $$('#attributes a.filter')[0];
         var attributesFilterBox = $$('#attributes > .datas-filter')[0];
+        var attributesFilterInput = attributesFilterBox.getElement('#attributes-filter');
         var resetA = $$('#attributes a.reset-filter')[0];
         var dataFieldsToggle = $$('#data-fields a.toggle')[0];
         var dataFieldsFilter = $$('#data-fields a.filter')[0];
         var dataFieldsFilterBox = $$('#data-fields > .datas-filter')[0];
+        var dataFieldsFilterInput = dataFieldsFilterBox.getElement('#data-fields-filter');
         var resetD = $$('#data-fields a.reset-filter')[0];
 
         attributesToggle.addEvent('click', function (event) {
@@ -141,8 +143,14 @@ var UIStructureListener = new Class({
 
         attributesFilter.addEvent('click', function (event) {
             event.stop();
-            attributesFilterBox.toggle();
-            attributesFilter.blur();
+            if(attributesFilterBox.getStyle('display') == 'none'){
+                attributesFilterBox.show();
+                attributesFilterInput.focus();
+                attributesFilterInput.select();
+            } else{
+                attributesFilterBox.hide();
+            }
+            //attributesFilter.blur();
         }.bind(this));
 
         $$('#attributes-filter')[0].addEvent('keydown', function(event){
@@ -152,12 +160,19 @@ var UIStructureListener = new Class({
         resetA.addEvent('click', function (event) {
             event.stop();
             resetA.getPrevious().set('value', '').fireEvent('keyup');
+            attributesFilterBox.hide();
         }.bind(this));
 
         dataFieldsFilter.addEvent('click', function (event) {
             event.stop();
-            dataFieldsFilterBox.toggle();
-            dataFieldsFilter.blur();
+            if(dataFieldsFilterBox.getStyle('display') == 'none'){
+                dataFieldsFilterBox.show();
+                dataFieldsFilterInput.focus();
+                dataFieldsFilterInput.select();
+            } else{
+                dataFieldsFilterBox.hide();
+            }
+            //dataFieldsFilter.blur();
         }.bind(this));
 
         $$('#data-fields-filter')[0].addEvent('keydown', function(event){
@@ -167,6 +182,7 @@ var UIStructureListener = new Class({
         resetD.addEvent('click', function (event) {
             event.stop();
             resetD.getPrevious().set('value', '').fireEvent('keyup');
+            dataFieldsFilterBox.hide();
         }.bind(this));
 
 //		if (this.ARBuilder.getARManager().getAttributesByGroup()) {

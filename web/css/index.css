@@ -1090,6 +1090,8 @@ nav {
   padding: 2px 3px;
   background: none;
   border: 1px solid #aaa;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 #attributes a.reset-filter,
 #data-fields a.reset-filter {
