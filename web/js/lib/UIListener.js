@@ -318,17 +318,6 @@ var UIListener = new Class({
       this.ARBuilder.getARManager().addFieldAR(field, cedent);
     }.bind(this));
 
-    // edit connective
-    var elCons = $$('#' + cedent.getCSSID() + ' a.edit-connective');
-    Array.each(elCons, function (elCon) {
-      elCon.addEvent('click', function (e) {
-        e.stop();
-        if (!$('edit-connective-window')) {
-          this.ARBuilder.getARManager().openEditConnectiveWindow(cedent);
-        }
-      }.bind(this));
-    }.bind(this));
-
     // group fields option
     if (rule.getGroupFields() && cedent.displayGroupButton()) {
       // group fields confirm
@@ -338,6 +327,19 @@ var UIListener = new Class({
       }.bind(this));
     }
   },
+
+    registerCedentConnectiveEventHandlers: function (cedent) {
+        // edit connective
+        var elCons = $$('#' + cedent.getCSSID() + ' a.edit-connective');
+        Array.each(elCons, function (elCon) {
+            elCon.addEvent('click', function (e) {
+                e.stop();
+                if (!$('edit-connective-window')) {
+                    this.ARBuilder.getARManager().openEditConnectiveWindow(cedent);
+                }
+            }.bind(this));
+        }.bind(this));
+    },
 
   registerAddCoefficientFormEventHandler: function (field) {
     // submit

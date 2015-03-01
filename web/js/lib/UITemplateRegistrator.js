@@ -170,10 +170,13 @@ var UITemplateRegistrator = new Class({
 
     Mooml.register('connectiveTemplate', function (data) {
       var connective = data.connective,
-        i18n = data.i18n;
+          editable = data.editable,
+          i18n = data.i18n;
 
       div({id: connective.getCSSID(), 'class': 'connective'},
-        a({href: '#', 'class': 'edit-connective', 'title': i18n.translate('edit connective')}, connective.toString()));
+          ((editable) ? a({href: '#', 'class': 'edit-connective', 'title': i18n.translate('edit connective')}, connective.toString()) : connective.toString())
+      );
+
     });
 
     Mooml.register('bracketTemplate', function (data) {

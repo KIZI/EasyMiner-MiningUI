@@ -301,6 +301,10 @@ var ARManager = new Class({
     return this.FL.getIM(name);
   },
 
+    getFLConnectives: function (scope) {
+        return this.FL.getAllowedConnectives(scope);
+    },
+
   generateCedentID: function () {
     return ++this.maxCedentID;
   },

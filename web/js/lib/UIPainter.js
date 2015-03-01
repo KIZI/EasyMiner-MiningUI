@@ -488,7 +488,12 @@ var UIPainter = new Class({
       }
 
       if (index < cedent.getNumChildren()) { // Connective
-        this.renderConnective(cedent.getConnective(), elementFields);
+          if(this.ARBuilder.getARManager().getFLConnectives(cedent.getScope()).length > 1){
+              this.UIListener.registerCedentConnectiveEventHandlers(cedent);
+              this.renderConnective(cedent.getConnective(), elementFields, false);
+          } else{
+              this.renderConnective(cedent.getConnective(), elementFields, true);
+          }
       }
 
       index++;
@@ -525,8 +530,8 @@ var UIPainter = new Class({
     }
   },
 
-  renderConnective: function (connective, elementParent) {
-    var elementConnective = Mooml.render('connectiveTemplate', {connective: connective, i18n: this.i18n});
+  renderConnective: function (connective, elementParent, editable) {
+    var elementConnective = Mooml.render('connectiveTemplate', {connective: connective, i18n: this.i18n, editable: editable});
     elementParent.grab(elementConnective);
   },
 
