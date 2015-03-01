@@ -35,7 +35,7 @@ var AssociationRule = new Class({
 
         this.IMs = {};
         Array.each(data.IMs, function (iIM) {
-            IM = new InterestMeasureAR(iIM.name, iIM.localizedName, iIM.explanation, iIM.thresholdType, iIM.compareType, iIM.fields, new StringHelper(), iIM.$default, iIM.threshold, iIM.alpha);
+            IM = new InterestMeasureAR(iIM.name, iIM.localizedName, iIM.explanation, iIM.thresholdType, iIM.compareType, iIM.fields, new StringHelper(), iIM.calculation, iIM.$default, iIM.$required, iIM.threshold, iIM.alpha);
             me.addIM(IM);
         });
 

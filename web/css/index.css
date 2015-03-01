@@ -1329,8 +1329,14 @@ section#active-rule #interest-measures .im .remove-im {
   visibility: hidden;
   float: left;
 }
+section#active-rule #interest-measures .im .remove-im.required {
+  visibility: hidden;
+}
 section#active-rule #interest-measures .im:hover .remove-im {
   visibility: visible;
+}
+section#active-rule #interest-measures .im:hover .remove-im.required {
+  visibility: hidden;
 }
 section#active-rule #succedent {
   margin-left: 30px;

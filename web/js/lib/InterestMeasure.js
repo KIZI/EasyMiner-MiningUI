@@ -1,6 +1,6 @@
 var InterestMeasure = new Class({
 
-    GetterSetter: ['default'],
+    GetterSetter: ['default','required'],
 
 	name: '',
 	localizedName: '',
@@ -11,9 +11,10 @@ var InterestMeasure = new Class({
 	calculation:'',
 	fields: [],
 	stringHelper: null,
-    $default: false,
+  $default: false,
+  $required: false,
 
-	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, calculation, def) {
+	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, calculation, def, required) {
 		this.name = name;
 		this.localizedName = localizedName;
 		this.explanation = explanation;
@@ -22,10 +23,11 @@ var InterestMeasure = new Class({
 		this.fields = fields;
 		this.stringHelper = stringHelper;
 		this.calculation=calculation;
-		if (calculation!=''){
+		if ((calculation!='') && (typeof calculation === 'string')){
 			eval('this.calculate=function(a,b,c,d){return '+calculation+';};')
 		}
     this.$default = def || false;
+    this.$required = required || false;
 	},
 	
 	getName: function () {
@@ -116,8 +118,7 @@ var InterestMeasure = new Class({
                 alpha = field.defaultValue;
             }
         });
-
-        return new InterestMeasureAR(IM.getName(), IM.getLocalizedName(), IM.getExplanation(), IM.getThresholdType(), IM.getCompareType(), IM.getFields(), IM.getStringHelper(), IM.getDefault(), threshold, alpha);
+        return new InterestMeasureAR(IM.getName(), IM.getLocalizedName(), IM.getExplanation(), IM.getThresholdType(), IM.getCompareType(), IM.getFields(), IM.getStringHelper(), IM.calculation, IM.getDefault(), IM.getRequired(), threshold, alpha);
     }
 
 });

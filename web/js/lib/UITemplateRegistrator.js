@@ -102,7 +102,7 @@ var UITemplateRegistrator = new Class({
           IM.hasThreshold() && IM.hasAlpha() ? ', ' : '',
           IM.hasAlpha() ? span({'class': 'alpha'}, 'α ' + IM.getAlpha()) : ''),
         a({id: IM.getCSSEditID(), href: '#', 'class': 'edit-im', 'title': i18n.translate('Edit')}),
-        a({id: IM.getCSSRemoveID(), href: '#', 'class': 'remove-im', 'title': i18n.translate('Remove')}));
+        a({id: IM.getCSSRemoveID(), href: '#', 'class': (IM.$required?'remove-im required':'remove-im'), 'title': i18n.translate('Remove')}));
     });
 
     Mooml.register('cedentTemplate', function (data) {

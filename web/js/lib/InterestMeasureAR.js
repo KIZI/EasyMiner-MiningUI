@@ -5,8 +5,8 @@ var InterestMeasureAR = new Class({
 	alpha: null,
 	displayPrecision: 6,
 	
-	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, def, threshold, alpha) {
-		this.parent(name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, def);
+	initialize: function (name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, calculation, def, required, threshold, alpha) {
+		this.parent(name, localizedName, explanation, thresholdType, compareType, fields, stringHelper, calculation, def, required);
 		this.threshold = threshold;
 		this.alpha = alpha;
 	},

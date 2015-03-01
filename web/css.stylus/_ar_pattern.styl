@@ -33,8 +33,12 @@ section#active-rule
       .remove-im
         remove()
         float left
+        &.required
+          visibility hidden
       &:hover .remove-im
         visibility visible
+        &.required
+          visibility hidden
 
   #succedent
     margin-left 2*boxMargin
