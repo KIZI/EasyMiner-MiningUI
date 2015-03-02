@@ -488,12 +488,12 @@ var UIPainter = new Class({
       }
 
       if (index < cedent.getNumChildren()) { // Connective
-          if(this.ARBuilder.getARManager().getFLConnectives(cedent.getScope()).length > 1){
-              this.UIListener.registerCedentConnectiveEventHandlers(cedent);
-              this.renderConnective(cedent.getConnective(), elementFields, true);
-          } else{
-              this.renderConnective(cedent.getConnective(), elementFields, false);
-          }
+        if(this.ARBuilder.getARManager().getFLConnectives(cedent.getScope()).length > 1){
+          this.renderConnective(cedent.getConnective(), elementFields, true);
+          this.UIListener.registerCedentConnectiveEventHandlers(cedent);
+        } else{
+          this.renderConnective(cedent.getConnective(), elementFields, false);
+        }
       }
 
       index++;
@@ -816,7 +816,6 @@ var UIPainter = new Class({
   renderEditConnectiveWindow: function (cedent) {
     var overlay = this.$UIStructurePainter.showOverlay();
     overlay.grab(Mooml.render('editConnectiveWindowTemplate', {i18n: this.i18n}));
-
     if (this.ARBuilder.getFL().isConnectiveAllowed('Conjunction', cedent.getScope(), this.ARBuilder.getARManager().getActiveRule().toSettings()[cedent.getScope()], cedent.getLevel())) {
       $('edit-connective-select').grab(Mooml.render('editConnectiveWindowSelectOptionTemplate', {
         isSelected: cedent.getConnective().getName() === 'Conjunction',
