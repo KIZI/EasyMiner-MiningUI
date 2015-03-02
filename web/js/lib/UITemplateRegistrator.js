@@ -323,7 +323,7 @@ var UITemplateRegistrator = new Class({
             )
           ),
           div({'class': 'autocomplete clearfix'},
-            label({'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
+            label({id: 'add-coefficient-minlength-label', 'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
             input({
               type: 'number',
               min: 1,
@@ -337,7 +337,7 @@ var UITemplateRegistrator = new Class({
             div({id: 'add-coefficient-minlength-slider', 'class': 'slider'},
               div({'class': 'knob'})
             ),
-            label({'for': 'add-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
+            label({id: 'add-coefficient-maxlength-label', 'for': 'add-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
             input({
               type: 'number',
               min: 1,

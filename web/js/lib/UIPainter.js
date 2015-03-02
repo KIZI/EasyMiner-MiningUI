@@ -715,7 +715,11 @@ var UIPainter = new Class({
         select.grab(Mooml.render('addCoefficientWindowSelectOption2Template', {choice: choice}));
       });
     } else {
-      if (selectedCoefficient.fields.minLength.minValue < selectedCoefficient.fields.minLength.maxValue) {
+        if(selectedCoefficient.fields.minLength.hidden){
+            $('add-coefficient-minlength').set('value', selectedCoefficient.fields.minLength.minValue).set('type', 'hidden');
+            $('add-coefficient-minlength-label').setStyles({display: 'none'});
+            $('add-coefficient-minlength-slider').setStyles({display: 'none'});
+        } else if (selectedCoefficient.fields.minLength.minValue < selectedCoefficient.fields.minLength.maxValue) {
         var coefData = selectedCoefficient.fields.minLength;
         var maxChoicesExceeded = (coefData.maxValue > field.getRef().getNumChoices());
         var slider1 = new CoefficientAddSlider($('add-coefficient-minlength-slider'), $('add-coefficient-minlength'), coefData.minValue, coefData.minValueInclusive, maxChoicesExceeded ? field.getRef().getNumChoices() : coefData.maxValue, maxChoicesExceeded ? true : coefData.maxValueInclusive);
@@ -723,7 +727,12 @@ var UIPainter = new Class({
         $('add-coefficient-minlength').set('value', selectedCoefficient.fields.minLength.minValue);
         $('add-coefficient-minlength-slider').setStyles({display: 'none'});
       }
-      if (selectedCoefficient.fields.maxLength.minValue < selectedCoefficient.fields.maxLength.maxValue) {
+
+        if(selectedCoefficient.fields.maxLength.hidden){
+            $('add-coefficient-maxlength').set('value', selectedCoefficient.fields.maxLength.minValue).set('type', 'hidden');
+            $('add-coefficient-maxlength-label').setStyles({display: 'none'});
+            $('add-coefficient-maxlength-slider').setStyles({display: 'none'});
+        } else if (selectedCoefficient.fields.maxLength.minValue < selectedCoefficient.fields.maxLength.maxValue) {
         var coefData = selectedCoefficient.fields.maxLength;
         var maxChoicesExceeded = (coefData.maxValue > field.getRef().getNumChoices());
         var slider2 = new CoefficientAddSlider($('add-coefficient-maxlength-slider'), $('add-coefficient-maxlength'), coefData.minValue, coefData.minValueInclusive, maxChoicesExceeded ? field.getRef().getNumChoices() : coefData.maxValue, maxChoicesExceeded ? true : coefData.maxValueInclusive);
