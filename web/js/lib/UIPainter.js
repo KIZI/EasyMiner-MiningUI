@@ -490,9 +490,9 @@ var UIPainter = new Class({
       if (index < cedent.getNumChildren()) { // Connective
           if(this.ARBuilder.getARManager().getFLConnectives(cedent.getScope()).length > 1){
               this.UIListener.registerCedentConnectiveEventHandlers(cedent);
-              this.renderConnective(cedent.getConnective(), elementFields, false);
-          } else{
               this.renderConnective(cedent.getConnective(), elementFields, true);
+          } else{
+              this.renderConnective(cedent.getConnective(), elementFields, false);
           }
       }
 
