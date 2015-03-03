@@ -371,10 +371,11 @@ var UITemplateRegistrator = new Class({
               span('')
             )
           ),
-          label({'for': 'edit-coefficient-category'}, i18n.translate('Category')),
-          select({name: 'edit-coefficient-category', id: 'edit-coefficient-category'}),
-          br({class: 'clearfix'}),
-          br({class: 'clearfix'}),
+            div({'class': 'autocomplete clearfix'},
+                label({'for': 'edit-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
+                select({name: 'edit-coefficient-category', id: 'edit-coefficient-category'})
+            ),
+          //label({'for': 'edit-coefficient-category'}, i18n.translate('Category')),
           input({type: 'submit', value: i18n.translate('Edit')}));
       } else {
         span({id: 'edit-coefficient-autocomplete'},
@@ -386,39 +387,38 @@ var UITemplateRegistrator = new Class({
               span('')
             )
           ),
-          label({'for': 'edit-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
-          input({
-            type: 'number',
-            min: 1,
-            step: 1,
-            name: 'edit-coefficient-minlength',
-            id: 'edit-coefficient-minlength',
-            readonly: 'readonly',
-            value: field.getMinimalLength(),
-            pattern: '[0-9]+',
-            required: ''
-          }),
-          div({id: 'edit-coefficient-minlength-slider', 'class': 'slider'},
-            div({'class': 'knob'})
-          ),
-          label({'for': 'edit-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
-          input({
-            type: 'number',
-            min: 1,
-            step: 1,
-            name: 'edit-coefficient-maxlength',
-            id: 'edit-coefficient-maxlength',
-            readonly: 'readonly',
-            value: field.getMaximalLength(),
-            pattern: '[0-9]+',
-            required: ''
-          }),
-          div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
-            div({'class': 'knob'})
-          ),
-          br(),
-          br(),
-          br(),
+            div({'class': 'autocomplete clearfix'},
+                label({id: 'edit-coefficient-minlength-label', 'for': 'edit-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
+                input({
+                    type: 'number',
+                    min: 1,
+                    step: 1,
+                    name: 'edit-coefficient-minlength',
+                    id: 'edit-coefficient-minlength',
+                    readonly: 'readonly',
+                    value: field.getMinimalLength(),
+                    pattern: '[0-9]+',
+                    required: ''
+                }),
+                div({id: 'edit-coefficient-minlength-slider', 'class': 'slider'},
+                    div({'class': 'knob'})
+                ),
+                label({id: 'edit-coefficient-maxlength-label', 'for': 'edit-coefficient-maxlength'}, selectedCoefficient.fields.maxLength.localizedName + ':'),
+                input({
+                    type: 'number',
+                    min: 1,
+                    step: 1,
+                    name: 'edit-coefficient-maxlength',
+                    id: 'edit-coefficient-maxlength',
+                    readonly: 'readonly',
+                    value: field.getMaximalLength(),
+                    pattern: '[0-9]+',
+                    required: ''
+                }),
+                div({id: 'edit-coefficient-maxlength-slider', 'class': 'slider'},
+                    div({'class': 'knob'})
+                )
+            ),
           input({type: 'submit', value: i18n.translate('Edit')}));
       }
     });
