@@ -6,6 +6,7 @@ var UIStructureTemplater = new Class({
     this.registerActiveRule();
     this.registerFoundRules();
     this.registerMarkedRules();
+    this.registerMarkedRulesTabs();
     this.registerUnsupportedBrowserWindow();
   },
 
@@ -403,14 +404,32 @@ var UIStructureTemplater = new Class({
       var i18n = data.i18n;
 
       section({id: 'marked-rules'},
-        h2({'class': 'minimize'}, i18n.translate('Rule clipboard'), a({href: '#', 'class': 'toggle'}, '')),
-        div({class: 'clearfix empty'},
+        div({class: 'marked-rules-tasks-content empty'},
             div(
-                {id: 'marked-rules-empty', class: 'marked-rules-task-name'},
+                {class: 'marked-rules-empty marked-rules-task-name'},
                 data.i18n.translate('Here you can collect interesting rules...')
             )
-        )
+        ),
+          div({class: 'marked-rules-base-content empty'},
+              div(
+                  {class: 'marked-rules-empty marked-rules-task-name'},
+                  data.i18n.translate('Here you can collect interesting rules...')
+              )
+          )
       );
     });
-  }
+  },
+
+    registerMarkedRulesTabs: function () {
+        Mooml.register('markedRulesTabsStructureTemplate', function (data) {
+            var i18n = data.i18n;
+
+                section({id: 'marked-rules-tabs'},
+                    h2({'class': 'marked-rules-tab marked-rules-tasks marked-rules-tab-active'},
+                        a(i18n.translate('Rule clipboard'))),
+                    h2({'class': 'marked-rules-tab marked-rules-base'},
+                        a(i18n.translate('Knowledge base')))
+                );
+        });
+    }
 });

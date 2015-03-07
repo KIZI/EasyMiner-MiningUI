@@ -247,13 +247,39 @@ var UIStructureListener = new Class({
 
 
     registerMarkedRulesEventHandlers: function () {
-        var elDropdown = $$('#marked-rules a.toggle')[0];
+        var links = $('marked-rules-tabs'),
+            linkTasks = links.getElement('.marked-rules-tasks'),
+            linkBase = links.getElement('.marked-rules-base'),
+            elMarkedRules = $('marked-rules'),
+            elTasks = elMarkedRules.getElement('.marked-rules-tasks-content'),
+            elBase = elMarkedRules.getElement('.marked-rules-base-content');
+        linkTasks.addEvent('click', function(e){
+            e.stop();
+            if(!linkTasks.hasClass('marked-rules-tab-active')){
+                linkBase.removeClass('marked-rules-tab-active');
+                linkTasks.addClass('marked-rules-tab-active');
+                elTasks.show();
+                elBase.hide();
+            }
+        }.bind(this));
+        linkBase.addEvent('click', function(e){
+            e.stop();
+            if(!linkBase.hasClass('marked-rules-tab-active')){
+                this.$ARBuilder.$MRManager.getBaseTasksRequest();
+                linkTasks.removeClass('marked-rules-tab-active');
+                linkBase.addClass('marked-rules-tab-active');
+                elBase.show();
+                elTasks.hide();
+            }
+        }.bind(this));
+
+        /*var elDropdown = $$('#marked-rules a.toggle')[0];
         elDropdown.addEvent('click', function (event) {
             event.stop();
             var elToggle = $$('#marked-rules > div')[0];
             elToggle.toggle();
             var elH2 = $$('#marked-rules h2')[0];
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
-        }.bind(this));
+        }.bind(this));*/
     }
 });

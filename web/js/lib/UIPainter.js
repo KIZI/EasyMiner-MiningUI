@@ -272,8 +272,8 @@ var UIPainter = new Class({
   // to render only task
   renderMarkedTask: function (task, status) {
     var taskElm = $('task-'+task.id),
-        taskStatus = (typeof status == 'undefined') ? taskElm.getProperty('class') : status;
-        mrElement = $$('#marked-rules div.clearfix')[0],
+        taskStatus = (typeof status == 'undefined') ? taskElm.getProperty('class') : status,
+        mrElement = $$('#marked-rules div.marked-rules-tasks-content')[0],
         newTaskElm = Mooml.render('taskTemplate',
         {
           i18n: this.i18n,
@@ -281,6 +281,7 @@ var UIPainter = new Class({
           status: taskStatus
         }
     );
+    if(task.isBase){ mrElement = $$('#marked-rules div.marked-rules-base-content')[0] }
     if(taskElm != undefined){
       newTaskElm.replaces(taskElm);
     } else{
@@ -289,7 +290,7 @@ var UIPainter = new Class({
         mrElement.removeClass('empty');
         //mrElement.getElement('div#marked-rules-empty').destroy();
       }
-      if(status = 'minimize'){ where = 'top' }
+      if(status == 'minimize'){ where = 'top'; }
       mrElement.grab(newTaskElm, where);
     }
     this.UIListener.registerMarkedRulesEventHandlers(task);
@@ -298,7 +299,7 @@ var UIPainter = new Class({
 
   // removes marked tasks div
   removeMarkedTask:function(taskId){
-    var mrElement = $$('#marked-rules div.clearfix')[0];
+    var mrElement = $$('#marked-rules div.marked-rules-tasks-content')[0];
     $('task-'+taskId).destroy();
     if(mrElement.getElements('div.marked-rules-task-name').length <= 1){
       mrElement.addClass('empty');

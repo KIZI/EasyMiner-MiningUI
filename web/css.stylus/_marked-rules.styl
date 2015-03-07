@@ -1,7 +1,30 @@
+#marked-rules-tabs
+  margin boxMargin 0 0 boxMargin
+  float left
+  clear left
+  width 1005px
+  .marked-rules-tab
+    box()
+    h2AR()
+    width 470px
+    margin 0
+    padding-left 15px
+    &.marked-rules-tasks
+      float left
+    &.marked-rules-base
+      float right
+    &.marked-rules-tab-active
+      border-bottom #fff 5px solid
+    a
+      cursor pointer
+      display block
+      color h2ARColor !important
+
 #marked-rules
   box()
+  box-shadow(10px, 0, 10px, 0, boxShadowColor)
   min-width minContentWidth
-  margin boxMargin 0 0 boxMargin
+  margin 0 0 0 boxMargin
   padding-left boxMargin
   float left
   clear left
@@ -9,21 +32,24 @@
   h2
     h2AR()
     /*margin-left 10px*/
-    margin-bottom 5px
+    margin 0 0 5px 0
 
   .maximize
     ul,.marked-rules-checkbox-controls,.marked-rules-controls
       display none
-    a.toggle
+    a.toggle span
       background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
 
-  .minimize a.toggle
+  .minimize a.toggle span
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
 
-  #marked-rules-empty
+  .marked-rules-base-content
     display none
 
-  .empty #marked-rules-empty
+  .marked-rules-empty
+    display none
+
+  .empty .marked-rules-empty
     display block
 
   .marked-rules-task-name
@@ -48,7 +74,7 @@
       background transparent url('../images/sprite/icon-edit.png') center bottom no-repeat
       visibility hidden
 
-    a.toggle
+    a.toggle span
       display block; width 12px; height 12px
       float left
       position relative; top 10px
@@ -58,7 +84,8 @@
       a.rename-task
         visibility visible
 
-  .maximize
+  .clearfix
+    clear both
 
   p.error
     color errorColor

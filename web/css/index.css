@@ -1853,6 +1853,42 @@ section#active-rule #ar-action-box #start-mining:focus {
 #found-rules #found-rules-multi-controls .task-actions >a.task-details {
   background: transparent url("../images/icon-goreport-20.png") left center no-repeat;
 }
+#marked-rules-tabs {
+  margin: 15px 0 0 15px;
+  float: left;
+  clear: left;
+  width: 1005px;
+}
+#marked-rules-tabs .marked-rules-tab {
+  color: #434343;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
+  color: #925213;
+  font: 36px 'Droid Sans', 'sans-serif';
+  font-weight: normal;
+  border-bottom: none;
+  width: 470px;
+  margin: 0;
+  padding-left: 15px;
+}
+#marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
+  float: left;
+}
+#marked-rules-tabs .marked-rules-tab.marked-rules-base {
+  float: right;
+}
+#marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
+  border-bottom: #fff 5px solid;
+}
+#marked-rules-tabs .marked-rules-tab a {
+  cursor: pointer;
+  display: block;
+  color: #925213 !important;
+}
 #marked-rules {
   color: #434343;
   background-color: #fff;
@@ -1861,8 +1897,11 @@ section#active-rule #ar-action-box #start-mining:focus {
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   padding: 20px 10px;
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
   min-width: 980px;
-  margin: 15px 0 0 15px;
+  margin: 0 0 0 15px;
   padding-left: 15px;
   float: left;
   clear: left;
@@ -1873,23 +1912,26 @@ section#active-rule #ar-action-box #start-mining:focus {
   font-weight: normal;
   border-bottom: none;
 /*margin-left 10px*/
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
 }
 #marked-rules .maximize ul,
 #marked-rules .maximize .marked-rules-checkbox-controls,
 #marked-rules .maximize .marked-rules-controls {
   display: none;
 }
-#marked-rules .maximize a.toggle {
+#marked-rules .maximize a.toggle span {
   background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
 }
-#marked-rules .minimize a.toggle {
+#marked-rules .minimize a.toggle span {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
 }
-#marked-rules #marked-rules-empty {
+#marked-rules .marked-rules-base-content {
   display: none;
 }
-#marked-rules .empty #marked-rules-empty {
+#marked-rules .marked-rules-empty {
+  display: none;
+}
+#marked-rules .empty .marked-rules-empty {
   display: block;
 }
 #marked-rules .marked-rules-task-name {
@@ -1920,7 +1962,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   background: transparent url("../images/sprite/icon-edit.png") center bottom no-repeat;
   visibility: hidden;
 }
-#marked-rules .marked-rules-task-name a.toggle {
+#marked-rules .marked-rules-task-name a.toggle span {
   display: block;
   width: 12px;
   height: 12px;
@@ -1932,7 +1974,9 @@ section#active-rule #ar-action-box #start-mining:focus {
 #marked-rules .marked-rules-task-name:hover a.rename-task {
   visibility: visible;
 }
-#marked-rules .maximize,
+#marked-rules .clearfix {
+  clear: both;
+}
 #marked-rules p.error {
   color: #a41d1d;
   margin: 10px 0;

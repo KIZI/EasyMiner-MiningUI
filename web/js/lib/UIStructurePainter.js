@@ -103,6 +103,10 @@ var UIStructurePainter = new Class({
     renderMarkedRules: function() {
         var workplace = $('workplace');
 
+        // marked rules tabs
+        var elementMarkedRulesTabs = Mooml.render('markedRulesTabsStructureTemplate', {i18n: this.$i18n});
+        workplace.grab(elementMarkedRulesTabs);
+
         // marked rules
         var elementMarkedRules = Mooml.render('markedRulesStructureTemplate', {i18n: this.$i18n});
         workplace.grab(elementMarkedRules);

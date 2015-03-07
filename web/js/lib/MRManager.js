@@ -90,7 +90,7 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRTasksRequest(responseJSON);
+        this.handleSuccessMRTasksRequest(responseJSON, false);
       }.bind(this),
 
       onError: function () {
@@ -112,6 +112,37 @@ var MRManager = new Class({
     }).get();
     //endregion
   },
+
+    getBaseTasksRequest: function(){
+        var url = this.config.getRuleClipboardGetTasksUrl();
+
+        //region načtení úloh ze serveru
+        new Request.JSON({
+            url: url,
+            secure: true,
+            onSuccess: function (responseJSON, responseText) {
+                this.handleSuccessMRTasksRequest(responseJSON, true);
+            }.bind(this),
+
+            onError: function () {
+                this.handleErrorMRTasksRequest();
+            }.bind(this),
+
+            onFailure: function () {
+                this.handleErrorMRTasksRequest();
+            }.bind(this),
+
+            onException: function () {
+                this.handleErrorMRTasksRequest();
+            }.bind(this),
+
+            onTimeout: function () {
+                this.handleErrorMRTasksRequest();
+            }.bind(this)
+
+        }).get();
+        //endregion
+    },
 
   getMarkedRulesByIds: function(foundRulesIds, taskId){
     var result = [],
@@ -165,10 +196,10 @@ var MRManager = new Class({
     }
   },
 
-  handleSuccessMRTasksRequest: function (data) {
+  handleSuccessMRTasksRequest: function (data, isBase) {
     Object.each(data, function (value, id) {
       if(!this.tasks[id]){
-        this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this);
+        this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this, isBase);
         this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
         this.tasks[id].calculatePagesCount();
       } else if(this.tasks[id].name != value.name){

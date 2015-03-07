@@ -898,16 +898,28 @@ var UITemplateRegistrator = new Class({
     // Marked task
     Mooml.register('taskTemplate', function (data) {
       var task = data.FRManager,
-          status = data.status;
+          status = data.status,
+          name;
+      if(task.isBase){
+        status = 'minimize';
+        name = div(
+            {class: 'marked-rules-task-name'},
+            'Selectbox',
+            span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')')
+        );
+      } else{
+        name = div(
+            {class: 'marked-rules-task-name'},
+            a({href: '#', class: 'toggle'},
+                task.name,
+                span({class: 'toggle'}, '')),
+            span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
+            a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
+        );
+      }
       div(
           {id: 'task-'+task.id, class: status},
-          div(
-              {class: 'marked-rules-task-name'},
-              task.name,
-              span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
-              a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')}),
-              a({href: '#', class: 'toggle'}, '')
-          ),
+          name,
           Mooml.render('markedRulesControlsTemplate',data),
           ul(),
           Mooml.render('markedRulesMultiControlsTemplate',data)
