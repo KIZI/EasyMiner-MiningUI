@@ -302,6 +302,10 @@ var Config = new Class({//TODO Standa: update URLs
   getPaginatorType: function(){
     //return 'selectPaginator';
     return 'linksPaginator';
+  },
+
+  getAutoShowAttributeBinningDialog: function(){//TODO udělat konfigurovatelné
+    return false;
   }
 
 });
