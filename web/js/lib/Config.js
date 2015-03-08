@@ -3,7 +3,6 @@ var Config = new Class({//TODO Standa: update URLs
   GetterSetter: ['stopMiningUrl', 'supportUrl', 'joomlaURL', 'showFeedback', 'easyMinerCenterUrl'],
 
   // app info
-  //author: 'Radek Skrabal (<a href="mailto:radek@skrabal.me">radek@skrabal.me</a>)',
   name: 'EasyMiner',
   version: '2.0-dev',
   slogan: 'easy association rule mining',
@@ -37,10 +36,18 @@ var Config = new Class({//TODO Standa: update URLs
   ruleClipboardAddAllRulesUrl:'/em/rule-clipboard/add-all-rules',
   ruleClipboardRemoveRuleUrl:'/em/rule-clipboard/remove-rule',
 
+  ruleClipboardAddToKnowledgeBaseUrl: '/em/rule-clipboard/add-to-ruleset',//TODO Standa
+
+  knowledgeBaseGetRulesUrl:'/em/knowledge-base/get-rules',//TODO Standa
+  knowledgeBaseGetRulesetsUrl: '/em/knowledge-base/rulesets',//TODO Standa
+  knowledgeBaseAddRulesetUrl: '/em/knowledge-base/add-ruleset',//TODO Standa
+  knowledgeBaseAddRuleUrl: '/em/knowledge-base/add-rule',//TODO Standa
+  knowledgeBaseRemoveRuleUrl: '/em/knowledge-base/remove-rule',//TODO Standa
+  knowledgeBaseRulesetRenameUrl: '/em/knowledge-base/rename-ruleset',//TODO Standa
+
   showRuleDetailsUrl: '/em/rules/rule-details',
   showTaskDetailsUrl: '/em/tasks/task-details',
   getTaskPMMLUrl: '/em/tasks/task-pmml',
-  getAnalyticalReportsUrl: '/em/reports/reports-articles',//FIXME Standa
   //endregion
 
   // URL settings
@@ -60,10 +67,6 @@ var Config = new Class({//TODO Standa: update URLs
   rootElementID: 'IZIMiner',
 
   initialize: function () {
-  },
-
-  getAuthor: function () {
-    return this.author;
   },
 
   getName: function () {
@@ -153,10 +156,6 @@ var Config = new Class({//TODO Standa: update URLs
   getAddAttributeURL: function (fieldName) {
     return this.$easyMinerCenterUrl + this.addAttributeUrl + '?columnName='+encodeURIComponent(fieldName) + '&miner=' + this.params.id_dm + '&mode=iframe';
   },
-/*
-  getEditAttributeURL: function (attributeName) {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=editAttribute&attribute=' + encodeURIComponent(attributeName) + '&kbi=' + this.params.id_dm + '&tmpl=component';
-  },*/
 
   getShowHistogramURL: function (name, type) {
     if (type === 'attribute') {
@@ -164,10 +163,6 @@ var Config = new Class({//TODO Standa: update URLs
     } else {
       return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&columnName=' + encodeURIComponent(name) + '&mode=iframe';
     }
-  },
-
-  getCreateReportUrl: function () {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=saveMinerData&format=raw&type=clipboard&kbi=' + this.params.id_dm;
   },
 
   getCreateUserReportUrl: function () {//TODO
@@ -230,7 +225,7 @@ var Config = new Class({//TODO Standa: update URLs
     return this.rootElementID;
   },
 
-
+  //region mining
   getStartMiningUrl: function (taskId) {
     return this.$easyMinerCenterUrl+this.startMiningUrl + '?miner=' + this.params.id_dm + '&task=' + taskId;
   },
@@ -249,6 +244,54 @@ var Config = new Class({//TODO Standa: update URLs
     + '&limit=' + limit
     + '&order=' + order;
   },
+  //endregion mining
+
+  //region knowledgeBase
+  getKnowledgeBaseGetRulesUrl: function (rulesetId,offset,limit,order) {
+    offset = (typeof offset === "undefined") ? 0 : offset;
+    limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
+    order = (typeof order === "undefined") ? '' : order;
+
+    return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesUrl
+      + '?miner=' + this.params.id_dm //atribut je pouze volitelný, pokud je použit, je daný ruleset nastaven jako výchozí
+      + '&ruleset=' + rulesetId
+      + '&offset=' + offset
+      + '&limit=' + limit
+      + '&order=' + order;
+  },
+  getKnowledgeBaseGetRulesetsUrl: function () {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesetsUrl
+      + '?miner=' + this.params.id_dm;
+  },
+  getKnowledgeBaseAddRulesetUrl: function(name){
+    return this.$easyMinerCenterUrl+this.knowledgeBaseAddRulesetUrl
+      + '?miner=' + this.params.id_dm //atribut je pouze volitelný (pokud je použit, je nastaven daný ruleset jako výchozí)
+      + 'name=' + name;
+  },
+  getKnowledgeBaseRulesetRenameUrl: function (rulesetId, newName) {
+    return this.$easyMinerCenterUrl+this.taskRenameUrl
+      + '?ruleset=' + rulesetId
+      + '&name=' + newName;
+  },
+  getKnowledgeBaseAddRuleUrl: function (rulesetId, ruleId) {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseAddRuleUrl
+      + '?ruleset=' + rulesetId
+      + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+  },
+  getKnowledgeBaseAddRuleClipboardUrl: function(rulesetId,taskId){
+    return this.$easyMinerCenterUrl+this.ruleClipboardAddToKnowledgeBaseUrl
+      + '?miner=' + this.params.id_dm
+      + '&task=' + taskId
+      + '&ruleset=' + rulesetId
+  },
+  getKnowledgeBaseRemoveRuleUrl: function (rulesetId, ruleId) {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseRemoveRuleUrl
+      + '?ruleset=' + rulesetId
+      + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+  },
+  //endregion knowledgeBase
+
+  //region ruleClipboard
   getRuleClipboardGetRulesUrl: function (taskId,offset,limit,order) {
     offset = (typeof offset === "undefined") ? 0 : offset;
     limit = ((typeof limit === "undefined") || (limit == null) || (limit == 0)) ? this.rulesPerPage : limit;
@@ -286,7 +329,7 @@ var Config = new Class({//TODO Standa: update URLs
     + '&task=' + taskId
     + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
   },
-
+  //endregion
   getTaskRenameUrl: function (taskId, newName) {
     return this.$easyMinerCenterUrl+this.taskRenameUrl
       + '?miner=' + this.params.id_dm
