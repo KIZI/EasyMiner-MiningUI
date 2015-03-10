@@ -38,12 +38,17 @@ var Config = new Class({//TODO Standa: update URLs
 
   ruleClipboardAddToKnowledgeBaseUrl: '/em/rule-clipboard/add-to-ruleset',//TODO Standa
 
-  knowledgeBaseGetRulesUrl:'/em/knowledge-base/get-rules',//TODO Standa
-  knowledgeBaseGetRulesetsUrl: '/em/knowledge-base/rulesets',//TODO Standa
-  knowledgeBaseAddRulesetUrl: '/em/knowledge-base/add-ruleset',//TODO Standa
-  knowledgeBaseAddRuleUrl: '/em/knowledge-base/add-rule',//TODO Standa
-  knowledgeBaseRemoveRuleUrl: '/em/knowledge-base/remove-rule',//TODO Standa
-  knowledgeBaseRulesetRenameUrl: '/em/knowledge-base/rename-ruleset',//TODO Standa
+  knowledgeBaseGetRulesUrl:'/kb/rule-sets/get-rules',
+  knowledgeBaseGetRulesetsUrl: '/kb/rule-sets/list',
+
+  knowledgeBaseAddRulesetUrl: '/kb/rule-sets/new',
+  knowledgeBaseRenameRulesetUrl: '/kb/rule-sets/rename',
+  knowledgeBaseDeleteRulesetUrl: '/kb/rule-sets/delete',
+
+  knowledgeBaseAddRulesUrl: '/kb/rule-sets/add-rules',
+  knowledgeBaseRemoveRulesUrl: '/kb/rule-sets/remove-rules',
+  knowledgeBaseRemoveAllRulesUrl: '/kb/rule-sets/remove-all-rules',
+
 
   showRuleDetailsUrl: '/em/rules/rule-details',
   showTaskDetailsUrl: '/em/tasks/task-details',
@@ -105,22 +110,6 @@ var Config = new Class({//TODO Standa: update URLs
     return this.params.id_dm;
   },
 
-  /*getBKAskURL: function () {
-    return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=ask&lang=' + this.lang;
-  },
-
-  getBKSaveInterestingURL: function () {
-    return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=saveInteresting&lang=' + this.lang;
-  },
-
-  getBKSaveNotInterestingURL: function () {
-    return this.BKGetURL + '?' + 'id_dm=' + this.params.id_dm + '&id_kb=' + this.params.id_kb + '&action=saveNotInteresting&lang=' + this.lang;
-  },
-
-  setBKGetURL: function (url) {
-    this.BKGetURL = url;
-  },*/
-
   getDataGetURL: function () {
     return this.dataGetURL + "?id_dm=" + this.params.id_dm + '&lang=' + this.lang;
   },
@@ -137,16 +126,8 @@ var Config = new Class({//TODO Standa: update URLs
     this.rulesGetURL = URL;
   },
 
-  getReportSaveUrl: function () {//TODO
-    return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=savePMMLArticle&format=raw';
-  },
-
   getListAnalyticalReportsUrl: function () {
     return this.$easyMinerCenterUrl+this.loadMinerDataUrl+'?miner='+this.params.id_dm;
-  },
-
-  getLoadClipboardUrl: function () {
-    return this.$easyMinerCenterUrl+this.loadMinerDataUrl+'?miner='+this.params.id_dm;;
   },
 
   getETreeGetURL: function () {
@@ -259,36 +240,52 @@ var Config = new Class({//TODO Standa: update URLs
       + '&limit=' + limit
       + '&order=' + order;
   },
+
   getKnowledgeBaseGetRulesetsUrl: function () {
-    return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesetsUrl
-      + '?miner=' + this.params.id_dm;
+    return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesetsUrl;
   },
+
   getKnowledgeBaseAddRulesetUrl: function(name){
     return this.$easyMinerCenterUrl+this.knowledgeBaseAddRulesetUrl
-      + '?miner=' + this.params.id_dm //atribut je pouze volitelný (pokud je použit, je nastaven daný ruleset jako výchozí)
-      + 'name=' + name;
+      + '?name=' + name;
   },
-  getKnowledgeBaseRulesetRenameUrl: function (rulesetId, newName) {
-    return this.$easyMinerCenterUrl+this.taskRenameUrl
-      + '?ruleset=' + rulesetId
+
+  getKnowledgeBaseRenameRulesetUrl: function (rulesetId, newName) {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseRenameRulesetUrl
+      + '?id=' + rulesetId
       + '&name=' + newName;
   },
-  getKnowledgeBaseAddRuleUrl: function (rulesetId, ruleId) {
-    return this.$easyMinerCenterUrl+this.knowledgeBaseAddRuleUrl
-      + '?ruleset=' + rulesetId
-      + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
+  getKnowledgeBaseDeleteRulesetUrl: function (rulesetId){
+    return this.$easyMinerCenterUrl+this.knowledgeBaseDeleteRulesetUrl
+      + '?id=' + rulesetId;
   },
-  getKnowledgeBaseAddRuleClipboardUrl: function(rulesetId,taskId){
+
+  getKnowledgeBaseAddRulesUrl: function (rulesetId, ruleIds, relation) {
+    relation = (typeof relation === "undefined" || relation=='') ? 'positive' : relation;
+    return this.$easyMinerCenterUrl+this.knowledgeBaseAddRulesUrl
+      + '?id=' + rulesetId
+      + '&rules=' + ruleIds //jako parametr je možné zadat i více ID oddělených čárkou
+      + '&relation=' + relation;
+  },
+
+  getKnowledgeBaseRemoveRulesUrl: function (rulesetId, ruleId) {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseRemoveRulesUrl
+      + '?id=' + rulesetId
+      + '&rules=' + ruleId;
+  },
+
+  getKnowledgeBaseRemoveAllRulesUrl: function (rulesetId) {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseRemoveAllRulesUrl
+      + '?id=' + rulesetId;
+  },
+
+  getKnowledgeBaseAddRuleClipboardUrl: function(rulesetId,taskId){//TODO Standa
     return this.$easyMinerCenterUrl+this.ruleClipboardAddToKnowledgeBaseUrl
       + '?miner=' + this.params.id_dm
       + '&task=' + taskId
       + '&ruleset=' + rulesetId
   },
-  getKnowledgeBaseRemoveRuleUrl: function (rulesetId, ruleId) {
-    return this.$easyMinerCenterUrl+this.knowledgeBaseRemoveRuleUrl
-      + '?ruleset=' + rulesetId
-      + '&rules=' + ruleId;//jako parametr je možné zadat i více ID oddělených čárkou
-  },
+
   //endregion knowledgeBase
 
   //region ruleClipboard
