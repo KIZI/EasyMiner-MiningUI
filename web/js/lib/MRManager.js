@@ -90,7 +90,7 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRTasksRequest(responseJSON, false);
+        this.handleSuccessMRTasksRequest(responseJSON, true);
       }.bind(this),
 
       onError: function () {
@@ -113,36 +113,37 @@ var MRManager = new Class({
     //endregion
   },
 
-    getBaseTasksRequest: function(){
-        var url = this.config.getRuleClipboardGetTasksUrl();
+  getRuleSetsRequest: function(){
+    var url = this.config.getKnowledgeBaseGetRuleSetsUrl();
 
-        //region načtení úloh ze serveru
-        new Request.JSON({
-            url: url,
-            secure: true,
-            onSuccess: function (responseJSON, responseText) {
-                this.handleSuccessMRTasksRequest(responseJSON, true);
-            }.bind(this),
+    //region načtení úloh ze serveru
+    new Request.JSON({
+      url: url,
+      secure: true,
+      onSuccess: function (responseJSON, responseText) {
+        console.log(responseJSON);
+        //this.handleSuccessMRTasksRequest(responseJSON, true);
+      }.bind(this),
 
-            onError: function () {
-                this.handleErrorMRTasksRequest();
-            }.bind(this),
+      onError: function () {
+        this.handleErrorMRTasksRequest();
+      }.bind(this),
 
-            onFailure: function () {
-                this.handleErrorMRTasksRequest();
-            }.bind(this),
+      onFailure: function () {
+        this.handleErrorMRTasksRequest();
+      }.bind(this),
 
-            onException: function () {
-                this.handleErrorMRTasksRequest();
-            }.bind(this),
+      onException: function () {
+        this.handleErrorMRTasksRequest();
+      }.bind(this),
 
-            onTimeout: function () {
-                this.handleErrorMRTasksRequest();
-            }.bind(this)
+      onTimeout: function () {
+        this.handleErrorMRTasksRequest();
+      }.bind(this)
 
-        }).get();
-        //endregion
-    },
+    }).get();
+    //endregion
+  },
 
   getMarkedRulesByIds: function(foundRulesIds, taskId){
     var result = [],

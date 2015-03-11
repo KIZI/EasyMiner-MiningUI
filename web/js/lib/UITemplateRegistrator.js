@@ -853,7 +853,32 @@ var UITemplateRegistrator = new Class({
 
     // same as foundRulesMultiControlsTemplate - differences only in task-actions TODO merge be aware of id vs. class
     Mooml.register('markedRulesMultiControlsTemplate', function (data) {
-      var i18n = data.i18n;
+      var i18n = data.i18n,
+          task = data.FRManager,
+          actions;
+      if(task.isBase){
+        status = 'minimize';
+        actions = span({class:'task-actions'}/*,
+            a({
+              href:'#',
+              class:'task-details',
+              title:i18n.translate('Show task details')
+            },i18n.translate('Task details'))*/
+        );
+      } else{
+        actions = span({class:'task-actions'},
+            /*a({
+             href:'#',
+             class:'mark-all',
+             title:i18n.translate('Add all rules to Rule Clipboard')
+             },i18n.translate('Add all rules')),*/
+            a({
+              href:'#',
+              class:'task-details',
+              title:i18n.translate('Show task details')
+            },i18n.translate('Task details'))
+        );
+      }
       div({class:'marked-rules-multi-controls'},
           div({class: 'marked-rules-checkbox-controls'},
               a({
@@ -881,18 +906,19 @@ var UITemplateRegistrator = new Class({
                   },i18n.translate('Remove...'))
               )
           ),
-          span({class:'task-actions'},
+          actions
+          /*span({class:'task-actions'},
               /*a({
                 href:'#',
                 class:'mark-all',
                 title:i18n.translate('Add all rules to Rule Clipboard')
-              },i18n.translate('Add all rules')),*/
+              },i18n.translate('Add all rules')),/
               a({
                 href:'#',
                 class:'task-details',
                 title:i18n.translate('Show task details')
               },i18n.translate('Task details'))
-          )
+          )*/
       );
     });
     // Marked task
