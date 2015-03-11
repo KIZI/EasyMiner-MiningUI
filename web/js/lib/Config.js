@@ -36,7 +36,8 @@ var Config = new Class({//TODO Standa: update URLs
   ruleClipboardAddAllRulesUrl:'/em/rule-clipboard/add-all-rules',
   ruleClipboardRemoveRuleUrl:'/em/rule-clipboard/remove-rule',
 
-  ruleClipboardAddToKnowledgeBaseUrl: '/em/rule-clipboard/add-to-ruleset',//TODO Standa
+  ruleClipboardAddToKnowledgeBaseUrl: '/em/rule-clipboard/add-rules-to-rule-set',
+  ruleClipboardRemoveFromKnowledgeBaseUrl: '/em/rule-clipboard/remove-rules-from-rule-set',
 
   knowledgeBaseGetRulesUrl:'/kb/rule-sets/get-rules',
   knowledgeBaseGetRuleSetsUrl: '/kb/rule-sets/list',
@@ -279,11 +280,20 @@ var Config = new Class({//TODO Standa: update URLs
       + '?id=' + rulesetId;
   },
 
-  getKnowledgeBaseAddRuleClipboardUrl: function(rulesetId,taskId){//TODO Standa
+  getKnowledgeBaseAddRuleClipboardUrl: function(rulesetId,taskId,relation){
+    relation = (typeof relation === "undefined" || relation=='') ? 'positive' : relation;
     return this.$easyMinerCenterUrl+this.ruleClipboardAddToKnowledgeBaseUrl
       + '?miner=' + this.params.id_dm
       + '&task=' + taskId
       + '&ruleset=' + rulesetId
+      + '&relation=' + relation;
+  },
+
+  getKnowledgeBaseRemoveRuleClipboardUrl: function(rulesetId,taskId){
+    return this.$easyMinerCenterUrl+this.ruleClipboardRemoveFromKnowledgeBaseUrl
+      + '?miner=' + this.params.id_dm
+      + '&task=' + taskId
+      + '&ruleset=' + rulesetId;
   },
 
   //endregion knowledgeBase
