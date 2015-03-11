@@ -39,11 +39,11 @@ var Config = new Class({//TODO Standa: update URLs
   ruleClipboardAddToKnowledgeBaseUrl: '/em/rule-clipboard/add-to-ruleset',//TODO Standa
 
   knowledgeBaseGetRulesUrl:'/kb/rule-sets/get-rules',
-  knowledgeBaseGetRulesetsUrl: '/kb/rule-sets/list',
+  knowledgeBaseGetRuleSetsUrl: '/kb/rule-sets/list',
 
-  knowledgeBaseAddRulesetUrl: '/kb/rule-sets/new',
-  knowledgeBaseRenameRulesetUrl: '/kb/rule-sets/rename',
-  knowledgeBaseDeleteRulesetUrl: '/kb/rule-sets/delete',
+  knowledgeBaseAddRuleSetUrl: '/kb/rule-sets/new',
+  knowledgeBaseRenameRuleSetUrl: '/kb/rule-sets/rename',
+  knowledgeBaseDeleteRuleSetUrl: '/kb/rule-sets/delete',
 
   knowledgeBaseAddRulesUrl: '/kb/rule-sets/add-rules',
   knowledgeBaseRemoveRulesUrl: '/kb/rule-sets/remove-rules',
@@ -241,22 +241,22 @@ var Config = new Class({//TODO Standa: update URLs
       + '&order=' + order;
   },
 
-  getKnowledgeBaseGetRulesetsUrl: function () {
-    return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesetsUrl;
+  getKnowledgeBaseGetRuleSetsUrl: function () {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseGetRuleSetsUrl;
   },
 
-  getKnowledgeBaseAddRulesetUrl: function(name){
-    return this.$easyMinerCenterUrl+this.knowledgeBaseAddRulesetUrl
+  getKnowledgeBaseAddRuleSetUrl: function(name){
+    return this.$easyMinerCenterUrl+this.knowledgeBaseAddRuleSetUrl
       + '?name=' + name;
   },
 
-  getKnowledgeBaseRenameRulesetUrl: function (rulesetId, newName) {
-    return this.$easyMinerCenterUrl+this.knowledgeBaseRenameRulesetUrl
+  getKnowledgeBaseRenameRuleSetUrl: function (rulesetId, newName) {
+    return this.$easyMinerCenterUrl+this.knowledgeBaseRenameRuleSetUrl
       + '?id=' + rulesetId
       + '&name=' + newName;
   },
-  getKnowledgeBaseDeleteRulesetUrl: function (rulesetId){
-    return this.$easyMinerCenterUrl+this.knowledgeBaseDeleteRulesetUrl
+  getKnowledgeBaseDeleteRuleSetUrl: function (rulesetId){
+    return this.$easyMinerCenterUrl+this.knowledgeBaseDeleteRuleSetUrl
       + '?id=' + rulesetId;
   },
 
