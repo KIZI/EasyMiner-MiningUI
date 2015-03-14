@@ -283,6 +283,17 @@ var UIStructureTemplater = new Class({
           ul({'class': 'clearfix'})));
     });
 
+    Mooml.register('knowledgeBaseSelectStructureTemplate', function (data) {
+      var i18n = data.i18n;
+
+      section({id: 'knowledge-base-select'},
+          h2({'class': 'minimize'}, i18n.translate('Knowledge base')),
+          div({'class': 'clearfix'},
+              label({'for': 'kb-select'}, i18n.translate('Active ruleset: ')),
+              select({name: 'kb-select', id: 'kb-select'})
+          ));
+    });
+
     Mooml.register('reportsStructureTemplate', function (data) {
       var i18n = data.i18n;
 
@@ -404,12 +415,12 @@ var UIStructureTemplater = new Class({
       var i18n = data.i18n;
 
       section({id: 'marked-rules'},
-        div({class: 'marked-rules-tasks-content empty'},
-            div(
-                {class: 'marked-rules-empty marked-rules-task-name'},
-                data.i18n.translate('Here you can collect interesting rules...')
-            )
-        ),
+          div({class: 'marked-rules-tasks-content empty'},
+              div(
+                  {class: 'marked-rules-empty marked-rules-task-name'},
+                  data.i18n.translate('Here you can collect interesting rules...')
+              )
+          ),
           div({class: 'marked-rules-base-content empty'},
               div(
                   {class: 'marked-rules-empty marked-rules-task-name'},

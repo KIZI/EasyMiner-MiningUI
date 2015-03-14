@@ -1076,6 +1076,35 @@ nav {
 #data-fields li:hover .show-histogram {
   visibility: visible;
 }
+#knowledge-base-select {
+  color: #434343;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px 10px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+}
+#knowledge-base-select h2 {
+  color: #314e64;
+  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  font-size: 22.400000000000002px;
+  margin: 5px 20px 15px 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #314e64;
+}
+#knowledge-base-select .clearfix {
+  padding: 0 20px;
+  line-height: 1.8;
+}
+#knowledge-base-select .clearfix select {
+  width: 100%;
+}
 #navigation h2.maximize .filter {
   display: none;
 }
@@ -1874,6 +1903,7 @@ section#active-rule #ar-action-box #start-mining:focus {
   width: 475px;
   margin: 0;
   padding-left: 15px;
+  background-color: rgba(255,255,255,0.6);
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
   float: left;
@@ -1882,12 +1912,17 @@ section#active-rule #ar-action-box #start-mining:focus {
   float: right;
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
+  background-color: #fff;
   border-bottom: #fff 5px solid;
+}
+#marked-rules-tabs .marked-rules-tab:hover {
+  background-color: #fff;
 }
 #marked-rules-tabs .marked-rules-tab a {
   cursor: pointer;
   display: block;
   color: #925213 !important;
+  text-decoration: none !important;
 }
 #marked-rules {
   color: #434343;

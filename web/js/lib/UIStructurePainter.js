@@ -76,6 +76,15 @@ var UIStructurePainter = new Class({
             navigation.grab(dataFields);
         }
 
+        // knowledge base selectbox
+        var kbSelect = $('knowledge-base-select');
+        if (kbSelect) {
+            Mooml.render('knowledgeBaseSelectStructureTemplate', {i18n: this.$i18n}).replaces(kbSelect);
+        } else {
+            kbSelect = Mooml.render('knowledgeBaseSelectStructureTemplate', {i18n: this.$i18n});
+            navigation.grab(kbSelect);
+        }
+
         // reports
         var reports = $('reports');
         if (reports) {

@@ -70,6 +70,14 @@ var UITemplateRegistrator = new Class({
       );
     });
 
+    Mooml.register('knowledgeBaseTemplate', function (data) {
+      console.log(data);
+      var id = data.rule_set_id,
+          name = data.name+' ('+data.rules+')';
+
+      option({'value': id, 'selected': ''}, name);
+    });
+
     Mooml.register('reportTemplate', function (data) {
       var i18n = data.i18n,
         report = data.report,

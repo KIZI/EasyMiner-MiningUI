@@ -58,7 +58,11 @@ var MarkedTask = new Class({
   gotoPage: function(page){
     //this.pageLoading = true;
     //this.UIPainter.renderMarkedRules(this);
-    var url = this.config.getRuleClipboardGetRulesUrl(this.id, (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
+    if(this.isBase){
+      var url = this.config.getKnowledgeBaseGetRulesUrl(this.id, (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
+    } else{
+      var url = this.config.getRuleClipboardGetRulesUrl(this.id, (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
+    }
 
     //region načtení pravidel ze serveru...
     new Request.JSON({

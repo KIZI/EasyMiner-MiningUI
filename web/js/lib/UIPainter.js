@@ -269,6 +269,15 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
+  renderRuleSetsSelect: function (data) {
+    var ruleSetsListElm = $('kb-select');
+    ruleSetsListElm.empty();
+    Object.each(data, function (value, id) {
+      ruleSetsListElm.grab(Mooml.render('knowledgeBaseTemplate', value));
+    }.bind(this));
+    //this.UIListener.registerMarkedRuleEventHandlers(MR);
+  },
+
   // to render only task
   renderMarkedTask: function (task, status) {
     var taskElm = $('task-'+task.id),

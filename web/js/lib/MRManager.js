@@ -21,6 +21,7 @@ var MRManager = new Class({
     this.UIListener = UIListener;
 
     this.getTasksRequest();
+    this.getRuleSetsRequest();
   },
 
   cleanMarkedRulesIds: function(foundRulesCSSIDs, taskId){
@@ -90,7 +91,7 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRTasksRequest(responseJSON, true);
+        this.handleSuccessMRTasksRequest(responseJSON, false);
       }.bind(this),
 
       onError: function () {
@@ -121,8 +122,8 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        console.log(responseJSON);
-        //this.handleSuccessMRTasksRequest(responseJSON, true);
+        this.UIPainter.renderRuleSetsSelect(responseJSON);
+        //this.handleSuccessKBRuleSetsRequest(responseJSON);
       }.bind(this),
 
       onError: function () {
@@ -172,6 +173,19 @@ var MRManager = new Class({
     this.errorMessage=this.i18n.translate('Loading of rule clipboard failed...');
   },
 
+  handleSuccessKBRuleSetsRequest: function (data) {
+    //this.UIPainter.renderMarkedTask(task);
+    //Object.each(data, function (value, id) {
+      /*if(!this.tasks[id]){
+        this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this, isBase);
+        this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
+        this.tasks[id].calculatePagesCount();
+      } else if(this.tasks[id].name != value.name){
+        this.setTaskName(id, value.name);
+      }*/
+    //}.bind(this));
+  },
+
   handleSuccessMRUnmarkRequest: function (jsonData, foundRules){
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
     var taskId = foundRules[0].$task.id,
@@ -198,15 +212,19 @@ var MRManager = new Class({
   },
 
   handleSuccessMRTasksRequest: function (data, isBase) {
-    Object.each(data, function (value, id) {
-      if(!this.tasks[id]){
-        this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this, isBase);
-        this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
-        this.tasks[id].calculatePagesCount();
-      } else if(this.tasks[id].name != value.name){
-        this.setTaskName(id, value.name);
-      }
-    }.bind(this));
+    if(isBase){
+      this.tasks[data.rule_set_id] = new MarkedTask(data.rule_set_id, data.name, this.config, data.rules, this.i18n, this.FL, this.UIPainter, this, isBase);
+    } else{
+      Object.each(data, function (value, id) {
+        if(!this.tasks[id]){
+          this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this, isBase);
+          this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
+          this.tasks[id].calculatePagesCount();
+        } else if(this.tasks[id].name != value.name){
+          this.setTaskName(id, value.name);
+        }
+      }.bind(this));
+    }
   },
 
   multiUnmarkFoundRules:function(foundRulesIds, taskId){
