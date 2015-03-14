@@ -235,8 +235,7 @@ var Config = new Class({//TODO Standa: update URLs
     order = (typeof order === "undefined") ? '' : order;
 
     return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesUrl
-      + '?miner=' + this.params.id_dm //atribut je pouze volitelný, pokud je použit, je daný ruleset nastaven jako výchozí
-      + '&ruleset=' + rulesetId
+      + '?id=' + rulesetId
       + '&offset=' + offset
       + '&limit=' + limit
       + '&order=' + order;
