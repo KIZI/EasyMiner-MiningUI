@@ -237,8 +237,8 @@ var Config = new Class({//TODO Standa: update URLs
     return this.$easyMinerCenterUrl+this.knowledgeBaseGetRulesUrl
       + '?id=' + rulesetId
       + '&offset=' + offset
-      + '&limit=' + limit
-      + '&order=' + order;
+      + '&limit=' + limit;
+      //+ '&order=' + order;
   },
 
   getKnowledgeBaseGetRuleSetsUrl: function () {

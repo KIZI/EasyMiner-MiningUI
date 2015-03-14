@@ -736,6 +736,33 @@ var UIListener = new Class({
       }.bind(this));
     }
     /*endregion details*/
+    /*region thumb up*/
+    var kbAddLink = $(foundRule.getUpCSSID());
+    if (kbAddLink) {
+      kbAddLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.kbAddRule(foundRule, 'positive');
+      }.bind(this));
+    }
+    /*endregion thumb up*/
+    /*region thumb down*/
+    var kbAddLink = $(foundRule.getDownCSSID());
+    if (kbAddLink) {
+      kbAddLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.kbAddRule(foundRule, 'negative');
+      }.bind(this));
+    }
+    /*endregion thumb down*/
+    /*region thumb down*/
+    var kbRemoveLink = $(foundRule.getKBRemoveCSSID());
+    if (kbRemoveLink) {
+      kbRemoveLink.addEvent('click', function (event) {
+        event.stop();
+        FRManager.kbRemoveRule(foundRule);
+      }.bind(this));
+    }
+    /*endregion thumb down*/
   },
 
   // same as checkFoundRulesSelectedCheckboxes, only ids differences TODO merge
@@ -758,8 +785,12 @@ var UIListener = new Class({
     }*/
     if (unmarkAction){
       multiControls.getElements('.actions .unmark').addClass('visible');
+      multiControls.getElements('.actions .kb-add').addClass('visible');
+      multiControls.getElements('.actions .kb-unmark').addClass('visible');
     }else{
       multiControls.getElements('.actions .unmark').removeClass('visible');
+      multiControls.getElements('.actions .kb-add').removeClass('visible');
+      multiControls.getElements('.actions .kb-unmark').removeClass('visible');
     }
   },
 
@@ -815,6 +846,26 @@ var UIListener = new Class({
         event.stop();
         var FRManager = this.ARBuilder.getMRManager();
         FRManager.multiUnmarkFoundRules(this.getMarkedRulesSelectedIds(rulesElm), taskId);
+        rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkMarkedRulesSelectedCheckboxes(taskId);
+      }.bind(this));
+
+      multiControls.getElements('.actions .kb-add').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getMRManager();
+        FRManager.multiKBAddRule(this.getMarkedRulesSelectedIds(rulesElm), taskId, event.target.get('rel'));
+        rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkMarkedRulesSelectedCheckboxes(taskId);
+      }.bind(this));
+
+      multiControls.getElements('.actions .kb-unmark').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getMRManager();
+        FRManager.multiKBRemoveRule(this.getMarkedRulesSelectedIds(rulesElm), taskId);
         rulesElm.getElements('.marked-rule-checkbox').each(function(checkbox){
           checkbox.checked=false;
         });

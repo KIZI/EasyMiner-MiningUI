@@ -331,11 +331,11 @@ var UIPainter = new Class({
 
   renderMarkedRules: function (task) {
     Mooml.render('markedRulesOrderTemplate',{FRManager: task}).replaces($('marked-rules-order-'+task.id));
-    var listElm = $$('#task-'+task.id+' ul')[0];
+    var listElm = $$('#task-'+task.id+' ul')[0],
+        template = (task.isBase) ? 'KBRuleTemplate' : 'markedRuleTemplate';
     listElm.empty();
-    //console.log(task);
     Object.each(task.rules, function (MR) {
-      listElm.grab(Mooml.render('markedRuleTemplate',
+      listElm.grab(Mooml.render(template,
           {
             i18n: this.i18n,
             IMs: task.IMs,

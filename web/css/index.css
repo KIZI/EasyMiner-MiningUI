@@ -2087,6 +2087,12 @@ section#active-rule #ar-action-box #start-mining:focus {
 #marked-rules ul li .ruleActions a.details {
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
 }
+#marked-rules ul li .ruleActions a.kb-add[rel=positive] {
+  background: transparent url("../images/icon-thumb-up.png") left center no-repeat;
+}
+#marked-rules ul li .ruleActions a.kb-add[rel=negative] {
+  background: transparent url("../images/icon-thumb-down.png") left center no-repeat;
+}
 #marked-rules ul li .ims {
   display: block;
   font-size: 12.8px;
@@ -2171,8 +2177,15 @@ section#active-rule #ar-action-box #start-mining:focus {
 #marked-rules .marked-rules-multi-controls .actions >a.mark {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
 }
-#marked-rules .marked-rules-multi-controls .actions >a.unmark {
+#marked-rules .marked-rules-multi-controls .actions >a.unmark,
+#marked-rules .marked-rules-multi-controls .actions >a.kb-unmark {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
+}
+#marked-rules .marked-rules-multi-controls .actions >a.kb-add[rel=positive] {
+  background: transparent url("../images/icon-thumb-up.png") left center no-repeat;
+}
+#marked-rules .marked-rules-multi-controls .actions >a.kb-add[rel=negative] {
+  background: transparent url("../images/icon-thumb-down.png") left center no-repeat;
 }
 #marked-rules .marked-rules-multi-controls .actions >a.visible {
   display: inline-block;

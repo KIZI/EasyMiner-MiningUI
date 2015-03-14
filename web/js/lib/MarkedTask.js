@@ -32,7 +32,7 @@ var MarkedTask = new Class({
     this.rulesPerPage = perPageOptions[0];
     this.UIPainter = UIPainter;
 
-    if(this.isBase){ this.gotoPage(1); }
+    //if(this.isBase){ this.gotoPage(1); }
   },
 
   calculatePagesCount: function(){
@@ -70,6 +70,7 @@ var MarkedTask = new Class({
       secure: true,
       onSuccess: function (responseJSON, responseText) {
         this.currentPage = page;
+        console.log(responseJSON);
         this.handleSuccessRulesRequest(responseJSON);
       }.bind(this),
 
@@ -100,13 +101,18 @@ var MarkedTask = new Class({
   },
 
   handleSuccessRulesRequest: function (data) {
+    var type = (this.isBase) ? 'ruleset' : 'task';
     this.pageLoading = false;
     this.rules = {};
-    if(data.task.rulesCount == 0) {
+    if(data[type].rulesCount == 0) {
       this.MRManager.removeTask(this);
     } else{
-      this.IMs = this.FL.getRulesIMs(data.task.IMs);
-      this.setRulesCount(data.task.rulesCount);
+      if(this.isBase){
+        this.MRManager.setTaskName(this.id, data[type].name);
+      } else{
+        this.IMs = this.FL.getRulesIMs(data[type].IMs);
+      }
+      this.setRulesCount(data[type].rulesCount);
       if(this.pagesCount > 7){
         this.UIPainter.renderMarkedTask(this, 'minimize');
       }

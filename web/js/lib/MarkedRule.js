@@ -49,6 +49,18 @@ var MarkedRule = new Class({
     return 'unmark-' + this.getCSSID();
   },
 
+  getUpCSSID: function(){
+    return 'up-' + this.getCSSID();
+  },
+
+  getDownCSSID: function(){
+    return 'down-' + this.getCSSID();
+  },
+
+  getKBRemoveCSSID: function(){
+    return 'unbase-' + this.getCSSID();
+  },
+
   isLoading: function(){
     return (this.$loading || false);
   },

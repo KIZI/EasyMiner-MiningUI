@@ -71,9 +71,8 @@ var UITemplateRegistrator = new Class({
     });
 
     Mooml.register('knowledgeBaseTemplate', function (data) {
-      console.log(data);
       var id = data.rule_set_id,
-          name = data.name+' ('+data.rules+')';
+          name = data.name+' ('+data.rulesCount+')';
 
       option({'value': id, 'selected': ''}, name);
     });
@@ -863,10 +862,18 @@ var UITemplateRegistrator = new Class({
     Mooml.register('markedRulesMultiControlsTemplate', function (data) {
       var i18n = data.i18n,
           task = data.FRManager,
-          actions;
+          actions,
+          taskActions;
       if(task.isBase){
         status = 'minimize';
-        actions = span({class:'task-actions'}/*,
+        actions = span({class:'actions'},
+            a({
+              href:'#',
+              class:'kb-unmark',
+              title:i18n.translate('Remove from Knowledge base')
+            },i18n.translate('Remove...'))
+        );
+        taskActions = span({class:'task-actions'}/*,
             a({
               href:'#',
               class:'task-details',
@@ -874,7 +881,31 @@ var UITemplateRegistrator = new Class({
             },i18n.translate('Task details'))*/
         );
       } else{
-        actions = span({class:'task-actions'},
+        actions = span({class:'actions'},
+            /*a({
+             href:'#',
+             class:'mark',
+             title:i18n.translate('Add to Rule Clipboard')
+             },i18n.translate('Add selected...')),*/
+            a({
+              href:'#',
+              class:'unmark',
+              title:i18n.translate('Remove from Rule Clipboard')
+            },i18n.translate('Remove...')),
+            a({
+              href:'#',
+              class:'kb-add',
+              rel:'positive',
+              title:i18n.translate('Interesting')
+            },i18n.translate('Interesting')),
+            a({
+              href:'#',
+              class:'kb-add',
+              rel:'negative',
+              title:i18n.translate('Not interesting')
+            },i18n.translate('Not interesting'))
+        );
+        taskActions = span({class:'task-actions'},
             /*a({
              href:'#',
              class:'mark-all',
@@ -901,20 +932,9 @@ var UITemplateRegistrator = new Class({
                 class:'none',
                 title: i18n.translate('Select none')
               }),
-              span({class:'actions'},
-                  /*a({
-                   href:'#',
-                   class:'mark',
-                   title:i18n.translate('Add to Rule Clipboard')
-                   },i18n.translate('Add selected...')),*/
-                  a({
-                    href:'#',
-                    class:'unmark',
-                    title:i18n.translate('Remove from Rule Clipboard')
-                  },i18n.translate('Remove...'))
-              )
+              actions
           ),
-          actions
+          taskActions
           /*span({class:'task-actions'},
               /*a({
                 href:'#',
@@ -938,7 +958,7 @@ var UITemplateRegistrator = new Class({
         status = 'minimize';
         name = div(
             {class: 'marked-rules-task-name'},
-            'Selectbox',
+            task.name,
             span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')')
         );
       } else{
@@ -1004,6 +1024,25 @@ var UITemplateRegistrator = new Class({
           label({for: markedRule.getCSSID()+'-checkbox', 'class': 'rule'}, markedRule.getIdent()),
           span({class:'ruleActions'},
               a({id: markedRule.getUnmarkCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Rule Clipboard')}),
+              a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
+              a({id: markedRule.getUpCSSID(),href: '#','class': 'kb-add','rel': 'positive','title': i18n.translate('Interesting')}),
+              a({id: markedRule.getDownCSSID(),href: '#','class': 'kb-add','rel': 'negative','title': i18n.translate('Not interesting')})
+          ),
+          span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
+      );
+    });
+
+    // KB rule
+    Mooml.register('KBRuleTemplate', function (data) {
+      var markedRule = data.rule,
+          i18n = data.i18n,
+          IMs = data.IMs;
+
+      li({id: markedRule.getCSSID(), 'class': 'marked-rule'+(markedRule.isLoading()?' loading':'')},
+          input({type:'checkbox',id:markedRule.getCSSID()+'-checkbox', class:'marked-rule-checkbox'}),
+          label({for: markedRule.getCSSID()+'-checkbox', 'class': 'rule'}, markedRule.getIdent()),
+          span({class:'ruleActions'},
+              a({id: markedRule.getKBRemoveCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Knowledge base')}),
               a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
           ),
           span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))

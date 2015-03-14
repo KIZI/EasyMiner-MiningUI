@@ -152,6 +152,12 @@
         a.details
           background transparent url('../images/icon-info-20.png') left center no-repeat
 
+        a.kb-add[rel=positive]
+          background transparent url('../images/icon-thumb-up.png') left center no-repeat
+
+        a.kb-add[rel=negative]
+          background transparent url('../images/icon-thumb-down.png') left center no-repeat
+
       .ims
         display block
         ruleIMs()
@@ -192,8 +198,12 @@
         display none
         &.mark
           background transparent url('../images/icon-ok-20.png') left center no-repeat
-        &.unmark
+        &.unmark,&.kb-unmark
           background transparent url('../images/icon-stop-20.png') left center no-repeat
+        &.kb-add[rel=positive]
+          background transparent url('../images/icon-thumb-up.png') left center no-repeat
+        &.kb-add[rel=negative]
+          background transparent url('../images/icon-thumb-down.png') left center no-repeat
         &.visible
           display inline-block
 
