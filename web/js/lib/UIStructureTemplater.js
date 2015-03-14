@@ -290,7 +290,10 @@ var UIStructureTemplater = new Class({
           h2({'class': 'minimize'}, i18n.translate('Knowledge base')),
           div({'class': 'clearfix'},
               label({'for': 'kb-select'}, i18n.translate('Active ruleset: ')),
-              select({name: 'kb-select', id: 'kb-select'})
+              select({name: 'kb-select', id: 'kb-select'},
+                  option(i18n.translate('Loading')+'...')
+              ),
+              a({href: '#', 'id': 'add-ruleset', 'title': i18n.translate('Add new ruleset')}, i18n.translate('Add new ruleset'))
           ));
     });
 

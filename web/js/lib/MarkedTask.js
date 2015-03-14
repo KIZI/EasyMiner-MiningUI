@@ -7,6 +7,7 @@ var MarkedTask = new Class({
   i18n: null,
   id: null,
   isBase: false,
+  isInit: false,
   IMs: [],
   FL: null,
   MRManager: null,
@@ -61,6 +62,7 @@ var MarkedTask = new Class({
     if(this.isBase){
       var url = this.config.getKnowledgeBaseGetRulesUrl(this.id, (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
     } else{
+      this.isInit = true;
       var url = this.config.getRuleClipboardGetRulesUrl(this.id, (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
     }
 
@@ -70,7 +72,6 @@ var MarkedTask = new Class({
       secure: true,
       onSuccess: function (responseJSON, responseText) {
         this.currentPage = page;
-        console.log(responseJSON);
         this.handleSuccessRulesRequest(responseJSON);
       }.bind(this),
 
@@ -107,8 +108,10 @@ var MarkedTask = new Class({
     if(data[type].rulesCount == 0) {
       this.MRManager.removeTask(this);
     } else{
-      if(this.isBase){
+      if(!this.isInit && this.isBase && data[type].rulesCount > 0){
+        this.UIPainter.renderMarkedTask(this, 'minimize');
         this.MRManager.setTaskName(this.id, data[type].name);
+        this.isInit = true;
       } else{
         this.IMs = this.FL.getRulesIMs(data[type].IMs);
       }
