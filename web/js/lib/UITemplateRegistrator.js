@@ -74,7 +74,7 @@ var UITemplateRegistrator = new Class({
       var id = data.rule_set_id,
           name = data.name+' ('+data.rulesCount+')';
 
-      option({'value': id, 'selected': ''}, name);
+      option({'value': id, 'selected': data.selected}, name);
     });
 
     Mooml.register('reportTemplate', function (data) {

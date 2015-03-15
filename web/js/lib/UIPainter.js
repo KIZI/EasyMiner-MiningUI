@@ -269,13 +269,13 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
-  renderRuleSetsSelect: function (data) {
+  renderRuleSetsSelect: function (data, selectedId) {
     var ruleSetsListElm = $('kb-select');
     ruleSetsListElm.empty();
     Object.each(data, function (value, id) {
+      value['selected'] = (id == selectedId) ? 'selected' : '';
       ruleSetsListElm.grab(Mooml.render('knowledgeBaseTemplate', value));
     }.bind(this));
-    //this.UIListener.registerMarkedRuleEventHandlers(MR);
   },
 
   // to render only task
@@ -343,6 +343,7 @@ var UIPainter = new Class({
           }
       ));
       this.UIListener.registerMarkedRuleEventHandlers(MR);
+      this.$UIScroller.restoreLastScroll();
     }.bind(this));
 
     /*var foundRules=this.ARBuilder.$FRManager.rules;

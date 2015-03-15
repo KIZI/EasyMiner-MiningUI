@@ -44,11 +44,12 @@ var MRManager = new Class({
   },
 
   loadKnowledgeBase: function (id) {
+    this.UIPainter.$UIScroller.rememberLastScroll();
     if(this.KBid != id){
-      if(this.KBid > 0){ this.removeTask(this.KBid);}
+      if(this.KBid > 0){ this.removeTask(this.tasks[this.KBid]); }
       this.tasks[id] = new MarkedTask(id, '', this.config, 0, this.i18n, this.FL, this.UIPainter, this, true);
+      this.KBid = id;
     }
-    //this.UIPainter.renderMarkedTask(this.tasks[id], 'minimize');
     this.tasks[id].reload();
   },
 
@@ -132,8 +133,7 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.UIPainter.renderRuleSetsSelect(responseJSON);
-        //this.handleSuccessKBRuleSetsRequest(responseJSON);
+        this.UIPainter.renderRuleSetsSelect(responseJSON, this.KBid);
       }.bind(this),
 
       onError: function () {
@@ -187,7 +187,7 @@ var MRManager = new Class({
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
     //if(task.pagesCount > 1){
       this.tasks[taskId].reload();
-    /*} else{ TODO asi načítat vždy, jelikož používáme nejen pro unmark...
+    /*} else{ TODO asi načítat vždy, jelikož používáme nejen pro unmark, ale zvážit...
       Object.each(jsonData.rules, function(value, id){
         if(value.selected == 0){
           Object.erase(task.rules, id);
@@ -204,6 +204,7 @@ var MRManager = new Class({
     if(this.FRManager.getTaskId() == taskId){
       this.FRManager.gotoPage(1); // reloads FRManager if we unmark in current FR Task
     }
+    this.getRuleSetsRequest();
   },
 
   handleSuccessMRTasksRequest: function (data) {
