@@ -1,9 +1,0 @@
-{
-    "require": {
-        "symfony/http-foundation": "2.1.*",
-        "symfony/class-loader": "2.1.*",
-        "firephp/firephp-core": "*"
-    },
-    "minimum-stability": "dev"
-}
-

@@ -20,7 +20,7 @@ var Config = new Class({//TODO Standa: update URLs
   userLogoutUrl: '/em/user/logout',
   userDetailsUrl: '/em/user/details',
   userInfoUrl: '/em/user/info',
-  getDataUrl: '/em/izi-ui/get-data',
+  getDataUrl: '/em/mining-ui/get-data',
   loadMinerDataUrl: '/em/helper/load-data',
   saveMinerDataUrl: '/em/helper/save-data',
   showAttributeHistogramUrl: '/em/data/attribute-histogram',
