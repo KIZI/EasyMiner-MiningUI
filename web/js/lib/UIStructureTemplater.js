@@ -17,24 +17,6 @@ var UIStructureTemplater = new Class({
       );
     });
 
-    Mooml.register('headerTemplate', function (data) {
-      var i18n = data.i18n,
-        config = data.config,
-        minerType = data.minerType;
-      header(
-        {id:'mainHeader'},
-        div(
-          {id:'headerContent'},
-          div({id: 'headerLinks'},
-            a({href: '#', id: 'new-task'}, i18n.translate('New task')),
-            /*TODO a({href: config.getSupportUrl(), id: 'support', target: '_blank'}, i18n.translate('Support')),*/
-            /*TODO a({href: '#', id: 'settings-open'}, i18n.translate('Settings')),*/
-            span({id:'current-user'})
-          ),
-          h1({class:'type'+minerType.toUpperCase()},config.getName() + '<sup>' + config.getVersion() + '</sup><span>' + config.getSlogan() + '</span>'))
-        )
-    });
-
     Mooml.register('mainTemplate', function (data) {
       var i18n = data.i18n;
 
@@ -47,14 +29,6 @@ var UIStructureTemplater = new Class({
         ),
         nav({id: 'navigation'})
       );
-    });
-
-    Mooml.register('footerTemplate', function (data) {
-      var i18n = data.i18n,
-        config = data.config,
-        dateHelper = data.dateHelper;
-
-      footer('Copyright &copy; ' + config.getCopyright() + ', ' + dateHelper.getYear());
     });
   },
 

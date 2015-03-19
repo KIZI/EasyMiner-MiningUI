@@ -1205,18 +1205,6 @@ var UITemplateRegistrator = new Class({
       );
     });
 
-    Mooml.register('currentUserTemplate', function (data) {
-      var user      = data.user;
-      var detailsUrl= data.detailsUrl;
-      var logoutUrl = data.logoutUrl;
-      var i18n      = data.i18n;
-
-      span({id: 'current-user'},
-        a({href: detailsUrl,title: i18n.translate('My account details...')},user.name),' - ',
-        a({href:logoutUrl},i18n.translate('logout'))
-      );
-    });
-
     Mooml.register('loadingErrorWindowTemplate', function (data) {
       div({id: 'loading-data-window', class:'error'},
         p(data.i18n.translate('An error occured while loading application data.')),

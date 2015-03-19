@@ -112,7 +112,7 @@ var ReportManager = new Class({
 */
     },
 
-    loadReports: function() {
+    loadReports: function() {console.log('load reports');//XXX
         var request = new Request.JSON({
             url: this.$config.getListAnalyticalReportsUrl(),
             secure: true,

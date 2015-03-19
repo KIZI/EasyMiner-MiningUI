@@ -25,25 +25,17 @@ var UIStructurePainter = new Class({
 
     render: function() {
         $(this.$config.getRootElementID()).grab(Mooml.render('overlayTemplate'));
-        $(this.$config.getRootElementID()).grab(Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, browserDetector: this.$browserDetector, minerType: this.$ARBuilder.getMinerType()}));
         $(this.$config.getRootElementID()).grab(Mooml.render('mainTemplate', {i18n: this.$i18n}));
-        $(this.$config.getRootElementID()).grab(Mooml.render('footerTemplate', {config: this.$config, i18n: this.$i18n, dateHelper: this.$dateHelper}));
         this.renderNavigation();
         this.renderActiveRule();
         this.renderMarkedRules();
         this.resizeWindow();
 
         this.$UIStructureListener.registerResizeEventHandler();
-        this.$UIStructureListener.registerSettingsEventHandlers();
         this.$UIStructureListener.registerDataReloadEventHandlers();
     },
 
-    renderHeader: function(){
-        var header=$('mainHeader');
-        if (header){
-            Mooml.render('headerTemplate', {config: this.$config, i18n: this.$i18n, minerType: this.$ARBuilder.getMinerType()}).replaces(header);
-            this.$UIStructureListener.registerSettingsEventHandlers();
-        }
+      /*TODO přesunout jinam...:
         if (this.$browserDetector.isDeprecated()){
             var overlay = this.showOverlay();
             overlay.grab(Mooml.render('unsupportedBrowserWindowTemplate', {i18n: this.$i18n, browserName: this.$browserDetector.getFullName()}));
@@ -53,7 +45,7 @@ var UIStructurePainter = new Class({
             // Positioning of Overlay after rendering
             this.posOverlay();
         }
-    },
+        */
 
     renderNavigation: function() {
         var navigation = $('navigation');

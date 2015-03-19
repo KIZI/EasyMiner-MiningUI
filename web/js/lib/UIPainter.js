@@ -45,7 +45,6 @@ var UIPainter = new Class({
   },
 
   createUI: function () {
-    this.$UIStructurePainter.renderHeader();
     this.renderNavigation();
     this.renderActiveRule();
     //this.renderMarkedRules();
@@ -999,15 +998,6 @@ var UIPainter = new Class({
     var window = Mooml.render('userWarningWindowTemplate', {message: message, url: url});
     overlay.grab(window);
     this.$UIStructurePainter.posOverlay();
-  },
-
-  renderCurrentUserBox: function (user,detailsUrl, logoutUrl) {
-    Mooml.render('currentUserTemplate',{
-      user: user,
-      detailsUrl: detailsUrl,
-      logoutUrl: logoutUrl,
-      i18n: this.i18n
-    }).replaces($('current-user'));
   }
 
 });

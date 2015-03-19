@@ -17,20 +17,6 @@ var UIStructureListener = new Class({
         }.bind(this));
     },
 
-    registerSettingsEventHandlers: function () {
-        $('new-task').addEvent('click', function (e) {
-            e.stop();
-            this.$ARBuilder.openNewTaskWindow();
-        }.bind(this));
-
-        /*TODO
-        $('settings-open').addEvent('click', function (e) {
-            e.stop();
-            this.$ARBuilder.openSettingsWindow();
-        }.bind(this));
-        */
-    },
-
     registerUnsupportedBrowserEventHandler: function (field) {
         // submit
         var elementSubmit = $('unsupported-browser-form').getElement('input[type=submit]');

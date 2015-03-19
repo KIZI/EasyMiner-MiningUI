@@ -87,10 +87,6 @@ var Config = new Class({//TODO Standa: update URLs
     return this.slogan;
   },
 
-  getCopyright: function () {
-    return this.copyright;
-  },
-
   getLang: function () {
     return this.lang;
   },
