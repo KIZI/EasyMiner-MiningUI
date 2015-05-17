@@ -142,8 +142,12 @@ var ARManager = new Class({
   },
 
   addAttributeToCedent: function (attribute) {
-    //FIXME Standa - pokud má být přidán atribut, který má jen jednu hodnotu, je nutné ji vybrat!!!
-    var field = new FieldAR(this.generateFieldID(), attribute, 'Subset', null, new StringHelper(), 1, 1);
+    if (attribute.choices && attribute.choices.length==1){
+      var field = new FieldAR(this.generateFieldID(), attribute, 'One category', null, new StringHelper(), attribute.choices[0]);
+    }else{
+      var field = new FieldAR(this.generateFieldID(), attribute, 'Subset', null, new StringHelper(), 1, 1);
+    }
+
     this.activeRule.getAntecedent().addChild(field);
     if (!this.attributesByGroup) {
       this.sortAttributes();
