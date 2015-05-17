@@ -57,7 +57,9 @@ var UIStructurePainter = new Class({
         } else {
             navigation.grab(Mooml.render('attributesStructureTemplate', {i18n: this.$i18n, byGroup: false, inProgress: false, hasHiddenAttributes: false}));
         }
+
         this.$UIStructureListener.registerShowHiddenAttributesEventHandler();
+        this.$UIStructureListener.registerAddAllUnusedAttributesEventHandler();
 
         // data fields
         var dataFields = $('data-fields');

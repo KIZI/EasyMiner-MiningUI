@@ -24,6 +24,8 @@ var ARBuilder = new Class({
   $callbackDelay: 1000, // miliseconds
   $reportManager: null,
   $currentUser:null,
+  //filter for attributes palette
+  attributesFilter:null,
 
   // init basics
   initialize: function (config) {

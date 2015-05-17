@@ -19,7 +19,8 @@ var ElementFilter = new Class({
     onShow: null,
     onHide: null,
     onComplete: null,
-    onNull: null
+    onNull: null,
+    initRepaint: true
 	},
 
 	//initialization
@@ -33,43 +34,52 @@ var ElementFilter = new Class({
 		this.misses = [];
     //start the listener
     this.listen();
+    if (options.initRepaint){
+      this.repaintMatches();
+    }
 	},
 	
 	//adds a listener to the element (if there's a value and if the event code shouldn't be ignored)
 	listen: function() {
 		//add the requested event
     this.observeElement.addEvent(this.options.trigger,function(e) {
-      //if there's a value in the box...
-			if(this.observeElement.value.length) {
-				//if the key should not be ignored...
-				if(!this.options.ignoreKeys.contains(e.code)) {
-					this.fireEvent('start');
-					this.findMatches(this.options.cache ? this.matches : this.elements);
-					this.fireEvent('complete');
-				}
-			}
-			else{
-				//show all of the elements
-				this.findMatches(this.elements,false);
-                this.fireEvent('null');
-			}
+      if(!this.options.ignoreKeys.contains(e.code)) {
+        this.repaintMatches();
+      }
     }.bind(this));
 	},
 
-	//check for matches within specified elements
-	findMatches: function(elements,matchOverride) {
-		//settings
-    var value = this.observeElement.value;
-    var regExpPattern = this.options.matchAnywhere ? value : '^' + value;
+  repaintMatches: function(){
+    //if there's a value in the box...
+    if(this.observeElement.value.length) {
+      //if the key should not be ignored...
+      this.fireEvent('start');
+      this.findMatches(this.options.cache ? this.matches : this.elements);
+      this.fireEvent('complete');
+    }
+    else{
+      //show all of the elements
+      this.findMatches(this.elements,false);
+      this.fireEvent('null');
+    }
+  },
 
+  prepareTestRegExp: function(){
+    var inputValue=this.observeElement.value;
+    var regExpPattern = this.options.matchAnywhere ? inputValue : '^' + inputValue;
     if(this.options.supportSimpleCompletion){
       regExpPattern=regExpPattern.replace('.', '\\.');
       regExpPattern=regExpPattern.replace('*', '.*');
       regExpPattern=regExpPattern.replace('?', '.');
     }
-
     var regExpAttrs = this.options.caseSensitive ? '' : 'i';
-		var filter = new RegExp(regExpPattern, regExpAttrs);
+    return new RegExp(regExpPattern, regExpAttrs);
+  },
+
+	//check for matches within specified elements
+	findMatches: function(elements,matchOverride) {
+		//settings
+		var filter = this.prepareTestRegExp();
 		var matches = [];				
     //recurse
     elements.each(function(el){

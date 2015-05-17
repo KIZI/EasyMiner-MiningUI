@@ -70,12 +70,14 @@ var UIPainter = new Class({
     } else {
       this.$UIStructurePainter.hideHiddenAttributesButton();
     }
+
     var attributesFilter = $$('#attributes a.filter')[0];
-    var myFilter = new ElementFilter('attributes-filter', '#attributes-by-list li', {
+    this.ARBuilder.attributesFilter = new ElementFilter('attributes-filter', '#attributes-by-list li', {
       trigger: 'keyup',
       cache: true,
       matchAnywhere: false,
       supportSimpleCompletion: true,
+      initRepaint: true,
       onShow: function (element) {
         element.setStyle('display', 'list-item');
       },
@@ -136,7 +138,7 @@ var UIPainter = new Class({
       } else if (attribute.isPartiallyRecommended()) {
         element.addClass('rec2');
       } else if (this.ARBuilder.getARManager().getActiveRule().isAttributeUsed(attribute)) {
-        element.morph({
+        element.morph({//TODO tohle předělat na třídu...
           'color': '#AAA'
         });
       } else {
@@ -253,6 +255,7 @@ var UIPainter = new Class({
 
       this.renderAttributes.delay((this.sortDuration + this.morphDuration) * 1.5, this);
     }.bind(this));
+
   },
 
   renderReports: function (reports) {

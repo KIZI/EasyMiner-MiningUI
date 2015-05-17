@@ -233,7 +233,11 @@ var UIStructureTemplater = new Class({
               id: 'show-hidden-attributes',
               href: '#',
               styles: {'display': hasHiddenAttributes ? 'inline' : 'none'}
-            }, 'Show hidden attributes')
+            }, 'Show hidden attributes'),
+            a({
+              id: 'add-all-unused-attributes',
+              href: '#'
+            },'Add attributes')
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));
       }
