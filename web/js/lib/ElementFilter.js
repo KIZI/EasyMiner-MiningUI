@@ -43,9 +43,8 @@ var ElementFilter = new Class({
 	listen: function() {
 		//add the requested event
     this.observeElement.addEvent(this.options.trigger,function(e) {
-      if(!this.options.ignoreKeys.contains(e.code)) {
-        this.repaintMatches();
-      }
+      if(e && this.options.ignoreKeys.contains(e.code)) {return;}
+      this.repaintMatches();
     }.bind(this));
 	},
 
