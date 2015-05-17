@@ -1,6 +1,7 @@
 var ElementFilter = new Class({
 
 /* Source: http://davidwalsh.name/plugin-element-filter */
+/* Modified by Stanislav Vojíř, 2015-05-17 */
 
   //implements
 	Implements: [Options,Events],
@@ -11,6 +12,7 @@ var ElementFilter = new Class({
     caseSensitive: false,
     ignoreKeys: [13, 27, 32, 37, 38, 39, 40],
     matchAnywhere: true,
+    supportSimpleCompletion: false,
     property: 'text',
     trigger: 'mouseup',
     onStart: null,
@@ -59,6 +61,13 @@ var ElementFilter = new Class({
 		//settings
     var value = this.observeElement.value;
     var regExpPattern = this.options.matchAnywhere ? value : '^' + value;
+
+    if(this.options.supportSimpleCompletion){
+      regExpPattern=regExpPattern.replace('.', '\\.');
+      regExpPattern=regExpPattern.replace('*', '.*');
+      regExpPattern=regExpPattern.replace('?', '.');
+    }
+
     var regExpAttrs = this.options.caseSensitive ? '' : 'i';
 		var filter = new RegExp(regExpPattern, regExpAttrs);
 		var matches = [];				

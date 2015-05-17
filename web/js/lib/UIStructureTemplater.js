@@ -219,6 +219,7 @@ var UIStructureTemplater = new Class({
           div({'class': 'datas-filter'},
             input({
               'id': 'attributes-filter',
+              'title': i18n.translate('Input part of requested attribute name - special characters * and ? are supported.'),
               'type': 'text'
             }),
             a({href: '#', 'class': 'reset-filter', 'title': i18n.translate('Reset filter')})),
@@ -250,6 +251,7 @@ var UIStructureTemplater = new Class({
         div({'class': 'datas-filter'},
           input({
             'id': 'data-fields-filter',
+            'title': i18n.translate('Input part of requested data field name - special characters * and ? are supported.'),
             'type': 'text'
           }),
           a({href: '#', 'class': 'reset-filter', 'title': i18n.translate('Reset filter')})),

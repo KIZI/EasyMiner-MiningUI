@@ -74,6 +74,8 @@ var UIPainter = new Class({
     var myFilter = new ElementFilter('attributes-filter', '#attributes-by-list li', {
       trigger: 'keyup',
       cache: true,
+      matchAnywhere: false,
+      supportSimpleCompletion: true,
       onShow: function (element) {
         element.setStyle('display', 'list-item');
       },
@@ -215,6 +217,8 @@ var UIPainter = new Class({
     var myFilter = new ElementFilter('data-fields-filter', '#data-fields li', {
       trigger: 'keyup',
       cache: true,
+      matchAnywhere: false,
+      supportSimpleCompletion: true,
       onShow: function (element) {
         element.setStyle('display', 'list-item');
       },
