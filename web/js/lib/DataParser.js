@@ -5,6 +5,7 @@ var DataParser = new Class({
   $async: true,
   DD: null,
   minerType: '',
+  minerName: '',
   FLs: [],
   FGC: null,
 
@@ -61,6 +62,7 @@ var DataParser = new Class({
     this.FGC = new FieldGroupConfig(this.DD, data.FGC);
 
     this.minerType=data.miner_type;
+    this.minerName=data.miner_name;
   },
 
   getDD: function () {
@@ -69,6 +71,10 @@ var DataParser = new Class({
 
   getMinerType: function(){
     return this.minerType
+  },
+
+  getMinerName: function(){
+    return this.minerName
   },
 
   getFLs: function () {

@@ -7,6 +7,7 @@ var ARBuilder = new Class({
   dataParser: null,
   $rulesParser: null,
   $minerType:'',
+  $minerName:'',
   $FRManager: null,
   $MRManager: null,
   $miningManager: null,
@@ -69,6 +70,8 @@ var ARBuilder = new Class({
   repaintData: function () {
     this.$DD = this.dataParser.getDD();
     this.$minerType=this.dataParser.getMinerType();
+    this.$minerName=this.dataParser.getMinerName();
+
     this.FLs = this.dataParser.getFLs();
     this.$FGC = this.dataParser.getFGC();
 
@@ -93,6 +96,7 @@ var ARBuilder = new Class({
 
     this.$DD = this.dataParser.getDD();
     this.$minerType=this.dataParser.getMinerType();
+    this.$minerName=this.dataParser.getMinerName();
     this.FLs = this.dataParser.getFLs();
     this.$FGC = this.dataParser.getFGC();
 
@@ -118,6 +122,10 @@ var ARBuilder = new Class({
 
   getMinerType: function(){
     return this.$minerType;
+  },
+
+  getMinerName: function(){
+    return this.$minerName;
   },
 
   getFL: function () {

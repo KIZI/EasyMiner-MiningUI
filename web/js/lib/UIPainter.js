@@ -45,6 +45,7 @@ var UIPainter = new Class({
   },
 
   createUI: function () {
+    this.renderMinerBasicInfo();
     this.renderNavigation();
     this.renderActiveRule();
     //this.renderMarkedRules();
@@ -424,6 +425,23 @@ var UIPainter = new Class({
     }.bind(this));
 
     return returnEl;
+  },
+
+  renderMinerBasicInfo: function(){
+    var minerType=this.ARBuilder.getMinerType();
+    var applicationMainTitle=$('applicationMainTitle');
+    if (applicationMainTitle && minerType){
+      applicationMainTitle.addClass('type'+minerType.toUpperCase());
+    }
+    var minerName=this.ARBuilder.getMinerName();
+    if (minerName){
+      document.title=minerName+' :: '+config.name;
+      var applicationSubTitle=$('applicationSubTitle');
+      if (applicationSubTitle){
+        applicationSubTitle.set('text',minerName);
+        applicationSubTitle.set('title',this.i18n.translate('Current miner name: ')+minerName);
+      }
+    }
   },
 
   renderActiveRule: function () {
