@@ -279,6 +279,7 @@ var AssociationRule = new Class({
     Object.each(this.IMs, function (IM) {
       serialized.IMs.push(IM.serialize());
     }.bind(this));
+
     serialized.specialIMs = [];
     Object.each(this.specialIMs, function (IM) {
       serialized.specialIMs.push(IM.serialize());

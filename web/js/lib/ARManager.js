@@ -52,7 +52,7 @@ var ARManager = new Class({
 
     // default interest measures
     this.FL.getDefaultIMs().each(function (IMPrototype) {
-      var IM = IMPrototype.initIMAR(IMPrototype);
+      var IM = IMPrototype.initIMAR();
       if (IM.getName() === 'SUPP') {
         var minimalSupport = this.DD.calculateMinimalSupport();
         if (IM.getThreshold().toFloat() < minimalSupport) {
@@ -388,7 +388,7 @@ var ARManager = new Class({
    */
   enableRulePruning: function(state){
     if(state && this.FL.specialIMs['CBA']){
-      this.activeRule.addSpecialIM(this.FL.specialIMs['CBA']);
+      this.activeRule.addSpecialIM(this.FL.specialIMs['CBA'].initIMAR());
     }else{
       this.activeRule.removeSpecialIM("CBA");
     }

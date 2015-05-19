@@ -108,17 +108,21 @@ var InterestMeasure = new Class({
 		return 'im-' + this.getNormalizedName() + '-value';
 	},
 
-    initIMAR: function(IM) {
-        var threshold = 0;
-        var alpha = 0;
-        IM.fields.each(function(field) {
-            if (field.name === 'threshold') { // threshold
-                threshold = field.defaultValue;
-            } else { // alpha
-                alpha = field.defaultValue;
-            }
-        });
-        return new InterestMeasureAR(IM.getName(), IM.getLocalizedName(), IM.getExplanation(), IM.getThresholdType(), IM.getCompareType(), IM.getFields(), IM.getStringHelper(), IM.calculation, IM.getDefault(), IM.getRequired(), threshold, alpha);
-    }
+  initIMAR: function(selectedIM) {
+      var IM=selectedIM;
+      if (!IM){
+        IM=this;
+      }
+      var threshold = 0;
+      var alpha = 0;
+      IM.fields.each(function(field) {
+          if (field.name === 'threshold') { // threshold
+              threshold = field.defaultValue;
+          } else { // alpha
+              alpha = field.defaultValue;
+          }
+      });
+      return new InterestMeasureAR(IM.getName(), IM.getLocalizedName(), IM.getExplanation(), IM.getThresholdType(), IM.getCompareType(), IM.getFields(), IM.getStringHelper(), IM.calculation, IM.getDefault(), IM.getRequired(), threshold, alpha);
+  }
 
 });
