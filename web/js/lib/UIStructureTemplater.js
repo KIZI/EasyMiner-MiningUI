@@ -299,7 +299,10 @@ var UIStructureTemplater = new Class({
         miningInProgress = data.miningInProgress || false,
         activeRuleChanged = data.activeRuleChanged || false,
         miningState = data.miningState || '',
-        miningProgressText = '';
+        miningProgressText = '',
+        pruningAvailable = data.pruningAvailable || false,
+        pruningAllowed = data.pruningAllowed || false,
+        pruningActive = data.pruningActive || false;
 
       if (taskBox) {
         var taskText = i18n.translate('Do you want to');
@@ -353,7 +356,13 @@ var UIStructureTemplater = new Class({
         div({'class': 'clearfix'}),
         div({id: 'ar-action-box'},
           //blok s akcemi pro AR Pattern
-          (rules ? a({id: 'start-mining', href: '#'}, i18n.translate('Mine rules...')) : ''),
+          (rules ? a({id: 'start-mining', href: '#'}, i18n.translate('Mine rules...')): ''),
+          (rules && pruningAvailable ?
+            div({id:'start-mining-with-pruning-label', title:i18n.translate('Prune founded rules using algorithm CBA (for classification). Allowed only for rule pattern with exactly one attribute in consequent.')},
+              input({type:"checkbox", value:"CBA", disabled:(!pruningAllowed), defaultChecked:(pruningActive&&pruningAllowed), name:"start-mining-with-pruning", id:"start-mining-with-pruning"}),
+              label({for:'start-mining-with-pruning'},i18n.translate('with pruning...'))
+            )
+            : ''),
           (miningInProgress ? a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')) : ''),
           miningProgressText
         )

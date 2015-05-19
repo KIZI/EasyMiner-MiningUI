@@ -427,19 +427,24 @@ var UIPainter = new Class({
   },
 
   renderActiveRule: function () {
+    var ARManager=this.ARBuilder.getARManager();
+
     Mooml.render(
       'activeRuleTemplate',
       {
-        rules: this.ARBuilder.getARManager().display4ftTaskBox(),
-        attributes: this.ARBuilder.getARManager().displayETreeTaskBox(),
+        rules: ARManager.display4ftTaskBox(),
+        attributes: ARManager.displayETreeTaskBox(),
         i18n: this.i18n,
-        displayAddIM: this.ARBuilder.getARManager().hasPossibleIMs(),
-        miningInProgress: this.ARBuilder.getARManager().miningInProgress(),
-        activeRuleChanged: this.ARBuilder.getARManager().getActiveRule().isChanged(),
-        miningState: this.ARBuilder.getARManager().getMiningState(),
-        foundRulesCount: this.ARBuilder.$FRManager.rulesCount
+        displayAddIM: ARManager.hasPossibleIMs(),
+        miningInProgress: ARManager.miningInProgress(),
+        activeRuleChanged: ARManager.getActiveRule().isChanged(),
+        miningState: ARManager.getMiningState(),
+        foundRulesCount: this.ARBuilder.$FRManager.rulesCount,
+        pruningAllowed: ARManager.isRulePruningEnabled(),
+        pruningActive: ARManager.isRulePruningActive(),
+        pruningAvailable: ARManager.isRulePruningAvailable()
       }
-    ).replaces($('active-rule'));//XXX
+    ).replaces($('active-rule'));
 
     var elementParent = $('antecedent');
     this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getAntecedent(), elementParent);

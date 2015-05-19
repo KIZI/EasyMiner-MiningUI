@@ -1252,6 +1252,22 @@ section#active-rule #ar-action-box #start-mining:focus {
   color: #fff;
   border: 1px solid #4c8e0e;
 }
+section#active-rule #ar-action-box #start-mining-with-pruning-label {
+  float: right;
+  clear: right;
+  margin: 5px 0 0 0;
+  padding: 0 15px;
+  width: 150px;
+  text-align: center;
+}
+section#active-rule #ar-action-box #start-mining-with-pruning-label label {
+  padding-left: 5px;
+  cursor: pointer;
+}
+section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=checkbox][disabled] + label {
+  color: #dfdfdf;
+  cursor: default;
+}
 .paginator a {
   background: #075783;
   font-size: 14px;

@@ -214,6 +214,12 @@ var UIListener = new Class({
           this.ARBuilder.getARManager().mineRulesConfirm();
         }.bind(this));
       }
+      var startMiningWithPruning=$('start-mining-with-pruning');
+      if (startMiningWithPruning){
+        startMiningWithPruning.addEvent('click', function (event) {
+          this.ARBuilder.getARManager().enableRulePruning(startMiningWithPruning.checked);
+        }.bind(this));
+      }
 
     }
     if (this.ARBuilder.getARManager().miningInProgress()){

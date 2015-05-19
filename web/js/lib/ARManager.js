@@ -349,6 +349,10 @@ var ARManager = new Class({
   },
 
   mineRulesConfirm: function () {
+    //pokud není povoleno prořezávání pravidel, tak zkontrolujeme, jestli není zadané ve vzoru pravidla
+    if (this.isRulePruningActive() && !this.isRulePruningEnabled()){
+      this.enableRulePruning(false);
+    }
     this.activeRule.setChanged(false);//pravidlo není změněno (je právě spuštěno dolování)
     this.miningManager.mineRules(this.activeRule, this.settings.getRulesCnt());
   },
@@ -376,6 +380,44 @@ var ARManager = new Class({
   displayError: function (sourceElementId, messageElementId, message) {
     $(sourceElementId).set('class', 'invalid-value');
     $(messageElementId).set('text', message);
+  },
+
+  /**
+   * Enables rule pruning during the mining (special IM in rule pattern)
+   * @param state
+   */
+  enableRulePruning: function(state){
+    if(state && this.FL.specialIMs['CBA']){
+      this.activeRule.addSpecialIM(this.FL.specialIMs['CBA']);
+    }else{
+      this.activeRule.removeSpecialIM("CBA");
+    }
+  },
+
+  /**
+   * @returns {boolean}
+   */
+  isRulePruningActive: function(){
+    return ("CBA" in this.activeRule.specialIMs)||false;
+  },
+
+  /**
+   * @returns {boolean}
+   */
+  isRulePruningAvailable: function(){
+    return ("CBA" in this.FL.specialIMs) || false;
+  },
+
+  /**
+   * @returns {boolean}
+   */
+  isRulePruningEnabled: function(){
+    if (!this.isRulePruningAvailable()){return false;}//rule pruning (CBA) is not in allowed special interest measures
+    if (this.activeRule.getSuccedent().getNumChildren()!=1 || this.activeRule.getSuccedent().getNumChildCedents()!=0){return false;}//in succedent, there are more partial cedents or attributes
+    if (this.activeRule.getAntecedent().getNumChildren()==0 && this.activeRule.getAntecedent().getNumChildCedents()==0){return false;}//blank antecedent
+    var succedentAttribute=this.activeRule.getSuccedent().getChildren()[0];
+    return (succedentAttribute.type=='Subset' && succedentAttribute.maximalLength==1 && succedentAttribute.minimalLength==1);
   }
+
 
 });

@@ -16,6 +16,7 @@ var FeatureList = new Class({
   IMTreshold: '',
   IMs: [],
   IMCombinations: [],
+  specialIMs: [],
 
   // - basic boolean attribute
   BBACoefficient: '',
@@ -59,6 +60,11 @@ var FeatureList = new Class({
 
     Object.each(data.interestMeasures.combinations, function (value, key) {
       this.IMCombinations[key] = value;
+    }.bind(this));
+
+    //special interest measures
+    Object.each(data.specialInterestMeasures.types, function (value, key) {
+      this.specialIMs[key] = new InterestMeasure(key, value.localizedName, value.explanation, value.thresholdType, value.compareType, value.fields, new StringHelper(), value.calculation, value.default, value.required);
     }.bind(this));
 
     // basic boolean attribute
