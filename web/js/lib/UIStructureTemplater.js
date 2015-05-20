@@ -206,7 +206,7 @@ var UIStructureTemplater = new Class({
             ul(),
             span({
               id: 'etree-progress',
-              styles: {'visibility': inProgress ? 'visible' : 'hidden'}
+              styles: {'display': inProgress ? 'block' : 'none'}
             }, i18n.translate('Sort in progress.')),
             div(a({id: 'attributes-by-list', href: '#'}, i18n.translate('attributes')))));
       } else {
@@ -227,17 +227,19 @@ var UIStructureTemplater = new Class({
             ul({'class': 'clearfix'}),
             span({
               id: 'etree-progress',
-              styles: {'visibility': inProgress ? 'visible' : 'hidden'}
+              styles: {'display': inProgress ? 'block' : 'none'}
             }, i18n.translate('Sort in progress.')),
             a({
               id: 'show-hidden-attributes',
               href: '#',
-              styles: {'display': hasHiddenAttributes ? 'inline' : 'none'}
-            }, 'Show hidden attributes'),
+              styles: {'display': hasHiddenAttributes ? 'inline' : 'none'},
+              title: i18n.translate('Show hidden attributes')
+            }, i18n.translate('Show hidden')),
             a({
               id: 'add-all-unused-attributes',
-              href: '#'
-            },'Add attributes')
+              href: '#',
+              title: i18n.translate('Add all unused attributes to antecedent...')
+            }, i18n.translate('Add attributes'))
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));
       }

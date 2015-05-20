@@ -59,6 +59,7 @@ var UIStructurePainter = new Class({
         }
 
         this.$UIStructureListener.registerShowHiddenAttributesEventHandler();
+        //add all attributes link
         this.$UIStructureListener.registerAddAllUnusedAttributesEventHandler();
 
         // data fields

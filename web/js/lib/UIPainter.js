@@ -54,7 +54,7 @@ var UIPainter = new Class({
   renderNavigation: function () {
     // attributes
     this.renderAttributes();
-
+    this.showAddAllUnusedAttributesLink();
     // data fields
     this.renderDataFields();
   },
@@ -87,11 +87,32 @@ var UIPainter = new Class({
       },
       onComplete: function (element) {
         attributesFilter.addClass('filter-active');
-      },
+        this.showAddAllUnusedAttributesLink();
+      }.bind(this),
       onNull: function (element) {
         attributesFilter.removeClass('filter-active');
-      }
+        this.showAddAllUnusedAttributesLink();
+      }.bind(this)
     });
+  },
+
+  showAddAllUnusedAttributesLink: function(){
+    var ARManager = this.ARBuilder.getARManager();
+    var activeRule= ARManager.getActiveRule();
+    if (!this.ARBuilder.attributesFilter){return;}
+    var attributeNameFilter=this.ARBuilder.attributesFilter.prepareTestRegExp();
+    var allowAddAllUnusedAttributesLink=false;
+    Array.each(this.ARBuilder.getDD().getAttributes(), function (attribute) {
+      if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
+      if (!attributeNameFilter.test(attribute.getName())){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
+      allowAddAllUnusedAttributesLink=true;
+    }.bind(this));
+    if (allowAddAllUnusedAttributesLink){
+      $('add-all-unused-attributes').show();
+    }else{
+      $('add-all-unused-attributes').hide();
+    }
+
   },
 
   renderAttributesByGroup: function (elementParent) {
