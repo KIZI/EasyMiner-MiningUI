@@ -424,7 +424,13 @@ var UIListener = new Class({
         var cedentName = elementSelect.options[elementSelect.selectedIndex].value;
         var cedent = (cedentName == 'antecedent') ? (this.ARBuilder.getARManager().getActiveRule().getAntecedent()) : (this.ARBuilder.getARManager().getActiveRule().getSuccedent());
         this.UIPainter.hideOverlay();
-        this.ARBuilder.getARManager().addAttribute(cedent, field);
+
+        if(this.ARBuilder.getConfig().getAutoShowAttributeBinningDialog()){
+          this.ARBuilder.getARManager().addAttributeToCedent(field, cedent);
+        }else{
+          this.ARBuilder.getARManager().addAttribute(cedent, field);
+        }
+
       }
     }.bind(this));
 
@@ -900,7 +906,7 @@ var UIListener = new Class({
     $('exportBusinessRules-' + taskId).addEvent('click', function (event) {
       event.stop();
       //me.ARBuilder.openExportBusinessRulesDialog(taskId);
-      me.ARBuilder.exportRulesToBRBase(taskId);//TODO standa
+      me.ARBuilder.exportRulesToBRBase(taskId);
     });
 
     $('modelTester-' + taskId).addEvent('click', function (event) {

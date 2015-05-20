@@ -141,14 +141,18 @@ var ARManager = new Class({
     this.openAddCoefficientWindow(field);
   },
 
-  addAttributeToCedent: function (attribute) {
+  addAttributeToCedent: function (attribute, cedent) {
     if (attribute.choices && attribute.choices.length==1){
       var field = new FieldAR(this.generateFieldID(), attribute, 'One category', null, new StringHelper(), attribute.choices[0]);
     }else{
       var field = new FieldAR(this.generateFieldID(), attribute, 'Subset', null, new StringHelper(), 1, 1);
     }
 
-    this.activeRule.getAntecedent().addChild(field);
+    if (!cedent){
+      cedent=this.activeRule.getAntecedent();
+    }
+
+    cedent.addChild(field);
     if (!this.attributesByGroup) {
       this.sortAttributes();
     }
