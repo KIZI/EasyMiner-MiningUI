@@ -8,7 +8,7 @@ var MiningManager = new Class({
 
   requests: [],
   inProgress: false,
-  finishedStates: ['solved', 'interrupted'],
+  finishedStates: ['solved', 'interrupted', 'solved_heads'],
   errorStates: ['failed'],
   reqDelay: 2500,
   miningState: null,
@@ -84,6 +84,18 @@ var MiningManager = new Class({
     if (this.finishedStates.contains(state)) {
       // task is finished
       this.inProgress = false;
+      //pokud jsou importovány jen hlavičky, pošleme ještě jeden požadavek
+      if (this.miningState='solved_heads'){
+        setTimeout(function(){
+        var activeTask = this.$taskManager.getActiveTask();
+          var request = new Request.JSON({
+            url: this.config.getStartMiningUrl(activeTask.getId()),
+            secure: true,
+            async: true
+          }).post({'data': data});
+          setTimeout(function(){request.cancel();}.bind(this),1000);
+        }.bind(this),1000);
+      }
     } else { // task is still running
       this.makeRequest.delay(this.reqDelay, this, data);
     }

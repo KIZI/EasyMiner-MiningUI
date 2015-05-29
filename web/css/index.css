@@ -1345,6 +1345,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
   margin: 10px 0;
+  max-width: 800px !important;
 }
 #found-rules #found-rules-task-name .count {
   color: #888;
