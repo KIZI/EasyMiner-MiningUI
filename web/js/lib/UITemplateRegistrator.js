@@ -510,7 +510,7 @@ var UITemplateRegistrator = new Class({
         i18n = data.i18n,
         IMs = data.IMs;
 
-      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+(foundRule.isLoading()?' loading':'')},
+      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+' KB'+foundRule.getRuleSetRelation()+(foundRule.isLoading()?' loading':'')},
         input({type:'checkbox',id:foundRule.getCSSID()+'-checkbox', class:'found-rule-checkbox'}),
         label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
         span({class:'ruleActions'},
@@ -518,6 +518,16 @@ var UITemplateRegistrator = new Class({
             a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})
             :
             a({id: foundRule.getMarkCSSID(), href: '#', 'class': 'mark', 'title': i18n.translate('Add to Rule Clipboard')})
+          ),
+          (foundRule.getRuleSetRelation()=="positive"?
+            a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbRemovePositive', title:i18n.translate('Remove from Knowledge Base')})
+            :
+            a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')})
+          ),
+          (foundRule.getRuleSetRelation()=="negative"?
+            a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbRemoveNegative', title:i18n.translate('Remove from Knowledge Base')})
+            :
+            a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as uninteresting')})
           ),
           a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
         ),

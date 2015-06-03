@@ -379,6 +379,45 @@ var FRManager = new Class({
 
   getTaskId: function(){
     return (this.task == undefined) ? 0 : this.task.getId();
+  },
+
+  getKBSelectedRuleSet: function(){
+    //FIXME Standa - oprava přiřazení aktivního rule setu....
+    return $('kb-select').getSelected().get("value");
+  },
+
+  //region práce s knowledge base
+
+  kbAddRule: function (foundRule, relation) {
+    this.AJAXBalancer.stopRequest(foundRule.getId());
+    this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseAddRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),relation,true));
+    this.AJAXBalancer.run();
+  },
+
+  kbRemoveRule: function (foundRule) {
+    this.AJAXBalancer.stopRequest(foundRule.getId());
+    this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),true));
+    this.AJAXBalancer.run();
   }
+
+/*
+
+  multiKBAddRule: function (foundRulesIds, taskId, relation) {
+    //FIXME Standa
+    var selectedRuleSet = $('kb-select').getSelected().get("value");
+    var foundRules = this.multiFoundRules(foundRulesIds, taskId);
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseAddRulesUrl(selectedRuleSet,foundRules[1],relation));
+  },
+
+
+  multiKBRemoveRule: function (foundRulesIds, taskId) {
+    //FIXME Standa
+    var selectedRuleSet = $('kb-select').getSelected().get("value");
+    var foundRules = this.multiFoundRules(foundRulesIds, taskId);
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseRemoveRulesUrl(selectedRuleSet,foundRules[1]));
+  },*/
+
+  //endregion práce s knowledge base
+
 
 });

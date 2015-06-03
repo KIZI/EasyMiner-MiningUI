@@ -553,6 +553,36 @@ var UIListener = new Class({
       }.bind(FRManager));
     }
     /*endregion unmark*/
+    /*region knowledge base*/
+    var kbAddPositiveLink = $(foundRule.getKBAddPositiveCSSID());
+    if (kbAddPositiveLink) {
+      if (kbAddPositiveLink.hasClass("kbAddPositive")){
+        kbAddPositiveLink.addEvent('click', function (event) {
+          event.stop();
+          FRManager.kbAddRule(foundRule,"positive");
+        }.bind(FRManager));
+      }else{
+        kbAddPositiveLink.addEvent('click', function (event) {
+          event.stop();
+          FRManager.kbRemoveRule(foundRule);
+        }.bind(FRManager));
+      }
+    }
+    var kbAddNegativeLink = $(foundRule.getKBAddNegativeCSSID());
+    if (kbAddNegativeLink) {
+      if (kbAddNegativeLink.hasClass("kbAddNegative")){
+        kbAddNegativeLink.addEvent('click', function (event) {
+          event.stop();
+          FRManager.kbAddRule(foundRule,"negative");
+        }.bind(FRManager));
+      }else{
+        kbAddNegativeLink.addEvent('click', function (event) {
+          event.stop();
+          FRManager.kbRemoveRule(foundRule);
+        }.bind(FRManager));
+      }
+    }
+    /*endregion knowledge base*/
     /*region details*/
     var detailsLink = $(foundRule.getDetailsCSSID());
     if (detailsLink) {

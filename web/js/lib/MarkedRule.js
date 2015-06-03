@@ -58,7 +58,11 @@ var MarkedRule = new Class({
   },
 
   getKBRemoveCSSID: function(){
-    return 'unbase-' + this.getCSSID();
+    return 'kbRemove-' + this.getCSSID();
+  },
+
+  getKBAddCSSID: function(){
+    return 'kbAdd-' + this.getCSSID();
   },
 
   isLoading: function(){

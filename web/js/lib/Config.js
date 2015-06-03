@@ -256,18 +256,35 @@ var Config = new Class({//TODO Standa: update URLs
       + '?id=' + rulesetId;
   },
 
-  getKnowledgeBaseAddRulesUrl: function (rulesetId, ruleIds, relation) {
+  /**
+   * Funkce pro sestavení adresy pro přidání pravidla do knowledge base
+   * @param {string} rulesetId
+   * @param {string} ruleIds
+   * @param {string} relation
+   * @param {boolean} returnRules
+   * @returns {string}
+   */
+  getKnowledgeBaseAddRulesUrl: function (rulesetId, ruleIds, relation, returnRules) {
     relation = (typeof relation === "undefined" || relation=='') ? 'positive' : relation;
     return this.$easyMinerCenterUrl+this.knowledgeBaseAddRulesUrl
       + '?id=' + rulesetId
       + '&rules=' + ruleIds //jako parametr je možné zadat i více ID oddělených čárkou
-      + '&relation=' + relation;
+      + '&relation=' + relation
+      + (returnRules?'&result=rules':'');
   },
 
-  getKnowledgeBaseRemoveRulesUrl: function (rulesetId, ruleId) {
+  /**
+   * Funkce pro sestavení adresy pro odebrání pravidla z knowledge base
+   * @param {string} rulesetId
+   * @param {string} ruleId
+   * @param {boolean} returnRules
+   * @returns {string}
+   */
+  getKnowledgeBaseRemoveRulesUrl: function (rulesetId, ruleId, returnRules) {
     return this.$easyMinerCenterUrl+this.knowledgeBaseRemoveRulesUrl
       + '?id=' + rulesetId
-      + '&rules=' + ruleId;
+      + '&rules=' + ruleId
+      + (returnRules?'&result=rules':'');
   },
 
   getKnowledgeBaseRemoveAllRulesUrl: function (rulesetId) {

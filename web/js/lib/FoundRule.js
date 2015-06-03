@@ -63,6 +63,14 @@ var FoundRule = new Class({
     return 'details-' + this.getCSSID();
   },
 
+  getKBAddNegativeCSSID: function(){
+    return 'kbAddNegative-' + this.getCSSID();
+  },
+
+  getKBAddPositiveCSSID: function(){
+    return 'kbAddPositive-' + this.getCSSID();
+  },
+
   getRuleValues: function(){
     return {
       a:this.$rule.a,
@@ -78,6 +86,18 @@ var FoundRule = new Class({
 
   setSelected: function(value){
     this.$rule.selected = value;
+  },
+
+  isInRuleSet: function(){
+    return this.$rule.ruleSetRelation!="";
+  },
+
+  setRuleSetRelation: function(relation){
+    this.$rule.ruleSetRelation=relation;
+  },
+
+  getRuleSetRelation: function(){
+    return this.$rule.ruleSetRelation;
   },
 
   isLoading: function(){

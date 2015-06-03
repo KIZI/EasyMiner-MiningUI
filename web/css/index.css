@@ -1447,6 +1447,30 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #found-rules ul li .ruleActions a.unmark:hover {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
 }
+#found-rules ul li .ruleActions a.kbAddPositive {
+  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbAddPositive:hover {
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbRemovePositive {
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbRemovePositive:hover {
+  background: transparent url("../images/icon-thumb-up-20-remove.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbAddNegative {
+  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbAddNegative:hover {
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbRemoveNegative {
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
+#found-rules ul li .ruleActions a.kbRemoveNegative:hover {
+  background: transparent url("../images/icon-thumb-down-20-remove.png") left center no-repeat;
+}
 #found-rules ul li .ruleActions a.details {
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
 }
@@ -1476,6 +1500,12 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules ul li.selected .ruleActions a.mark,
 #found-rules ul li.selected .ruleActions a.unmark {
+  visibility: visible;
+}
+#found-rules ul li.KBpositive .ruleActions a.kbRemovePositive {
+  visibility: visible;
+}
+#found-rules ul li.KBnegative .ruleActions a.kbRemoveNegative {
   visibility: visible;
 }
 #found-rules ul li.loading .ruleActions {

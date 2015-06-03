@@ -1,7 +1,7 @@
 var Settings = new Class({
     GetterSetter: ['rulesCnt', 'caching', 'debug', 'BKAutoSearch', 'recEnabled', 'strictMatch', 'taskMode'],
 
-	$rulesCnt: 100,
+	$rulesCnt: 10000,//TODO Standa nastavení maximálního počtu pravidel
     $caching: false,
     $debug: false,
 	$BKAutoSearch: false,
