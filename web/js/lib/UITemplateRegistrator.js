@@ -527,7 +527,7 @@ var UITemplateRegistrator = new Class({
           (foundRule.getRuleSetRelation()=="negative"?
             a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbRemoveNegative', title:i18n.translate('Remove from Knowledge Base')})
             :
-            a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as uninteresting')})
+            a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')})
           ),
           a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
         ),
@@ -778,7 +778,17 @@ var UITemplateRegistrator = new Class({
             href:'#',
             class:'unmark',
             title:i18n.translate('Remove from Rule Clipboard')
-          },i18n.translate('Remove...'))
+          },i18n.translate('Remove...')),
+          a({
+            href:'#',
+            class:'kbAddPositive',
+            title:i18n.translate('Add to Knowledge Base as interesting')
+          },i18n.translate('Interesting')),
+          a({
+            href:'#',
+            class:'kbAddNegative',
+            title:i18n.translate('Add to Knowledge Base as not interesting')
+          },i18n.translate('Not interesting'))
         ),
         span({class:'task-actions'},
           a({

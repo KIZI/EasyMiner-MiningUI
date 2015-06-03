@@ -1569,6 +1569,18 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #found-rules #found-rules-multi-controls .actions >a.unmark {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
 }
+#found-rules #found-rules-multi-controls .actions >a.kbAddPositive {
+  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
+}
+#found-rules #found-rules-multi-controls .actions >a.kbAddPositive:hover {
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+#found-rules #found-rules-multi-controls .actions >a.kbAddNegative {
+  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
+}
+#found-rules #found-rules-multi-controls .actions >a.kbAddNegative:hover {
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
 #found-rules #found-rules-multi-controls .actions >a.visible {
   display: inline-block;
 }

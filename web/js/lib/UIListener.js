@@ -600,6 +600,10 @@ var UIListener = new Class({
     var multiControls=$('found-rules-multi-controls');
     var markAction=(foundRulesRules.getElements('.found-rule-checkbox:checked').length);
     var unmarkAction=(foundRulesRules.getElements('.selected .found-rule-checkbox:checked').length);
+    var kbAddPositiveAction=(foundRulesRules.getElements('.KBpositive .found-rule-checkbox:checked').length);
+    var kbAddNegativeAction=(foundRulesRules.getElements('.KBnegative .found-rule-checkbox:checked').length);
+    kbAddPositiveAction=((markAction-kbAddPositiveAction)>0);
+    kbAddNegativeAction=((markAction-kbAddNegativeAction)>0);
     markAction=((markAction-unmarkAction)>0);
     unmarkAction=(unmarkAction>0);
 
@@ -612,6 +616,16 @@ var UIListener = new Class({
       multiControls.getElements('.actions .unmark').addClass('visible');
     }else{
       multiControls.getElements('.actions .unmark').removeClass('visible');
+    }
+    if (kbAddPositiveAction){
+      multiControls.getElements('.actions .kbAddPositive').addClass('visible');
+    }else{
+      multiControls.getElements('.actions .kbAddPositive').removeClass('visible');
+    }
+    if (kbAddNegativeAction){
+      multiControls.getElements('.actions .kbAddNegative').addClass('visible');
+    }else{
+      multiControls.getElements('.actions .kbAddNegative').removeClass('visible');
     }
   },
 
@@ -654,7 +668,7 @@ var UIListener = new Class({
         this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
       multiControls.getElements('.none').addEvent('click',function(event){
-        //select all checkboxes
+        //unselect all checkboxes
         event.stop();
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
           checkbox.checked=false;
@@ -685,6 +699,27 @@ var UIListener = new Class({
         event.stop();
         var FRManager = this.ARBuilder.getFRManager();
         FRManager.multiUnmarkFoundRules(this.getFoundRulesSelectedIds());
+        $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
+
+
+      multiControls.getElements('.actions .kbAddPositive').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.multiKBAddRules(this.getFoundRulesSelectedIds(),'positive');
+        $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
+
+      multiControls.getElements('.actions .kbAddNegative').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.multiKBAddRules(this.getFoundRulesSelectedIds(),'negative');
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
           checkbox.checked=false;
         });

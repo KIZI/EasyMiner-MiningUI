@@ -398,24 +398,35 @@ var FRManager = new Class({
     this.AJAXBalancer.stopRequest(foundRule.getId());
     this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),true));
     this.AJAXBalancer.run();
-  }
-
-/*
-
-  multiKBAddRule: function (foundRulesIds, taskId, relation) {
-    //FIXME Standa
-    var selectedRuleSet = $('kb-select').getSelected().get("value");
-    var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseAddRulesUrl(selectedRuleSet,foundRules[1],relation));
   },
 
+  multiKBAddRules: function (foundRulesIds, relation) {
+    var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
+    if (selectedFoundRules.length==0){return;}
+    var urlIds=[];
+    Array.each(selectedFoundRules,function(foundRule){
+      urlIds.push(foundRule.$id);
+      this.AJAXBalancer.stopRequest(foundRule.getId());
+      foundRule.setLoading(true);
+    }.bind(this));
+    urlIds=urlIds.join(',');
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseAddRulesUrl(this.getKBSelectedRuleSet(),urlIds,relation,true));
+    this.AJAXBalancer.run();
+  },
 
-  multiKBRemoveRule: function (foundRulesIds, taskId) {
-    //FIXME Standa
-    var selectedRuleSet = $('kb-select').getSelected().get("value");
-    var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseRemoveRulesUrl(selectedRuleSet,foundRules[1]));
-  },*/
+  multiKBRemoveRules: function (foundRulesIds) {
+    var selectedFoundRules=this.getFoundRulesByIds(this.cleanFoundRulesIds(foundRulesIds));
+    if (selectedFoundRules.length==0){return;}
+    var urlIds=[];
+    Array.each(selectedFoundRules,function(foundRule){
+      urlIds.push(foundRule.$id);
+      this.AJAXBalancer.stopRequest(foundRule.getId());
+      foundRule.setLoading(true);
+    }.bind(this));
+    urlIds=urlIds.join(',');
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),urlIds,true));
+    this.AJAXBalancer.run();
+  }
 
   //endregion práce s knowledge base
 
