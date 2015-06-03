@@ -985,10 +985,12 @@ var UITemplateRegistrator = new Class({
         name = div(
             {class: 'marked-rules-task-name'},
             a({href: '#', class: 'toggle'},
-                task.name,
-                span({class: 'toggle'}, '')),
+              span({class: 'toggle'}, '')
+            ),
+            a({href: '#', class: 'toggle'},task.name),
             span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
             a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
+            //TODO Standa odkaz na odebrání celé úlohy z rule clipboard...
         );
       }
       div(

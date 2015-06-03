@@ -164,6 +164,8 @@ var UIStructurePainter = new Class({
     },
 
     resizeApplication: function() {
+      //FIXME Standa
+      console.log('resizeApplication');
         // Declarations
         var measuredElements = [ $('antecedent'), $('interest-measures'), $('succedent') ];
         var widthFix = 50; // HACK: To prevent reimplementing vast codebase
@@ -183,7 +185,9 @@ var UIStructurePainter = new Class({
         var width = this.$elementSizeMeter.getWidth(measuredElements) + 1; // IE9 hack (+1)
         $('ar-wrapper').setStyle('width', width);
 
-        $('marked-rules').setStyle('width', $('content').getSize().x - $('content').getStyle('padding-right').replace('px', '').toInt() - $('content').getStyle('padding-left').replace('px', '').toInt() - 2);
+        var markedRulesWidth=$('content').getSize().x - $('content').getStyle('padding-right').replace('px', '').toInt() - $('content').getStyle('padding-left').replace('px', '').toInt() - 2;
+        $('marked-rules').setStyle('width', markedRulesWidth);
+        $('marked-rules').setStyle('max-width', markedRulesWidth);
 
         this.resizeWindow();
     },
