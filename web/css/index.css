@@ -1808,10 +1808,16 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
 }
 #marked-rules ul li .ruleActions a.kb-add[rel=positive] {
-  background: transparent url("../images/icon-thumb-up.png") left center no-repeat;
+  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
+}
+#marked-rules ul li .ruleActions a.kb-add[rel=positive]:hover {
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
 }
 #marked-rules ul li .ruleActions a.kb-add[rel=negative] {
-  background: transparent url("../images/icon-thumb-down.png") left center no-repeat;
+  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
+}
+#marked-rules ul li .ruleActions a.kb-add[rel=negative]:hover {
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
 }
 #marked-rules ul li .ims {
   display: block;
