@@ -36,19 +36,19 @@ var ARBuilder = new Class({
 
     // Paint application structure
     this.$UIStructureListener = new UIStructureListener(this);
-    this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementID())), new ElementSizeMeter(), new BrowserDetector(), this);
+    this.$UIStructurePainter = new UIStructurePainter(this.$config, new DateHelper(), this.$i18n, this.$UIStructureListener, new UIStructureTemplater(), new UIScroller($(this.$config.getRootElementId())), new ElementSizeMeter(), new BrowserDetector(), this);
     this.$UIStructureListener.setUIStructurePainter(this.$UIStructurePainter);
     this.$UIStructurePainter.render();
 
     this.UIListener = new UIListener(this, new UIColorizer(), new DragDropHelper(new UIColorizer()), new ColorHelper());
-    this.UIPainter = new UIPainter(this, this.$config, this.settings, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementID())), this.$UIStructurePainter);
+    this.UIPainter = new UIPainter(this, this.$config, this.settings, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementId())), this.$UIStructurePainter);
     this.UIListener.setUIPainter(this.UIPainter);
 
     this.$reportManager = new ReportManager(this.$config, this.settings, this.UIPainter);
 
     this.$currentUser = new CurrentUser(this, this.UIPainter, this.$config, this.$i18n);
 
-    if (this.$config.getIdDm()) {
+    if (this.$config.getMinerId()) {
       this.loadData();
     } else {
       this.openNewTaskWindow();
@@ -58,13 +58,13 @@ var ARBuilder = new Class({
   loadData: function () {
     this.handleLoadData();
     this.dataParser = new DataParser(this.$config, this.settings, true);
-    this.dataParser.getData(this.initApplication, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
+    this.dataParser.getData(this.initApplication, this.handleLoadDataError, this, this.$config.getMinerId() != 'TEST' ? this.$callbackDelay : 0);
   },
 
   reloadData: function () {
     this.handleLoadData();
     this.dataParser = new DataParser(this.$config, this.settings, true);
-    this.dataParser.getData(this.repaintData, this.handleLoadDataError, this, this.$config.getIdDm() != 'TEST' ? this.$callbackDelay : 0);
+    this.dataParser.getData(this.repaintData, this.handleLoadDataError, this, this.$config.getMinerId() != 'TEST' ? this.$callbackDelay : 0);
   },
 
   repaintData: function () {

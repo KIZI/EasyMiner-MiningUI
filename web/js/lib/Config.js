@@ -1,6 +1,6 @@
 var Config = new Class({//TODO Standa: update URLs
 
-  GetterSetter: ['stopMiningUrl', 'supportUrl', 'joomlaURL', 'showFeedback', 'easyMinerCenterUrl'],
+  GetterSetter: ['stopMiningUrl', 'supportUrl', 'showFeedback', 'easyMinerCenterUrl'],
 
   // app info
   name: 'EasyMiner',
@@ -57,7 +57,9 @@ var Config = new Class({//TODO Standa: update URLs
   //endregion
 
   // URL settings
+  /*
   $joomlaURL: 'http://sewebar-dev.lmcloud.vse.cz/',
+  */
   $showFeedback: false,
   params: {},
   ////BKGetURL: 'getBK.php',
@@ -142,7 +144,7 @@ var Config = new Class({//TODO Standa: update URLs
       return this.$easyMinerCenterUrl + this.showColumnHistogramUrl +'?miner='+ this.params.id_dm + '&columnName=' + encodeURIComponent(name) + '&mode=iframe';
     }
   },
-
+/*
   getCreateUserReportUrl: function () {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=izi&task=newReportArticle&tmpl=component&kbi=' + this.params.id_dm;
   },
@@ -158,7 +160,7 @@ var Config = new Class({//TODO Standa: update URLs
   getModelTesterUrl: function (taskId, rulesIds) {//TODO
     return this.$joomlaURL + 'index.php?option=com_dbconnect&controller=data&task=modelTester&tmpl=component&kbi=' + this.params.id_dm + '&lmtask=' + taskId + '&rules=' + rulesIds.join();
   },
-
+*/
   //region easyMinerCenterUrls
   getUserLoginUrl: function () {
     return this.$easyMinerCenterUrl+this.userLoginUrl+'?url='+encodeURIComponent(location.href);
@@ -199,7 +201,7 @@ var Config = new Class({//TODO Standa: update URLs
   },
   //endregion easyMinerCenterUrls
 
-  getRootElementID: function () {
+  getRootElementId: function () {
     return this.rootElementID;
   },
 

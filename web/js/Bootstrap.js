@@ -3,25 +3,24 @@
 var config = null;
 
 var reload = function() {
-    $(config.getRootElementID()).fireEvent('reload');
+    $(config.getRootElementId()).fireEvent('reload');
 };
 
 var close = function() {
-    $(config.getRootElementID()).fireEvent('closeOverlay');
+    $(config.getRootElementId()).fireEvent('closeOverlay');
 };
 
 var reloadReports = function() {
-    $(config.getRootElementID()).fireEvent('reloadReports');
+    $(config.getRootElementId()).fireEvent('reloadReports');
 };
 
 window.addEvent('domready', function () {
-    var nativeTypeExtender = new NativeTypeExtender();
-    nativeTypeExtender.extendAll();
+  var nativeTypeExtender = new NativeTypeExtender();
+  nativeTypeExtender.extendAll();
 
-    config = new Config();
-
-	var uri = new URI(window.location.href);
-	config.setParams(uri.get('data'));
+  config = new Config();
+  config.setMinerId(minerId);
+  config.setRootElementId(rootElementId);
 
 	var ARB = new ARBuilder(config);
 });

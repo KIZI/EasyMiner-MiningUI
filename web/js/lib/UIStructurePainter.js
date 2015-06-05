@@ -24,8 +24,8 @@ var UIStructurePainter = new Class({
     },
 
     render: function() {
-        $(this.$config.getRootElementID()).grab(Mooml.render('overlayTemplate'));
-        $(this.$config.getRootElementID()).grab(Mooml.render('mainTemplate', {i18n: this.$i18n}));
+        $(this.$config.getRootElementId()).grab(Mooml.render('overlayTemplate'));
+        $(this.$config.getRootElementId()).grab(Mooml.render('mainTemplate', {i18n: this.$i18n}));
         this.renderNavigation();
         this.renderActiveRule();
         this.renderMarkedRules();
@@ -164,8 +164,6 @@ var UIStructurePainter = new Class({
     },
 
     resizeApplication: function() {
-      //FIXME Standa
-      console.log('resizeApplication');
         // Declarations
         var measuredElements = [ $('antecedent'), $('interest-measures'), $('succedent') ];
         var widthFix = 50; // HACK: To prevent reimplementing vast codebase

@@ -231,7 +231,7 @@ var UIStructureListener = new Class({
     },
 
     registerDataReloadEventHandlers: function() {
-        var elIZI = $(this.$ARBuilder.getConfig().getRootElementID());
+        var elIZI = $(this.$ARBuilder.getConfig().getRootElementId());
 
         // called when com_dbconnect window is closed
         elIZI.addEvent('reload', function() {

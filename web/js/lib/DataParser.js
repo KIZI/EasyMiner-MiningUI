@@ -29,7 +29,7 @@ var DataParser = new Class({
           errCallback.delay(delay, bind);
           return;
         }
-        this.parseData(responseJSON, this.config.getIdDm());
+        this.parseData(responseJSON, this.config.getMinerId());
 
         if (instanceOf(callback, Function)) {
           callback.delay(delay, bind);
