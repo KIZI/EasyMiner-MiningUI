@@ -21,7 +21,7 @@ var MRManager = new Class({
     this.UIPainter = UIPainter;
     this.UIListener = UIListener;
 
-    this.getRuleSetsRequest();
+    //this.getRuleSetsRequest();
     this.getTasksRequest();
   },
 

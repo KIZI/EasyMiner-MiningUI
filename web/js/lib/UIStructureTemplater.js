@@ -271,11 +271,12 @@ var UIStructureTemplater = new Class({
       section({id: 'knowledge-base-select'},
           h2({'class': 'minimize'}, i18n.translate('Knowledge base')),
           div({'class': 'clearfix'},
+              //strong({id: 'kb-ruleset'}, i18n.translate('Loading')+'...'),
               label({'for': 'kb-select'}, i18n.translate('Active ruleset: ')),
               select({name: 'kb-select', id: 'kb-select'},
-                  option(i18n.translate('Loading')+'...')
+                  option({value: 2}, i18n.translate('Test ruleset (4)'))
               ),
-              a({href: '#', 'id': 'add-ruleset', 'title': i18n.translate('Add new ruleset')}, i18n.translate('Add new ruleset'))
+              a({href: '#', 'id': 'change-ruleset', 'title': i18n.translate('Change ruleset')}, i18n.translate('Change ruleset'))
           ));
     });
 

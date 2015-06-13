@@ -198,9 +198,9 @@ var UIStructureListener = new Class({
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
         }.bind(this));
 
-        $('kb-select').addEvent('change', function (event) {
+        /*$('kb-select').addEvent('change', function (event) {
             this.$ARBuilder.$MRManager.loadKnowledgeBase(event.target.getSelected().get("value"));
-        }.bind(this));
+        }.bind(this));*/
 
         var me = this;
         $('createUserReport').addEvent('click', function(event) {

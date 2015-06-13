@@ -761,7 +761,7 @@ nav {
 #knowledge-base-select .clearfix select {
   width: 100%;
 }
-#knowledge-base-select .clearfix #add-ruleset {
+#knowledge-base-select .clearfix #change-ruleset {
   color: #126499;
   font-size: 14px;
   float: right;

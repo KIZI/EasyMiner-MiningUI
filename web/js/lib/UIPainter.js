@@ -297,14 +297,14 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
-  renderRuleSetsSelect: function (data, selectedId) {
+  /*renderRuleSetsSelect: function (data, selectedId) {
     var ruleSetsListElm = $('kb-select');
     ruleSetsListElm.empty();
     Object.each(data, function (value, id) {
       value['selected'] = (id == selectedId) ? 'selected' : '';
       ruleSetsListElm.grab(Mooml.render('knowledgeBaseTemplate', value));
     }.bind(this));
-  },
+  },*/
 
   // to render only task
   renderMarkedTask: function (task, status) {
