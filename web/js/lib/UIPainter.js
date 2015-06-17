@@ -258,6 +258,23 @@ var UIPainter = new Class({
     });
   },
 
+  renderChangeRulesetWindow: function () {
+    var overlay = this.$UIStructurePainter.showOverlay();
+
+    //this.$ARBuilder.$MRManager.loadKnowledgeBase(event.target.getSelected().get("value"));
+
+    var window = Mooml.render('changeRulesetWindowTemplate', {
+      i18n: this.i18n
+    });
+    overlay.grab(window);
+
+    this.ARBuilder.$MRManager.getRuleSetsRequest();
+
+    this.UIListener.registerOverlayEventHandlers();
+
+    this.$UIStructurePainter.posOverlay();
+  },
+
   renderDataField: function (field, elementParent) {
     elementParent.grab(Mooml.render('dataFieldTemplate', {i18n: this.i18n, field: field}));
   },
@@ -297,14 +314,14 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
-  /*renderRuleSetsSelect: function (data, selectedId) {
-    var ruleSetsListElm = $('kb-select');
+  renderRulesetsList: function (data, selectedId) {
+    var ruleSetsListElm = $('change-ruleset-list');
     ruleSetsListElm.empty();
     Object.each(data, function (value, id) {
       value['selected'] = (id == selectedId) ? 'selected' : '';
-      ruleSetsListElm.grab(Mooml.render('knowledgeBaseTemplate', value));
+      ruleSetsListElm.grab(Mooml.render('changeRulesetWindowItemTemplate', value));
     }.bind(this));
-  },*/
+  },
 
   // to render only task
   renderMarkedTask: function (task, status) {

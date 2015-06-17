@@ -267,6 +267,10 @@ var ARBuilder = new Class({
     this.$UIStructurePainter.hideOverlay();
   },
 
+  openChangeRulesetWindow: function () {
+    this.UIPainter.renderChangeRulesetWindow();
+  },
+
   openAddAttributeWindow: function (field) {
     this.UIPainter.renderAddAttributeWindow(field);
   },

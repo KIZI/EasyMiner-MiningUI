@@ -70,6 +70,22 @@ var UITemplateRegistrator = new Class({
       );
     });
 
+    Mooml.register('changeRulesetWindowTemplate', function (data) {
+      var i18n = data.i18n;
+
+      div({id: 'change-ruleset-window'},
+          a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+          h2(i18n.translate('Change ruleset')),
+          div({id: 'change-ruleset-list', class: 'actionsDiv bigButtons'}));
+    });
+
+    Mooml.register('changeRulesetWindowItemTemplate', function (data) {
+      var id = data.rule_set_id,
+          name = data.name+' ('+data.rulesCount+')';
+
+      a({href: '#', rel: id}, name);
+    });
+
     Mooml.register('knowledgeBaseTemplate', function (data) {
       var id = data.rule_set_id,
           name = data.name+' ('+data.rulesCount+')';

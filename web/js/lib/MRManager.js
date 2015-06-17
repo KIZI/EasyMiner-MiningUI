@@ -133,7 +133,7 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.UIPainter.renderRuleSetsSelect(responseJSON, this.KBid);
+        this.UIPainter.renderRulesetsList(responseJSON, this.KBid);
       }.bind(this),
 
       onError: function () {

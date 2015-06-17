@@ -202,6 +202,10 @@ var UIStructureListener = new Class({
             this.$ARBuilder.$MRManager.loadKnowledgeBase(event.target.getSelected().get("value"));
         }.bind(this));*/
 
+        $('change-ruleset').addEvent('click', function (event) {
+            this.$ARBuilder.openChangeRulesetWindow();
+        }.bind(this));
+
         var me = this;
         $('createUserReport').addEvent('click', function(event) {
             me.$ARBuilder.openCreateUserReportkWindow();
