@@ -306,8 +306,7 @@ var UIPainter = new Class({
     overlay.grab(window);
 
     this.ARBuilder.$MRManager.getRuleSetsRequest();
-    this.UIListener.registerOverlayEventHandlers()
-    this.UIListener.registerChangeRulesetEventHandler();
+    this.UIListener.registerOverlayEventHandlers();
     this.$UIStructurePainter.posOverlay();
   },
 
@@ -324,6 +323,7 @@ var UIPainter = new Class({
         ruleSetsListElm.grab(Mooml.render('changeRulesetWindowItemTemplate', value));
       }
     }.bind(this));
+    this.UIListener.registerChangeRulesetEventHandler();
   },
 
   renderAddRulesetForm: function () {
@@ -366,9 +366,13 @@ var UIPainter = new Class({
   },
 
   // removes marked tasks div
-  removeMarkedTask:function(taskId){
-    var mrElement = $$('#marked-rules div.marked-rules-tasks-content')[0];
-    $('task-'+taskId).destroy();
+  removeMarkedTask:function(taskId, isBase){
+    var typeElm = (isBase ? 'base' : tasks),
+        mrElement = $$('#marked-rules div.marked-rules-'+typeElm+'-content')[0],
+        taskElm = $('task-'+taskId);
+    if(taskElm){
+      $('task-'+taskId).destroy();
+    }
     if(mrElement.getElements('div.marked-rules-task-name').length <= 1){
       mrElement.addClass('empty');
     }

@@ -459,19 +459,60 @@ var UIListener = new Class({
 
   registerAddRulesetFormEventHandler: function (cedent) {
     // submit
-    var elementSubmit = $('add-ruleset-form').getElement('input[type=submit]');
+    var elementSubmit = $('add-ruleset-submit');
     elementSubmit.addEvent('click', function (event) {
       event.stop();
-      alert('add ruleset');
+      var rulesetName = $('add-ruleset-name').value;
+      if(rulesetName.length > 0){
+        var url = this.ARBuilder.$config.getKnowledgeBaseAddRuleSetUrl(rulesetName),
+            errorMsg = this.ARBuilder.$i18n.translate('Unable to add new ruleset! Try it again later.');
+
+        //region načtení úloh ze serveru
+        new Request.JSON({
+          url: url,
+          secure: true,
+          onSuccess: function (responseJSON, responseText) {
+            this.ARBuilder.$MRManager.initKnowledgeBase(responseJSON.rule_set_id);
+            this.UIPainter.hideOverlay();
+          }.bind(this),
+          onError: function () {
+            alert(errorMsg);
+          }.bind(this),
+          onFailure: function () {
+            alert(errorMsg);
+          }.bind(this),
+          onException: function () {
+            alert(errorMsg);
+          }.bind(this),
+          onTimeout: function () {
+            alert(errorMsg);
+          }.bind(this)
+        }).get();
+        //endregion
+      } else{
+        alert(this.ARBuilder.$i18n.translate('Name is required!'));
+      }
     }.bind(this));
   },
 
   registerChangeRulesetEventHandler: function (cedent) {
+    // click on other ruleset
+    var elements = $('change-ruleset-list').getElements('a');
+    elements.addEvent('click', function (event) {
+      event.stop();
+      var elm = event.target,
+          elmId = elm.get('rel');
+      if(elmId != null){
+        this.ARBuilder.$MRManager.loadKnowledgeBase(elmId);
+        this.UIPainter.hideOverlay();
+      }
+    }.bind(this));
     // submit
     var elementSubmit = $('add-ruleset');
     elementSubmit.addEvent('click', function (event) {
       event.stop();
       this.UIPainter.renderAddRulesetForm();
+      this.UIPainter.$UIStructurePainter.resizeApplication();
     }.bind(this));
   },
 

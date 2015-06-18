@@ -21,7 +21,6 @@ var MRManager = new Class({
     this.UIPainter = UIPainter;
     this.UIListener = UIListener;
 
-    //this.getRuleSetsRequest();
     this.getTasksRequest();
   },
 
@@ -46,17 +45,11 @@ var MRManager = new Class({
   loadKnowledgeBase: function (id) {
     this.UIPainter.$UIScroller.rememberLastScroll();
     if(this.KBid != id){
-      if(this.KBid > 0){ this.removeTask(this.tasks[this.KBid]); }
+      if(this.tasks[this.KBid]){ this.removeTask(this.tasks[this.KBid]); }
       this.tasks[id] = new MarkedTask(id, '', this.config, 0, this.i18n, this.FL, this.UIPainter, this, true);
       this.KBid = id;
     }
     this.tasks[id].reload();
-  },
-
-  initKnowledgeBase: function (id) {
-    this.loadKnowledgeBase(id);
-    var kb = this.tasks[id];
-    kb.reload();
   },
 
   getUnmarkRequest: function (foundRules, taskId, URL) {
@@ -108,7 +101,7 @@ var MRManager = new Class({
       url: url,
       secure: true,
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRTasksRequest(responseJSON, false);
+        this.handleSuccessMRTasksRequest(responseJSON);
       }.bind(this),
 
       onError: function () {
@@ -210,7 +203,7 @@ var MRManager = new Class({
     if(this.FRManager.getTaskId() == taskId){
       this.FRManager.gotoPage(1); // reloads FRManager if we unmark in current FR Task
     }
-    this.getRuleSetsRequest();
+    this.loadKnowledgeBase(this.KBid);
   },
 
   handleSuccessMRTasksRequest: function (data) {
@@ -237,7 +230,7 @@ var MRManager = new Class({
 
   removeTask: function(task){
     Object.erase(this.tasks, task.id);
-    this.UIPainter.removeMarkedTask(task.id);
+    this.UIPainter.removeMarkedTask(task.id, task.isBase);
   },
 
   setTaskName: function(taskId, newTaskName){
@@ -265,25 +258,21 @@ var MRManager = new Class({
   },
 
   multiKBAddRule: function (foundRulesIds, taskId, relation) {
-    var selectedRuleSet = $('kb-select').getSelected().get("value");
     var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseAddRulesUrl(selectedRuleSet,foundRules[1],relation));
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseAddRulesUrl(this.KBid,foundRules[1],relation));
   },
 
   kbAddRule: function (foundRule, relation) {
-    var selectedRuleSet = $('kb-select').getSelected().get("value");
-    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseAddRulesUrl(selectedRuleSet,foundRule.getId(true),relation));
+    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseAddRulesUrl(this.KBid,foundRule.getId(true),relation));
   },
 
   multiKBRemoveRule: function (foundRulesIds, taskId) {
-    var selectedRuleSet = $('kb-select').getSelected().get("value");
     var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseRemoveRulesUrl(selectedRuleSet,foundRules[1]));
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseRemoveRulesUrl(this.KBid,foundRules[1]));
   },
 
   kbRemoveRule: function (foundRule) {
-    var selectedRuleSet = $('kb-select').getSelected().get("value");
-    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseRemoveRulesUrl(selectedRuleSet,foundRule.getId(true)));
+    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseRemoveRulesUrl(this.KBid,foundRule.getId(true)));
   },
 
   multiUnmarkFoundRules:function(foundRulesIds, taskId){

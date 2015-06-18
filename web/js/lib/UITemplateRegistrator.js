@@ -101,7 +101,9 @@ var UITemplateRegistrator = new Class({
           ' * '+i18n.translate('required'),
           div({class: 'addValue'},
               label({for: 'add-ruleset-description'}, i18n.translate('Ruleset description:')),
-              input({id: 'add-ruleset-description', type: 'text'})));
+              input({id: 'add-ruleset-description', type: 'text'}),
+              input({id: 'add-ruleset-submit', type: 'submit', value: i18n.translate('Add ruleset')}))
+          );
     });
 
     Mooml.register('activeRulesetTemplate', function (name) {

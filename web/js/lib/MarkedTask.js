@@ -105,17 +105,18 @@ var MarkedTask = new Class({
     var type = (this.isBase) ? 'ruleset' : 'task';
     this.pageLoading = false;
     this.rules = {};
-    if(data[type].rulesCount == 0) {
+    if(data[type].rulesCount == 0 && !this.isBase) {
       this.MRManager.removeTask(this);
     } else{
-      if(!this.isInit && this.isBase && data[type].rulesCount > 0){
-        this.UIPainter.renderMarkedTask(this, 'minimize');
-        this.MRManager.setTaskName(this.id, data[type].name);
-        this.UIPainter.renderActiveRuleset((data[type].name+' ('+this.i18n.translate('rules')+': '+data[type].rulesCount+')'))
-        this.isInit = true;
-      } else{
-        this.IMs = this.FL.getRulesIMs(data[type].IMs);
+      if(this.isBase){
+        this.UIPainter.renderActiveRuleset((data[type].name+' ('+this.i18n.translate('rules')+': '+data[type].rulesCount+')'));
+        if(!this.isInit && data[type].rulesCount > 0){
+          this.UIPainter.renderMarkedTask(this, 'minimize');
+          this.MRManager.setTaskName(this.id, data[type].name);
+          this.isInit = true;
+        }
       }
+      this.IMs = this.FL.getRulesIMs(data[type].IMs);
       this.setRulesCount(data[type].rulesCount);
       if(this.pagesCount > 7){
         this.UIPainter.renderMarkedTask(this, 'minimize');
@@ -124,7 +125,9 @@ var MarkedTask = new Class({
       Object.each(data.rules, function (MRdata, MRid) {
         this.rules[MRid] = new MarkedRule(MRid, MRdata, this);
       }.bind(this));
-      this.UIPainter.renderMarkedRules(this);
+      if(data[type].rulesCount > 0){
+        this.UIPainter.renderMarkedRules(this);
+      }
     }
   },
 
