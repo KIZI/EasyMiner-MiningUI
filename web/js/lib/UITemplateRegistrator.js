@@ -75,15 +75,37 @@ var UITemplateRegistrator = new Class({
 
       div({id: 'change-ruleset-window'},
           a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
-          h2(i18n.translate('Change ruleset')),
-          div({id: 'change-ruleset-list', class: 'actionsDiv bigButtons'}));
+          h2(i18n.translate('Current ruleset')),
+          div({id: 'current-ruleset', class: 'actionsDiv bigButtons'}),
+          br(),
+          h2(i18n.translate('Change ruleset to')),
+          div({id: 'change-ruleset-list', class: 'actionsDiv bigButtons'}),
+          br(),
+          input({id: 'add-ruleset', type: 'submit', value: i18n.translate('Add new ruleset')}));
     });
 
     Mooml.register('changeRulesetWindowItemTemplate', function (data) {
       var id = data.rule_set_id,
-          name = data.name+' ('+data.rulesCount+')';
+          name = data.name+' (rules: '+data.rulesCount+')';
 
-      a({href: '#', rel: id}, name);
+      a({href: '#', rel: id}, name,
+        span({style: 'color: gray;'}, 'Zde bude popisek...'));
+    });
+
+    Mooml.register('changeRulesetWindowAddTemplate', function (data) {
+      var i18n = data.i18n;
+
+      div({class: 'valuesBin'},
+          label({for: 'add-ruleset-name'}, i18n.translate('Ruleset name:')),
+          input({id: 'add-ruleset-name', type: 'text'}),
+          ' * '+i18n.translate('required'),
+          div({class: 'addValue'},
+              label({for: 'add-ruleset-description'}, i18n.translate('Ruleset description:')),
+              input({id: 'add-ruleset-description', type: 'text'})));
+    });
+
+    Mooml.register('activeRulesetTemplate', function (name) {
+      strong({id: 'kb-ruleset'}, name);
     });
 
     Mooml.register('knowledgeBaseTemplate', function (data) {

@@ -457,6 +457,24 @@ var UIListener = new Class({
     }.bind(this));
   },
 
+  registerAddRulesetFormEventHandler: function (cedent) {
+    // submit
+    var elementSubmit = $('add-ruleset-form').getElement('input[type=submit]');
+    elementSubmit.addEvent('click', function (event) {
+      event.stop();
+      alert('add ruleset');
+    }.bind(this));
+  },
+
+  registerChangeRulesetEventHandler: function (cedent) {
+    // submit
+    var elementSubmit = $('add-ruleset');
+    elementSubmit.addEvent('click', function (event) {
+      event.stop();
+      this.UIPainter.renderAddRulesetForm();
+    }.bind(this));
+  },
+
   registerFieldAREventHandlers: function (field, cedent) {
     // remove field
     var elementField = $(field.getCSSRemoveID());

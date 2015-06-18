@@ -111,6 +111,7 @@ var MarkedTask = new Class({
       if(!this.isInit && this.isBase && data[type].rulesCount > 0){
         this.UIPainter.renderMarkedTask(this, 'minimize');
         this.MRManager.setTaskName(this.id, data[type].name);
+        this.UIPainter.renderActiveRuleset((data[type].name+' ('+this.i18n.translate('rules')+': '+data[type].rulesCount+')'))
         this.isInit = true;
       } else{
         this.IMs = this.FL.getRulesIMs(data[type].IMs);

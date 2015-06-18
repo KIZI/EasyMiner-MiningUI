@@ -274,8 +274,8 @@ var UIStructureListener = new Class({
         linkBase.addEvent('click', function(e){
             e.stop();
             if(!linkBase.hasClass('marked-rules-tab-active')){
-                var selectedRuleSet = $('kb-select').getSelected().get("value");
-                this.$ARBuilder.$MRManager.loadKnowledgeBase(selectedRuleSet);
+                //var selectedRuleSet = $('kb-select').getSelected().get("value");
+                this.$ARBuilder.$MRManager.loadKnowledgeBase(this.$ARBuilder.$MRManager.KBid);
                 linkTasks.removeClass('marked-rules-tab-active');
                 linkBase.addClass('marked-rules-tab-active');
                 elBase.show();

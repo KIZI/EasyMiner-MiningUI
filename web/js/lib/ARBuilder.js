@@ -102,6 +102,7 @@ var ARBuilder = new Class({
 
     this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
     this.$MRManager = new MRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$i18n);
+    this.$MRManager.initKnowledgeBase(2); // init KB by id from data
     this.$FRManager = new FRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$MRManager, this.$i18n);
     this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper(), new TaskManager(this.$config, this.settings));
     this.$ETreeManager = new ETreeManager(this.$config, this.settings, this.$DD, this.UIPainter);

@@ -258,23 +258,6 @@ var UIPainter = new Class({
     });
   },
 
-  renderChangeRulesetWindow: function () {
-    var overlay = this.$UIStructurePainter.showOverlay();
-
-    //this.$ARBuilder.$MRManager.loadKnowledgeBase(event.target.getSelected().get("value"));
-
-    var window = Mooml.render('changeRulesetWindowTemplate', {
-      i18n: this.i18n
-    });
-    overlay.grab(window);
-
-    this.ARBuilder.$MRManager.getRuleSetsRequest();
-
-    this.UIListener.registerOverlayEventHandlers();
-
-    this.$UIStructurePainter.posOverlay();
-  },
-
   renderDataField: function (field, elementParent) {
     elementParent.grab(Mooml.render('dataFieldTemplate', {i18n: this.i18n, field: field}));
   },
@@ -314,13 +297,44 @@ var UIPainter = new Class({
 //        this.UIListener.registerReportEventHandler(report);
   },
 
+  renderChangeRulesetWindow: function () {
+    var overlay = this.$UIStructurePainter.showOverlay();
+
+    var window = Mooml.render('changeRulesetWindowTemplate', {
+      i18n: this.i18n
+    });
+    overlay.grab(window);
+
+    this.ARBuilder.$MRManager.getRuleSetsRequest();
+    this.UIListener.registerOverlayEventHandlers()
+    this.UIListener.registerChangeRulesetEventHandler();
+    this.$UIStructurePainter.posOverlay();
+  },
+
   renderRulesetsList: function (data, selectedId) {
     var ruleSetsListElm = $('change-ruleset-list');
     ruleSetsListElm.empty();
+    var currentRulesetElm = $('current-ruleset');
+    currentRulesetElm.empty();
     Object.each(data, function (value, id) {
-      value['selected'] = (id == selectedId) ? 'selected' : '';
-      ruleSetsListElm.grab(Mooml.render('changeRulesetWindowItemTemplate', value));
+      if(id == selectedId){
+        value['selected'] = 'selected';
+        currentRulesetElm.grab(Mooml.render('changeRulesetWindowItemTemplate', value));
+      } else{
+        ruleSetsListElm.grab(Mooml.render('changeRulesetWindowItemTemplate', value));
+      }
     }.bind(this));
+  },
+
+  renderAddRulesetForm: function () {
+    var addRulesetInput = $('add-ruleset');
+    Mooml.render('changeRulesetWindowAddTemplate', {i18n: this.i18n}).replaces(addRulesetInput);
+    this.UIListener.registerAddRulesetFormEventHandler();
+  },
+
+  renderActiveRuleset: function (name) {
+    var activeRulesetElm = $('kb-ruleset');
+    Mooml.render('activeRulesetTemplate', name).replaces(activeRulesetElm);
   },
 
   // to render only task
@@ -390,53 +404,6 @@ var UIPainter = new Class({
       this.UIListener.registerMarkedRuleEventHandlers(MR);
       this.$UIScroller.restoreLastScroll();
     }.bind(this));
-
-    /*var foundRules=this.ARBuilder.$FRManager.rules;
-    Array.each(foundRules,function(foundRule){
-    }.bind(this));
-*/
-
-    //console.log(url);
-    /*var me = this;
-
-    if (!elementParent) { // re-render
-      elementParent = $$('#marked-rules ul')[0];
-      elementParent.empty();
-    }
-
-    var taskId,
-      sortedRules = {};
-    Object.each(markedRules, function (FR) {
-      taskId = FR.getRule().getTask().getId();
-      if (!sortedRules.hasOwnProperty(taskId)) {
-        sortedRules[taskId] = [];
-      }
-      sortedRules[taskId].push(FR);
-    }.bind(this));
-
-    var i = 0,
-      taskParent,
-      lastTaskId,
-      taskIds = [];
-    Object.each(sortedRules, function (foundRules, taskId) {
-      taskIds.include(taskId);
-
-      if (taskId !== lastTaskId) {
-        taskParent = Mooml.render('taskTemplate', {i18n: this.i18n, task: foundRules[0].getRule().getTask()});
-        elementParent.grab(taskParent);
-        lastTaskId = taskId;
-      }
-      Array.each(foundRules, function (FR) {
-//                FR.getRule().setId(++i);
-        var elementRule = Mooml.render('markedRuleTemplate', {i18n: this.i18n, rule: FR.getRule()});
-        taskParent.grab(elementRule);
-        this.UIListener.registerMarkedRuleEventHandlers(FR);
-      }.bind(this));
-    }.bind(this));
-
-    taskIds.each(function (taskId) {
-      me.UIListener.registerMarkedRulesTaskEventHandlers(taskId);
-    });*/
   },
 
   initFieldGroup: function (id) { // recursive

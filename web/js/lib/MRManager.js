@@ -53,6 +53,12 @@ var MRManager = new Class({
     this.tasks[id].reload();
   },
 
+  initKnowledgeBase: function (id) {
+    this.loadKnowledgeBase(id);
+    var kb = this.tasks[id];
+    kb.reload();
+  },
+
   getUnmarkRequest: function (foundRules, taskId, URL) {
     new Request.JSON({
       url: URL,
