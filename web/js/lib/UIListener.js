@@ -819,12 +819,13 @@ var UIListener = new Class({
   // same as registerFoundRulesEventHandlers, only ids differences TODO merge
   registerMarkedRulesEventHandlers: function(task){
     var taskElm = $('task-'+task.id),
-        taskNameElement = taskElm.getElement('.marked-rules-task-name');
+        taskNameElement = taskElm.getElement('.marked-rules-task-name'),
+        taskDesc = (task.isBase ? task.desc : null);
     if (!taskNameElement){return;}
     var renameTaskLink = taskNameElement.getElements('.rename-task');
     renameTaskLink.addEvent('click',function(event){
       event.stop();
-      this.ARBuilder.getARManager().openRenameTaskWindow(task.id,task.name);
+      this.UIPainter.renderRenameTaskWindow(task.id,task.name,taskDesc);
     }.bind(this));
 
     taskNameElement.getElements('.toggle').addEvent('click', function (event) {
@@ -1046,17 +1047,29 @@ var UIListener = new Class({
   },*/
 
   registerTaskRenameEventHandlers: function () {
+    // Reset (erase ruleset)
+    var resetButton = $$('#rename-task-form input[type=reset]')[0];
+    if(resetButton){ // should be only for ruleset renaming
+      resetButton.addEvent('click', function (e) {
+        e.stop();
+
+        var rulesetId = $('rename-task-id').value;
+        this.ARBuilder.getMRManager().eraseRuleset(rulesetId)
+
+        this.UIPainter.hideOverlay();
+
+      }.bind(this));
+    }
     // Submit (rename)
     $$('#rename-task-form input[type=submit]').addEvent('click', function (e) {
       e.stop();
 
-      var newTaskName = $('rename-task-input')
-        .value
-        .trim();
-      var taskId = $('rename-task-id').value;
+      var taskId = $('rename-task-id').value,
+          newTaskDesc = $('rename-task-input-desc'),
+          newTaskName = $('rename-task-input').value.trim();
 
       // Check that the name is valid
-      if (newTaskName.trim().length == 0) {
+      if (newTaskName.length == 0) {
         this.ARBuilder.getARManager().displayError(
           'rename-task-input',
           'rename-task-error',
@@ -1066,8 +1079,14 @@ var UIListener = new Class({
       }
 
       // Proceed with renaming
-      this.ARBuilder.getARManager().renameTask(taskId, newTaskName);
+      if(newTaskDesc != null){ // it should be ruleset renaming
+        this.ARBuilder.getMRManager().editRuleset(taskId, newTaskName, newTaskDesc)
+      } else{
+        this.ARBuilder.getARManager().renameTask(taskId, newTaskName);
+      }
+
       this.UIPainter.hideOverlay();
+
 
     }.bind(this));
   },

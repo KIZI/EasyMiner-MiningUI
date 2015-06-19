@@ -233,6 +233,66 @@ var MRManager = new Class({
     this.UIPainter.removeMarkedTask(task.id, task.isBase);
   },
 
+  editRuleset: function(taskId, newTaskName, newTaskDesc){
+    var task = this.tasks[taskId];
+    if(task != undefined){
+      new Request.JSON({
+        url: this.config.getKnowledgeBaseRenameRuleSetUrl(taskId,newTaskName),
+        secure: true,
+        onSuccess: function () {
+          this.loadKnowledgeBase(taskId);
+          task.setName(newTaskName);
+          this.UIPainter.renderMarkedTask(task);
+        }.bind(this),
+
+        onError: function () {
+          alert('Editing ruleset failed. Try again later.');
+        }.bind(this),
+
+        onFailure: function () {
+          alert('Editing ruleset failed. Try again later.');
+        }.bind(this),
+
+        onException: function () {
+          alert('Editing ruleset failed. Try again later.');
+        }.bind(this),
+
+        onTimeout: function () {
+          alert('Editing ruleset failed. Try again later.');
+        }.bind(this)
+      }).get();
+    }
+  },
+
+  eraseRuleset: function(rulesetId){
+    var task = this.tasks[rulesetId];
+    if(task != undefined){
+      new Request.JSON({
+        url: this.config.getKnowledgeBaseDeleteRuleSetUrl(rulesetId),
+        secure: true,
+        onSuccess: function () {
+          this.loadKnowledgeBase(2);
+        }.bind(this),
+
+        onError: function () {
+          alert('Erasing ruleset failed. Try again later.');
+        }.bind(this),
+
+        onFailure: function () {
+          alert('Erasing ruleset failed. Try again later.');
+        }.bind(this),
+
+        onException: function () {
+          alert('Erasing ruleset failed. Try again later.');
+        }.bind(this),
+
+        onTimeout: function () {
+          alert('Erasing ruleset failed. Try again later.');
+        }.bind(this)
+      }).get();
+    }
+  },
+
   setTaskName: function(taskId, newTaskName){
     var task = this.tasks[taskId];
     if(task != undefined){

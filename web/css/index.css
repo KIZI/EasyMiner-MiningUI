@@ -118,6 +118,11 @@ div#overlay-inner form input[type='submit']:focus {
   color: #fff;
   border: 1px solid #4c8e0e;
 }
+div#overlay-inner form input[type='reset'] {
+  margin-top: 15px;
+  float: right;
+  background-color: #e44444;
+}
 div#overlay-inner form .slider {
   background: #fff none;
   border: 1px solid #a6c9e2;

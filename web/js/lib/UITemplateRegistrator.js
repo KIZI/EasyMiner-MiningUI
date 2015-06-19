@@ -1019,7 +1019,8 @@ var UITemplateRegistrator = new Class({
         name = div(
             {class: 'marked-rules-task-name'},
             task.name,
-            span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')')
+            span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
+            a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
         );
       } else{
         name = div(
@@ -1146,7 +1147,22 @@ var UITemplateRegistrator = new Class({
     Mooml.register('renameTaskWindowTemplate', function (data) {
       var i18n = data.i18n,
         taskId = data.taskId,
-        taskName = data.taskName;
+        taskName = data.taskName,
+        taskDesc = data.taskDesc,
+        descField = (taskDesc != null ? div(label({
+              'for': 'rename-task-input-desc'
+            },
+            i18n.translate('New description:')),
+            input({
+              name: 'rename-task-input-desc',
+              id: 'rename-task-input-desc',
+              type: 'text',
+              value: taskDesc
+            })) : div()),
+        eraseButton = (taskDesc != null ? input({
+            type: 'reset',
+            value: i18n.translate('Erase')
+          }) : div());
 
       div({
           id: 'rename-task-window'
@@ -1174,7 +1190,7 @@ var UITemplateRegistrator = new Class({
             id: 'rename-task-input',
             type: 'text',
             value: taskName
-          }),
+          }),descField,
           input({
             type: 'hidden',
             id: 'rename-task-id',
@@ -1188,7 +1204,7 @@ var UITemplateRegistrator = new Class({
           ),
           div({
             'class': 'autocomplete clearfix'
-          }),
+          }),eraseButton,
           input({
             type: 'submit',
             value: i18n.translate('Rename')

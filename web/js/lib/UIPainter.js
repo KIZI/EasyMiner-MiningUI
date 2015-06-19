@@ -643,8 +643,9 @@ var UIPainter = new Class({
    * Renders the rename task window in an overlay.
    * @param taskId Task id to rename.
    * @param taskName original name of the task
+   * @param taskDesc original description of the task
    */
-  renderRenameTaskWindow: function (taskId, taskName) {
+  renderRenameTaskWindow: function (taskId, taskName, taskDesc) {
     // Locals
     var overlay = this.$UIStructurePainter.showOverlay();
 
@@ -654,7 +655,8 @@ var UIPainter = new Class({
       {
         i18n: this.i18n,
         taskId: taskId,
-        taskName: taskName
+        taskName: taskName,
+        taskDesc: taskDesc
       }
     ));
 
