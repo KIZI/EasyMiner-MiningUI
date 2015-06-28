@@ -1158,11 +1158,7 @@ var UITemplateRegistrator = new Class({
               id: 'rename-task-input-desc',
               type: 'text',
               value: taskDesc
-            })) : div()),
-        eraseButton = (taskDesc != null ? input({
-            type: 'reset',
-            value: i18n.translate('Erase')
-          }) : div());
+            })) : div());
 
       div({
           id: 'rename-task-window'
@@ -1204,7 +1200,7 @@ var UITemplateRegistrator = new Class({
           ),
           div({
             'class': 'autocomplete clearfix'
-          }),eraseButton,
+          }),
           input({
             type: 'submit',
             value: i18n.translate('Rename')

@@ -264,35 +264,6 @@ var MRManager = new Class({
     }
   },
 
-  eraseRuleset: function(rulesetId){
-    var task = this.tasks[rulesetId];
-    if(task != undefined){
-      new Request.JSON({
-        url: this.config.getKnowledgeBaseDeleteRuleSetUrl(rulesetId),
-        secure: true,
-        onSuccess: function () {
-          this.loadKnowledgeBase(2);
-        }.bind(this),
-
-        onError: function () {
-          alert('Erasing ruleset failed. Try again later.');
-        }.bind(this),
-
-        onFailure: function () {
-          alert('Erasing ruleset failed. Try again later.');
-        }.bind(this),
-
-        onException: function () {
-          alert('Erasing ruleset failed. Try again later.');
-        }.bind(this),
-
-        onTimeout: function () {
-          alert('Erasing ruleset failed. Try again later.');
-        }.bind(this)
-      }).get();
-    }
-  },
-
   setTaskName: function(taskId, newTaskName){
     var task = this.tasks[taskId];
     if(task != undefined){

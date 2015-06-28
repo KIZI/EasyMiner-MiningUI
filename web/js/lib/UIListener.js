@@ -1047,19 +1047,6 @@ var UIListener = new Class({
   },*/
 
   registerTaskRenameEventHandlers: function () {
-    // Reset (erase ruleset)
-    var resetButton = $$('#rename-task-form input[type=reset]')[0];
-    if(resetButton){ // should be only for ruleset renaming
-      resetButton.addEvent('click', function (e) {
-        e.stop();
-
-        var rulesetId = $('rename-task-id').value;
-        this.ARBuilder.getMRManager().eraseRuleset(rulesetId)
-
-        this.UIPainter.hideOverlay();
-
-      }.bind(this));
-    }
     // Submit (rename)
     $$('#rename-task-form input[type=submit]').addEvent('click', function (e) {
       e.stop();

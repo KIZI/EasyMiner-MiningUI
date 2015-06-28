@@ -6,6 +6,8 @@ var DataParser = new Class({
   DD: null,
   minerType: '',
   minerName: '',
+  rulesetId: '',
+  rulesetName: '',
   FLs: [],
   FGC: null,
 
@@ -63,6 +65,8 @@ var DataParser = new Class({
 
     this.minerType=data.miner_type;
     this.minerName=data.miner_name;
+
+    this.rulesetId=data.miner_ruleset.id;
   },
 
   getDD: function () {
