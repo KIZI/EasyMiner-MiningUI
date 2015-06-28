@@ -45,8 +45,10 @@ var UIListener = new Class({
       });
 
       drag.start(event);
-      this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
-      this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
+      droppable.setStyle('background-color', this.$colorHelper.getCedentHighlightBackgroundColor());
+      droppable.setStyle('border-color', this.$colorHelper.getCedentHighlightBorderColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
     }.bind(this));
 
     $(attribute.getCSSAddID()).addEvent('click', function (event) {
@@ -97,7 +99,8 @@ var UIListener = new Class({
       });
 
       drag.start(event);
-      this.UIColorizer.tween(droppable, this.$colorHelper.getAttributesHighlightBackgroundColor());
+      droppable.setStyle('background-color', this.$colorHelper.getAttributesHighlightBackgroundColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getAttributesHighlightBackgroundColor());
     }.bind(this));
 
     // add to attributes
@@ -141,8 +144,10 @@ var UIListener = new Class({
       });
 
       drag.start(event);
-      this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
-      this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
+      droppable.setStyle('background-color', this.$colorHelper.getCedentHighlightBackgroundColor());
+      droppable.setStyle('border-color', this.$colorHelper.getCedentHighlightBorderColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
     }.bind(this));
   },
 
@@ -563,8 +568,10 @@ var UIListener = new Class({
       });
 
       drag.start(event);
-      this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
-      this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
+      droppable.setStyle('background-color', this.$colorHelper.getCedentHighlightBackgroundColor());
+      droppable.setStyle('border-color', this.$colorHelper.getCedentHighlightBorderColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBackgroundColor());
+      //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
 
       var ARManager = this.ARBuilder.getARManager();
       var attributes = $('attributes');
@@ -579,7 +586,8 @@ var UIListener = new Class({
       });
 
       dragA.start(event);
-      this.UIColorizer.tween(attributes, this.$colorHelper.getAttributesHighlightBackgroundColor());
+      attributes.setStyle('background-color', this.$colorHelper.getAttributesHighlightBackgroundColor());
+      //this.UIColorizer.tween(attributes, this.$colorHelper.getAttributesHighlightBackgroundColor());
     }.bind(this));
   },
 

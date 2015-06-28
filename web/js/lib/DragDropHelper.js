@@ -39,9 +39,11 @@ var DragDropHelper = new Class({
                         callback.call(this, element);
                     }
                 }
-                me.$UIColorizer.tween(droppable, color);
+                droppable.setStyle('background-color', color);
+                //me.$UIColorizer.tween(droppable, color);
                 if (highlightBorderColor) {
-                    me.$UIColorizer.tween(droppable, borderColor, 'border-color');
+                    droppable.setStyle('border-color', borderColor);
+                    //me.$UIColorizer.tween(droppable, borderColor, 'border-color');
                 }
             },
 
@@ -55,9 +57,11 @@ var DragDropHelper = new Class({
 
             onCancel: function(dragging) {
                 dragging.destroy();
-                me.$UIColorizer.tween(droppable, color);
+                droppable.setStyle('background-color', color);
+                //me.$UIColorizer.tween(droppable, color);
                 if (highlightBorderColor) {
-                    me.$UIColorizer.tween(droppable, borderColor, 'border-color');
+                    droppable.setStyle('border-color', borderColor);
+                    //me.$UIColorizer.tween(droppable, borderColor, 'border-color');
                 }
             }
         });
