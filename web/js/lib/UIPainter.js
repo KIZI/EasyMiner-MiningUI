@@ -307,7 +307,6 @@ var UIPainter = new Class({
 
     this.ARBuilder.$MRManager.getRuleSetsRequest();
     this.UIListener.registerOverlayEventHandlers();
-    this.$UIStructurePainter.posOverlay();
   },
 
   renderRulesetsList: function (data, selectedId) {
@@ -324,6 +323,7 @@ var UIPainter = new Class({
       }
     }.bind(this));
     this.UIListener.registerChangeRulesetEventHandler();
+    this.$UIStructurePainter.posOverlay();
   },
 
   renderAddRulesetForm: function () {
