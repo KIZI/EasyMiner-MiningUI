@@ -246,9 +246,9 @@ var UIStructurePainter = new Class({
             $content = $elementOverlayInner.getChildren('div'),
             top = $content.getScrollSize();
 
-        $elementOverlayInner.setStyles({
+        /*$elementOverlayInner.setStyles({
             width: window.innerWidth
-        });
+        });*/
 
         if($content.length > 0) {
             if (top[0]['y'] + 20 > window.innerHeight) {
