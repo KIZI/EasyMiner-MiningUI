@@ -400,7 +400,7 @@ div#overlay-inner #user-warning-window a:focus {
 }
 div#overlay-inner #loading-data-window.loading {
   padding-bottom: 40px;
-  background: #fff url("../images/icon-loading-big.gif") center 30px no-repeat;
+  background: #fff url("../images/icon-loading-bw-72.gif") center 30px no-repeat;
 }
 div#overlay-inner .valuesBin label {
   width: 200px;
@@ -662,7 +662,7 @@ nav {
 #attributes #etree-progress {
   color: #666;
   font-size: 14px;
-  background: transparent url("../images/icon-loading-small.gif") 0 3px no-repeat;
+  background: transparent url("../images/icon-loading-bw-16.gif") 0 3px no-repeat;
   display: block;
   padding-left: 20px;
   margin: 5px 0 5px 20px;
@@ -1188,7 +1188,7 @@ section#active-rule #ar-action-box > div {
   padding: 20px 0 20px 55px;
 }
 section#active-rule #ar-action-box > div.in_progress {
-  background: #fff url("../images/icon-loading-big.gif") left center no-repeat;
+  background: #fff url("../images/icon-loading-bw-48.gif") left center no-repeat;
 }
 section#active-rule #ar-action-box > div.question {
   background: #fff url("../images/icon-help-48.png") left center no-repeat;
@@ -1346,7 +1346,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   color: #ededed;
 }
 .paginator .loading {
-  background: transparent url("../images/icon-loading-20.gif") left center no-repeat;
+  background: transparent url("../images/icon-loading-bw-20.gif") left center no-repeat;
   padding: 3px 0 3px 25px;
   margin-left: 10px;
   display: none;
@@ -1531,7 +1531,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   visibility: visible;
 }
 #found-rules ul li.loading .ruleActions {
-  background: transparent url("../images/icon-loading-20.gif") left center no-repeat;
+  background: transparent url("../images/icon-loading-bw-20.gif") left center no-repeat;
 }
 #found-rules ul li.loading .ruleActions >a {
   visibility: hidden !important;
@@ -1864,7 +1864,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   color: #7b0d2e;
 }
 #marked-rules ul li.loading .ruleActions {
-  background: transparent url("../images/icon-loading-20.gif") left center no-repeat;
+  background: transparent url("../images/icon-loading-bw-20.gif") left center no-repeat;
 }
 #marked-rules ul li.loading .ruleActions >a {
   visibility: hidden !important;
