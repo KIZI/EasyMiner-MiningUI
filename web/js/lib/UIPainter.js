@@ -332,9 +332,14 @@ var UIPainter = new Class({
     this.UIListener.registerAddRulesetFormEventHandler();
   },
 
-  renderActiveRuleset: function (name) {
+  renderActiveRuleset: function (name, count) {
     var activeRulesetElm = $('kb-ruleset');
-    Mooml.render('activeRulesetTemplate', name).replaces(activeRulesetElm);
+    if(name == ''){ name = this.i18n.translate('(unnamed ruleset)'); }
+    Mooml.render('activeRulesetTemplate', {
+      i18n: this.i18n,
+      name: name,
+      count: count
+    }).replaces(activeRulesetElm);
   },
 
   // to render only task

@@ -106,8 +106,12 @@ var UITemplateRegistrator = new Class({
           );
     });
 
-    Mooml.register('activeRulesetTemplate', function (name) {
-      strong({id: 'kb-ruleset'}, name);
+    Mooml.register('activeRulesetTemplate', function (data) {
+      span({id: 'kb-ruleset'},
+          strong(data.name),
+          br(),
+          data.i18n.translate('rules')+': '+data.count
+      );
     });
 
     Mooml.register('knowledgeBaseTemplate', function (data) {

@@ -111,7 +111,7 @@ var MarkedTask = new Class({
     } else{
       if(this.isBase){
         this.desc = 'Nějaký popisek'; // TODO přidat finální popisek, který by měl být obdržen spolu s JSONem
-        this.UIPainter.renderActiveRuleset((data[type].name+' ('+this.i18n.translate('rules')+': '+data[type].rulesCount+')'));
+        this.UIPainter.renderActiveRuleset(data[type].name, data[type].rulesCount);
         if(!this.isInit && data[type].rulesCount > 0){
           this.UIPainter.renderMarkedTask(this, 'minimize');
           this.MRManager.setTaskName(this.id, data[type].name);
