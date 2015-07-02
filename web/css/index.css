@@ -545,7 +545,9 @@ nav {
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
+  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-bottom: 15px;
 }
 #attributes h2 {
@@ -689,8 +691,9 @@ nav {
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
-  padding-bottom: 20px;
+  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-bottom: 15px;
 }
 #data-fields h2 {
@@ -761,8 +764,9 @@ nav {
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
-  padding-bottom: 20px;
+  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-bottom: 15px;
 }
 #knowledge-base-select h2 {
@@ -826,46 +830,6 @@ nav {
 #attributes .filter-active,
 #data-fields .filter-active {
   background-position: 0 -20px !important;
-}
-#reports {
-  color: #434343;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
-  padding-bottom: 20px;
-  margin-bottom: 25px;
-}
-#reports h2 {
-  color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
-  font-size: 28px;
-  font-weight: normal;
-  margin: 0 0 20px 0;
-  font-size: 22.400000000000002px;
-  margin: 5px 20px 15px 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #314e64;
-}
-#reports h2.minimize a {
-  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
-}
-#reports h2.maximize a {
-  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
-}
-#reports h2 a {
-  display: block;
-  width: 12px;
-  height: 12px;
-  float: right;
-  position: relative;
-  left: 1px;
-  top: 5px;
-}
-#reports ul {
-  margin-bottom: 10px;
 }
 section#active-rule {
   position: relative;
@@ -1637,7 +1601,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
+  padding: 20px;
   color: #925213;
   font: 36px 'Droid Sans', 'sans-serif';
   font-weight: normal;
@@ -1645,6 +1609,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   width: 475px;
   margin: 0;
   padding-left: 15px;
+  padding-right: 10px;
   background-color: rgba(255,255,255,0.6);
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
@@ -1673,13 +1638,14 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
+  padding: 20px;
   box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
   min-width: 980px;
   margin: 0 0 0 15px;
   padding-left: 15px;
+  padding-right: 10px;
   float: left;
   clear: left;
 }
@@ -1988,11 +1954,12 @@ section#content {
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px 10px;
+  padding: 20px;
   min-width: 980px;
   float: left;
   margin: 15px 0 0 15px;
   padding-left: 15px;
+  padding-right: 10px;
 }
 section#content h2 {
   color: #925213;
