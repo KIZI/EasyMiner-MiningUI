@@ -382,8 +382,7 @@ var FRManager = new Class({
   },
 
   getKBSelectedRuleSet: function(){
-    //FIXME Standa - oprava přiřazení aktivního rule setu....
-    return $('kb-select').getSelected().get("value");
+    return this.MRManager.KBid;
   },
 
   //region práce s knowledge base
