@@ -75,13 +75,13 @@ var UIStructureTemplater = new Class({
               label({'for': 'fl-select'}, i18n.translate('Restrictions') + ':'),
               select({name: 'fl-select', id: 'fl-select'}),
               reset ? span({'class': 'tooltip warning'},
-                span({'class': 'warning'},
-                  img({src: './images/icon-tooltip-warning.png'}),
+                span({'class': 'warningImg'}),
+                span({'class': 'warningImg'},
                   em(i18n.translate('Association rule pattern reset')),
                   i18n.translate('Association rule pattern has to be reset due to new restrictions.'))) : '',
               span({'class': 'tooltip info'},
+                span({'class': 'helpImg'}),
                 span({'class': 'help'},
-                  img({src: './images/icon-tooltip-help.png'}),
                   em(i18n.translate('Restrictions')),
                   i18n.translate('These are predefined association rule pattern restrictions, which do not depend on analysed data. The more expert the looser they are.')))),
             div(
@@ -109,8 +109,8 @@ var UIStructureTemplater = new Class({
               'value': settings.getRulesCnt()
             }),
             span({'class': 'tooltip info'},
+              span({'class': 'helpImg'}),
               span({'class': 'help'},
-                img({src: './images/icon-tooltip-help.png'}),
                 em(i18n.translate('Limit')),
                 i18n.translate('Maximal number of association rules to be searched for.')
               )
@@ -120,8 +120,8 @@ var UIStructureTemplater = new Class({
            label(i18n.translate('Auto filter') + ':'),
            a({id: 'autofilter', 'href': '#', 'class': settings.getBKAutoSearch() ? 'autofilter-on' : 'autofilter-off'}, i18n.translate(settings.getBKAutoSearch() ? 'On': 'Off')),
            span({'class': 'tooltip info'},
+           span({'class': 'helpImg'}),
            span({'class': 'help'},
-           img({src: './images/icon-tooltip-help.png'}),
            em(i18n.translate('Auto filter')),
            i18n.translate('Association rules are automaticaly filtered according to expert background knowledge. This guarantees that only interesting association rules are left.')))
            ) : '', condition makes problem in IE11, in config is false => we don't use it */
@@ -133,8 +133,8 @@ var UIStructureTemplater = new Class({
               'class': settings.getCaching() ? 'cache-on' : 'cache-off'
             }, i18n.translate(settings.getCaching() ? 'On' : 'Off')),
             span({'class': 'tooltip info'},
+              span({'class': 'helpImg'}),
               span({'class': 'help'},
-                img({src: './images/icon-tooltip-help.png'}),
                 em(i18n.translate('Cache')),
                 i18n.translate('Some mining results are automatically cached so that they are retrieved much faster next time.')))
           ),
@@ -146,8 +146,8 @@ var UIStructureTemplater = new Class({
               'class': settings.getDebug() ? 'debug-on' : 'debug-off'
             }, i18n.translate(settings.getDebug() ? 'On' : 'Off')),
             span({'class': 'tooltip info'},
+              span({'class': 'helpImg'}),
               span({'class': 'help'},
-                img({src: './images/icon-tooltip-help.png'}),
                 em(i18n.translate('Debug mode')),
                 i18n.translate('Application shows and logs more information in debug mode.')))
           ),
@@ -159,8 +159,8 @@ var UIStructureTemplater = new Class({
               'class': settings.getStrictMatch() ? 'strict-on' : 'strict-off'
             }, i18n.translate(settings.getStrictMatch() ? 'On' : 'Off')),
             span({'class': 'tooltip info'},
+              span({'class': 'helpImg'}),
               span({'class': 'help'},
-                img({src: './images/icon-tooltip-help.png'}),
                 em(i18n.translate('Strict match')),
                 i18n.translate('All attributes from task setting must appear in discovered rules.')))
           ),

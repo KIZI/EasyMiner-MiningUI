@@ -420,29 +420,42 @@ tooltip()
     position absolute
   &:hover
     >span
-      font-family 'Calibri' 'Tahoma' 'Geneva' sans-serif
-      border-radius(5px)
-      box-shadow(5px, 5px, 5px, 0, rgba(0, 0, 0, 0.1))
+      font-family fontFamily
       width 250px
-      margin-left -3em
-      position absolute; top 2em; left 1em
+      margin-left 0
+      position absolute; top 0; left 0
       z-index 99
-    img
-      border 0
-      margin -10px 0 0 -55px
-      float left
+    span.helpImg
+    span.warningImg
+      display block
+      width 48px
+      height 48px
+      left -20px
+      top -20px
       position absolute
+      margin 0
+      padding 0
+      z-index 100
+    span.helpImg
+      background url('../images/icon-help-48.png') top left no-repeat transparent
+    span.warningImg
+      background url('../images/icon-warning-48.png') top left no-repeat transparent
     em
-      font-family 'Candara' 'Tahoma' 'Geneva' sans-serif
+      display block
+      position relative
+      top 0
+      left 0
+      width 250px
       font-size 1.2em
       font-weight bold
-      display block
-      padding 0.2em 0 0.6em 0
-      float none
-      top 0
+      font-style normal
+      padding-top boxMargin
+      padding-bottom boxMargin
+
   > .help
     background-color #D3E6F4
     border 1px solid #2BB0D7
+
   > .warning
     background-color #FFFFAA
     border 1px solid #FFAD33

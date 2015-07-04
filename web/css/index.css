@@ -180,34 +180,43 @@ div#overlay-inner form .tooltip >span {
   position: absolute;
 }
 div#overlay-inner form .tooltip:hover >span {
-  font-family: 'Calibri' 'Tahoma' 'Geneva' sans-serif;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
-  -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
-  -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  font-family: 'Arial', 'sans-serif';
   width: 250px;
-  margin-left: -3em;
+  margin-left: 0;
   position: absolute;
-  top: 2em;
-  left: 1em;
+  top: 0;
+  left: 0;
   z-index: 99;
 }
-div#overlay-inner form .tooltip:hover img {
-  border: 0;
-  margin: -10px 0 0 -55px;
-  float: left;
+div#overlay-inner form .tooltip:hover span.helpImg,
+div#overlay-inner form .tooltip:hover span.warningImg {
+  display: block;
+  width: 48px;
+  height: 48px;
+  left: -20px;
+  top: -20px;
   position: absolute;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+}
+div#overlay-inner form .tooltip:hover span.helpImg {
+  background: url("../images/icon-help-48.png") top left no-repeat transparent;
+}
+div#overlay-inner form .tooltip:hover span.warningImg {
+  background: url("../images/icon-warning-48.png") top left no-repeat transparent;
 }
 div#overlay-inner form .tooltip:hover em {
-  font-family: 'Candara' 'Tahoma' 'Geneva' sans-serif;
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 250px;
   font-size: 1.2em;
   font-weight: bold;
-  display: block;
-  padding: 0.2em 0 0.6em 0;
-  float: none;
-  top: 0;
+  font-style: normal;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 div#overlay-inner form .tooltip > .help {
   background-color: #d3e6f4;
@@ -453,34 +462,43 @@ div#overlay-inner .bigButtons a span {
   position: absolute;
 }
 #settings-form .tooltip:hover >span {
-  font-family: 'Calibri' 'Tahoma' 'Geneva' sans-serif;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
-  -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
-  -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
+  font-family: 'Arial', 'sans-serif';
   width: 250px;
-  margin-left: -3em;
+  margin-left: 0;
   position: absolute;
-  top: 2em;
-  left: 1em;
+  top: 0;
+  left: 0;
   z-index: 99;
 }
-#settings-form .tooltip:hover img {
-  border: 0;
-  margin: -10px 0 0 -55px;
-  float: left;
+#settings-form .tooltip:hover span.helpImg,
+#settings-form .tooltip:hover span.warningImg {
+  display: block;
+  width: 48px;
+  height: 48px;
+  left: -20px;
+  top: -20px;
   position: absolute;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+}
+#settings-form .tooltip:hover span.helpImg {
+  background: url("../images/icon-help-48.png") top left no-repeat transparent;
+}
+#settings-form .tooltip:hover span.warningImg {
+  background: url("../images/icon-warning-48.png") top left no-repeat transparent;
 }
 #settings-form .tooltip:hover em {
-  font-family: 'Candara' 'Tahoma' 'Geneva' sans-serif;
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 250px;
   font-size: 1.2em;
   font-weight: bold;
-  display: block;
-  padding: 0.2em 0 0.6em 0;
-  float: none;
-  top: 0;
+  font-style: normal;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 #settings-form .tooltip > .help {
   background-color: #d3e6f4;

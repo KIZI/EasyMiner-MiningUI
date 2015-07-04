@@ -252,8 +252,8 @@ var UITemplateRegistrator = new Class({
           label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
           select({name: 'add-im-select', id: 'add-im-select'}),
           span({'class': 'tooltip info'},
+            span({'class': 'helpImg'}),
             span({'class': 'help'},
-              img({src: './images/icon-tooltip-help.png'}),
               em(i18n.translate('Explanation')),
               span('')
             )
@@ -274,8 +274,8 @@ var UITemplateRegistrator = new Class({
           em({class: 'normal'}, IM.getLocalizedName()),
           select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
           span({'class': 'tooltip info', 'styles': {display: 'none'}},
+            span({'class': 'helpImg'}),
             span({'class': 'help'},
-              img({src: './images/icon-tooltip-help.png'}),
               em(i18n.translate('Explanation')),
               span('')
             )
@@ -352,8 +352,8 @@ var UITemplateRegistrator = new Class({
         span({id: 'add-coefficient-autocomplete'},
           //select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
           span({'class': 'tooltip info'},
+            span({'class': 'helpImg'}),
             span({'class': 'help'},
-              img({src: './images/icon-tooltip-help.png'}),
               em(i18n.translate('Explanation')),
               span('')
             )
@@ -367,8 +367,8 @@ var UITemplateRegistrator = new Class({
         span({id: 'add-coefficient-autocomplete'},
           //select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
           span({'class': 'tooltip info'},
+            span({'class': 'helpImg'}),
             span({'class': 'help'},
-              img({src: './images/icon-tooltip-help.png'}),
               em(i18n.translate('Explanation')),
               span('')
             )
@@ -416,8 +416,8 @@ var UITemplateRegistrator = new Class({
         span({id: 'edit-coefficient-autocomplete'},
           //select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
           span({'class': 'tooltip info'},
+            span({'class': 'helpImg'}),
             span({'class': 'help'},
-              img({src: './images/icon-tooltip-help.png'}),
               em(i18n.translate('Explanation')),
               span('')
             )
@@ -432,8 +432,8 @@ var UITemplateRegistrator = new Class({
         span({id: 'edit-coefficient-autocomplete'},
           //select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
           span({'class': 'tooltip info'},
+            span({'class': 'helpImg'}),
             span({'class': 'help'},
-              img({src: './images/icon-tooltip-help.png'}),
               em(i18n.translate('Explanation')),
               span('')
             )
