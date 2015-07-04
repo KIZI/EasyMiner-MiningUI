@@ -4,7 +4,7 @@ navWidth = 280px
 interestMeasuresWidth = 200px
 paletteLiPadding = 2px 0
 
-boxMargin = 15px
+boxMargin = 10px
 feedbackMargin = 20px
 
 baseFontSize = 16px
@@ -12,13 +12,14 @@ actionLinkFontSize = 14px
 
 color = #434343
 linkColor = #126499
+linkHoverColor = #06e
 backgroundColor = #EDEDED
 font = 'Helvetica Neue', 'Arial', 'sans-serif'
 
 foundRuleColor = color
 selectedFoundRuleColor = #4C8E0E
 
-errorColor = #A41D1D
+errorColor = #D01D1D
 h1Color = #FFF
 h1Font = 48px 'Average', 'serif'
 h2Font = 20px 'Average', 'serif'
@@ -40,6 +41,9 @@ buttonBorder = 1px solid rgb(49,78,100)
 buttonHoverBackground = #2d83be
 buttonHoverBorder = buttonBorder
 buttonHoverColor = buttonColor
+
+inputHoverBorderColor = #2d83be
+inputBorderColor = rgb(235,235,235)
 
 invisButtonBorder = 1px solid #EDEDED
 invisButtonColor = #075783
@@ -136,15 +140,22 @@ button()
   cursor pointer
   color buttonColor
   border buttonBorder
-  text-align left
+  text-align center
   display inline-block
-  padding 12px 15px
+  padding 8px 13px
   &:hover
   &:focus
     background buttonHoverBackground
     color buttonHoverColor
     border buttonHoverBorder
     text-decoration none
+
+bigButton()
+  button()
+  padding 12px 15px
+  text-align left
+  display block
+  margin 5px auto
 
 mainButton()
   button()
@@ -168,7 +179,6 @@ invisButton()
   color invisButtonColor
   border invisButtonBorder
   text-align center
-  display block
   &:hover
   &:focus
     background invisButtonHoverBackground
