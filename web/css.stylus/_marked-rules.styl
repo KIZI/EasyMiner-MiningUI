@@ -1,15 +1,18 @@
+tabPadding = 15px
+
 #marked-rules-tabs
   margin boxMargin 0 0 boxMargin
   float left
   clear left
-  width 1005px
+  padding 0
+  width minContentWidth + 4*boxMargin
   .marked-rules-tab
     box()
     h2AR()
-    width 475px
+    width (minContentWidth + 4*boxMargin - 0.5*boxMargin) * 0.5 - 2*tabPadding
     margin 0
-    padding-left 15px
-    padding-right 10px
+    padding-left tabPadding
+    padding-right tabPadding
     background-color rgba(255, 255, 255, 0.6)
     &.marked-rules-tasks
       float left
@@ -31,8 +34,6 @@
   box-shadow(10px, 0, 10px, 0, boxShadowColor)
   min-width minContentWidth
   margin 0 0 0 boxMargin
-  padding-left boxMargin
-  padding-right 10px
   float left
   clear left
 

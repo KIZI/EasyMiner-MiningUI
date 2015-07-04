@@ -1,6 +1,6 @@
 #overlay {
   color: #434343;
-  font: 'Helvetica Neue', 'Arial', 'sans-serif';
+  font: font;
   background: none rgba(0,0,0,0.6);
   position: fixed;
   top: 0;
@@ -31,7 +31,7 @@ div#overlay-inner form em.normal {
   font-style: normal;
 }
 div#overlay-inner form #message {
-  color: #a41d1d;
+  color: #d01d1d;
   line-height: 1em;
 }
 div#overlay-inner form label {
@@ -86,15 +86,15 @@ div#overlay-inner form input[type='number'] {
 div#overlay-inner form input[type='submit'] {
   background: #075783;
   font-size: 14px;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
-  text-align: left;
+  text-align: center;
   display: inline-block;
-  padding: 12px 15px;
+  padding: 8px 13px;
   background: #4c8e0e;
   color: #fff;
   border: 1px solid #4c8e0e;
@@ -219,7 +219,7 @@ div#overlay-inner form .tooltip > .warning {
 }
 div#overlay-inner h2 {
   color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -328,15 +328,15 @@ div#overlay-inner #loading-data-window a,
 div#overlay-inner #user-warning-window a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
-  text-align: left;
+  text-align: center;
   display: inline-block;
-  padding: 12px 15px;
+  padding: 8px 13px;
   background: #4c8e0e;
   color: #fff;
   border: 1px solid #4c8e0e;
@@ -347,15 +347,15 @@ div#overlay-inner #user-warning-window a {
   min-width: 150px;
   background: #075783;
   font-size: 14px;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
-  text-align: left;
+  text-align: center;
   display: inline-block;
-  padding: 12px 15px;
+  padding: 8px 13px;
   background: #fff;
   color: #075783;
   border: 1px solid #ededed;
@@ -535,7 +535,7 @@ nav {
   color: #434343;
   float: left;
   width: 280px;
-  margin: 15px 5px 0 15px;
+  margin: 10px 5px 0 10px;
   line-height: 20px;
 }
 #attributes {
@@ -548,11 +548,11 @@ nav {
   padding: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 #attributes h2 {
   color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -694,11 +694,11 @@ nav {
   padding: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 #data-fields h2 {
   color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -767,11 +767,11 @@ nav {
   padding: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 #knowledge-base-select h2 {
   color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -961,7 +961,7 @@ section#active-rule #antecedent >.cedent >.fields >.connective {
   margin-top: 3px;
 }
 section#active-rule #interest-measures {
-  margin-left: 30px;
+  margin-left: 20px;
   width: 200px;
 }
 section#active-rule #interest-measures #add-im {
@@ -1015,7 +1015,7 @@ section#active-rule #interest-measures .im:hover .remove-im.required {
   visibility: hidden;
 }
 section#active-rule #succedent {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 section#active-rule #succedent .cedent {
   float: left;
@@ -1172,15 +1172,15 @@ section#active-rule #ar-action-box > div.info {
 section#active-rule #ar-action-box #stop-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
-  text-align: left;
+  text-align: center;
   display: inline-block;
-  padding: 12px 15px;
+  padding: 8px 13px;
   background: #4c8e0e;
   color: #fff;
   border: 1px solid #4c8e0e;
@@ -1215,15 +1215,15 @@ section#active-rule #ar-action-box #stop-mining:focus {
 section#active-rule #ar-action-box #start-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
-  text-align: left;
+  text-align: center;
   display: inline-block;
-  padding: 12px 15px;
+  padding: 8px 13px;
   background: #4c8e0e;
   color: #fff;
   border: 1px solid #4c8e0e;
@@ -1267,20 +1267,19 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 .paginator a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   border: 1px solid #314e64;
-  text-align: left;
+  text-align: center;
   display: inline-block;
-  padding: 12px 15px;
+  padding: 8px 13px;
   background: #fff;
   color: #075783;
   border: 1px solid #ededed;
   text-align: center;
-  display: block;
   display: inline-block;
   padding: 3px 6px;
   min-width: 16px;
@@ -1325,7 +1324,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules #found-rules-task-name {
   color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -1356,7 +1355,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   visibility: visible;
 }
 #found-rules p.error {
-  color: #a41d1d;
+  color: #d01d1d;
   margin: 10px 0;
 }
 #found-rules .found-rules-controls {
@@ -1589,10 +1588,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   background: transparent url("../images/icon-goreport-20.png") left center no-repeat;
 }
 #marked-rules-tabs {
-  margin: 15px 0 0 15px;
+  margin: 10px 0 0 10px;
   float: left;
   clear: left;
-  width: 1005px;
+  padding: 0;
+  width: 1025px;
 }
 #marked-rules-tabs .marked-rules-tab {
   color: #434343;
@@ -1603,13 +1603,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   padding: 20px;
   color: #925213;
-  font: 36px 'Droid Sans', 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
-  width: 475px;
+  width: 480px;
   margin: 0;
   padding-left: 15px;
-  padding-right: 10px;
+  padding-right: 15px;
   background-color: rgba(255,255,255,0.6);
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
@@ -1642,16 +1642,14 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
-  min-width: 980px;
-  margin: 0 0 0 15px;
-  padding-left: 15px;
-  padding-right: 10px;
+  min-width: 985px;
+  margin: 0 0 0 10px;
   float: left;
   clear: left;
 }
 #marked-rules h2 {
   color: #925213;
-  font: 36px 'Droid Sans', 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
 /*margin-left 10px*/
@@ -1679,7 +1677,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules .marked-rules-task-name {
   color: #314e64;
-  font-family: 'Droid Sans', 'Arial', 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -1722,7 +1720,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   clear: both;
 }
 #marked-rules p.error {
-  color: #a41d1d;
+  color: #d01d1d;
   margin: 10px 0;
 }
 #marked-rules .marked-rules-controls {
@@ -1944,7 +1942,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 section#workplace {
   margin: 0 auto;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   float: left;
 }
 section#content {
@@ -1955,15 +1953,13 @@ section#content {
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   padding: 20px;
-  min-width: 980px;
+  min-width: 985px;
   float: left;
-  margin: 15px 0 0 15px;
-  padding-left: 15px;
-  padding-right: 10px;
+  margin: 10px 0 0 10px;
 }
 section#content h2 {
   color: #925213;
-  font: 36px 'Droid Sans', 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   margin: 0;
@@ -1974,11 +1970,4 @@ section#content h3 {
   border-bottom: 1px solid #314e64;
   line-height: 20px;
   margin-bottom: 10px;
-}
-a {
-  color: #126499;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
 }
