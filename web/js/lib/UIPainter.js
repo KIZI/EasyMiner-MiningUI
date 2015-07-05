@@ -372,7 +372,7 @@ var UIPainter = new Class({
 
   // removes marked tasks div
   removeMarkedTask:function(taskId, isBase){
-    var typeElm = (isBase ? 'base' : tasks),
+    var typeElm = (isBase ? 'base' : 'tasks'),
         mrElement = $$('#marked-rules div.marked-rules-'+typeElm+'-content')[0],
         taskElm = $('task-'+taskId);
     if(taskElm){
