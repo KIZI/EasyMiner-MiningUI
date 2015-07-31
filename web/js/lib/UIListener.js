@@ -462,7 +462,7 @@ var UIListener = new Class({
     }.bind(this));
   },
 
-  registerAddRulesetFormEventHandler: function (cedent) {
+  registerAddRulesetFormEventHandler: function () {
     // submit
     var elementSubmit = $('add-ruleset-submit');
     elementSubmit.addEvent('click', function (event) {
@@ -473,7 +473,7 @@ var UIListener = new Class({
         var url = this.ARBuilder.$config.getKnowledgeBaseAddRuleSetUrl(rulesetName,rulesetDesc),
             errorMsg = this.ARBuilder.$i18n.translate('Unable to add new ruleset! Try it again later.');
 
-        //region načtení úloh ze serveru
+        //region vložení nového rulesetu
         new Request.JSON({
           url: url,
           secure: true,
@@ -501,7 +501,7 @@ var UIListener = new Class({
     }.bind(this));
   },
 
-  registerChangeRulesetEventHandler: function (cedent) {
+  registerChangeRulesetEventHandler: function () {
     // click on other ruleset
     var elements = $('change-ruleset-list').getElements('a');
     elements.addEvent('click', function (event) {
@@ -509,7 +509,30 @@ var UIListener = new Class({
       var elm = event.target,
           elmId = elm.get('rel');
       if(elmId != null){
-        this.ARBuilder.$MRManager.loadKnowledgeBase(elmId);
+        var url = this.ARBuilder.$config.getKnowledgeBaseSetMinerRuleSetUrl(elmId),
+            errorMsg = this.ARBuilder.$i18n.translate('Unable to change ruleset! Try it again later.');
+
+        //region uložení rulesetu pro aktuální miner
+        new Request.JSON({
+          url: url,
+          secure: true,
+          onSuccess: function (responseJSON, responseText) {
+            this.ARBuilder.$MRManager.loadKnowledgeBase(elmId);
+          }.bind(this),
+          onError: function () {
+            alert(errorMsg);
+          }.bind(this),
+          onFailure: function () {
+            alert(errorMsg);
+          }.bind(this),
+          onException: function () {
+            alert(errorMsg);
+          }.bind(this),
+          onTimeout: function () {
+            alert(errorMsg);
+          }.bind(this)
+        }).get();
+        //endregion
         this.UIPainter.hideOverlay();
       }
     }.bind(this));
