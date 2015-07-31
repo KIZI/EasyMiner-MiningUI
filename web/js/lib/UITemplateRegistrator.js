@@ -1032,7 +1032,8 @@ var UITemplateRegistrator = new Class({
             ),
             a({href: '#', class: 'toggle'},task.name),
             span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
-            a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')})
+            a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')}),
+            a({href: '#', class: 'remove-task', title: data.i18n.translate('Remove task from Rule clipboard')})
             //TODO Standa odkaz na odebrání celé úlohy z rule clipboard...
         );
       }

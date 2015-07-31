@@ -1748,6 +1748,16 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   background: transparent url("../images/sprite/icon-edit.png") center bottom no-repeat;
   visibility: hidden;
 }
+#marked-rules .marked-rules-task-name a.remove-task {
+  margin-left: 10px;
+  width: 20px;
+  height: 25px;
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  background: transparent url("../images/icon-stop-20.png") center bottom no-repeat;
+  visibility: hidden;
+}
 #marked-rules .marked-rules-task-name a.toggle span.toggle {
   display: block;
   width: 12px;
@@ -1756,7 +1766,8 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   left: 0;
   top: 10px;
 }
-#marked-rules .marked-rules-task-name:hover a.rename-task {
+#marked-rules .marked-rules-task-name:hover a.rename-task,
+#marked-rules .marked-rules-task-name:hover a.remove-task {
   visibility: visible;
 }
 #marked-rules .clearfix {

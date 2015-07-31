@@ -854,10 +854,15 @@ var UIListener = new Class({
         taskNameElement = taskElm.getElement('.marked-rules-task-name'),
         taskDesc = (task.isBase ? task.desc : null);
     if (!taskNameElement){return;}
-    var renameTaskLink = taskNameElement.getElements('.rename-task');
+    var renameTaskLink = taskNameElement.getElements('.rename-task'),
+        removeTaskLink = taskNameElement.getElements('.remove-task');
     renameTaskLink.addEvent('click',function(event){
       event.stop();
       this.UIPainter.renderRenameTaskWindow(task.id,task.name,taskDesc);
+    }.bind(this));
+    removeTaskLink.addEvent('click',function(event){
+      event.stop();
+      this.ARBuilder.getMRManager().removeCompleteTask(task);
     }.bind(this));
 
     taskNameElement.getElements('.toggle').addEvent('click', function (event) {

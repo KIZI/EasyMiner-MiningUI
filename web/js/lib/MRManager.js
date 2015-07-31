@@ -234,6 +234,16 @@ var MRManager = new Class({
     this.UIPainter.removeMarkedTask(task.id, task.isBase);
   },
 
+  removeCompleteTask: function(task){
+    new Request.JSON({
+      url: this.config.getRuleClipboardRemoveAllRulesUrl(task.id),
+      secure: true,
+      onSuccess: function () {
+        this.removeTask(task);
+      }.bind(this)
+    }).get();
+  },
+
   editRuleset: function(taskId, newTaskName, newTaskDesc){
     var task = this.tasks[taskId];
     if(task != undefined){
