@@ -240,6 +240,9 @@ var MRManager = new Class({
       secure: true,
       onSuccess: function () {
         this.removeTask(task);
+        if(this.FRManager.getTaskId() == task.id){
+          this.FRManager.gotoPage(1); // reloads FRManager if we removed current FR Task
+        }
       }.bind(this)
     }).get();
   },
