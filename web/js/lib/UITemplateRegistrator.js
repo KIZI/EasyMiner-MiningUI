@@ -89,21 +89,19 @@ var UITemplateRegistrator = new Class({
           name = data.name+' (rules: '+data.rulesCount+')';
 
       a({href: '#', rel: id}, name,
-        span({style: 'color: gray;'}, 'Zde bude popisek...'));
+        span(data.description));
     });
 
     Mooml.register('changeRulesetWindowAddTemplate', function (data) {
       var i18n = data.i18n;
 
-      div({class: 'valuesBin'},
+      form({class: 'valuesBin'},
           label({for: 'add-ruleset-name'}, i18n.translate('Ruleset name:')),
           input({id: 'add-ruleset-name', type: 'text'}),
           ' * '+i18n.translate('required'),
-          div({class: 'addValue'},
               label({for: 'add-ruleset-description'}, i18n.translate('Ruleset description:')),
               input({id: 'add-ruleset-description', type: 'text'}),
               input({id: 'add-ruleset-submit', type: 'submit', value: i18n.translate('Add ruleset')}))
-          );
     });
 
     Mooml.register('activeRulesetTemplate', function (data) {

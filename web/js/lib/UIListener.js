@@ -467,9 +467,10 @@ var UIListener = new Class({
     var elementSubmit = $('add-ruleset-submit');
     elementSubmit.addEvent('click', function (event) {
       event.stop();
-      var rulesetName = $('add-ruleset-name').value;
+      var rulesetName = $('add-ruleset-name').value,
+          rulesetDesc = $('add-ruleset-description').value;
       if(rulesetName.length > 0){
-        var url = this.ARBuilder.$config.getKnowledgeBaseAddRuleSetUrl(rulesetName),
+        var url = this.ARBuilder.$config.getKnowledgeBaseAddRuleSetUrl(rulesetName,rulesetDesc),
             errorMsg = this.ARBuilder.$i18n.translate('Unable to add new ruleset! Try it again later.');
 
         //region načtení úloh ze serveru
@@ -477,7 +478,7 @@ var UIListener = new Class({
           url: url,
           secure: true,
           onSuccess: function (responseJSON, responseText) {
-            this.ARBuilder.$MRManager.initKnowledgeBase(responseJSON.rule_set_id);
+            this.ARBuilder.$MRManager.loadKnowledgeBase(responseJSON.rule_set_id);
             this.UIPainter.hideOverlay();
           }.bind(this),
           onError: function () {

@@ -411,18 +411,43 @@ div#overlay-inner #loading-data-window.loading {
   padding-bottom: 40px;
   background: #fff url("../images/icon-loading-bw-72.gif") center 30px no-repeat;
 }
-div#overlay-inner .valuesBin label {
+div#overlay-inner #change-ruleset-window #add-ruleset {
+  background: #075783;
+  font-size: 14px;
+  font-family: 'Arial', 'sans-serif';
+  font-weight: normal;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-align: center;
+  display: inline-block;
+  padding: 8px 13px;
+}
+div#overlay-inner #change-ruleset-window #add-ruleset:hover,
+div#overlay-inner #change-ruleset-window #add-ruleset:focus {
+  background: #2d83be;
+  color: #fff;
+  border: 1px solid #314e64;
+  text-decoration: none;
+}
+div#overlay-inner #change-ruleset-window .valuesBin {
+  line-height: 1;
+}
+div#overlay-inner #change-ruleset-window .valuesBin label {
   width: 200px;
 }
-div#overlay-inner .valuesBin input[type="text"] {
+div#overlay-inner #change-ruleset-window .valuesBin input[type="text"] {
   width: 300px;
+  margin-right: 10px;
 }
-div#overlay-inner .valuesBin input[type="submit"] {
+div#overlay-inner #change-ruleset-window .valuesBin input[type="submit"] {
+  margin-top: 0;
   float: right;
 }
-div#overlay-inner .bigButtons a span {
+div#overlay-inner #change-ruleset-window .bigButtons a span {
   display: block;
-  color: #888;
+  color: #aed0e6;
   font-size: 12px;
 }
 #settings-form {
