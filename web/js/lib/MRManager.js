@@ -226,6 +226,7 @@ var MRManager = new Class({
     }
     this.UIPainter.renderMarkedTask(task, 'minimize');
     task.reload();
+    this.loadKnowledgeBase(this.KBid);
   },
 
   removeTask: function(task){
