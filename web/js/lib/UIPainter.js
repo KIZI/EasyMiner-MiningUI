@@ -66,11 +66,11 @@ var UIPainter = new Class({
       this.renderAttributesByList();
     }
 
-    if (this.ARBuilder.getDD().hasHiddenAttributes()) {
+    /*if (this.ARBuilder.getDD().hasHiddenAttributes()) {
       this.$UIStructurePainter.showHiddenAttributesButton();
     } else {
       this.$UIStructurePainter.hideHiddenAttributesButton();
-    }
+    }*/
 
     var attributesFilter = $$('#attributes a.filter')[0];
     this.ARBuilder.attributesFilter = new ElementFilter('attributes-filter', '#attributes-by-list li', {

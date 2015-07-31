@@ -216,6 +216,7 @@ var UIStructureListener = new Class({
         $('show-hidden-attributes').addEvent('click', function(e) {
             e.stop();
             this.$ARBuilder.showHiddenAttributes();
+            this.$UIStructurePainter.hideHiddenAttributesButton();
         }.bind(this));
     },
 

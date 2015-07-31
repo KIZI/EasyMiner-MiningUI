@@ -308,6 +308,7 @@ var ARBuilder = new Class({
   removeAttribute: function (attribute) {
     // remove attribute
     this.$DD.removeAttribute(attribute);
+    this.$UIStructurePainter.showHiddenAttributesButton();
     this.UIPainter.removeAttribute(attribute);
 
     // reset UI

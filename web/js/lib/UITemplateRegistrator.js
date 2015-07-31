@@ -37,7 +37,7 @@ var UITemplateRegistrator = new Class({
           href: '#',
           id: attribute.getCSSRemoveID(),
           'class': 'remove-attribute',
-          'title': i18n.translate('Remove')
+          'title': i18n.translate('Hide')
         }) : '',
         showEditAttribute ? a({
           href: '#',
@@ -1034,7 +1034,6 @@ var UITemplateRegistrator = new Class({
             span({class: 'count'}, '(rules:  ', strong(task.rulesCount), ')'),
             a({href: '#', class: 'rename-task', title: data.i18n.translate('Rename task')}),
             a({href: '#', class: 'remove-task', title: data.i18n.translate('Remove task from Rule clipboard')})
-            //TODO Standa odkaz na odebrání celé úlohy z rule clipboard...
         );
       }
       div(
