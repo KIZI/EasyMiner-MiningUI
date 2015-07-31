@@ -239,7 +239,7 @@ var UIStructureTemplater = new Class({
               id: 'add-all-unused-attributes',
               href: '#',
               title: i18n.translate('Add all unused attributes to antecedent...')
-            }, i18n.translate('Add attributes'))
+            }, i18n.translate('Add all attributes'))
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));
       }
