@@ -45,9 +45,6 @@ div#overlay-inner form label {
   float: left;
   clear: left;
 }
-div#overlay-inner form select {
-  padding: 4px 2px 1px;
-}
 div#overlay-inner form input[type='text'],
 div#overlay-inner form input[type='number'],
 div#overlay-inner form select {
@@ -56,10 +53,11 @@ div#overlay-inner form select {
   border: 1px solid #aaa;
   background-color: #fff;
   float: left;
-  padding: 4px 2px 1px;
+  padding: 4px 6px;
   position: relative;
   top: -4px;
   margin-bottom: 10px;
+  max-width: 420px;
   -moz-user-select: text;
   -ms-user-select: text;
 }
