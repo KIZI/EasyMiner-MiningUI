@@ -5,7 +5,8 @@ var UIScroller = new Class({
   lastPositionLeft: 0,
 
   initialize: function (rootElement) {
-    this.$rootElement = rootElement;
+    //this.$rootElement = rootElement;
+    this.$rootElement = $$('html')[0];
   },
 
   scrollTo: function (x, y) {
