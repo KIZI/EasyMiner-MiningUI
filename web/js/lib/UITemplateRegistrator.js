@@ -95,13 +95,14 @@ var UITemplateRegistrator = new Class({
     Mooml.register('changeRulesetWindowAddTemplate', function (data) {
       var i18n = data.i18n;
 
-      form({class: 'valuesBin'},
+      form({id: 'add-ruleset-form'},
           label({for: 'add-ruleset-name'}, i18n.translate('Ruleset name:')),
           input({id: 'add-ruleset-name', type: 'text'}),
           ' * '+i18n.translate('required'),
-              label({for: 'add-ruleset-description'}, i18n.translate('Ruleset description:')),
-              input({id: 'add-ruleset-description', type: 'text'}),
-              input({id: 'add-ruleset-submit', type: 'submit', value: i18n.translate('Add ruleset')}))
+          label({for: 'add-ruleset-description'}, i18n.translate('Ruleset description:')),
+          input({id: 'add-ruleset-description', type: 'text'}),
+          input({id: 'add-ruleset-submit', type: 'submit', value: i18n.translate('Add ruleset')}),
+          input({id: 'add-ruleset-storno', type: 'reset', value: i18n.translate('Storno')}))
     });
 
     Mooml.register('activeRulesetTemplate', function (data) {

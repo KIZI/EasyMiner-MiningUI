@@ -463,6 +463,13 @@ var UIListener = new Class({
   },
 
   registerAddRulesetFormEventHandler: function () {
+    // reset
+    var elementStorno = $('add-ruleset-storno');
+    elementStorno.addEvent('click', function (event) {
+      event.stop();
+      this.UIPainter.removeAddRulesetForm();
+      //this.UIPainter.$UIStructurePainter.resizeApplication();
+    }.bind(this));
     // submit
     var elementSubmit = $('add-ruleset-submit');
     elementSubmit.addEvent('click', function (event) {

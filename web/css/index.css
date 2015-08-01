@@ -431,18 +431,18 @@ div#overlay-inner #change-ruleset-window #add-ruleset:focus {
   border: 1px solid #314e64;
   text-decoration: none;
 }
-div#overlay-inner #change-ruleset-window .valuesBin {
+div#overlay-inner #change-ruleset-window #add-ruleset-form {
   line-height: 1;
 }
-div#overlay-inner #change-ruleset-window .valuesBin label {
+div#overlay-inner #change-ruleset-window #add-ruleset-form label {
   width: 200px;
 }
-div#overlay-inner #change-ruleset-window .valuesBin input[type="text"] {
+div#overlay-inner #change-ruleset-window #add-ruleset-form input[type="text"] {
   width: 300px;
   margin-right: 10px;
 }
-div#overlay-inner #change-ruleset-window .valuesBin input[type="submit"] {
-  margin-top: 0;
+div#overlay-inner #change-ruleset-window #add-ruleset-form input[type="submit"] {
+  margin-left: 10px;
   float: right;
 }
 div#overlay-inner #change-ruleset-window .bigButtons a span {

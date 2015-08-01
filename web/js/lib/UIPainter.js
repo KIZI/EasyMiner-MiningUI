@@ -327,9 +327,18 @@ var UIPainter = new Class({
   },
 
   renderAddRulesetForm: function () {
-    var addRulesetInput = $('add-ruleset');
-    Mooml.render('changeRulesetWindowAddTemplate', {i18n: this.i18n}).replaces(addRulesetInput);
+    var changeRulesetBox = $('change-ruleset-window'),
+        addRulesetInput = $('add-ruleset');
+    changeRulesetBox.grab(Mooml.render('changeRulesetWindowAddTemplate', {i18n: this.i18n}));
+    addRulesetInput.hide();
     this.UIListener.registerAddRulesetFormEventHandler();
+  },
+
+  removeAddRulesetForm: function () {
+    var addRulesetForm = $('add-ruleset-form'),
+        addRulesetInput = $('add-ruleset');
+    addRulesetForm.destroy();
+    addRulesetInput.show();
   },
 
   renderActiveRuleset: function (name, count) {
