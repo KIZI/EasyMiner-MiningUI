@@ -8,6 +8,7 @@ var DataDescription = new Class({
     $fields: [],
     $storage: null,
     $config: null,
+    $hiddenAttributes: [],
 
 	initialize: function (id, storage, config) {
         this.$id = id;
@@ -56,11 +57,10 @@ var DataDescription = new Class({
 
 	parseAttributes: function (attributes) {
         this.$attributes = [];
-        var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Array.from(allHiddenAttributes);
+        var hiddenAttributes = this.getHiddenAttributes();
 		Object.each(attributes, function (value, name) {
             var hidden = false;
-            if (hiddenAttributes[name]) {
+            if (hiddenAttributes.contains(name)) {
                 hidden = true;
             }
             var attribute = new Attribute(name, value.choices, new StringHelper(), hidden);
@@ -96,21 +96,48 @@ var DataDescription = new Class({
     removeAttribute: function(attribute) {
         attribute.setHidden(true);
 
-        var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Array.from(allHiddenAttributes);
-        hiddenAttributes.include(attribute.getName());
+        this.$hiddenAttributes.include(attribute.getName());
 
-        this.$storage.setObj('hiddenAttributes', hiddenAttributes);
+        this.requestHiddenAttributes();
+    },
+
+    requestHiddenAttributes: function() {
+        var hiddenAttributesString = String.from(this.$hiddenAttributes);
+        var url = this.$config.getMinerSetConfigParamUrl('hiddenAttributes',hiddenAttributesString);
+
+        //region vloení nového rulesetu
+        new Request.JSON({
+            url: url,
+            secure: true,
+            onSuccess: function (responseJSON, responseText) {
+                console.log('Hidden attributes saved to server');
+            }.bind(this),
+            onError: function () {
+                console.log('Unable to save hidden attributes to server');
+            }.bind(this),
+            onFailure: function () {
+                console.log('Unable to save hidden attributes to server');
+            }.bind(this),
+            onException: function () {
+                console.log('Unable to save hidden attributes to server');
+            }.bind(this),
+            onTimeout: function () {
+                console.log('Unable to save hidden attributes to server');
+            }.bind(this)
+        }).get();
+        //endregion
     },
 
     showHiddenAttributes: function() {
-        var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Array.from(allHiddenAttributes);
+        var hiddenAttributes = this.getHiddenAttributes();
         Array.each(hiddenAttributes, function (name) {
             var attr = this.getAttributeByName(name);
-            attr.setHidden(false);
+            if(attr){
+                attr.setHidden(false);
+            }
         }.bind(this));
-        this.$storage.setObj('hiddenAttributes', []);
+        this.$hiddenAttributes = [];
+        this.requestHiddenAttributes();
     },
 
     parseFields: function (fields) {
@@ -121,18 +148,15 @@ var DataDescription = new Class({
     },
 
     getHiddenAttributes: function(id) {
-        return this.$storage.getObj('hiddenAttributes') ? this.$storage.getObj('hiddenAttributes') : {};
+        return this.$hiddenAttributes;
     },
 
     hasHiddenAttributes: function() {
-        var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Array.from(allHiddenAttributes);
-
-        return hiddenAttributes.length;
+        return this.$hiddenAttributes.length > 0;
     },
 
     setHiddenAttributes: function(data) {
-        this.$storage.setObj('hiddenAttributes', data);
+        this.$hiddenAttributes = (data.length > 0) ? data.split(',') : [];
     }
 	
 });

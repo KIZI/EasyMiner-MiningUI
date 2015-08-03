@@ -8,12 +8,12 @@ var Attribute = new Class({
 	value: null,
 	hidden: false,
 
-	initialize: function (name, choices, stringHelper, value, hidden) {
+	initialize: function (name, choices, stringHelper, hidden, value) {
 		this.name = name;
 		this.choices = choices;
 		this.stringHelper = stringHelper;
-		this.value = value || 0;
 		this.hidden = hidden;
+		this.value = value || 0;
 	},
 	
 	getName: function () {
