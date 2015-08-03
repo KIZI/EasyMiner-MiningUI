@@ -28,6 +28,8 @@ var UITemplateRegistrator = new Class({
         className = 'rec2';
       } else if (isUsed) {
         className = 'used';
+      } else if (attribute.isHidden()) {
+        className = 'hidden';
       }
 
       li({'class': className},

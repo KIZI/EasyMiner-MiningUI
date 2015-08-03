@@ -7,10 +7,12 @@ var DataDescription = new Class({
     $attributes: [],
     $fields: [],
     $storage: null,
+    $config: null,
 
-	initialize: function (id, storage) {
+	initialize: function (id, storage, config) {
         this.$id = id;
         this.$storage = storage;
+        this.$config = config;
 	},
 
     parse: function(data) {
@@ -55,18 +57,14 @@ var DataDescription = new Class({
 	parseAttributes: function (attributes) {
         this.$attributes = [];
         var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
+        var hiddenAttributes = Array.from(allHiddenAttributes);
 		Object.each(attributes, function (value, name) {
             var hidden = false;
-            hiddenAttributes.each(function(attributeName) {
-                if (attributeName === name) {
-                    hidden = true;
-                }
-            }.bind(this));
-            if (!hidden) {
-			    var attribute = new Attribute(name, value.choices, new StringHelper());
-			    this.$attributes.push(attribute);
+            if (hiddenAttributes[name]) {
+                hidden = true;
             }
+            var attribute = new Attribute(name, value.choices, new StringHelper(), hidden);
+            this.$attributes.push(attribute);
 		}.bind(this));
 	},
 	
@@ -96,18 +94,23 @@ var DataDescription = new Class({
 	},
 
     removeAttribute: function(attribute) {
-        this.$attributes.erase(attribute);
+        attribute.setHidden(true);
 
         var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
+        var hiddenAttributes = Array.from(allHiddenAttributes);
         hiddenAttributes.include(attribute.getName());
 
-        allHiddenAttributes[this.$id] = hiddenAttributes;
-        this.$storage.setObj('hiddenAttributes', allHiddenAttributes);
+        this.$storage.setObj('hiddenAttributes', hiddenAttributes);
     },
 
     showHiddenAttributes: function() {
-        this.$storage.setObj('hiddenAttributes', {});
+        var allHiddenAttributes = this.getHiddenAttributes();
+        var hiddenAttributes = Array.from(allHiddenAttributes);
+        Array.each(hiddenAttributes, function (name) {
+            var attr = this.getAttributeByName(name);
+            attr.setHidden(false);
+        }.bind(this));
+        this.$storage.setObj('hiddenAttributes', []);
     },
 
     parseFields: function (fields) {
@@ -123,9 +126,13 @@ var DataDescription = new Class({
 
     hasHiddenAttributes: function() {
         var allHiddenAttributes = this.getHiddenAttributes();
-        var hiddenAttributes = Object.keys(allHiddenAttributes).contains(this.$id) ? Array.from(allHiddenAttributes[this.$id]) : [];
+        var hiddenAttributes = Array.from(allHiddenAttributes);
 
         return hiddenAttributes.length;
+    },
+
+    setHiddenAttributes: function(data) {
+        this.$storage.setObj('hiddenAttributes', data);
     }
 	
 });

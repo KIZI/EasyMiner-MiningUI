@@ -308,8 +308,6 @@ var ARBuilder = new Class({
   removeAttribute: function (attribute) {
     // remove attribute
     this.$DD.removeAttribute(attribute);
-    this.$UIStructurePainter.showHiddenAttributesButton();
-    this.UIPainter.removeAttribute(attribute);
 
     // reset UI
     this.reset();
@@ -343,7 +341,9 @@ var ARBuilder = new Class({
 
   showHiddenAttributes: function () {
     this.$DD.showHiddenAttributes();
-    this.reloadData();
+
+    // reset UI
+    this.reset();
   },
 
   createReport: function (taskId) {//TODO Standa předělat

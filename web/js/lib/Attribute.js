@@ -6,12 +6,14 @@ var Attribute = new Class({
 	choices: [],
 	stringHelper: null,
 	value: null,
+	hidden: false,
 
-	initialize: function (name, choices, stringHelper, value) {
+	initialize: function (name, choices, stringHelper, value, hidden) {
 		this.name = name;
 		this.choices = choices;
 		this.stringHelper = stringHelper;
 		this.value = value || 0;
+		this.hidden = hidden;
 	},
 	
 	getName: function () {
@@ -40,6 +42,14 @@ var Attribute = new Class({
 	
 	setValue: function (value) {
 		this.value = value;
+	},
+
+	isHidden: function () {
+		return this.hidden;
+	},
+
+	setHidden: function (hidden) {
+		this.hidden = hidden;
 	},
 	
 	isRecommended: function () {

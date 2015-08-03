@@ -53,7 +53,8 @@ var DataParser = new Class({
   },
 
   parseData: function (data, id) {
-    this.DD = new DataDescription(id, new Storage());
+    this.DD = new DataDescription(id, new Storage(), this.config);
+    this.DD.setHiddenAttributes(data.miner_config);
     this.DD.parse(data.DD);
 
     Array.each(data.FLs, function (iFL) {
