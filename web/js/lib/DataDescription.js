@@ -156,7 +156,11 @@ var DataDescription = new Class({
     },
 
     setHiddenAttributes: function(data) {
-        this.$hiddenAttributes = (data.length > 0) ? data.split(',') : [];
+	if (typeof data === "undefined"){
+	  this.$hiddenAttributes = [];
+	}else{
+       	  this.$hiddenAttributes = (data.length > 0) ? data.split(',') : [];
+	}
     }
 	
 });
