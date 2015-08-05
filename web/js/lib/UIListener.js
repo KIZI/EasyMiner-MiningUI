@@ -1096,7 +1096,7 @@ var UIListener = new Class({
       e.stop();
 
       var taskId = $('rename-task-id').value,
-          newTaskDesc = $('rename-task-input-desc'),
+          newTaskDesc = $('rename-task-input-desc').value.trim(),
           newTaskName = $('rename-task-input').value.trim();
 
       // Check that the name is valid

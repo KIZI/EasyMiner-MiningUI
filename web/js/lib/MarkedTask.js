@@ -110,7 +110,7 @@ var MarkedTask = new Class({
       this.MRManager.removeTask(this);
     } else{
       if(this.isBase){
-        this.desc = 'Nějaký popisek'; // TODO přidat finální popisek, který by měl být obdržen spolu s JSONem
+        this.desc = data[type].description;
         this.UIPainter.renderActiveRuleset(data[type].name, data[type].rulesCount);
         if(!this.isInit && data[type].rulesCount > 0){
           this.UIPainter.renderMarkedTask(this, 'minimize');
@@ -135,6 +135,10 @@ var MarkedTask = new Class({
 
   reload: function(){
     this.gotoPage(this.currentPage);
+  },
+
+  setDesc: function(desc){
+    this.desc = desc;
   },
 
   setName: function(name){

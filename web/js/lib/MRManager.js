@@ -200,8 +200,8 @@ var MRManager = new Class({
         this.UIPainter.renderMarkedRules(task);
       }
     }*/
-    if(this.FRManager.getTaskId() == taskId){
-      this.FRManager.gotoPage(1); // reloads FRManager if we unmark in current FR Task
+    if(this.FRManager.getTaskId() == taskId || this.tasks[taskId].isBase){
+      this.FRManager.gotoPage(this.FRManager.currentPage); // reloads FRManager if we unmark in current FR Task
     }
     this.loadKnowledgeBase(this.KBid);
   },
@@ -251,11 +251,12 @@ var MRManager = new Class({
     var task = this.tasks[taskId];
     if(task != undefined){
       new Request.JSON({
-        url: this.config.getKnowledgeBaseRenameRuleSetUrl(taskId,newTaskName),
+        url: this.config.getKnowledgeBaseRenameRuleSetUrl(taskId,newTaskName,newTaskDesc),
         secure: true,
         onSuccess: function () {
           this.loadKnowledgeBase(taskId);
           task.setName(newTaskName);
+          task.setDesc(newTaskDesc);
           this.UIPainter.renderMarkedTask(task);
         }.bind(this),
 
