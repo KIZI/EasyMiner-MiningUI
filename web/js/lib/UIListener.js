@@ -16,7 +16,7 @@ var UIListener = new Class({
     this.UIPainter = UIPainter;
   },
 
-  registerBRBaseEventHandler: function () {
+  registerBRBaseEventHandler: function () {//TODO???
     $('showBRBase').addEvent('click', function (event) {
       event.stop();
       this.ARBuilder.openBRBaseDialog();
@@ -1096,7 +1096,7 @@ var UIListener = new Class({
       e.stop();
 
       var taskId = $('rename-task-id').value,
-          newTaskDesc = $('rename-task-input-desc').value.trim(),
+          newTaskDesc = $('rename-task-input-desc'),
           newTaskName = $('rename-task-input').value.trim();
 
       // Check that the name is valid

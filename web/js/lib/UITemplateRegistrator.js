@@ -938,12 +938,13 @@ var UITemplateRegistrator = new Class({
               title:i18n.translate('Remove from Knowledge base')
             },i18n.translate('Remove...'))
         );
-        taskActions = span({class:'task-actions'}/*,
+        taskActions = span({class:'task-actions'},//FIXME
             a({
-              href:'#',
-              class:'task-details',
-              title:i18n.translate('Show task details')
-            },i18n.translate('Task details'))*/
+              href:'http://br-dev.lmcloud.vse.cz/easyminercenter/em/rule-sets/drl/'+data.FRManager.MRManager.KBid,
+              target:'_blank',
+              class:'export-drl',
+              title:i18n.translate('Export classification business rules')
+            },i18n.translate('Export DRL'))
         );
       } else{
         actions = span({class:'actions'},
