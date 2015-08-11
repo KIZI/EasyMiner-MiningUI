@@ -1149,22 +1149,78 @@ var UITemplateRegistrator = new Class({
       );
     });
 
+    // Rename ruleset overlay
+    Mooml.register('renameRulesetWindowTemplate', function (data) {
+      var i18n = data.i18n,
+          taskId = data.taskId,
+          taskName = data.taskName,
+          taskDesc = data.taskDesc;
+
+      div({
+            id: 'rename-task-window'
+          },
+          a({
+                id: 'overlay-close',
+                href: '#'
+              },
+              i18n.translate('Close')
+          ),
+          h2(
+              i18n.translate('Rename the Ruleset')
+          ),
+          form({
+                action: '#',
+                method: 'POST',
+                id: 'rename-task-form'
+              },
+              label({
+                    'for': 'rename-task-input'
+                  },
+                  i18n.translate('New name:')),
+              input({
+                name: 'rename-task-input',
+                id: 'rename-task-input',
+                type: 'text',
+                value: taskName
+              }),
+              div({class: 'clearfix'}),
+              label({
+                    'for': 'rename-task-input-desc'
+                  },
+                  i18n.translate('New description:')),
+              textarea({
+                name: 'rename-task-input-desc',
+                id: 'rename-task-input-desc',
+                type: 'text',
+                value: taskDesc
+              }),
+              input({
+                type: 'hidden',
+                id: 'rename-task-id',
+                value: taskId
+              }),
+              br(),
+              div(
+                  span({
+                    id: 'rename-task-error'
+                  })
+              ),
+              div({
+                class: 'autocomplete clearfix'
+              }),
+              input({
+                type: 'submit',
+                value: i18n.translate('Rename')
+              })
+          )
+      );
+    });
+
     // Rename task overlay
     Mooml.register('renameTaskWindowTemplate', function (data) {
       var i18n = data.i18n,
         taskId = data.taskId,
-        taskName = data.taskName,
-        taskDesc = data.taskDesc,
-        descField = (taskDesc != null ? div(label({
-              'for': 'rename-task-input-desc'
-            },
-            i18n.translate('New description:')),
-            input({
-              name: 'rename-task-input-desc',
-              id: 'rename-task-input-desc',
-              type: 'text',
-              value: taskDesc
-            })) : div());
+        taskName = data.taskName;
 
       div({
           id: 'rename-task-window'
@@ -1192,7 +1248,7 @@ var UITemplateRegistrator = new Class({
             id: 'rename-task-input',
             type: 'text',
             value: taskName
-          }),descField,
+          }),
           input({
             type: 'hidden',
             id: 'rename-task-id',

@@ -45,19 +45,22 @@ div#overlay-inner form label {
   float: left;
   clear: left;
 }
+div#overlay-inner form select {
+  padding: 4px 2px 1px;
+}
 div#overlay-inner form input[type='text'],
 div#overlay-inner form input[type='number'],
+div#overlay-inner form textarea,
 div#overlay-inner form select {
   color: #434343;
   font-size: 14px;
   border: 1px solid #aaa;
   background-color: #fff;
   float: left;
-  padding: 4px 6px;
+  padding: 4px 2px 1px;
   position: relative;
   top: -4px;
   margin-bottom: 10px;
-  max-width: 420px;
   -moz-user-select: text;
   -ms-user-select: text;
 }
@@ -236,8 +239,7 @@ div#overlay-inner > div {
   box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
   -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
   -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
-  min-width: 435px;
-  max-width: 800px;
+  width: 435px;
 /*margin 10% auto*/
   position: fixed;
   left: 50%;
@@ -267,6 +269,15 @@ div#overlay-inner #new-task-button {
   float: none;
   padding: 0;
   top: 0;
+}
+div#overlay-inner #rename-task-window {
+  width: 500px;
+}
+div#overlay-inner #rename-task-window input {
+  width: 300px;
+}
+div#overlay-inner #rename-task-window textarea {
+  width: 300px;
 }
 div#overlay-inner #change-ruleset-window,
 div#overlay-inner #add-attribute-window,
@@ -1971,8 +1982,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules .marked-rules-multi-controls .task-actions >a.mark-all {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
 }
-#marked-rules .marked-rules-multi-controls .task-actions >a.task-details,
-#marked-rules .marked-rules-multi-controls .task-actions >a.export-drl {
+#marked-rules .marked-rules-multi-controls .task-actions >a.task-details {
   background: transparent url("../images/icon-goreport-20.png") left center no-repeat;
 }
 #createUserReport {

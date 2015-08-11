@@ -654,12 +654,42 @@ var UIPainter = new Class({
   },
 
   /**
+   * Renders the rename ruleset window in an overlay.
+   * @param taskId ruleset id to rename.
+   * @param taskName original name of the ruleset
+   * @param taskDesc original description of the ruleset
+   */
+  renderRenameRulesetWindow: function (taskId, taskName, taskDesc) {
+    // Locals
+    var overlay = this.$UIStructurePainter.showOverlay();
+
+    // Render
+    overlay.grab(Mooml.render(
+        'renameRulesetWindowTemplate',
+        {
+          i18n: this.i18n,
+          taskId: taskId,
+          taskName: taskName,
+          taskDesc: taskDesc
+        }
+    ));
+
+    // Positioning of Overlay after rendering
+    this.$UIStructurePainter.posOverlay();
+
+    // Register event handlers for the new controls
+    this.UIListener.registerTaskRenameEventHandlers();
+    this.UIListener.registerOverlayEventHandlers();
+
+    $('rename-task-input').select();
+  },
+
+  /**
    * Renders the rename task window in an overlay.
    * @param taskId Task id to rename.
    * @param taskName original name of the task
-   * @param taskDesc original description of the task
    */
-  renderRenameTaskWindow: function (taskId, taskName, taskDesc) {
+  renderRenameTaskWindow: function (taskId, taskName) {
     // Locals
     var overlay = this.$UIStructurePainter.showOverlay();
 
@@ -669,8 +699,7 @@ var UIPainter = new Class({
       {
         i18n: this.i18n,
         taskId: taskId,
-        taskName: taskName,
-        taskDesc: taskDesc
+        taskName: taskName
       }
     ));
 

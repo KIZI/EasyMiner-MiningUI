@@ -509,6 +509,11 @@ var UIListener = new Class({
   },
 
   registerChangeRulesetEventHandler: function () {
+    // click on current ruleset
+    $('current-ruleset').getElement('a').addEvent('click', function (event) {
+      event.stop();
+      this.UIPainter.hideOverlay();
+    }.bind(this));
     // click on other ruleset
     var elements = $('change-ruleset-list').getElements('a');
     elements.addEvent('click', function (event) {
@@ -858,14 +863,17 @@ var UIListener = new Class({
   // same as registerFoundRulesEventHandlers, only ids differences TODO merge
   registerMarkedRulesEventHandlers: function(task){
     var taskElm = $('task-'+task.id),
-        taskNameElement = taskElm.getElement('.marked-rules-task-name'),
-        taskDesc = (task.isBase ? task.desc : null);
+        taskNameElement = taskElm.getElement('.marked-rules-task-name');
     if (!taskNameElement){return;}
     var renameTaskLink = taskNameElement.getElements('.rename-task'),
         removeTaskLink = taskNameElement.getElements('.remove-task');
     renameTaskLink.addEvent('click',function(event){
       event.stop();
-      this.UIPainter.renderRenameTaskWindow(task.id,task.name,taskDesc);
+      if(task.isBase){
+        this.UIPainter.renderRenameRulesetWindow(task.id,task.name,task.desc);
+      } else{
+        this.UIPainter.renderRenameTaskWindow(task.id,task.name);
+      }
     }.bind(this));
     removeTaskLink.addEvent('click',function(event){
       event.stop();
@@ -1111,7 +1119,7 @@ var UIListener = new Class({
 
       // Proceed with renaming
       if(newTaskDesc != null){ // it should be ruleset renaming
-        this.ARBuilder.getMRManager().editRuleset(taskId, newTaskName, newTaskDesc)
+        this.ARBuilder.getMRManager().editRuleset(taskId, newTaskName, newTaskDesc.value.trim())
       } else{
         this.ARBuilder.getARManager().renameTask(taskId, newTaskName);
       }
