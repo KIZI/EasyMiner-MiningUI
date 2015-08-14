@@ -200,7 +200,14 @@ var MRManager = new Class({
         this.UIPainter.renderMarkedRules(task);
       }
     }*/
-    if(this.FRManager.getTaskId() == taskId || this.tasks[taskId].isBase){
+    var isInFr = false;
+    Object.each(foundRules, function (value) {
+      if(this.FRManager.getFoundRulesByIds(value.$id).length > 0){
+        isInFr = true;
+      }
+
+    }.bind(this));
+    if(this.FRManager.getTaskId() == taskId || isInFr){
       this.FRManager.gotoPage(this.FRManager.currentPage); // reloads FRManager if we unmark in current FR Task
     }
     this.loadKnowledgeBase(this.KBid);

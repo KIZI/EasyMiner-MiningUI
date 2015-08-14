@@ -268,6 +268,11 @@ var UIStructureListener = new Class({
             if(!linkTasks.hasClass('marked-rules-tab-active')){
                 linkBase.removeClass('marked-rules-tab-active');
                 linkTasks.addClass('marked-rules-tab-active');
+                var openMrTasks = elTasks.getElements('div.minimize');
+                Array.each(openMrTasks, function (value) {
+                    // reloads tasks by id from elm id (without "task-" at begin)
+                    this.$ARBuilder.$MRManager.tasks[value.get('id').substring(5)].reload();
+                }.bind(this));
                 elTasks.show();
                 elBase.hide();
             }
@@ -275,7 +280,6 @@ var UIStructureListener = new Class({
         linkBase.addEvent('click', function(e){
             e.stop();
             if(!linkBase.hasClass('marked-rules-tab-active')){
-                //var selectedRuleSet = $('kb-select').getSelected().get("value");
                 this.$ARBuilder.$MRManager.loadKnowledgeBase(this.$ARBuilder.$MRManager.KBid);
                 linkTasks.removeClass('marked-rules-tab-active');
                 linkBase.addClass('marked-rules-tab-active');
