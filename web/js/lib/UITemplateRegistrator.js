@@ -87,7 +87,7 @@ var UITemplateRegistrator = new Class({
     });
 
     Mooml.register('changeRulesetWindowItemTemplate', function (data) {
-      var id = data.rule_set_id,
+      var id = data.id,
           name = data.name+' (rules: '+data.rulesCount+')';
 
       a({href: '#', rel: id}, name,
