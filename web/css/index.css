@@ -1659,10 +1659,9 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
-  width: 480px;
+  width: 510px;
   margin: 0;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0;
   background-color: rgba(255,255,255,0.6);
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
@@ -1679,6 +1678,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   background-color: #fff;
 }
 #marked-rules-tabs .marked-rules-tab a {
+  padding: 20px 15px;
   cursor: pointer;
   display: block;
   color: #925213 !important;

@@ -9,10 +9,9 @@ tabPadding = 15px
   .marked-rules-tab
     box()
     h2AR()
-    width (minContentWidth + 4*boxMargin - 0.5*boxMargin) * 0.5 - 2*tabPadding
+    width (minContentWidth + 4*boxMargin - 0.5*boxMargin) * 0.5
     margin 0
-    padding-left tabPadding
-    padding-right tabPadding
+    padding 0
     background-color rgba(255, 255, 255, 0.6)
     &.marked-rules-tasks
       float left
@@ -24,6 +23,7 @@ tabPadding = 15px
     &:hover
       background-color #ffffff
     a
+      padding 20px tabPadding
       cursor pointer
       display block
       color h2ARColor !important
