@@ -233,7 +233,7 @@ var UIStructurePainter = new Class({
     },
 
     hideOverlay: function () {
-        $('overlay').fade('out');
+        $('overlay').fade('out').setStyle('height', '0');
         var elementOverlay = $('overlay-inner');
         elementOverlay.empty();
         this.$UIScroller.restoreLastScroll();
