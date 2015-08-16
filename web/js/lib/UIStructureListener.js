@@ -228,9 +228,10 @@ var UIStructureListener = new Class({
             var activeRule= ARManager.getActiveRule();
             var attributeNameFilter=this.$ARBuilder.attributesFilter.prepareTestRegExp();
             Array.each(this.$ARBuilder.getDD().getAttributes(), function (attribute) {
-              if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
-              if (!attributeNameFilter.test(attribute.getName())){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
-              ARManager.addAttributeToCedent(attribute);
+                if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
+                if (!attributeNameFilter.test(attribute.getName())){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
+                if ((attribute.isHidden())){return;/*jde o skrytý atribut*/}
+                ARManager.addAttributeToCedent(attribute);
             }.bind(this));
         }.bind(this));
     },

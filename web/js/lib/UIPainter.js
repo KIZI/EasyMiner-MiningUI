@@ -105,6 +105,7 @@ var UIPainter = new Class({
     Array.each(this.ARBuilder.getDD().getAttributes(), function (attribute) {
       if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
       if (!attributeNameFilter.test(attribute.getName())){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
+      if ((attribute.isHidden())){return;/*jde o skrytý atribut*/}
       allowAddAllUnusedAttributesLink=true;
     }.bind(this));
     if (allowAddAllUnusedAttributesLink){
