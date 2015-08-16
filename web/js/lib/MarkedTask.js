@@ -112,7 +112,7 @@ var MarkedTask = new Class({
       if(this.isBase){
         this.desc = data[type].description;
         this.UIPainter.renderActiveRuleset(data[type].name, data[type].rulesCount);
-        if(!this.isInit && data[type].rulesCount > 0){
+        if(data[type].rulesCount > 0){
           this.UIPainter.renderMarkedTask(this, 'minimize');
           this.MRManager.setTaskName(this.id, data[type].name);
           this.isInit = true;
