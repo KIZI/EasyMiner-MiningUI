@@ -143,7 +143,7 @@ var ARManager = new Class({
 
   addAttributeToCedent: function (attribute, cedent) {
     if (attribute.choices && attribute.choices.length==1){
-      var field = new FieldAR(this.generateFieldID(), attribute, 'One category', null, new StringHelper(), attribute.choices[0]);
+      var field = new FieldAR(this.generateFieldID(), attribute, 'One category', null, new StringHelper(), String(attribute.choices[0]));
     }else{
       var field = new FieldAR(this.generateFieldID(), attribute, 'Subset', null, new StringHelper(), 1, 1);
     }
