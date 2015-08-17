@@ -1067,6 +1067,11 @@ var UIListener = new Class({
         reportManager.showTaskDetails(taskId);
       }.bind(this));
 
+      multiControls.getElements('.task-actions .task-export').addEvent('click',function(event){
+        event.stop();
+        this.UIPainter.renderExportWindow(taskId,event.target.get('rel'))
+      }.bind(this));
+
       this.checkMarkedRulesSelectedCheckboxes(taskId);
     }
   },

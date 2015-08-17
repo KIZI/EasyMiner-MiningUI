@@ -86,6 +86,24 @@ var UITemplateRegistrator = new Class({
           input({id: 'add-ruleset', type: 'submit', value: i18n.translate('Add new ruleset')}));
     });
 
+    Mooml.register('exportWindowTemplate', function (data) {
+      var i18n = data.i18n,
+          type = data.type,
+          links = data.links,
+          domLinks = [];
+
+      Object.each(links, function (value, id) {
+        domLinks.push(a({href: value.url}, value.text));
+      }.bind(this));
+
+      div({id: 'export-window'},
+          a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+          h2(i18n.translate('Export '+type)),
+          div({id: 'change-ruleset-list', class: 'actionsDiv bigButtons'},
+              domLinks
+          ));
+    });
+
     Mooml.register('changeRulesetWindowItemTemplate', function (data) {
       var id = data.id,
           name = data.name+' (rules: '+data.rulesCount+')';
@@ -938,13 +956,13 @@ var UITemplateRegistrator = new Class({
               title:i18n.translate('Remove from Knowledge base')
             },i18n.translate('Remove...'))
         );
-        taskActions = span({class:'task-actions'},//FIXME
+        taskActions = span({class:'task-actions'},
             a({
-              href:'http://br-dev.lmcloud.vse.cz/easyminercenter/em/rule-sets/drl/'+data.FRManager.MRManager.KBid,
-              target:'_blank',
-              class:'export-drl',
-              title:i18n.translate('Export classification business rules')
-            },i18n.translate('Export DRL'))
+              href:task.id,
+              class:'task-export',
+              rel:'ruleset',
+              title:i18n.translate('Show ruleset export options')
+            },i18n.translate('Ruleset export'))
         );
       } else{
         actions = span({class:'actions'},
@@ -981,7 +999,13 @@ var UITemplateRegistrator = new Class({
               href:'#',
               class:'task-details',
               title:i18n.translate('Show task details')
-            },i18n.translate('Task details'))
+            },i18n.translate('Task details')),
+            a({
+              href:'#',
+              class:'task-export',
+              rel:'task',
+              title:i18n.translate('Show task export options')
+            },i18n.translate('Task export'))
         );
       }
       div({class:'marked-rules-multi-controls'},

@@ -310,6 +310,29 @@ var UIPainter = new Class({
     this.UIListener.registerOverlayEventHandlers();
   },
 
+  renderExportWindow: function (taskId,type) {
+    var overlay = this.$UIStructurePainter.showOverlay();
+
+    var url = "",
+        links = [],
+        errorMsg = this.i18n.translate('Unable to load export links! Try it again later.');
+
+    if(type == 'ruleset'){
+      links = this.config.getKnowledgeBaseExportLinks(taskId);
+    } else{
+      links = this.config.getRuleClipboardExportLinks(taskId);
+    }
+
+    var window = Mooml.render('exportWindowTemplate', {
+      i18n: this.i18n,
+      type: type,
+      links: links
+    });
+    overlay.grab(window);
+
+    this.UIListener.registerOverlayEventHandlers();
+  },
+
   renderRulesetsList: function (data, selectedId) {
     var ruleSetsListElm = $('change-ruleset-list');
     ruleSetsListElm.empty();
