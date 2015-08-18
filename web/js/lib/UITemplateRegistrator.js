@@ -93,13 +93,13 @@ var UITemplateRegistrator = new Class({
           domLinks = [];
 
       Object.each(links, function (value, id) {
-        domLinks.push(a({href: value.url}, value.text));
+        domLinks.push(a({href: value.url, target: "_blank"}, value.text));
       }.bind(this));
 
       div({id: 'export-window'},
           a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
           h2(i18n.translate('Export '+type)),
-          div({id: 'change-ruleset-list', class: 'actionsDiv bigButtons'},
+          div({id: 'export-list', class: 'actionsDiv bigButtons'},
               domLinks
           ));
     });
