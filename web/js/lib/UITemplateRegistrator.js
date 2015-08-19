@@ -270,13 +270,9 @@ var UITemplateRegistrator = new Class({
         form({action: '#', method: 'POST', id: 'add-im-form', novalidate: ''},
           label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
           select({name: 'add-im-select', id: 'add-im-select'}),
-          span({'class': 'tooltip info'},
-            span({'class': 'helpImg'}),
-            span({'class': 'help'},
-              em(i18n.translate('Explanation')),
-              span('')
-            )
-          ),
+            p({'class': 'help'},
+                span('')
+            ),
           div({'class': 'autocomplete clearfix'}),
           input({type: 'submit', value: i18n.translate('Add')})));
     });
@@ -292,13 +288,9 @@ var UITemplateRegistrator = new Class({
           label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
           em({class: 'normal'}, IM.getLocalizedName()),
           select({name: 'edit-im-select', id: 'edit-im-select', styles: {display: 'none'}}),
-          span({'class': 'tooltip info', 'styles': {display: 'none'}},
-            span({'class': 'helpImg'}),
-            span({'class': 'help'},
-              em(i18n.translate('Explanation')),
-              span('')
-            )
-          ),
+            p({'class': 'help'},
+                span('')
+            ),
           div({'class': 'autocomplete clearfix'}),
           input({type: 'submit', value: i18n.translate('Edit')})));
     });
