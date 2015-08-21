@@ -60,6 +60,7 @@ div#overlay-inner form select {
   padding: 4px 2px 1px;
   position: relative;
   top: -4px;
+  margin-bottom: 10px;
   -moz-user-select: text;
   -ms-user-select: text;
 }
@@ -327,6 +328,10 @@ div#overlay-inner #edit-im-window .help {
 div#overlay-inner #add-im-window label,
 div#overlay-inner #edit-im-window label {
   text-align: left;
+}
+div#overlay-inner #add-im-window select,
+div#overlay-inner #edit-im-window select {
+  margin-bottom: 0;
 }
 div#overlay-inner #show-rule-details-window {
   width: 800px;
