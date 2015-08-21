@@ -25,7 +25,7 @@ div#overlay-inner form em {
   float: left;
   padding-left: 5px;
   position: relative;
-  top: -11px;
+  line-height: 1.3em;
 }
 div#overlay-inner form em.normal {
   font-style: normal;
@@ -60,7 +60,6 @@ div#overlay-inner form select {
   padding: 4px 2px 1px;
   position: relative;
   top: -4px;
-  margin-bottom: 10px;
   -moz-user-select: text;
   -ms-user-select: text;
 }
@@ -320,9 +319,14 @@ div#overlay-inner #edit-im-window .help {
   clear: both;
   display: block;
   margin-bottom: 20px;
-  color: #aaa;
-  font-size: 11px;
+  padding-top: 10px;
+  color: #666;
+  font-size: 12px;
   line-height: 14px;
+}
+div#overlay-inner #add-im-window label,
+div#overlay-inner #edit-im-window label {
+  text-align: left;
 }
 div#overlay-inner #show-rule-details-window {
   width: 800px;
