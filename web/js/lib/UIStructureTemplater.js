@@ -294,6 +294,29 @@ var UIStructureTemplater = new Class({
   },
 
   registerActiveRule: function () {
+
+    Mooml.register('arActionBoxTemplate',function(data){
+      var rules=data.rules,
+          pruningAvailable=data.pruningAvailable,
+          pruningAllowed=data.pruningAllowed,
+          pruningActive=data.pruningActive,
+          miningInProgress=data.miningInProgress,
+          i18n=data.i18n;
+
+      if (rules){
+        a({id: 'start-mining', href: '#'}, i18n.translate('Mine rules...'));
+        if (pruningAvailable){
+          div({id:'start-mining-with-pruning-label', title:i18n.translate('Prune founded rules using algorithm CBA (for classification). Allowed only for rule pattern with exactly one attribute in consequent.')},
+            input({type:"checkbox", value:"CBA", disabled:(!pruningAllowed), defaultChecked:(pruningActive&&pruningAllowed), name:"start-mining-with-pruning", id:"start-mining-with-pruning"}),
+            label({for:'start-mining-with-pruning'},i18n.translate('with pruning...'))
+          );
+        }
+      }
+      if (miningInProgress){
+        a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining'));
+      }
+    });
+
     Mooml.register('activeRuleTemplate', function (data) {
       var rules = data.rules,
         attributes = data.attributes,
@@ -359,15 +382,7 @@ var UIStructureTemplater = new Class({
         ),
         div({'class': 'clearfix'}),
         div({id: 'ar-action-box'},
-          //blok s akcemi pro AR Pattern
-          (rules ? a({id: 'start-mining', href: '#'}, i18n.translate('Mine rules...')): ''),
-          (rules && pruningAvailable ?
-            div({id:'start-mining-with-pruning-label', title:i18n.translate('Prune founded rules using algorithm CBA (for classification). Allowed only for rule pattern with exactly one attribute in consequent.')},
-              input({type:"checkbox", value:"CBA", disabled:(!pruningAllowed), defaultChecked:(pruningActive&&pruningAllowed), name:"start-mining-with-pruning", id:"start-mining-with-pruning"}),
-              label({for:'start-mining-with-pruning'},i18n.translate('with pruning...'))
-            )
-            : ''),
-          (miningInProgress ? a({id: 'stop-mining', href: '#'}, i18n.translate('Stop mining')) : ''),
+          Mooml.render('arActionBoxTemplate',{rules:rules,pruningAvailable:pruningAvailable,pruningAllowed:pruningAllowed,pruningActive:pruningActive,miningInProgress:miningInProgress,i18n:i18n}),
           miningProgressText
         )
       );
@@ -375,6 +390,7 @@ var UIStructureTemplater = new Class({
   },
 
   registerFoundRules: function () {
+
     Mooml.register('foundRulesStructureTemplate', function (data) {
       var FRManager=data.FRManager;
       if (FRManager.rulesCount>0){
