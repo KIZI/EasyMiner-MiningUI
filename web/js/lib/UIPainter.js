@@ -319,7 +319,9 @@ var UIPainter = new Class({
 
     if(type == 'ruleset'){
       links = this.config.getKnowledgeBaseExportLinks(taskId);
-    } else{
+    } else if (type == 'discovered'){
+      links = this.config.getDiscoveredRulesExportLinks(taskId);
+    } else {
       links = this.config.getRuleClipboardExportLinks(taskId);
     }
 

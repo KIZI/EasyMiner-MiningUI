@@ -855,7 +855,12 @@ var UITemplateRegistrator = new Class({
             href:'#',
             class:'task-details',
             title:i18n.translate('Show task details')
-          },i18n.translate('Task details'))
+          },i18n.translate('Task details')),
+          a({
+            href:'#',
+            class:'task-export',
+            title:i18n.translate('Show task export options')
+          },i18n.translate('Task export'))
         )
       );
     });

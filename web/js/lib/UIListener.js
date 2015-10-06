@@ -846,6 +846,13 @@ var UIListener = new Class({
         reportManager.showTaskDetails(FRManager.getTaskId());
       }.bind(this));
 
+      multiControls.getElements('.task-actions .task-export').addEvent('click',function(event){
+        event.stop();
+        var FRManager = this.ARBuilder.getFRManager();
+        var reportManager = this.ARBuilder.getReportManager();
+        this.UIPainter.renderExportWindow(FRManager.getTaskId(),'discovered');
+      }.bind(this));
+
       this.checkFoundRulesSelectedCheckboxes();
     }
   },
