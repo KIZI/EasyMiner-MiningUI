@@ -103,6 +103,11 @@ var UIListener = new Class({
       //this.UIColorizer.tween(droppable, this.$colorHelper.getAttributesHighlightBackgroundColor());
     }.bind(this));
 
+    // change checkbox status
+    $(field.getCSSCheckboxID()).addEvent('click', function (event) {
+      this.checkDataFieldsSelectedCheckboxes();
+    }.bind(this));
+
     // add to attributes
     $(field.getCSSAddID()).addEvent('click', function (event) {
       event.stop();
@@ -114,6 +119,18 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.openShowHistogramWindow(field.getName(), 'datafield');
     }.bind(this));
+  },
+
+  checkDataFieldsSelectedCheckboxes : function(){
+    //function for checking of checkboxes selection
+    var dataFieldsBox = $('data-fields'),
+        selectedDataFields = dataFieldsBox.getElements('.data-field-checkbox:checked').length,
+        linkAddSelected = dataFieldsBox.getElement('#add-selected-data-fields');
+    if (selectedDataFields > 0){
+      linkAddSelected.show();
+    }else{
+      linkAddSelected.hide();
+    }
   },
 
   registerReportEventHandler: function (report) {

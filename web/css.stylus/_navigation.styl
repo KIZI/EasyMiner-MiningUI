@@ -162,6 +162,26 @@ navigationBox()
       .show-histogram
         visibility visible
 
+  #add-selected-data-fields
+    color linkColor
+    font-size 14px
+    float left
+    padding-left 21px
+    margin-top 8px
+    display none
+    background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+
+  input[type='checkbox']
+    display none
+    float left
+    width 20px
+    margin-top 5px
+  &.show-checkboxes
+    input[type='checkbox']
+      display block
+    .add
+      display none
+
 #knowledge-base-select
   navigationBox()
 
@@ -180,14 +200,15 @@ navigationBox()
       font-size 14px
       float right
 
-#navigation h2.maximize .filter
+#navigation h2.maximize .filter,
+#navigation h2.maximize .selectable
     display none
 
 #attributes, #data-fields
   .datas-filter
     display none
     margin 5px 20px
-  input
+  input[type='text']
     width 180px
     padding 2px 3px
     background none
@@ -208,6 +229,13 @@ navigationBox()
     float right;
     top 3px !important;
     background transparent url("../images/icon-filter.png") no-repeat 0 0 !important;
+  .selectable
+    display block
+    width 20px
+    height 20px
+    float right;
+    top 3px !important;
+    background transparent url("../images/icon-checkboxes.png") no-repeat 0 0 !important;
   .filter-active
     background-position 0 -20px !important;
 /*

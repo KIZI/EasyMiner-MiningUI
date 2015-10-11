@@ -24,6 +24,10 @@ var APField = new Class({
         return 'field-nav-add-' + this.getNormalizedName();
     },
 
+    getCSSCheckboxID: function () {
+        return this.getNormalizedName() + '-checkbox';
+    },
+
     getCSSShowHistogramID: function () {
         return 'field-nav-show-histogram-' + this.getNormalizedName();
     },

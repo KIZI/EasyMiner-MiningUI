@@ -110,6 +110,8 @@ var UIStructureListener = new Class({
         var attributesFilterInput = attributesFilterBox.getElement('#attributes-filter');
         var resetA = $$('#attributes a.reset-filter')[0];
         var dataFieldsToggle = $$('#data-fields a.toggle')[0];
+        var dataFieldsSelectable = $$('#data-fields a.selectable')[0];
+        var dataFieldsAddSelected = $$('#data-fields #add-selected-data-fields')[0];
         var dataFieldsFilter = $$('#data-fields a.filter')[0];
         var dataFieldsFilterBox = $$('#data-fields > .datas-filter')[0];
         var dataFieldsFilterInput = dataFieldsFilterBox.getElement('#data-fields-filter');
@@ -147,6 +149,16 @@ var UIStructureListener = new Class({
             event.stop();
             resetA.getPrevious().set('value', '').fireEvent('keyup');
             attributesFilterBox.hide();
+        }.bind(this));
+
+        dataFieldsSelectable.addEvent('click', function (event) {
+            event.stop();
+            $('data-fields').toggleClass('show-checkboxes');
+        }.bind(this));
+
+        dataFieldsAddSelected.addEvent('click', function (event) {
+            event.stop();
+            console.log(this.getDataFieldsSelectedIds());
         }.bind(this));
 
         dataFieldsFilter.addEvent('click', function (event) {
@@ -210,6 +222,17 @@ var UIStructureListener = new Class({
         $('createUserReport').addEvent('click', function(event) {
             me.$ARBuilder.openCreateUserReportkWindow();
         });
+    },
+
+    getDataFieldsSelectedIds: function(){
+        var selectedCheckboxes=$$('#data-fields .data-field-checkbox:checked');
+        if (selectedCheckboxes.length > 0){
+            var result=[];
+            Array.each(selectedCheckboxes,function(checkbox){
+                result.push(checkbox.get('id'));
+            }.bind(result))
+        }
+        return result;
     },
 
     registerShowHiddenAttributesEventHandler: function() {

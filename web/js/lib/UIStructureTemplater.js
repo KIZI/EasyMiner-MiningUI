@@ -253,7 +253,8 @@ var UIStructureTemplater = new Class({
           href: '#',
           'class': 'toggle',
           'title': i18n.translate('Minimize')
-        }, ''), a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, '')),
+        }, ''), a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
+            a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')),
         div({'class': 'datas-filter'},
           input({
             'id': 'data-fields-filter',
@@ -262,7 +263,14 @@ var UIStructureTemplater = new Class({
           }),
           a({href: '#', 'class': 'reset-filter', 'title': i18n.translate('Reset filter')})),
         div(
-          ul({'class': 'clearfix'})));
+            {'class': 'clearfix'},
+          ul(),
+            a({
+              id: 'add-selected-data-fields',
+              href: '#',
+              title: i18n.translate('Add all selected data fields to attributes...')
+            }, i18n.translate('Add selected to attributes'))
+        ));
     });
 
     Mooml.register('knowledgeBaseSelectStructureTemplate', function (data) {

@@ -61,6 +61,7 @@ var UITemplateRegistrator = new Class({
         field = data.field;
 
       li({id: field.getCSSID()},
+          input({type:'checkbox',id:field.getCSSCheckboxID(), class:'data-field-checkbox'}),
         a({href: '#', id: field.getCSSAddID(), class: 'add', title: i18n.translate('Add to attributes')}),
         span(field.getName()),
         a({
