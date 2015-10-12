@@ -265,11 +265,25 @@ var UIStructureTemplater = new Class({
         div(
             {'class': 'clearfix'},
           ul(),
-            a({
-              id: 'add-selected-data-fields',
-              href: '#',
-              title: i18n.translate('Add all selected data fields to attributes...')
-            }, i18n.translate('Add selected to attributes'))
+            div({class: 'data-fields-checkbox-controls'},
+                a({
+                  class: 'all',
+                  title: i18n.translate('Select all')
+                }),
+                a({
+                  class: 'invert',
+                  title: i18n.translate('Invert selection')
+                }),
+                a({
+                  class: 'none',
+                  title: i18n.translate('Select none')
+                }),
+                a({
+                  id: 'add-selected-data-fields',
+                  href: '#',
+                  title: i18n.translate('Add all selected data fields to attributes...')
+                }, i18n.translate('Add selected to attributes'))
+            )
         ));
     });
 

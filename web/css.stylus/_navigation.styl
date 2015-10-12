@@ -120,6 +120,12 @@ navigationBox()
     display none
     background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
 
+
+dataFieldsIconLink()
+  iconLink()
+  float left
+  margin-right 2px
+  margin-top 4px
 #data-fields
   navigationBox()
 
@@ -162,25 +168,40 @@ navigationBox()
       .show-histogram
         visibility visible
 
-  #add-selected-data-fields
-    color linkColor
-    font-size 14px
-    float left
-    padding-left 21px
-    margin-top 8px
+  .data-fields-checkbox-controls
+    clear both
     display none
-    background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+    overflow hidden
+    #add-selected-data-fields
+      color linkColor
+      font-size 14px
+      float left
+      padding-left 21px
+      margin-top 8px
+      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+    .all
+      dataFieldsIconLink()
+      background transparent url('../images/icon-select-all.png') center center no-repeat
+    .none
+      dataFieldsIconLink()
+      background transparent url('../images/icon-select-none.png') center center no-repeat
+    .invert
+      dataFieldsIconLink()
+      background transparent url('../images/icon-select-invert.png') center center no-repeat
 
   input[type='checkbox']
     display none
     float left
     width 20px
-    margin-top 5px
+    margin-top 4px
   &.show-checkboxes
     input[type='checkbox']
       display block
     .add
       display none
+  &:not(.show-checkboxes)
+    .data-fields-checkbox-controls
+      display none !important
 
 #knowledge-base-select
   navigationBox()

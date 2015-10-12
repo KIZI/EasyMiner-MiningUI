@@ -828,26 +828,72 @@ nav {
 #data-fields li:hover .show-histogram {
   visibility: visible;
 }
-#data-fields #add-selected-data-fields {
+#data-fields .data-fields-checkbox-controls {
+  clear: both;
+  display: none;
+  overflow: hidden;
+}
+#data-fields .data-fields-checkbox-controls #add-selected-data-fields {
   color: #126499;
   font-size: 14px;
   float: left;
   padding-left: 21px;
   margin-top: 8px;
-  display: none;
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
+}
+#data-fields .data-fields-checkbox-controls .all {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+  margin-top: 4px;
+  background: transparent url("../images/icon-select-all.png") center center no-repeat;
+}
+#data-fields .data-fields-checkbox-controls .none {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+  margin-top: 4px;
+  background: transparent url("../images/icon-select-none.png") center center no-repeat;
+}
+#data-fields .data-fields-checkbox-controls .invert {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+  margin-top: 4px;
+  background: transparent url("../images/icon-select-invert.png") center center no-repeat;
 }
 #data-fields input[type='checkbox'] {
   display: none;
   float: left;
   width: 20px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 #data-fields.show-checkboxes input[type='checkbox'] {
   display: block;
 }
 #data-fields.show-checkboxes .add {
   display: none;
+}
+#data-fields:not(.show-checkboxes) .data-fields-checkbox-controls {
+  display: none !important;
 }
 #knowledge-base-select {
   color: #434343;

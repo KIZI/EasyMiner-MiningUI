@@ -25,7 +25,7 @@ var APField = new Class({
     },
 
     getCSSCheckboxID: function () {
-        return this.getNormalizedName() + '-checkbox';
+        return this.getNormalizedName();
     },
 
     getCSSShowHistogramID: function () {

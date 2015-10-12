@@ -111,7 +111,7 @@ var UIStructureListener = new Class({
         var resetA = $$('#attributes a.reset-filter')[0];
         var dataFieldsToggle = $$('#data-fields a.toggle')[0];
         var dataFieldsSelectable = $$('#data-fields a.selectable')[0];
-        var dataFieldsAddSelected = $$('#data-fields #add-selected-data-fields')[0];
+        var dataFieldsSelected = $$('#data-fields .data-fields-checkbox-controls')[0];
         var dataFieldsFilter = $$('#data-fields a.filter')[0];
         var dataFieldsFilterBox = $$('#data-fields > .datas-filter')[0];
         var dataFieldsFilterInput = dataFieldsFilterBox.getElement('#data-fields-filter');
@@ -156,7 +156,32 @@ var UIStructureListener = new Class({
             $('data-fields').toggleClass('show-checkboxes');
         }.bind(this));
 
-        dataFieldsAddSelected.addEvent('click', function (event) {
+        dataFieldsSelected.getElements('.all').addEvent('click',function(event){
+            //select all checkboxes
+            event.stop();
+            $('data-fields').getElements('.data-field-checkbox').each(function(checkbox){
+                checkbox.checked=true;
+            });
+            this.$ARBuilder.UIListener.checkDataFieldsSelectedCheckboxes();
+        }.bind(this));
+        dataFieldsSelected.getElements('.none').addEvent('click',function(event){
+            //unselect all checkboxes
+            event.stop();
+            $('data-fields').getElements('.data-field-checkbox').each(function(checkbox){
+                checkbox.checked=false;
+            });
+            this.$ARBuilder.UIListener.checkDataFieldsSelectedCheckboxes();
+        }.bind(this));
+        dataFieldsSelected.getElements('.invert').addEvent('click',function(event){
+            //select all checkboxes
+            event.stop();
+            $('data-fields').getElements('.data-field-checkbox').each(function(checkbox){
+                checkbox.checked=!checkbox.checked;
+            });
+            this.$ARBuilder.UIListener.checkDataFieldsSelectedCheckboxes();
+        }.bind(this));
+
+        dataFieldsSelected.getElement('#add-selected-data-fields').addEvent('click', function (event) {
             event.stop();
             console.log(this.getDataFieldsSelectedIds());
         }.bind(this));
