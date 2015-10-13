@@ -216,7 +216,7 @@ var MRManager = new Class({
   handleSuccessMRTasksRequest: function (data) {
       Object.each(data, function (value, id) {
         if(!this.tasks[id]){
-          this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this, false);
+          this.tasks[id] = new MarkedTask(id, value.name, this.config, value.rule_clipboard_rules, this.i18n, this.FL, this.UIPainter, this, false, value.rules_order);
           this.UIPainter.renderMarkedTask(this.tasks[id], 'maximize');
           this.tasks[id].calculatePagesCount();
         } else if(this.tasks[id].name != value.name){

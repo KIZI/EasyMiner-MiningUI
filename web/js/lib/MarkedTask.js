@@ -21,7 +21,7 @@ var MarkedTask = new Class({
   rulesPerPage: null,
   UIPainter: null,
 
-  initialize: function (id, name, config, count, i18n, FL, UIPainter, MRManager, isBase) {
+  initialize: function (id, name, config, count, i18n, FL, UIPainter, MRManager, isBase, rulesOrder) {
     this.config = config;
     this.i18n = i18n;
     this.id = id;
@@ -33,6 +33,9 @@ var MarkedTask = new Class({
     var perPageOptions = this.getPerPageOptions();
     this.rulesPerPage = perPageOptions[0];
     this.UIPainter = UIPainter;
+    if(rulesOrder != 'DEFAULT'){
+      this.rulesOrder = rulesOrder;
+    }
 
     //if(this.isBase){ this.gotoPage(1); }
   },
