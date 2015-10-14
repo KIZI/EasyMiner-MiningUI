@@ -895,6 +895,12 @@ var UITemplateRegistrator = new Class({
           }.bind(FRManager)
         }
       });
+      // set DEFAULT option
+      var option = new Element('option', {value: 'DEFAULT', text: data.i18n.translate('Found order')});
+      if (FRManager.rulesOrder == 'DEFAULT') {
+        option.setAttribute('selected', 'selected');
+      }
+      orderSelect.grab(option);
       Array.each(IMs, function (IM) {
         var option = new Element('option', {value: IM.getName(), text: IM.getLocalizedName()});
         if (IM.getName() == FRManager.rulesOrder) {

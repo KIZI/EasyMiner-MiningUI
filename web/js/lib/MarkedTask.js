@@ -17,7 +17,7 @@ var MarkedTask = new Class({
   pageLoading:false,
   rules: {},
   rulesCount: 0,
-  rulesOrder: 'FUI',
+  rulesOrder: 'DEFAULT',
   rulesPerPage: null,
   UIPainter: null,
 
@@ -33,7 +33,7 @@ var MarkedTask = new Class({
     var perPageOptions = this.getPerPageOptions();
     this.rulesPerPage = perPageOptions[0];
     this.UIPainter = UIPainter;
-    if(rulesOrder != 'DEFAULT'){
+    if(rulesOrder != ''){
       this.rulesOrder = rulesOrder;
     }
 
