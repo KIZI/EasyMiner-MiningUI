@@ -56,7 +56,6 @@ navigationBox()
   li
     cursor move
     float left; clear left
-    padding paletteLiPadding
     &.rec1
       background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
     &.rec2
@@ -150,7 +149,6 @@ dataFieldsIconLink()
   li
     cursor move
     float left; clear left
-    padding paletteLiPadding
     .add
       background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
       display block
@@ -261,11 +259,14 @@ dataFieldsIconLink()
   .filter-active
     background-position 0 -20px !important
   li
-    width 250px
-    height 20px
-    overflow hidden
-    text-overflow ellipsis
-    white-space nowrap
+    span
+      display inline-block
+      max-width 190px
+      height 18px
+      padding 1px 0
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
 
 /*
 #reports

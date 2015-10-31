@@ -675,7 +675,6 @@ nav {
   cursor: move;
   float: left;
   clear: left;
-  padding: 2px 0;
 }
 #attributes li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
@@ -803,7 +802,6 @@ nav {
   cursor: move;
   float: left;
   clear: left;
-  padding: 2px 0;
 }
 #data-fields li .add {
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
@@ -984,10 +982,12 @@ nav {
 #data-fields .filter-active {
   background-position: 0 -20px !important;
 }
-#attributes li,
-#data-fields li {
-  width: 250px;
-  height: 20px;
+#attributes li span,
+#data-fields li span {
+  display: inline-block;
+  max-width: 190px;
+  height: 18px;
+  padding: 1px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
