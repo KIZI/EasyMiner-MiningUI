@@ -277,8 +277,12 @@ var ARBuilder = new Class({
   },
 
     openClickAddAttributeWindow: function (field) {
-        this.UIPainter.renderClickAddAttributeWindow(field);
+      this.UIPainter.renderClickAddAttributeWindow(field);
     },
+
+  openAddAttributesWindow: function (fields) {
+    this.UIPainter.renderAddAttributesWindow(fields);
+  },
 
   openEditAttributeWindow: function (attribute) {
     this.UIPainter.renderEditAttributeWindow(attribute);

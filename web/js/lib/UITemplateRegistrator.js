@@ -1315,6 +1315,20 @@ var UITemplateRegistrator = new Class({
         iframe({src: url}));
     });
 
+    Mooml.register('addAttributesTemplate', function (data) {
+      var i18n = data.i18n,
+          url = data.url;
+
+      div({id: 'add-attributes-window'},
+          a({
+                id: 'overlay-close',
+                href: '#'
+              },
+              i18n.translate('Close')
+          ),
+          iframe({src: url}));
+    });
+
     Mooml.register('editAttributeTemplate', function (data) {
       var i18n = data.i18n,
         url = data.url;

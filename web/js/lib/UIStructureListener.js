@@ -183,7 +183,7 @@ var UIStructureListener = new Class({
 
         dataFieldsSelected.getElement('#add-selected-data-fields').addEvent('click', function (event) {
             event.stop();
-            console.log(this.getDataFieldsSelectedIds());
+            this.$ARBuilder.openAddAttributesWindow(this.getDataFieldsSelectedIds());
         }.bind(this));
 
         dataFieldsFilter.addEvent('click', function (event) {

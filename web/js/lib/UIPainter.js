@@ -182,6 +182,16 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
+  renderAddAttributesWindow: function (fields) {
+    var overlay = this.$UIStructurePainter.showOverlay();
+    var url = this.config.getAddAttributesURL(fields);
+    var window = Mooml.render('addAttributesTemplate', {i18n: this.i18n, url: url});
+    overlay.grab(window);
+
+    this.UIListener.registerOverlayEventHandlers();
+    this.$UIStructurePainter.posOverlay();
+  },
+
   renderEditAttributeWindow: function (attribute) {
     var overlay = this.$UIStructurePainter.showOverlay();
     var url = this.config.getEditAttributeURL(attribute.getName());
