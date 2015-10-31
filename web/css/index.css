@@ -984,6 +984,14 @@ nav {
 #data-fields .filter-active {
   background-position: 0 -20px !important;
 }
+#attributes li,
+#data-fields li {
+  width: 250px;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 section#active-rule {
   position: relative;
 }

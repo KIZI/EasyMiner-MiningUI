@@ -34,7 +34,7 @@ var UITemplateRegistrator = new Class({
 
       li({'class': className},
         a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add attribute')}),
-        span({id: attribute.getCSSID()}, attribute.getName()),
+        span({id: attribute.getCSSID(), title: attribute.getName()}, attribute.getName()),
         showRemoveAttribute ? a({
           href: '#',
           id: attribute.getCSSRemoveID(),
@@ -63,7 +63,7 @@ var UITemplateRegistrator = new Class({
       li({id: field.getCSSID()},
           input({type:'checkbox',id:field.getCSSCheckboxID(), class:'data-field-checkbox', 'data-id': field.getName()}),
         a({href: '#', id: field.getCSSAddID(), class: 'add', title: i18n.translate('Add to attributes')}),
-        span(field.getName()),
+        span({title: field.getName()}, field.getName()),
         a({
           href: '#',
           id: field.getCSSShowHistogramID(),
