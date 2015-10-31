@@ -125,7 +125,7 @@ var UIListener = new Class({
     //function for checking of checkboxes selection
     var dataFieldsBox = $('data-fields'),
         selectedDataFields = dataFieldsBox.getElements('.data-field-checkbox:checked').length,
-        linkAddSelected = dataFieldsBox.getElements('.data-fields-checkbox-controls')[0];
+        linkAddSelected = dataFieldsBox.getElements('#add-selected-data-fields');
     if (selectedDataFields > 0){
       linkAddSelected.show();
     }else{

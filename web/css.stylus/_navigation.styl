@@ -171,8 +171,10 @@ dataFieldsIconLink()
   .data-fields-checkbox-controls
     clear both
     display none
+    height 28px
     overflow hidden
     #add-selected-data-fields
+      display none
       color linkColor
       font-size 14px
       float left
@@ -199,9 +201,8 @@ dataFieldsIconLink()
       display block
     .add
       display none
-  &:not(.show-checkboxes)
     .data-fields-checkbox-controls
-      display none !important
+      display block
 
 #knowledge-base-select
   navigationBox()

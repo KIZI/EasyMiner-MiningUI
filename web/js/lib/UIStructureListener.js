@@ -254,7 +254,7 @@ var UIStructureListener = new Class({
         if (selectedCheckboxes.length > 0){
             var result=[];
             Array.each(selectedCheckboxes,function(checkbox){
-                result.push(checkbox.get('id'));
+                result.push(checkbox.get('data-id'));
             }.bind(result))
         }
         return result;
