@@ -363,13 +363,9 @@ var UITemplateRegistrator = new Class({
       if (selectedCoefficient.getName() === 'One category') {
         span({id: 'add-coefficient-autocomplete'},
           //select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
-          span({'class': 'tooltip info'},
-            span({'class': 'helpImg'}),
-            span({'class': 'help'},
-              em(i18n.translate('Explanation')),
-              span('')
-            )
-          ),
+            p({'class': 'help'},
+                span('')
+            ),
             div({'class': 'autocomplete clearfix'},
                 label({'for': 'add-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
                 select({name: 'add-coefficient-category', id: 'add-coefficient-category'})
@@ -378,13 +374,9 @@ var UITemplateRegistrator = new Class({
       } else {
         span({id: 'add-coefficient-autocomplete'},
           //select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
-          span({'class': 'tooltip info'},
-            span({'class': 'helpImg'}),
-            span({'class': 'help'},
-              em(i18n.translate('Explanation')),
-              span('')
-            )
-          ),
+            p({'class': 'help'},
+                span('')
+            ),
           div({'class': 'autocomplete clearfix'},
             label({id: 'add-coefficient-minlength-label', 'for': 'add-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
             input({
@@ -427,13 +419,9 @@ var UITemplateRegistrator = new Class({
       if (selectedCoefficient.getName() === 'One category') {
         span({id: 'edit-coefficient-autocomplete'},
           //select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
-          span({'class': 'tooltip info'},
-            span({'class': 'helpImg'}),
-            span({'class': 'help'},
-              em(i18n.translate('Explanation')),
-              span('')
-            )
-          ),
+            p({'class': 'help'},
+                span('')
+            ),
             div({'class': 'autocomplete clearfix'},
                 label({'for': 'edit-coefficient-category'}, selectedCoefficient.fields.category.localizedName + ':'),
                 select({name: 'edit-coefficient-category', id: 'edit-coefficient-category'})
@@ -443,13 +431,9 @@ var UITemplateRegistrator = new Class({
       } else {
         span({id: 'edit-coefficient-autocomplete'},
           //select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
-          span({'class': 'tooltip info'},
-            span({'class': 'helpImg'}),
-            span({'class': 'help'},
-              em(i18n.translate('Explanation')),
-              span('')
-            )
-          ),
+            p({'class': 'help'},
+                span('')
+            ),
             div({'class': 'autocomplete clearfix'},
                 label({id: 'edit-coefficient-minlength-label', 'for': 'edit-coefficient-minlength'}, selectedCoefficient.fields.minLength.localizedName + ':'),
                 input({

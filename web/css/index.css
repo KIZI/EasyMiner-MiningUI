@@ -47,6 +47,9 @@ div#overlay-inner form label {
 }
 div#overlay-inner form select {
   padding: 4px 2px 1px;
+  max-width: 400px;
+  min-width: 200px;
+  width: auto;
 }
 div#overlay-inner form input[type='text'],
 div#overlay-inner form input[type='number'],
@@ -239,7 +242,7 @@ div#overlay-inner > div {
   box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
   -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
   -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.6);
-  width: 435px;
+  min-width: 435px;
 /*margin 10% auto*/
   position: fixed;
   left: 50%;
@@ -318,6 +321,8 @@ div#overlay-inner #model-tester-window form input[type="submit"],
 div#overlay-inner #show-br-base-window form input[type="submit"] {
   margin-left: 310px;
 }
+div#overlay-inner #add-coefficient-window .help,
+div#overlay-inner #edit-coefficient-window .help,
 div#overlay-inner #add-im-window .help,
 div#overlay-inner #edit-im-window .help {
   clear: both;
@@ -328,10 +333,14 @@ div#overlay-inner #edit-im-window .help {
   font-size: 12px;
   line-height: 14px;
 }
+div#overlay-inner #add-coefficient-window label,
+div#overlay-inner #edit-coefficient-window label,
 div#overlay-inner #add-im-window label,
 div#overlay-inner #edit-im-window label {
   text-align: left;
 }
+div#overlay-inner #add-coefficient-window select,
+div#overlay-inner #edit-coefficient-window select,
 div#overlay-inner #add-im-window select,
 div#overlay-inner #edit-im-window select {
   margin-bottom: 0;
