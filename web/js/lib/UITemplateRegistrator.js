@@ -1193,7 +1193,8 @@ var UITemplateRegistrator = new Class({
                 name: 'rename-task-input',
                 id: 'rename-task-input',
                 type: 'text',
-                value: taskName
+                value: taskName,
+                maxlength: '100'
               }),
               div({class: 'clearfix'}),
               label({
@@ -1259,7 +1260,8 @@ var UITemplateRegistrator = new Class({
             name: 'rename-task-input',
             id: 'rename-task-input',
             type: 'text',
-            value: taskName
+            value: taskName,
+            maxlength: '100'
           }),
           input({
             type: 'hidden',
