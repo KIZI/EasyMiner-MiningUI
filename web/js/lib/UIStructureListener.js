@@ -105,13 +105,15 @@ var UIStructureListener = new Class({
 
     registerNavigationEventHandlers: function (i18n) {
         var attributesToggle = $$('#attributes a.toggle')[0];
+        var attributesSelectable = $$('#attributes a.selectable')[0];
+        var attributesSelected = $$('#attributes .navigation-checkbox-controls')[0];
         var attributesFilter = $$('#attributes a.filter')[0];
         var attributesFilterBox = $$('#attributes > .datas-filter')[0];
         var attributesFilterInput = attributesFilterBox.getElement('#attributes-filter');
         var resetA = $$('#attributes a.reset-filter')[0];
         var dataFieldsToggle = $$('#data-fields a.toggle')[0];
         var dataFieldsSelectable = $$('#data-fields a.selectable')[0];
-        var dataFieldsSelected = $$('#data-fields .data-fields-checkbox-controls')[0];
+        var dataFieldsSelected = $$('#data-fields .navigation-checkbox-controls')[0];
         var dataFieldsFilter = $$('#data-fields a.filter')[0];
         var dataFieldsFilterBox = $$('#data-fields > .datas-filter')[0];
         var dataFieldsFilterInput = dataFieldsFilterBox.getElement('#data-fields-filter');
@@ -127,6 +129,41 @@ var UIStructureListener = new Class({
                 attributesFilterBox.hide();
             } else{ attributesToggle.set('title', i18n.translate('Minimize')); }
             elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
+        }.bind(this));
+
+        attributesSelectable.addEvent('click', function (event) {
+            event.stop();
+            $('attributes').toggleClass('show-checkboxes');
+        }.bind(this));
+
+        attributesSelected.getElements('.all').addEvent('click',function(event){
+            //select all checkboxes
+            event.stop();
+            $('attributes').getElements('.attribute-checkbox').each(function(checkbox){
+                checkbox.checked=true;
+            });
+            this.$ARBuilder.UIListener.checkAttributesSelectedCheckboxes();
+        }.bind(this));
+        attributesSelected.getElements('.none').addEvent('click',function(event){
+            //unselect all checkboxes
+            event.stop();
+            $('attributes').getElements('.attribute-checkbox').each(function(checkbox){
+                checkbox.checked=false;
+            });
+            this.$ARBuilder.UIListener.checkAttributesSelectedCheckboxes();
+        }.bind(this));
+        attributesSelected.getElements('.invert').addEvent('click',function(event){
+            //select all checkboxes
+            event.stop();
+            $('attributes').getElements('.attribute-checkbox').each(function(checkbox){
+                checkbox.checked=!checkbox.checked;
+            });
+            this.$ARBuilder.UIListener.checkAttributesSelectedCheckboxes();
+        }.bind(this));
+
+        attributesSelected.getElement('#add-selected-attributes').addEvent('click', function (event) {
+            event.stop();
+            //this.$ARBuilder.openAddAttributesWindow(this.getDataFieldsSelectedIds());
         }.bind(this));
 
         attributesFilter.addEvent('click', function (event) {

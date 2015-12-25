@@ -838,75 +838,6 @@ nav {
 #data-fields li:hover .show-histogram {
   visibility: visible;
 }
-#data-fields .data-fields-checkbox-controls {
-  clear: both;
-  display: none;
-  height: 28px;
-  overflow: hidden;
-}
-#data-fields .data-fields-checkbox-controls #add-selected-data-fields {
-  display: none;
-  color: #126499;
-  font-size: 14px;
-  float: left;
-  padding-left: 21px;
-  margin-top: 8px;
-  background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
-}
-#data-fields .data-fields-checkbox-controls .all {
-  display: inline-block;
-  position: relative;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  cursor: pointer;
-  float: left;
-  margin-right: 2px;
-  margin-top: 4px;
-  background: transparent url("../images/icon-select-all.png") center center no-repeat;
-}
-#data-fields .data-fields-checkbox-controls .none {
-  display: inline-block;
-  position: relative;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  cursor: pointer;
-  float: left;
-  margin-right: 2px;
-  margin-top: 4px;
-  background: transparent url("../images/icon-select-none.png") center center no-repeat;
-}
-#data-fields .data-fields-checkbox-controls .invert {
-  display: inline-block;
-  position: relative;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  cursor: pointer;
-  float: left;
-  margin-right: 2px;
-  margin-top: 4px;
-  background: transparent url("../images/icon-select-invert.png") center center no-repeat;
-}
-#data-fields input[type='checkbox'] {
-  display: none;
-  float: left;
-  width: 20px;
-  margin-top: 4px;
-}
-#data-fields.show-checkboxes input[type='checkbox'] {
-  display: block;
-}
-#data-fields.show-checkboxes .add {
-  display: none;
-}
-#data-fields.show-checkboxes .data-fields-checkbox-controls {
-  display: block;
-}
 #knowledge-base-select {
   color: #434343;
   background-color: #fff;
@@ -1000,6 +931,86 @@ nav {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+#attributes .navigation-checkbox-controls,
+#data-fields .navigation-checkbox-controls {
+  clear: both;
+  display: none;
+  height: 28px;
+  overflow: hidden;
+}
+#attributes .navigation-checkbox-controls #add-selected-attributes,
+#data-fields .navigation-checkbox-controls #add-selected-attributes,
+#attributes .navigation-checkbox-controls #add-selected-data-fields,
+#data-fields .navigation-checkbox-controls #add-selected-data-fields {
+  display: none;
+  color: #126499;
+  font-size: 14px;
+  float: left;
+  padding-left: 21px;
+  margin-top: 8px;
+  background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
+}
+#attributes .navigation-checkbox-controls .all,
+#data-fields .navigation-checkbox-controls .all {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+  margin-top: 4px;
+  background: transparent url("../images/icon-select-all.png") center center no-repeat;
+}
+#attributes .navigation-checkbox-controls .none,
+#data-fields .navigation-checkbox-controls .none {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+  margin-top: 4px;
+  background: transparent url("../images/icon-select-none.png") center center no-repeat;
+}
+#attributes .navigation-checkbox-controls .invert,
+#data-fields .navigation-checkbox-controls .invert {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+  margin-top: 4px;
+  background: transparent url("../images/icon-select-invert.png") center center no-repeat;
+}
+#attributes input[type='checkbox'],
+#data-fields input[type='checkbox'] {
+  display: none;
+  float: left;
+  width: 20px;
+  margin-top: 4px;
+}
+#attributes.show-checkboxes input[type='checkbox'],
+#data-fields.show-checkboxes input[type='checkbox'] {
+  display: block;
+}
+#attributes.show-checkboxes .add,
+#data-fields.show-checkboxes .add {
+  display: none;
+}
+#attributes.show-checkboxes .navigation-checkbox-controls,
+#data-fields.show-checkboxes .navigation-checkbox-controls {
+  display: block;
 }
 section#active-rule {
   position: relative;

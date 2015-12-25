@@ -51,6 +51,11 @@ var UIListener = new Class({
       //this.UIColorizer.tween(droppable, this.$colorHelper.getCedentHighlightBorderColor(), 'border-color');
     }.bind(this));
 
+    // change checkbox status
+    $(attribute.getCSSCheckboxID()).addEvent('click', function (event) {
+      this.checkAttributesSelectedCheckboxes();
+    }.bind(this));
+
     $(attribute.getCSSAddID()).addEvent('click', function (event) {
       event.stop();
       //this.ARBuilder.getARManager().addAttributeToCedent(attribute);
@@ -119,6 +124,18 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.openShowHistogramWindow(field.getName(), 'datafield');
     }.bind(this));
+  },
+
+  checkAttributesSelectedCheckboxes : function(){
+    //function for checking of checkboxes selection
+    var attributesBox = $('attributes'),
+        selectedAttributes = attributesBox.getElements('.attribute-checkbox:checked').length,
+        linkAddSelected = attributesBox.getElements('#add-selected-attributes');
+    if (selectedAttributes > 0){
+      linkAddSelected.show();
+    }else{
+      linkAddSelected.hide();
+    }
   },
 
   checkDataFieldsSelectedCheckboxes : function(){

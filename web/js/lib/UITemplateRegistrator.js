@@ -33,6 +33,7 @@ var UITemplateRegistrator = new Class({
       }
 
       li({'class': className},
+          input({type:'checkbox',id:attribute.getCSSCheckboxID(), class:'attribute-checkbox', 'data-id': attribute.getName()}),
         a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add attribute')}),
         span({id: attribute.getCSSID(), title: attribute.getName()}, attribute.getName()),
         showRemoveAttribute ? a({

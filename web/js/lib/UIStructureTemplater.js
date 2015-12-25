@@ -215,7 +215,8 @@ var UIStructureTemplater = new Class({
             href: '#',
             'class': 'toggle',
             'title': i18n.translate('Minimize')
-          }, ''), a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, '')),
+          }, ''), a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
+            a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')),
           div({'class': 'datas-filter'},
             input({
               'id': 'attributes-filter',
@@ -239,7 +240,26 @@ var UIStructureTemplater = new Class({
               id: 'add-all-unused-attributes',
               href: '#',
               title: i18n.translate('Add all unused attributes to antecedent...')
-            }, i18n.translate('Add all attributes'))
+            }, i18n.translate('Add all attributes')),
+              div({class: 'navigation-checkbox-controls'},
+                  a({
+                      class: 'all',
+                      title: i18n.translate('Select all')
+                  }),
+                  a({
+                      class: 'invert',
+                      title: i18n.translate('Invert selection')
+                  }),
+                  a({
+                      class: 'none',
+                      title: i18n.translate('Select none')
+                  }),
+                  a({
+                      id: 'add-selected-attributes',
+                      href: '#',
+                      title: i18n.translate('Add all selected data fields to attributes...')
+                  }, i18n.translate('Add selected to attributes'))
+              )
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));
       }
@@ -265,7 +285,7 @@ var UIStructureTemplater = new Class({
         div(
             {'class': 'clearfix'},
           ul(),
-            div({class: 'data-fields-checkbox-controls'},
+            div({class: 'navigation-checkbox-controls'},
                 a({
                   class: 'all',
                   title: i18n.translate('Select all')

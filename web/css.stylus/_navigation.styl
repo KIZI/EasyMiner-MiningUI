@@ -120,11 +120,6 @@ navigationBox()
     background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
 
 
-dataFieldsIconLink()
-  iconLink()
-  float left
-  margin-right 2px
-  margin-top 4px
 #data-fields
   navigationBox()
 
@@ -166,42 +161,6 @@ dataFieldsIconLink()
       .show-histogram
         visibility visible
 
-  .data-fields-checkbox-controls
-    clear both
-    display none
-    height 28px
-    overflow hidden
-    #add-selected-data-fields
-      display none
-      color linkColor
-      font-size 14px
-      float left
-      padding-left 21px
-      margin-top 8px
-      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
-    .all
-      dataFieldsIconLink()
-      background transparent url('../images/icon-select-all.png') center center no-repeat
-    .none
-      dataFieldsIconLink()
-      background transparent url('../images/icon-select-none.png') center center no-repeat
-    .invert
-      dataFieldsIconLink()
-      background transparent url('../images/icon-select-invert.png') center center no-repeat
-
-  input[type='checkbox']
-    display none
-    float left
-    width 20px
-    margin-top 4px
-  &.show-checkboxes
-    input[type='checkbox']
-      display block
-    .add
-      display none
-    .data-fields-checkbox-controls
-      display block
-
 #knowledge-base-select
   navigationBox()
 
@@ -224,6 +183,11 @@ dataFieldsIconLink()
 #navigation h2.maximize .selectable
     display none
 
+attributeIconLink()
+  iconLink()
+  float left
+  margin-right 2px
+  margin-top 4px
 #attributes, #data-fields
   .datas-filter
     display none
@@ -267,6 +231,42 @@ dataFieldsIconLink()
       overflow hidden
       text-overflow ellipsis
       white-space nowrap
+  .navigation-checkbox-controls
+    clear both
+    display none
+    height 28px
+    overflow hidden
+    #add-selected-attributes,
+    #add-selected-data-fields
+      display none
+      color linkColor
+      font-size 14px
+      float left
+      padding-left 21px
+      margin-top 8px
+      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+    .all
+      attributeIconLink()
+      background transparent url('../images/icon-select-all.png') center center no-repeat
+    .none
+      attributeIconLink()
+      background transparent url('../images/icon-select-none.png') center center no-repeat
+    .invert
+      attributeIconLink()
+      background transparent url('../images/icon-select-invert.png') center center no-repeat
+
+  input[type='checkbox']
+    display none
+    float left
+    width 20px
+    margin-top 4px
+  &.show-checkboxes
+    input[type='checkbox']
+      display block
+    .add
+      display none
+    .navigation-checkbox-controls
+      display block
 
 /*
 #reports

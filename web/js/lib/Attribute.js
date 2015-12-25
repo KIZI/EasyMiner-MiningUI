@@ -69,6 +69,10 @@ var Attribute = new Class({
         return 'attribute-add-' + this.getNormalizedName();
     },
 
+	getCSSCheckboxID: function () {
+		return 'attribute-checkbox-' + this.getNormalizedName();
+	},
+
     getCSSEditID: function () {
         return 'attribute-edit-' + this.getNormalizedName();
     },
