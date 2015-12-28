@@ -467,10 +467,22 @@ var UIListener = new Class({
         var cedent = (cedentName == 'antecedent') ? (this.ARBuilder.getARManager().getActiveRule().getAntecedent()) : (this.ARBuilder.getARManager().getActiveRule().getSuccedent());
         this.UIPainter.hideOverlay();
 
-        if(this.ARBuilder.getConfig().getAutoShowAttributeBinningDialog()){
-          this.ARBuilder.getARManager().addAttributeToCedent(field, cedent);
+        var ARManager = this.ARBuilder.getARManager();
+        if(typeOf(field) === 'array'){
+          Array.each(field, function (fieldName) {
+            //automatické přidání všech vybraných atributů do vybraného hlavního cedentu
+            var activeRule= ARManager.getActiveRule();
+            var attributeNameFilter=this.ARBuilder.attributesFilter.prepareTestRegExp();
+            var attribute = this.ARBuilder.getDD().getAttributeByName(fieldName);
+            if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
+            if (!attributeNameFilter.test(fieldName)){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
+            if ((attribute.isHidden())){return;/*jde o skrytý atribut*/}
+            ARManager.addAttributeToCedent(attribute, cedent);
+          }.bind(this));
+        }else if(this.ARBuilder.getConfig().getAutoShowAttributeBinningDialog()){
+          ARManager.addAttributeToCedent(field, cedent);
         }else{
-          this.ARBuilder.getARManager().addAttribute(cedent, field);
+          ARManager.addAttribute(cedent, field);
         }
 
       }

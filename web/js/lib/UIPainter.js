@@ -94,6 +94,7 @@ var UIPainter = new Class({
         this.showAddAllUnusedAttributesLink();
       }.bind(this)
     });
+    this.UIListener.checkAttributesSelectedCheckboxes();
   },
 
   showAddAllUnusedAttributesLink: function(){

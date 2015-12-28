@@ -171,7 +171,7 @@ var UIStructureListener = new Class({
 
         attributesSelected.getElement('#add-selected-attributes').addEvent('click', function (event) {
             event.stop();
-            //this.$ARBuilder.openAddAttributesWindow(this.getDataFieldsSelectedIds());
+            this.$ARBuilder.openClickAddAttributeWindow(this.getAttributesSelectedIds());
         }.bind(this));
 
         attributesFilter.addEvent('click', function (event) {
@@ -292,6 +292,17 @@ var UIStructureListener = new Class({
         $('createUserReport').addEvent('click', function(event) {
             me.$ARBuilder.openCreateUserReportkWindow();
         });
+    },
+
+    getAttributesSelectedIds: function(){
+        var selectedCheckboxes=$$('#attributes .attribute-checkbox:checked');
+        if (selectedCheckboxes.length > 0){
+            var result=[];
+            Array.each(selectedCheckboxes,function(checkbox){
+                result.push(checkbox.get('data-id'));
+            }.bind(result))
+        }
+        return result;
     },
 
     getDataFieldsSelectedIds: function(){
