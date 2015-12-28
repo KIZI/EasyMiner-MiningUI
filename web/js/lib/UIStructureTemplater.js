@@ -236,11 +236,6 @@ var UIStructureTemplater = new Class({
               styles: {'display': hasHiddenAttributes ? 'inline' : 'none'},
               title: i18n.translate('Show hidden attributes')
             }, i18n.translate('Show hidden')),
-            a({
-              id: 'add-all-unused-attributes',
-              href: '#',
-              title: i18n.translate('Add all unused attributes to antecedent...')
-            }, i18n.translate('Add all attributes')),
               div({class: 'navigation-checkbox-controls'},
                   a({
                       class: 'all',
@@ -259,7 +254,12 @@ var UIStructureTemplater = new Class({
                       href: '#',
                       title: i18n.translate('Add all selected data fields to attributes...')
                   }, i18n.translate('Add selected to attributes'))
-              )
+              ),
+              a({
+                  id: 'add-all-unused-attributes',
+                  href: '#',
+                  title: i18n.translate('Add all unused attributes to antecedent...')
+              }, i18n.translate('Add all unused'))
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));
       }

@@ -133,7 +133,15 @@ var UIStructureListener = new Class({
 
         attributesSelectable.addEvent('click', function (event) {
             event.stop();
-            $('attributes').toggleClass('show-checkboxes');
+            var attributesElm = $('attributes');
+            if(attributesElm.hasClass('show-checkboxes')){
+                attributesElm.removeClass('show-checkboxes');
+                this.$ARBuilder.UIPainter.showAddAllUnusedAttributesLink();
+            } else{
+                attributesElm.addClass('show-checkboxes');
+                this.$ARBuilder.UIListener.checkAttributesSelectedCheckboxes();
+            }
+
         }.bind(this));
 
         attributesSelected.getElements('.all').addEvent('click',function(event){

@@ -130,11 +130,14 @@ var UIListener = new Class({
     //function for checking of checkboxes selection
     var attributesBox = $('attributes'),
         selectedAttributes = attributesBox.getElements('.attribute-checkbox:checked').length,
-        linkAddSelected = attributesBox.getElements('#add-selected-attributes');
+        linkAddSelected = attributesBox.getElements('#add-selected-attributes'),
+        linkAddUnused = attributesBox.getElements('#add-all-unused-attributes');
     if (selectedAttributes > 0){
       linkAddSelected.show();
+      linkAddUnused.hide();
     }else{
       linkAddSelected.hide();
+      linkAddUnused.show();
     }
   },
 
