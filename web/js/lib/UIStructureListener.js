@@ -331,12 +331,16 @@ var UIStructureListener = new Class({
             var ARManager = this.$ARBuilder.getARManager();
             var activeRule= ARManager.getActiveRule();
             var attributeNameFilter=this.$ARBuilder.attributesFilter.prepareTestRegExp();
+            var attributeNames=[];
             Array.each(this.$ARBuilder.getDD().getAttributes(), function (attribute) {
                 if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
                 if (!attributeNameFilter.test(attribute.getName())){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
                 if ((attribute.isHidden())){return;/*jde o skrytý atribut*/}
-                ARManager.addAttributeToCedent(attribute);
+                //příprava seznamu jmen nepoužitých atributů
+                attributeNames.push(attribute.name);
             }.bind(this));
+            //otevření okna pro výběr cíle, kam se mají dané atributy přidat
+            this.$ARBuilder.openClickAddAttributeWindow(attributeNames);
         }.bind(this));
     },
 

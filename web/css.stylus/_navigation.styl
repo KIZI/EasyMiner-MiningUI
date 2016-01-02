@@ -232,18 +232,20 @@ attributeIconLink()
       overflow hidden
       text-overflow ellipsis
       white-space nowrap
+
   .navigation-checkbox-controls
     clear both
     display none
     float left
     height 28px
     overflow hidden
+    width auto
     #add-selected-attributes,
     #add-selected-data-fields
       display none
       color linkColor
       font-size 14px
-      float left
+      float right
       padding-left 21px
       margin-top 8px
       background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
@@ -256,6 +258,10 @@ attributeIconLink()
     .invert
       attributeIconLink()
       background transparent url('../images/icon-select-invert.png') center center no-repeat
+
+
+  &.with-checkboxes-actions .navigation-checkbox-controls
+    width 100%
 
   input[type='checkbox']
     display none

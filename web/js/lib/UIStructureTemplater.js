@@ -252,13 +252,13 @@ var UIStructureTemplater = new Class({
                   a({
                       id: 'add-selected-attributes',
                       href: '#',
-                      title: i18n.translate('Add all selected data fields to attributes...')
-                  }, i18n.translate('Add selected to attributes'))
+                      title: i18n.translate('Add selected attributes to rule pattern...')
+                  }, i18n.translate('Add selected'))
               ),
               a({
                   id: 'add-all-unused-attributes',
                   href: '#',
-                  title: i18n.translate('Add all unused attributes to antecedent...')
+                  title: i18n.translate('Add all unused attributes to rule pattern...')
               }, i18n.translate('Add all unused'))
 //						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));

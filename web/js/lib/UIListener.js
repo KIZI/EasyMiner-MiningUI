@@ -134,10 +134,12 @@ var UIListener = new Class({
         linkAddUnused = attributesBox.getElements('#add-all-unused-attributes');
     if (selectedAttributes > 0){
       linkAddSelected.show();
+      attributesBox.addClass('with-checkboxes-actions');
       linkAddUnused.hide();
     }else{
       linkAddSelected.hide();
-      linkAddUnused.show();
+      attributesBox.removeClass('with-checkboxes-actions');
+      this.ARBuilder.UIPainter.showAddAllUnusedAttributesLink();
     }
   },
 
@@ -147,8 +149,10 @@ var UIListener = new Class({
         selectedDataFields = dataFieldsBox.getElements('.data-field-checkbox:checked').length,
         linkAddSelected = dataFieldsBox.getElements('#add-selected-data-fields');
     if (selectedDataFields > 0){
+      dataFieldsBox.addClass('with-checkboxes-actions');
       linkAddSelected.show();
     }else{
+      dataFieldsBox.removeClass('with-checkboxes-actions');
       linkAddSelected.hide();
     }
   },
@@ -474,7 +478,7 @@ var UIListener = new Class({
             var activeRule= ARManager.getActiveRule();
             var attributeNameFilter=this.ARBuilder.attributesFilter.prepareTestRegExp();
             var attribute = this.ARBuilder.getDD().getAttributeByName(fieldName);
-            if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
+            //povolujeme atribut na obou stranách pravidla... if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
             if (!attributeNameFilter.test(fieldName)){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
             if ((attribute.isHidden())){return;/*jde o skrytý atribut*/}
             ARManager.addAttributeToCedent(attribute, cedent);

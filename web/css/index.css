@@ -90,7 +90,7 @@ div#overlay-inner form input[type='number'] {
 div#overlay-inner form input[type='submit'] {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -184,7 +184,7 @@ div#overlay-inner form .tooltip >span {
   position: absolute;
 }
 div#overlay-inner form .tooltip:hover >span {
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   width: 250px;
   margin-left: 0;
   position: absolute;
@@ -232,7 +232,7 @@ div#overlay-inner form .tooltip > .warning {
 }
 div#overlay-inner h2 {
   color: #314e64;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -257,7 +257,7 @@ div#overlay-inner > div.bigger {
 }
 div#overlay-inner > div > a {
   color: #126499;
-  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat;
+  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat /*TODO přesun ikony doprava*/;
   padding-left: 20px;
   float: right;
   position: relative;
@@ -377,7 +377,7 @@ div#overlay-inner #loading-data-window a,
 div#overlay-inner #user-warning-window a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -396,7 +396,7 @@ div#overlay-inner #user-warning-window a {
   min-width: 150px;
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -454,7 +454,7 @@ div#overlay-inner #loading-data-window.loading {
 div#overlay-inner #change-ruleset-window #add-ruleset {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -527,7 +527,7 @@ div#overlay-inner #change-ruleset-window .bigButtons a span {
   position: absolute;
 }
 #settings-form .tooltip:hover >span {
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   width: 250px;
   margin-left: 0;
   position: absolute;
@@ -635,7 +635,7 @@ nav {
 }
 #attributes h2 {
   color: #314e64;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -657,7 +657,7 @@ nav {
   float: right;
   position: relative;
   top: 5px;
-  margin-left: 5px;
+  margin-left: 5px /*FIXME*/;
 }
 #attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
@@ -781,7 +781,7 @@ nav {
 }
 #data-fields h2 {
   color: #314e64;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -803,7 +803,7 @@ nav {
   float: right;
   position: relative;
   top: 5px;
-  margin-left: 5px;
+  margin-left: 5px /*FIXME*/;
 }
 #data-fields ul {
   margin-bottom: 10px;
@@ -853,7 +853,7 @@ nav {
 }
 #knowledge-base-select h2 {
   color: #314e64;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -888,7 +888,7 @@ nav {
   width: 180px;
   padding: 2px 3px;
   background: none;
-  border: 1px solid #aaa;
+  border: 1px solid #aaa /*TODO nahradit parametry!*/;
   -moz-user-select: text;
   -ms-user-select: text;
 }
@@ -940,6 +940,7 @@ nav {
   float: left;
   height: 28px;
   overflow: hidden;
+  width: auto;
 }
 #attributes .navigation-checkbox-controls #add-selected-attributes,
 #data-fields .navigation-checkbox-controls #add-selected-attributes,
@@ -948,7 +949,7 @@ nav {
   display: none;
   color: #126499;
   font-size: 14px;
-  float: left;
+  float: right;
   padding-left: 21px;
   margin-top: 8px;
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
@@ -994,6 +995,10 @@ nav {
   margin-right: 2px;
   margin-top: 4px;
   background: transparent url("../images/icon-select-invert.png") center center no-repeat;
+}
+#attributes.with-checkboxes-actions .navigation-checkbox-controls,
+#data-fields.with-checkboxes-actions .navigation-checkbox-controls {
+  width: 100%;
 }
 #attributes input[type='checkbox'],
 #data-fields input[type='checkbox'] {
@@ -1355,7 +1360,7 @@ section#active-rule #ar-action-box > div.info {
 section#active-rule #ar-action-box #stop-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1398,7 +1403,7 @@ section#active-rule #ar-action-box #stop-mining:focus {
 section#active-rule #ar-action-box #start-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1450,7 +1455,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 .paginator a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1507,13 +1512,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules #found-rules-task-name {
   color: #314e64;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
   margin: 10px 0;
-  max-width: 800px !important;
+  max-width: 800px !important /*TODO*/;
 }
 #found-rules #found-rules-task-name .count {
   color: #888;
@@ -1789,7 +1794,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   padding: 20px;
   color: #925213;
-  font: 36px 'Arial', 'sans-serif';
+  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   width: 510px;
@@ -1835,7 +1840,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules h2 {
   color: #925213;
-  font: 36px 'Arial', 'sans-serif';
+  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   border-bottom: none;
 /*margin-left 10px*/
@@ -1863,7 +1868,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules .marked-rules-task-name {
   color: #314e64;
-  font-family: 'Arial', 'sans-serif';
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -2159,7 +2164,7 @@ section#content {
 }
 section#content h2 {
   color: #925213;
-  font: 36px 'Arial', 'sans-serif';
+  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   margin: 0;
