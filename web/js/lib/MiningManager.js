@@ -107,7 +107,7 @@ var MiningManager = new Class({
 
     if (this.isInProgress() || this.isImportInProgress()){
       //úloha ještě běží, nebo ještě nebyly naimportovány všechny výsledky...
-      //this.makeRequest.delay((this.isInProgress?this.miningRequestDelay:this.importRequestDelay), this, data);
+      this.makeRequest.delay((this.isInProgress()?this.miningRequestDelay:this.importRequestDelay), this, data);
     }
 
     this.FRManager.renderRules(rulesCount, taskName, this.isInProgress(), this.isImportInProgress(), this.$taskManager.getActiveTask());
@@ -139,7 +139,7 @@ var MiningManager = new Class({
 
     this.requests = [];
     this.$taskManager.clearActiveTask();
-    this.FRManager.handleStoppedMining();
+    this.FRManager.handleStoppedMining(this.miningState, this.importState);
   },
 
   isInProgress: function () {
