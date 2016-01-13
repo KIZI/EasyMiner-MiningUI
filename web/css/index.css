@@ -2135,6 +2135,15 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules .marked-rules-multi-controls .task-actions >a.task-export {
   background: transparent url("../images/icon-export-20.png") left center no-repeat;
 }
+#marked-rules .marked-rules-multi-controls .task-actions >a.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: #888;
+}
+#marked-rules .marked-rules-multi-controls .task-actions >a.disabled:hover {
+  text-decoration: none;
+  color: #888;
+}
 #createUserReport {
   float: right;
   margin: 20px 20px 0 0;

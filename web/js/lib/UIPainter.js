@@ -321,15 +321,17 @@ var UIPainter = new Class({
     this.UIListener.registerOverlayEventHandlers();
   },
 
-  renderExportWindow: function (taskId,type) {
+  renderExportWindow: function (taskId, type, isMiningInProgress, isImportInProgress) {
     var overlay = this.$UIStructurePainter.showOverlay();
-
     var url = "",
         links = [],
         errorMsg = this.i18n.translate('Unable to load export links! Try it again later.');
 
     if(type == 'ruleset'){
       links = this.config.getKnowledgeBaseExportLinks(taskId);
+      //ignorujeme info o tom, jestli se v mezičase importují výsledky dolování (nepracujeme s úlohou, ale rule-setem)
+      isMiningInProgress=false;
+      isImportInProgress=false;
     } else if (type == 'discovered'){
       links = this.config.getDiscoveredRulesExportLinks(taskId);
     } else {
@@ -339,7 +341,9 @@ var UIPainter = new Class({
     var window = Mooml.render('exportWindowTemplate', {
       i18n: this.i18n,
       type: type,
-      links: links
+      links: links,
+      isMiningInProgress: isMiningInProgress,
+      isImportInProgress: isImportInProgress
     });
     overlay.grab(window);
 

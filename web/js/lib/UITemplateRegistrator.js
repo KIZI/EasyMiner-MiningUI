@@ -92,10 +92,15 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n,
           type = data.type,
           links = data.links,
+          isMiningInProgress=data.isMiningInProgress,
+          isImportInProgress=data.isImportInProgress,
           domLinks = [];
 
       Object.each(links, function (value, id) {
-        domLinks.push(a({href: value.url, target: "_blank"}, value.text));
+        console.log(value);
+        if ((!isMiningInProgress || value.miningInProgress) && (!isImportInProgress || value.importInProgress)) {
+          domLinks.push(a({href: value.url, target: "_blank"}, value.text));
+        }
       }.bind(this));
 
       div({id: 'export-window'},
@@ -939,62 +944,62 @@ var UITemplateRegistrator = new Class({
       if(task.isBase){
         status = 'minimize';
         actions = span({class:'actions'},
-            a({
-              href:'#',
-              class:'kb-unmark',
-              title:i18n.translate('Remove from Knowledge base')
-            },i18n.translate('Remove...'))
+          a({
+            href:'#',
+            class:'kb-unmark',
+            title:i18n.translate('Remove from Knowledge base')
+          },i18n.translate('Remove...'))
         );
         taskActions = span({class:'task-actions'},
-            a({
-              href:task.id,
-              class:'task-export',
-              rel:'ruleset',
-              title:i18n.translate('Show ruleset export options')
-            },i18n.translate('Ruleset export'))
+          a({
+            href:task.id,
+            class:'task-export',
+            rel:'ruleset',
+            title:i18n.translate('Show ruleset export options')
+          },i18n.translate('Ruleset export'))
         );
       } else{
         actions = span({class:'actions'},
-            /*a({
-             href:'#',
-             class:'mark',
-             title:i18n.translate('Add to Rule Clipboard')
-             },i18n.translate('Add selected...')),*/
-            a({
-              href:'#',
-              class:'unmark',
-              title:i18n.translate('Remove from Rule Clipboard')
-            },i18n.translate('Remove...')),
-            a({
-              href:'#',
-              class:'kb-add',
-              rel:'positive',
-              title:i18n.translate('Interesting')
-            },i18n.translate('Interesting')),
-            a({
-              href:'#',
-              class:'kb-add',
-              rel:'negative',
-              title:i18n.translate('Not interesting')
-            },i18n.translate('Not interesting'))
+          /*a({
+           href:'#',
+           class:'mark',
+           title:i18n.translate('Add to Rule Clipboard')
+           },i18n.translate('Add selected...')),*/
+          a({
+            href:'#',
+            class:'unmark',
+            title:i18n.translate('Remove from Rule Clipboard')
+          },i18n.translate('Remove...')),
+          a({
+            href:'#',
+            class:'kb-add',
+            rel:'positive',
+            title:i18n.translate('Interesting')
+          },i18n.translate('Interesting')),
+          a({
+            href:'#',
+            class:'kb-add',
+            rel:'negative',
+            title:i18n.translate('Not interesting')
+          },i18n.translate('Not interesting'))
         );
         taskActions = span({class:'task-actions'},
-            /*a({
-             href:'#',
-             class:'mark-all',
-             title:i18n.translate('Add all rules to Rule Clipboard')
-             },i18n.translate('Add all rules')),*/
-            a({
-              href:'#',
-              class:'task-details',
-              title:i18n.translate('Show task details')
-            },i18n.translate('Task details')),
-            a({
-              href:'#',
-              class:'task-export',
-              rel:'task',
-              title:i18n.translate('Show task export options')
-            },i18n.translate('Task export'))
+          /*a({
+           href:'#',
+           class:'mark-all',
+           title:i18n.translate('Add all rules to Rule Clipboard')
+           },i18n.translate('Add all rules')),*/
+          a({
+            href:'#',
+            class:'task-details'+(task.isImportInProgress()?' disabled':''),
+            title:(task.isImportInProgress()?i18n.translate('Import of results is still in progress'):i18n.translate('Show task details'))
+          },i18n.translate('Task details')),
+          a({
+            href:'#',
+            class:'task-export',
+            rel:'task',
+            title:i18n.translate('Show task export options')
+          },i18n.translate('Task export'))
         );
       }
       div({class:'marked-rules-multi-controls'},
@@ -1059,7 +1064,7 @@ var UITemplateRegistrator = new Class({
           Mooml.render('markedRulesControlsTemplate',data),
           ul(),
           Mooml.render('markedRulesMultiControlsTemplate',data)
-      )
+      );
       /*ul({id: task.getCssId(), class: 'task'},
         li({},
           div({class: 'marked-task'},
