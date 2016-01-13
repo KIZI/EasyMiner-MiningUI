@@ -834,13 +834,13 @@ var UITemplateRegistrator = new Class({
         span({class:'task-actions'},
           a({
             href:'#',
-            class:'mark-all',
-            title:i18n.translate('Add all rules to Rule Clipboard')
+            class:'mark-all'+(FRManager.importInProgress?' disabled':''),
+            title:(FRManager.importInProgress?i18n.translate('Import of results is still in progress'):i18n.translate('Add all rules to Rule Clipboard'))
           },i18n.translate('Add all rules')),
           a({
             href:'#',
-            class:'task-details',
-            title:i18n.translate('Show task details')
+            class:'task-details'+(FRManager.importInProgress?' disabled':''),
+            title:(FRManager.importInProgress?i18n.translate('Import of results is still in progress'):i18n.translate('Show task details'))
           },i18n.translate('Task details')),
           a({
             href:'#',

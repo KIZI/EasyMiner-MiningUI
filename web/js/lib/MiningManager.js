@@ -8,9 +8,12 @@ var MiningManager = new Class({
 
   requests: [],
   inProgress: false,
+  importState: null, //hodnoty: none, waiting, partial, done
   finishedStates: ['solved', 'interrupted', 'solved_heads'],
   errorStates: ['failed'],
-  reqDelay: 2500,
+  miningRequestDelay: 2500,
+  importRequestDelay: 700,
+
   miningState: null,
 
   initialize: function (config, settings, FRManager, dateHelper, taskManager) {
@@ -69,7 +72,7 @@ var MiningManager = new Class({
   },
 
   handleSuccessRequest: function (data, responseJSON) {
-    if (!this.inProgress) {
+    if (!this.isInProgress() && !this.isImportInProgress()) {
       return;
     }
 
@@ -80,27 +83,34 @@ var MiningManager = new Class({
       taskName = responseJSON.name;
     }
     this.miningState = state;
+    this.importState=responseJSON.importState;
 
     if (this.finishedStates.contains(state)) {
       // task is finished
       this.inProgress = false;
-      //pokud jsou importovány jen hlavičky, pošleme ještě jeden požadavek
-      if (this.miningState='solved_heads'){
-        setTimeout(function(){
-        var activeTask = this.$taskManager.getActiveTask();
-          var request = new Request.JSON({
-            url: this.config.getStartMiningUrl(activeTask.getId()),
-            secure: true,
-            async: true
-          }).post({'data': data});
-          setTimeout(function(){request.cancel();}.bind(this),1000);
-        }.bind(this),1000);
-      }
-    } else { // task is still running
-      this.makeRequest.delay(this.reqDelay, this, data);
     }
 
-    this.FRManager.renderRules(rulesCount, taskName, this.inProgress, this.$taskManager.getActiveTask());
+    /*
+     //pokud jsou importovány jen hlavičky, pošleme ještě jeden požadavek
+     if (this.miningState='solved_heads'){
+     setTimeout(function(){
+     var activeTask = this.$taskManager.getActiveTask();
+     var request = new Request.JSON({
+     url: this.config.getStartMiningUrl(activeTask.getId()),
+     secure: true,
+     async: true
+     }).post({'data': data});
+     setTimeout(function(){request.cancel();}.bind(this),1000);
+     }.bind(this),1000);
+     }
+    */
+
+    if (this.isInProgress() || this.isImportInProgress()){
+      //úloha ještě běží, nebo ještě nebyly naimportovány všechny výsledky...
+      this.makeRequest.delay((this.isInProgress?this.miningRequestDelay:this.importRequestDelay), this, data);
+    }
+
+    this.FRManager.renderRules(rulesCount, taskName, this.isInProgress(), this.isImportInProgress(), this.$taskManager.getActiveTask());
   },
 
   handleErrorRequest: function () {
@@ -110,7 +120,6 @@ var MiningManager = new Class({
     this.miningState = 'failed';
     this.stopMining();
     this.FRManager.handleError();
-//        throw 'Failed task: ID: ' + this.$taskManager.getActiveTask().getId() + ', source ID: ' + this.config.getIdDm();
   },
 
   stopMining: function () {
@@ -133,8 +142,12 @@ var MiningManager = new Class({
     this.FRManager.handleStoppedMining();
   },
 
-  getInProgress: function () {
+  isInProgress: function () {
     return this.inProgress;
+  },
+
+  isImportInProgress: function(){
+    return (this.importState=='waiting' || this.importState=='partial');
   },
 
   getMiningState: function () {

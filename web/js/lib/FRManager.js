@@ -12,8 +12,9 @@ var FRManager = new Class({
 
   //nově používané proměnné s informacemi o stavu
   task: null,
-  miningInProgress: false,
   pageLoading:false,
+  miningInProgress: false,
+  importInProgress: false,
 
   IMs: [],
   rules: [],
@@ -42,14 +43,19 @@ var FRManager = new Class({
   },
 
   handleInProgress: function () {
+    console.log('FRManager handleInProgress');//XXX Standa remove
+    //TODO zpracování informace o tom, jestli probíhá dolování...
     this.reset();
     this.miningInProgress = true;
+    //TODO this.importInProgress
     this.UIPainter.renderActiveRule();
     this.UIPainter.renderFoundRules();
   },
 
   handleStoppedMining: function () {
+    console.log('FRManager handleStoppedMining');//XXX Standa remove
     this.miningInProgress = false;
+    //TODO this.importInProgress
     this.UIPainter.renderActiveRule();
     this.UIPainter.renderFoundRules();
   },
@@ -97,6 +103,10 @@ var FRManager = new Class({
       this.setTaskName(data.task.name);
     }
 
+    console.log('FRManager handleSuccessRulesRequest');//XXX Standa remove
+    console.log(data);
+    //TODO import in progress
+
     Object.each(data.rules, function (value, key) {
       this.rules.push(new FoundRule(key, value, this.task));
     }.bind(this));
@@ -118,9 +128,10 @@ var FRManager = new Class({
     }
   },
 
-  renderRules: function (rulesCount, taskName, inProgress, task) {
+  renderRules: function (rulesCount, taskName, inProgress, importInProgress, task) {
     this.task = task;
     this.miningInProgress = inProgress;
+    this.importInProgress = importInProgress;
     if (taskName!=''){
       this.setTaskName(taskName);
     }
@@ -218,6 +229,7 @@ var FRManager = new Class({
       this.rulesOrder=this.IMs[0].getName();
     }
     this.miningInProgress = false;
+    this.importInProgress = false;
   },
 
   markFoundRule: function (foundRule) {

@@ -882,8 +882,11 @@ var UIListener = new Class({
         this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
 
-      multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
+      multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event, target){
         event.stop();
+        //odkaz není aktivní
+        if (target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
         var FRManager = this.ARBuilder.getFRManager();
         FRManager.markAllFoundRules();
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
@@ -894,13 +897,19 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
         event.stop();
-        var FRManager = this.ARBuilder.getFRManager()
+        //odkaz není aktivní
+        if (target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
+        var FRManager = this.ARBuilder.getFRManager();
         var reportManager = this.ARBuilder.getReportManager();
         reportManager.showTaskDetails(FRManager.getTaskId());
       }.bind(this));
 
       multiControls.getElements('.task-actions .task-export').addEvent('click',function(event){
         event.stop();
+        //odkaz není aktivní
+        if (target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
         var FRManager = this.ARBuilder.getFRManager();
         var reportManager = this.ARBuilder.getReportManager();
         this.UIPainter.renderExportWindow(FRManager.getTaskId(),'discovered');
