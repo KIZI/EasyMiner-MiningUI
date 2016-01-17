@@ -2,6 +2,7 @@ var FRManager = new Class({
 
   config: null,
   reloadRequestDelay: 8000,
+  reloadRequestCounterMax: 5,
   FL: null,
   settings: null,
   i18n: null,
@@ -27,6 +28,7 @@ var FRManager = new Class({
   currentPage: null,
   pagesCount: 0,
   delayedPageRequestTimer: null,//timer používaný pro zpoždění znovu-načtení dané stránky
+  delayedPageRequestCounter:0,
 
 
   initialize: function (config, FL, settings, UIPainter, UIListener, MRManager, i18n) {
@@ -67,8 +69,16 @@ var FRManager = new Class({
   },
 
   delayedPageReload: function(){
-    console.log('delayedPageReload');
-    this.delayedPageRequestTimer=this.gotoPage.delay(this.reloadRequestDelay,this,(this.currentPage?this.currentPage:0));
+    if (this.delayedPageRequestCounter<this.reloadRequestCounterMax){
+      //určení doby zpoždění
+      var reloadRequestDelay=this.reloadRequestDelay;
+      if (this.delayedPageRequestCounter==0){//u prvního pokusu to zkusíme po kratší době
+        reloadRequestDelay=Math.round(this.reloadRequestDelay/2);
+      }
+      //připočtení dalšího pokusu o načtení a spuštění příslušného časovače
+      this.delayedPageRequestCounter++;
+      this.delayedPageRequestTimer=this.gotoPage.delay(reloadRequestDelay,this,(this.currentPage?this.currentPage:0));
+    }
   },
 
   gotoPage: function(page){
@@ -251,6 +261,7 @@ var FRManager = new Class({
       clearTimeout(this.delayedPageRequestTimer);
       this.delayedPageRequestTimer=null;
     }
+    this.delayedPageRequestCounter=0;
     this.IMs = this.FL.getRulesIMs([]);
     if(this.rulesOrder==null || this.rulesOrder==''){
       this.rulesOrder=this.IMs[0].getName();
