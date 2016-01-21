@@ -438,8 +438,13 @@ var UIStructureTemplater = new Class({
       if (FRManager.rulesCount>0){
 
         var rulesCountInfo = '('+data.i18n.translate('rules: ')+' <strong>'+FRManager.rulesCount+'</strong>';
+        if (FRManager.miningInterrupted){
+          rulesCountInfo+=', '+data.i18n.translate('interrupted');
+        }
         if (FRManager.miningInProgress){
           rulesCountInfo+=', '+data.i18n.translate('mining in progress...');
+        }else if(FRManager.importInProgress){
+          rulesCountInfo+=', '+data.i18n.translate('results import in progress...');
         }
         rulesCountInfo+=')';
         //máme nějaká pravidla pro zobrazení

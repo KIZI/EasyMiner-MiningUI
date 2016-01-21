@@ -1,6 +1,8 @@
 var FRManager = new Class({
 
   config: null,
+  reloadRequestDelay: 8000,
+  reloadRequestCounterMax: 5,
   FL: null,
   settings: null,
   i18n: null,
@@ -12,8 +14,10 @@ var FRManager = new Class({
 
   //nově používané proměnné s informacemi o stavu
   task: null,
-  miningInProgress: false,
   pageLoading:false,
+  miningInProgress: false,
+  importInProgress: false,
+  miningInterrupted: false,
 
   IMs: [],
   rules: [],
@@ -23,6 +27,8 @@ var FRManager = new Class({
   rulesPerPage: null,
   currentPage: null,
   pagesCount: 0,
+  delayedPageRequestTimer: null,//timer používaný pro zpoždění znovu-načtení dané stránky
+  delayedPageRequestCounter:0,
 
 
   initialize: function (config, FL, settings, UIPainter, UIListener, MRManager, i18n) {
@@ -41,6 +47,9 @@ var FRManager = new Class({
     this.MRManager.FRManager = this; // MRManager has to know FRManager
   },
 
+  /**
+   * Metoda volaná při spuštění dolování
+   */
   handleInProgress: function () {
     this.reset();
     this.miningInProgress = true;
@@ -48,13 +57,32 @@ var FRManager = new Class({
     this.UIPainter.renderFoundRules();
   },
 
-  handleStoppedMining: function () {
-    this.miningInProgress = false;
+  handleStoppedMining: function (miningState, importState) {
+    this.setMiningInProgress(miningState);
+    this.setImportInProgress(importState);
     this.UIPainter.renderActiveRule();
     this.UIPainter.renderFoundRules();
+
+    if (!this.miningInProgress && this.importInProgress) {
+      this.delayedPageReload();
+    }
+  },
+
+  delayedPageReload: function(){
+    if (this.delayedPageRequestCounter<this.reloadRequestCounterMax){
+      //určení doby zpoždění
+      var reloadRequestDelay=this.reloadRequestDelay;
+      if (this.delayedPageRequestCounter==0){//u prvního pokusu to zkusíme po kratší době
+        reloadRequestDelay=Math.round(this.reloadRequestDelay/2);
+      }
+      //připočtení dalšího pokusu o načtení a spuštění příslušného časovače
+      this.delayedPageRequestCounter++;
+      this.delayedPageRequestTimer=this.gotoPage.delay(reloadRequestDelay,this,(this.currentPage?this.currentPage:0));
+    }
   },
 
   gotoPage: function(page){
+    this.delayedPageRequestTimer=null;
     this.pageLoading=true;
     this.UIPainter.renderFoundRules();
     var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
@@ -63,7 +91,7 @@ var FRManager = new Class({
     new Request.JSON({
       url: url,
       secure: true,
-      onSuccess: function (responseJSON, responseText) {
+      onSuccess: function (responseJSON) {
         this.currentPage=page;
         this.handleSuccessRulesRequest(responseJSON);
       }.bind(this),
@@ -88,6 +116,15 @@ var FRManager = new Class({
     //endregion
   },
 
+  setMiningInProgress: function(miningState){
+    this.miningInProgress=!(miningState=='solved' || miningState=='interrupted' || miningState=='solved_heads' || miningState=='failed');
+    this.miningInterrupted=(miningState=='interrupted' || miningState=='failed');
+  },
+
+  setImportInProgress: function(importState){
+    this.importInProgress=(importState=='waiting' || importState=='partial');
+  },
+
   handleSuccessRulesRequest: function (data) {
     //zjištění aktuálních měr zajímavosti
     this.pageLoading=false;
@@ -101,6 +138,12 @@ var FRManager = new Class({
       this.rules.push(new FoundRule(key, value, this.task));
     }.bind(this));
 
+    this.setMiningInProgress(data.task.state);
+    this.setImportInProgress(data.task.importState);
+
+    if (!this.miningInProgress && this.importInProgress) {
+      this.delayedPageReload();
+    }
     this.UIPainter.renderFoundRules();
   },
 
@@ -118,9 +161,10 @@ var FRManager = new Class({
     }
   },
 
-  renderRules: function (rulesCount, taskName, inProgress, task) {
+  renderRules: function (rulesCount, taskName, inProgress, importInProgress, task) {
     this.task = task;
     this.miningInProgress = inProgress;
+    this.importInProgress = importInProgress;
     if (taskName!=''){
       this.setTaskName(taskName);
     }
@@ -213,11 +257,18 @@ var FRManager = new Class({
     this.AJAXBalancer.stopAllRequests();
     this.errorMessage='';
     this.setRulesCount(0);
+    if (this.delayedPageRequestTimer){
+      clearTimeout(this.delayedPageRequestTimer);
+      this.delayedPageRequestTimer=null;
+    }
+    this.delayedPageRequestCounter=0;
     this.IMs = this.FL.getRulesIMs([]);
     if(this.rulesOrder==null || this.rulesOrder==''){
       this.rulesOrder=this.IMs[0].getName();
     }
     this.miningInProgress = false;
+    this.miningInterrupted= false;
+    this.importInProgress = false;
   },
 
   markFoundRule: function (foundRule) {

@@ -884,6 +884,9 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
         event.stop();
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
         var FRManager = this.ARBuilder.getFRManager();
         FRManager.markAllFoundRules();
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
@@ -894,16 +897,22 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
         event.stop();
-        var FRManager = this.ARBuilder.getFRManager()
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){alert('ne');return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
+        var FRManager = this.ARBuilder.getFRManager();
         var reportManager = this.ARBuilder.getReportManager();
         reportManager.showTaskDetails(FRManager.getTaskId());
       }.bind(this));
 
       multiControls.getElements('.task-actions .task-export').addEvent('click',function(event){
         event.stop();
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
         var FRManager = this.ARBuilder.getFRManager();
         var reportManager = this.ARBuilder.getReportManager();
-        this.UIPainter.renderExportWindow(FRManager.getTaskId(),'discovered');
+        this.UIPainter.renderExportWindow(FRManager.getTaskId(),'discovered',FRManager.miningInProgress,FRManager.importInProgress);
       }.bind(this));
 
       this.checkFoundRulesSelectedCheckboxes();
@@ -1123,13 +1132,19 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
         event.stop();
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
         var reportManager = this.ARBuilder.getReportManager();
         reportManager.showTaskDetails(taskId);
       }.bind(this));
 
       multiControls.getElements('.task-actions .task-export').addEvent('click',function(event){
         event.stop();
-        this.UIPainter.renderExportWindow(taskId,event.target.get('rel'))
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
+        this.UIPainter.renderExportWindow(taskId,event.target.get('rel'),task.isMiningInProgress(),task.isImportInProgress());
       }.bind(this));
 
       this.checkMarkedRulesSelectedCheckboxes(taskId);

@@ -337,11 +337,11 @@ var ARManager = new Class({
 
   /* mining */
   display4ftTaskBox: function () {
-    return (this.activeRule.isValid() && (true || this.activeRule.isChanged()) && !this.miningManager.getInProgress());
+    return (this.activeRule.isValid() && (true || this.activeRule.isChanged()) && !this.miningManager.isInProgress());
   },
 
   miningInProgress: function () {
-    return this.miningManager.getInProgress();
+    return this.miningManager.isInProgress();
   },
 
   getMiningState: function () {
