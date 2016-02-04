@@ -499,7 +499,7 @@ var UIPainter = new Class({
     }
     var minerName=this.ARBuilder.getMinerName();
     if (minerName){
-      document.title=minerName+' :: '+config.name;
+      document.title=minerName+' :: '+config.titleAppName;
       var applicationSubTitle=$('applicationSubTitle');
       if (applicationSubTitle){
         applicationSubTitle.set('text',minerName);
