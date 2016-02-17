@@ -1030,6 +1030,15 @@ section#active-rule #succedent {
   padding-bottom: 70px;
   overflow: auto;
 }
+section#active-rule #antecedent h3 a#empty-antecedent {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-top: -2px;
+  float: right;
+}
 section#active-rule #antecedent .cedent {
   float: left;
   border: 1px dashed #fff;
@@ -1156,6 +1165,9 @@ section#active-rule #antecedent >.cedent >.fields >.field,
 section#active-rule #antecedent >.cedent >.fields >.connective {
   margin-top: 3px;
 }
+section#active-rule #antecedent:hover a#empty-antecedent {
+  visibility: visible;
+}
 section#active-rule #interest-measures {
   margin-left: 20px;
   width: 200px;
@@ -1212,6 +1224,15 @@ section#active-rule #interest-measures .im:hover .remove-im.required {
 }
 section#active-rule #succedent {
   margin-left: 20px;
+}
+section#active-rule #succedent h3 a#empty-succedent {
+  background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
+  margin-top: -2px;
+  float: right;
 }
 section#active-rule #succedent .cedent {
   float: left;
@@ -1338,6 +1359,9 @@ section#active-rule #succedent .cedent .group-fields {
 section#active-rule #succedent >.cedent >.fields >.field,
 section#active-rule #succedent >.cedent >.fields >.connective {
   margin-top: 3px;
+}
+section#active-rule #succedent:hover a#empty-succedent {
+  visibility: visible;
 }
 section#active-rule .no-restriction {
   background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;

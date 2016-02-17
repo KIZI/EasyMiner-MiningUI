@@ -7,10 +7,18 @@ section#active-rule
     overflow auto
 
   #antecedent
+    h3
+      a#empty-antecedent
+        remove()
+        margin-top -2px
+        float right
     .cedent
       cedent()
     >.cedent
       firstCedent()
+    &:hover
+      a#empty-antecedent
+        visibility visible
 
   #interest-measures
     margin-left 2*boxMargin
@@ -41,11 +49,19 @@ section#active-rule
           visibility hidden
 
   #succedent
+    h3
+      a#empty-succedent
+        remove()
+        margin-top -2px
+        float right
     margin-left 2*boxMargin
     .cedent
       cedent()
     >.cedent
       firstCedent()
+    &:hover
+      a#empty-succedent
+        visibility visible
 
   .no-restriction
     background transparent url('../images/sprite-icons.png') -20px -714px no-repeat

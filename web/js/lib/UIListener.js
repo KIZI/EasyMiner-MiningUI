@@ -282,6 +282,20 @@ var UIListener = new Class({
         this.ARBuilder.getARManager().recommendAttributesConfirm();
       }.bind(this));
     }
+
+    $('empty-antecedent').addEvent('click', function (event) {
+      event.stop();
+      this.ARBuilder.getARManager().getActiveRule().getAntecedent().emptyCedent();
+      this.UIPainter.renderActiveRule();
+      this.ARBuilder.getARManager().sortAttributes();
+    }.bind(this));
+
+    $('empty-succedent').addEvent('click', function (event) {
+      event.stop();
+      this.ARBuilder.getARManager().getActiveRule().getSuccedent().emptyCedent();
+      this.UIPainter.renderActiveRule();
+      this.ARBuilder.getARManager().sortAttributes();
+    }.bind(this));
   },
 
   registerIMEventHandler: function (IM) {

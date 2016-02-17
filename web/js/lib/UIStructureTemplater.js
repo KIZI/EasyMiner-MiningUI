@@ -414,13 +414,25 @@ var UIStructureTemplater = new Class({
         h2(i18n.translate('Association rule pattern')),
         div({id: 'ar-wrapper', 'class': 'clearfix'},
           div({id: 'antecedent'},
-            h3(i18n.translate('Antecedent'))
+            h3(i18n.translate('Antecedent'),
+                a({
+                    href: '#',
+                    id: 'empty-antecedent',
+                    'title': i18n.translate('Empty')
+                })
+            )
           ),
           div({id: 'interest-measures'},
             h3(i18n.translate('Interest measures')),
             div(),
             displayAddIM ? a({href: '#', id: 'add-im'}, i18n.translate('Add interest measure')) : ''),
-          div({id: 'succedent'}, h3(i18n.translate('Consequent')))
+          div({id: 'succedent'}, h3(i18n.translate('Consequent'),
+              a({
+                  href: '#',
+                  id: 'empty-succedent',
+                  'title': i18n.translate('Empty')
+              })
+          ))
         ),
         div({'class': 'clearfix'}),
         div({id: 'ar-action-box'},

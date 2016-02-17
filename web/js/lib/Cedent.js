@@ -67,6 +67,11 @@ var Cedent = new Class({
         this.update();
     },
 
+    emptyCedent: function() {
+        this.$children = [];
+        this.update();
+    },
+
     getNumChildren: function() {
         return this.$children.length;
     },
