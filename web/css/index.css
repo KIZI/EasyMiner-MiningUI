@@ -90,7 +90,7 @@ div#overlay-inner form input[type='number'] {
 div#overlay-inner form input[type='submit'] {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -184,7 +184,7 @@ div#overlay-inner form .tooltip >span {
   position: absolute;
 }
 div#overlay-inner form .tooltip:hover >span {
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   width: 250px;
   margin-left: 0;
   position: absolute;
@@ -232,7 +232,7 @@ div#overlay-inner form .tooltip > .warning {
 }
 div#overlay-inner h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -257,7 +257,7 @@ div#overlay-inner > div.bigger {
 }
 div#overlay-inner > div > a {
   color: #126499;
-  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat /*TODO přesun ikony doprava*/;
+  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat;
   padding-left: 20px;
   float: right;
   position: relative;
@@ -377,7 +377,7 @@ div#overlay-inner #loading-data-window a,
 div#overlay-inner #user-warning-window a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -396,7 +396,7 @@ div#overlay-inner #user-warning-window a {
   min-width: 150px;
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -454,7 +454,7 @@ div#overlay-inner #loading-data-window.loading {
 div#overlay-inner #change-ruleset-window #add-ruleset {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -527,7 +527,7 @@ div#overlay-inner #change-ruleset-window .bigButtons a span {
   position: absolute;
 }
 #settings-form .tooltip:hover >span {
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   width: 250px;
   margin-left: 0;
   position: absolute;
@@ -635,7 +635,7 @@ nav {
 }
 #attributes h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -657,7 +657,7 @@ nav {
   float: right;
   position: relative;
   top: 5px;
-  margin-left: 5px /*FIXME*/;
+  margin-left: 5px;
 }
 #attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
@@ -781,7 +781,7 @@ nav {
 }
 #data-fields h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -803,7 +803,7 @@ nav {
   float: right;
   position: relative;
   top: 5px;
-  margin-left: 5px /*FIXME*/;
+  margin-left: 5px;
 }
 #data-fields ul {
   margin-bottom: 10px;
@@ -853,7 +853,7 @@ nav {
 }
 #knowledge-base-select h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -888,7 +888,7 @@ nav {
   width: 180px;
   padding: 2px 3px;
   background: none;
-  border: 1px solid #aaa /*TODO nahradit parametry!*/;
+  border: 1px solid #aaa;
   -moz-user-select: text;
   -ms-user-select: text;
 }
@@ -1061,6 +1061,13 @@ section#active-rule #antecedent .cedent .fields .field .coefficient {
 section#active-rule #antecedent .cedent .fields .field .field-drag {
   cursor: move;
 }
+section#active-rule #antecedent .cedent .fields .field .field-name {
+  display: block;
+  float: left;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 section#active-rule #antecedent .cedent .fields .field .change-sign.negative,
 section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
   background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
@@ -1131,6 +1138,7 @@ section#active-rule #antecedent .cedent .fields .connective {
   top: 1px;
   margin: 0 1px;
   float: left;
+  height: 40px;
 }
 section#active-rule #antecedent .cedent .fields .left-bracket,
 section#active-rule #antecedent .cedent .fields .right-bracket {
@@ -1236,6 +1244,13 @@ section#active-rule #succedent .cedent .fields .field .coefficient {
 section#active-rule #succedent .cedent .fields .field .field-drag {
   cursor: move;
 }
+section#active-rule #succedent .cedent .fields .field .field-name {
+  display: block;
+  float: left;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 section#active-rule #succedent .cedent .fields .field .change-sign.negative,
 section#active-rule #succedent .cedent .fields .field .field-sign.negative {
   background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
@@ -1306,6 +1321,7 @@ section#active-rule #succedent .cedent .fields .connective {
   top: 1px;
   margin: 0 1px;
   float: left;
+  height: 40px;
 }
 section#active-rule #succedent .cedent .fields .left-bracket,
 section#active-rule #succedent .cedent .fields .right-bracket {
@@ -1360,7 +1376,7 @@ section#active-rule #ar-action-box > div.info {
 section#active-rule #ar-action-box #stop-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1403,7 +1419,7 @@ section#active-rule #ar-action-box #stop-mining:focus {
 section#active-rule #ar-action-box #start-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1455,7 +1471,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 .paginator a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1512,13 +1528,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules #found-rules-task-name {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
   margin: 10px 0;
-  max-width: 800px !important /*TODO*/;
+  max-width: 800px !important;
 }
 #found-rules #found-rules-task-name .count {
   color: #888;
@@ -1803,7 +1819,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   padding: 20px;
   color: #925213;
-  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   width: 510px;
@@ -1849,7 +1865,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules h2 {
   color: #925213;
-  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
 /*margin-left 10px*/
@@ -1877,7 +1893,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules .marked-rules-task-name {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -2182,7 +2198,7 @@ section#content {
 }
 section#content h2 {
   color: #925213;
-  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   margin: 0;

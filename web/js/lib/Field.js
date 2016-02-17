@@ -75,6 +75,10 @@ var Field = new Class({
 	getAttributeName: function () {
 		return this.ref && this.ref.getName ? this.ref.getName() : this.ref;
 	},
+
+	getAttributeNameInField: function () {
+		return '<span class="field-name">' + this.getAttributeName() + '</span>';
+	},
 	
 	setCoefficient: function () {
 		if (arguments.length === 3) { // One category
@@ -110,21 +114,22 @@ var Field = new Class({
 	
 	toString: function () {
 		if (!this.type) {
-			return this.getAttributeName();
+			return this.getAttributeNameInField();
 		}
 
-        var string = '';
+        var string = this.getAttributeNameInField() + '<span class="coefficient">';
 		if (this.type === 'One category') {
             if (this.category.contains('<') || this.category.contains('>')) {
-                string += this.getAttributeName() + '<span class="coefficient">' + this.category + '</span>';
+                string += this.category;
             } else {
-			    string += this.getAttributeName() + '<span class="coefficient">(' + this.category + ')</span>';
+			    string += '(' + this.category + ')';
             }
         } else if (this.type == 'Subset' && this.minimalLength == 1 && this.maximalLength == 1) {
-            string += this.getAttributeName() + '<span class="coefficient">(*)</span>';
+            string += '(*)';
         } else {
-            string += this.getAttributeName() + '<span class="coefficient">(*' + this.getLocalizedName() + ' ' + this.minimalLength + '-' + this.maximalLength + ')</span>';
+            string += '(*' + this.getLocalizedName() + ' ' + this.minimalLength + '-' + this.maximalLength + ')';
 		}
+		string += '</span>';
 
         return string;
 	}
