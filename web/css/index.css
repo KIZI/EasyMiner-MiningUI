@@ -258,11 +258,12 @@ div#overlay-inner > div.bigger {
 div#overlay-inner > div > a {
   color: #126499;
   background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat;
-  padding-left: 20px;
   float: right;
   position: relative;
   top: -20px;
-  text-decoration: none;
+  right: -10px;
+  width: 18px;
+  height: 18px;
 }
 div#overlay-inner > div > a:hover {
   text-decoration: underline;

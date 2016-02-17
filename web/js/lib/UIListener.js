@@ -439,6 +439,15 @@ var UIListener = new Class({
       this.ARBuilder.getARManager().removeField(field);
       event.stop();
     }.bind(this));
+
+    // Close window on click outside of overlay content
+    $('overlay-inner').addEvent('mousedown', function(e){
+      if(e.target.id === 'overlay-inner'){
+        if($('overlay-inner').getElement('#add-coefficient-close') != null){
+          $('overlay-inner').getElement('#add-coefficient-close').click();
+        }
+      }
+    }.bind(this));
   },
 
   registerEditCoefficientEventHandler: function (field) {
@@ -1229,6 +1238,15 @@ var UIListener = new Class({
     $('overlay-close').addEvent('click', function (e) {
       e.stop();
       this.UIPainter.hideOverlay();
+    }.bind(this));
+
+    // Close window on click outside of overlay content
+    $('overlay-inner').addEvent('mousedown', function(e){
+      if(e.target.id === 'overlay-inner'){
+        if($('overlay-inner').getElement('#overlay-close') != null){
+          $('overlay-inner').getElement('#overlay-close').click();
+        }
+      }
     }.bind(this));
   }
 });

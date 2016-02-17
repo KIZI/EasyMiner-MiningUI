@@ -78,7 +78,7 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n;
 
       div({id: 'change-ruleset-window'},
-          a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+          a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
           h2(i18n.translate('Current ruleset')),
           div({id: 'current-ruleset', class: 'actionsDiv bigButtons'}),
           br(),
@@ -104,7 +104,7 @@ var UITemplateRegistrator = new Class({
       }.bind(this));
 
       div({id: 'export-window'},
-          a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+          a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
           h2(i18n.translate('Export '+type)),
           div({id: 'export-list', class: 'actionsDiv bigButtons'},
               domLinks
@@ -159,9 +159,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'create-user-report-window'},
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          data.i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         iframe({src: data.url}));
     });
@@ -272,7 +272,7 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n;
 
       div({id: 'add-im-window'},
-        a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+        a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
         h2(i18n.translate('Add interest measure')),
         form({action: '#', method: 'POST', id: 'add-im-form', novalidate: ''},
           label({'for': 'add-im-select'}, i18n.translate('Interest measure:')),
@@ -289,7 +289,7 @@ var UITemplateRegistrator = new Class({
         IM = data.IM;
 
       div({id: 'edit-im-window'},
-        a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+        a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
         h2(i18n.translate('Edit interest measure')),
         form({action: '#', method: 'POST', id: 'edit-im-form', novalidate: ''},
           label({'for': 'edit-im-select'}, i18n.translate('Interest measure:')),
@@ -319,7 +319,7 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n;
 
       div({id: 'click-add-attribute-window'},
-        a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+        a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
         h2(i18n.translate('Add attribute')),
         form({action: '#', method: 'POST', id: 'click-add-attribute-form'},
           div({class: 'clearfix'},
@@ -340,7 +340,7 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n;
 
       div({id: 'add-coefficient-window'},
-        a({id: 'add-coefficient-close', href: '#'}, i18n.translate('Close')),
+        a({id: 'add-coefficient-close', href: '#', 'title': i18n.translate('Close')}),
         h2(i18n.translate('Set value merging')),
         form({action: '#', method: 'POST', id: 'add-coefficient-form'},
           label({'for': 'add-coefficient-select'}, i18n.translate('Merging type:')),
@@ -353,7 +353,7 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n;
 
       div({id: 'edit-coefficient-window'},
-        a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+        a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
         h2(i18n.translate('Edit value merging')),
         form({action: '#', method: 'POST', id: 'edit-coefficient-form'},
           label({'for': 'edit-coefficient-select'}, i18n.translate('Merging type:')),
@@ -522,7 +522,7 @@ var UITemplateRegistrator = new Class({
       var i18n = data.i18n;
 
       div({id: 'edit-connective-window'},
-        a({id: 'overlay-close', href: '#'}, i18n.translate('Close')),
+        a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
         h2(i18n.translate('Edit connective')),
         form({action: '#', method: 'POST', id: 'edit-connective-form'},
           div({class: 'clearfix'},
@@ -1151,9 +1151,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'show-rule-details-window'},
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         iframe({src: url})
       );
@@ -1179,9 +1179,9 @@ var UITemplateRegistrator = new Class({
           },
           a({
                 id: 'overlay-close',
-                href: '#'
-              },
-              i18n.translate('Close')
+                href: '#',
+                'title': i18n.translate('Close')
+              }
           ),
           h2(
               i18n.translate('Rename the Ruleset')
@@ -1246,9 +1246,9 @@ var UITemplateRegistrator = new Class({
         },
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         h2(
           i18n.translate('Rename the Task')
@@ -1300,9 +1300,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'add-attribute-window'},
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         iframe({src: url}));
     });
@@ -1314,9 +1314,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'add-attributes-window'},
           a({
                 id: 'overlay-close',
-                href: '#'
-              },
-              i18n.translate('Close')
+                href: '#',
+                'title': i18n.translate('Close')
+              }
           ),
           iframe({src: url}));
     });
@@ -1328,9 +1328,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'edit-attribute-window'},
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         iframe({src: url}));
     });
@@ -1342,9 +1342,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'show-histogram-window'},
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         iframe({src: url}));
     });
@@ -1356,9 +1356,9 @@ var UITemplateRegistrator = new Class({
       div({id: 'report-window'},
         a({
             id: 'overlay-close',
-            href: '#'
-          },
-          i18n.translate('Close')
+            href: '#',
+            'title': i18n.translate('Close')
+          }
         ),
         iframe({src: url}));
     });
