@@ -285,16 +285,20 @@ var UIListener = new Class({
 
     $('empty-antecedent').addEvent('click', function (event) {
       event.stop();
-      this.ARBuilder.getARManager().getActiveRule().getAntecedent().emptyCedent();
-      this.UIPainter.renderActiveRule();
-      this.ARBuilder.getARManager().sortAttributes();
+      if(this.ARBuilder.getARManager().getActiveRule().getAntecedent().getNumChildren() > 0){
+        this.ARBuilder.getARManager().getActiveRule().getAntecedent().emptyCedent();
+        this.UIPainter.renderActiveRule();
+        this.ARBuilder.getARManager().sortAttributes();
+      }
     }.bind(this));
 
     $('empty-succedent').addEvent('click', function (event) {
       event.stop();
-      this.ARBuilder.getARManager().getActiveRule().getSuccedent().emptyCedent();
-      this.UIPainter.renderActiveRule();
-      this.ARBuilder.getARManager().sortAttributes();
+      if(this.ARBuilder.getARManager().getActiveRule().getSuccedent().getNumChildren() > 0){
+        this.ARBuilder.getARManager().getActiveRule().getSuccedent().emptyCedent();
+        this.UIPainter.renderActiveRule();
+        this.ARBuilder.getARManager().sortAttributes();
+      }
     }.bind(this));
   },
 
