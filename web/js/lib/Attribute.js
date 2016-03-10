@@ -95,12 +95,6 @@ var Attribute = new Class({
 
     getCSSShowHistogramID: function () {
         return 'attribute-show-histogram-' + this.getNormalizedName();
-    },
-
-    load: function(obj) {
-        this.name = obj.name;
-        this.stringHelper = this.stringHelper || new StringHelper();
-        this.value = obj.value;
     }
 
 });

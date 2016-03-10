@@ -65,7 +65,6 @@ class Integration {
     'js/lib/RulePattern.js',
     'js/lib/RulesParser.js',
     'js/lib/Settings.js',
-    'js/lib/Storage.js',
     'js/lib/StringHelper.js',
     'js/lib/Task.js',
     'js/lib/TaskManager.js',

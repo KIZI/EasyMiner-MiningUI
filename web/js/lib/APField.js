@@ -31,12 +31,6 @@ var APField = new Class({
 
   getCSSShowHistogramID: function () {
     return 'field-nav-show-histogram-' + this.getNormalizedName();
-  },
-
-  load: function (obj) {
-    this.$name = obj.$name;
-    this.$value = obj.$value;
-    this.$stringHelper = new StringHelper();
   }
 
 });
