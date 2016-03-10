@@ -175,7 +175,7 @@ var UIPainter = new Class({
 
   renderAddAttributeWindow: function (field) {
     var overlay = this.$UIStructurePainter.showOverlay();
-    var url = this.config.getAddAttributeURL(field.getName());
+    var url = this.config.getAddAttributeURL(field.getId());
     var window = Mooml.render('addAttributeTemplate', {i18n: this.i18n, url: url});
     overlay.grab(window);
 
@@ -205,11 +205,11 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
-  renderShowHistogramWindow: function (name, type) {
+  renderShowHistogramWindow: function (id, type) {
     var overlay = this.$UIStructurePainter.showOverlay();
     var window = Mooml.render('showHistogramTemplate', {
       i18n: this.i18n,
-      url: this.config.getShowHistogramURL(name, type)
+      url: this.config.getShowHistogramURL(id, type)
     });
     overlay.grab(window);
 

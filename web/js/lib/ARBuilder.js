@@ -288,8 +288,8 @@ var ARBuilder = new Class({
     this.UIPainter.renderEditAttributeWindow(attribute);
   },
 
-  openShowHistogramWindow: function (name, type) {
-    this.UIPainter.renderShowHistogramWindow(name, type);
+  openShowHistogramWindow: function (id, type) {
+    this.UIPainter.renderShowHistogramWindow(id, type);
   },
 
   openReportWindow: function (id, name) {

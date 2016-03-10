@@ -2,14 +2,18 @@
 
 var Attribute = new Class({
 
+	id: null,
 	name: '',
+	type:null,
 	choices: [],
 	stringHelper: null,
 	value: null,
 	hidden: false,
 
-	initialize: function (name, choices, stringHelper, hidden, value) {
+	initialize: function (id, name, type, choices, stringHelper, hidden, value) {
+		this.id = id;
 		this.name = name;
+		this.type = type;
 		this.choices = choices;
 		this.stringHelper = stringHelper;
 		this.hidden = hidden;
@@ -42,6 +46,14 @@ var Attribute = new Class({
 	
 	setValue: function (value) {
 		this.value = value;
+	},
+
+	getId: function(){
+		return this.id;
+	},
+
+	setId: function (id){
+		this.id = id;
 	},
 
 	isHidden: function () {

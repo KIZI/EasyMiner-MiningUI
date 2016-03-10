@@ -79,7 +79,7 @@ var UIListener = new Class({
     // show histogram
     $(attribute.getCSSShowHistogramID()).addEvent('click', function (event) {
       event.stop();
-      this.ARBuilder.openShowHistogramWindow(attribute.getName(), 'attribute');
+      this.ARBuilder.openShowHistogramWindow(attribute.getId(), 'attribute');
     }.bind(this));
   },
 
@@ -122,7 +122,7 @@ var UIListener = new Class({
     // show histogram
     $(field.getCSSShowHistogramID()).addEvent('click', function (event) {
       event.stop();
-      this.ARBuilder.openShowHistogramWindow(field.getName(), 'datafield');
+      this.ARBuilder.openShowHistogramWindow(field.getId(), 'field');
     }.bind(this));
   },
 

@@ -26,7 +26,7 @@ var DataDescription = new Class({
         return (typeOf(this.$storage.getObj('DD_' + this.$id)) === 'object');
     },
 
-    load: function() {
+    load: function() {alert('function load...');//XXX Standa
         var data = this.$storage.getObj('DD_' + this.$id);
         Array.from(data.$attributes).each(function(obj) {
             var attribute = new Attribute();
@@ -52,20 +52,20 @@ var DataDescription = new Class({
     },
 
     calculateMinimalSupport: function() {
-        return (1.0 / this.$recordCount).ceilWithPrecision(3);//upravena pøesnost pro povolení i 0.001
+        return (1.0 / this.$recordCount).ceilWithPrecision(3);//upravena pï¿½esnost pro povolenï¿½ i 0.001
     },
 
-	parseAttributes: function (attributes) {
+	parseAttributes: function (attributes) {//TODO Standa: aktualizovat
         this.$attributes = [];
         var hiddenAttributes = this.getHiddenAttributes();
-		Object.each(attributes, function (value, name) {
+		    Object.each(attributes, function (data, id) {
             var hidden = false;
-            if (hiddenAttributes.contains(name)) {
+            if (hiddenAttributes.contains(id)) {
                 hidden = true;
             }
-            var attribute = new Attribute(name, value.choices, new StringHelper(), hidden);
+            var attribute = new Attribute(id, data.name, data.type, data.choices, new StringHelper(), hidden);
             this.$attributes.push(attribute);
-		}.bind(this));
+		    }.bind(this));
 	},
 	
 	getAttributeByName: function (name) {
@@ -105,7 +105,7 @@ var DataDescription = new Class({
         var hiddenAttributesString = String.from(this.$hiddenAttributes);
         var url = this.$config.getMinerSetConfigParamUrl('hiddenAttributes',hiddenAttributesString);
 
-        //region vložení nového rulesetu
+        //region vloÅ¾enÃ­ novÃ©ho rulesetu
         new Request.JSON({
             url: url,
             secure: true,
@@ -141,8 +141,8 @@ var DataDescription = new Class({
     },
 
     parseFields: function (fields) {
-        Object.each(fields, function (value, name) {
-            var field = new APField(name, value, new StringHelper());
+        Object.each(fields, function (data, id) {
+            var field = new APField(id, data.name, data.type, new StringHelper());
             this.$fields.push(field);
         }.bind(this));
     },
