@@ -101,6 +101,7 @@ var Field = new Class({
         serialized.name = this.getAttributeName();
         serialized.category = this.type;
         serialized.ref = this.ref.getName ? this.ref.getName() : this.ref;
+				serialized.attributeId = this.ref.getId ? this.ref.getId() : null;
         if (this.type === 'One category') {
             serialized.fields = [{name: 'category', value: this.category}];
         } else if (this.type) {
@@ -108,7 +109,6 @@ var Field = new Class({
                 {name: 'maxLength', value: this.maximalLength}];
         }
         serialized.sign = this.hasPositiveSign() ? 'positive' : 'negative';
-
         return serialized;
     },
 	
