@@ -81,12 +81,13 @@ navigationBox()
     visibility visible
 
   a.show-histogram
-    showHistogram()
+  /*xxx  showHistogram()*/
     margin-left 10px
     float right
-
+    visibility hidden !important
+/*xxx
   li:hover a.show-histogram
-    visibility visible
+    visibility visible*/
 
   a.remove-attribute
     remove()
@@ -155,12 +156,13 @@ navigationBox()
       showHistogram()
       margin-left 10px
       float right
+      visibility hidden !important //XXX
     &:hover
       color #000
       .add
         visibility visible
-      .show-histogram
-        visibility visible
+      /*XXX.show-histogram
+        visibility visible*/
 
 #knowledge-base-select
   navigationBox()
