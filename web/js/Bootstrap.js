@@ -6,6 +6,10 @@ var reload = function() {
     $(config.getRootElementId()).fireEvent('reload');
 };
 
+var removeOverlayClose = function(){
+  $("overlay-close").destroy();
+};
+
 var close = function() {
     $(config.getRootElementId()).fireEvent('closeOverlay');
 };
