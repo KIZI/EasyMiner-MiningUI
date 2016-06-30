@@ -43,6 +43,10 @@ buttonHoverBackground = #2d83be
 buttonHoverBorder = buttonBorder
 buttonHoverColor = buttonColor
 
+buttonDetailsFontSize = 10px
+buttonDetailsFontWeight = normal
+buttonDetailsColor = #dfdfdf
+
 inputHoverBorderColor = #2d83be
 inputBorderColor = rgb(235,235,235)
 
@@ -158,6 +162,20 @@ bigButton()
   text-align left
   display block
   margin 5px auto
+  span.details
+    margin-top 1px
+    display block
+    font-size buttonDetailsFontSize
+    font-weight buttonDetailsFontWeight
+    color buttonDetailsColor
+    position relative
+    span.right
+      display block
+      float right
+      visibility hidden
+  &:hover
+    span.details span.right
+      visibility visible
 
 mainButton()
   button()
