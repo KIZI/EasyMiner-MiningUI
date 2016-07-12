@@ -3,6 +3,7 @@ var Task = new Class({
 
     $requestData: null,
     $time: null,
+    $hasId: false,
 
     initialize: function(serializedRule, limitHits, debug, strictMatch, taskMode, cache) {
         var taskName = "";
@@ -86,6 +87,23 @@ var Task = new Class({
 
     getId: function() {
         return this.$requestData.taskId;
+    },
+
+    /**
+     * Sets short ID of task if was UUID first
+     * @param int
+     */
+    setId: function(value) {
+        this.$hasId = true;
+        this.$requestData.taskId = value;
+    },
+
+    /**
+     * Gets status of task, if has final ID
+     * @returns {boolean}
+     */
+    getHasId: function() {
+        return this.$hasId;
     },
 
     getDebug: function() {

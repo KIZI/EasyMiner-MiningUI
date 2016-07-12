@@ -44,6 +44,9 @@ var MiningManager = new Class({
 
       onSuccess: function (responseJSON, responseText) {
         if (/*responseJSON.status === 'ok' && */!this.errorStates.contains(responseJSON.state)) {
+          if(activeTask.getHasId() == false){
+            activeTask.setId(responseJSON.taskId);
+          }
           this.handleSuccessRequest(data, responseJSON);
         } else {
           this.handleErrorRequest();
