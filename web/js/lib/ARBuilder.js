@@ -115,6 +115,7 @@ var ARBuilder = new Class({
     this.$currentUser.loadUser();
 
     this.$reportManager.loadReports();
+    this.$ARManager.sortAttributes();
   },
 
   getDD: function () {
