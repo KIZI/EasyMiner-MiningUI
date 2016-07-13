@@ -72,11 +72,12 @@ var Task = new Class({
             articleId: articleId
         };
 
-        if (cache) { // caching enabled
+        /*if (cache) { // caching enabled
             this.$requestData.taskId = CryptoJS.MD5(JSON.encode(this.$requestData)).toString(); // MD5 hash from task setting
         } else { // caching disabled
             this.$requestData.taskId = CryptoJS.MD5(JSON.encode(new Date().getTime())).toString(); // MD5 hash from unix timestamp
-        }
+        }*/
+        this.$requestData.taskId = 0;
 
         this.$time = new Date();
     },
