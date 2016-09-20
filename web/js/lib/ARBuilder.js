@@ -10,6 +10,7 @@ var ARBuilder = new Class({
   $minerName:'',
   $FRManager: null,
   $MRManager: null,
+  $KBManager: null,
   $miningManager: null,
   $ETreeManager: null,
   $ARManager: null,
@@ -101,7 +102,8 @@ var ARBuilder = new Class({
     this.$FGC = this.dataParser.getFGC();
 
     this.$rulesParser = new RulesParser(this, this.$DD, this.getDefFL());
-    this.$MRManager = new MRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$i18n);
+    this.$KBManager = new KBManager(this.$config, this.UIPainter, this.UIListener, this.$i18n);
+    this.$MRManager = new MRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$i18n, this.$KBManager);
     this.$MRManager.loadKnowledgeBase(this.dataParser.rulesetId); // init KB by id from data
     this.$FRManager = new FRManager(this.$config, this.getDefFL(), this.settings, this.UIPainter, this.UIListener, this.$MRManager, this.$i18n);
     this.$miningManager = new MiningManager(this.$config, this.settings, this.$FRManager, new DateHelper(), new TaskManager(this.$config, this.settings));

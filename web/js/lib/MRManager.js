@@ -6,13 +6,14 @@ var MRManager = new Class({
   i18n: null,
   FL: null,
   FRManager: null,
+  KBManager: null,
   KBid: 0,
   settings: null,
   tasks: {},
   UIPainter: null,
   UIListener: null,
 
-  initialize: function (config, FL, settings, UIPainter, UIListener, i18n) {
+  initialize: function (config, FL, settings, UIPainter, UIListener, i18n, KBManager) {
     this.config = config;
     this.i18n = i18n;
     this.FL = FL;
@@ -20,6 +21,8 @@ var MRManager = new Class({
     this.settings = settings;
     this.UIPainter = UIPainter;
     this.UIListener = UIListener;
+
+    this.KBManager = KBManager;
 
     this.getTasksRequest();
   },
@@ -48,6 +51,7 @@ var MRManager = new Class({
       if(this.tasks[this.KBid]){ this.removeTask(this.tasks[this.KBid]); }
       this.tasks[id] = new MarkedTask(id, '', this.config, 0, this.i18n, this.FL, this.UIPainter, this, true);
       this.KBid = id;
+      this.KBManager.setId(id);
     }
     this.tasks[id].reload();
   },

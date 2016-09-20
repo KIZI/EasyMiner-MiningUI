@@ -559,6 +559,11 @@ var UITemplateRegistrator = new Class({
       li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+' KB'+foundRule.getRuleSetRelation()+(foundRule.isLoading()?' loading':'')},
         input({type:'checkbox',id:foundRule.getCSSID()+'-checkbox', class:'found-rule-checkbox'}),
         label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
+        (foundRule.getInterestRate() > 0 ?
+            a({/*id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', */'title': i18n.translate('Interesting')}, foundRule.getInterestRate())
+            :
+            span()
+        ),
         span({class:'ruleActions'},
           (foundRule.isSelected()?
             a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})

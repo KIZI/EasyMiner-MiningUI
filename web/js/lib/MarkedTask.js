@@ -122,6 +122,7 @@ var MarkedTask = new Class({
           this.UIPainter.renderMarkedTask(this, 'minimize');
           this.MRManager.setTaskName(this.id, data[type].name);
           this.isInit = true;
+          this.MRManager.KBManager.setRulesCount(data[type].rulesCount);
         }
       }
       this.IMs = this.FL.getRulesIMs(data[type].IMs);

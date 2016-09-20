@@ -4,6 +4,7 @@ var FoundRule = new Class({
 
   $exception: null,
   $interesting: null,
+  $interestRate: 0,
   $loading: false,
 
   $id: null,
@@ -106,6 +107,14 @@ var FoundRule = new Class({
 
   setLoading: function(loading){
     this.$loading=loading;
+  },
+
+  getInterestRate: function () {
+    return this.$interestRate;
+  },
+
+  setInterestRate: function(value){
+    this.$interestRate = this.$interestRate.toFloat()+value.toFloat();
   },
 
   getTaskId: function(){

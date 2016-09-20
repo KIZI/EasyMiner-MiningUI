@@ -1064,6 +1064,9 @@ var UIPainter = new Class({
     var foundRules=this.ARBuilder.$FRManager.rules;
     Array.each(foundRules,function(foundRule){
       this.UIListener.registerFoundRuleEventHandlers(foundRule);
+      if(!this.ARBuilder.$FRManager.miningInProgress && !this.ARBuilder.$FRManager.pageLoading){
+        this.ARBuilder.$KBManager.basicAnalyze(foundRule);
+      }
     }.bind(this));
 
     this.UIListener.registerFoundRulesEventHandlers(this.ARBuilder.$FRManager);
