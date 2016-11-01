@@ -341,9 +341,9 @@ var UITemplateRegistrator = new Class({
 
       div({id: 'add-coefficient-window'},
         a({id: 'add-coefficient-close', href: '#', 'title': i18n.translate('Close')}),
-        h2(i18n.translate('Set value merging')),
+        h2(i18n.translate('Set value type')),
         form({action: '#', method: 'POST', id: 'add-coefficient-form'},
-          label({'for': 'add-coefficient-select'}, i18n.translate('Merging type:')),
+          label({'for': 'add-coefficient-select'}, i18n.translate('Value type:')),
           select({name: 'add-coefficient-select', id: 'add-coefficient-select'}),
           span({id: 'add-coefficient-autocomplete'})),
         div({'class': 'clearfix'}));
@@ -354,9 +354,9 @@ var UITemplateRegistrator = new Class({
 
       div({id: 'edit-coefficient-window'},
         a({id: 'overlay-close', href: '#', 'title': i18n.translate('Close')}),
-        h2(i18n.translate('Edit value merging')),
+        h2(i18n.translate('Edit value type')),
         form({action: '#', method: 'POST', id: 'edit-coefficient-form'},
-          label({'for': 'edit-coefficient-select'}, i18n.translate('Merging type:')),
+          label({'for': 'edit-coefficient-select'}, i18n.translate('Value type:')),
           select({name: 'edit-coefficient-select', id: 'edit-coefficient-select'}),
           span({id: 'edit-coefficient-autocomplete'})),
         div({'class': 'clearfix'}));
