@@ -2,6 +2,7 @@ var MarkedRule = new Class({
 
   // používané proměnné MarkedRule
   $id: null,
+  $interestRate: 0,
   $loading: false,
   $rule: null,
   $task: null,
@@ -71,6 +72,14 @@ var MarkedRule = new Class({
 
   setLoading: function(loading){
     this.$loading = loading;
+  },
+
+  getInterestRate: function () {
+    return this.$interestRate;
+  },
+
+  setInterestRate: function(value){
+    this.$interestRate = this.$interestRate.toFloat()+value.toFloat();
   }
 
 });

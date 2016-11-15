@@ -23,51 +23,54 @@ var KBManager = new Class({
     this.UIListener = UIListener;
   },
 
-  basicAnalyze: function(rule){
-    var ruleName = rule.$rule.text;
-    Object.each(this.rules, function (ruleData, ruleId) {
-      if(ruleName == ruleData.text){
+  compareName: function(rule, type){
+    var ruleName = rule.getIdent();
+    Object.each(this.rules, function (ruleText, ruleId) {
+      if(ruleName == ruleText){
         console.log(rule);
         rule.setInterestRate('0.1');
-        this.UIPainter.updateFoundRule(rule);
+        if(type == "found"){
+          this.UIPainter.updateFoundRule(rule);
+        } else if(type == "marked"){
+          this.UIPainter.updateMarkedRule(rule);
+        }
       }
     }.bind(this));
   },
 
-  getRules: function () {
-    if(this.reloadRules){
-      var url = this.config.getKnowledgeBaseGetRulesUrl(this.id, 0, this.rulesCount, null); // TO-DO get only names...
+  basicAnalyze: function (rules, type) {
+    var url = this.config.getKnowledgeBaseGetRulesNamesUrl(this.id);
 
-      //region načtení pravidel ze serveru...
-      new Request.JSON({
-        url: url,
-        secure: true,
-        onSuccess: function (responseJSON, responseText) {
-          console.log("getRules - success");
-          this.rules = responseJSON.rules;
-          this.reloadRules = false;
-        }.bind(this),
+    //region načtení pravidel ze serveru...
+    new Request.JSON({
+      url: url,
+      secure: true,
+      onSuccess: function (responseJSON, responseText) {
+        console.log("getRules - success");
+        this.rules = responseJSON.rules;
+        Object.each(rules, function(ruleData, ruleId){
+          this.compareName(rules[ruleId], type)
+        }.bind(this));
+      }.bind(this),
 
-        onError: function () {
-          console.log("getRules - error");
-        }.bind(this),
+      onError: function () {
+        console.log("getRules - error");
+      }.bind(this),
 
-        onFailure: function () {
-          console.log("getRules - failure");
-        }.bind(this),
+      onFailure: function () {
+        console.log("getRules - failure");
+      }.bind(this),
 
-        onException: function () {
-          console.log("getRules - exception");
-        }.bind(this),
+      onException: function () {
+        console.log("getRules - exception");
+      }.bind(this),
 
-        onTimeout: function () {
-          console.log("getRules - timeout");
-        }.bind(this)
+      onTimeout: function () {
+        console.log("getRules - timeout");
+      }.bind(this)
 
-      }).get();
-      //endregion
-    }
-    return this.rules;
+    }).get();
+    //endregion
   },
 
   setId: function(id){
@@ -79,8 +82,6 @@ var KBManager = new Class({
     if(this.rulesCount != count){
       this.rulesCount = count;
       this.reloadRules = true;
-
-      this.getRules(); // just for test
     }
   },
 

@@ -136,6 +136,44 @@ var MarkedTask = new Class({
       }.bind(this));
       if(data[type].rulesCount > 0){
         this.UIPainter.renderMarkedRules(this);
+        if(!this.isBase){
+          //console.log("Hey");
+
+          //console.log(Object.getLength(this.rules));
+          this.MRManager.KBManager.basicAnalyze(this.rules, "marked");
+
+          /*var url = this.config.getKnowledgeBaseCompareRuleUrl(0);
+
+          //region načtení pravidel ze serveru...
+          new Request.JSON({
+            url: url,
+            secure: true,
+            onSuccess: function (responseJSON, responseText) {
+              console.log("compareRule - success");
+              console.log(responseJSON);
+              //this.rules = responseJSON.rules;
+              //this.reloadRules = false;
+              //return this.rules;
+            }.bind(this),
+
+            onError: function () {
+              console.log("compareRule - error");
+            }.bind(this),
+
+            onFailure: function () {
+              console.log("compareRule - failure");
+            }.bind(this),
+
+            onException: function () {
+              console.log("compareRule - exception");
+            }.bind(this),
+
+            onTimeout: function () {
+              console.log("compareRule - timeout");
+            }.bind(this)
+
+          }).get();*/
+        }
       }
     }
   },
