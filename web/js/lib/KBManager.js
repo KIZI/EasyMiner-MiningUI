@@ -27,13 +27,13 @@ var KBManager = new Class({
     var ruleName = rule.getIdent();
     Object.each(this.rules, function (ruleText, ruleId) {
       if(ruleName == ruleText){
-        console.log(rule);
         rule.setInterestRate('0.1');
         if(type == "found"){
           this.UIPainter.updateFoundRule(rule);
         } else if(type == "marked"){
           this.UIPainter.updateMarkedRule(rule);
         }
+        this.deepAnalyze(rule, type) // TO-DO always
       }
     }.bind(this));
   },
@@ -67,6 +67,37 @@ var KBManager = new Class({
 
       onTimeout: function () {
         console.log("getRules - timeout");
+      }.bind(this)
+
+    }).get();
+    //endregion
+  },
+
+  deepAnalyze: function (rule, type) {
+    var url = this.config.getKnowledgeBaseCompareRuleUrl(rule.$id, this.id);
+
+    //region analýzy pravidla na serveru...
+    new Request.JSON({
+      url: url,
+      secure: true,
+      onSuccess: function (responseJSON, responseText) {
+        console.log("deepAnalyze - success");
+      }.bind(this),
+
+      onError: function () {
+        console.log("deepAnalyze - error");
+      }.bind(this),
+
+      onFailure: function () {
+        console.log("deepAnalyze - failure");
+      }.bind(this),
+
+      onException: function () {
+        console.log("deepAnalyze - exception");
+      }.bind(this),
+
+      onTimeout: function () {
+        console.log("deepAnalyze - timeout");
       }.bind(this)
 
     }).get();
