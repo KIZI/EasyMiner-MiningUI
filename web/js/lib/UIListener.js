@@ -1004,14 +1004,14 @@ var UIListener = new Class({
     }
     *endregion mark*/
     /*region unmark*/
-    var unmarkLink = $(foundRule.getUnmarkCSSID());
+    /*var unmarkLink = $(foundRule.getUnmarkCSSID());
     if (unmarkLink) {
       unmarkLink.addEvent('click', function (event) {
         event.stop();
         FRManager.unmarkMarkedRule(foundRule);
       }.bind(FRManager));
     }
-    /*endregion unmark*/
+    *endregion unmark*/
     /*region details*/
     var detailsLink = $(foundRule.getDetailsCSSID());
     if (detailsLink) {
@@ -1022,20 +1022,28 @@ var UIListener = new Class({
     }
     /*endregion details*/
     /*region thumb up*/
-    var kbAddLink = $(foundRule.getUpCSSID());
-    if (kbAddLink) {
-      kbAddLink.addEvent('click', function (event) {
+    var kbPositiveLink = $(foundRule.getUpCSSID());
+    if (kbPositiveLink) {
+      kbPositiveLink.addEvent('click', function (event) {
         event.stop();
-        FRManager.kbAddRule(foundRule, 'positive');
+        if(event.target.hasClass('kbAddPositive')){
+          FRManager.kbAddRule(foundRule, 'positive');
+        } else if(event.target.hasClass('kbRemovePositive')){
+          FRManager.kbRemoveRule(foundRule);
+        }
       }.bind(this));
     }
     /*endregion thumb up*/
     /*region thumb down*/
-    var kbAddLink = $(foundRule.getDownCSSID());
-    if (kbAddLink) {
-      kbAddLink.addEvent('click', function (event) {
+    var kbNegativeLink = $(foundRule.getDownCSSID());
+    if (kbNegativeLink) {
+      kbNegativeLink.addEvent('click', function (event) {
         event.stop();
-        FRManager.kbAddRule(foundRule, 'negative');
+        if(event.target.hasClass('kbAddNegative')){
+          FRManager.kbAddRule(foundRule, 'negative');
+        } else if(event.target.hasClass('kbRemoveNegative')){
+          FRManager.kbRemoveRule(foundRule);
+        }
       }.bind(this));
     }
     /*endregion thumb down*/

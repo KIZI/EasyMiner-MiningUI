@@ -66,6 +66,18 @@ var MarkedRule = new Class({
     return 'kbAdd-' + this.getCSSID();
   },
 
+  isInRuleSet: function(){
+    return this.$rule.ruleSetRelation!="";
+  },
+
+  setRuleSetRelation: function(relation){
+    this.$rule.ruleSetRelation=relation;
+  },
+
+  getRuleSetRelation: function(){
+    return this.$rule.ruleSetRelation;
+  },
+
   isLoading: function(){
     return (this.$loading || false);
   },

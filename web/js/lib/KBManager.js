@@ -24,18 +24,26 @@ var KBManager = new Class({
   },
 
   compareName: function(rule, type){
-    var ruleName = rule.getIdent();
-    Object.each(this.rules, function (ruleText, ruleId) {
-      if(ruleName == ruleText){
+    var id = rule.getId(true),
+        ruleName = rule.getIdent(),
+        isInKb = false;
+    Object.each(this.rules, function (ruleArray, ruleId) {
+      if(id == ruleId){ // rule is in KB
+        rule.setRuleSetRelation(ruleArray.relation);
+        this.UIPainter.updateMarkedRule(rule);
+        isInKb = true;
+      } else if(ruleName == ruleArray.name){
         rule.setInterestRate('0.1');
         if(type == "found"){
           this.UIPainter.updateFoundRule(rule);
         } else if(type == "marked"){
           this.UIPainter.updateMarkedRule(rule);
         }
-        this.deepAnalyze(rule, type) // TO-DO always
       }
     }.bind(this));
+    if(!isInKb){
+      this.deepAnalyze(rule, type);
+    }
   },
 
   basicAnalyze: function (rules, type) {

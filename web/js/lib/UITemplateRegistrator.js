@@ -1122,8 +1122,16 @@ var UITemplateRegistrator = new Class({
           span({class:'ruleActions'},
               a({id: markedRule.getUnmarkCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Rule Clipboard')}),
               a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
-              a({id: markedRule.getUpCSSID(),href: '#','class': 'kb-add','rel': 'positive','title': i18n.translate('Interesting')}),
-              a({id: markedRule.getDownCSSID(),href: '#','class': 'kb-add','rel': 'negative','title': i18n.translate('Not interesting')})
+              (markedRule.getRuleSetRelation()=="positive"?
+                      a({id: markedRule.getUpCSSID(), href:'#', class:'kbRemovePositive', title:i18n.translate('Remove from Knowledge Base')})
+                      :
+                      a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')})
+              ),
+              (markedRule.getRuleSetRelation()=="negative"?
+                      a({id: markedRule.getDownCSSID(), href:'#', class:'kbRemoveNegative', title:i18n.translate('Remove from Knowledge Base')})
+                      :
+                      a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')})
+              )
           ),
           span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
       );
