@@ -114,7 +114,15 @@ var FoundRule = new Class({
   },
 
   setInterestRate: function(value){
-    this.$interestRate = this.$interestRate.toFloat()+value.toFloat();
+    this.$interestRate = value;
+  },
+
+  getInterestRelation: function () {
+    return this.$interestRelation;
+  },
+
+  setInterestRelation: function(relation){
+    this.$interestRelation = relation;
   },
 
   getTaskId: function(){

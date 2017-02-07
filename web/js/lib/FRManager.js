@@ -145,6 +145,9 @@ var FRManager = new Class({
       this.delayedPageReload();
     }
     this.UIPainter.renderFoundRules();
+    if(!this.importInProgress){ // only if mining has finished
+      this.MRManager.KBManager.basicAnalyze(this.rules, "found");
+    }
   },
 
   handleErrorRulesRequest: function (page){
