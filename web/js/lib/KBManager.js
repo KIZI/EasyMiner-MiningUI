@@ -100,12 +100,14 @@ var KBManager = new Class({
       secure: true,
       onSuccess: function (responseJSON, responseText) {
         console.log("deepAnalyze - success");
-        rule.setInterestRate(rule.getInterestRate().toFloat() + (responseJSON.max*this.weights.deep).toFloat());
-        rule.setInterestRelation(responseJSON.rule.relation);
-        if(type == "found"){
-          this.UIPainter.updateFoundRule(rule);
-        } else if(type == "marked"){
-          this.UIPainter.updateMarkedRule(rule);
+        if(responseJSON.rule){
+          rule.setInterestRate(rule.getInterestRate().toFloat() + (responseJSON.max*this.weights.deep).toFloat());
+          rule.setInterestRelation(responseJSON.rule.relation);
+          if(type == "found"){
+            this.UIPainter.updateFoundRule(rule);
+          } else if(type == "marked"){
+            this.UIPainter.updateMarkedRule(rule);
+          }
         }
       }.bind(this),
 
