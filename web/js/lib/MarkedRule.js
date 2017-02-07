@@ -3,6 +3,7 @@ var MarkedRule = new Class({
   // používané proměnné MarkedRule
   $id: null,
   $interestRate: 0,
+  $interestRelation: null,
   $loading: false,
   $rule: null,
   $task: null,
@@ -91,7 +92,15 @@ var MarkedRule = new Class({
   },
 
   setInterestRate: function(value){
-    this.$interestRate = this.$interestRate.toFloat()+value.toFloat();
+    this.$interestRate = value;
+  },
+
+  getInterestRelation: function () {
+    return this.$interestRelation;
+  },
+
+  setInterestRelation: function(relation){
+    this.$interestRelation = relation;
   }
 
 });

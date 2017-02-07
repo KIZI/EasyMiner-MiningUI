@@ -16,6 +16,11 @@ var KBManager = new Class({
   rules: 0,
   rulesCount: 0,
 
+  weights: {
+    'basic': 0.1,
+    'deep': 0.9
+  },
+
   initialize: function (config, UIPainter, UIListener, i18n) {
     this.config = config;
     this.i18n = i18n;
@@ -33,7 +38,8 @@ var KBManager = new Class({
           this.UIPainter.updateMarkedRule(rule);
           isInKb = true;
         } else if(rule.getIdent() == ruleArray.name){
-          rule.setInterestRate('0.1');
+          rule.setInterestRate(this.weights.basic);
+          rule.setInterestRelation(ruleArray.relation);
           if(type == "found"){
             this.UIPainter.updateFoundRule(rule);
           } else if(type == "marked"){
@@ -94,6 +100,13 @@ var KBManager = new Class({
       secure: true,
       onSuccess: function (responseJSON, responseText) {
         console.log("deepAnalyze - success");
+        rule.setInterestRate(rule.getInterestRate().toFloat() + (responseJSON.max*this.weights.deep).toFloat());
+        rule.setInterestRelation(responseJSON.rule.relation);
+        if(type == "found"){
+          this.UIPainter.updateFoundRule(rule);
+        } else if(type == "marked"){
+          this.UIPainter.updateMarkedRule(rule);
+        }
       }.bind(this),
 
       onError: function () {
