@@ -188,6 +188,7 @@ var MRManager = new Class({
 
   handleSuccessMRUnmarkRequest: function (jsonData, foundRules, taskId){
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
+    this.KBManager.reloadRules = true;
     //if(task.pagesCount > 1){
       this.tasks[taskId].reload();
     /*} else{ TODO asi načítat vždy, jelikož používáme nejen pro unmark, ale zvážit...

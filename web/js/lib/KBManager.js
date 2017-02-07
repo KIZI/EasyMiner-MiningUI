@@ -23,62 +23,66 @@ var KBManager = new Class({
     this.UIListener = UIListener;
   },
 
-  compareName: function(rule, type){
-    var id = rule.getId(true),
-        ruleName = rule.getIdent(),
-        isInKb = false;
-    Object.each(this.rules, function (ruleArray, ruleId) {
-      if(id == ruleId){ // rule is in KB
-        rule.setRuleSetRelation(ruleArray.relation);
-        this.UIPainter.updateMarkedRule(rule);
-        isInKb = true;
-      } else if(ruleName == ruleArray.name){
-        rule.setInterestRate('0.1');
-        if(type == "found"){
-          this.UIPainter.updateFoundRule(rule);
-        } else if(type == "marked"){
+  compareNames: function(rules, type){
+    Object.each(rules, function(ruleData, ruleId){
+      var rule = rules[ruleId],
+          isInKb = false;
+      Object.each(this.rules, function (ruleArray, ruleId) {
+        if(rule.getId(true) == ruleId){ // rule is in KB
+          rule.setRuleSetRelation(ruleArray.relation);
           this.UIPainter.updateMarkedRule(rule);
+          isInKb = true;
+        } else if(rule.getIdent() == ruleArray.name){
+          rule.setInterestRate('0.1');
+          if(type == "found"){
+            this.UIPainter.updateFoundRule(rule);
+          } else if(type == "marked"){
+            this.UIPainter.updateMarkedRule(rule);
+          }
         }
+      }.bind(this));
+      if(!isInKb){
+        this.deepAnalyze(rule, type);
       }
     }.bind(this));
-    if(!isInKb){
-      this.deepAnalyze(rule, type);
-    }
   },
 
   basicAnalyze: function (rules, type) {
-    var url = this.config.getKnowledgeBaseGetRulesNamesUrl(this.id);
+    if(this.reloadRules){
+      var url = this.config.getKnowledgeBaseGetRulesNamesUrl(this.id);
 
-    //region načtení pravidel ze serveru...
-    new Request.JSON({
-      url: url,
-      secure: true,
-      onSuccess: function (responseJSON, responseText) {
-        console.log("getRules - success");
-        this.rules = responseJSON.rules;
-        Object.each(rules, function(ruleData, ruleId){
-          this.compareName(rules[ruleId], type)
-        }.bind(this));
-      }.bind(this),
+      //region načtení pravidel ze serveru...
+      new Request.JSON({
+        url: url,
+        secure: true,
+        onSuccess: function (responseJSON, responseText) {
+          console.log("getRules - success");
+          this.rules = responseJSON.rules;
+          this.reloadRules = false;
+          this.compareNames(rules, type);
+        }.bind(this),
 
-      onError: function () {
-        console.log("getRules - error");
-      }.bind(this),
+        onError: function () {
+          console.log("getRules - error");
+        }.bind(this),
 
-      onFailure: function () {
-        console.log("getRules - failure");
-      }.bind(this),
+        onFailure: function () {
+          console.log("getRules - failure");
+        }.bind(this),
 
-      onException: function () {
-        console.log("getRules - exception");
-      }.bind(this),
+        onException: function () {
+          console.log("getRules - exception");
+        }.bind(this),
 
-      onTimeout: function () {
-        console.log("getRules - timeout");
-      }.bind(this)
+        onTimeout: function () {
+          console.log("getRules - timeout");
+        }.bind(this)
 
-    }).get();
-    //endregion
+      }).get();
+      //endregion
+    } else{
+      this.compareNames(rules, type);
+    }
   },
 
   deepAnalyze: function (rule, type) {
