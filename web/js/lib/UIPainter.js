@@ -461,7 +461,6 @@ var UIPainter = new Class({
           }
       ));
       this.UIListener.registerMarkedRuleEventHandlers(MR);
-      this.$UIScroller.restoreLastScroll();
     }.bind(this));
   },
 
