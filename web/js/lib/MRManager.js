@@ -56,7 +56,7 @@ var MRManager = new Class({
     this.tasks[id].reload();
   },
 
-  getUnmarkRequest: function (foundRules, taskId, URL) {
+  getUnmarkRequest: function (foundRules, taskId, URL, affectKB) {
     new Request.JSON({
       url: URL,
       secure: true,
@@ -69,7 +69,11 @@ var MRManager = new Class({
       }.bind(this),
 
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessMRUnmarkRequest(responseJSON, foundRules, taskId);
+        if(affectKB){
+          this.handleSuccessMRInterestRequest(responseJSON, foundRules, taskId);
+        } else{
+          this.handleSuccessMRUnmarkRequest(responseJSON, foundRules, taskId);
+        }
       }.bind(this),
 
       onError: function () {
@@ -77,10 +81,7 @@ var MRManager = new Class({
       }.bind(this),
 
       onCancel: function () {
-        Array.each(foundRules,function(foundRule){
-          foundRule.setLoading(false);
-          this.UIPainter.updateMarkedRule(foundRule);
-        }.bind(this));
+        this.handleErrorMRUnmarkRequest(foundRules);
       }.bind(this),
 
       onFailure: function () {
@@ -186,9 +187,16 @@ var MRManager = new Class({
     this.errorMessage=this.i18n.translate('Loading of rule clipboard failed...');
   },
 
-  handleSuccessMRUnmarkRequest: function (jsonData, foundRules, taskId){
+  handleSuccessMRInterestRequest: function (jsonData, foundRules, taskId){
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
     this.KBManager.reloadRules = true;
+    this.reloadActiveTasks();
+    this.FRManager.gotoPage(this.FRManager.currentPage);
+    this.loadKnowledgeBase(this.KBid);
+  },
+
+  handleSuccessMRUnmarkRequest: function (jsonData, foundRules, taskId){
+    if ((foundRules == undefined)||(foundRules.length == 0)){return;}
     //if(task.pagesCount > 1){
       this.tasks[taskId].reload();
     /*} else{ TODO asi načítat vždy, jelikož používáme nejen pro unmark, ale zvážit...
@@ -210,7 +218,6 @@ var MRManager = new Class({
       if(this.FRManager.getFoundRulesByIds(value.$id).length > 0){
         isInFr = true;
       }
-
     }.bind(this));
     if(this.FRManager.getTaskId() == taskId || isInFr){
       this.FRManager.gotoPage(this.FRManager.currentPage); // reloads FRManager if we unmark in current FR Task
@@ -239,6 +246,14 @@ var MRManager = new Class({
     this.UIPainter.renderMarkedTask(task, 'minimize');
     task.reload();
     this.loadKnowledgeBase(this.KBid);
+  },
+
+  reloadActiveTasks: function(){
+    Object.each(this.tasks, function(task){
+      if(!task.isBase && task.isInit){
+        task.reload();
+      }
+    }.bind(this));
   },
 
   removeTask: function(task){
@@ -317,29 +332,29 @@ var MRManager = new Class({
 
   multiKBAddRule: function (foundRulesIds, taskId, relation) {
     var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseAddRulesUrl(this.KBid,foundRules[1],relation));
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseAddRulesUrl(this.KBid,foundRules[1],relation), true);
   },
 
   kbAddRule: function (foundRule, relation) {
-    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseAddRulesUrl(this.KBid,foundRule.getId(true),relation));
+    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseAddRulesUrl(this.KBid,foundRule.getId(true),relation), true);
   },
 
   multiKBRemoveRule: function (foundRulesIds, taskId) {
     var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseRemoveRulesUrl(this.KBid,foundRules[1]));
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getKnowledgeBaseRemoveRulesUrl(this.KBid,foundRules[1]), true);
   },
 
   kbRemoveRule: function (foundRule) {
-    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseRemoveRulesUrl(this.KBid,foundRule.getId(true)));
+    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getKnowledgeBaseRemoveRulesUrl(this.KBid,foundRule.getId(true)), true);
   },
 
   multiUnmarkFoundRules:function(foundRulesIds, taskId){
     var foundRules = this.multiFoundRules(foundRulesIds, taskId);
-    this.getUnmarkRequest(foundRules[0],taskId,this.config.getRuleClipboardRemoveRuleUrl(taskId,foundRules[1]));
+    this.getUnmarkRequest(foundRules[0],taskId,this.config.getRuleClipboardRemoveRuleUrl(taskId,foundRules[1]), false);
   },
 
   unmarkMarkedRule: function (foundRule) {
-    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getRuleClipboardRemoveRuleUrl(foundRule.getTaskId(),foundRule.$id));
+    this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getRuleClipboardRemoveRuleUrl(foundRule.getTaskId(),foundRule.$id), false);
   }
   /* regionend rules actions */
 

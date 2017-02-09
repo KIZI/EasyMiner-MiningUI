@@ -35,16 +35,16 @@ var KBManager = new Class({
       Object.each(this.rules, function (ruleArray, ruleId) {
         if(rule.getId(true) == ruleId){ // rule is in KB
           rule.setRuleSetRelation(ruleArray.relation);
-          this.UIPainter.updateMarkedRule(rule);
+          rule.setInterestRate(0);
           isInKb = true;
         } else if(rule.getIdent() == ruleArray.name){
           rule.setInterestRate(this.weights.basic);
           rule.setInterestRelation(ruleArray.relation);
-          if(type == "found"){
-            this.UIPainter.updateFoundRule(rule);
-          } else if(type == "marked"){
-            this.UIPainter.updateMarkedRule(rule);
-          }
+        }
+        if(type == "found"){
+          this.UIPainter.updateFoundRule(rule);
+        } else if(type == "marked"){
+          this.UIPainter.updateMarkedRule(rule);
         }
       }.bind(this));
       if(!isInKb){

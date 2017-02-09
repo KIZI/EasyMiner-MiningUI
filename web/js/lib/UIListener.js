@@ -979,6 +979,7 @@ var UIListener = new Class({
     taskNameElement.getElements('.toggle').addEvent('click', function (event) {
       event.stop();
       if(taskElm.hasClass('maximize')){ task.reload(); }
+      if(taskElm.hasClass('minimize')){ task.isInit = false; }
       taskElm.toggleClass('minimize'); taskElm.toggleClass('maximize');
     }.bind(this));
   },
@@ -1004,14 +1005,14 @@ var UIListener = new Class({
     }
     *endregion mark*/
     /*region unmark*/
-    /*var unmarkLink = $(foundRule.getUnmarkCSSID());
+    var unmarkLink = $(foundRule.getUnmarkCSSID());
     if (unmarkLink) {
       unmarkLink.addEvent('click', function (event) {
         event.stop();
         FRManager.unmarkMarkedRule(foundRule);
       }.bind(FRManager));
     }
-    *endregion unmark*/
+    /*endregion unmark*/
     /*region details*/
     var detailsLink = $(foundRule.getDetailsCSSID());
     if (detailsLink) {
