@@ -189,6 +189,9 @@ var MRManager = new Class({
 
   handleSuccessMRInterestRequest: function (jsonData, foundRules, taskId){
     if ((foundRules == undefined)||(foundRules.length == 0)){return;}
+    if(this.tasks[taskId].isBase){
+      this.tasks[taskId].reload();
+    }
     this.KBManager.reloadRules = true;
     this.reloadActiveTasks();
     this.FRManager.gotoPage(this.FRManager.currentPage);
