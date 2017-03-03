@@ -194,7 +194,9 @@ var MRManager = new Class({
     }
     this.KBManager.reloadRules = true;
     this.reloadActiveTasks();
-    this.FRManager.gotoPage(this.FRManager.currentPage);
+    if(this.FRManager.rulesCount > 0){
+      this.FRManager.gotoPage(this.FRManager.currentPage);
+    }
     this.loadKnowledgeBase(this.KBid);
   },
 

@@ -10,6 +10,7 @@ var KBManager = new Class({
   config: null,
   i18n: null,
   id: null,
+  isReloading: false, // if is reloading right now
   reloadRules: false, // if should be rules loaded again
   UIPainter: null,
   UIListener: null,
@@ -54,7 +55,12 @@ var KBManager = new Class({
   },
 
   basicAnalyze: function (rules, type) {
+    if(this.isReloading){
+      this.basicAnalyze.delay(100,this,[rules, type]);
+      return;
+    }
     if(this.reloadRules){
+      this.isReloading = true;
       var url = this.config.getKnowledgeBaseGetRulesNamesUrl(this.id);
 
       //region načtení pravidel ze serveru...
@@ -65,6 +71,7 @@ var KBManager = new Class({
           console.log("getRules - success");
           this.rules = responseJSON.rules;
           this.reloadRules = false;
+          this.isReloading = false;
           this.compareNames(rules, type);
         }.bind(this),
 
