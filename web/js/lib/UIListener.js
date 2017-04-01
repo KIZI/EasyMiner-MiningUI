@@ -1017,7 +1017,7 @@ var UIListener = new Class({
     if (detailsLink) {
       detailsLink.addEvent('click', function (event) {
         event.stop();
-        this.UIPainter.renderRuleDetailsDialog(foundRule.getTaskId(),foundRule.getId(true));
+        this.UIPainter.renderRuleDetailsDialog(foundRule.getOriginTaskId(),foundRule.getId(true));
       }.bind(this));
     }
     /*endregion details*/
