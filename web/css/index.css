@@ -1628,7 +1628,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   overflow: auto;
   position: relative;
   width: 100px;
-  height: 20px;
+  height: 21px;
   margin-left: 15px;
   background: transparent;
   top: 5px;
@@ -1652,30 +1652,6 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules ul li .ruleActions a.unmark:hover {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddPositive {
-  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddPositive:hover {
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemovePositive {
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemovePositive:hover {
-  background: transparent url("../images/icon-thumb-up-20-remove.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddNegative {
-  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddNegative:hover {
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemoveNegative {
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemoveNegative:hover {
-  background: transparent url("../images/icon-thumb-down-20-remove.png") left center no-repeat;
 }
 #found-rules ul li .ruleActions a.details {
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
@@ -2016,7 +1992,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   overflow: auto;
   position: relative;
   width: 100px;
-  height: 20px;
+  height: 21px;
   margin-left: 15px;
   background: transparent;
   top: 5px;
@@ -2037,32 +2013,6 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules ul li .ruleActions a.details {
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbAddPositive {
-  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbAddPositive:hover {
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbRemovePositive {
-  visibility: visible;
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbRemovePositive:hover {
-  background: transparent url("../images/icon-thumb-up-20-remove.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbAddNegative {
-  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbAddNegative:hover {
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbRemoveNegative {
-  visibility: visible;
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kbRemoveNegative:hover {
-  background: transparent url("../images/icon-thumb-down-20-remove.png") left center no-repeat;
 }
 #marked-rules ul li .ims {
   display: block;
@@ -2240,4 +2190,82 @@ section#content h3 {
   border-bottom: 1px solid #314e64;
   line-height: 20px;
   margin-bottom: 10px;
+}
+a.kbAddPositive {
+  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
+}
+a.kbAddPositive[class^="kbPositive"],
+a.kbAddPositive[class*=" kbPositive"] {
+  visibility: visible !important;
+  height: 21px;
+}
+a.kbAddPositive.kbPositiveNotice {
+  background: transparent url("../images/icon-thumb-up-notice.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive10,
+a.kbAddPositive.kbPositive20 {
+  background: transparent url("../images/icon-thumb-up-rate20.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive30,
+a.kbAddPositive.kbPositive40 {
+  background: transparent url("../images/icon-thumb-up-rate40.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive50,
+a.kbAddPositive.kbPositive60 {
+  background: transparent url("../images/icon-thumb-up-rate60.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive70,
+a.kbAddPositive.kbPositive80,
+a.kbAddPositive.kbPositive90 {
+  background: transparent url("../images/icon-thumb-up-rate80.png") left top no-repeat;
+}
+a.kbAddPositive:hover,
+a.kbAddPositive.kbPositive100 {
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+a.kbRemovePositive {
+  visibility: visible !important;
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+a.kbRemovePositive:hover {
+  background: transparent url("../images/icon-thumb-up-20-remove.png") left center no-repeat;
+}
+a.kbAddNegative {
+  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
+}
+a.kbAddNegative[class^="kbNegative"],
+a.kbAddNegative[class*=" kbNegative"] {
+  visibility: visible !important;
+  height: 21px;
+}
+a.kbAddNegative.kbNegativeNotice {
+  background: transparent url("../images/icon-thumb-down-notice.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative10,
+a.kbAddNegative.kbNegative20 {
+  background: transparent url("../images/icon-thumb-down-rate20.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative30,
+a.kbAddNegative.kbNegative40 {
+  background: transparent url("../images/icon-thumb-down-rate40.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative50,
+a.kbAddNegative.kbNegative60 {
+  background: transparent url("../images/icon-thumb-down-rate60.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative70,
+a.kbAddNegative.kbNegative80,
+a.kbAddNegative.kbNegative90 {
+  background: transparent url("../images/icon-thumb-down-rate80.png") left top no-repeat;
+}
+a.kbAddNegative:hover,
+a.kbAddNegative.kbNegative100 {
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
+a.kbRemoveNegative {
+  visibility: visible !important;
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
+a.kbRemoveNegative:hover {
+  background: transparent url("../images/icon-thumb-down-20-remove.png") left center no-repeat;
 }

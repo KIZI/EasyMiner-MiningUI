@@ -34,24 +34,39 @@ var KBManager = new Class({
       var rule = rules[ruleId],
           isInKb = false;
       Object.each(this.rules, function (ruleArray, ruleId) {
-        if(rule.getId(true) == ruleId){ // rule is in KB
-          rule.setRuleSetRelation(ruleArray.relation);
-          rule.setInterestRate(0);
-          isInKb = true;
-        } else if(rule.getIdent() == ruleArray.name){
-          rule.setInterestRate(this.weights.basic);
-          rule.setInterestRelation(ruleArray.relation);
-        }
-        if(type == "found"){
-          this.UIPainter.updateFoundRule(rule);
-        } else if(type == "marked"){
-          this.UIPainter.updateMarkedRule(rule);
+        if(!isInKb){
+          if(rule.getId(true) == ruleId){ // rule is in KB
+            rule.setRuleSetRelation(ruleArray.relation);
+            rule.setInterestRelation("");
+            rule.setInterestRate(0);
+            isInKb = true;
+          } else if(this.compareName(rule.getIdent(), ruleArray.name)){
+            rule.setInterestRate("y");
+            rule.setInterestRelation(ruleArray.relation);
+          }
         }
       }.bind(this));
+      if(type == "found"){
+        this.UIPainter.updateFoundRule(rule);
+      } else if(type == "marked"){
+        this.UIPainter.updateMarkedRule(rule);
+      }
       if(!isInKb){
         this.deepAnalyze(rule, type);
       }
     }.bind(this));
+  },
+
+  compareName: function(ruleName, ruleSetRuleName){
+    if(ruleName == ruleSetRuleName){ // identical
+      return true;
+    }
+    var ruleParts = ruleName.split('→');
+    var ruleSetRuleParts = ruleSetRuleName.split('→');
+    if((ruleParts[0].trim() == ruleSetRuleParts[0].trim()) || (ruleParts[1].trim() == ruleSetRuleParts[1].trim())){ // same antecedent or consequent
+      return true;
+    }
+    return false;
   },
 
   basicAnalyze: function (rules, type) {
@@ -108,7 +123,7 @@ var KBManager = new Class({
       onSuccess: function (responseJSON, responseText) {
         console.log("deepAnalyze - success");
         if(responseJSON.rule){
-          rule.setInterestRate(rule.getInterestRate().toFloat() + (responseJSON.max*this.weights.deep).toFloat());
+          rule.setInterestRate(Math.ceil((responseJSON.max).toFloat()*10)*10);
           rule.setInterestRelation(responseJSON.rule.relation);
           if(type == "found"){
             this.UIPainter.updateFoundRule(rule);
