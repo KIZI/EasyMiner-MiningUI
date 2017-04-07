@@ -15,12 +15,7 @@ var KBManager = new Class({
   UIPainter: null,
   UIListener: null,
   rules: 0,
-  rulesCount: 0,
-
-  weights: {
-    'basic': 0.1,
-    'deep': 0.9
-  },
+  lastModified: null,
 
   initialize: function (config, UIPainter, UIListener, i18n) {
     this.config = config;
@@ -158,9 +153,9 @@ var KBManager = new Class({
     this.reloadRules = true;
   },
 
-  setRulesCount: function(count){
-    if(this.rulesCount != count){
-      this.rulesCount = count;
+  checkIfModified: function(lastModified){
+    if(this.lastModified != lastModified){
+      this.lastModified = lastModified;
       this.reloadRules = true;
     }
   },
