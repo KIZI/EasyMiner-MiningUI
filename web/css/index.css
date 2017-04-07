@@ -1697,6 +1697,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   visibility: hidden !important;
 }
 #found-rules ul li:hover .ruleActions >a {
+  opacity: 1;
   visibility: visible;
 }
 #found-rules #found-rules-multi-controls {
@@ -2042,6 +2043,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   visibility: hidden !important;
 }
 #marked-rules ul li:hover .ruleActions >a {
+  opacity: 1;
   visibility: visible;
 }
 #marked-rules .marked-rules-multi-controls {
@@ -2198,6 +2200,7 @@ a.kbAddPositive[class^="kbPositive"],
 a.kbAddPositive[class*=" kbPositive"] {
   visibility: visible !important;
   height: 21px;
+  opacity: 0.5;
 }
 a.kbAddPositive.kbPositiveNotice {
   background: transparent url("../images/icon-thumb-up-notice.png") left top no-repeat;
@@ -2237,6 +2240,7 @@ a.kbAddNegative[class^="kbNegative"],
 a.kbAddNegative[class*=" kbNegative"] {
   visibility: visible !important;
   height: 21px;
+  opacity: 0.5;
 }
 a.kbAddNegative.kbNegativeNotice {
   background: transparent url("../images/icon-thumb-down-notice.png") left top no-repeat;

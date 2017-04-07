@@ -35,7 +35,7 @@ var KBManager = new Class({
             rule.setInterestRelation("");
             rule.setInterestRate(0);
             isInKb = true;
-          } else if(this.compareName(rule.getIdent(), ruleArray.name)){
+          } else if(rule.getInterestRate() != "y" && this.compareName(rule.getIdent(), ruleArray.name)){
             rule.setInterestRate("y");
             rule.setInterestRelation(ruleArray.relation);
           }
