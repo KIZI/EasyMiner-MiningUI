@@ -47,6 +47,10 @@ var MarkedRule = new Class({
     return this.$task.id;
   },
 
+  getOriginTaskId: function(){
+    return this.$rule.task ? this.$rule.task : this.getTaskId();
+  },
+
   getUnmarkCSSID: function(){
     return 'unmark-' + this.getCSSID();
   },
