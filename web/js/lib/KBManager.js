@@ -14,7 +14,8 @@ var KBManager = new Class({
   reloadRules: false, // if should be rules loaded again
   UIPainter: null,
   UIListener: null,
-  rules: 0,
+  rules: null,
+  rulesCount: 0,
   lastModified: null,
 
   initialize: function (config, UIPainter, UIListener, i18n) {
@@ -82,7 +83,9 @@ var KBManager = new Class({
           this.rules = responseJSON.rules;
           this.reloadRules = false;
           this.isReloading = false;
-          this.compareNames(rules, type);
+            if(this.rulesCount > 0){
+                this.compareNames(rules, type);
+            }
         }.bind(this),
 
         onError: function () {
@@ -103,7 +106,7 @@ var KBManager = new Class({
 
       }).get();
       //endregion
-    } else{
+    } else if(this.rulesCount > 0){
       this.compareNames(rules, type);
     }
   },

@@ -584,6 +584,9 @@ var UITemplateRegistrator = new Class({
             title = i18n.translate('Up to '+foundRule.getInterestRate()+'% similarity with not interesting Rule in Knowledge Base');
           }
           positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+        } else{
+            positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+            negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
         }
       }
 
@@ -1152,6 +1155,9 @@ var UITemplateRegistrator = new Class({
             title = i18n.translate('Up to '+markedRule.getInterestRate()+'% similarity with not interesting Rule in Knowledge Base');
           }
           positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+        } else{
+            positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+            negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
         }
       }
 
