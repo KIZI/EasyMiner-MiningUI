@@ -2222,8 +2222,10 @@ a.kbAddPositive.kbPositive80,
 a.kbAddPositive.kbPositive90 {
   background: transparent url("../images/icon-thumb-up-rate80.png") left top no-repeat;
 }
-a.kbAddPositive:hover,
 a.kbAddPositive.kbPositive100 {
+  background: transparent url("../images/icon-thumb-up-rate100.png") left center no-repeat;
+}
+a.kbAddPositive:hover {
   background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
 }
 a.kbRemovePositive {
@@ -2262,8 +2264,10 @@ a.kbAddNegative.kbNegative80,
 a.kbAddNegative.kbNegative90 {
   background: transparent url("../images/icon-thumb-down-rate80.png") left top no-repeat;
 }
-a.kbAddNegative:hover,
 a.kbAddNegative.kbNegative100 {
+  background: transparent url("../images/icon-thumb-down-rate100.png") left top no-repeat;
+}
+a.kbAddNegative:hover {
   background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
 }
 a.kbRemoveNegative {
