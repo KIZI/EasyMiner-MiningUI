@@ -5,6 +5,7 @@ var FoundRule = new Class({
   $exception: null,
   $interesting: null,
   $interestRate: 0,
+  $interestRelation: null,
   $loading: false,
 
   $id: null,
