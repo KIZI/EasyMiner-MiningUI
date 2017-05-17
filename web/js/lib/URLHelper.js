@@ -1,3 +1,11 @@
+/**
+ * Class URLHelper
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ * TODO probably on in use...
+ */
 var URLHelper = new Class({
 	
 	initialize: function () {},
@@ -8,9 +16,7 @@ var URLHelper = new Class({
 	
 	getImagePath: function (image) {
 		var matches = this.getURL().match('http://[a-z]{1,}(/izi-miner)');
-		var path = matches[1] + '/web/images/' + image;
-		
-		return path;
+		return matches[1] + '/web/images/' + image;
 	}
 	
 });

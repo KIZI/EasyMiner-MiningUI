@@ -1,3 +1,10 @@
+/**
+ * Class MiningManager
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var MiningManager = new Class({
 
   config: null,
@@ -8,7 +15,7 @@ var MiningManager = new Class({
 
   requests: [],
   inProgress: false,
-  importState: null, //hodnoty: none, waiting, partial, done
+  importState: null, //values: none, waiting, partial, done
   finishedStates: ['solved', 'interrupted', 'solved_heads'],
   errorStates: ['failed'],
   miningRequestDelay: 2500,
@@ -93,23 +100,8 @@ var MiningManager = new Class({
       this.inProgress = false;
     }
 
-    /*
-     //pokud jsou importovány jen hlavičky, pošleme ještě jeden požadavek
-     if (this.miningState='solved_heads'){
-     setTimeout(function(){
-     var activeTask = this.$taskManager.getActiveTask();
-     var request = new Request.JSON({
-     url: this.config.getStartMiningUrl(activeTask.getId()),
-     secure: true,
-     async: true
-     }).post({'data': data});
-     setTimeout(function(){request.cancel();}.bind(this),1000);
-     }.bind(this),1000);
-     }
-    */
-
     if (this.isInProgress() || this.isImportInProgress()){
-      //úloha ještě běží, nebo ještě nebyly naimportovány všechny výsledky...
+      //task is still running, or results were not imported yet
       this.makeRequest.delay((this.isInProgress()?this.miningRequestDelay:this.importRequestDelay), this, data);
     }
 

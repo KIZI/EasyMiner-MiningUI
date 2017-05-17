@@ -1,3 +1,10 @@
+/**
+ * Class UIStructureListener
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var UIStructureListener = new Class({
 
 	$ARBuilder: null,
@@ -327,19 +334,19 @@ var UIStructureListener = new Class({
     registerAddAllUnusedAttributesEventHandler: function(){
         $('add-all-unused-attributes').addEvent('click', function(e){
             e.stop();
-            //výběr všech nevybraných atributů a jejich přidání
+            //select all unused attributes and add them
             var ARManager = this.$ARBuilder.getARManager();
             var activeRule= ARManager.getActiveRule();
             var attributeNameFilter=this.$ARBuilder.attributesFilter.prepareTestRegExp();
             var attributeNames=[];
             Array.each(this.$ARBuilder.getDD().getAttributes(), function (attribute) {
-                if (activeRule.isAttributeUsed(attribute)){return;/*atribut je už použit*/}
-                if (!attributeNameFilter.test(attribute.getName())){return;/*jméno atributu neodpovídá aktivnímu filtru*/}
-                if ((attribute.isHidden())){return;/*jde o skrytý atribut*/}
-                //příprava seznamu jmen nepoužitých atributů
+                if (activeRule.isAttributeUsed(attribute)){return;/*atributte is already used*/}
+                if (!attributeNameFilter.test(attribute.getName())){return;/*name of attribute does not match the current filter*/}
+                if ((attribute.isHidden())){return;/*it is hidden attribute*/}
+                //prepare list with names of unused attributes
                 attributeNames.push(attribute.name);
             }.bind(this));
-            //otevření okna pro výběr cíle, kam se mají dané atributy přidat
+            //open window for target selection
             this.$ARBuilder.openClickAddAttributeWindow(attributeNames);
         }.bind(this));
     },
@@ -354,7 +361,7 @@ var UIStructureListener = new Class({
         }.bind(this));
 
         elIZI.addEvent('closeOverlay', function() {
-            this.$ARBuilder.closeOverlay(); /* TODO voláno z iframe, propojit s obecným close */
+            this.$ARBuilder.closeOverlay();
         }.bind(this));
 
         // called when com_dbconnect reloads reports
@@ -396,14 +403,5 @@ var UIStructureListener = new Class({
                 elTasks.hide();
             }
         }.bind(this));
-
-        /*var elDropdown = $$('#marked-rules a.toggle')[0];
-        elDropdown.addEvent('click', function (event) {
-            event.stop();
-            var elToggle = $$('#marked-rules > div')[0];
-            elToggle.toggle();
-            var elH2 = $$('#marked-rules h2')[0];
-            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
-        }.bind(this));*/
     }
 });

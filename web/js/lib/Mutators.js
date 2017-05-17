@@ -1,3 +1,7 @@
+/**
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ */
 // GetterSetter Class mutator
 Class.Mutators.GetterSetter = function(properties) {
     var klass = this;

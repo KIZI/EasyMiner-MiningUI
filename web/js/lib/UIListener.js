@@ -1,3 +1,10 @@
+/**
+ * Class UIListener
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var UIListener = new Class({
 
   ARBuilder: null,
@@ -911,9 +918,9 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .mark-all').addEvent('click',function(event){
         event.stop();
-        //odkaz není aktivní
+        //link is not active
         if (event.target.hasClass('disabled')){return;}
-        //odkaz je aktivní, pokračujeme ve zpracování
+        //link is active, process it
         var FRManager = this.ARBuilder.getFRManager();
         FRManager.markAllFoundRules();
         $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
@@ -924,9 +931,9 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
         event.stop();
-        //odkaz není aktivní
+        //link is not active
         if (event.target.hasClass('disabled')){alert('ne');return;}
-        //odkaz je aktivní, pokračujeme ve zpracování
+        //link is active, process it
         var FRManager = this.ARBuilder.getFRManager();
         var reportManager = this.ARBuilder.getReportManager();
         reportManager.showTaskDetails(FRManager.getTaskId());
@@ -934,9 +941,9 @@ var UIListener = new Class({
 
       multiControls.getElements('.task-actions .task-export').addEvent('click',function(event){
         event.stop();
-        //odkaz není aktivní
+        //link is not active
         if (event.target.hasClass('disabled')){return;}
-        //odkaz je aktivní, pokračujeme ve zpracování
+        //link is active, process it
         var FRManager = this.ARBuilder.getFRManager();
         var reportManager = this.ARBuilder.getReportManager();
         this.UIPainter.renderExportWindow(FRManager.getTaskId(),'discovered',FRManager.miningInProgress,FRManager.importInProgress);
@@ -945,16 +952,6 @@ var UIListener = new Class({
       this.checkFoundRulesSelectedCheckboxes();
     }
   },
-
-  /*
-  registerMarkedRuleEventHandlers: function (FR) {
-    var me = this;
-
-    $(FR.getRule().getMarkedRuleCSSRemoveID()).addEvent('click', function (event) {
-      me.ARBuilder.getFRManager().removeMarkedRule(FR);
-      event.stop();
-    });
-  },*/
 
   // same as registerFoundRulesEventHandlers, only ids differences TODO merge
   registerMarkedRulesEventHandlers: function(task){

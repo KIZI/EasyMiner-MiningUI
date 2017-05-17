@@ -1,3 +1,10 @@
+/**
+ * Class Cedent
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var Cedent = new Class({
 
     GetterSetter: ['id', 'level', 'stringHelper', 'connective', 'children', 'scope'],

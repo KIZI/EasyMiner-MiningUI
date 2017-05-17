@@ -1,6 +1,12 @@
 
-/*global Class: false */ 
-
+/*global Class: false */
+/**
+ * Class i18n
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var i18n = new Class({
 	
 	lang: '',

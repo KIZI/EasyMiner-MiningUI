@@ -1,6 +1,12 @@
+/**
+ * Class MRManager
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var MRManager = new Class({
 
-  // používané proměnné MRManager
   config: null,
   errorMessage: '',
   i18n: null,
@@ -96,7 +102,7 @@ var MRManager = new Class({
   getTasksRequest: function(){
     var url = this.config.getRuleClipboardGetTasksUrl();
 
-    //region načtení úloh ze serveru
+    //region load details about tasks from server
     new Request.JSON({
       url: url,
       secure: true,
@@ -121,13 +127,13 @@ var MRManager = new Class({
       }.bind(this)
 
     }).get();
-    //endregion
+    //endregion load details about tasks from server
   },
 
   getRuleSetsRequest: function(){
     var url = this.config.getKnowledgeBaseGetRuleSetsUrl();
 
-    //region načtení úloh ze serveru
+    //region load details about rulesets from server
     new Request.JSON({
       url: url,
       secure: true,
@@ -152,7 +158,7 @@ var MRManager = new Class({
       }.bind(this)
 
     }).get();
-    //endregion
+    //endregion load details about rulesets from server
   },
 
   getMarkedRulesByIds: function(foundRulesIds, taskId){

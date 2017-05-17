@@ -1,3 +1,10 @@
+/**
+ * Class ReportManager
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var ReportManager = new Class({
 
     $config: null,
@@ -13,7 +20,7 @@ var ReportManager = new Class({
     },
 
     /**
-     * Funkce pro zobrazení detailů úlohy na serveru (HTML verze z PMML)
+     * Function for loading task details from server
      * @param taskId
      */
     showTaskDetails: function(taskId){

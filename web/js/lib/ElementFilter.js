@@ -1,7 +1,13 @@
+/**
+ * Class Attribute
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ * @link http://davidwalsh.name/plugin-element-filter
+ * Modified by Stanislav Vojíř, 2015-05-17
+ *
+ * @type Class
+ */
 var ElementFilter = new Class({
-
-/* Source: http://davidwalsh.name/plugin-element-filter */
-/* Modified by Stanislav Vojíř, 2015-05-17 */
 
   //implements
 	Implements: [Options,Events],

@@ -329,7 +329,7 @@ var UIPainter = new Class({
 
     if(type == 'ruleset'){
       links = this.config.getKnowledgeBaseExportLinks(taskId);
-      //ignorujeme info o tom, jestli se v mezičase importují výsledky dolování (nepracujeme s úlohou, ale rule-setem)
+      //ignore the info about import of mining results (we do not work with task, but ruleset)
       isMiningInProgress=false;
       isImportInProgress=false;
     } else if (type == 'discovered'){
