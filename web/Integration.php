@@ -81,8 +81,7 @@ class Integration {
     'js/lib/UIStructureListener.js',
     'js/lib/UIStructurePainter.js',
     'js/lib/UIStructureTemplater.js',
-    'js/lib/UITemplateRegistrator.js',
-    'js/lib/URLHelper.js'
+    'js/lib/UITemplateRegistrator.js'
   ];
 
   /**
