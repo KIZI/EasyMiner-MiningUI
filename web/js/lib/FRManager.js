@@ -240,6 +240,7 @@ var FRManager = new Class({
   handleSuccessFoundRulesInterestRequest: function (jsonData,foundRules){
     if ((foundRules == undefined)||(foundRules.length==0)){return;}
     this.MRManager.KBManager.reloadRules = true;
+    this.MRManager.loadKnowledgeBase(this.MRManager.KBid);
     this.MRManager.reloadActiveTasks();
     this.gotoPage(this.currentPage);
   },
