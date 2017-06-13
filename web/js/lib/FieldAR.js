@@ -1,5 +1,11 @@
-/*global Class: false, Field: false */ 
-
+/*global Class: false, Field: false */
+/**
+ * Class FieldAR
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var FieldAR = new Class({
 	Extends: Field,
 	

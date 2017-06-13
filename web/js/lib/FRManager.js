@@ -1,3 +1,10 @@
+/**
+ * Class FRManager
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var FRManager = new Class({
 
   config: null,
@@ -12,7 +19,7 @@ var FRManager = new Class({
   MRManager: null,
   errorMessage: '',
 
-  //nově používané proměnné s informacemi o stavu
+  //newly used variables with information about the state
   task: null,
   pageLoading:false,
   miningInProgress: false,
@@ -27,7 +34,7 @@ var FRManager = new Class({
   rulesPerPage: null,
   currentPage: null,
   pagesCount: 0,
-  delayedPageRequestTimer: null,//timer používaný pro zpoždění znovu-načtení dané stránky
+  delayedPageRequestTimer: null,//timer used for page reload delay
   delayedPageRequestCounter:0,
 
 
@@ -48,7 +55,7 @@ var FRManager = new Class({
   },
 
   /**
-   * Metoda volaná při spuštění dolování
+   * Method called after the start of mining
    */
   handleInProgress: function () {
     this.reset();
@@ -70,12 +77,12 @@ var FRManager = new Class({
 
   delayedPageReload: function(){
     if (this.delayedPageRequestCounter<this.reloadRequestCounterMax){
-      //určení doby zpoždění
+      //set the delay
       var reloadRequestDelay=this.reloadRequestDelay;
-      if (this.delayedPageRequestCounter==0){//u prvního pokusu to zkusíme po kratší době
+      if (this.delayedPageRequestCounter==0){//in case of first delay, repeat it after shorter time
         reloadRequestDelay=Math.round(this.reloadRequestDelay/2);
       }
-      //připočtení dalšího pokusu o načtení a spuštění příslušného časovače
+      //calculate the next try of loading and running the timer
       this.delayedPageRequestCounter++;
       this.delayedPageRequestTimer=this.gotoPage.delay(reloadRequestDelay,this,(this.currentPage?this.currentPage:0));
     }
@@ -87,7 +94,7 @@ var FRManager = new Class({
     this.UIPainter.renderFoundRules();
     var url = this.config.getGetRulesUrl(this.task.getId(), (page - 1) * this.rulesPerPage, this.rulesPerPage, this.rulesOrder);
 
-    //region načtení pravidel ze serveru...
+    //region load rules from server
     new Request.JSON({
       url: url,
       secure: true,
@@ -113,7 +120,7 @@ var FRManager = new Class({
       }.bind(this)
 
     }).get();
-    //endregion
+    //endregion load rules from server
   },
 
   setMiningInProgress: function(miningState){
@@ -126,7 +133,7 @@ var FRManager = new Class({
   },
 
   handleSuccessRulesRequest: function (data) {
-    //zjištění aktuálních měr zajímavosti
+    //get currently used interest measures
     this.pageLoading=false;
     this.IMs = this.FL.getRulesIMs(data.task.IMs);
     this.rules = [];
@@ -402,7 +409,7 @@ var FRManager = new Class({
 
   handleRenameTaskFinished: function(taskId, newTaskName){
     if (this.getTaskId() == taskId){
-      //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
+      //if the current task is renamed, we have to repaint it (reload the current page with rules)
       this.gotoPage(this.currentPage);
     }
     this.MRManager.setTaskName(taskId, newTaskName)
@@ -411,7 +418,7 @@ var FRManager = new Class({
   // duplicated handleRenameTaskFinished due to difference of result for MRManager
   handleRenameTaskError: function(taskId){
     if (this.getTaskId() == taskId){
-      //pokud jde o přejmenování aktuální úlohy, musíme ji překreslit (znovu načteme aktuální stránku s pravidly)
+      //if is is current task, we have to repaint it (reload the current page with rules)
       this.gotoPage(this.currentPage);
     }
   },
@@ -450,7 +457,7 @@ var FRManager = new Class({
     return this.MRManager.KBid;
   },
 
-  //region práce s knowledge base
+  //region work with knowledge base
 
   kbAddRule: function (foundRule, relation) {
     this.AJAXBalancer.stopRequest(foundRule.getId());
@@ -492,7 +499,7 @@ var FRManager = new Class({
     this.AJAXBalancer.run();
   }
 
-  //endregion práce s knowledge base
+  //endregion work with knowledge base
 
 
 });

@@ -1,3 +1,10 @@
+/**
+ * Class UIStructureTemplater
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var UIStructureTemplater = new Class({
   register: function () {
     this.registerStructure();
@@ -260,7 +267,6 @@ var UIStructureTemplater = new Class({
                   href: '#',
                   title: i18n.translate('Add all unused attributes to rule pattern...')
               }, i18n.translate('Add all unused'))
-//						div(a({id: 'attributes-by-group', href: '#'}, i18n.translate('predefined attributes')))
           ));
       }
     });
@@ -315,10 +321,6 @@ var UIStructureTemplater = new Class({
           div({'class': 'clearfix'},
               strong({id: 'kb-ruleset'}, i18n.translate('Loading')+'...'),
               br(),
-              /*label({'for': 'kb-select'}, i18n.translate('Active ruleset: ')),
-              select({name: 'kb-select', id: 'kb-select'},
-                  option({value: 2}, i18n.translate('Test ruleset (4)'))
-              ),*/
               a({href: '#', 'id': 'change-ruleset', 'title': i18n.translate('Change ruleset')}, i18n.translate('Change ruleset'))
           ));
     });
@@ -386,7 +388,7 @@ var UIStructureTemplater = new Class({
       }
 
       if (activeRuleChanged) {
-        //došlo ke změně vzoru pravidla
+        //rule pattern changed
         if (taskBox && taskText != '') {
           miningProgressText = div({'class': 'question'}, taskText);
         } else {
@@ -459,7 +461,7 @@ var UIStructureTemplater = new Class({
           rulesCountInfo+=', '+data.i18n.translate('results import in progress...');
         }
         rulesCountInfo+=')';
-        //máme nějaká pravidla pro zobrazení
+        //some rules for rendering
         section({id: 'found-rules'},
           h2(data.i18n.translate('Discovered rules')),
           div(

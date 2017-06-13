@@ -1,3 +1,10 @@
+/**
+ * Class UIStructureRegistrator
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var UITemplateRegistrator = new Class({
   initialize: function () {
     this.registerNavigation();
@@ -1091,34 +1098,6 @@ var UITemplateRegistrator = new Class({
           ul(),
           Mooml.render('markedRulesMultiControlsTemplate',data)
       );
-      /*ul({id: task.getCssId(), class: 'task'},
-        li({},
-          div({class: 'marked-task'},
-            span(
-              task.getName()
-            ), a({
-              id: task.getChangeNameCssId(),
-              href: '#',
-              class: 'rename',
-              title: i18n.translate('Rename')
-            })
-          ),
-          a({styles: {display: 'none'}, id: 'openWindow-' + task.getId(), href: '#', target: '_blank'}, '&nbsp;'),
-          a({
-            class: 'exportBusinessRules',
-            id: 'exportBusinessRules-' + task.getId(),
-            href: '#',
-            title: i18n.translate('Export Business Rules to BR base')
-          }, i18n.translate('Export BR')),
-          a({
-            class: 'modelTester',
-            id: 'modelTester-' + task.getId(),
-            href: '#',
-            title: i18n.translate("Check classification model")
-          }, i18n.translate('Check model')),
-          a({class: 'createReport', id: 'createReport-' + task.getId(), href: '#'}, i18n.translate('Show task details'))
-        )
-      );*/
     });
 
     // Marked rule

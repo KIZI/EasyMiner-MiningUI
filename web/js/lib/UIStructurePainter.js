@@ -1,3 +1,10 @@
+/**
+ * Class UIStructurePainter
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var UIStructurePainter = new Class({
 
     $ARBuilder: null,
@@ -34,18 +41,6 @@ var UIStructurePainter = new Class({
         this.$UIStructureListener.registerResizeEventHandler();
         this.$UIStructureListener.registerDataReloadEventHandlers();
     },
-
-      /*TODO přesunout jinam...:
-        if (this.$browserDetector.isDeprecated()){
-            var overlay = this.showOverlay();
-            overlay.grab(Mooml.render('unsupportedBrowserWindowTemplate', {i18n: this.$i18n, browserName: this.$browserDetector.getFullName()}));
-            this.$UIStructureListener.registerUnsupportedBrowserEventHandler();
-
-            //this.UIListener.registerOverlayEventHandlers();
-            // Positioning of Overlay after rendering
-            this.posOverlay();
-        }
-        */
 
     renderNavigation: function() {
         var navigation = $('navigation');

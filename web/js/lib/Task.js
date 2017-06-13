@@ -1,3 +1,10 @@
+/**
+ * Class Task
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var Task = new Class({
     GetterSetter: ['requestData', 'time'],
 
@@ -10,13 +17,6 @@ var Task = new Class({
         var articleId;
 
         // Create the task name
-        /*console.log(serializedRule.antecedent.children);
-            serializedRule.antecedent.children.each() a serializedRule.antecedent.connective.type
-            serializedRule.succedent.children.each() a serializedRule.succedent.connective.type
-            poskládat z vypsaných antecedentů s connective mezi => succedenty s connective mezi
-            IMs do závorky na konci
-            PVD 1/12/14
-         */
         if (serializedRule !== undefined &&
             serializedRule.IMs !== undefined) {
 
@@ -72,11 +72,6 @@ var Task = new Class({
             articleId: articleId
         };
 
-        /*if (cache) { // caching enabled
-            this.$requestData.taskId = CryptoJS.MD5(JSON.encode(this.$requestData)).toString(); // MD5 hash from task setting
-        } else { // caching disabled
-            this.$requestData.taskId = CryptoJS.MD5(JSON.encode(new Date().getTime())).toString(); // MD5 hash from unix timestamp
-        }*/
         this.$requestData.taskId = 0;
 
         this.$time = new Date();

@@ -2,6 +2,12 @@
 
 namespace EasyMiner\MiningUI;
 
+/**
+ * Class Integration
+ * @package EasyMiner\MiningUI
+ * @author Stanislav Vojíř
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ */
 class Integration {
   /**
    * @var $javascriptFiles - this array contains list of javascript files for inclusion into page
@@ -76,8 +82,7 @@ class Integration {
     'js/lib/UIStructureListener.js',
     'js/lib/UIStructurePainter.js',
     'js/lib/UIStructureTemplater.js',
-    'js/lib/UITemplateRegistrator.js',
-    'js/lib/URLHelper.js'
+    'js/lib/UITemplateRegistrator.js'
   ];
 
   /**
