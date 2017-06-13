@@ -1,12 +1,12 @@
+/**
+ * Class KBManager
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://github.com/kizi/easyminer-miningui
+ *
+ * @type Class
+ */
 var KBManager = new Class({
 
-  errorMessage: '',
-  FL: null,
-  FRManager: null,
-  KBid: 0,
-  settings: null,
-  tasks: {},
-  // používané proměnné KBManager
   config: null,
   i18n: null,
   id: null,
@@ -74,7 +74,7 @@ var KBManager = new Class({
       this.isReloading = true;
       var url = this.config.getKnowledgeBaseGetRulesNamesUrl(this.id);
 
-      //region načtení pravidel ze serveru...
+      //region load rules from server
       new Request.JSON({
         url: url,
         secure: true,
@@ -105,7 +105,7 @@ var KBManager = new Class({
         }.bind(this)
 
       }).get();
-      //endregion
+      //endregion load rules from server
     } else if(this.rulesCount > 0){
       this.compareNames(rules, type);
     }
@@ -114,7 +114,7 @@ var KBManager = new Class({
   deepAnalyze: function (rule, type) {
     var url = this.config.getKnowledgeBaseCompareRuleUrl(rule.$id, this.id);
 
-    //region analýzy pravidla na serveru...
+    //region deep analyze on server side
     new Request.JSON({
       url: url,
       secure: true,
@@ -148,7 +148,7 @@ var KBManager = new Class({
       }.bind(this)
 
     }).get();
-    //endregion
+    //endregion deep analyze on server side
   },
 
   setId: function(id){

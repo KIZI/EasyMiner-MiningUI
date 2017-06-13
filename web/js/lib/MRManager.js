@@ -367,6 +367,6 @@ var MRManager = new Class({
   unmarkMarkedRule: function (foundRule) {
     this.getUnmarkRequest([foundRule],foundRule.getTaskId(),this.config.getRuleClipboardRemoveRuleUrl(foundRule.getTaskId(),foundRule.$id), false);
   }
-  /* regionend rules actions */
+  /* endregion rules actions */
 
 });
