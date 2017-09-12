@@ -721,11 +721,19 @@ nav {
   visibility: visible;
 }
 #attributes a.show-histogram {
+  background: transparent url("../images/sprite-icons.png") -20px -664px no-repeat;
+  display: block;
+  width: 16px;
+  height: 20px;
+  visibility: hidden;
   margin-left: 10px;
   float: right;
-  visibility: hidden !important;
+  visibility: hidden;
 }
-a.remove-attribute {
+#attributes li:hover a.show-histogram {
+  visibility: visible;
+}
+#attributes a.remove-attribute {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
   display: block;
   width: 16px;
@@ -734,10 +742,10 @@ a.remove-attribute {
   margin-left: 5px;
   float: right;
 }
-li:hover a.remove-attribute {
+#attributes li:hover a.remove-attribute {
   visibility: visible;
 }
-#etree-progress {
+#attributes #etree-progress {
   color: #666;
   font-size: 14px;
   background: transparent url("../images/icon-loading-bw-16.gif") 0 3px no-repeat;
@@ -745,13 +753,13 @@ li:hover a.remove-attribute {
   padding-left: 20px;
   margin: 5px 0 5px 20px;
 }
-#show-hidden-attributes {
+#attributes #show-hidden-attributes {
   color: #126499;
   font-size: 14px;
   float: right;
   margin-top: 8px;
 }
-#add-all-unused-attributes {
+#attributes #add-all-unused-attributes {
   clear: right;
   color: #126499;
   font-size: 14px;
@@ -823,14 +831,15 @@ li:hover a.remove-attribute {
   visibility: hidden;
   margin-left: 10px;
   float: right;
-  visibility: hidden !important;
+  visibility: hidden;
 }
 #data-fields li:hover {
   color: #000;
-/*XXX.show-histogram
-        visibility visible*/
 }
 #data-fields li:hover .add {
+  visibility: visible;
+}
+#data-fields li:hover .show-histogram {
   visibility: visible;
 }
 #knowledge-base-select {
