@@ -18,6 +18,18 @@ div#overlay-inner
 
   form
     line-height 36px
+    &#add-coefficient-form
+    &#edit-coefficient-form
+
+      label
+        padding-top 2px
+
+      input#add-coefficient-attribute,
+      input#edit-coefficient-attribute
+        border 1px solid #ffffff !important
+        width auto
+        max-width 400px
+
     em
       color h2ARColor
       font-size 14px
@@ -51,6 +63,7 @@ div#overlay-inner
 
     input[type='text'],
     input[type='number'],
+    input[list],
     textarea,
     select
       color color
@@ -113,11 +126,12 @@ div#overlay-inner
         position relative; top -3px
         cursor move
 
-    #add-coefficient-autocomplete table,
-    #edit-coefficient-autocomplete table
-      line-height 1em
-      clear left
-      margin-top 1em
+    #add-coefficient-autocomplete
+    #edit-coefficient-autocomplete
+      table
+        line-height 1em
+        clear left
+        margin-top 1em
 
     .info
       info()
@@ -183,10 +197,35 @@ div#overlay-inner
       color #666
       font-size 12px
       line-height 14px
+      & + .warning
+        margin-top 0
+        padding-top 0
+    .warning
+      font-size 12px
+      line-height 14px
+      margin-bottom 20px
+      padding-top 10px
+
+    .loading
+      font-size 12px
+      color #666
+      margin 10px 0 20px 0
+      padding-left 30px
+      background url('../images/icon-loading-bw-20.gif') left center no-repeat
+      min-height 20px
+
     label
       text-align left
     select
       margin-bottom 0
+
+    input[type="submit"][disabled]
+      &
+      &:hover
+      &:focus
+        background #aaa
+        opacity 0.5
+        cursor not-allowed
 
   #show-rule-details-window
     width 800px

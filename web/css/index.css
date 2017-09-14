@@ -19,6 +19,18 @@ div#overlay-inner {
 div#overlay-inner form {
   line-height: 36px;
 }
+div#overlay-inner form#add-coefficient-form label,
+div#overlay-inner form#edit-coefficient-form label {
+  padding-top: 2px;
+}
+div#overlay-inner form#add-coefficient-form input#add-coefficient-attribute,
+div#overlay-inner form#edit-coefficient-form input#add-coefficient-attribute,
+div#overlay-inner form#add-coefficient-form input#edit-coefficient-attribute,
+div#overlay-inner form#edit-coefficient-form input#edit-coefficient-attribute {
+  border: 1px solid #fff !important;
+  width: auto;
+  max-width: 400px;
+}
 div#overlay-inner form em {
   color: #925213;
   font-size: 14px;
@@ -53,6 +65,7 @@ div#overlay-inner form select {
 }
 div#overlay-inner form input[type='text'],
 div#overlay-inner form input[type='number'],
+div#overlay-inner form input[list],
 div#overlay-inner form textarea,
 div#overlay-inner form select {
   color: #434343;
@@ -334,6 +347,33 @@ div#overlay-inner #edit-im-window .help {
   font-size: 12px;
   line-height: 14px;
 }
+div#overlay-inner #add-coefficient-window .help + .warning,
+div#overlay-inner #edit-coefficient-window .help + .warning,
+div#overlay-inner #add-im-window .help + .warning,
+div#overlay-inner #edit-im-window .help + .warning {
+  margin-top: 0;
+  padding-top: 0;
+}
+div#overlay-inner #add-coefficient-window .warning,
+div#overlay-inner #edit-coefficient-window .warning,
+div#overlay-inner #add-im-window .warning,
+div#overlay-inner #edit-im-window .warning {
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+}
+div#overlay-inner #add-coefficient-window .loading,
+div#overlay-inner #edit-coefficient-window .loading,
+div#overlay-inner #add-im-window .loading,
+div#overlay-inner #edit-im-window .loading {
+  font-size: 12px;
+  color: #666;
+  margin: 10px 0 20px 0;
+  padding-left: 30px;
+  background: url("../images/icon-loading-bw-20.gif") left center no-repeat;
+  min-height: 20px;
+}
 div#overlay-inner #add-coefficient-window label,
 div#overlay-inner #edit-coefficient-window label,
 div#overlay-inner #add-im-window label,
@@ -345,6 +385,22 @@ div#overlay-inner #edit-coefficient-window select,
 div#overlay-inner #add-im-window select,
 div#overlay-inner #edit-im-window select {
   margin-bottom: 0;
+}
+div#overlay-inner #add-coefficient-window input[type="submit"][disabled],
+div#overlay-inner #edit-coefficient-window input[type="submit"][disabled],
+div#overlay-inner #add-im-window input[type="submit"][disabled],
+div#overlay-inner #edit-im-window input[type="submit"][disabled],
+div#overlay-inner #add-coefficient-window input[type="submit"][disabled]:hover,
+div#overlay-inner #edit-coefficient-window input[type="submit"][disabled]:hover,
+div#overlay-inner #add-im-window input[type="submit"][disabled]:hover,
+div#overlay-inner #edit-im-window input[type="submit"][disabled]:hover,
+div#overlay-inner #add-coefficient-window input[type="submit"][disabled]:focus,
+div#overlay-inner #edit-coefficient-window input[type="submit"][disabled]:focus,
+div#overlay-inner #add-im-window input[type="submit"][disabled]:focus,
+div#overlay-inner #edit-im-window input[type="submit"][disabled]:focus {
+  background: #aaa;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 div#overlay-inner #show-rule-details-window {
   width: 800px;
