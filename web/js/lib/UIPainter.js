@@ -9,6 +9,7 @@ var UIPainter = new Class({
   UITemplateRegistrator: null,
   $UIScroller: null,
   $UIStructurePainter: null,
+  AttributeValuesManager: null,
 
   pager: null,
 
@@ -30,7 +31,7 @@ var UIPainter = new Class({
   // Settings window top margin, used when manipulating with overlay position
   settingsWindowTopMargin: null,
 
-  initialize: function (ARBuilder, config, settings, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator, UIScroller, UIStructurePainter) {
+  initialize: function (ARBuilder, config, settings, i18n, UIColorizer, UIListener, dateHelper, UITemplateRegistrator, UIScroller, UIStructurePainter, AttributeValuesManager) {
     this.ARBuilder = ARBuilder;
     this.config = config;
     this.$settings = settings;
@@ -42,6 +43,7 @@ var UIPainter = new Class({
     this.UITemplateRegistrator = UITemplateRegistrator;
     this.$UIScroller = UIScroller;
     this.$UIStructurePainter = UIStructurePainter;
+    this.AttributeValuesManager = AttributeValuesManager;
   },
 
   createUI: function () {
@@ -759,7 +761,7 @@ var UIPainter = new Class({
 
   renderAddCoefficientWindow: function (field) {
     var overlay = this.$UIStructurePainter.showOverlay();
-    overlay.grab(Mooml.render('addCoefficientWindowTemplate', {i18n: this.i18n}));
+    overlay.grab(Mooml.render('addCoefficientWindowTemplate', {i18n: this.i18n, field: field}));
     var selectedCoefficient = this.ARBuilder.getFL().getDefaultBBACoef();
     var selectBox = $('add-coefficient-select');
     if (field.ref.choices.length === 1) {
@@ -785,7 +787,7 @@ var UIPainter = new Class({
 
   renderEditCoefficientWindow: function (field) {
     var overlay = this.$UIStructurePainter.showOverlay();
-    overlay.grab(Mooml.render('editCoefficientWindowTemplate', {i18n: this.i18n}));
+    overlay.grab(Mooml.render('editCoefficientWindowTemplate', {i18n: this.i18n, field: field}));
     var selectedCoefficient = this.ARBuilder.getFL().getBBACoefficient(field.getType());
     var selectBox = $('edit-coefficient-select');
     if (field.ref.choices.length === 1) {
@@ -821,9 +823,10 @@ var UIPainter = new Class({
   },
 
   renderAddCoefficientAutocomplete: function (field, selectedCoefficient) {
-    var selectBox = $('add-coefficient-select');
+    var i18n = this.i18n;
+    /*var selectBox = $('add-coefficient-select');
     selectBox.focus();
-    /*if (field.ref.choices.length === 1) {
+    if (field.ref.choices.length === 1) {
       selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
       selectBox.grab(Mooml.render('addCoefficientWindowSelectOptionTemplate', {
         coefficient: selectedCoefficient,
@@ -839,15 +842,58 @@ var UIPainter = new Class({
       }.bind(this));
     }*/
     Mooml.render('addCoefficientWindowAutocompleteTemplate', {
-      i18n: this.i18n,
+      i18n: i18n,
       selectedCoefficient: selectedCoefficient
     }).replaces($('add-coefficient-autocomplete'));
 
     if (selectedCoefficient.getName() === 'One category') {
-      var select = $('add-coefficient-category');
-      Array.each(field.getRef().getChoices(), function (choice) {
-        select.grab(Mooml.render('addCoefficientWindowSelectOption2Template', {choice: choice}));
+      var attributeId=field.ref.id;
+      this.AttributeValuesManager.getAttributeValues({
+        attributeId: field.ref.id,
+        onSuccess: function(data){
+          var select=null;
+          if (data.hasOwnProperty('length') && (data.length > 0)){
+            //some items loaded...
+            if (data.length > 100){
+              //too many items - render datalist
+              Mooml.render('addCoefficientWindowCategoryAutocompleteTemplate',{
+                i18n: i18n,
+                selectType: 'input'
+              }).replaces($('add-coefficient-category-autocomplete'));
+              select=$('add-coefficient-category-list');
+            }else{
+              //render select
+              Mooml.render('addCoefficientWindowCategoryAutocompleteTemplate',{
+                i18n: i18n,
+                selectType: 'select'
+              }).replaces($('add-coefficient-category-autocomplete'));
+              select=$('add-coefficient-category');
+            }
+            //render options, enable submit
+            if (select !== null){
+              Array.each(data,function(value){
+                select.grab(Mooml.render('optionTemplate',{value:value}));
+              });
+              var submit=$('add-coefficient-autocomplete-submit');
+              submit.setProperty('disabled',false);
+              submit.removeAttribute('disabled');
+            }
+          }else{
+            Mooml.render('addCoefficientWindowCategoryAutocompleteTemplate',{
+              i18n: i18n,
+              error: i18n.translate('No values found. Please select another value type.')
+            }).replaces($('add-coefficient-category-autocomplete'));
+          }
+        },
+        onError: function(){
+          //render error
+          Mooml.render('addCoefficientWindowCategoryAutocompleteTemplate',{
+            i18n: i18n,
+            error: i18n.translate('Sorry, values load failed. Please select another value type.')
+          }).replaces($('add-coefficient-category-autocomplete'));
+        }
       });
+
     } else {
         if(selectedCoefficient.fields.minLength.hidden){
             $('add-coefficient-minlength').set('value', selectedCoefficient.fields.minLength.minValue).set('type', 'hidden');
@@ -886,38 +932,63 @@ var UIPainter = new Class({
   },
 
   renderEditCoefficientAutocomplete: function (field, selectedCoefficient) {
-    var selectBox = $('edit-coefficient-select');
-    selectBox.focus();
-    /*if (field.ref.choices.length === 1) {
-      selectedCoefficient = this.ARBuilder.getFL().getBBACoefficients()['One category'];
-      selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {
-        coefficient: selectedCoefficient,
-        isSelected: true
-      }));
-    } else {
-      Object.each(this.ARBuilder.getFL().getBBACoefficients(), function (BBACoefficient) {
-        var isSelected = (BBACoefficient.getName() === selectedCoefficient.getName());
-        selectBox.grab(Mooml.render('editCoefficientWindowSelectOptionTemplate', {
-          coefficient: BBACoefficient,
-          isSelected: isSelected
-        }));
-      }.bind(this));
-    }*/
+    var i18n = this.i18n;
+
     Mooml.render('editCoefficientWindowAutocompleteTemplate', {
       field: field,
-      i18n: this.i18n,
+      i18n: i18n,
       selectedCoefficient: selectedCoefficient
     }).replaces($('edit-coefficient-autocomplete'));
 
     if (selectedCoefficient.getName() === 'One category') {
-      var select = $('edit-coefficient-category');
-      Array.each(field.getRef().getChoices(), function (choice) {
-        var isSelected = (choice === field.getCategory());
-        select.grab(Mooml.render('editCoefficientWindowSelectOption2Template', {
-          choice: choice,
-          isSelected: isSelected
-        }));
+      //region render value selection
+      var attributeId=field.ref.id;
+      this.AttributeValuesManager.getAttributeValues({
+        attributeId: field.ref.id,
+        onSuccess: function(data){
+          var select=null;
+          if (data.hasOwnProperty('length') && (data.length > 0)){
+            //some items loaded...
+            if (data.length > 100){
+              //too many items - render datalist
+              Mooml.render('editCoefficientWindowCategoryAutocompleteTemplate',{
+                i18n: i18n,
+                selectType: 'input'
+              }).replaces($('edit-coefficient-category-autocomplete'));
+              select=$('edit-coefficient-category-list');
+            }else{
+              //render select
+              Mooml.render('editCoefficientWindowCategoryAutocompleteTemplate',{
+                i18n: i18n,
+                selectType: 'select'
+              }).replaces($('edit-coefficient-category-autocomplete'));
+              select=$('edit-coefficient-category');
+            }
+            //render options, enable submit
+            if (select !== null){
+              Array.each(data,function(value){
+                select.grab(Mooml.render('optionTemplate',{value:value, isSelected: (field.category == value)}));
+              });
+              var submit=$('edit-coefficient-autocomplete-submit');
+              submit.setProperty('disabled',false);
+              submit.removeAttribute('disabled');
+            }
+          }else{
+            Mooml.render('editCoefficientWindowCategoryAutocompleteTemplate',{
+              i18n: i18n,
+              error: i18n.translate('No values found. Please select another value type.')
+            }).replaces($('edit-coefficient-category-autocomplete'));
+          }
+        },
+        onError: function(){
+          //render error
+          Mooml.render('editCoefficientWindowCategoryAutocompleteTemplate',{
+            i18n: i18n,
+            error: i18n.translate('Sorry, values load failed. Please select another value type.')
+          }).replaces($('edit-coefficient-category-autocomplete'));
+        }
       });
+      //endregion render value selection
     } else {
         if(selectedCoefficient.fields.minLength.hidden){
             $('edit-coefficient-minlength').set('value', selectedCoefficient.fields.minLength.minValue).set('type', 'hidden');
@@ -984,7 +1055,7 @@ var UIPainter = new Class({
     overlay.grab(Mooml.render('createUserReportWindowTemplate', {
       i18n: this.i18n,
       url: this.config.getCreateUserReportUrl()
-    }))
+    }));
 
     this.UIListener.registerOverlayEventHandlers();
 

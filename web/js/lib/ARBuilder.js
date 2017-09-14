@@ -6,7 +6,7 @@
  * @type Class
  */
 var ARBuilder = new Class({
-  GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'MRManager', 'miningManager', 'reportManager'],
+  GetterSetter: ['DD', 'FGC', 'ETreeManager', 'config', 'ARManager', 'FRManager', 'MRManager', 'miningManager', 'reportManager', 'AttributeValuesManager'],
   Implements: Events,
 
   $config: null,
@@ -34,12 +34,14 @@ var ARBuilder = new Class({
   $currentUser:null,
   //filter for attributes palette
   attributesFilter:null,
+  $AttributeValuesManager:null,
 
   // init basics
   initialize: function (config) {
     this.$config = config;
     this.settings = new Settings();
     this.$i18n = new i18n(this.$config.getLang());
+    this.$AttributeValuesManager = new AttributeValuesManager(this.$config);
 
     // Paint application structure
     this.$UIStructureListener = new UIStructureListener(this);
@@ -48,7 +50,7 @@ var ARBuilder = new Class({
     this.$UIStructurePainter.render();
 
     this.UIListener = new UIListener(this, new UIColorizer(), new DragDropHelper(new UIColorizer()), new ColorHelper());
-    this.UIPainter = new UIPainter(this, this.$config, this.settings, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementId())), this.$UIStructurePainter);
+    this.UIPainter = new UIPainter(this, this.$config, this.settings, this.$i18n, new UIColorizer(), this.UIListener, new DateHelper(), new UITemplateRegistrator(), new UIScroller($(this.$config.getRootElementId())), this.$UIStructurePainter, this.$AttributeValuesManager);
     this.UIListener.setUIPainter(this.UIPainter);
 
     this.$reportManager = new ReportManager(this.$config, this.settings, this.UIPainter);

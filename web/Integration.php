@@ -31,6 +31,7 @@ class Integration {
     'js/lib/AssociationRuleValidator.js',
     'js/lib/Attribute.js',
     'js/lib/AttributeSorter.js',
+    'js/lib/AttributeValuesManager.js',
     'js/lib/BBACoefficient.js',
     'js/lib/BrowserDetector.js',
     'js/lib/Cedent.js',
