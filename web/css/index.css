@@ -1,6 +1,5 @@
 #overlay {
   color: #434343;
-  font: font;
   background: none rgba(0,0,0,0.6);
   position: fixed;
   top: 0;
@@ -103,7 +102,7 @@ div#overlay-inner form input[type='number'] {
 div#overlay-inner form input[type='submit'] {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -197,7 +196,7 @@ div#overlay-inner form .tooltip >span {
   position: absolute;
 }
 div#overlay-inner form .tooltip:hover >span {
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   width: 250px;
   margin-left: 0;
   position: absolute;
@@ -245,7 +244,7 @@ div#overlay-inner form .tooltip > .warning {
 }
 div#overlay-inner h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -270,7 +269,7 @@ div#overlay-inner > div.bigger {
 }
 div#overlay-inner > div > a {
   color: #126499;
-  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat /*TODO přesun ikony doprava*/;
+  background: transparent url("../images/sprite-icons.png") -67px -116px no-repeat;
   float: right;
   position: relative;
   top: -20px;
@@ -434,7 +433,7 @@ div#overlay-inner #loading-data-window a,
 div#overlay-inner #user-warning-window a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -453,7 +452,7 @@ div#overlay-inner #user-warning-window a {
   min-width: 150px;
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -511,7 +510,7 @@ div#overlay-inner #loading-data-window.loading {
 div#overlay-inner #change-ruleset-window #add-ruleset {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -584,7 +583,7 @@ div#overlay-inner #change-ruleset-window .bigButtons a span {
   position: absolute;
 }
 #settings-form .tooltip:hover >span {
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   width: 250px;
   margin-left: 0;
   position: absolute;
@@ -692,7 +691,7 @@ nav {
 }
 #attributes h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -714,7 +713,7 @@ nav {
   float: right;
   position: relative;
   top: 5px;
-  margin-left: 5px /*FIXME*/;
+  margin-left: 5px;
 }
 #attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
@@ -839,7 +838,7 @@ nav {
 }
 #data-fields h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -861,7 +860,7 @@ nav {
   float: right;
   position: relative;
   top: 5px;
-  margin-left: 5px /*FIXME*/;
+  margin-left: 5px;
 }
 #data-fields ul {
   margin-bottom: 10px;
@@ -912,7 +911,7 @@ nav {
 }
 #knowledge-base-select h2 {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -947,7 +946,7 @@ nav {
   width: 180px;
   padding: 2px 3px;
   background: none;
-  border: 1px solid #aaa /*TODO nahradit parametry!*/;
+  border: 1px solid #aaa;
   -moz-user-select: text;
   -ms-user-select: text;
 }
@@ -1459,7 +1458,7 @@ section#active-rule #ar-action-box > div.info {
 section#active-rule #ar-action-box #stop-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1502,7 +1501,7 @@ section#active-rule #ar-action-box #stop-mining:focus {
 section#active-rule #ar-action-box #start-mining {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1554,7 +1553,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 .paginator a {
   background: #075783;
   font-size: 14px;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-weight: normal;
   text-decoration: none;
   cursor: pointer;
@@ -1611,13 +1610,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules #found-rules-task-name {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
   margin: 10px 0;
-  max-width: 800px !important /*TODO*/;
+  max-width: 800px !important;
 }
 #found-rules #found-rules-task-name .count {
   color: #888;
@@ -1694,7 +1693,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   overflow: auto;
   position: relative;
   width: 100px;
-  height: 20px;
+  height: 21px;
   margin-left: 15px;
   background: transparent;
   top: 5px;
@@ -1718,30 +1717,6 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules ul li .ruleActions a.unmark:hover {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddPositive {
-  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddPositive:hover {
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemovePositive {
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemovePositive:hover {
-  background: transparent url("../images/icon-thumb-up-20-remove.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddNegative {
-  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbAddNegative:hover {
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemoveNegative {
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
-}
-#found-rules ul li .ruleActions a.kbRemoveNegative:hover {
-  background: transparent url("../images/icon-thumb-down-20-remove.png") left center no-repeat;
 }
 #found-rules ul li .ruleActions a.details {
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
@@ -1787,6 +1762,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   visibility: hidden !important;
 }
 #found-rules ul li:hover .ruleActions >a {
+  opacity: 1;
   visibility: visible;
 }
 #found-rules #found-rules-multi-controls {
@@ -1902,7 +1878,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   padding: 20px;
   color: #925213;
-  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   width: 510px;
@@ -1948,7 +1924,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules h2 {
   color: #925213;
-  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
 /*margin-left 10px*/
@@ -1976,7 +1952,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules .marked-rules-task-name {
   color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-family: 'Arial', 'sans-serif';
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 20px 0;
@@ -2082,7 +2058,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   overflow: auto;
   position: relative;
   width: 100px;
-  height: 20px;
+  height: 21px;
   margin-left: 15px;
   background: transparent;
   top: 5px;
@@ -2103,18 +2079,6 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules ul li .ruleActions a.details {
   background: transparent url("../images/icon-info-20.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kb-add[rel=positive] {
-  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kb-add[rel=positive]:hover {
-  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kb-add[rel=negative] {
-  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
-}
-#marked-rules ul li .ruleActions a.kb-add[rel=negative]:hover {
-  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
 }
 #marked-rules ul li .ims {
   display: block;
@@ -2144,6 +2108,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   visibility: hidden !important;
 }
 #marked-rules ul li:hover .ruleActions >a {
+  opacity: 1;
   visibility: visible;
 }
 #marked-rules .marked-rules-multi-controls {
@@ -2281,7 +2246,7 @@ section#content {
 }
 section#content h2 {
   color: #925213;
-  font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font: 36px 'Arial', 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   margin: 0;
@@ -2292,4 +2257,88 @@ section#content h3 {
   border-bottom: 1px solid #314e64;
   line-height: 20px;
   margin-bottom: 10px;
+}
+a.kbAddPositive {
+  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
+}
+a.kbAddPositive[class^="kbPositive"],
+a.kbAddPositive[class*=" kbPositive"] {
+  visibility: visible !important;
+  height: 21px;
+  opacity: 0.5;
+}
+a.kbAddPositive.kbPositiveNotice {
+  background: transparent url("../images/icon-thumb-up-notice.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive10,
+a.kbAddPositive.kbPositive20 {
+  background: transparent url("../images/icon-thumb-up-rate20.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive30,
+a.kbAddPositive.kbPositive40 {
+  background: transparent url("../images/icon-thumb-up-rate40.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive50,
+a.kbAddPositive.kbPositive60 {
+  background: transparent url("../images/icon-thumb-up-rate60.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive70,
+a.kbAddPositive.kbPositive80,
+a.kbAddPositive.kbPositive90 {
+  background: transparent url("../images/icon-thumb-up-rate80.png") left top no-repeat;
+}
+a.kbAddPositive.kbPositive100 {
+  background: transparent url("../images/icon-thumb-up-rate100.png") left center no-repeat;
+}
+a.kbAddPositive:hover {
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+a.kbRemovePositive {
+  visibility: visible !important;
+  background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
+}
+a.kbRemovePositive:hover {
+  background: transparent url("../images/icon-thumb-up-20-remove.png") left center no-repeat;
+}
+a.kbAddNegative {
+  background: transparent url("../images/icon-thumb-down-20.png") left center no-repeat;
+}
+a.kbAddNegative[class^="kbNegative"],
+a.kbAddNegative[class*=" kbNegative"] {
+  visibility: visible !important;
+  height: 21px;
+  opacity: 0.5;
+}
+a.kbAddNegative.kbNegativeNotice {
+  background: transparent url("../images/icon-thumb-down-notice.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative10,
+a.kbAddNegative.kbNegative20 {
+  background: transparent url("../images/icon-thumb-down-rate20.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative30,
+a.kbAddNegative.kbNegative40 {
+  background: transparent url("../images/icon-thumb-down-rate40.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative50,
+a.kbAddNegative.kbNegative60 {
+  background: transparent url("../images/icon-thumb-down-rate60.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative70,
+a.kbAddNegative.kbNegative80,
+a.kbAddNegative.kbNegative90 {
+  background: transparent url("../images/icon-thumb-down-rate80.png") left top no-repeat;
+}
+a.kbAddNegative.kbNegative100 {
+  background: transparent url("../images/icon-thumb-down-rate100.png") left top no-repeat;
+}
+a.kbAddNegative:hover {
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
+a.kbRemoveNegative {
+  visibility: visible !important;
+  background: transparent url("../images/icon-thumb-down-20-active.png") left center no-repeat;
+}
+a.kbRemoveNegative:hover {
+  background: transparent url("../images/icon-thumb-down-20-remove.png") left center no-repeat;
 }

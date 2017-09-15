@@ -609,9 +609,43 @@ var UITemplateRegistrator = new Class({
       var
         foundRule = data.foundRule,
         i18n = data.i18n,
-        IMs = data.IMs;
+        IMs = data.IMs,
+          positiveElm,
+          negativeElm,
+          title;
 
-      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+' KB'+foundRule.getRuleSetRelation()+(foundRule.isLoading()?' loading':'')},
+      if(foundRule.getRuleSetRelation()=="positive"){
+        positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbRemovePositive', title:i18n.translate('Remove from Knowledge Base')});
+        negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
+      } else if(foundRule.getRuleSetRelation()=="negative") {
+        positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+        negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbRemoveNegative', title:i18n.translate('Remove from Knowledge Base')});
+      } else{
+        if(foundRule.getInterestRelation()=="positive"){
+          if(foundRule.getInterestRate()=="y"){
+            positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive kbPositiveNotice', title:i18n.translate('Add to Knowledge Base as interesting')});
+            title = i18n.translate('Seems to be similar to interesting Rule in Knowledge Base - is checking deeply');
+          } else{
+            positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive kbPositive'+foundRule.getInterestRate(), title:i18n.translate('Add to Knowledge Base as interesting')});
+            title = i18n.translate('Up to '+foundRule.getInterestRate()+'% similarity with interesting Rule in Knowledge Base');
+          }
+          negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
+        } else if(foundRule.getInterestRelation()=="negative"){
+          if(foundRule.getInterestRate()=="y"){
+            negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative kbNegativeNotice', title:i18n.translate('Add to Knowledge Base as not interesting')});
+            title = i18n.translate('Seems to be similar to not interesting Rule in Knowledge Base - is checking deeply');
+          } else{
+            negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative kbNegative'+foundRule.getInterestRate(), title:i18n.translate('Add to Knowledge Base as not interesting')});
+            title = i18n.translate('Up to '+foundRule.getInterestRate()+'% similarity with not interesting Rule in Knowledge Base');
+          }
+          positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+        } else{
+            positiveElm = a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+            negativeElm = a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
+        }
+      }
+
+      li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+' KB'+foundRule.getRuleSetRelation()+(foundRule.isLoading()?' loading':''), title: title},
         input({type:'checkbox',id:foundRule.getCSSID()+'-checkbox', class:'found-rule-checkbox'}),
         label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
         span({class:'ruleActions'},
@@ -620,16 +654,8 @@ var UITemplateRegistrator = new Class({
             :
             a({id: foundRule.getMarkCSSID(), href: '#', 'class': 'mark', 'title': i18n.translate('Add to Rule Clipboard')})
           ),
-          (foundRule.getRuleSetRelation()=="positive"?
-            a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbRemovePositive', title:i18n.translate('Remove from Knowledge Base')})
-            :
-            a({id: foundRule.getKBAddPositiveCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')})
-          ),
-          (foundRule.getRuleSetRelation()=="negative"?
-            a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbRemoveNegative', title:i18n.translate('Remove from Knowledge Base')})
-            :
-            a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')})
-          ),
+          positiveElm,
+          negativeElm,
           a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
         ),
         span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
@@ -1126,21 +1152,55 @@ var UITemplateRegistrator = new Class({
     Mooml.register('markedRuleTemplate', function (data) {
       var markedRule = data.rule,
           i18n = data.i18n,
-          IMs = data.IMs;
+          IMs = data.IMs,
+          positiveElm,
+          negativeElm,
+          title;
+
+      if(markedRule.getRuleSetRelation()=="positive"){
+        positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbRemovePositive', title:i18n.translate('Remove from Knowledge Base')});
+        negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
+      } else if(markedRule.getRuleSetRelation()=="negative") {
+        positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+        negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbRemoveNegative', title:i18n.translate('Remove from Knowledge Base')});
+      } else{
+        if(markedRule.getInterestRelation()=="positive"){
+          if(markedRule.getInterestRate()=="y"){
+            positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive kbPositiveNotice', title:i18n.translate('Add to Knowledge Base as interesting')});
+            title = i18n.translate('Seems to be similar to interesting Rule in Knowledge Base - is checking deeply');
+          } else{
+            positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive kbPositive'+markedRule.getInterestRate(), title:i18n.translate('Add to Knowledge Base as interesting')});
+            title = i18n.translate('Up to '+markedRule.getInterestRate()+'% similarity with interesting Rule in Knowledge Base');
+          }
+          negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
+        } else if(markedRule.getInterestRelation()=="negative"){
+          if(markedRule.getInterestRate()=="y"){
+            negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative kbNegativeNotice', title:i18n.translate('Add to Knowledge Base as not interesting')});
+            title = i18n.translate('Seems to be similar to not interesting Rule in Knowledge Base - is checking deeply');
+          } else{
+            negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative kbNegative'+markedRule.getInterestRate(), title:i18n.translate('Add to Knowledge Base as not interesting')});
+            title = i18n.translate('Up to '+markedRule.getInterestRate()+'% similarity with not interesting Rule in Knowledge Base');
+          }
+          positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+        } else{
+            positiveElm = a({id: markedRule.getUpCSSID(), href:'#', class:'kbAddPositive', title:i18n.translate('Add to Knowledge Base as interesting')});
+            negativeElm = a({id: markedRule.getDownCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')});
+        }
+      }
 
       /*li({id: ruleId, class: 'marked-rule'},
         span({'class': 'rule'}, rule.getIdent()),
         a({id: rule.getMarkedRuleCSSRemoveID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove')}),
         span({'class': 'ims'}, rule.getIMIdent()));*/
       
-      li({id: markedRule.getCSSID(), 'class': 'marked-rule'+(markedRule.isLoading()?' loading':'')},
+      li({id: markedRule.getCSSID(), 'class': 'marked-rule'+(markedRule.isLoading()?' loading':''), title: title},
           input({type:'checkbox',id:markedRule.getCSSID()+'-checkbox', class:'marked-rule-checkbox'}),
           label({for: markedRule.getCSSID()+'-checkbox', 'class': 'rule'}, markedRule.getIdent()),
           span({class:'ruleActions'},
               a({id: markedRule.getUnmarkCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Rule Clipboard')}),
               a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
-              a({id: markedRule.getUpCSSID(),href: '#','class': 'kb-add','rel': 'positive','title': i18n.translate('Interesting')}),
-              a({id: markedRule.getDownCSSID(),href: '#','class': 'kb-add','rel': 'negative','title': i18n.translate('Not interesting')})
+              positiveElm,
+              negativeElm
           ),
           span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
       );

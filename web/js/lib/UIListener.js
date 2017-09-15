@@ -976,6 +976,7 @@ var UIListener = new Class({
     taskNameElement.getElements('.toggle').addEvent('click', function (event) {
       event.stop();
       if(taskElm.hasClass('maximize')){ task.reload(); }
+      if(taskElm.hasClass('minimize')){ task.isInit = false; }
       taskElm.toggleClass('minimize'); taskElm.toggleClass('maximize');
     }.bind(this));
   },
@@ -1019,20 +1020,28 @@ var UIListener = new Class({
     }
     /*endregion details*/
     /*region thumb up*/
-    var kbAddLink = $(foundRule.getUpCSSID());
-    if (kbAddLink) {
-      kbAddLink.addEvent('click', function (event) {
+    var kbPositiveLink = $(foundRule.getUpCSSID());
+    if (kbPositiveLink) {
+      kbPositiveLink.addEvent('click', function (event) {
         event.stop();
-        FRManager.kbAddRule(foundRule, 'positive');
+        if(event.target.hasClass('kbAddPositive')){
+          FRManager.kbAddRule(foundRule, 'positive');
+        } else if(event.target.hasClass('kbRemovePositive')){
+          FRManager.kbRemoveRule(foundRule);
+        }
       }.bind(this));
     }
     /*endregion thumb up*/
     /*region thumb down*/
-    var kbAddLink = $(foundRule.getDownCSSID());
-    if (kbAddLink) {
-      kbAddLink.addEvent('click', function (event) {
+    var kbNegativeLink = $(foundRule.getDownCSSID());
+    if (kbNegativeLink) {
+      kbNegativeLink.addEvent('click', function (event) {
         event.stop();
-        FRManager.kbAddRule(foundRule, 'negative');
+        if(event.target.hasClass('kbAddNegative')){
+          FRManager.kbAddRule(foundRule, 'negative');
+        } else if(event.target.hasClass('kbRemoveNegative')){
+          FRManager.kbRemoveRule(foundRule);
+        }
       }.bind(this));
     }
     /*endregion thumb down*/

@@ -128,6 +128,8 @@ var MarkedTask = new Class({
           this.UIPainter.renderMarkedTask(this, 'minimize');
           this.MRManager.setTaskName(this.id, data[type].name);
           this.isInit = true;
+          this.MRManager.KBManager.rulesCount = data[type].rulesCount;
+          this.MRManager.KBManager.checkIfModified(data[type].lastModified);
         }
       }
       this.IMs = this.FL.getRulesIMs(data[type].IMs);
@@ -141,6 +143,9 @@ var MarkedTask = new Class({
       }.bind(this));
       if(data[type].rulesCount > 0){
         this.UIPainter.renderMarkedRules(this);
+        if(!this.isBase){
+          this.MRManager.KBManager.basicAnalyze(this.rules, "marked");
+        }
       }
     }
   },

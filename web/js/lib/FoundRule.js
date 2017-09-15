@@ -11,6 +11,8 @@ var FoundRule = new Class({
 
   $exception: null,
   $interesting: null,
+  $interestRate: 0,
+  $interestRelation: null,
   $loading: false,
 
   $id: null,
@@ -113,6 +115,22 @@ var FoundRule = new Class({
 
   setLoading: function(loading){
     this.$loading=loading;
+  },
+
+  getInterestRate: function () {
+    return this.$interestRate;
+  },
+
+  setInterestRate: function(value){
+    this.$interestRate = value;
+  },
+
+  getInterestRelation: function () {
+    return this.$interestRelation;
+  },
+
+  setInterestRelation: function(relation){
+    this.$interestRelation = relation;
   },
 
   getTaskId: function(){

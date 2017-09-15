@@ -152,6 +152,9 @@ var FRManager = new Class({
       this.delayedPageReload();
     }
     this.UIPainter.renderFoundRules();
+    if(!this.importInProgress){ // only if mining has finished
+      this.MRManager.KBManager.basicAnalyze(this.rules, "found");
+    }
   },
 
   handleErrorRulesRequest: function (page){
@@ -180,7 +183,7 @@ var FRManager = new Class({
     this.UIPainter.renderFoundRules();
   },
 
-  buildFoundRulesRequest: function (foundRules, URL) {
+  buildFoundRulesRequest: function (foundRules, URL, affectKB) {
     var options = {
       url: URL,
       secure: true,
@@ -193,7 +196,11 @@ var FRManager = new Class({
       }.bind(this),
 
       onSuccess: function (responseJSON, responseText) {
-        this.handleSuccessFoundRulesRequest(responseJSON,foundRules);
+        if(affectKB){
+          this.handleSuccessFoundRulesInterestRequest(responseJSON,foundRules);
+        } else{
+          this.handleSuccessFoundRulesRequest(responseJSON,foundRules);
+        }
       }.bind(this),
 
       onError: function () {
@@ -237,6 +244,13 @@ var FRManager = new Class({
   },
 
 
+  handleSuccessFoundRulesInterestRequest: function (jsonData,foundRules){
+    if ((foundRules == undefined)||(foundRules.length==0)){return;}
+    this.MRManager.KBManager.reloadRules = true;
+    this.MRManager.loadKnowledgeBase(this.MRManager.KBid);
+    this.MRManager.reloadActiveTasks();
+    this.gotoPage(this.currentPage);
+  },
 
   handleSuccessFoundRulesRequest: function (jsonData,foundRules){
     if ((foundRules == undefined)||(foundRules.length==0)){return;}
@@ -280,13 +294,13 @@ var FRManager = new Class({
 
   markFoundRule: function (foundRule) {
     this.AJAXBalancer.stopRequest(foundRule.getId());
-    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),foundRule.$id));
+    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),foundRule.$id), false);
     this.AJAXBalancer.run();
   },
 
   unmarkFoundRule: function (foundRule) {
     this.AJAXBalancer.stopRequest(foundRule.getId());
-    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),foundRule.$id));
+    this.buildFoundRulesRequest([foundRule],this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),foundRule.$id), false);
     this.AJAXBalancer.run();
   },
 
@@ -331,7 +345,7 @@ var FRManager = new Class({
       foundRule.setLoading(true);
     }.bind(this));
     urlIds=urlIds.join(',');
-    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),urlIds));
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardAddRuleUrl(this.getTaskId(),urlIds), false);
     this.AJAXBalancer.run();
   },
 
@@ -342,7 +356,7 @@ var FRManager = new Class({
       urlIds.push(foundRule.$id);
       foundRule.setLoading(true);
     }.bind(this));
-    this.buildFoundRulesRequest(this.rules,this.config.getRuleClipboardAddAllRulesUrl(this.getTaskId(),urlIds));
+    this.buildFoundRulesRequest(this.rules,this.config.getRuleClipboardAddAllRulesUrl(this.getTaskId(),urlIds), false);
     this.AJAXBalancer.run();
   },
 
@@ -356,7 +370,7 @@ var FRManager = new Class({
       foundRule.setLoading(true);
     }.bind(this));
     urlIds=urlIds.join(',');
-    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),urlIds));
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getRuleClipboardRemoveRuleUrl(this.getTaskId(),urlIds), false);
     this.AJAXBalancer.run();
   },
 
@@ -447,13 +461,13 @@ var FRManager = new Class({
 
   kbAddRule: function (foundRule, relation) {
     this.AJAXBalancer.stopRequest(foundRule.getId());
-    this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseAddRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),relation,true));
+    this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseAddRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),relation,true), true);
     this.AJAXBalancer.run();
   },
 
   kbRemoveRule: function (foundRule) {
     this.AJAXBalancer.stopRequest(foundRule.getId());
-    this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),true));
+    this.buildFoundRulesRequest([foundRule],this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),foundRule.getId(true),true), true);
     this.AJAXBalancer.run();
   },
 
@@ -467,7 +481,7 @@ var FRManager = new Class({
       foundRule.setLoading(true);
     }.bind(this));
     urlIds=urlIds.join(',');
-    this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseAddRulesUrl(this.getKBSelectedRuleSet(),urlIds,relation,true));
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseAddRulesUrl(this.getKBSelectedRuleSet(),urlIds,relation,true), true);
     this.AJAXBalancer.run();
   },
 
@@ -481,7 +495,7 @@ var FRManager = new Class({
       foundRule.setLoading(true);
     }.bind(this));
     urlIds=urlIds.join(',');
-    this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),urlIds,true));
+    this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),urlIds,true), true);
     this.AJAXBalancer.run();
   }
 

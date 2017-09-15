@@ -8,6 +8,8 @@
 var MarkedRule = new Class({
 
   $id: null,
+  $interestRate: 0,
+  $interestRelation: null,
   $loading: false,
   $rule: null,
   $task: null,
@@ -75,12 +77,40 @@ var MarkedRule = new Class({
     return 'kbAdd-' + this.getCSSID();
   },
 
+  isInRuleSet: function(){
+    return this.$rule.ruleSetRelation!="";
+  },
+
+  setRuleSetRelation: function(relation){
+    this.$rule.ruleSetRelation=relation;
+  },
+
+  getRuleSetRelation: function(){
+    return this.$rule.ruleSetRelation;
+  },
+
   isLoading: function(){
     return (this.$loading || false);
   },
 
   setLoading: function(loading){
     this.$loading = loading;
+  },
+
+  getInterestRate: function () {
+    return this.$interestRate;
+  },
+
+  setInterestRate: function(value){
+    this.$interestRate = value;
+  },
+
+  getInterestRelation: function () {
+    return this.$interestRelation;
+  },
+
+  setInterestRelation: function(relation){
+    this.$interestRelation = relation;
   }
 
 });

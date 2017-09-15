@@ -42,3 +42,58 @@ section#content
     border-bottom 1px solid h3ContentColor
     line-height 20px
     margin-bottom 10px
+
+
+a.kbAddPositive
+  background transparent url('../images/icon-thumb-up-20.png') left center no-repeat
+  &[class^="kbPositive"],&[class*=" kbPositive"]
+    visibility visible !important
+    height 21px
+    opacity 0.5
+  &.kbPositiveNotice
+    background transparent url('../images/icon-thumb-up-notice.png') left top no-repeat
+  &.kbPositive10,&.kbPositive20
+    background transparent url('../images/icon-thumb-up-rate20.png') left top no-repeat
+  &.kbPositive30,&.kbPositive40
+    background transparent url('../images/icon-thumb-up-rate40.png') left top no-repeat
+  &.kbPositive50,&.kbPositive60
+    background transparent url('../images/icon-thumb-up-rate60.png') left top no-repeat
+  &.kbPositive70,&.kbPositive80,&.kbPositive90
+    background transparent url('../images/icon-thumb-up-rate80.png') left top no-repeat
+  &.kbPositive100
+    background transparent url('../images/icon-thumb-up-rate100.png') left center no-repeat
+  &:hover
+    background transparent url('../images/icon-thumb-up-20-active.png') left center no-repeat
+
+a.kbRemovePositive
+  visibility visible !important
+  background transparent url('../images/icon-thumb-up-20-active.png') left center no-repeat
+  &:hover
+    background transparent url('../images/icon-thumb-up-20-remove.png') left center no-repeat
+
+a.kbAddNegative
+  background transparent url('../images/icon-thumb-down-20.png') left center no-repeat
+  &[class^="kbNegative"],&[class*=" kbNegative"]
+    visibility visible !important
+    height 21px
+    opacity 0.5
+  &.kbNegativeNotice
+    background transparent url('../images/icon-thumb-down-notice.png') left top no-repeat
+  &.kbNegative10,&.kbNegative20
+    background transparent url('../images/icon-thumb-down-rate20.png') left top no-repeat
+  &.kbNegative30,&.kbNegative40
+    background transparent url('../images/icon-thumb-down-rate40.png') left top no-repeat
+  &.kbNegative50,&.kbNegative60
+    background transparent url('../images/icon-thumb-down-rate60.png') left top no-repeat
+  &.kbNegative70,&.kbNegative80,&.kbNegative90
+    background transparent url('../images/icon-thumb-down-rate80.png') left top no-repeat
+  &.kbNegative100
+    background transparent url('../images/icon-thumb-down-rate100.png') left top no-repeat
+  &:hover
+    background transparent url('../images/icon-thumb-down-20-active.png') left center no-repeat
+
+a.kbRemoveNegative
+  visibility visible !important
+  background transparent url('../images/icon-thumb-down-20-active.png') left center no-repeat
+  &:hover
+    background transparent url('../images/icon-thumb-down-20-remove.png') left center no-repeat

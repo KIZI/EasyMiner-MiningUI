@@ -57,6 +57,7 @@ class Integration {
     'js/lib/FoundRule.js',
     'js/lib/FRManager.js',
     'js/lib/i18n.js',
+    'js/lib/KBManager.js',
     'js/lib/IMValidator.js',
     'js/lib/InterestMeasure.js',
     'js/lib/InterestMeasureSlider.js',
