@@ -18,6 +18,36 @@ navigationBox()
   margin-bottom boxMargin
 
 
+
+.attributesPalette
+  navigationBox()
+
+  h2
+    navigationH2()
+
+  h2.minimize a
+    background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
+
+  h2.maximize a
+    background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
+
+  h2 a
+    display block; width 12px; height 12px
+    float right
+    position relative; top 5px
+    margin-left 5px/*FIXME*/
+
+  ul
+    margin-bottom 10px
+
+  li
+    cursor move
+    float left; clear left
+    &:hover
+      color #000
+      .action
+        visibility visible
+
 #attributes
   navigationBox()
 
