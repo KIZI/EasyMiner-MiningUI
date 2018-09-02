@@ -27,6 +27,14 @@ var ReportManager = new Class({
         window.open(this.$config.getTaskDetailsUrl(taskId),'task-details-'+taskId);
     },
 
+    /**
+     * Function for loading ruleset in rule editor
+     * @param rulesetId
+     */
+    openRulesEditor: function(rulesetId){
+        alert(this.$UIPainter.i18n.translate('Rule editor will be opened in new window. After finishing the work in editor, don´t forget to reload this miner window.'));
+        window.open(this.$config.getKnowledgeBaseRuleEditorUrl(rulesetId),'bre-'+rulesetId);
+    },
 
     createReport: function(taskId, taskName) {
         var report = this.initReport(taskId, taskName);

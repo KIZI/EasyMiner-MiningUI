@@ -1007,10 +1007,15 @@ var UITemplateRegistrator = new Class({
         );
         taskActions = span({class:'task-actions'},
           a({
-            href:task.id,
-            class:'task-export',
-            rel:'ruleset',
-            title:i18n.translate('Show ruleset export options')
+              href:task.id,
+              class:'rules-editor',
+              title:i18n.translate('Open ruleset in Rule editor')
+          },i18n.translate('Rules editor')),
+          a({
+              href:task.id,
+              class:'task-export',
+              rel:'ruleset',
+              title:i18n.translate('Show ruleset export options')
           },i18n.translate('Ruleset export'))
         );
       } else{

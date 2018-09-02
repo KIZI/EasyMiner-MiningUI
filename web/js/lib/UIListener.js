@@ -1171,6 +1171,14 @@ var UIListener = new Class({
         this.UIPainter.renderExportWindow(taskId,event.target.get('rel'),task.isMiningInProgress(),task.isImportInProgress());
       }.bind(this));
 
+      multiControls.getElements('.task-actions .rules-editor').addEvent('click',function(event){
+        event.stop();
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
+        this.ARBuilder.getReportManager().openRulesEditor(taskId);
+      }.bind(this));
+
       this.checkMarkedRulesSelectedCheckboxes(taskId);
     }
   },
