@@ -1104,19 +1104,24 @@ var UIPainter = new Class({
     this.$UIStructurePainter.posOverlay();
   },
 
-  renderModelTesterDialog: function (taskId, rules) {
+  renderModelTesterDialog: function (taskId, mode, rules) {
     var rulesIds = [];
-    rules.each(function (rule) {
-      rulesIds.push(rule.getRule().getId());
-    });
+    if (mode=='knowledge-base'){
+      var url=this.config.getKnowledgeBaseModelTesterUrl(taskId);
+    }else{
+      rules.each(function (rule) {
+        rulesIds.push(rule.getRule().getId());
+      });
+      var url=this.config.getTaskModelTesterUrl(taskId, rulesIds);
+    }
 
     var overlay = this.$UIStructurePainter.showOverlay();
     overlay.grab(Mooml.render('modelTesterDialogTemplate', {
       i18n: this.i18n,
-      url: this.config.getModelTesterUrl(taskId, rulesIds)
-    }))
+      url: url
+    }));
 
-    // Positioning of Overlay after rendering
+    this.UIListener.registerOverlayEventHandlers();
     this.$UIStructurePainter.posOverlay();
   },
 

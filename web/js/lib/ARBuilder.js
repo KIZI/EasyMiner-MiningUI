@@ -385,8 +385,12 @@ var ARBuilder = new Class({
     ///this.$reportManager.exportRulesToBRBase(taskId, this.$FRManager.getMarkedRules(taskId));
   },
 
-  openModelTesterDialog: function (taskId) {
-    alert('openModelTesterDialog');
-    ///this.UIPainter.renderModelTesterDialog(taskId, this.$FRManager.getMarkedRules(taskId));
+  openModelTesterDialog: function (taskId, mode) {
+    if (mode=="knowledge-base"){
+      this.UIPainter.renderModelTesterDialog(taskId, mode);
+    }else{
+      this.UIPainter.renderModelTesterDialog(taskId, mode, this.$FRManager.getMarkedRules(taskId));
+    }
+
   }
 });

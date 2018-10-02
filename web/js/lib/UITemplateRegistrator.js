@@ -1008,8 +1008,13 @@ var UITemplateRegistrator = new Class({
         taskActions = span({class:'task-actions'},
           a({
               href:task.id,
-              class:'rules-editor',
-              title:i18n.translate('Open ruleset in Rule editor')
+              class:'model-tester',
+              title:i18n.translate('Test as classification model')
+          },i18n.translate('Test model')),
+          a({
+            href:task.id,
+            class:'rules-editor',
+            title:i18n.translate('Open ruleset in Rule editor')
           },i18n.translate('Rules editor')),
           a({
               href:task.id,
@@ -1192,9 +1197,16 @@ var UITemplateRegistrator = new Class({
     });
 
     Mooml.register('modelTesterDialogTemplate', function (data) {
-      var url = data.url;
+      var i18n = data.i18n,
+        url = data.url;
 
       div({id: 'model-tester-window'},
+        a({
+            id: 'overlay-close',
+            href: '#',
+            'title': i18n.translate('Close')
+          }
+        ),
         iframe({src: url})
       );
     });
