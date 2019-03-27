@@ -4,12 +4,25 @@ nav
   width navWidth
   margin boxMargin 5px 0 boxMargin
   line-height 20px
+  +tablet_l()
+    flexbox(flex)
+    flex-direction(column)
+    margin-right 10px
+    width auto
+    max-width navWidth - 20px
+    min-width navWidth - 20px
+    section 
+      flexbox(flex)
+      flex-direction(column)
 
 navigationH2()
   h2Small()
   margin 5px 20px 15px 20px
   padding-bottom 5px
   border-bottom 1px solid h2Color
+  // +tablet_l()
+  flexbox(flex)
+  flex-justify(space-between)
 
 navigationBox()
   box()
@@ -42,30 +55,14 @@ navigationBox()
 
   li
     cursor move
-    float left; clear left
+    float left
+    clear left
     &:hover
       color #000
       .action
         visibility visible
 
 #attributes
-  navigationBox()
-
-  h2
-    navigationH2()
-
-  h2.minimize a
-    background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
-
-  h2.maximize a
-    background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
-
-  h2 a
-    display block; width 12px; height 12px
-    float right
-    position relative; top 5px
-    margin-left 5px/*FIXME*/
-
   ul#attributes-by-group
     background transparent url('../images/icon-group4.png') 0 2px no-repeat
 
@@ -82,25 +79,66 @@ navigationBox()
   a#attributes-by-list,
   a#attributes-by-group
     font-size 13px
+    li
+      display list-item
 
-  li
-    cursor move
-    float left; clear left
-    &.rec1
-      background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
-    &.rec2
-      background transparent url('../images/sprite-icons.png') -20px -463px no-repeat
-    &.used
-      color #AAA
-    .add
-      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+  ul
+      margin 0 20px 10px 20px 
+    li
+      flexbox(flex)
+      flex-direction(row)
+      flex-justify(start)
+      width 100%
+      cursor move
       float left
-      width 20px; height 20px
-      visibility hidden
-    &:hover
-      color #000
+      clear left
+      margin 5px 0
+      &.rec1
+        background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
+      &.rec2
+        background transparent url('../images/sprite-icons.png') -20px -463px no-repeat
+      &.used
+        color #AAA
       .add
-        visibility visible
+        background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+        float left
+        width 20px
+        height 20px
+        margin-left 5px
+        visibility hidden
+        +tablet_l()
+          visibility visible
+      &:hover
+        color #000
+        .add
+          visibility visible
+  +tablet_l()
+    li 
+      flex-justify(space-between)
+        
+    a[id^=nav-control-menu-]
+      flexbox(flex)
+      background transparent url("../images/sprite/icon-settings.png")
+      background-size 20px
+      width 20px
+      height 20px
+      &.hide-nav-menu
+        display none
+    div[id^=nav-attribute-control-]
+      flexbox(flex)
+      flex-direction(row)
+      flex-justify(end) 
+      &.hide-nav-control 
+        display none
+    &.show-checkboxes
+      li
+        flexbox(flex) 
+        flex-justify(start)
+        flex-align(start)
+        a[id^=nav-control-menu-]
+          display none
+        div[id^=nav-attribute-control-]
+          display none
 
   a.edit-attribute
     edit()
@@ -112,9 +150,11 @@ navigationBox()
 
   a.show-histogram
     showHistogram()
-    margin-left 10px
+    margin-left 5px
     float right
     visibility hidden
+    +tablet_l()
+        visibility visible
 
   li:hover a.show-histogram
     visibility visible
@@ -123,6 +163,8 @@ navigationBox()
     remove()
     margin-left 5px
     float right
+    +tablet_l()
+        visibility visible
 
   li:hover a.remove-attribute
     visibility visible
@@ -150,49 +192,78 @@ navigationBox()
     margin-top 8px
     display none
     background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+    +tablet_l()
+      margin-left 20px
 
 
 #data-fields
-  navigationBox()
-
-  h2
-    navigationH2()
-
-  h2.minimize a
-    background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
-
-  h2.maximize a
-    background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
-
-  h2 a
-    display block; width 12px; height 12px
-    float right
-    position relative; top 5px
-    margin-left 5px/*FIXME*/
-
   ul
-    margin-bottom 10px
-
-  li
-    cursor move
-    float left; clear left
-    .add
-      background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
-      display block
+      margin 0 20px 10px 20px 
+    li
+      flexbox(flex)
+      flex-direction(row)
+      flex-justify(start)
+      width 100%
+      cursor move
       float left
-      width 20px; height 20px
-      visibility hidden
-    .show-histogram
-      showHistogram()
-      margin-left 10px
-      float right
-      visibility hidden
-    &:hover
-      color #000
+      clear left
+      margin 0
       .add
-        visibility visible
+        background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
+        display block
+        float left
+        width 20px
+        height 20px
+        visibility hidden
+        +tablet_l()
+          visibility visible
       .show-histogram
-        visibility visible
+        showHistogram()
+        margin-left 10px
+        float right
+        visibility hidden
+        +tablet_l()
+          visibility visible
+      &:hover
+        color #000
+        .add
+          visibility visible
+        .show-histogram
+          visibility visible
+
+  +tablet_l()
+    ul
+      margin 0 20px 10px 20px 
+      li 
+        flexbox(flex)
+        flex-direction(row)
+        flex-justify(space-between)
+        margin 5px 0
+        width 100%
+    div[id^=field-nav-attribute-control-]
+        flexbox(flex)
+        flex-direction(row)
+        flex-justify(end) 
+        &.hide-nav-control-field
+          display none
+    a[id^=field-nav-control-menu-]
+      flexbox(flex)
+      background transparent url("../images/sprite/icon-settings.png")
+      background-size 20px
+      width 20px
+      height 20px
+      &.hide-nav-control-menu
+        display none
+    &.show-checkboxes
+      li
+        flex-justify(start)
+        flex-align(start)
+        [id^=field-nav-control-menu-]
+          display none
+        a[id^=field-nav-attribute-control-]
+          display none
+
+
 
 #knowledge-base-select
   navigationBox()
@@ -221,7 +292,31 @@ attributeIconLink()
   float left
   margin-right 2px
   margin-top 4px
+  +tablet_l()
+    flexbox(flex)
+    margin 5px
+
 #attributes, #data-fields
+  navigationBox()
+
+  h2
+    navigationH2()
+
+  h2.minimize a
+    background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
+
+  h2.maximize a
+    background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
+
+  h2 a
+    display block
+    width 12px
+    height 12px
+    float right
+    position relative
+    top 5px
+    margin-left 5px/*FIXME*/
+
   .datas-filter
     display none
     margin 5px 20px
@@ -272,6 +367,11 @@ attributeIconLink()
     height 28px
     overflow hidden
     width auto
+    +tablet_l()
+      flex-direction(row)
+      height 100%
+      a 
+        flex-align(center)
     #add-selected-attributes,
     #add-selected-data-fields
       display none
@@ -284,12 +384,19 @@ attributeIconLink()
     .all
       attributeIconLink()
       background transparent url('../images/icon-select-all.png') center center no-repeat
+      +tablet_l()
+        background transparent url('../images/icon-select-all.png') no-repeat
+        margin-left 23px
     .none
       attributeIconLink()
       background transparent url('../images/icon-select-none.png') center center no-repeat
+      +tablet_l()
+        background transparent url('../images/icon-select-none.png') no-repeat
     .invert
       attributeIconLink()
       background transparent url('../images/icon-select-invert.png') center center no-repeat
+      +tablet_l()
+        background transparent url('../images/icon-select-invert.png') no-repeat
 
 
   &.with-checkboxes-actions .navigation-checkbox-controls
@@ -300,13 +407,24 @@ attributeIconLink()
     float left
     width 20px
     margin-top 4px
+    +tablet_l()
+      width 15px
+      height 15px
+      margin 3px
+
   &.show-checkboxes
     input[type='checkbox']
       display block
+      +tablet_l()
+        felxbox(flex)
+        flex-align(center)
     .add
       display none
     .navigation-checkbox-controls
       display block
+      +tablet_l()
+        flexbox(flex)
+
 
 /*
 #reports

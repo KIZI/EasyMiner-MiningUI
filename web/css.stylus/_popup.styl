@@ -1,6 +1,6 @@
 #overlay
   color #434343
-  font font
+  font fontFamily
   background none rgba(0, 0, 0, 0.6)
   position fixed
   top 0
@@ -9,12 +9,18 @@
   z-index 1
   width 100%
   min-width 100%
+  height 100%
+  +tablet_l()
+    width 100%
+    min-width initial
 
 div#overlay-inner
   top 0
   left 0
   width 100%
   height 100%
+  // +tablet_l()
+  background none rgba(0, 0, 0, 0.6)
 
   form
     line-height 36px
@@ -180,7 +186,8 @@ div#overlay-inner
     /*margin-top 45px*/
     iframe
       border none
-      width 800px; height 500px
+      width 800px
+      height 500px
     form
       input[type="submit"]
         margin-left 310px
@@ -234,7 +241,13 @@ div#overlay-inner
       width 800px
       height 380px
       border none
-
+      table 
+        background-color black
+      .rule4ftTable
+        border-collapse collapse
+        border 1px solid black
+        th,td 
+          border 1px solid black
 
   #add-br-base-window
     width 400px

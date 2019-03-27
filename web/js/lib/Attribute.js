@@ -15,6 +15,7 @@ var Attribute = new Class({
 	stringHelper: null,
 	value: null,
 	hidden: false,
+	showNav: false,
 
 	initialize: function (id, name, type, choices, stringHelper, hidden, value) {
 		this.id = id;
@@ -24,6 +25,7 @@ var Attribute = new Class({
 		this.stringHelper = stringHelper;
 		this.hidden = hidden;
 		this.value = value || 0;
+		this.showNav = false;
 	},
 	
 	getName: function () {
@@ -49,6 +51,10 @@ var Attribute = new Class({
 	getValue: function () {
 		return this.value;
 	},
+
+	getShowNav: function () {
+		return this.showNav;
+	},
 	
 	setValue: function (value) {
 		this.value = value;
@@ -68,6 +74,10 @@ var Attribute = new Class({
 
 	setHidden: function (hidden) {
 		this.hidden = hidden;
+	},
+
+	setShowNav: function (show) {
+		this.showNav = show;		
 	},
 	
 	isRecommended: function () {
@@ -101,6 +111,14 @@ var Attribute = new Class({
 
     getCSSShowHistogramID: function () {
         return 'attribute-show-histogram-' + this.getNormalizedName();
-    }
+	},
+
+	getCSSNavControlShowMenu: function () {
+		return 'nav-control-menu-' + this.getNormalizedName();
+	},
+
+	getCSSNavAttributeControl: function () {
+		return 'nav-attribute-control-' + this.getNormalizedName();
+	}
 
 });

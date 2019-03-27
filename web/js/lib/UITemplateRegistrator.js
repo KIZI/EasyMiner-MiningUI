@@ -41,27 +41,30 @@ var UITemplateRegistrator = new Class({
 
       li({'class': className},
           input({type:'checkbox',id:attribute.getCSSCheckboxID(), class:'attribute-checkbox', 'data-id': attribute.getName()}),
-        a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add attribute')}),
-        span({id: attribute.getCSSID(), title: attribute.getName()}, attribute.getName()),
-        showRemoveAttribute ? a({
-          href: '#',
-          id: attribute.getCSSRemoveID(),
-          'class': 'remove-attribute',
-          'title': i18n.translate('Hide')
-        }) : '',
-        showEditAttribute ? a({
-          href: '#',
-          id: attribute.getCSSEditID(),
-          'class': 'edit-attribute',
-          'title': i18n.translate('Edit')
-        }) : '',
-        a({
-          href: '#',
-          id: attribute.getCSSShowHistogramID(),
-          'class': 'show-histogram',
-          'title': i18n.translate('Show histogram')
-        })
-      );
+          span({id: attribute.getCSSID(), title: attribute.getName()}, attribute.getName()),
+          a({href:' #', id: attribute.getCSSNavControlShowMenu()}),
+          div({id: attribute.getCSSNavAttributeControl(), class: 'hide-nav-control'},
+            a({href: '#', id: attribute.getCSSAddID(), class: 'add', title: i18n.translate('Add attribute')}),
+            showRemoveAttribute ? a({
+              href: '#',
+              id: attribute.getCSSRemoveID(),
+              'class': 'remove-attribute',
+              'title': i18n.translate('Hide')
+            }) : '',
+            showEditAttribute ? a({
+              href: '#',
+              id: attribute.getCSSEditID(),
+              'class': 'edit-attribute',
+              'title': i18n.translate('Edit')
+            }) : '',
+            a({
+              href: '#',
+              id: attribute.getCSSShowHistogramID(),
+              'class': 'show-histogram',
+              'title': i18n.translate('Show histogram')
+            })
+          )
+        );
     });
 
     Mooml.register('dataFieldTemplate', function (data) {
@@ -69,15 +72,18 @@ var UITemplateRegistrator = new Class({
         field = data.field;
 
       li({id: field.getCSSID()},
-          input({type:'checkbox',id:field.getCSSCheckboxID(), class:'data-field-checkbox', 'data-id': field.getName()}),
-        a({href: '#', id: field.getCSSAddID(), class: 'add', title: i18n.translate('Add to attributes')}),
+        input({type:'checkbox',id:field.getCSSCheckboxID(), class:'data-field-checkbox', 'data-id': field.getName()}),
         span({title: field.getName()}, field.getName()),
-        a({
-          href: '#',
-          id: field.getCSSShowHistogramID(),
-          'class': 'show-histogram',
-          'title': i18n.translate('Show histogram')
-        })
+        a({href:' #', id: field.getCSSNavControlShowMenuField()}),
+        div({id: field.getCSSNavAttributeControlField(), class: 'hide-nav-control-field'},
+          a({href: '#', id: field.getCSSAddID(), class: 'add', title: i18n.translate('Add to attributes')}),
+          a({
+            href: '#',
+            id: field.getCSSShowHistogramID(),
+            'class': 'show-histogram',
+            'title': i18n.translate('Show histogram')}
+          )
+        )
       );
     });
 
@@ -982,11 +988,13 @@ var UITemplateRegistrator = new Class({
       }.bind([perPageSelect, perPage]));
 
       div({'class':'marked-rules-controls'},
-          Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n}),
+        div({'class': 'marked-rules-control-wrapper'},
           label({'for':'marked-rules-order-'+taskId},i18n.translate('Rules order:')),
           Mooml.render('markedRulesOrderTemplate',data),
           label({'for':'marked-rules-per-page-'+taskId},i18n.translate('Rules per page:')),
-          perPageSelect
+          perPageSelect,
+        ),
+        Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n})
       );
     });
 

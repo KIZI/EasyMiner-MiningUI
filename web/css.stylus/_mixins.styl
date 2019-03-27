@@ -80,6 +80,38 @@ unimportantTextColor = #888
 interestMeasureValueColor = #7B0D2E
 interestMeasureColor = unimportantTextColor
 
+portrait-width-min = 768px
+portrait-width-max = 960px
+landscape-width-min = 1024px
+landscape-width-max = 1280px
+/** Mixins for responsive mode */
+/** Media queries */
+max(bp)
+ @media only screen and (max-width: bp)
+  {block} 
+
+min(bp)
+ @media only screen and (min-width: bp)
+  {block}
+
+between(bp1, bp2)
+ @media only screen and (min-width: bp1) and (max-width: bp2)
+  {block} 
+
+// tablet portrait
+tablet_p()
+ +between(portrait-width-min, portrait-width-max)
+  {block}
+
+// tablet landscape
+tablet_l()
+ +between(landscape-width-min, landscape-width-max)
+  {block}
+
+// pc()
+//  +min(pc-start-value)
+//   {block}
+
 centerContent()
   margin-left auto
   margin-right auto
@@ -89,6 +121,8 @@ centerMainContent()
   width minContentWidth2
   margin 0 auto
   position relative
+  +tablet_l()
+    min-width initial
 
 box()
   color color
@@ -112,7 +146,7 @@ overlay-close()
   color #126499
   background transparent url('../images/sprite-icons.png') -67px -116px no-repeat /*TODO přesun ikony doprava*/
   float right
-  position relative;
+  position relative
   top -20px
   right -10px
   width 18px
@@ -220,8 +254,8 @@ associationRule()
   .id
     font-size 0.8em
     text-align right
-    display block; width 35px
-    margin-right 3px; margin-top 9px
+    display block width 35px
+    margin-right 3px margin-top 9px
     float left
   .cedent
     cedent()
@@ -248,7 +282,7 @@ cedent()
     fields()
   .group-fields
     font-size 14px
-    position relative; top 23px
+    position relative top 23px
 
 fields()
   .field
@@ -276,6 +310,8 @@ field()
     coefficient()
   .field-drag
     cursor move
+    +tablet_l()
+      flexbox(inline-flex)
   .field-name
     display block
     float left
@@ -285,8 +321,13 @@ field()
   .change-sign.negative,
   .field-sign.negative
     background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
-    width 13px; height 20px
+    width 13px
+    height 20px
     float left
+    +tablet_l()
+      flexbox(flex)
+      flex-align(center)
+      height 25px
   .controls
     fieldControls()
 
@@ -295,27 +336,35 @@ fieldControls()
     edit()
     margin-left 2px
     float right
+    +tablet_l()
+      visibility visible
   a.remove-field
     remove()
     margin-left 5px
     float right
+    +tablet_l()
+      visibility visible
   a.mark-field
     background transparent url('../images/sprite-icons.png') -67px -212px no-repeat
-    display block; width 16px; height 20px
+    display block width 16px height 20px
     margin-right 3px
     float right
     visibility hidden
   a.marked-field
     background transparent url('../images/sprite-icons.png') -68px -260px no-repeat
-    display block; width 16px; height 20px
+    display block width 16px height 20px
     margin-right 3px
     float right
     visibility visible
   a.change-sign.positive
     background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
-    display block; width 16px; height 20px
+    display block
+    width 16px
+    height 20px
     float right
     visibility hidden
+    +tablet_l()
+      visibility visible
 
 firstCedent()
   >.fields
@@ -325,13 +374,22 @@ firstCedent()
 coefficient()
   color #925213
   font-size 0.85em
-  position relative; top -1px;
+  position relative
+  top -1px
   margin-left 3px
+  +tablet_l()
+    flexbox(flex)
+    flex-align(center)
+    max-width 140px
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
 
 connective()
   color #336600
   font-size 14px
-  position relative; top 1px
+  position relative
+  top 1px
   margin 0 1px
   float left
   height 40px
@@ -339,7 +397,8 @@ connective()
 bracket()
   font-size 18px
   float left
-  position relative; top -2px
+  position relative
+  top -2px
 
 interestMeasureMixin()
   .name
@@ -385,22 +444,30 @@ ruleActions()
 
 edit()
   background transparent url('../images/sprite-icons.png') -19px -262px no-repeat
-  display block; width 16px; height 20px
+  display block
+  width 16px
+  height 20px
   visibility hidden
 
 remove()
   background transparent url('../images/sprite-icons.png') -19px -15px no-repeat
-  display block; width 16px; height 20px
+  display block
+  width 16px
+  height 20px
   visibility hidden
 
 showHistogram()
   background transparent url('../images/sprite-icons.png') -20px -664px no-repeat
-  display block; width 16px; height 20px
+  display block
+  width 16px
+  height 20px
   visibility hidden
 
 loading()
   background transparent url('../images/sprite-icons.png') -18px -416px no-repeat
-  display block; width 16px; height 20px
+  display block
+  width 16px
+  height 20px
 
 tip()
   border-radius(5px)
@@ -429,9 +496,12 @@ userSelect(value)
 
 info()
   background transparent url('../images/sprite-icons.png') -20px -714px no-repeat
-  display block; float right
-  position relative; top -2px
-  width 24px; height 24px
+  display block 
+  float right
+  position relative 
+  top -2px
+  width 24px 
+  height 24px
 
 tooltip()
   color #000000
@@ -442,14 +512,15 @@ tooltip()
   >span
     font-size 0.9em
     line-height 1.25em
-    margin-left -999em; padding: 0.5em 0.8em 0.8em 2em
+    margin-left -999em
+    padding: 0.5em 0.8em 0.8em 2em
     position absolute
   &:hover
     >span
       font-family fontFamily
       width 250px
       margin-left 0
-      position absolute; top 0; left 0
+      position absolute top 0 left 0
       z-index 99
     span.helpImg
     span.warningImg

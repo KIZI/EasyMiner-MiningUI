@@ -18,11 +18,11 @@ var UIStructureListener = new Class({
         this.$UIStructurePainter = UIStructurePainter;
     },
 
-    registerResizeEventHandler: function() {
-        window.addEvent('resize', function() {
-            this.$UIStructurePainter.resizeWindow();
-        }.bind(this));
-    },
+    // registerResizeEventHandler: function() {
+    //     window.addEvent('resize', function() {
+    //         this.$UIStructurePainter.resizeWindow();
+    //     }.bind(this));
+    // },
 
     registerUnsupportedBrowserEventHandler: function (field) {
         // submit

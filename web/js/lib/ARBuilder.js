@@ -36,7 +36,7 @@ var ARBuilder = new Class({
   attributesFilter:null,
   $AttributeValuesManager:null,
 
-  // init basics
+  // init basics 
   initialize: function (config) {
     this.$config = config;
     this.settings = new Settings();
@@ -119,7 +119,7 @@ var ARBuilder = new Class({
     this.$ETreeManager.setARManager(this.$ARManager);
 
     this.UIPainter.createUI();
-    this.$UIStructurePainter.resizeApplication();
+    // this.$UIStructurePainter.resizeApplication();
 
     this.$currentUser.loadUser();
 

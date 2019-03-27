@@ -6,6 +6,12 @@ tabPadding = 15px
   clear left
   padding 0
   width minContentWidth + 4*boxMargin
+  +tablet_l()
+    flexbox(flex)
+    flex-direction(row)
+    h2
+      flex(grow:1)
+    width initial
   .marked-rules-tab
     box()
     h2AR()
@@ -13,11 +19,21 @@ tabPadding = 15px
     margin 0
     padding 0
     background-color rgba(255, 255, 255, 0.6)
+    +tablet_l()
+      flexbox(flex)
+      width initial
+      margin-bottom 5px
     &.marked-rules-tasks
       float left
+      +tablet_l()
+        margin-right 5px
     &.marked-rules-base
       float right
+      +tablet_l()
+        margin-left 5px
     &.marked-rules-tab-active
+      +tablet_l()
+        margin 0
       background-color #ffffff
       border-bottom #fff 5px solid
     &:hover
@@ -36,17 +52,28 @@ tabPadding = 15px
   margin 0 0 0 boxMargin
   float left
   clear left
+  +tablet_l()
+    min-width initial
+    .marked-rules-control-wrapper
+      flexbox(flex)
+      flex-direction(row)
+      flex-justify(start)
+      flex(grow:1)
+      label 
+        font-size 1rem
+      select
+        border 1px solid black
+    .marked-rules-tasks-content
+      .minimize
+        +tablet_l()
+          flexbox(flex)
+          flex-direction(column)
 
   h2
     h2AR()
     /*margin-left 10px*/
     margin 0 0 5px 0
 
-  .maximize
-    ul,.marked-rules-checkbox-controls,.marked-rules-controls
-      display none
-    a.toggle span
-      background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
 
   .minimize a.toggle span
     background transparent url('../images/sprite-icons.png') -20px -220px no-repeat
@@ -54,6 +81,12 @@ tabPadding = 15px
   .marked-rules-base-content
     display none
 
+  .maximize
+    ul,.marked-rules-checkbox-controls,.marked-rules-controls
+      display none
+    a.toggle span
+      background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
+  
   .marked-rules-empty
     display none
 
@@ -118,14 +151,24 @@ tabPadding = 15px
     text-align right
     color unimportantTextColor
     font-size 0.8*baseFontSize
+    +tablet_l()
+      flexbox(flex)
+      flex-direction(row)
+      flex-justify(space-between)
 
     .paginator
       float left
+      +tablet_l()
+        flexbox(flex)
+        flex-align(center)
 
     label
       display inline-block
       padding 0 5px 0 15px
       margin 0
+      +tablet_l()
+        flexbox(flex)
+        flex-align(center)
 
     select
       padding 5px

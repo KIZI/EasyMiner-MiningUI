@@ -36,9 +36,9 @@ var UIStructurePainter = new Class({
         this.renderNavigation();
         this.renderActiveRule();
         this.renderMarkedRules();
-        this.resizeWindow();
+        // this.resizeWindow();
 
-        this.$UIStructureListener.registerResizeEventHandler();
+        // this.$UIStructureListener.registerResizeEventHandler();
         this.$UIStructureListener.registerDataReloadEventHandlers();
     },
 
@@ -160,8 +160,8 @@ var UIStructurePainter = new Class({
 
     resizeApplication: function() {
         // Declarations
-        var measuredElements = [ $('antecedent'), $('interest-measures'), $('succedent') ];
-        var widthFix = 50; // HACK: To prevent reimplementing vast codebase
+        // var measuredElements = [ $('antecedent'), $('interest-measures'), $('succedent') ];
+        // var widthFix = 50; // HACK: To prevent reimplementing vast codebase
 
         /*
         // Set antecedent and consequent to max width within its container
@@ -170,19 +170,19 @@ var UIStructurePainter = new Class({
         ruleWidth = ruleWidth / 2 - widthFix;
         */
         // FIX: Hardcode antecedent with to 325px to prevent horizontal resizing
-        ruleWidth = "325px";
-        $('antecedent').setStyle('width', ruleWidth);
-        $('succedent').setStyle('width', ruleWidth);
+        // ruleWidth = "325px";
+        // $('antecedent').setStyle('width', ruleWidth);
+        // $('succedent').setStyle('width', ruleWidth);
 
         // Resize the container
-        var width = this.$elementSizeMeter.getWidth(measuredElements) + 1; // IE9 hack (+1)
-        $('ar-wrapper').setStyle('width', width);
+        // var width = this.$elementSizeMeter.getWidth(measuredElements) + 1; // IE9 hack (+1)
+        // $('ar-wrapper').setStyle('width', width);
 
-        var markedRulesWidth=$('content').getSize().x - $('content').getStyle('padding-right').replace('px', '').toInt() - $('content').getStyle('padding-left').replace('px', '').toInt() - 2;
-        $('marked-rules').setStyle('width', markedRulesWidth);
-        $('marked-rules').setStyle('max-width', markedRulesWidth);
+        // var markedRulesWidth=$('content').getSize().x - $('content').getStyle('padding-right').replace('px', '').toInt() - $('content').getStyle('padding-left').replace('px', '').toInt() - 2;
+        // $('marked-rules').setStyle('width', markedRulesWidth);
+        // $('marked-rules').setStyle('max-width', markedRulesWidth);
 
-        this.resizeWindow();
+        // this.resizeWindow();
     },
 
     resizeWindow: function() {
@@ -198,9 +198,10 @@ var UIStructurePainter = new Class({
         }
 
         // fix overlay width & height to 100%
-        $overlay.setStyle('width', wrapperWidth);
-        //$('overlay').setStyle('height', '100%');
-        $overlay.setStyle('height', window.getScrollSize().y);
+        // $overlay.setStyle('width', wrapperWidth);
+        // $overlay.setStyle('height', window.getScrollSize().y);
+        $('overlay').setStyle('height', '100%');
+        $('overlay').setStyle('width', '100%');
 
         // check correct positioning of overlay
         this.posOverlay();

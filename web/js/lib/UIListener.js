@@ -88,6 +88,40 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.openShowHistogramWindow(attribute.getId(), 'attribute');
     }.bind(this));
+
+    $(attribute.getCSSNavControlShowMenu()).addEvent('click', function (event) {
+      event.stop();
+      
+      this.hideNavigationAttributeControl();
+      this.showNavigationAttributeControlMenu();
+
+      if ($(attribute.getCSSNavAttributeControl()).hasClass('hide-nav-control')) {
+        $(attribute.getCSSNavAttributeControl()).removeClass('hide-nav-control');
+        $(attribute.getCSSNavControlShowMenu()).addClass('hide-nav-menu');
+      }
+    }.bind(this));
+
+    $('IZIMiner').addEvent('click', function (event) {
+      event.stop();
+      this.hideNavigationAttributeControl();
+      this.showNavigationAttributeControlMenu();
+    }.bind(this));
+  },
+
+  hideNavigationAttributeControl: function () {
+    attributeControlList = $$('[id^=nav-attribute-control-]');
+    attributeControlList.forEach(function (att) {
+      att.addClass('hide-nav-control');
+    });
+  },
+
+  showNavigationAttributeControlMenu: function () {
+    attributeList = $$('[id^=nav-control-menu-]');
+    attributeList.forEach(function (att) {
+      if (att.hasClass('hide-nav-menu')) {
+        att.removeClass('hide-nav-menu');
+      };
+    });
   },
 
   registerDataFieldEventHandler: function (field) {
@@ -131,6 +165,52 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.openShowHistogramWindow(field.getId(), 'field');
     }.bind(this));
+
+    $(field.getCSSCheckboxID()).addEvent('click', function (event) {
+      event.stop();
+      $(field.getCSSID()).getElements('.data-field-checkbox').each(function(checkbox){
+        if (checkbox.checked) {
+          checkbox.checked = false;
+          console.log(checkbox);
+        } else {
+          checkbox.checked = true;
+          console.log('else', checkbox);
+        }
+      });
+    }.bind(this));
+
+    $(field.getCSSNavControlShowMenuField()).addEvent('click', function (event) {
+      event.stop();
+      this.hideNavigationFieldControl();
+      this.showNavigationFieldControlMenu();
+
+      if ($(field.getCSSNavAttributeControlField()).hasClass('hide-nav-control-field')) {
+        $(field.getCSSNavAttributeControlField()).removeClass('hide-nav-control-field');
+        $(field.getCSSNavControlShowMenuField()).addClass('hide-nav-control-menu');
+      }
+    }.bind(this));
+
+    $('IZIMiner').addEvent('click', function (event) {
+      event.stop();
+      this.showNavigationFieldControlMenu();
+      this.hideNavigationFieldControl();
+    }.bind(this));    
+  },
+
+  hideNavigationFieldControl: function () {
+    fieldControlList = $$('[id^=field-nav-attribute-control-]');
+    fieldControlList.forEach(function (field) {
+      field.addClass('hide-nav-control-field')
+    });
+  },
+
+  showNavigationFieldControlMenu: function () {
+    fieldList = $$('[id^=field-nav-control-menu-]');
+    fieldList.forEach(function (field) {
+      if (field.hasClass('hide-nav-control-menu')) {
+        field.removeClass('hide-nav-control-menu');
+      }
+    });
   },
 
   checkAttributesSelectedCheckboxes : function(){
@@ -640,7 +720,7 @@ var UIListener = new Class({
     elementSubmit.addEvent('click', function (event) {
       event.stop();
       this.UIPainter.renderAddRulesetForm();
-      this.UIPainter.$UIStructurePainter.resizeApplication();
+      // this.UIPainter.$UIStructurePainter.resizeApplication();
     }.bind(this));
   },
 

@@ -1,4 +1,7 @@
 
+// import flexbox
+@import 'flexbox.styl'
+
 //import basic shared styles
 @import '_mixins.styl'
 
@@ -21,16 +24,33 @@
   width minContentWidth2
   margin 0 auto
   position relative
+  +tablet_l()
+    flexbox(flex)
+    flex-direction(row)
+    position initial
+    width 100%
+    min-width 100%
 
 section#workplace
-  margin 0 auto; padding-bottom boxMargin
+  margin 0 auto
+  padding-bottom boxMargin
   float left
+  +tablet_l()
+    flexbox(flex)
+    flex-direction(column)
+    flex(grow:1, shrink:1)
+    margin 0
 
-section#content
-  box()
-  min-width minContentWidth
-  float left
-  margin boxMargin 0 0 boxMargin
+section
+  #content
+    box()
+    min-width minContentWidth
+    float left
+    margin boxMargin 0 0 boxMargin
+    +tablet_l()
+      min-width initial
+      flexbox(flex)
+      flex-direction(column)
 
   h2
     h2AR()

@@ -18,10 +18,19 @@ var APField = new Class({
     this.$id = id;
     this.$name = name;
     this.$stringHelper = stringHelper;
+    this.showInNavFiled = false;
   },
 
   getNormalizedName: function () {
     return this.$stringHelper.normalizeString(this.$name);
+  },
+
+  getShowInNavField: function () {
+    return this.showInNavFiled;
+  },
+
+  setShowInNavField: function (show) {
+    this.showInNavFiled = show;
   },
 
   getCSSID: function () {
@@ -38,6 +47,14 @@ var APField = new Class({
 
   getCSSShowHistogramID: function () {
     return 'field-nav-show-histogram-' + this.getNormalizedName();
+  },
+
+  getCSSNavControlShowMenuField: function () {
+		return 'field-nav-control-menu-' + this.getNormalizedName();
+  },
+  
+  getCSSNavAttributeControlField: function () {
+    return 'field-nav-attribute-control-' + this.getNormalizedName();
   }
 
 });

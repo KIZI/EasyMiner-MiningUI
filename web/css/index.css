@@ -1,6 +1,6 @@
 #overlay {
   color: #434343;
-  font: font;
+  font: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   background: none rgba(0,0,0,0.6);
   position: fixed;
   top: 0;
@@ -9,12 +9,20 @@
   z-index: 1;
   width: 100%;
   min-width: 100%;
+  height: 100%;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #overlay {
+    width: 100%;
+    min-width: initial;
+  }
 }
 div#overlay-inner {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: none rgba(0,0,0,0.6);
 }
 div#overlay-inner form {
   line-height: 36px;
@@ -200,9 +208,7 @@ div#overlay-inner form .tooltip:hover >span {
   font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   width: 250px;
   margin-left: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: absolute top 0 left 0;
   z-index: 99;
 }
 div#overlay-inner form .tooltip:hover span.helpImg,
@@ -411,6 +417,17 @@ div#overlay-inner #show-rule-details-window iframe {
   height: 380px;
   border: none;
 }
+div#overlay-inner #show-rule-details-window iframe table {
+  background-color: #000;
+}
+div#overlay-inner #show-rule-details-window iframe .rule4ftTable {
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+div#overlay-inner #show-rule-details-window iframe .rule4ftTable th,
+div#overlay-inner #show-rule-details-window iframe .rule4ftTable td {
+  border: 1px solid #000;
+}
 div#overlay-inner #add-br-base-window {
   width: 400px;
   margin-top: 45px;
@@ -587,9 +604,7 @@ div#overlay-inner #change-ruleset-window .bigButtons a span {
   font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
   width: 250px;
   margin-left: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: absolute top 0 left 0;
   z-index: 99;
 }
 #settings-form .tooltip:hover span.helpImg,
@@ -678,6 +693,40 @@ nav {
   margin: 10px 5px 0 10px;
   line-height: 20px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  nav {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-right: 10px;
+    width: auto;
+    max-width: 260px;
+    min-width: 260px;
+  }
+  nav section {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 .attributesPalette {
   color: #434343;
   background-color: #fff;
@@ -700,6 +749,16 @@ nav {
   margin: 5px 20px 15px 20px;
   padding-bottom: 5px;
   border-bottom: 1px solid #314e64;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 .attributesPalette h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -730,44 +789,6 @@ nav {
 .attributesPalette li:hover .action {
   visibility: visible;
 }
-#attributes {
-  color: #434343;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 10px;
-}
-#attributes h2 {
-  color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
-  font-size: 28px;
-  font-weight: normal;
-  margin: 0 0 20px 0;
-  font-size: 22.400000000000002px;
-  margin: 5px 20px 15px 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #314e64;
-}
-#attributes h2.minimize a {
-  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
-}
-#attributes h2.maximize a {
-  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
-}
-#attributes h2 a {
-  display: block;
-  width: 12px;
-  height: 12px;
-  float: right;
-  position: relative;
-  top: 5px;
-  margin-left: 5px /*FIXME*/;
-}
 #attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
 }
@@ -785,14 +806,58 @@ nav {
   top: -1px;
   margin-left: 3px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes #attributes-by-group span.coefficient {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 #attributes a#attributes-by-list,
 #attributes a#attributes-by-group {
   font-size: 13px;
 }
+#attributes a#attributes-by-list li,
+#attributes a#attributes-by-group li {
+  display: list-item;
+}
+#attributes ul {
+  margin: 0 20px 10px 20px;
+}
 #attributes li {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  width: 100%;
   cursor: move;
   float: left;
   clear: left;
+  margin: 5px 0;
 }
 #attributes li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
@@ -808,13 +873,87 @@ nav {
   float: left;
   width: 20px;
   height: 20px;
+  margin-left: 5px;
   visibility: hidden;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes li .add {
+    visibility: visible;
+  }
 }
 #attributes li:hover {
   color: #000;
 }
 #attributes li:hover .add {
   visibility: visible;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes li {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  #attributes a[id^=nav-control-menu-] {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    background: transparent url("../images/sprite/icon-settings.png");
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+  #attributes a[id^=nav-control-menu-].hide-nav-menu {
+    display: none;
+  }
+  #attributes div[id^=nav-attribute-control-] {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+  #attributes div[id^=nav-attribute-control-].hide-nav-control {
+    display: none;
+  }
+  #attributes.show-checkboxes li {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  #attributes.show-checkboxes li a[id^=nav-control-menu-] {
+    display: none;
+  }
+  #attributes.show-checkboxes li div[id^=nav-attribute-control-] {
+    display: none;
+  }
 }
 #attributes a.edit-attribute {
   background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
@@ -834,9 +973,14 @@ nav {
   width: 16px;
   height: 20px;
   visibility: hidden;
-  margin-left: 10px;
+  margin-left: 5px;
   float: right;
   visibility: hidden;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes a.show-histogram {
+    visibility: visible;
+  }
 }
 #attributes li:hover a.show-histogram {
   visibility: visible;
@@ -849,6 +993,11 @@ nav {
   visibility: hidden;
   margin-left: 5px;
   float: right;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes a.remove-attribute {
+    visibility: visible;
+  }
 }
 #attributes li:hover a.remove-attribute {
   visibility: visible;
@@ -877,51 +1026,37 @@ nav {
   display: none;
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
 }
-#data-fields {
-  color: #434343;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-  padding: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 10px;
-}
-#data-fields h2 {
-  color: #314e64;
-  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
-  font-size: 28px;
-  font-weight: normal;
-  margin: 0 0 20px 0;
-  font-size: 22.400000000000002px;
-  margin: 5px 20px 15px 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #314e64;
-}
-#data-fields h2.minimize a {
-  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
-}
-#data-fields h2.maximize a {
-  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
-}
-#data-fields h2 a {
-  display: block;
-  width: 12px;
-  height: 12px;
-  float: right;
-  position: relative;
-  top: 5px;
-  margin-left: 5px /*FIXME*/;
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes #add-all-unused-attributes {
+    margin-left: 20px;
+  }
 }
 #data-fields ul {
-  margin-bottom: 10px;
+  margin: 0 20px 10px 20px;
 }
 #data-fields li {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  width: 100%;
   cursor: move;
   float: left;
   clear: left;
+  margin: 0;
 }
 #data-fields li .add {
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
@@ -930,6 +1065,11 @@ nav {
   width: 20px;
   height: 20px;
   visibility: hidden;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #data-fields li .add {
+    visibility: visible;
+  }
 }
 #data-fields li .show-histogram {
   background: transparent url("../images/sprite-icons.png") -20px -664px no-repeat;
@@ -941,6 +1081,11 @@ nav {
   float: right;
   visibility: hidden;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #data-fields li .show-histogram {
+    visibility: visible;
+  }
+}
 #data-fields li:hover {
   color: #000;
 }
@@ -949,6 +1094,86 @@ nav {
 }
 #data-fields li:hover .show-histogram {
   visibility: visible;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #data-fields ul {
+    margin: 0 20px 10px 20px;
+  }
+  #data-fields ul li {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 5px 0;
+    width: 100%;
+  }
+  #data-fields div[id^=field-nav-attribute-control-] {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+  #data-fields div[id^=field-nav-attribute-control-].hide-nav-control-field {
+    display: none;
+  }
+  #data-fields a[id^=field-nav-control-menu-] {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    background: transparent url("../images/sprite/icon-settings.png");
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+  #data-fields a[id^=field-nav-control-menu-].hide-nav-control-menu {
+    display: none;
+  }
+  #data-fields.show-checkboxes li {
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  #data-fields.show-checkboxes li [id^=field-nav-control-menu-] {
+    display: none;
+  }
+  #data-fields.show-checkboxes li a[id^=field-nav-attribute-control-] {
+    display: none;
+  }
 }
 #knowledge-base-select {
   color: #434343;
@@ -972,6 +1197,16 @@ nav {
   margin: 5px 20px 15px 20px;
   padding-bottom: 5px;
   border-bottom: 1px solid #314e64;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 #knowledge-base-select .clearfix {
   padding: 0 20px;
@@ -988,6 +1223,59 @@ nav {
 #navigation h2.maximize .filter,
 #navigation h2.maximize .selectable {
   display: none;
+}
+#attributes,
+#data-fields {
+  color: #434343;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+#attributes h2,
+#data-fields h2 {
+  color: #314e64;
+  font-family: 'Arial', /*'Droid Sans',*/ 'sans-serif';
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  font-size: 22.400000000000002px;
+  margin: 5px 20px 15px 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #314e64;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+#attributes h2.minimize a,
+#data-fields h2.minimize a {
+  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
+}
+#attributes h2.maximize a,
+#data-fields h2.maximize a {
+  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
+}
+#attributes h2 a,
+#data-fields h2 a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  position: relative;
+  top: 5px;
+  margin-left: 5px /*FIXME*/;
 }
 #attributes .datas-filter,
 #data-fields .datas-filter {
@@ -1053,6 +1341,27 @@ nav {
   overflow: hidden;
   width: auto;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls,
+  #data-fields .navigation-checkbox-controls {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 100%;
+  }
+  #attributes .navigation-checkbox-controls a,
+  #data-fields .navigation-checkbox-controls a {
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
 #attributes .navigation-checkbox-controls #add-selected-attributes,
 #data-fields .navigation-checkbox-controls #add-selected-attributes,
 #attributes .navigation-checkbox-controls #add-selected-data-fields,
@@ -1079,6 +1388,24 @@ nav {
   margin-top: 4px;
   background: transparent url("../images/icon-select-all.png") center center no-repeat;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls .all,
+  #data-fields .navigation-checkbox-controls .all {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin: 5px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls .all,
+  #data-fields .navigation-checkbox-controls .all {
+    background: transparent url("../images/icon-select-all.png") no-repeat;
+    margin-left: 23px;
+  }
+}
 #attributes .navigation-checkbox-controls .none,
 #data-fields .navigation-checkbox-controls .none {
   display: inline-block;
@@ -1092,6 +1419,23 @@ nav {
   margin-right: 2px;
   margin-top: 4px;
   background: transparent url("../images/icon-select-none.png") center center no-repeat;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls .none,
+  #data-fields .navigation-checkbox-controls .none {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin: 5px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls .none,
+  #data-fields .navigation-checkbox-controls .none {
+    background: transparent url("../images/icon-select-none.png") no-repeat;
+  }
 }
 #attributes .navigation-checkbox-controls .invert,
 #data-fields .navigation-checkbox-controls .invert {
@@ -1107,6 +1451,23 @@ nav {
   margin-top: 4px;
   background: transparent url("../images/icon-select-invert.png") center center no-repeat;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls .invert,
+  #data-fields .navigation-checkbox-controls .invert {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin: 5px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes .navigation-checkbox-controls .invert,
+  #data-fields .navigation-checkbox-controls .invert {
+    background: transparent url("../images/icon-select-invert.png") no-repeat;
+  }
+}
 #attributes.with-checkboxes-actions .navigation-checkbox-controls,
 #data-fields.with-checkboxes-actions .navigation-checkbox-controls {
   width: 100%;
@@ -1118,9 +1479,27 @@ nav {
   width: 20px;
   margin-top: 4px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes input[type='checkbox'],
+  #data-fields input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    margin: 3px;
+  }
+}
 #attributes.show-checkboxes input[type='checkbox'],
 #data-fields.show-checkboxes input[type='checkbox'] {
   display: block;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes.show-checkboxes input[type='checkbox'],
+  #data-fields.show-checkboxes input[type='checkbox'] {
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
 }
 #attributes.show-checkboxes .add,
 #data-fields.show-checkboxes .add {
@@ -1130,16 +1509,76 @@ nav {
 #data-fields.show-checkboxes .navigation-checkbox-controls {
   display: block;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #attributes.show-checkboxes .navigation-checkbox-controls,
+  #data-fields.show-checkboxes .navigation-checkbox-controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
+}
 section#active-rule {
   position: relative;
 }
-section#active-rule #antecedent,
-section#active-rule #interest-measures,
-section#active-rule #succedent {
-  float: left;
-  height: 300px;
-  padding-bottom: 70px;
-  overflow: auto;
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    position: initial;
+  }
+  section#active-rule div {
+    box-sizing: border-box;
+  }
+  section#active-rule #ar-wrapper {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent h3 {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
 }
 section#active-rule #antecedent h3 a#empty-antecedent {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
@@ -1149,6 +1588,17 @@ section#active-rule #antecedent h3 a#empty-antecedent {
   visibility: hidden;
   margin-top: -2px;
   float: right;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent h3 a#empty-antecedent {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    visibility: visible;
+    margin: 5px;
+  }
 }
 section#active-rule #antecedent .cedent {
   float: left;
@@ -1178,8 +1628,35 @@ section#active-rule #antecedent .cedent .fields .field .coefficient {
   top: -1px;
   margin-left: 3px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .coefficient {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 section#active-rule #antecedent .cedent .fields .field .field-drag {
   cursor: move;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .field-drag {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-inline-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-inline-flex /* NEW - Chrome */;
+    display: inline-flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
 }
 section#active-rule #antecedent .cedent .fields .field .field-name {
   display: block;
@@ -1195,6 +1672,22 @@ section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
   height: 20px;
   float: left;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .change-sign.negative,
+  section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 25px;
+  }
+}
 section#active-rule #antecedent .cedent .fields .field .controls a.edit-coefficient {
   background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
   display: block;
@@ -1203,6 +1696,11 @@ section#active-rule #antecedent .cedent .fields .field .controls a.edit-coeffici
   visibility: hidden;
   margin-left: 2px;
   float: right;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .controls a.edit-coefficient {
+    visibility: visible;
+  }
 }
 section#active-rule #antecedent .cedent .fields .field .controls a.remove-field {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
@@ -1213,20 +1711,21 @@ section#active-rule #antecedent .cedent .fields .field .controls a.remove-field 
   margin-left: 5px;
   float: right;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .controls a.remove-field {
+    visibility: visible;
+  }
+}
 section#active-rule #antecedent .cedent .fields .field .controls a.mark-field {
   background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
+  display: block width 16px height 20px;
   margin-right: 3px;
   float: right;
   visibility: hidden;
 }
 section#active-rule #antecedent .cedent .fields .field .controls a.marked-field {
   background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
+  display: block width 16px height 20px;
   margin-right: 3px;
   float: right;
   visibility: visible;
@@ -1238,6 +1737,11 @@ section#active-rule #antecedent .cedent .fields .field .controls a.change-sign.p
   height: 20px;
   float: right;
   visibility: hidden;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .controls a.change-sign.positive {
+    visibility: visible;
+  }
 }
 section#active-rule #antecedent .cedent .fields .field:hover a.remove-field {
   visibility: visible;
@@ -1269,8 +1773,7 @@ section#active-rule #antecedent .cedent .fields .right-bracket {
 }
 section#active-rule #antecedent .cedent .group-fields {
   font-size: 14px;
-  position: relative;
-  top: 23px;
+  position: relative top 23px;
 }
 section#active-rule #antecedent >.cedent >.fields >.field,
 section#active-rule #antecedent >.cedent >.fields >.connective {
@@ -1279,9 +1782,29 @@ section#active-rule #antecedent >.cedent >.fields >.connective {
 section#active-rule #antecedent:hover a#empty-antecedent {
   visibility: visible;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent {
+    width: 40%;
+  }
+}
 section#active-rule #interest-measures {
   margin-left: 20px;
   width: 200px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #interest-measures {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    width: initial;
+    width: 20%;
+    min-width: 160px;
+  }
+  section#active-rule #interest-measures h3 {
+    padding: 5px 0;
+  }
 }
 section#active-rule #interest-measures #add-im {
   font-size: 14px;
@@ -1289,6 +1812,12 @@ section#active-rule #interest-measures #add-im {
   margin: 0 0 0 10px;
   padding-left: 20px;
   float: left;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #interest-measures #add-im {
+    margin: 0;
+    margin-top: 10px;
+  }
 }
 section#active-rule #interest-measures .im {
   float: left;
@@ -1313,6 +1842,13 @@ section#active-rule #interest-measures .im .edit-im {
   margin-right: 5px;
   float: left;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #interest-measures .im .edit-im {
+    width: 20px;
+    margin-right: 0;
+    margin: 5px;
+  }
+}
 section#active-rule #interest-measures .im:hover .edit-im {
   visibility: visible;
 }
@@ -1327,14 +1863,73 @@ section#active-rule #interest-measures .im .remove-im {
 section#active-rule #interest-measures .im .remove-im.required {
   visibility: hidden;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #interest-measures .im .remove-im {
+    width: 20px;
+    margin-right: 0;
+    margin: 5px;
+  }
+}
 section#active-rule #interest-measures .im:hover .remove-im {
   visibility: visible;
 }
 section#active-rule #interest-measures .im:hover .remove-im.required {
   visibility: hidden;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #interest-measures .im {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  section#active-rule #interest-measures .im a,
+  section#active-rule #interest-measures .im span.name {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  section#active-rule #interest-measures .im a .threshold,
+  section#active-rule #interest-measures .im span.name .threshold {
+    margin-left: 5px;
+  }
+  section#active-rule #interest-measures .im a {
+    margin: 5px;
+  }
+}
 section#active-rule #succedent {
   margin-left: 20px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent h3 {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
 }
 section#active-rule #succedent h3 a#empty-succedent {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
@@ -1344,6 +1939,17 @@ section#active-rule #succedent h3 a#empty-succedent {
   visibility: hidden;
   margin-top: -2px;
   float: right;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent h3 a#empty-succedent {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    visibility: visible;
+    margin: 5px;
+  }
 }
 section#active-rule #succedent .cedent {
   float: left;
@@ -1373,8 +1979,35 @@ section#active-rule #succedent .cedent .fields .field .coefficient {
   top: -1px;
   margin-left: 3px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .coefficient {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 section#active-rule #succedent .cedent .fields .field .field-drag {
   cursor: move;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .field-drag {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-inline-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-inline-flex /* NEW - Chrome */;
+    display: inline-flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
 }
 section#active-rule #succedent .cedent .fields .field .field-name {
   display: block;
@@ -1390,6 +2023,22 @@ section#active-rule #succedent .cedent .fields .field .field-sign.negative {
   height: 20px;
   float: left;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .change-sign.negative,
+  section#active-rule #succedent .cedent .fields .field .field-sign.negative {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 25px;
+  }
+}
 section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficient {
   background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
   display: block;
@@ -1398,6 +2047,11 @@ section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficie
   visibility: hidden;
   margin-left: 2px;
   float: right;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficient {
+    visibility: visible;
+  }
 }
 section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
   background: transparent url("../images/sprite-icons.png") -19px -15px no-repeat;
@@ -1408,20 +2062,21 @@ section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
   margin-left: 5px;
   float: right;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
+    visibility: visible;
+  }
+}
 section#active-rule #succedent .cedent .fields .field .controls a.mark-field {
   background: transparent url("../images/sprite-icons.png") -67px -212px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
+  display: block width 16px height 20px;
   margin-right: 3px;
   float: right;
   visibility: hidden;
 }
 section#active-rule #succedent .cedent .fields .field .controls a.marked-field {
   background: transparent url("../images/sprite-icons.png") -68px -260px no-repeat;
-  display: block;
-  width: 16px;
-  height: 20px;
+  display: block width 16px height 20px;
   margin-right: 3px;
   float: right;
   visibility: visible;
@@ -1433,6 +2088,11 @@ section#active-rule #succedent .cedent .fields .field .controls a.change-sign.po
   height: 20px;
   float: right;
   visibility: hidden;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .controls a.change-sign.positive {
+    visibility: visible;
+  }
 }
 section#active-rule #succedent .cedent .fields .field:hover a.remove-field {
   visibility: visible;
@@ -1464,8 +2124,7 @@ section#active-rule #succedent .cedent .fields .right-bracket {
 }
 section#active-rule #succedent .cedent .group-fields {
   font-size: 14px;
-  position: relative;
-  top: 23px;
+  position: relative top 23px;
 }
 section#active-rule #succedent >.cedent >.fields >.field,
 section#active-rule #succedent >.cedent >.fields >.connective {
@@ -1474,6 +2133,128 @@ section#active-rule #succedent >.cedent >.fields >.connective {
 section#active-rule #succedent:hover a#empty-succedent {
   visibility: visible;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #succedent {
+    width: 40%;
+  }
+}
+section#active-rule #antecedent,
+section#active-rule #interest-measures,
+section#active-rule #succedent {
+  float: left;
+  height: 300px;
+  padding-bottom: 70px;
+  overflow: auto;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule #antecedent,
+  section#active-rule #interest-measures,
+  section#active-rule #succedent {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    height: auto;
+  }
+  section#active-rule #antecedent h3,
+  section#active-rule #interest-measures h3,
+  section#active-rule #succedent h3 {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
+  section#active-rule #antecedent .cedent,
+  section#active-rule #interest-measures .cedent,
+  section#active-rule #succedent .cedent {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    padding: 0;
+  }
+  section#active-rule #antecedent .cedent .fields,
+  section#active-rule #interest-measures .cedent .fields,
+  section#active-rule #succedent .cedent .fields {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+  }
+  section#active-rule #antecedent .cedent .fields .info,
+  section#active-rule #interest-measures .cedent .fields .info,
+  section#active-rule #succedent .cedent .fields .info {
+    padding: 5px;
+  }
+  section#active-rule #antecedent .cedent .fields .connective,
+  section#active-rule #interest-measures .cedent .fields .connective,
+  section#active-rule #succedent .cedent .fields .connective {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: auto;
+    margin: 0;
+    width: 100;
+  }
+  section#active-rule #antecedent .cedent .fields .field,
+  section#active-rule #interest-measures .cedent .fields .field,
+  section#active-rule #succedent .cedent .fields .field {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0;
+  }
+}
 section#active-rule .no-restriction {
   background: transparent url("../images/sprite-icons.png") -20px -714px no-repeat;
   padding: 1px 0 0 17px;
@@ -1481,6 +2262,11 @@ section#active-rule .no-restriction {
   float: left;
   clear: left;
   cursor: help;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#active-rule .no-restrictionspan:after {
+    content: 'No restriction box will be considered as empty cedent.';
+  }
 }
 section#active-rule #ar-action-box {
   position: relative;
@@ -1945,6 +2731,30 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   padding: 0;
   width: 1025px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules-tabs {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: initial;
+  }
+  #marked-rules-tabs h2 {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+  }
+}
 #marked-rules-tabs .marked-rules-tab {
   color: #434343;
   background-color: #fff;
@@ -1962,15 +2772,41 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   padding: 0;
   background-color: rgba(255,255,255,0.6);
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules-tabs .marked-rules-tab {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    width: initial;
+    margin-bottom: 5px;
+  }
+}
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
   float: left;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
+    margin-right: 5px;
+  }
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-base {
   float: right;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-base {
+    margin-left: 5px;
+  }
+}
 #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
   background-color: #fff;
   border-bottom: #fff 5px solid;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
+    margin: 0;
+  }
 }
 #marked-rules-tabs .marked-rules-tab:hover {
   background-color: #fff;
@@ -1998,6 +2834,41 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   float: left;
   clear: left;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules {
+    min-width: initial;
+  }
+  #marked-rules .marked-rules-control-wrapper {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+  }
+  #marked-rules .marked-rules-control-wrapper label {
+    font-size: 1rem;
+  }
+  #marked-rules .marked-rules-control-wrapper select {
+    border: 1px solid #000;
+  }
+}
 #marked-rules h2 {
   color: #925213;
   font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
@@ -2006,6 +2877,12 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 /*margin-left 10px*/
   margin: 0 0 5px 0;
 }
+#marked-rules .minimize a.toggle span {
+  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
+}
+#marked-rules .marked-rules-base-content {
+  display: none;
+}
 #marked-rules .maximize ul,
 #marked-rules .maximize .marked-rules-checkbox-controls,
 #marked-rules .maximize .marked-rules-controls {
@@ -2013,12 +2890,6 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules .maximize a.toggle span {
   background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
-}
-#marked-rules .minimize a.toggle span {
-  background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
-}
-#marked-rules .marked-rules-base-content {
-  display: none;
 }
 #marked-rules .marked-rules-empty {
   display: none;
@@ -2092,13 +2963,62 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   color: #888;
   font-size: 12.8px;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+}
 #marked-rules .marked-rules-controls .paginator {
   float: left;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-controls .paginator {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
 }
 #marked-rules .marked-rules-controls label {
   display: inline-block;
   padding: 0 5px 0 15px;
   margin: 0;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-controls label {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
 }
 #marked-rules .marked-rules-controls select {
   padding: 5px;
@@ -2301,6 +3221,22 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   text-decoration: none;
   color: #888;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) and (min-width: 1024px) and (max-width: 1280px) {
+  #marked-rules .minimize {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 #createUserReport {
   float: right;
   margin: 20px 20px 0 0;
@@ -2320,12 +3256,53 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin: 0 auto;
   position: relative;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  #wrapper {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    position: initial;
+    width: 100%;
+    min-width: 100%;
+  }
+}
 section#workplace {
   margin: 0 auto;
   padding-bottom: 10px;
   float: left;
 }
-section#content {
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section#workplace {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    margin: 0;
+  }
+}
+section #content {
   color: #434343;
   background-color: #fff;
   border: none;
@@ -2337,14 +3314,31 @@ section#content {
   float: left;
   margin: 10px 0 0 10px;
 }
-section#content h2 {
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  section #content {
+    min-width: initial;
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+section h2 {
   color: #925213;
   font: 36px 'Arial', /*'Droid Sans',*/ 'sans-serif';
   font-weight: normal;
   border-bottom: none;
   margin: 0;
 }
-section#content h3 {
+section h3 {
   color: #314e64;
   font: 16px;
   border-bottom: 1px solid #314e64;

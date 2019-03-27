@@ -81,9 +81,9 @@ var UIPainter = new Class({
       matchAnywhere: false,
       supportSimpleCompletion: true,
       initRepaint: true,
-      onShow: function (element) {
-        element.setStyle('display', 'list-item');
-      },
+      // onShow: function (element) {
+      //   element.setStyle('display', 'list-item');
+      // },
       onHide: function (element) {
         element.setStyle('display', 'none');
       },
@@ -541,7 +541,7 @@ var UIPainter = new Class({
 
     this.UIListener.registerActiveRuleEventHandlers(this.ARBuilder.getARManager().getActiveRule());
 
-    this.$UIStructurePainter.resizeApplication();
+    // this.$UIStructurePainter.resizeApplication();
   },
 
   renderCedent: function (cedent, elementParent) {
@@ -1144,7 +1144,7 @@ var UIPainter = new Class({
     this.UIListener.registerFoundRulesEventHandlers(this.ARBuilder.$FRManager);
     this.UIListener.registerFoundRulesMultiControlsEventHandlers();
 
-    ///this.$UIStructurePainter.resizeApplication();
+    //this.$UIStructurePainter.resizeApplication();
   },
   //endregion FoundRules
 

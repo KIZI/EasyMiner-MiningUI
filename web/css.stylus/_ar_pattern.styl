@@ -1,17 +1,31 @@
 section#active-rule
   position relative
-  #antecedent, #interest-measures, #succedent
-    float left
-    height 300px
-    padding-bottom 70px
-    overflow auto
-
+  +tablet_l()
+    flexbox(flex)
+    flex-direction(column)
+    flex(grow:1)
+    position initial
+    // width 100%
+    div 
+      box-sizing border-box
+    #ar-wrapper
+      flexbox(flex)
+      flex-direction(row)
+      flex(grow:1)
+  
   #antecedent
     h3
+      +tablet_l()
+        flex-justify(space-between)
+        flex-align(center)
       a#empty-antecedent
         remove()
         margin-top -2px
         float right
+        +tablet_l()
+          flexbox(flex)
+          visibility visible
+          margin 5px
     .cedent
       cedent()
     >.cedent
@@ -19,15 +33,28 @@ section#active-rule
     &:hover
       a#empty-antecedent
         visibility visible
+    +tablet_l()
+      width 40%
 
   #interest-measures
     margin-left 2*boxMargin
     width interestMeasuresWidth
+    +tablet_l()
+      flexbox(flex)
+      width initial
+      width 20%
+      min-width 160px
+      h3 
+        padding 5px 0
     #add-im
       font-size 14px
       background transparent url('../images/sprite-icons.png') -167px -162px no-repeat
-      margin 0 0 0 10px; padding-left 20px
+      margin 0 0 0 10px
+      padding-left 20px
       float left
+      +tablet_l()
+        margin 0
+        margin-top 10px
     .im
       interestMeasureMixin()
       float left; clear left
@@ -36,6 +63,10 @@ section#active-rule
         edit()
         margin-right 5px
         float left
+        +tablet_l()
+          width 20px
+          margin-right 0 
+          margin 5px
       &:hover .edit-im
         visibility visible
       .remove-im
@@ -43,17 +74,40 @@ section#active-rule
         float left
         &.required
           visibility hidden
+        +tablet_l()
+          width 20px
+          margin-right 0 
+          margin 5px
       &:hover .remove-im
         visibility visible
         &.required
           visibility hidden
+      +tablet_l()
+        flexbox(flex)
+        flex-direction(row)
+        width 100%
+        margin-bottom 0
+        a, span.name 
+          flexbox(flex)
+          flex-align(center)
+          .threshold
+            margin-left 5px
+        a 
+          margin 5px
 
   #succedent
     h3
+      +tablet_l()
+        flex-justify(space-between)
+        flex-align(center)
       a#empty-succedent
         remove()
         margin-top -2px
         float right
+        +tablet_l()
+          flexbox(flex)
+          visibility visible
+          margin 5px
     margin-left 2*boxMargin
     .cedent
       cedent()
@@ -62,12 +116,54 @@ section#active-rule
     &:hover
       a#empty-succedent
         visibility visible
+    +tablet_l()
+      width 40%
+
+  #antecedent, #interest-measures, #succedent
+    float left
+    height 300px
+    padding-bottom 70px
+    overflow auto
+    +tablet_l()
+      flexbox(flex)
+      flex-direction(column)
+      flex(grow:1, shrink:1)
+      height auto
+      h3
+        flexbox(flex)
+      .cedent
+        flexbox(flex)
+        padding 0
+        .fields
+          flexbox(flex)
+          flex-direction(column)
+          width 100%
+          .info
+            padding 5px
+          .connective
+            flexbox(flex)
+            flex-justify(center)
+            height auto
+            margin 0
+            width 100
+          .field
+            flexbox(flex)
+            flex-direction(row)
+            flex-justify(space-between)
+            flex-align(center)
+            margin 0
+
 
   .no-restriction
     background transparent url('../images/sprite-icons.png') -20px -714px no-repeat
-    padding 1px 0 0 17px; margin-top 2px
-    float left; clear left
+    padding 1px 0 0 17px 
+    margin-top 2px
+    float left
+    clear left
     cursor help
+    +tablet_l()
+      &span:after
+        content 'No restriction box will be considered as empty cedent.'
 
   #ar-action-box
     position relative

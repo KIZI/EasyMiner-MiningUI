@@ -208,7 +208,9 @@ var UIStructureTemplater = new Class({
 
       if (byGroup) {
         section({id: 'attributes'},
-          h2({'class': 'minimize'}, i18n.translate('Attributes'), a({href: '#', 'class': 'toggle'}, '')),
+          h2({'class': 'minimize'}, i18n.translate('Attributes'), 
+            a({href: '#', 'class': 'toggle'}, '')
+          ),
           div(
             ul(),
             span({
@@ -218,12 +220,13 @@ var UIStructureTemplater = new Class({
             div(a({id: 'attributes-by-list', href: '#'}, i18n.translate('attributes')))));
       } else {
         section({id: 'attributes'},
-          h2({'class': 'minimize'}, i18n.translate('Attributes'), a({
-            href: '#',
-            'class': 'toggle',
-            'title': i18n.translate('Minimize')
-          }, ''), a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
-            a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')),
+            h2({'class': 'minimize'}, i18n.translate('Attributes'),
+              div({class: 'nav-header-control'},
+                a({href: '#', 'class': 'toggle', 'title': i18n.translate('Minimize')}, ''), 
+                a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
+                a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')
+              )
+            ),
           div({'class': 'datas-filter'},
             input({
               'id': 'attributes-filter',
@@ -275,12 +278,13 @@ var UIStructureTemplater = new Class({
       var i18n = data.i18n;
 
       section({id: 'data-fields'},
-        h2({'class': 'minimize'}, i18n.translate('Data fields'), a({
-          href: '#',
-          'class': 'toggle',
-          'title': i18n.translate('Minimize')
-        }, ''), a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
-            a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')),
+        h2({'class': 'minimize'}, i18n.translate('Data fields'), 
+          div({class: 'nav-header-control'},
+            a({href: '#', 'class': 'toggle', 'title': i18n.translate('Minimize')}, ''), 
+            a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
+            a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')
+          )
+        ),
         div({'class': 'datas-filter'},
           input({
             'id': 'data-fields-filter',
@@ -291,25 +295,25 @@ var UIStructureTemplater = new Class({
         div(
             {'class': 'clearfix'},
           ul(),
-            div({class: 'navigation-checkbox-controls'},
-                a({
-                  class: 'all',
-                  title: i18n.translate('Select all')
-                }),
-                a({
-                  class: 'invert',
-                  title: i18n.translate('Invert selection')
-                }),
-                a({
-                  class: 'none',
-                  title: i18n.translate('Select none')
-                }),
-                a({
-                  id: 'add-selected-data-fields',
-                  href: '#',
-                  title: i18n.translate('Add all selected data fields to attributes...')
-                }, i18n.translate('Add selected to attributes'))
-            )
+          div({class: 'navigation-checkbox-controls'},
+              a({
+                class: 'all',
+                title: i18n.translate('Select all')
+              }),
+              a({
+                class: 'invert',
+                title: i18n.translate('Invert selection')
+              }),
+              a({
+                class: 'none',
+                title: i18n.translate('Select none')
+              }),
+              a({
+                id: 'add-selected-data-fields',
+                href: '#',
+                title: i18n.translate('Add all selected data fields to attributes...')
+              }, i18n.translate('Add selected to attributes'))
+          )
         ));
     });
 
@@ -503,17 +507,25 @@ var UIStructureTemplater = new Class({
       );
     });
   },
+  registerMarkedRulesTabs: function () {
+      Mooml.register('markedRulesTabsStructureTemplate', function (data) {
+          var i18n = data.i18n;
 
-    registerMarkedRulesTabs: function () {
-        Mooml.register('markedRulesTabsStructureTemplate', function (data) {
-            var i18n = data.i18n;
-
-                section({id: 'marked-rules-tabs'},
-                    h2({'class': 'marked-rules-tab marked-rules-tasks marked-rules-tab-active'},
-                        a(i18n.translate('Rule clipboard'))),
-                    h2({'class': 'marked-rules-tab marked-rules-base'},
-                        a(i18n.translate('Knowledge base')))
-                );
-        });
-    }
+              section({id: 'marked-rules-tabs'},
+                  h2({'class': 'marked-rules-tab marked-rules-tasks marked-rules-tab-active'},
+                      a(i18n.translate('Rule clipboard'))),
+                  h2({'class': 'marked-rules-tab marked-rules-base'},
+                      a(i18n.translate('Knowledge base')))
+              );
+      });
+  },
+  registerDataAndAttrNavigation: function () {
+    Mooml.register('dataAndAttrNavigation', function (data) {
+      var i18n = data.i18n;
+      div({'class': 'data-attr-navigation minimize'},
+        a({href: '#', 'class': 'toggle', 'title': i18n.translate('Minimize')}, ''),
+        a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
+        a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, ''))
+    })
+  }
 });
