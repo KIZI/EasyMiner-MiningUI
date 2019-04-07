@@ -10,6 +10,13 @@ taskActionLink()
   clear left
   padding-top 20px
   position relative
+  border-top 1px solid black
+  margin-top 10px
+  +tablet_L()
+    #found-rules-order
+    #found-rules-per-page
+      border 1px solid black
+      
 
   #found-rules-task-name
     h2Small()
@@ -32,6 +39,8 @@ taskActionLink()
       display inline-block
       background transparent url('../images/sprite/icon-edit.png') center bottom no-repeat
       visibility hidden
+      +tablet_L()
+        visibility visible
 
     &:hover
       a.rename-task
@@ -73,6 +82,9 @@ taskActionLink()
         position absolute
         left 0
         top 8px
+        +tablet_l()
+          width 18px
+          height 18px
 
       .rule
         color foundRuleColor

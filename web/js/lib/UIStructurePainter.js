@@ -191,7 +191,7 @@ var UIStructurePainter = new Class({
             $wrapper = $('wrapper'),
             $overlay = $('overlay');
         if (wrapperWidth > this.$elementSizeMeter.getWidth([window])) {
-            $wrapper.setStyle('width', wrapperWidth);
+            // $wrapper.setStyle('width', wrapperWidth);
         }
         else {
             $wrapper.removeClass('style');

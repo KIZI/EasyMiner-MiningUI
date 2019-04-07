@@ -34,7 +34,20 @@ var UIStructureTemplater = new Class({
             section({id: 'found-rules'})
           )
         ),
-        nav({id: 'navigation'})
+        nav({id: 'navigation'},
+          div({id: 'navigation-controls'},
+            a({class: 'menu-controller-show', href: '#'}, 'show'),
+            a({class: 'menu-controller-hide visible', href: '#'}, 'hide'),
+            div({id: 'nav-filter'},
+              input({type: 'checkbox', id: 'show-menu-attributes'}),
+              span('ATT'),
+              input({type: 'checkbox', id: 'show-menu-data-fields'}),
+              span('DF'),
+              input({type: 'checkbox', id: 'show-menu-knowledge-base'}),
+              span('KB')
+            )
+          )
+        )
       );
     });
   },
@@ -417,7 +430,10 @@ var UIStructureTemplater = new Class({
       }
 
       section({id: 'active-rule'},
-        h2(i18n.translate('Association rule pattern')),
+        div({class: 'ar-header-wrapper'},
+          h2(i18n.translate('Association rule pattern')),
+          a({href: '#', id: 'ar-controller', class: 'minimize'}),
+        ),
         div({id: 'ar-wrapper', 'class': 'clearfix'},
           div({id: 'antecedent'},
             h3(i18n.translate('Antecedent'),

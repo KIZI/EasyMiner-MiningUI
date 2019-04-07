@@ -98,6 +98,7 @@ tabPadding = 15px
     margin 10px 0
     position relative
     padding-left 20px
+    text-decoration none
 
     .count
       color unimportantTextColor
@@ -134,6 +135,10 @@ tabPadding = 15px
         top 10px
 
     &:hover
+      a.rename-task,
+      a.remove-task
+        visibility visible
+    +tablet_l()
       a.rename-task,
       a.remove-task
         visibility visible

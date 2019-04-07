@@ -11,7 +11,7 @@
   min-width: 100%;
   height: 100%;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #overlay {
     width: 100%;
     min-width: initial;
@@ -693,7 +693,77 @@ nav {
   margin: 10px 5px 0 10px;
   line-height: 20px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+nav #navigation-controls {
+  display: none;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 10px;
+}
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  nav #navigation-controls {
+    display: flex;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+nav #navigation-controls #nav-filter {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+nav #navigation-controls #nav-filter input {
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+}
+nav #navigation-controls #nav-filter span {
+  margin-top: 3px;
+  margin-right: auto;
+  font-size: 13px;
+}
+nav #navigation-controls #nav-filter.collapse {
+  display: none;
+}
+nav .menu-controller-show,
+nav .menu-controller-hide {
+  display: none;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  background: #075783;
+  margin: 3px;
+  padding: 3px;
+  color: #fff;
+}
+nav .menu-controller-show.visible,
+nav .menu-controller-hide.visible {
+  display: flex;
+}
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   nav {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -711,6 +781,16 @@ nav {
     width: auto;
     max-width: 260px;
     min-width: 260px;
+  }
+  nav.collapse {
+    background: #fff;
+    width: initial;
+    max-width: initial;
+    min-width: initial;
+    margin-bottom: 10px;
+    box-shadow: 5px 10px 10px 0 rgba(0,0,0,0.4);
+    -webkit-box-shadow: 5px 10px 10px 0 rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 10px 10px 0 rgba(0,0,0,0.4);
   }
   nav section {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -806,7 +886,7 @@ nav {
   top: -1px;
   margin-left: 3px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes #attributes-by-group span.coefficient {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -818,10 +898,7 @@ nav {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    max-width: 140px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: inherit;
   }
 }
 #attributes a#attributes-by-list,
@@ -857,7 +934,8 @@ nav {
   cursor: move;
   float: left;
   clear: left;
-  margin: 5px 0;
+  margin: 0;
+  padding: 2px 0;
 }
 #attributes li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
@@ -876,7 +954,7 @@ nav {
   margin-left: 5px;
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes li .add {
     visibility: visible;
   }
@@ -887,13 +965,17 @@ nav {
 #attributes li:hover .add {
   visibility: visible;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
-  #attributes li {
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  #attributes ul {
+    margin: 0 20px 10px 0;
+  }
+  #attributes ul li {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin: 5px 0;
   }
   #attributes a[id^=nav-control-menu-] {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -901,6 +983,7 @@ nav {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin-left: auto;
     background: transparent url("../images/sprite/icon-settings.png");
     background-size: 20px;
     width: 20px;
@@ -915,20 +998,10 @@ nav {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-box-pack: end;
-    -moz-box-pack: end;
-    -webkit-justify-content: flex-end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
+    margin-left: auto;
   }
   #attributes div[id^=nav-attribute-control-].hide-nav-control {
+    margin-left: 5px;
     display: none;
   }
   #attributes.show-checkboxes li {
@@ -977,7 +1050,7 @@ nav {
   float: right;
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes a.show-histogram {
     visibility: visible;
   }
@@ -994,7 +1067,7 @@ nav {
   margin-left: 5px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes a.remove-attribute {
     visibility: visible;
   }
@@ -1026,7 +1099,7 @@ nav {
   display: none;
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes #add-all-unused-attributes {
     margin-left: 20px;
   }
@@ -1057,6 +1130,7 @@ nav {
   float: left;
   clear: left;
   margin: 0;
+  padding: 2px 0;
 }
 #data-fields li .add {
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
@@ -1066,7 +1140,7 @@ nav {
   height: 20px;
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #data-fields li .add {
     visibility: visible;
   }
@@ -1081,9 +1155,10 @@ nav {
   float: right;
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #data-fields li .show-histogram {
     visibility: visible;
+    margin-left: 5px;
   }
 }
 #data-fields li:hover {
@@ -1095,9 +1170,9 @@ nav {
 #data-fields li:hover .show-histogram {
   visibility: visible;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #data-fields ul {
-    margin: 0 20px 10px 20px;
+    margin: 0 20px 10px 0;
   }
   #data-fields ul li {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1105,18 +1180,6 @@ nav {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
     margin: 5px 0;
     width: 100%;
   }
@@ -1126,18 +1189,7 @@ nav {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-box-pack: end;
-    -moz-box-pack: end;
-    -webkit-justify-content: flex-end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
+    margin-left: auto;
   }
   #data-fields div[id^=field-nav-attribute-control-].hide-nav-control-field {
     display: none;
@@ -1148,6 +1200,7 @@ nav {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin-left: auto;
     background: transparent url("../images/sprite/icon-settings.png");
     background-size: 20px;
     width: 20px;
@@ -1157,6 +1210,11 @@ nav {
     display: none;
   }
   #data-fields.show-checkboxes li {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
     -webkit-box-pack: start;
     -moz-box-pack: start;
     -webkit-justify-content: flex-start;
@@ -1168,10 +1226,10 @@ nav {
     -ms-flex-align: start;
     align-items: flex-start;
   }
-  #data-fields.show-checkboxes li [id^=field-nav-control-menu-] {
+  #data-fields.show-checkboxes li a[id^=field-nav-control-menu-] {
     display: none;
   }
-  #data-fields.show-checkboxes li a[id^=field-nav-attribute-control-] {
+  #data-fields.show-checkboxes li div[id^=field-nav-attribute-control-] {
     display: none;
   }
 }
@@ -1186,6 +1244,9 @@ nav {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
 }
 #knowledge-base-select h2 {
   color: #314e64;
@@ -1219,6 +1280,9 @@ nav {
   color: #126499;
   font-size: 14px;
   float: right;
+}
+#knowledge-base-select.collapse {
+  display: none;
 }
 #navigation h2.maximize .filter,
 #navigation h2.maximize .selectable {
@@ -1332,6 +1396,17 @@ nav {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  #attributes li span,
+  #data-fields li span {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    padding-top: 3px;
+  }
+}
 #attributes .navigation-checkbox-controls,
 #data-fields .navigation-checkbox-controls {
   clear: both;
@@ -1341,7 +1416,7 @@ nav {
   overflow: hidden;
   width: auto;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls,
   #data-fields .navigation-checkbox-controls {
     -webkit-box-direction: normal;
@@ -1388,7 +1463,7 @@ nav {
   margin-top: 4px;
   background: transparent url("../images/icon-select-all.png") center center no-repeat;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls .all,
   #data-fields .navigation-checkbox-controls .all {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1399,7 +1474,7 @@ nav {
     margin: 5px;
   }
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls .all,
   #data-fields .navigation-checkbox-controls .all {
     background: transparent url("../images/icon-select-all.png") no-repeat;
@@ -1420,7 +1495,7 @@ nav {
   margin-top: 4px;
   background: transparent url("../images/icon-select-none.png") center center no-repeat;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls .none,
   #data-fields .navigation-checkbox-controls .none {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1431,7 +1506,7 @@ nav {
     margin: 5px;
   }
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls .none,
   #data-fields .navigation-checkbox-controls .none {
     background: transparent url("../images/icon-select-none.png") no-repeat;
@@ -1451,7 +1526,7 @@ nav {
   margin-top: 4px;
   background: transparent url("../images/icon-select-invert.png") center center no-repeat;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls .invert,
   #data-fields .navigation-checkbox-controls .invert {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1462,7 +1537,7 @@ nav {
     margin: 5px;
   }
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes .navigation-checkbox-controls .invert,
   #data-fields .navigation-checkbox-controls .invert {
     background: transparent url("../images/icon-select-invert.png") no-repeat;
@@ -1479,11 +1554,17 @@ nav {
   width: 20px;
   margin-top: 4px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes input[type='checkbox'],
   #data-fields input[type='checkbox'] {
-    width: 15px;
-    height: 15px;
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    visibility: hidden;
+    width: 18px;
+    height: 18px;
     margin: 3px;
   }
 }
@@ -1491,7 +1572,7 @@ nav {
 #data-fields.show-checkboxes input[type='checkbox'] {
   display: block;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes.show-checkboxes input[type='checkbox'],
   #data-fields.show-checkboxes input[type='checkbox'] {
     -webkit-box-align: center;
@@ -1499,6 +1580,7 @@ nav {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    visibility: visible;
   }
 }
 #attributes.show-checkboxes .add,
@@ -1509,7 +1591,7 @@ nav {
 #data-fields.show-checkboxes .navigation-checkbox-controls {
   display: block;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #attributes.show-checkboxes .navigation-checkbox-controls,
   #data-fields.show-checkboxes .navigation-checkbox-controls {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1517,12 +1599,21 @@ nav {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    height: auto;
   }
+}
+#attributes.collapse,
+#data-fields.collapse {
+  display: none;
 }
 section#active-rule {
   position: relative;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+section#active-rule .ar-header-wrapper a {
+  display: none;
+  background: #000;
+}
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1565,8 +1656,45 @@ section#active-rule {
     -ms-flex: 1 0 auto;
     flex: 1 0 auto;
   }
+  section#active-rule .ar-header-wrapper {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  section#active-rule .ar-header-wrapper a {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+  }
+  section#active-rule .ar-header-wrapper #ar-controller.maximize {
+    background: transparent url("../images/sprite-icons.png") -15px -165px no-repeat;
+  }
+  section#active-rule .ar-header-wrapper #ar-controller.minimize {
+    background: transparent url("../images/sprite-icons.png") -16px -216px no-repeat;
+  }
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+section#active-rule #ar-wrapper.clearfix.minimize {
+  display: none;
+}
+section#active-rule #antecedent {
+  width: 325px;
+}
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent h3 {
     -webkit-box-pack: justify;
     -moz-box-pack: justify;
@@ -1589,7 +1717,7 @@ section#active-rule #antecedent h3 a#empty-antecedent {
   margin-top: -2px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent h3 a#empty-antecedent {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1628,7 +1756,7 @@ section#active-rule #antecedent .cedent .fields .field .coefficient {
   top: -1px;
   margin-left: 3px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent .cedent .fields .field .coefficient {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1640,16 +1768,13 @@ section#active-rule #antecedent .cedent .fields .field .coefficient {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    max-width: 140px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: inherit;
   }
 }
 section#active-rule #antecedent .cedent .fields .field .field-drag {
   cursor: move;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent .cedent .fields .field .field-drag {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1665,6 +1790,23 @@ section#active-rule #antecedent .cedent .fields .field .field-name {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .field-name {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: initial;
+    text-overflow: initial;
+    margin-right: 5px;
+  }
+}
 section#active-rule #antecedent .cedent .fields .field .change-sign.negative,
 section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
   background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
@@ -1672,7 +1814,7 @@ section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
   height: 20px;
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent .cedent .fields .field .change-sign.negative,
   section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1697,7 +1839,7 @@ section#active-rule #antecedent .cedent .fields .field .controls a.edit-coeffici
   margin-left: 2px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent .cedent .fields .field .controls a.edit-coefficient {
     visibility: visible;
   }
@@ -1711,7 +1853,7 @@ section#active-rule #antecedent .cedent .fields .field .controls a.remove-field 
   margin-left: 5px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent .cedent .fields .field .controls a.remove-field {
     visibility: visible;
   }
@@ -1738,7 +1880,7 @@ section#active-rule #antecedent .cedent .fields .field .controls a.change-sign.p
   float: right;
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent .cedent .fields .field .controls a.change-sign.positive {
     visibility: visible;
   }
@@ -1782,16 +1924,17 @@ section#active-rule #antecedent >.cedent >.fields >.connective {
 section#active-rule #antecedent:hover a#empty-antecedent {
   visibility: visible;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent {
     width: 40%;
+    min-width: initial;
   }
 }
 section#active-rule #interest-measures {
   margin-left: 20px;
   width: 200px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #interest-measures {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1813,7 +1956,7 @@ section#active-rule #interest-measures #add-im {
   padding-left: 20px;
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #interest-measures #add-im {
     margin: 0;
     margin-top: 10px;
@@ -1842,7 +1985,7 @@ section#active-rule #interest-measures .im .edit-im {
   margin-right: 5px;
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #interest-measures .im .edit-im {
     width: 20px;
     margin-right: 0;
@@ -1863,7 +2006,7 @@ section#active-rule #interest-measures .im .remove-im {
 section#active-rule #interest-measures .im .remove-im.required {
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #interest-measures .im .remove-im {
     width: 20px;
     margin-right: 0;
@@ -1876,7 +2019,7 @@ section#active-rule #interest-measures .im:hover .remove-im {
 section#active-rule #interest-measures .im:hover .remove-im.required {
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #interest-measures .im {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1916,8 +2059,9 @@ section#active-rule #interest-measures .im:hover .remove-im.required {
 }
 section#active-rule #succedent {
   margin-left: 20px;
+  width: 325px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent h3 {
     -webkit-box-pack: justify;
     -moz-box-pack: justify;
@@ -1940,7 +2084,7 @@ section#active-rule #succedent h3 a#empty-succedent {
   margin-top: -2px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent h3 a#empty-succedent {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1979,7 +2123,7 @@ section#active-rule #succedent .cedent .fields .field .coefficient {
   top: -1px;
   margin-left: 3px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent .cedent .fields .field .coefficient {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -1991,16 +2135,13 @@ section#active-rule #succedent .cedent .fields .field .coefficient {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    max-width: 140px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: inherit;
   }
 }
 section#active-rule #succedent .cedent .fields .field .field-drag {
   cursor: move;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent .cedent .fields .field .field-drag {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -2016,6 +2157,23 @@ section#active-rule #succedent .cedent .fields .field .field-name {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .field-name {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: initial;
+    text-overflow: initial;
+    margin-right: 5px;
+  }
+}
 section#active-rule #succedent .cedent .fields .field .change-sign.negative,
 section#active-rule #succedent .cedent .fields .field .field-sign.negative {
   background: transparent url("../images/sprite-icons.png") -118px -161px no-repeat;
@@ -2023,7 +2181,7 @@ section#active-rule #succedent .cedent .fields .field .field-sign.negative {
   height: 20px;
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent .cedent .fields .field .change-sign.negative,
   section#active-rule #succedent .cedent .fields .field .field-sign.negative {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -2048,7 +2206,7 @@ section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficie
   margin-left: 2px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficient {
     visibility: visible;
   }
@@ -2062,7 +2220,7 @@ section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
   margin-left: 5px;
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent .cedent .fields .field .controls a.remove-field {
     visibility: visible;
   }
@@ -2089,7 +2247,7 @@ section#active-rule #succedent .cedent .fields .field .controls a.change-sign.po
   float: right;
   visibility: hidden;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent .cedent .fields .field .controls a.change-sign.positive {
     visibility: visible;
   }
@@ -2133,9 +2291,10 @@ section#active-rule #succedent >.cedent >.fields >.connective {
 section#active-rule #succedent:hover a#empty-succedent {
   visibility: visible;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #succedent {
     width: 40%;
+    min-width: initial;
   }
 }
 section#active-rule #antecedent,
@@ -2146,7 +2305,7 @@ section#active-rule #succedent {
   padding-bottom: 70px;
   overflow: auto;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule #antecedent,
   section#active-rule #interest-measures,
   section#active-rule #succedent {
@@ -2252,7 +2411,23 @@ section#active-rule #succedent {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    margin: 0;
+    margin: 3px 0;
+  }
+  section#active-rule #antecedent .cedent .fields .field .controls,
+  section#active-rule #interest-measures .cedent .fields .field .controls,
+  section#active-rule #succedent .cedent .fields .field .controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: reverse;
+    -moz-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
   }
 }
 section#active-rule .no-restriction {
@@ -2263,7 +2438,7 @@ section#active-rule .no-restriction {
   clear: left;
   cursor: help;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#active-rule .no-restrictionspan:after {
     content: 'No restriction box will be considered as empty cedent.';
   }
@@ -2293,6 +2468,9 @@ section#active-rule #ar-action-box > div.failed {
 }
 section#active-rule #ar-action-box > div.info {
   background: #fff url("../images/icon-info-48.png") left center no-repeat;
+}
+section#active-rule #ar-action-box.minimize {
+  display: none;
 }
 section#active-rule #ar-action-box #stop-mining {
   background: #075783;
@@ -2446,6 +2624,9 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   clear: left;
   padding-top: 20px;
   position: relative;
+  border-top: 1px solid #000;
+  margin-top: 10px;
+tablet_L()
 }
 #found-rules #found-rules-task-name {
   color: #314e64;
@@ -2475,6 +2656,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   display: inline-block;
   background: transparent url("../images/sprite/icon-edit.png") center bottom no-repeat;
   visibility: hidden;
+tablet_L()
 }
 #found-rules #found-rules-task-name:hover a.rename-task {
   visibility: visible;
@@ -2517,6 +2699,12 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   left: 0;
   top: 8px;
 }
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  #found-rules ul li input.found-rule-checkbox {
+    width: 18px;
+    height: 18px;
+  }
+}
 #found-rules ul li .rule {
   color: #434343;
   cursor: default;
@@ -2544,6 +2732,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   float: left;
   margin-right: 5px;
   visibility: hidden;
+}
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  #found-rules ul li .ruleActions > a {
+    visibility: visible;
+  }
 }
 #found-rules ul li .ruleActions a.bk {
   background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
@@ -2731,7 +2924,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   padding: 0;
   width: 1025px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules-tabs {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -2772,7 +2965,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   padding: 0;
   background-color: rgba(255,255,255,0.6);
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules-tabs .marked-rules-tab {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -2786,7 +2979,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
     margin-right: 5px;
   }
@@ -2794,7 +2987,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules-tabs .marked-rules-tab.marked-rules-base {
   float: right;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules-tabs .marked-rules-tab.marked-rules-base {
     margin-left: 5px;
   }
@@ -2803,7 +2996,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   background-color: #fff;
   border-bottom: #fff 5px solid;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
     margin: 0;
   }
@@ -2834,7 +3027,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   float: left;
   clear: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules {
     min-width: initial;
   }
@@ -2907,6 +3100,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin: 10px 0;
   position: relative;
   padding-left: 20px;
+  text-decoration: none;
 }
 #marked-rules .marked-rules-task-name .count {
   color: #888;
@@ -2949,6 +3143,12 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules .marked-rules-task-name:hover a.remove-task {
   visibility: visible;
 }
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-task-name a.rename-task,
+  #marked-rules .marked-rules-task-name a.remove-task {
+    visibility: visible;
+  }
+}
 #marked-rules .clearfix {
   clear: both;
 }
@@ -2963,7 +3163,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   color: #888;
   font-size: 12.8px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules .marked-rules-controls {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -2987,7 +3187,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules .marked-rules-controls .paginator {
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules .marked-rules-controls .paginator {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -3006,7 +3206,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   padding: 0 5px 0 15px;
   margin: 0;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules .marked-rules-controls label {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -3066,6 +3266,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   float: left;
   margin-right: 5px;
   visibility: hidden;
+}
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  #marked-rules ul li .ruleActions > a {
+    visibility: visible;
+  }
 }
 #marked-rules ul li .ruleActions a.bk {
   background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
@@ -3221,7 +3426,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   text-decoration: none;
   color: #888;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) and (min-width: 768px) and (max-width: 1280px) {
   #marked-rules .minimize {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -3256,7 +3461,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin: 0 auto;
   position: relative;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   #wrapper {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -3280,7 +3485,7 @@ section#workplace {
   padding-bottom: 10px;
   float: left;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section#workplace {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
@@ -3314,7 +3519,7 @@ section #content {
   float: left;
   margin: 10px 0 0 10px;
 }
-@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
   section #content {
     min-width: initial;
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;

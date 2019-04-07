@@ -111,6 +111,9 @@ var UIStructureListener = new Class({
     },
 
     registerNavigationEventHandlers: function (i18n) {
+        var attributesElm = $('attributes');
+        var dataFieldsElm = $('data-fields');
+        var knowledgeBaseElm = $('knowledge-base-select');
         var attributesToggle = $$('#attributes a.toggle')[0];
         var attributesSelectable = $$('#attributes a.selectable')[0];
         var attributesSelected = $$('#attributes .navigation-checkbox-controls')[0];
@@ -125,6 +128,32 @@ var UIStructureListener = new Class({
         var dataFieldsFilterBox = $$('#data-fields > .datas-filter')[0];
         var dataFieldsFilterInput = dataFieldsFilterBox.getElement('#data-fields-filter');
         var resetD = $$('#data-fields a.reset-filter')[0];
+        var hideMenu = $$('nav .menu-controller-hide');
+        var showMenu = $$('nav .menu-controller-show');
+        var navMenu = $$('nav')
+        var navFilterDiv = $$('#nav-filter')
+
+        hideMenu.addEvent('click', function (event) {
+            event.stop();
+            this.removeClass('visible');
+            showMenu.addClass('visible');
+            navMenu.addClass('collapse');
+            attributesElm.addClass('collapse');
+            dataFieldsElm.addClass('collapse');
+            knowledgeBaseElm.addClass('collapse');
+            navFilterDiv.addClass('collapse');
+        })
+        
+        showMenu.addEvent('click', function (event) {
+            event.stop();
+            this.removeClass('visible');
+            hideMenu.addClass('visible');
+            navMenu.removeClass('collapse');
+            attributesElm.removeClass('collapse');
+            dataFieldsElm.removeClass('collapse');
+            knowledgeBaseElm.removeClass('collapse');
+            navFilterDiv.removeClass('collapse');
+        })
 
         attributesToggle.addEvent('click', function (event) {
             event.stop();
@@ -134,13 +163,16 @@ var UIStructureListener = new Class({
             if(elH2.hasClass('minimize')){
                 attributesToggle.set('title', i18n.translate('Maximize'));
                 attributesFilterBox.hide();
-            } else{ attributesToggle.set('title', i18n.translate('Minimize')); }
-            elH2.toggleClass('minimize'); elH2.toggleClass('maximize');
+            } else { 
+                attributesToggle.set('title', i18n.translate('Minimize')); 
+            }
+            elH2.toggleClass('minimize'); 
+            elH2.toggleClass('maximize');
         }.bind(this));
 
         attributesSelectable.addEvent('click', function (event) {
             event.stop();
-            var attributesElm = $('attributes');
+            // var attributesElm = $('attributes');
             if(attributesElm.hasClass('show-checkboxes')){
                 attributesElm.removeClass('show-checkboxes');
                 this.$ARBuilder.UIPainter.showAddAllUnusedAttributesLink();
@@ -184,7 +216,7 @@ var UIStructureListener = new Class({
         attributesFilter.addEvent('click', function (event) {
             event.stop();
             if(attributesFilterBox.getStyle('display') == 'none'){
-                attributesFilterBox.show();
+                attributesFilterBox.show('flex');
                 attributesFilterInput.focus();
                 attributesFilterInput.select();
             } else{
@@ -241,7 +273,7 @@ var UIStructureListener = new Class({
         dataFieldsFilter.addEvent('click', function (event) {
             event.stop();
             if(dataFieldsFilterBox.getStyle('display') == 'none'){
-                dataFieldsFilterBox.show();
+                dataFieldsFilterBox.show('flex');
                 dataFieldsFilterInput.focus();
                 dataFieldsFilterInput.select();
             } else{

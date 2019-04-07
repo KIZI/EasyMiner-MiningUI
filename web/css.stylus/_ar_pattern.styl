@@ -1,5 +1,9 @@
 section#active-rule
   position relative
+  .ar-header-wrapper
+    a
+      display none
+      background: black
   +tablet_l()
     flexbox(flex)
     flex-direction(column)
@@ -12,8 +16,27 @@ section#active-rule
       flexbox(flex)
       flex-direction(row)
       flex(grow:1)
+    .ar-header-wrapper
+      flexbox(flex)
+      flex-direction(row)
+      flex-align(center)
+      a
+        display flex
+        width 20px
+        height 20px
+        margin-left auto
+      #ar-controller
+        &.maximize
+          background transparent url('../images/sprite-icons.png') -15px -165px no-repeat
+        &.minimize
+          background transparent url('../images/sprite-icons.png') -16px -216px no-repeat
+  #ar-wrapper
+    &.clearfix
+      &.minimize
+        display none
   
   #antecedent
+    width 325px
     h3
       +tablet_l()
         flex-justify(space-between)
@@ -35,6 +58,7 @@ section#active-rule
         visibility visible
     +tablet_l()
       width 40%
+      min-width initial
 
   #interest-measures
     margin-left 2*boxMargin
@@ -96,6 +120,8 @@ section#active-rule
           margin 5px
 
   #succedent
+    margin-left 2*boxMargin
+    width 325px
     h3
       +tablet_l()
         flex-justify(space-between)
@@ -108,7 +134,6 @@ section#active-rule
           flexbox(flex)
           visibility visible
           margin 5px
-    margin-left 2*boxMargin
     .cedent
       cedent()
     >.cedent
@@ -118,6 +143,7 @@ section#active-rule
         visibility visible
     +tablet_l()
       width 40%
+      min-width initial
 
   #antecedent, #interest-measures, #succedent
     float left
@@ -151,7 +177,10 @@ section#active-rule
             flex-direction(row)
             flex-justify(space-between)
             flex-align(center)
-            margin 0
+            margin 3px 0
+            .controls
+              flexbox(flex)
+              flex-direction(row-reverse)
 
 
   .no-restriction
@@ -183,6 +212,9 @@ section#active-rule
         background boxBackgroundColor url('../images/icon-warning-48.png') left center no-repeat
       &.info
         background boxBackgroundColor url('../images/icon-info-48.png') left center no-repeat
+    
+    &.minimize
+      display none
 
     #stop-mining
       mainButton()

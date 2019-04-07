@@ -105,7 +105,7 @@ tablet_p()
 
 // tablet landscape
 tablet_l()
- +between(landscape-width-min, landscape-width-max)
+ +between(portrait-width-min, landscape-width-max)
   {block}
 
 // pc()
@@ -318,6 +318,12 @@ field()
     max-width 250px
     overflow hidden
     text-overflow ellipsis
+    +tablet_l()
+      flexbox(flex)
+      flex-align(center)
+      overflow initial
+      text-overflow initial
+      margin-right 5px
   .change-sign.negative,
   .field-sign.negative
     background transparent url('../images/sprite-icons.png') -118px -161px no-repeat
@@ -380,10 +386,7 @@ coefficient()
   +tablet_l()
     flexbox(flex)
     flex-align(center)
-    max-width 140px
-    white-space nowrap
-    overflow hidden
-    text-overflow ellipsis
+    height inherit
 
 connective()
   color #336600
@@ -441,6 +444,8 @@ ruleActions()
     float left
     margin-right 5px
     visibility hidden
+    +tablet_l()
+      visibility visible
 
 edit()
   background transparent url('../images/sprite-icons.png') -19px -262px no-repeat

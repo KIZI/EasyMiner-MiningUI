@@ -81,17 +81,17 @@ var UIPainter = new Class({
       matchAnywhere: false,
       supportSimpleCompletion: true,
       initRepaint: true,
-      // onShow: function (element) {
-      //   element.setStyle('display', 'list-item');
-      // },
+      onShow: function (element) {
+        element.setStyle('display', 'flex');
+      },
       onHide: function (element) {
         element.setStyle('display', 'none');
       },
-      onComplete: function (element) {
+      onComplete: function () {
         attributesFilter.addClass('filter-active');
         this.showAddAllUnusedAttributesLink();
       }.bind(this),
-      onNull: function (element) {
+      onNull: function () {
         attributesFilter.removeClass('filter-active');
         this.showAddAllUnusedAttributesLink();
       }.bind(this)
@@ -258,7 +258,7 @@ var UIPainter = new Class({
       matchAnywhere: false,
       supportSimpleCompletion: true,
       onShow: function (element) {
-        element.setStyle('display', 'list-item');
+        element.setStyle('display', 'flex');
       },
       onHide: function (element) {
         element.setStyle('display', 'none');
@@ -277,6 +277,11 @@ var UIPainter = new Class({
   },
 
   sortAttributes: function (positions) {
+    var attList = $$('#attributes > div > ul').getElements('li')
+    console.log(attList)
+    if (attList[0].length <= 1) {
+      return;
+    }
     var sorter = new Fx.Sort($$('#attributes > div > ul > li'), {
       transition: Fx.Transitions.Cubic.easeInOut,
       duration: this.sortDuration

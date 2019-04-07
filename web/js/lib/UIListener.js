@@ -151,6 +151,8 @@ var UIListener = new Class({
 
     // change checkbox status
     $(field.getCSSCheckboxID()).addEvent('click', function (event) {
+      $(field.getCSSCheckboxID()).setAttribute('checked', true);
+      console.log(field.getCSSCheckboxID(), 'has value after click', $(field.getCSSCheckboxID()).checked)
       this.checkDataFieldsSelectedCheckboxes();
     }.bind(this));
 
@@ -166,18 +168,14 @@ var UIListener = new Class({
       this.ARBuilder.openShowHistogramWindow(field.getId(), 'field');
     }.bind(this));
 
-    $(field.getCSSCheckboxID()).addEvent('click', function (event) {
-      event.stop();
-      $(field.getCSSID()).getElements('.data-field-checkbox').each(function(checkbox){
-        if (checkbox.checked) {
-          checkbox.checked = false;
-          console.log(checkbox);
-        } else {
-          checkbox.checked = true;
-          console.log('else', checkbox);
-        }
-      });
-    }.bind(this));
+    // $(field.getCSSCheckboxID()).addEvent('click', function (event) {
+    //   event.stop();
+    //   let checkbox = $(field.getCSSCheckboxID())
+    //   console.log(field.getCSSCheckboxID(), 'has value after click', checkbox.checked)
+    //   var dataFieldsBox = $('data-fields')
+    //   console.log(dataFieldsBox.getElements('.data-field-checkbox:checked').length)
+
+    // }.bind(this)),
 
     $(field.getCSSNavControlShowMenuField()).addEvent('click', function (event) {
       event.stop();
@@ -387,6 +385,21 @@ var UIListener = new Class({
         this.ARBuilder.getARManager().sortAttributes();
       }
     }.bind(this));
+
+    $('ar-controller').addEvent('click', function (event) {
+      event.stop()
+      if ($('ar-controller').hasClass('maximize')) {
+        $('ar-controller').removeClass('maximize')
+        $('ar-controller').addClass('minimize')
+        $('ar-wrapper').removeClass('minimize')
+        $('ar-action-box').removeClass('minimize')
+      } else if ($('ar-controller').hasClass('minimize')) {
+        $('ar-controller').removeClass('minimize')
+        $('ar-controller').addClass('maximize')
+        $('ar-wrapper').addClass('minimize')
+        $('ar-action-box').addClass('minimize')
+      }
+    })
   },
 
   registerIMEventHandler: function (IM) {
@@ -1055,8 +1068,11 @@ var UIListener = new Class({
 
     taskNameElement.getElements('.toggle').addEvent('click', function (event) {
       event.stop();
-      if(taskElm.hasClass('maximize')){ task.reload(); }
-      taskElm.toggleClass('minimize'); taskElm.toggleClass('maximize');
+      if (taskElm.hasClass('maximize')) {
+        task.reload(); 
+      }
+      taskElm.toggleClass('minimize'); 
+      taskElm.toggleClass('maximize');
     }.bind(this));
   },
 

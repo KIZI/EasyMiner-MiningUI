@@ -4,6 +4,45 @@ nav
   width navWidth
   margin boxMargin 5px 0 boxMargin
   line-height 20px
+
+  #navigation-controls
+    display none
+    width 100%
+    background white
+    margin-bottom 10px
+    +tablet_l()
+      display flex
+      flex-direction(row)
+    #nav-filter
+      flexbox(flex)
+      flex-direction(row)
+      flex-align(center)
+      width 100%
+      input
+        margin-right 5px
+        width 18px
+        height 18px
+      span 
+        margin-top 3px
+        margin-right auto
+        font-size 13px
+      &.collapse
+        display none
+
+  .menu-controller-show
+  .menu-controller-hide
+    display none
+    flex-align(center)
+    text-decoration none
+    cursor pointer
+    background #075783
+    margin 3px
+    padding 3px
+    color white
+    &.visible
+      display flex
+
+
   +tablet_l()
     flexbox(flex)
     flex-direction(column)
@@ -11,6 +50,13 @@ nav
     width auto
     max-width navWidth - 20px
     min-width navWidth - 20px
+    &.collapse
+      background white
+      width initial
+      max-width initial
+      min-width initial
+      margin-bottom 10px
+      box-shadow(10px, 5px, 10px, 0, rgba(0, 0, 0, 0.4))
     section 
       flexbox(flex)
       flex-direction(column)
@@ -45,7 +91,9 @@ navigationBox()
     background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
 
   h2 a
-    display block; width 12px; height 12px
+    display block
+    width 12px
+    height 12px
     float right
     position relative; top 5px
     margin-left 5px/*FIXME*/
@@ -83,7 +131,7 @@ navigationBox()
       display list-item
 
   ul
-      margin 0 20px 10px 20px 
+      margin 0 20px 10px 20px
     li
       flexbox(flex)
       flex-direction(row)
@@ -92,7 +140,8 @@ navigationBox()
       cursor move
       float left
       clear left
-      margin 5px 0
+      margin 0
+      padding 2px 0
       &.rec1
         background transparent url('../images/sprite-icons.png') -20px -415px no-repeat
       &.rec2
@@ -113,11 +162,15 @@ navigationBox()
         .add
           visibility visible
   +tablet_l()
-    li 
-      flex-justify(space-between)
+    ul
+      margin 0 20px 10px 0
+      li 
+        flexbox(flex)
+        margin 5px 0
         
     a[id^=nav-control-menu-]
       flexbox(flex)
+      margin-left auto
       background transparent url("../images/sprite/icon-settings.png")
       background-size 20px
       width 20px
@@ -126,9 +179,9 @@ navigationBox()
         display none
     div[id^=nav-attribute-control-]
       flexbox(flex)
-      flex-direction(row)
-      flex-justify(end) 
+      margin-left auto
       &.hide-nav-control 
+        margin-left 5px
         display none
     &.show-checkboxes
       li
@@ -208,6 +261,7 @@ navigationBox()
       float left
       clear left
       margin 0
+      padding 2px 0
       .add
         background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
         display block
@@ -224,6 +278,7 @@ navigationBox()
         visibility hidden
         +tablet_l()
           visibility visible
+          margin-left 5px
       &:hover
         color #000
         .add
@@ -233,21 +288,19 @@ navigationBox()
 
   +tablet_l()
     ul
-      margin 0 20px 10px 20px 
+      margin 0 20px 10px 0 
       li 
         flexbox(flex)
-        flex-direction(row)
-        flex-justify(space-between)
         margin 5px 0
         width 100%
     div[id^=field-nav-attribute-control-]
         flexbox(flex)
-        flex-direction(row)
-        flex-justify(end) 
+        margin-left auto
         &.hide-nav-control-field
           display none
     a[id^=field-nav-control-menu-]
       flexbox(flex)
+      margin-left auto
       background transparent url("../images/sprite/icon-settings.png")
       background-size 20px
       width 20px
@@ -256,17 +309,19 @@ navigationBox()
         display none
     &.show-checkboxes
       li
+        flexbox(flex) 
         flex-justify(start)
         flex-align(start)
-        [id^=field-nav-control-menu-]
+        a[id^=field-nav-control-menu-]
           display none
-        a[id^=field-nav-attribute-control-]
+        div[id^=field-nav-attribute-control-]
           display none
 
 
 
 #knowledge-base-select
   navigationBox()
+  box-shadow(10px, 0, 10px, 0, rgba(0, 0, 0, 0.4))
 
   h2
     navigationH2()
@@ -282,6 +337,8 @@ navigationBox()
       color linkColor
       font-size 14px
       float right
+  &.collapse
+    display none
 
 #navigation h2.maximize .filter,
 #navigation h2.maximize .selectable
@@ -359,6 +416,9 @@ attributeIconLink()
       overflow hidden
       text-overflow ellipsis
       white-space nowrap
+      +tablet_l()
+        flexbox(flex)
+        padding-top 3px
 
   .navigation-checkbox-controls
     clear both
@@ -408,8 +468,10 @@ attributeIconLink()
     width 20px
     margin-top 4px
     +tablet_l()
-      width 15px
-      height 15px
+      flexbox(flex)
+      visibility hidden
+      width 18px
+      height 18px
       margin 3px
 
   &.show-checkboxes
@@ -418,12 +480,17 @@ attributeIconLink()
       +tablet_l()
         felxbox(flex)
         flex-align(center)
+        visibility visible
     .add
       display none
     .navigation-checkbox-controls
       display block
       +tablet_l()
         flexbox(flex)
+        height auto
+
+  &.collapse
+    display none
 
 
 /*
