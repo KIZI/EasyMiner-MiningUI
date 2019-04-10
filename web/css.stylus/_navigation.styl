@@ -6,69 +6,30 @@ nav
   line-height 20px
 
   #navigation-controls
-    display none
-    width 100%
-    background white
-    margin-bottom 10px
-    +tablet_l()
-      display flex
-      flex-direction(row)
-    #nav-filter
-      flexbox(flex)
-      flex-direction(row)
-      flex-align(center)
-      width 100%
-      input
-        margin-right 5px
-        width 18px
-        height 18px
-      span 
-        margin-top 3px
-        margin-right auto
-        font-size 13px
-      &.collapse
-        display none
+    border-radius 50%
+    width 30px
+    margin-left auto
+    background-color rgba(#126499, 0.2)
 
-  .menu-controller-show
-  .menu-controller-hide
-    display none
-    flex-align(center)
-    text-decoration none
-    cursor pointer
-    background #075783
-    margin 3px
-    padding 3px
-    color white
-    &.visible
-      display flex
-
-
-  +tablet_l()
+  +tablet()
     flexbox(flex)
     flex-direction(column)
     margin-right 10px
     width auto
-    max-width navWidth - 20px
-    min-width navWidth - 20px
-    &.collapse
-      background white
-      width initial
-      max-width initial
-      min-width initial
-      margin-bottom 10px
-      box-shadow(10px, 5px, 10px, 0, rgba(0, 0, 0, 0.4))
+    max-width navWidth - 40px
+    min-width navWidth - 40px
+    width initial
     section 
       flexbox(flex)
       flex-direction(column)
+  &.hide
+    width 35px
+    min-width initial
+    max-width initial
 
 navigationH2()
   h2Small()
-  margin 5px 20px 15px 20px
-  padding-bottom 5px
-  border-bottom 1px solid h2Color
-  // +tablet_l()
   flexbox(flex)
-  flex-justify(space-between)
 
 navigationBox()
   box()
@@ -95,7 +56,8 @@ navigationBox()
     width 12px
     height 12px
     float right
-    position relative; top 5px
+    position relative
+    top 5px
     margin-left 5px/*FIXME*/
 
   ul
@@ -111,6 +73,7 @@ navigationBox()
         visibility visible
 
 #attributes
+  padding-top 0 !important
   ul#attributes-by-group
     background transparent url('../images/icon-group4.png') 0 2px no-repeat
 
@@ -129,6 +92,15 @@ navigationBox()
     font-size 13px
     li
       display list-item
+
+  #att-menu-wrapper
+    flexbox(flex)
+    flex-direction(row)
+    flex-justify(space-between)
+    border-bottom 1px solid h2Color
+    margin 0 0 5px 30px
+    h2 
+      margin 0
 
   ul
       margin 0 20px 10px 20px
@@ -155,15 +127,15 @@ navigationBox()
         height 20px
         margin-left 5px
         visibility hidden
-        +tablet_l()
+        +tablet()
           visibility visible
       &:hover
         color #000
         .add
           visibility visible
-  +tablet_l()
+  +tablet()
     ul
-      margin 0 20px 10px 0
+      margin 0 5px 10px 5px
       li 
         flexbox(flex)
         margin 5px 0
@@ -171,7 +143,7 @@ navigationBox()
     a[id^=nav-control-menu-]
       flexbox(flex)
       margin-left auto
-      background transparent url("../images/sprite/icon-settings.png")
+      background transparent url("../images/hamburger-icon.png")
       background-size 20px
       width 20px
       height 20px
@@ -192,6 +164,10 @@ navigationBox()
           display none
         div[id^=nav-attribute-control-]
           display none
+      #add-all-unused-attributes
+        display none
+        &.show
+          flexbox(flex)
 
   a.edit-attribute
     edit()
@@ -206,7 +182,7 @@ navigationBox()
     margin-left 5px
     float right
     visibility hidden
-    +tablet_l()
+    +tablet()
         visibility visible
 
   li:hover a.show-histogram
@@ -216,7 +192,7 @@ navigationBox()
     remove()
     margin-left 5px
     float right
-    +tablet_l()
+    +tablet()
         visibility visible
 
   li:hover a.remove-attribute
@@ -245,11 +221,19 @@ navigationBox()
     margin-top 8px
     display none
     background transparent url("../images/sprite-icons.png") -166px -162px no-repeat
-    +tablet_l()
+    +tablet()
       margin-left 20px
 
 
 #data-fields
+  #df-menu-wrapper
+    flexbox(flex)
+    flex-direction(row)
+    flex-justify(space-between)
+    border-bottom 1px solid h2Color
+    margin 0 0 5px 30px
+    h2 
+      margin 0
   ul
       margin 0 20px 10px 20px 
     li
@@ -269,14 +253,14 @@ navigationBox()
         width 20px
         height 20px
         visibility hidden
-        +tablet_l()
+        +tablet()
           visibility visible
       .show-histogram
         showHistogram()
         margin-left 10px
         float right
         visibility hidden
-        +tablet_l()
+        +tablet()
           visibility visible
           margin-left 5px
       &:hover
@@ -286,9 +270,9 @@ navigationBox()
         .show-histogram
           visibility visible
 
-  +tablet_l()
+  +tablet()
     ul
-      margin 0 20px 10px 0 
+      margin 0 5px 10px 5px
       li 
         flexbox(flex)
         margin 5px 0
@@ -301,7 +285,7 @@ navigationBox()
     a[id^=field-nav-control-menu-]
       flexbox(flex)
       margin-left auto
-      background transparent url("../images/sprite/icon-settings.png")
+      background transparent url("../images/hamburger-icon.png")
       background-size 20px
       width 20px
       height 20px
@@ -323,11 +307,20 @@ navigationBox()
   navigationBox()
   box-shadow(10px, 0, 10px, 0, rgba(0, 0, 0, 0.4))
 
-  h2
-    navigationH2()
+  #kb-menu-wrapper
+    flexbox(flex)
+    flex-direction(row)
+    flex-justify(space-between)
+    border-bottom 1px solid h2Color
+    margin 0 0 5px 30px
+    h2
+      navigationH2() 
+      margin 0
 
   .clearfix
     padding 0 20px
+    +tablet()
+      padding 0 5px 0 30px
     line-height 1.8
 
     select
@@ -337,6 +330,11 @@ navigationBox()
       color linkColor
       font-size 14px
       float right
+  &.hide
+    div.clearfix
+      display none
+    #kb-menu-wrapper
+      margin-left 0
   &.collapse
     display none
 
@@ -349,12 +347,13 @@ attributeIconLink()
   float left
   margin-right 2px
   margin-top 4px
-  +tablet_l()
+  +tablet()
     flexbox(flex)
     margin 5px
 
 #attributes, #data-fields
   navigationBox()
+  box-shadow(5px, 5px, 10px, 0, rgba(0, 0, 0, 0.4))
 
   h2
     navigationH2()
@@ -377,6 +376,9 @@ attributeIconLink()
   .datas-filter
     display none
     margin 5px 20px
+    margin-right 5px
+    flex-direction(row)
+    flex-justify(space-between)
   input[type='text']
     width 180px
     padding 2px 3px
@@ -384,6 +386,8 @@ attributeIconLink()
     border 1px solid #aaa /*TODO nahradit parametry!*/
     -moz-user-select text
     -ms-user-select text
+    +tablet()
+      width initial
   a.reset-filter
     float right
     background transparent url("../images/sprite-icons.png") -19px -15px no-repeat
@@ -416,9 +420,22 @@ attributeIconLink()
       overflow hidden
       text-overflow ellipsis
       white-space nowrap
-      +tablet_l()
+      +tablet()
         flexbox(flex)
         padding-top 3px
+  
+  .nav-header-control
+    flexbox(flex)
+    flex-direction(row-reverse)
+    a
+      margin 2px
+      &.toggle
+        width 20px
+        height 20px
+        &.minimize
+          background transparent url('../images/sprite-icons.png') -16px -216px no-repeat
+        &.maximize
+          background transparent url('../images/sprite-icons.png') -15px -165px no-repeat
 
   .navigation-checkbox-controls
     clear both
@@ -427,7 +444,7 @@ attributeIconLink()
     height 28px
     overflow hidden
     width auto
-    +tablet_l()
+    +tablet()
       flex-direction(row)
       height 100%
       a 
@@ -444,18 +461,18 @@ attributeIconLink()
     .all
       attributeIconLink()
       background transparent url('../images/icon-select-all.png') center center no-repeat
-      +tablet_l()
+      +tablet()
         background transparent url('../images/icon-select-all.png') no-repeat
         margin-left 23px
     .none
       attributeIconLink()
       background transparent url('../images/icon-select-none.png') center center no-repeat
-      +tablet_l()
+      +tablet()
         background transparent url('../images/icon-select-none.png') no-repeat
     .invert
       attributeIconLink()
       background transparent url('../images/icon-select-invert.png') center center no-repeat
-      +tablet_l()
+      +tablet()
         background transparent url('../images/icon-select-invert.png') no-repeat
 
 
@@ -467,7 +484,7 @@ attributeIconLink()
     float left
     width 20px
     margin-top 4px
-    +tablet_l()
+    +tablet()
       flexbox(flex)
       visibility hidden
       width 18px
@@ -477,7 +494,7 @@ attributeIconLink()
   &.show-checkboxes
     input[type='checkbox']
       display block
-      +tablet_l()
+      +tablet()
         felxbox(flex)
         flex-align(center)
         visibility visible
@@ -485,13 +502,40 @@ attributeIconLink()
       display none
     .navigation-checkbox-controls
       display block
-      +tablet_l()
+      +tablet()
         flexbox(flex)
         height auto
 
-  &.collapse
-    display none
+  &.hide
+    div.clearfix
+      display none
+    #att-menu-wrapper
+    #df-menu-wrapper
+      margin-left 0
 
+#menu-controller
+  flexbox(flex)
+  background transparent url("../images/arrow-right.png") 5px 5px no-repeat
+  background-size 20px
+  height 30px
+  width 30px
+  text-decoration none
+  // margin 3px
+  // padding 5px
+  &.hide
+    #navigation
+      min-width initial !important
+      max-width initial !important
+    background transparent url("../images/arrow-left.png") -2px 5px no-repeat
+    background-size 20px
+    height 30px
+    width 30px
+    text-decoration none
+
+#attributes
+  &.hide
+    #attributes-by-list
+      display none
 
 /*
 #reports

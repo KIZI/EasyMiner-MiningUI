@@ -1152,15 +1152,17 @@ var UITemplateRegistrator = new Class({
         span({'class': 'ims'}, rule.getIMIdent()));*/
       
       li({id: markedRule.getCSSID(), 'class': 'marked-rule'+(markedRule.isLoading()?' loading':'')},
+        div({class:'marked-rule-info'},
           input({type:'checkbox',id:markedRule.getCSSID()+'-checkbox', class:'marked-rule-checkbox'}),
           label({for: markedRule.getCSSID()+'-checkbox', 'class': 'rule'}, markedRule.getIdent()),
-          span({class:'ruleActions'},
-              a({id: markedRule.getUnmarkCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Rule Clipboard')}),
-              a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
-              a({id: markedRule.getUpCSSID(),href: '#','class': 'kb-add','rel': 'positive','title': i18n.translate('Interesting')}),
-              a({id: markedRule.getDownCSSID(),href: '#','class': 'kb-add','rel': 'negative','title': i18n.translate('Not interesting')})
-          ),
           span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
+        ),
+        span({class:'ruleActions'},
+          a({id: markedRule.getUnmarkCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Rule Clipboard')}),
+          a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')}),
+          a({id: markedRule.getUpCSSID(),href: '#','class': 'kb-add','rel': 'positive','title': i18n.translate('Interesting')}),
+          a({id: markedRule.getDownCSSID(),href: '#','class': 'kb-add','rel': 'negative','title': i18n.translate('Not interesting')})
+        ),
       );
     });
 

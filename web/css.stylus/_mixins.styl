@@ -26,6 +26,7 @@ h1Font = 48px 'Average', 'serif'
 h2Font = 20px 'Average', 'serif'
 h2Color = #314E64
 h2ARFont = 36px fontFamily
+h2ARFontTablet = 34px fontFamily
 h2ARColor = #925213
 
 /*úprava pro sjednocení fontů*/
@@ -80,6 +81,8 @@ unimportantTextColor = #888
 interestMeasureValueColor = #7B0D2E
 interestMeasureColor = unimportantTextColor
 
+mobile-width-min = 320px
+mobile-width-max = 767px
 portrait-width-min = 768px
 portrait-width-max = 960px
 landscape-width-min = 1024px
@@ -99,14 +102,18 @@ between(bp1, bp2)
   {block} 
 
 // tablet portrait
-tablet_p()
- +between(portrait-width-min, portrait-width-max)
+mobile()
+ +between(mobile-width-min, mobile-width-max)
   {block}
 
 // tablet landscape
-tablet_l()
- +between(portrait-width-min, landscape-width-max)
+tablet()
+ +between(mobile-width-min, landscape-width-max)
   {block}
+
+tablet_p()
+  +max(potrait-width-max)
+    {block}
 
 // pc()
 //  +min(pc-start-value)
@@ -121,7 +128,7 @@ centerMainContent()
   width minContentWidth2
   margin 0 auto
   position relative
-  +tablet_l()
+  +tablet()
     min-width initial
 
 box()
@@ -168,6 +175,8 @@ h2Small()
 h2AR()
   color h2ARColor
   font h2ARFont
+  +tablet()
+    font h2ARFontTablet
   font-weight normal
   border-bottom none
 
@@ -310,7 +319,7 @@ field()
     coefficient()
   .field-drag
     cursor move
-    +tablet_l()
+    +tablet()
       flexbox(inline-flex)
   .field-name
     display block
@@ -318,7 +327,7 @@ field()
     max-width 250px
     overflow hidden
     text-overflow ellipsis
-    +tablet_l()
+    +tablet()
       flexbox(flex)
       flex-align(center)
       overflow initial
@@ -330,7 +339,7 @@ field()
     width 13px
     height 20px
     float left
-    +tablet_l()
+    +tablet()
       flexbox(flex)
       flex-align(center)
       height 25px
@@ -342,13 +351,13 @@ fieldControls()
     edit()
     margin-left 2px
     float right
-    +tablet_l()
+    +tablet()
       visibility visible
   a.remove-field
     remove()
     margin-left 5px
     float right
-    +tablet_l()
+    +tablet()
       visibility visible
   a.mark-field
     background transparent url('../images/sprite-icons.png') -67px -212px no-repeat
@@ -369,7 +378,7 @@ fieldControls()
     height 20px
     float right
     visibility hidden
-    +tablet_l()
+    +tablet()
       visibility visible
 
 firstCedent()
@@ -383,7 +392,7 @@ coefficient()
   position relative
   top -1px
   margin-left 3px
-  +tablet_l()
+  +tablet()
     flexbox(flex)
     flex-align(center)
     height inherit
@@ -444,7 +453,7 @@ ruleActions()
     float left
     margin-right 5px
     visibility hidden
-    +tablet_l()
+    +tablet()
       visibility visible
 
 edit()

@@ -6,12 +6,15 @@ tabPadding = 15px
   clear left
   padding 0
   width minContentWidth + 4*boxMargin
-  +tablet_l()
+  +tablet()
     flexbox(flex)
     flex-direction(row)
     h2
       flex(grow:1)
     width initial
+  +tablet_p()
+    h2
+      font-size 29px
   .marked-rules-tab
     box()
     h2AR()
@@ -19,20 +22,20 @@ tabPadding = 15px
     margin 0
     padding 0
     background-color rgba(255, 255, 255, 0.6)
-    +tablet_l()
+    +tablet()
       flexbox(flex)
       width initial
       margin-bottom 5px
     &.marked-rules-tasks
       float left
-      +tablet_l()
+      +tablet()
         margin-right 5px
     &.marked-rules-base
       float right
-      +tablet_l()
+      +tablet()
         margin-left 5px
     &.marked-rules-tab-active
-      +tablet_l()
+      +tablet()
         margin 0
       background-color #ffffff
       border-bottom #fff 5px solid
@@ -52,7 +55,7 @@ tabPadding = 15px
   margin 0 0 0 boxMargin
   float left
   clear left
-  +tablet_l()
+  +tablet()
     min-width initial
     .marked-rules-control-wrapper
       flexbox(flex)
@@ -64,10 +67,13 @@ tabPadding = 15px
       select
         border 1px solid black
     .marked-rules-tasks-content
-      .minimize
-        +tablet_l()
+      +tablet()
+        .minimize
           flexbox(flex)
           flex-direction(column)
+        .marked-rule  
+          flexbox(flex)
+          flex-justify(space-between)
 
   h2
     h2AR()
@@ -138,7 +144,7 @@ tabPadding = 15px
       a.rename-task,
       a.remove-task
         visibility visible
-    +tablet_l()
+    +tablet()
       a.rename-task,
       a.remove-task
         visibility visible
@@ -156,14 +162,14 @@ tabPadding = 15px
     text-align right
     color unimportantTextColor
     font-size 0.8*baseFontSize
-    +tablet_l()
+    +tablet()
       flexbox(flex)
       flex-direction(row)
       flex-justify(space-between)
 
     .paginator
       float left
-      +tablet_l()
+      +tablet()
         flexbox(flex)
         flex-align(center)
 
@@ -171,7 +177,7 @@ tabPadding = 15px
       display inline-block
       padding 0 5px 0 15px
       margin 0
-      +tablet_l()
+      +tablet()
         flexbox(flex)
         flex-align(center)
 

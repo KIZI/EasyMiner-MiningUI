@@ -24,7 +24,7 @@
   width minContentWidth2
   margin 0 auto
   position relative
-  +tablet_l()
+  +tablet()
     flexbox(flex)
     flex-direction(row)
     position initial
@@ -35,10 +35,11 @@ section#workplace
   margin 0 auto
   padding-bottom boxMargin
   float left
-  +tablet_l()
+  +tablet()
     flexbox(flex)
     flex-direction(column)
-    flex(grow:1, shrink:1)
+    // flex(grow:1, shrink:1)
+    width 100%
     margin 0
 
 section
@@ -47,7 +48,7 @@ section
     min-width minContentWidth
     float left
     margin boxMargin 0 0 boxMargin
-    +tablet_l()
+    +tablet()
       min-width initial
       flexbox(flex)
       flex-direction(column)

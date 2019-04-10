@@ -34,20 +34,7 @@ var UIStructureTemplater = new Class({
             section({id: 'found-rules'})
           )
         ),
-        nav({id: 'navigation'},
-          div({id: 'navigation-controls'},
-            a({class: 'menu-controller-show', href: '#'}, 'show'),
-            a({class: 'menu-controller-hide visible', href: '#'}, 'hide'),
-            div({id: 'nav-filter'},
-              input({type: 'checkbox', id: 'show-menu-attributes'}),
-              span('ATT'),
-              input({type: 'checkbox', id: 'show-menu-data-fields'}),
-              span('DF'),
-              input({type: 'checkbox', id: 'show-menu-knowledge-base'}),
-              span('KB')
-            )
-          )
-        )
+        nav({id: 'navigation'})
       );
     });
   },
@@ -233,13 +220,17 @@ var UIStructureTemplater = new Class({
             div(a({id: 'attributes-by-list', href: '#'}, i18n.translate('attributes')))));
       } else {
         section({id: 'attributes'},
-            h2({'class': 'minimize'}, i18n.translate('Attributes'),
-              div({class: 'nav-header-control'},
-                a({href: '#', 'class': 'toggle', 'title': i18n.translate('Minimize')}, ''), 
-                a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
-                a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')
-              )
+          div({id: 'navigation-controls'},
+            a({id: 'menu-controller', href: '#'})
+          ),
+          div({id: 'att-menu-wrapper'},
+            h2({id:'header-att', 'class': 'minimize'}, i18n.translate('Attributes')),
+            div({class: 'nav-header-control'},
+              a({href: '#', 'class': 'toggle minimize', 'title': i18n.translate('Minimize')}, ''), 
+              a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
+              a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')
             ),
+          ),
           div({'class': 'datas-filter'},
             input({
               'id': 'attributes-filter',
@@ -291,9 +282,10 @@ var UIStructureTemplater = new Class({
       var i18n = data.i18n;
 
       section({id: 'data-fields'},
-        h2({'class': 'minimize'}, i18n.translate('Data fields'), 
+        div({id: 'df-menu-wrapper'},
+          h2({id:'header-df', 'class': 'minimize'}, i18n.translate('Data fields')),
           div({class: 'nav-header-control'},
-            a({href: '#', 'class': 'toggle', 'title': i18n.translate('Minimize')}, ''), 
+            a({href: '#', 'class': 'toggle minimize', 'title': i18n.translate('Minimize')}, ''), 
             a({href: '#', 'class': 'filter', 'title': i18n.translate('Filter')}, ''),
             a({href: '#', 'class': 'selectable', 'title': i18n.translate('Selectable')}, '')
           )
@@ -334,12 +326,14 @@ var UIStructureTemplater = new Class({
       var i18n = data.i18n;
 
       section({id: 'knowledge-base-select'},
-          h2({'class': 'minimize'}, i18n.translate('Knowledge base')),
+        div({id: 'kb-menu-wrapper'},
+          h2({id:'header-kb', 'class': 'minimize'}, i18n.translate('Knowledge base'))),
           div({'class': 'clearfix'},
               strong({id: 'kb-ruleset'}, i18n.translate('Loading')+'...'),
               br(),
               a({href: '#', 'id': 'change-ruleset', 'title': i18n.translate('Change ruleset')}, i18n.translate('Change ruleset'))
-          ));
+        )
+      );
     });
 
     Mooml.register('reportsStructureTemplate', function (data) {

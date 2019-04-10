@@ -112,7 +112,7 @@ var UIPainter = new Class({
       allowAddAllUnusedAttributesLink=true;
     }.bind(this));
     if (allowAddAllUnusedAttributesLink){
-      $('add-all-unused-attributes').show();
+      $('add-all-unused-attributes').show('flex');
     }else{
       $('add-all-unused-attributes').hide();
     }
