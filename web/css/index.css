@@ -699,7 +699,6 @@ nav #navigation-controls {
   -moz-border-radius: 50%;
   width: 30px;
   margin-left: auto;
-  background-color: rgba(18,100,153,0.2);
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   nav {
@@ -795,9 +794,6 @@ nav.hide {
 .attributesPalette li:hover .action {
   visibility: visible;
 }
-#attributes {
-  padding-top: 0 !important;
-}
 #attributes ul#attributes-by-group {
   background: transparent url("../images/icon-group4.png") 0 2px no-repeat;
 }
@@ -857,10 +853,15 @@ nav.hide {
   -ms-flex-pack: justify;
   justify-content: space-between;
   border-bottom: 1px solid #314e64;
-  margin: 0 0 5px 30px;
+  margin: 0 10px 5px 20px;
 }
 #attributes #att-menu-wrapper h2 {
   margin: 0;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #attributes #att-menu-wrapper {
+    margin: 0 5px 5px 30px;
+  }
 }
 #attributes ul {
   margin: 0 20px 10px 20px;
@@ -919,6 +920,9 @@ nav.hide {
   visibility: visible;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #attributes {
+    padding-top: 0 !important;
+  }
   #attributes ul {
     margin: 0 5px 10px 5px;
   }
@@ -1669,29 +1673,35 @@ nav.hide {
 #attributes.hide #df-menu-wrapper,
 #data-fields.hide #df-menu-wrapper {
   margin-left: 0;
+  margin-right: 0;
 }
 #menu-controller {
-  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-  display: -ms-flexbox /* TWEENER - IE 10 */;
-  display: -webkit-flex /* NEW - Chrome */;
-  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-  background: transparent url("../images/arrow-right.png") 5px 5px no-repeat;
-  background-size: 20px;
-  height: 30px;
-  width: 30px;
-  text-decoration: none;
+  display: none;
 }
-#menu-controller.hide {
-  background: transparent url("../images/arrow-left.png") -2px 5px no-repeat;
-  background-size: 20px;
-  height: 30px;
-  width: 30px;
-  text-decoration: none;
-}
-#menu-controller.hide #navigation {
-  min-width: initial !important;
-  max-width: initial !important;
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #menu-controller {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    background: transparent url("../images/arrow-right.png") 5px 5px no-repeat;
+    background-size: 20px;
+    height: 30px;
+    width: 30px;
+    text-decoration: none;
+  }
+  #menu-controller.hide {
+    background: transparent url("../images/arrow-left.png") -2px 5px no-repeat;
+    background-size: 20px;
+    height: 30px;
+    width: 30px;
+    text-decoration: none;
+  }
+  #menu-controller.hide #navigation {
+    min-width: initial !important;
+    max-width: initial !important;
+  }
 }
 #attributes.hide #attributes-by-list {
   display: none;
@@ -3045,9 +3055,26 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     flex: 1 0 auto;
   }
 }
-@media only screen and (max-width: potrait-width-max) {
-  #marked-rules-tabs h2 {
-    font-size: 29px;
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  #marked-rules-tabs {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules-tabs {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 }
 #marked-rules-tabs .marked-rules-tab {
@@ -3083,12 +3110,31 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     margin-bottom: 5px;
   }
 }
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules-tabs .marked-rules-tab {
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+  }
+}
 #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
   float: left;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
     margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
+    margin-right: 0;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-tasks {
+    margin-right: 0;
   }
 }
 #marked-rules-tabs .marked-rules-tab.marked-rules-base {
@@ -3099,6 +3145,16 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     margin-left: 5px;
   }
 }
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-base {
+    margin-left: 0;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-base {
+    margin-left: 0;
+  }
+}
 #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
   background-color: #fff;
   border-bottom: #fff 5px solid;
@@ -3106,6 +3162,24 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
     margin: 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules-tabs .marked-rules-tab.marked-rules-tab-active {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
   }
 }
 #marked-rules-tabs .marked-rules-tab:hover {
@@ -3133,6 +3207,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin: 0 0 0 10px;
   float: left;
   clear: left;
+}
+#marked-rules .marked-rule {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #marked-rules {
@@ -3167,6 +3248,20 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   }
   #marked-rules .marked-rules-control-wrapper select {
     border: 1px solid #000;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules .marked-rules-control-wrapper {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  #marked-rules .ruleActions {
+    min-width: 100px;
   }
 }
 #marked-rules h2 {
@@ -3296,6 +3391,17 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     justify-content: space-between;
   }
 }
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules .marked-rules-controls {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 #marked-rules .marked-rules-controls .paginator {
   float: left;
 }
@@ -3311,6 +3417,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules .marked-rules-controls .paginator {
+    margin-top: 5px;
   }
 }
 #marked-rules .marked-rules-controls label {
@@ -3332,6 +3443,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     align-items: center;
   }
 }
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules .marked-rules-controls label {
+    padding-left: 0;
+  }
+}
 #marked-rules .marked-rules-controls select {
   padding: 5px;
 }
@@ -3350,6 +3466,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   position: absolute;
   left: 0;
   top: 8px;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules ul li input.marked-rule-checkbox {
+    width: 15px;
+    height: 15px;
+    top: 4px;
+  }
 }
 #marked-rules ul li .rule {
   color: #434343;
@@ -3564,6 +3687,18 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+  }
+  #marked-rules .marked-rule .ruleActions {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
   }
 }
 #createUserReport {

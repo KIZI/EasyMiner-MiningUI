@@ -1173,13 +1173,15 @@ var UITemplateRegistrator = new Class({
           IMs = data.IMs;
 
       li({id: markedRule.getCSSID(), 'class': 'marked-rule'+(markedRule.isLoading()?' loading':'')},
+        div({class: 'marked-rule-info'},
           input({type:'checkbox',id:markedRule.getCSSID()+'-checkbox', class:'marked-rule-checkbox'}),
           label({for: markedRule.getCSSID()+'-checkbox', 'class': 'rule'}, markedRule.getIdent()),
+          span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
+        ),
           span({class:'ruleActions'},
               a({id: markedRule.getKBRemoveCSSID(), href: '#', 'class': 'clear', 'title': i18n.translate('Remove from Knowledge base')}),
               a({id: markedRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
           ),
-          span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: markedRule.getRuleValues(), IMs: IMs}))
       );
     });
 

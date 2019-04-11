@@ -9,7 +9,7 @@ nav
     border-radius 50%
     width 30px
     margin-left auto
-    background-color rgba(#126499, 0.2)
+    // background-color rgba(#126499, 0.2)
 
   +tablet()
     flexbox(flex)
@@ -73,7 +73,6 @@ navigationBox()
         visibility visible
 
 #attributes
-  padding-top 0 !important
   ul#attributes-by-group
     background transparent url('../images/icon-group4.png') 0 2px no-repeat
 
@@ -98,9 +97,11 @@ navigationBox()
     flex-direction(row)
     flex-justify(space-between)
     border-bottom 1px solid h2Color
-    margin 0 0 5px 30px
+    margin 0 10px 5px 20px
     h2 
       margin 0
+    +tablet()
+      margin 0 5px 5px 30px
 
   ul
       margin 0 20px 10px 20px
@@ -134,6 +135,7 @@ navigationBox()
         .add
           visibility visible
   +tablet()
+    padding-top 0 !important
     ul
       margin 0 5px 10px 5px
       li 
@@ -512,25 +514,28 @@ attributeIconLink()
     #att-menu-wrapper
     #df-menu-wrapper
       margin-left 0
+      margin-right 0
 
 #menu-controller
-  flexbox(flex)
-  background transparent url("../images/arrow-right.png") 5px 5px no-repeat
-  background-size 20px
-  height 30px
-  width 30px
-  text-decoration none
-  // margin 3px
-  // padding 5px
-  &.hide
-    #navigation
-      min-width initial !important
-      max-width initial !important
-    background transparent url("../images/arrow-left.png") -2px 5px no-repeat
+  display none
+  +tablet()
+    flexbox(flex)
+    background transparent url("../images/arrow-right.png") 5px 5px no-repeat
     background-size 20px
     height 30px
     width 30px
     text-decoration none
+    // margin 3px
+    // padding 5px
+    &.hide
+      #navigation
+        min-width initial !important
+        max-width initial !important
+      background transparent url("../images/arrow-left.png") -2px 5px no-repeat
+      background-size 20px
+      height 30px
+      width 30px
+      text-decoration none
 
 #attributes
   &.hide

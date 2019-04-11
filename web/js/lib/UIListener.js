@@ -60,6 +60,7 @@ var UIListener = new Class({
 
     // change checkbox status
     $(attribute.getCSSCheckboxID()).addEvent('click', function (event) {
+      event.stop()
       this.checkAttributesSelectedCheckboxes();
     }.bind(this));
 
@@ -151,8 +152,9 @@ var UIListener = new Class({
 
     // change checkbox status
     $(field.getCSSCheckboxID()).addEvent('click', function (event) {
-      $(field.getCSSCheckboxID()).setAttribute('checked', true);
-      console.log(field.getCSSCheckboxID(), 'has value after click', $(field.getCSSCheckboxID()).checked)
+      // event.stop();
+      // $(field.getCSSCheckboxID()).setAttribute('checked', true);
+      // console.log(field.getCSSCheckboxID(), 'has value after click', $(field.getCSSCheckboxID()).checked)
       this.checkDataFieldsSelectedCheckboxes();
     }.bind(this));
 
@@ -399,7 +401,7 @@ var UIListener = new Class({
         $('ar-wrapper').addClass('minimize')
         $('ar-action-box').addClass('minimize')
       }
-    })
+    }.bind(this));
   },
 
   registerIMEventHandler: function (IM) {

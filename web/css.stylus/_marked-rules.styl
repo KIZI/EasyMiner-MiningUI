@@ -12,9 +12,13 @@ tabPadding = 15px
     h2
       flex(grow:1)
     width initial
+  // +tablet_p()
+  //   h2
+  //     font-size 29px
   +tablet_p()
-    h2
-      font-size 29px
+    flex-direction(column)
+  +mobile()
+    flex-direction(column)
   .marked-rules-tab
     box()
     h2AR()
@@ -26,17 +30,31 @@ tabPadding = 15px
       flexbox(flex)
       width initial
       margin-bottom 5px
+    +mobile()
+      flex-group(1)
     &.marked-rules-tasks
       float left
       +tablet()
         margin-right 5px
+      +tablet_p()
+        margin-right 0
+      +mobile()
+        margin-right 0
     &.marked-rules-base
       float right
       +tablet()
         margin-left 5px
+      +tablet_p()
+        margin-left 0
+      +mobile()
+        margin-left 0
     &.marked-rules-tab-active
       +tablet()
         margin 0
+      +tablet_p()
+        flex-group(2)
+      +mobile()
+        flex-group(2)
       background-color #ffffff
       border-bottom #fff 5px solid
     &:hover
@@ -55,6 +73,8 @@ tabPadding = 15px
   margin 0 0 0 boxMargin
   float left
   clear left
+  .marked-rule  
+    flexbox(flex)
   +tablet()
     min-width initial
     .marked-rules-control-wrapper
@@ -74,6 +94,14 @@ tabPadding = 15px
         .marked-rule  
           flexbox(flex)
           flex-justify(space-between)
+          .ruleActions
+            flexbox(flex)
+            flex-justify(end)
+  +mobile()
+    .marked-rules-control-wrapper
+      flex-direction(column)
+    .ruleActions
+      min-width 100px
 
   h2
     h2AR()
@@ -166,12 +194,16 @@ tabPadding = 15px
       flexbox(flex)
       flex-direction(row)
       flex-justify(space-between)
+    +mobile()
+      flex-direction(column)
 
     .paginator
       float left
       +tablet()
         flexbox(flex)
         flex-align(center)
+      +mobile()
+        margin-top 5px
 
     label
       display inline-block
@@ -180,6 +212,8 @@ tabPadding = 15px
       +tablet()
         flexbox(flex)
         flex-align(center)
+      +mobile()
+        padding-left 0
 
     select
       padding 5px
@@ -198,6 +232,10 @@ tabPadding = 15px
         position absolute
         left 0
         top 8px
+        +tablet()
+          width 15px
+          height 15px
+          top 4px
 
       .rule
         color foundRuleColor
