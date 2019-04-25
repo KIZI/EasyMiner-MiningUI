@@ -41,6 +41,12 @@ section#workplace
     // flex(grow:1, shrink:1)
     width 100%
     margin 0
+    &.ar-hidden
+      max-width 92px
+      #content
+        padding 10px
+  +mobile_p()
+    width initial
 
 section
   #content

@@ -1,3 +1,24 @@
+#workplace
+  +mobile_p()
+    &.hide
+      #content
+        width 23px
+        padding 10px
+      .ar-header-wrapper
+        h2
+          width 23px
+          white-space nowrap
+          overflow hidden
+      #ar-controller,
+      #dr-controller,
+      #ar-wrapper,
+      .clearfix,
+      #ar-action-box,
+      #found-rules,
+      #marked-rules-tabs,
+      #marked-rules
+        display none
+        
 section#active-rule
   position relative
   .ar-header-wrapper
@@ -9,13 +30,11 @@ section#active-rule
     flex-direction(column)
     flex(grow:1)
     position initial
-    // width 100%
     div 
       box-sizing border-box
     #ar-wrapper
       flexbox(flex)
       flex-direction(column)
-      // flex(grow:1)
     .ar-header-wrapper
       flexbox(flex)
       flex-direction(row)
@@ -30,6 +49,18 @@ section#active-rule
           background transparent url('../images/sprite-icons.png') -15px -165px no-repeat
         &.minimize
           background transparent url('../images/sprite-icons.png') -16px -216px no-repeat
+      &.ar-hidden
+        h2
+          flexbox(flex)
+          flex-justify(center)
+          width 100%
+        #ar-controller
+          display none
+    &.ar-hidden
+      #ar-action-box,
+      #found-rules
+        display none
+
   #ar-wrapper
     &.clearfix
       &.minimize
@@ -171,19 +202,23 @@ section#active-rule
             padding 5px
           .connective
             flexbox(flex)
-            flex-justify(center)
+            flex-justify(start)
             height auto
             margin 0
+            margin-left 30px
             width 100
           .field
             flexbox(flex)
             flex-direction(row)
-            flex-justify(space-between)
             flex-align(center)
+            height initial 
+            float initial
+            // flex-justify(space-between)
             margin 3px 0
             .controls
               flexbox(flex)
               flex-direction(row-reverse)
+              margin-left auto
 
 
   .no-restriction
@@ -201,6 +236,9 @@ section#active-rule
     position relative
     clear both
     overflow auto
+    +mobile()
+      flexbox(flex)
+      flex-direction(column-reverse)
     > div
       padding 20px 0 20px 55px
       &.in_progress
@@ -242,6 +280,8 @@ section#active-rule
       padding 0 15px
       width 150px
       text-align center
+      +mobile_p()
+        width 100%
       label
         padding-left 5px
         cursor pointer
