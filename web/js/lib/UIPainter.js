@@ -278,7 +278,6 @@ var UIPainter = new Class({
 
   sortAttributes: function (positions) {
     var attList = $$('#attributes > div > ul').getElements('li')
-    console.log(attList)
     if (attList[0].length <= 1) {
       return;
     }
@@ -397,6 +396,7 @@ var UIPainter = new Class({
       name: name,
       count: count
     }).replaces(activeRulesetElm);
+    // this.UIListener.registerMobileARSetupEventHandler(window.getSize());
   },
 
   // to render only task
@@ -512,6 +512,7 @@ var UIPainter = new Class({
         applicationSubTitle.set('title',this.i18n.translate('Current miner name: ')+minerName);
       }
     }
+    this.UIListener.registerMobileARSetupEventHandler();
   },
 
   renderActiveRule: function () {
@@ -545,6 +546,8 @@ var UIPainter = new Class({
     this.renderCedent(this.ARBuilder.getARManager().getActiveRule().getSuccedent(), elementParent);
 
     this.UIListener.registerActiveRuleEventHandlers(this.ARBuilder.getARManager().getActiveRule());
+
+    // this.UIListener.registerMobileARSetupEventHandler(window.getSize());
 
     // this.$UIStructurePainter.resizeApplication();
   },

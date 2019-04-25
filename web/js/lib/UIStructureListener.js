@@ -131,32 +131,16 @@ var UIStructureListener = new Class({
 
         $('menu-controller').addEvent('click', function (event) {
             event.stop();
-            if ($('menu-controller').hasClass('hide')) {
-                $('menu-controller').removeClass('hide');
-                attributesElm.removeClass('hide');
-                dataFieldsElm.removeClass('hide');
-                knowledgeBaseElm.removeClass('hide');
-                $('navigation').removeClass('hide');
-                $('add-all-unused-attributes').show('flex');
-                $('attributes').getElement('.nav-header-control').show('flex');
-                $('data-fields').getElement('.nav-header-control').show('flex');
-                $('header-att').set('html', i18n.translate('Attributes'));
-                $('header-df').set('html', i18n.translate('Data fields'));
-                $('header-kb').set('html', i18n.translate('Knowledge base'));
+            var nav = $('navigation');
+            var workplace = $('workplace');
+            if (nav.hasClass('hide')) {
+                nav.removeClass('hide');
+                workplace.addClass('hide');
             } else {
-                $('menu-controller').addClass('hide');
-                attributesElm.addClass('hide');
-                dataFieldsElm.addClass('hide');
-                knowledgeBaseElm.addClass('hide');
-                $('navigation').addClass('hide');
-                $('add-all-unused-attributes').hide();
-                $('attributes').getElement('.nav-header-control').hide();
-                $('data-fields').getElement('.nav-header-control').hide();
-                $('header-att').set('html', 'A');
-                $('header-df').set('html', 'D');
-                $('header-kb').set('html', 'K');
+                nav.addClass('hide');
+                workplace.removeClass('hide');
             }
-        })
+        }),
 
         attributesToggle.addEvent('click', function (event) {
             event.stop();
@@ -295,20 +279,6 @@ var UIStructureListener = new Class({
             dataFieldsFilterBox.hide();
         }.bind(this));
 
-//		if (this.ARBuilder.getARManager().getAttributesByGroup()) {
-//			// attributes by list
-//			$('attributes-by-list').addEvent('click', function (event) {
-//				event.stop();
-//				this.ARBuilder.getARManager().displayAttributesByList();
-//			}.bind(this));
-//		} else {
-//			// attributes by group
-//			$('attributes-by-group').addEvent('click', function (event) {
-//				this.ARBuilder.getARManager().displayAttributesByGroup();
-//				event.stop();
-//			}.bind(this));
-//		}
-
         dataFieldsToggle.addEvent('click', function (event) {
             event.stop();
             var sizeSwitcher = $$('#data-fields .toggle')[0];
@@ -323,10 +293,6 @@ var UIStructureListener = new Class({
                 $$('#data-fields div.clearfix')[0].show();
             }
         }.bind(this));
-
-        /*$('kb-select').addEvent('change', function (event) {
-            this.$ARBuilder.$MRManager.loadKnowledgeBase(event.target.getSelected().get("value"));
-        }.bind(this));*/
 
         $('change-ruleset').addEvent('click', function (event) {
             this.$ARBuilder.openChangeRulesetWindow();

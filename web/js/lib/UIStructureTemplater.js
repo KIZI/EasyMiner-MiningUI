@@ -477,7 +477,10 @@ var UIStructureTemplater = new Class({
         rulesCountInfo+=')';
         //some rules for rendering
         section({id: 'found-rules'},
-          h2(data.i18n.translate('Discovered rules')),
+          div({class: 'dr-header-wrapper'},
+            h2(data.i18n.translate('Discovered rules')),
+            a({href: '#', id: 'dr-controller', class: 'minimize'})
+          ),
           div(
             {id: 'found-rules-task-name'},
             FRManager.getTaskName(),

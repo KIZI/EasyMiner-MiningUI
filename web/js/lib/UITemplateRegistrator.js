@@ -146,10 +146,8 @@ var UITemplateRegistrator = new Class({
     });
 
     Mooml.register('activeRulesetTemplate', function (data) {
-      span({id: 'kb-ruleset'},
-          strong(data.name),
-          br(),
-          data.i18n.translate('rules')+': '+data.count
+      span({id: 'kb-ruleset'}, data.name,
+          span(data.i18n.translate('rules')+': '+data.count)
       );
     });
 
@@ -619,7 +617,10 @@ var UITemplateRegistrator = new Class({
 
       li({id: foundRule.getCSSID(), 'class': 'found-rule'+(foundRule.isSelected()?' selected':'')+' KB'+foundRule.getRuleSetRelation()+(foundRule.isLoading()?' loading':'')},
         input({type:'checkbox',id:foundRule.getCSSID()+'-checkbox', class:'found-rule-checkbox'}),
-        label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
+        div({id: 'found-rule-info'},
+          label({for: foundRule.getCSSID()+'-checkbox', 'class': 'rule'}, foundRule.getIdent()),
+          span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
+        ),
         span({class:'ruleActions'},
           (foundRule.isSelected()?
             a({id: foundRule.getUnmarkCSSID(), href: '#', 'class': 'unmark', 'title': i18n.translate('Remove from Rule Clipboard')})
@@ -637,8 +638,7 @@ var UITemplateRegistrator = new Class({
             a({id: foundRule.getKBAddNegativeCSSID(), href:'#', class:'kbAddNegative', title:i18n.translate('Add to Knowledge Base as not interesting')})
           ),
           a({id: foundRule.getDetailsCSSID(),href: '#','class': 'details','title': i18n.translate('Show rule details')})
-        ),
-        span({'class': 'ims'}, Mooml.render('ruleIMs', {ruleValues: foundRule.getRuleValues(), IMs: IMs}))
+        )
       );
     });
 
@@ -850,11 +850,13 @@ var UITemplateRegistrator = new Class({
       }.bind([perPageSelect, perPage]));
 
       div({'class':'found-rules-controls'},
+        div({'class': 'found-rules-controls-wrapper'},
+          label({'for':'found-rules-order'},i18n.translate('Rules order:')),
+          orderSelect,
+          label({'for':'found-rules-per-page'},i18n.translate('Rules per page:')),
+          perPageSelect
+        ),
         Mooml.render('foundRulesPaginator',{FRManager:FRManager,i18n:i18n}),
-        label({'for':'found-rules-order'},i18n.translate('Rules order:')),
-        orderSelect,
-        label({'for':'found-rules-per-page'},i18n.translate('Rules per page:')),
-        perPageSelect
       );
     });
 

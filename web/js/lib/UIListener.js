@@ -23,6 +23,12 @@ var UIListener = new Class({
     this.UIPainter = UIPainter;
   },
 
+  registerMobileARSetupEventHandler: function () {
+    if (window.getSize().x >= 325 && window.getSize().x <= 420) {
+      $('navigation').addClass('hide');
+    }
+  },
+
   registerBRBaseEventHandler: function () {//TODO???
     $('showBRBase').addEvent('click', function (event) {
       event.stop();
@@ -38,7 +44,7 @@ var UIListener = new Class({
         return false;
       } // disable right click drag & drop
 
-      var draggable = this.$dragDropHelper.createDraggable($(attribute.getCSSID()));
+      var draggable = this.$dragDropHelper.createDraggable($(attribute.getCSSID()).getParent());
       var droppable = $$('#active-rule div.cedent');
       var drag = this.$dragDropHelper.createDrag(draggable, droppable, {
         color: this.$colorHelper.getCedentBackgroundColor(),
@@ -60,7 +66,6 @@ var UIListener = new Class({
 
     // change checkbox status
     $(attribute.getCSSCheckboxID()).addEvent('click', function (event) {
-      event.stop()
       this.checkAttributesSelectedCheckboxes();
     }.bind(this));
 
@@ -103,7 +108,6 @@ var UIListener = new Class({
     }.bind(this));
 
     $('IZIMiner').addEvent('click', function (event) {
-      event.stop();
       this.hideNavigationAttributeControl();
       this.showNavigationAttributeControlMenu();
     }.bind(this));
@@ -151,10 +155,7 @@ var UIListener = new Class({
     }.bind(this));
 
     // change checkbox status
-    $(field.getCSSCheckboxID()).addEvent('click', function (event) {
-      // event.stop();
-      // $(field.getCSSCheckboxID()).setAttribute('checked', true);
-      // console.log(field.getCSSCheckboxID(), 'has value after click', $(field.getCSSCheckboxID()).checked)
+    $(field.getCSSCheckboxID()).addEvent('click', function () {
       this.checkDataFieldsSelectedCheckboxes();
     }.bind(this));
 
@@ -170,15 +171,6 @@ var UIListener = new Class({
       this.ARBuilder.openShowHistogramWindow(field.getId(), 'field');
     }.bind(this));
 
-    // $(field.getCSSCheckboxID()).addEvent('click', function (event) {
-    //   event.stop();
-    //   let checkbox = $(field.getCSSCheckboxID())
-    //   console.log(field.getCSSCheckboxID(), 'has value after click', checkbox.checked)
-    //   var dataFieldsBox = $('data-fields')
-    //   console.log(dataFieldsBox.getElements('.data-field-checkbox:checked').length)
-
-    // }.bind(this)),
-
     $(field.getCSSNavControlShowMenuField()).addEvent('click', function (event) {
       event.stop();
       this.hideNavigationFieldControl();
@@ -191,7 +183,7 @@ var UIListener = new Class({
     }.bind(this));
 
     $('IZIMiner').addEvent('click', function (event) {
-      event.stop();
+      //FIXME event.stop();
       this.showNavigationFieldControlMenu();
       this.hideNavigationFieldControl();
     }.bind(this));    
@@ -389,7 +381,7 @@ var UIListener = new Class({
     }.bind(this));
 
     $('ar-controller').addEvent('click', function (event) {
-      event.stop()
+      // event.stop()
       if ($('ar-controller').hasClass('maximize')) {
         $('ar-controller').removeClass('maximize')
         $('ar-controller').addClass('minimize')
@@ -705,7 +697,6 @@ var UIListener = new Class({
       if(elmId != null){
         var url = this.ARBuilder.$config.getKnowledgeBaseSetMinerRuleSetUrl(elmId),
             errorMsg = this.ARBuilder.$i18n.translate('Unable to change ruleset! Try it again later.');
-
         //region uložení rulesetu pro aktuální miner
         new Request.JSON({
           url: url,
@@ -935,6 +926,22 @@ var UIListener = new Class({
       event.stop();
       this.ARBuilder.getARManager().openRenameTaskWindow(taskId,taskName);
     }.bind(this));
+
+    $('dr-controller').addEvent('click', function (event) {
+      // event.stop()
+      if ($('dr-controller').hasClass('maximize')) {
+        $('found-rules').addClass('minimize')
+        $('found-rules').removeClass('maximize')
+        $('dr-controller').removeClass('maximize')
+        $('dr-controller').addClass('minimize')
+      } else if ($('dr-controller').hasClass('minimize')) {
+        $('found-rules').addClass('maximize')
+        $('found-rules').removeClass('minimize')
+        $('dr-controller').removeClass('minimize')
+        $('dr-controller').addClass('maximize')
+      }
+    }.bind(this));
+
   },
 
   registerFoundRulesMultiControlsEventHandlers: function () {
