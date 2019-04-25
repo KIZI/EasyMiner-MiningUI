@@ -13,10 +13,51 @@ taskActionLink()
   border-top 1px solid black
   margin-top 10px
   +tablet()
+    min-width initial
+    max-width initial
+    &.maximize
+      max-height 300px
+      overflow scroll
+    .dr-header-wrapper
+      flexbox(flex)
+      flex-direction(row)
+      flex-align(center)
+      a
+        display flex
+        width 20px
+        height 20px
+        margin-left auto
+      #dr-controller
+        &.maximize
+          background transparent url('../images/sprite-icons.png') -15px -165px no-repeat
+          margin-right 5px
+        &.minimize
+          background transparent url('../images/sprite-icons.png') -16px -216px no-repeat
     #found-rules-order
     #found-rules-per-page
       border 1px solid black
-      
+    #found-rules-rules
+      li
+        flexbox(flex)
+        #found-rule-info
+          max-width 65%
+          margin-left 5px
+        .ruleActions
+          flexbox(flex)
+          flex-direction(row)
+          margin-left auto
+    +mobile()
+      .found-rules-controls-wrapper
+        flexbox(flex)
+        flex-direction(column)
+        width 100%
+        label 
+          flexbox(flex)
+          padding 5px 0
+    +mobile_p()
+      #found-rules-rules li .ruleActions
+        flex-direction(column)
+
 
   #found-rules-task-name
     h2Small()
@@ -56,9 +97,20 @@ taskActionLink()
     text-align right
     color unimportantTextColor
     font-size 0.8*baseFontSize
+    flexbox(flex)
+    flex-direction(row)
+    flex-justify(space-between)
+    // +tablet()
+    +mobile()
+      flex-direction(column-reverse)
     
     .paginator
       float left
+      +tablet()
+        flexbox(flex)
+        flex-align(center)
+      +mobile()
+        padding-top 5px
 
     label
       display inline-block
@@ -99,6 +151,14 @@ taskActionLink()
       .ruleActions
         ruleActions()
         top 5px
+        +tablet()
+          width initial
+          position initial
+          height initial
+          a
+            flexbox(flex)
+            margin-bottom 5px
+
 
         a.bk
           background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
@@ -108,6 +168,8 @@ taskActionLink()
 
         a.unmark
           background transparent url('../images/icon-ok-20.png') left center no-repeat
+          +tablet()
+            background transparent url('../images/icon-stop-20.png') left center no-repeat
           &:hover
             background transparent url('../images/icon-stop-20.png') left center no-repeat
 
@@ -137,6 +199,11 @@ taskActionLink()
       .ims
         display block
         ruleIMs()
+        +tablet()
+          flexbox(flex)
+          flex-direction(row)
+        +mobile_p()
+          flex-direction(column)
 
       &.selected
         .rule

@@ -82,11 +82,12 @@ interestMeasureValueColor = #7B0D2E
 interestMeasureColor = unimportantTextColor
 
 mobile-width-min = 320px
+mobile-width-max-portrait = 450px
 mobile-width-max = 767px
-portrait-width-min = 768px
-portrait-width-max = 960px
-landscape-width-min = 1024px
-landscape-width-max = 1280px
+tablet-portrait-width-min = 768px
+tablet-portrait-width-max = 960px
+tablet-landscape-width-min = 1024px
+tablet-landscape-width-max = 1280px
 /** Mixins for responsive mode */
 /** Media queries */
 max(bp)
@@ -106,13 +107,19 @@ mobile()
  +between(mobile-width-min, mobile-width-max)
   {block}
 
-// tablet landscape
-tablet()
- +between(mobile-width-min, landscape-width-max)
+// mobile portrait
+mobile_p()
+ +between(mobile-width-min, mobile-width-max-portrait)
   {block}
 
+// tablet landscape
+tablet()
+ +between(mobile-width-min, tablet-landscape-width-max)
+  {block}
+
+// tablet portrait
 tablet_p()
-  +between(portrait-width-min, portrait-width-max)
+  +between(tablet-portrait-width-min, tablet-portrait-width-max)
    {block}
 
 // pc()
@@ -142,6 +149,8 @@ overlay()
   background-color #FFF
   box-shadow(5px, 5px, 5px, 0, overlayShadowColor)
   min-width 435px
+  +tablet()
+    min-width initial
   /*margin 10% auto*/
   position: fixed
   left: 50%
@@ -199,6 +208,7 @@ button()
     border buttonHoverBorder
     text-decoration none
 
+
 bigButton()
   button()
   padding 12px 15px
@@ -216,6 +226,10 @@ bigButton()
       display block
       float right
       visibility hidden
+    +tablet()
+      span.details,
+      span.right
+        visibility visible
   &:hover
     span.details span.right
       visibility visible
@@ -347,6 +361,8 @@ field()
     fieldControls()
 
 fieldControls()
+  +tablet()
+    margin-right 5px
   a.edit-coefficient
     edit()
     margin-left 2px

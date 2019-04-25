@@ -19,6 +19,8 @@ tabPadding = 15px
     flex-direction(column)
   +mobile()
     flex-direction(column)
+    &.ar-hidden
+      display none
   .marked-rules-tab
     box()
     h2AR()
@@ -73,10 +75,14 @@ tabPadding = 15px
   margin 0 0 0 boxMargin
   float left
   clear left
+  max-width minContentWidth
   .marked-rule  
     flexbox(flex)
   +tablet()
     min-width initial
+    max-width initial
+    .marked-rule-info
+      max-width 65%
     .marked-rules-control-wrapper
       flexbox(flex)
       flex-direction(row)
@@ -86,22 +92,28 @@ tabPadding = 15px
         font-size 1rem
       select
         border 1px solid black
-    .marked-rules-tasks-content
-      +tablet()
-        .minimize
+    .marked-rules-tasks-content,
+    .marked-rules-base-content 
+      .minimize
+        flexbox(flex)
+        flex-direction(column)
+      .marked-rule  
+        flexbox(flex)
+        flex-justify(space-between)
+        .ruleActions
           flexbox(flex)
-          flex-direction(column)
-        .marked-rule  
-          flexbox(flex)
-          flex-justify(space-between)
-          .ruleActions
-            flexbox(flex)
-            flex-justify(end)
+          flex-direction(row)
+          flex-justify(center)
   +mobile()
     .marked-rules-control-wrapper
       flex-direction(column)
-    .ruleActions
-      min-width 100px
+    &.ar-hidden
+      display none
+  +mobile_p()
+    .marked-rules-tasks-content .marked-rule .ruleActions
+      flex-direction(column)
+    .marked-rule-info
+      max-width 55%
 
   h2
     h2AR()
@@ -114,12 +126,6 @@ tabPadding = 15px
 
   .marked-rules-base-content
     display none
-
-  .maximize
-    ul,.marked-rules-checkbox-controls,.marked-rules-controls
-      display none
-    a.toggle span
-      background transparent url('../images/sprite-icons.png') -19px -169px no-repeat
   
   .marked-rules-empty
     display none
@@ -176,6 +182,11 @@ tabPadding = 15px
       a.rename-task,
       a.remove-task
         visibility visible
+    +mobile()
+      &.ar-hidden
+        a.rename-task,
+        a.remove-task
+          display none
 
   .clearfix
     clear both
@@ -190,12 +201,17 @@ tabPadding = 15px
     text-align right
     color unimportantTextColor
     font-size 0.8*baseFontSize
-    +tablet()
-      flexbox(flex)
-      flex-direction(row)
-      flex-justify(space-between)
+    flexbox(flex)
+    flex-justify(space-between)
+    flex-direction(row)
     +mobile()
       flex-direction(column)
+      label:first-of-type
+        padding-left 0
+    +tablet_p()
+      flex-direction(column)
+      label:first-of-type
+        padding-left 0
 
     .paginator
       float left
@@ -233,8 +249,8 @@ tabPadding = 15px
         left 0
         top 8px
         +tablet()
-          width 15px
-          height 15px
+          width 18px
+          height 18px
           top 4px
 
       .rule
@@ -250,6 +266,13 @@ tabPadding = 15px
       .ruleActions
         ruleActions()
         top 5px
+        +tablet()
+          width initial
+          position initial
+          height initial
+          a
+            flexbox(flex)
+            margin-bottom 5px
 
         a.bk
           background transparent url('../images/sprite-icons.png') -19px -119px no-repeat
@@ -273,6 +296,11 @@ tabPadding = 15px
       .ims
         display block
         ruleIMs()
+        +tablet()
+          flexbox(flex)
+          flex-direction(row)
+        +mobile_p()
+          flex-direction(column)
 
       &.loading
         .ruleActions
@@ -290,18 +318,42 @@ tabPadding = 15px
     position relative
     padding-bottom 10px
     border-bottom 2px solid linkColor
+    +tablet()
+      flexbox(flex)
+      flex-direction(column)
     .all
       iconLink()
       background transparent url('../images/icon-select-all.png') center center no-repeat
+      +tablet()
+        position initial
     .none
       iconLink()
       background transparent url('../images/icon-select-none.png') center center no-repeat
+      +tablet()
+        position initial
     .invert
       iconLink()
       background transparent url('../images/icon-select-invert.png') center center no-repeat
+      +tablet()
+        position initial
 
     .marked-rules-checkbox-controls
       float left
+      +tablet()
+        flexbox(flex)
+        flex-direction(row)
+        flex-align(center)
+        float initial
+        width 100%
+        padding-bottom 5px
+        .actions
+          margin-left auto
+      +mobile()
+        flex-wrap(wrap)
+        .actions
+          flexbox(flex)
+          padding 10px 0
+
 
     .actions
       margin-left 10px
@@ -322,6 +374,8 @@ tabPadding = 15px
     .task-actions
       float right
       margin-top 3px
+      +tablet()
+        flexbox(flex)
       >a
         taskActionLink()
         &.mark-all
@@ -336,3 +390,8 @@ tabPadding = 15px
           background transparent url('../images/sprite/icon-bk.png') left center no-repeat
         &.disabled
           disabledLink()
+  .maximize
+    ul,.marked-rules-checkbox-controls,.marked-rules-controls
+      display none
+    a.toggle span
+      background transparent url('../images/sprite-icons.png') -19px -169px no-repeat

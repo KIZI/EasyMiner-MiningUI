@@ -6,10 +6,20 @@ nav
   line-height 20px
 
   #navigation-controls
+    display none
     border-radius 50%
     width 30px
     margin-left auto
-    // background-color rgba(#126499, 0.2)
+    #menu-controller
+      flexbox(flex)
+      flex-aliign(center)
+      background transparent url("../images/arrow-right.png") 5px 5px no-repeat
+      background-size 20px
+      height 30px
+      width 30px
+      text-decoration none
+  .nav-header-control
+    flexbox(flex)
 
   +tablet()
     flexbox(flex)
@@ -17,19 +27,54 @@ nav
     margin-right 10px
     width auto
     max-width navWidth - 40px
-    min-width navWidth - 40px
-    width initial
+    // min-width navWidth - 40px
+    width 100%
     section 
       flexbox(flex)
       flex-direction(column)
+    #navigation-controls
+      flexbox(flex)
+    +mobile_p()
+      max-width initial
   &.hide
-    width 35px
-    min-width initial
-    max-width initial
+    +tablet()
+      width 40px
+      min-width initial
+      max-width initial
+      #navigation-controls
+        flexbox(flex)
+        #menu-controller
+          background transparent url("../images/arrow-left.png") 5px 5px no-repeat
+          background-size 20px
+          height 30px
+          width 30px
+          text-decoration none
+      #attributes,
+      #data-fields,
+      #knowledge-base-select
+        padding 0
+        h2
+          width 15px
+          white-space nowrap
+          overflow hidden
+        .nav-header-control
+          display none
+          margin 0
+          padding 0
+        .datas-filter
+          display none
+        .clearfix
+          display none
+      #navigation-checkbox-controls,
+      #add-all-unused-attributes
+          display none
+        
+        
 
 navigationH2()
   h2Small()
-  flexbox(flex)
+  // display block
+  // flexbox(flex)
 
 navigationBox()
   box()
@@ -97,18 +142,19 @@ navigationBox()
     flex-direction(row)
     flex-justify(space-between)
     border-bottom 1px solid h2Color
-    margin 0 10px 5px 20px
+    margin 0 10px 5px 10px
     h2 
-      margin 0
-    +tablet()
-      margin 0 5px 5px 30px
+      margin 2px
 
+  div.clearfix
+    padding 0 10px
   ul
-      margin 0 20px 10px 20px
+    margin 0
     li
       flexbox(flex)
       flex-direction(row)
       flex-justify(start)
+      flex-align(center)
       width 100%
       cursor move
       float left
@@ -136,11 +182,11 @@ navigationBox()
           visibility visible
   +tablet()
     padding-top 0 !important
-    ul
-      margin 0 5px 10px 5px
-      li 
-        flexbox(flex)
-        margin 5px 0
+    li 
+      flexbox(flex)
+      span
+        word-break break-all
+        margin-right 5px
         
     a[id^=nav-control-menu-]
       flexbox(flex)
@@ -233,15 +279,18 @@ navigationBox()
     flex-direction(row)
     flex-justify(space-between)
     border-bottom 1px solid h2Color
-    margin 0 0 5px 30px
+    margin 0 10px 5px 10px
     h2 
-      margin 0
+      margin 2px
+  div.clearfix
+    padding 0 10px
   ul
-      margin 0 20px 10px 20px 
+    margin 0
     li
       flexbox(flex)
       flex-direction(row)
       flex-justify(start)
+      flex-align(center)
       width 100%
       cursor move
       float left
@@ -274,10 +323,9 @@ navigationBox()
 
   +tablet()
     ul
-      margin 0 5px 10px 5px
+      margin 0
       li 
         flexbox(flex)
-        margin 5px 0
         width 100%
     div[id^=field-nav-attribute-control-]
         flexbox(flex)
@@ -314,15 +362,15 @@ navigationBox()
     flex-direction(row)
     flex-justify(space-between)
     border-bottom 1px solid h2Color
-    margin 0 0 5px 30px
+    margin 0 10px 5px 10px
     h2
       navigationH2() 
-      margin 0
+      margin 2px
 
   .clearfix
-    padding 0 20px
+    padding 0 10px
     +tablet()
-      padding 0 5px 0 30px
+      padding 0 10px
     line-height 1.8
 
     select
@@ -332,11 +380,19 @@ navigationBox()
       color linkColor
       font-size 14px
       float right
-  &.hide
-    div.clearfix
-      display none
-    #kb-menu-wrapper
-      margin-left 0
+  #kb-ruleset
+    flexbox(flex)
+    flex-direction(column)
+    font-weight bold
+    word-wrap break-word
+    span
+      margin-top 10px
+      font-weight normal
+  // &.hide
+  //   div.clearfix
+  //     display none
+  //   #kb-menu-wrapper
+  //     margin-left 0
   &.collapse
     display none
 
@@ -425,9 +481,13 @@ attributeIconLink()
       +tablet()
         flexbox(flex)
         padding-top 3px
+        overflow initial
+        text-overflow initial
+        white-space initial
+        height initial
+        word-break break-word
   
   .nav-header-control
-    flexbox(flex)
     flex-direction(row-reverse)
     a
       margin 2px
@@ -465,7 +525,7 @@ attributeIconLink()
       background transparent url('../images/icon-select-all.png') center center no-repeat
       +tablet()
         background transparent url('../images/icon-select-all.png') no-repeat
-        margin-left 23px
+        margin-left 10px
     .none
       attributeIconLink()
       background transparent url('../images/icon-select-none.png') center center no-repeat
@@ -487,11 +547,10 @@ attributeIconLink()
     width 20px
     margin-top 4px
     +tablet()
-      flexbox(flex)
-      visibility hidden
       width 18px
       height 18px
       margin 3px
+      padding 10px
 
   &.show-checkboxes
     input[type='checkbox']
@@ -499,7 +558,6 @@ attributeIconLink()
       +tablet()
         felxbox(flex)
         flex-align(center)
-        visibility visible
     .add
       display none
     .navigation-checkbox-controls
@@ -508,39 +566,41 @@ attributeIconLink()
         flexbox(flex)
         height auto
 
-  &.hide
-    div.clearfix
-      display none
-    #att-menu-wrapper
-    #df-menu-wrapper
-      margin-left 0
-      margin-right 0
+  // &.hide
+  //   div.clearfix
+  //     display none
+  //   #att-menu-wrapper
+  //   #df-menu-wrapper
+  //     margin-left 0
+  //     margin-right 0
 
-#menu-controller
-  display none
-  +tablet()
-    flexbox(flex)
-    background transparent url("../images/arrow-right.png") 5px 5px no-repeat
-    background-size 20px
-    height 30px
-    width 30px
-    text-decoration none
-    // margin 3px
-    // padding 5px
-    &.hide
-      #navigation
-        min-width initial !important
-        max-width initial !important
-      background transparent url("../images/arrow-left.png") -2px 5px no-repeat
-      background-size 20px
-      height 30px
-      width 30px
-      text-decoration none
+// #menu-controller
+  // display none
+  // background transparent url("../images/arrow-right.png") 5px 5px no-repeat
+  // background-size 20px
+  // height 30px
+  // width 30px
+  // text-decoration none
+  // margin 3px
+  // padding 5px
+  // &.hide
+  //   display none
+  //   +tablet()
+  //     flexbox(flex)
+  //     background transparent url("../images/arrow-left.png") -2px 5px no-repeat
+  //     background-size 20px
+  //     height 30px
+  //     width 30px
+  //     text-decoration none
+  //     #navigation
+  //       min-width initial !important
+  //       max-width initial !important
 
-#attributes
-  &.hide
-    #attributes-by-list
-      display none
+// #attributes
+//   &.hide
+//     +tablet()
+//       #attributes-by-list
+//         display none
 
 /*
 #reports

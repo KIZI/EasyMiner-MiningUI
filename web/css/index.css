@@ -29,7 +29,7 @@ div#overlay-inner form {
 }
 div#overlay-inner form#add-coefficient-form label,
 div#overlay-inner form#edit-coefficient-form label {
-  padding-top: 2px;
+  padding: 5px 0px;
 }
 div#overlay-inner form#add-coefficient-form input#add-coefficient-attribute,
 div#overlay-inner form#edit-coefficient-form input#add-coefficient-attribute,
@@ -65,11 +65,23 @@ div#overlay-inner form label {
   float: left;
   clear: left;
 }
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  div#overlay-inner form label {
+    margin-bottom: 2px;
+    width: initial;
+  }
+}
 div#overlay-inner form select {
   padding: 4px 2px 1px;
   max-width: 400px;
   min-width: 200px;
   width: auto;
+}
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  div#overlay-inner form select {
+    min-width: initial;
+    width: 100%;
+  }
 }
 div#overlay-inner form input[type='text'],
 div#overlay-inner form input[type='number'],
@@ -269,6 +281,11 @@ div#overlay-inner > div {
   transform: translate(-50%, -50%);
   padding: 35px 25px;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner > div {
+    min-width: initial;
+  }
+}
 div#overlay-inner > div.bigger {
   position: absolute !important;
   top: 10px !important;
@@ -302,6 +319,16 @@ div#overlay-inner #rename-task-window input {
 div#overlay-inner #rename-task-window textarea {
   width: 300px;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #click-add-attribute-window label {
+    width: initial;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  div#overlay-inner #click-add-attribute-window {
+    width: 65%;
+  }
+}
 div#overlay-inner #change-ruleset-window,
 div#overlay-inner #add-attribute-window,
 div#overlay-inner #add-attributes-window,
@@ -313,7 +340,40 @@ div#overlay-inner #export-business-rules-window,
 div#overlay-inner #model-tester-window,
 div#overlay-inner #show-br-base-window {
   width: 800px;
+mobile_()
 /*margin-top 45px*/
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #change-ruleset-window,
+  div#overlay-inner #add-attribute-window,
+  div#overlay-inner #add-attributes-window,
+  div#overlay-inner #edit-attribute-window,
+  div#overlay-inner #new-task-window,
+  div#overlay-inner #show-histogram-window,
+  div#overlay-inner #create-user-report-window,
+  div#overlay-inner #export-business-rules-window,
+  div#overlay-inner #model-tester-window,
+  div#overlay-inner #show-br-base-window {
+    width: 70%;
+    height: 60%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  div#overlay-inner #change-ruleset-window,
+  div#overlay-inner #add-attribute-window,
+  div#overlay-inner #add-attributes-window,
+  div#overlay-inner #edit-attribute-window,
+  div#overlay-inner #new-task-window,
+  div#overlay-inner #show-histogram-window,
+  div#overlay-inner #create-user-report-window,
+  div#overlay-inner #export-business-rules-window,
+  div#overlay-inner #model-tester-window,
+  div#overlay-inner #show-br-base-window {
+    width: 60%;
+    height: 70%;
+  }
 }
 div#overlay-inner #change-ruleset-window iframe,
 div#overlay-inner #add-attribute-window iframe,
@@ -329,6 +389,21 @@ div#overlay-inner #show-br-base-window iframe {
   width: 800px;
   height: 500px;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #change-ruleset-window iframe,
+  div#overlay-inner #add-attribute-window iframe,
+  div#overlay-inner #add-attributes-window iframe,
+  div#overlay-inner #edit-attribute-window iframe,
+  div#overlay-inner #new-task-window iframe,
+  div#overlay-inner #show-histogram-window iframe,
+  div#overlay-inner #create-user-report-window iframe,
+  div#overlay-inner #export-business-rules-window iframe,
+  div#overlay-inner #model-tester-window iframe,
+  div#overlay-inner #show-br-base-window iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
 div#overlay-inner #change-ruleset-window form input[type="submit"],
 div#overlay-inner #add-attribute-window form input[type="submit"],
 div#overlay-inner #add-attributes-window form input[type="submit"],
@@ -340,6 +415,14 @@ div#overlay-inner #export-business-rules-window form input[type="submit"],
 div#overlay-inner #model-tester-window form input[type="submit"],
 div#overlay-inner #show-br-base-window form input[type="submit"] {
   margin-left: 310px;
+}
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  div#overlay-inner #add-coefficient-window,
+  div#overlay-inner #edit-coefficient-window,
+  div#overlay-inner #add-im-window,
+  div#overlay-inner #edit-im-window {
+    width: 65%;
+  }
 }
 div#overlay-inner #add-coefficient-window .help,
 div#overlay-inner #edit-coefficient-window .help,
@@ -408,14 +491,31 @@ div#overlay-inner #edit-im-window input[type="submit"][disabled]:focus {
   opacity: 0.5;
   cursor: not-allowed;
 }
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  div#overlay-inner #add-coefficient-window {
+    width: 70%;
+  }
+}
 div#overlay-inner #show-rule-details-window {
   width: 800px;
   padding-bottom: 10px;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #show-rule-details-window {
+    width: 70%;
+  }
 }
 div#overlay-inner #show-rule-details-window iframe {
   width: 800px;
   height: 380px;
   border: none;
+mobile_()
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #show-rule-details-window iframe {
+    width: 100%;
+    height: initial;
+  }
 }
 div#overlay-inner #show-rule-details-window iframe table {
   background-color: #000;
@@ -428,6 +528,13 @@ div#overlay-inner #show-rule-details-window iframe .rule4ftTable th,
 div#overlay-inner #show-rule-details-window iframe .rule4ftTable td {
   border: 1px solid #000;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #show-rule-details-window iframe {
+    width: 400px;
+    height: 400px;
+    box-sizing: border-box;
+  }
+}
 div#overlay-inner #add-br-base-window {
   width: 400px;
   margin-top: 45px;
@@ -437,11 +544,23 @@ div#overlay-inner #add-br-base-window iframe {
   width: 400px;
   border: none;
 }
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  div#overlay-inner #add-br-base-window iframe {
+    width: 270px;
+  }
+}
 div#overlay-inner #loading-data-window,
 div#overlay-inner #user-warning-window {
   text-align: center;
   background: #fff url("../images/icon-stop-72.png") center 30px no-repeat;
   padding: 120px 0 20px 0;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  div#overlay-inner #loading-data-window,
+  div#overlay-inner #user-warning-window {
+    width: 100%;
+    margin: 0 10%;
+  }
 }
 div#overlay-inner #loading-data-window p,
 div#overlay-inner #user-warning-window p {
@@ -524,6 +643,18 @@ div#overlay-inner #user-warning-window a:focus {
 div#overlay-inner #loading-data-window.loading {
   padding-bottom: 40px;
   background: #fff url("../images/icon-loading-bw-72.gif") center 30px no-repeat;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  div#overlay-inner #change-ruleset-window {
+    width: 60%;
+    height: 70%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  div#overlay-inner #change-ruleset-window {
+    width: 70%;
+    height: 60%;
+  }
 }
 div#overlay-inner #change-ruleset-window #add-ruleset {
   background: #075783;
@@ -694,11 +825,31 @@ nav {
   line-height: 20px;
 }
 nav #navigation-controls {
+  display: none;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   width: 30px;
   margin-left: auto;
+}
+nav #navigation-controls #menu-controller {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  background: transparent url("../images/arrow-right.png") 5px 5px no-repeat;
+  background-size: 20px;
+  height: 30px;
+  width: 30px;
+  text-decoration: none;
+}
+nav .nav-header-control {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   nav {
@@ -717,8 +868,7 @@ nav #navigation-controls {
     margin-right: 10px;
     width: auto;
     max-width: 240px;
-    min-width: 240px;
-    width: initial;
+    width: 100%;
   }
   nav section {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -734,11 +884,72 @@ nav #navigation-controls {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+  nav #navigation-controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
 }
-nav.hide {
-  width: 35px;
-  min-width: initial;
-  max-width: initial;
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  nav.hide {
+    width: 40px;
+    min-width: initial;
+    max-width: initial;
+  }
+  nav.hide #navigation-controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
+  nav.hide #navigation-controls #menu-controller {
+    background: transparent url("../images/arrow-left.png") 5px 5px no-repeat;
+    background-size: 20px;
+    height: 30px;
+    width: 30px;
+    text-decoration: none;
+  }
+  nav.hide #attributes,
+  nav.hide #data-fields,
+  nav.hide #knowledge-base-select {
+    padding: 0;
+  }
+  nav.hide #attributes h2,
+  nav.hide #data-fields h2,
+  nav.hide #knowledge-base-select h2 {
+    width: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  nav.hide #attributes .nav-header-control,
+  nav.hide #data-fields .nav-header-control,
+  nav.hide #knowledge-base-select .nav-header-control {
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav.hide #attributes .datas-filter,
+  nav.hide #data-fields .datas-filter,
+  nav.hide #knowledge-base-select .datas-filter {
+    display: none;
+  }
+  nav.hide #attributes .clearfix,
+  nav.hide #data-fields .clearfix,
+  nav.hide #knowledge-base-select .clearfix {
+    display: none;
+  }
+  nav.hide #navigation-checkbox-controls,
+  nav.hide #add-all-unused-attributes {
+    display: none;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) and (min-width: 320px) and (max-width: 450px) {
+  nav {
+    max-width: initial;
+  }
 }
 .attributesPalette {
   color: #434343;
@@ -759,11 +970,6 @@ nav.hide {
   font-weight: normal;
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
-  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-  display: -ms-flexbox /* TWEENER - IE 10 */;
-  display: -webkit-flex /* NEW - Chrome */;
-  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
 }
 .attributesPalette h2.minimize a {
   background: transparent url("../images/sprite-icons.png") -20px -220px no-repeat;
@@ -853,20 +1059,18 @@ nav.hide {
   -ms-flex-pack: justify;
   justify-content: space-between;
   border-bottom: 1px solid #314e64;
-  margin: 0 10px 5px 20px;
+  margin: 0 10px 5px 10px;
 }
 #attributes #att-menu-wrapper h2 {
-  margin: 0;
+  margin: 2px;
 }
-@media only screen and (min-width: 320px) and (max-width: 1280px) {
-  #attributes #att-menu-wrapper {
-    margin: 0 5px 5px 30px;
-  }
+#attributes div.clearfix {
+  padding: 0 10px;
 }
 #attributes ul {
-  margin: 0 20px 10px 20px;
+  margin: 0;
 }
-#attributes li {
+#attributes ul li {
   display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
   display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
   display: -ms-flexbox /* TWEENER - IE 10 */;
@@ -884,6 +1088,11 @@ nav.hide {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
   cursor: move;
   float: left;
@@ -891,16 +1100,16 @@ nav.hide {
   margin: 0;
   padding: 2px 0;
 }
-#attributes li.rec1 {
+#attributes ul li.rec1 {
   background: transparent url("../images/sprite-icons.png") -20px -415px no-repeat;
 }
-#attributes li.rec2 {
+#attributes ul li.rec2 {
   background: transparent url("../images/sprite-icons.png") -20px -463px no-repeat;
 }
-#attributes li.used {
+#attributes ul li.used {
   color: #aaa;
 }
-#attributes li .add {
+#attributes ul li .add {
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
   float: left;
   width: 20px;
@@ -909,30 +1118,30 @@ nav.hide {
   visibility: hidden;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
-  #attributes li .add {
+  #attributes ul li .add {
     visibility: visible;
   }
 }
-#attributes li:hover {
+#attributes ul li:hover {
   color: #000;
 }
-#attributes li:hover .add {
+#attributes ul li:hover .add {
   visibility: visible;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #attributes {
     padding-top: 0 !important;
   }
-  #attributes ul {
-    margin: 0 5px 10px 5px;
-  }
-  #attributes ul li {
+  #attributes li {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
     display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    margin: 5px 0;
+  }
+  #attributes li span {
+    word-break: break-all;
+    margin-right: 5px;
   }
   #attributes a[id^=nav-control-menu-] {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1090,15 +1299,18 @@ nav.hide {
   -ms-flex-pack: justify;
   justify-content: space-between;
   border-bottom: 1px solid #314e64;
-  margin: 0 0 5px 30px;
+  margin: 0 10px 5px 10px;
 }
 #data-fields #df-menu-wrapper h2 {
-  margin: 0;
+  margin: 2px;
+}
+#data-fields div.clearfix {
+  padding: 0 10px;
 }
 #data-fields ul {
-  margin: 0 20px 10px 20px;
+  margin: 0;
 }
-#data-fields li {
+#data-fields ul li {
   display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
   display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
   display: -ms-flexbox /* TWEENER - IE 10 */;
@@ -1116,6 +1328,11 @@ nav.hide {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
   cursor: move;
   float: left;
@@ -1123,7 +1340,7 @@ nav.hide {
   margin: 0;
   padding: 2px 0;
 }
-#data-fields li .add {
+#data-fields ul li .add {
   background: transparent url("../images/sprite-icons.png") -166px -162px no-repeat;
   display: block;
   float: left;
@@ -1132,11 +1349,11 @@ nav.hide {
   visibility: hidden;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
-  #data-fields li .add {
+  #data-fields ul li .add {
     visibility: visible;
   }
 }
-#data-fields li .show-histogram {
+#data-fields ul li .show-histogram {
   background: transparent url("../images/sprite-icons.png") -20px -664px no-repeat;
   display: block;
   width: 16px;
@@ -1147,23 +1364,23 @@ nav.hide {
   visibility: hidden;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
-  #data-fields li .show-histogram {
+  #data-fields ul li .show-histogram {
     visibility: visible;
     margin-left: 5px;
   }
 }
-#data-fields li:hover {
+#data-fields ul li:hover {
   color: #000;
 }
-#data-fields li:hover .add {
+#data-fields ul li:hover .add {
   visibility: visible;
 }
-#data-fields li:hover .show-histogram {
+#data-fields ul li:hover .show-histogram {
   visibility: visible;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #data-fields ul {
-    margin: 0 5px 10px 5px;
+    margin: 0;
   }
   #data-fields ul li {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -1171,7 +1388,6 @@ nav.hide {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    margin: 5px 0;
     width: 100%;
   }
   #data-fields div[id^=field-nav-attribute-control-] {
@@ -1258,7 +1474,7 @@ nav.hide {
   -ms-flex-pack: justify;
   justify-content: space-between;
   border-bottom: 1px solid #314e64;
-  margin: 0 0 5px 30px;
+  margin: 0 10px 5px 10px;
 }
 #knowledge-base-select #kb-menu-wrapper h2 {
   color: #314e64;
@@ -1267,20 +1483,15 @@ nav.hide {
   font-weight: normal;
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
-  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-  display: -ms-flexbox /* TWEENER - IE 10 */;
-  display: -webkit-flex /* NEW - Chrome */;
-  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-  margin: 0;
+  margin: 2px;
 }
 #knowledge-base-select .clearfix {
-  padding: 0 20px;
+  padding: 0 10px;
   line-height: 1.8;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #knowledge-base-select .clearfix {
-    padding: 0 5px 0 30px;
+    padding: 0 10px;
   }
 }
 #knowledge-base-select .clearfix select {
@@ -1291,11 +1502,25 @@ nav.hide {
   font-size: 14px;
   float: right;
 }
-#knowledge-base-select.hide div.clearfix {
-  display: none;
+#knowledge-base-select #kb-ruleset {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-weight: bold;
+  word-wrap: break-word;
 }
-#knowledge-base-select.hide #kb-menu-wrapper {
-  margin-left: 0;
+#knowledge-base-select #kb-ruleset span {
+  margin-top: 10px;
+  font-weight: normal;
 }
 #knowledge-base-select.collapse {
   display: none;
@@ -1328,11 +1553,6 @@ nav.hide {
   font-weight: normal;
   margin: 0 0 20px 0;
   font-size: 22.400000000000002px;
-  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-  display: -ms-flexbox /* TWEENER - IE 10 */;
-  display: -webkit-flex /* NEW - Chrome */;
-  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
 }
 #attributes h2.minimize a,
 #data-fields h2.minimize a {
@@ -1435,15 +1655,15 @@ nav.hide {
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
     padding-top: 3px;
+    overflow: initial;
+    text-overflow: initial;
+    white-space: initial;
+    height: initial;
+    word-break: break-word;
   }
 }
 #attributes .nav-header-control,
 #data-fields .nav-header-control {
-  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-  display: -ms-flexbox /* TWEENER - IE 10 */;
-  display: -webkit-flex /* NEW - Chrome */;
-  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
   -webkit-box-direction: reverse;
   -moz-box-direction: reverse;
   -webkit-box-orient: horizontal;
@@ -1540,7 +1760,7 @@ nav.hide {
   #attributes .navigation-checkbox-controls .all,
   #data-fields .navigation-checkbox-controls .all {
     background: transparent url("../images/icon-select-all.png") no-repeat;
-    margin-left: 23px;
+    margin-left: 10px;
   }
 }
 #attributes .navigation-checkbox-controls .none,
@@ -1619,15 +1839,10 @@ nav.hide {
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #attributes input[type='checkbox'],
   #data-fields input[type='checkbox'] {
-    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-    display: -ms-flexbox /* TWEENER - IE 10 */;
-    display: -webkit-flex /* NEW - Chrome */;
-    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    visibility: hidden;
     width: 18px;
     height: 18px;
     margin: 3px;
+    padding: 10px;
   }
 }
 #attributes.show-checkboxes input[type='checkbox'],
@@ -1642,7 +1857,6 @@ nav.hide {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    visibility: visible;
   }
 }
 #attributes.show-checkboxes .add,
@@ -1664,47 +1878,26 @@ nav.hide {
     height: auto;
   }
 }
-#attributes.hide div.clearfix,
-#data-fields.hide div.clearfix {
-  display: none;
-}
-#attributes.hide #att-menu-wrapper,
-#data-fields.hide #att-menu-wrapper,
-#attributes.hide #df-menu-wrapper,
-#data-fields.hide #df-menu-wrapper {
-  margin-left: 0;
-  margin-right: 0;
-}
-#menu-controller {
-  display: none;
-}
-@media only screen and (min-width: 320px) and (max-width: 1280px) {
-  #menu-controller {
-    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-    display: -ms-flexbox /* TWEENER - IE 10 */;
-    display: -webkit-flex /* NEW - Chrome */;
-    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    background: transparent url("../images/arrow-right.png") 5px 5px no-repeat;
-    background-size: 20px;
-    height: 30px;
-    width: 30px;
-    text-decoration: none;
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  #workplace.hide #content {
+    width: 23px;
+    padding: 10px;
   }
-  #menu-controller.hide {
-    background: transparent url("../images/arrow-left.png") -2px 5px no-repeat;
-    background-size: 20px;
-    height: 30px;
-    width: 30px;
-    text-decoration: none;
+  #workplace.hide .ar-header-wrapper h2 {
+    width: 23px;
+    white-space: nowrap;
+    overflow: hidden;
   }
-  #menu-controller.hide #navigation {
-    min-width: initial !important;
-    max-width: initial !important;
+  #workplace.hide #ar-controller,
+  #workplace.hide #dr-controller,
+  #workplace.hide #ar-wrapper,
+  #workplace.hide .clearfix,
+  #workplace.hide #ar-action-box,
+  #workplace.hide #found-rules,
+  #workplace.hide #marked-rules-tabs,
+  #workplace.hide #marked-rules {
+    display: none;
   }
-}
-#attributes.hide #attributes-by-list {
-  display: none;
 }
 section#active-rule {
   position: relative;
@@ -1781,6 +1974,26 @@ section#active-rule .ar-header-wrapper a {
   }
   section#active-rule .ar-header-wrapper #ar-controller.minimize {
     background: transparent url("../images/sprite-icons.png") -16px -216px no-repeat;
+  }
+  section#active-rule .ar-header-wrapper.ar-hidden h2 {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+  }
+  section#active-rule .ar-header-wrapper.ar-hidden #ar-controller {
+    display: none;
+  }
+  section#active-rule.ar-hidden #ar-action-box,
+  section#active-rule.ar-hidden #found-rules {
+    display: none;
   }
 }
 section#active-rule #ar-wrapper.clearfix.minimize {
@@ -1923,6 +2136,11 @@ section#active-rule #antecedent .cedent .fields .field .field-sign.negative {
     -ms-flex-align: center;
     align-items: center;
     height: 25px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  section#active-rule #antecedent .cedent .fields .field .controls {
+    margin-right: 5px;
   }
 }
 section#active-rule #antecedent .cedent .fields .field .controls a.edit-coefficient {
@@ -2293,6 +2511,11 @@ section#active-rule #succedent .cedent .fields .field .field-sign.negative {
     height: 25px;
   }
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  section#active-rule #succedent .cedent .fields .field .controls {
+    margin-right: 5px;
+  }
+}
 section#active-rule #succedent .cedent .fields .field .controls a.edit-coefficient {
   background: transparent url("../images/sprite-icons.png") -19px -262px no-repeat;
   display: block;
@@ -2475,13 +2698,14 @@ section#active-rule #succedent {
     display: -ms-flexbox /* TWEENER - IE 10 */;
     display: -webkit-flex /* NEW - Chrome */;
     display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     height: auto;
     margin: 0;
+    margin-left: 30px;
     width: 100;
   }
   section#active-rule #antecedent .cedent .fields .field,
@@ -2499,16 +2723,13 @@ section#active-rule #succedent {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
     -webkit-box-align: center;
     -moz-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    height: initial;
+    float: initial;
     margin: 3px 0;
   }
   section#active-rule #antecedent .cedent .fields .field .controls,
@@ -2526,6 +2747,7 @@ section#active-rule #succedent {
     -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
+    margin-left: auto;
   }
 }
 section#active-rule .no-restriction {
@@ -2545,6 +2767,22 @@ section#active-rule #ar-action-box {
   position: relative;
   clear: both;
   overflow: auto;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  section#active-rule #ar-action-box {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: reverse;
+    -moz-box-direction: reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+  }
 }
 section#active-rule #ar-action-box > div {
   padding: 20px 0 20px 55px;
@@ -2657,6 +2895,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label {
   width: 150px;
   text-align: center;
 }
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  section#active-rule #ar-action-box #start-mining-with-pruning-label {
+    width: 100%;
+  }
+}
 section#active-rule #ar-action-box #start-mining-with-pruning-label label {
   padding-left: 5px;
   cursor: pointer;
@@ -2726,9 +2969,75 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin-top: 10px;
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #found-rules {
+    min-width: initial;
+    max-width: initial;
+  }
+  #found-rules.maximize {
+    max-height: 300px;
+    overflow: scroll;
+  }
+  #found-rules .dr-header-wrapper {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  #found-rules .dr-header-wrapper a {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+  }
+  #found-rules .dr-header-wrapper #dr-controller.maximize {
+    background: transparent url("../images/sprite-icons.png") -15px -165px no-repeat;
+    margin-right: 5px;
+  }
+  #found-rules .dr-header-wrapper #dr-controller.minimize {
+    background: transparent url("../images/sprite-icons.png") -16px -216px no-repeat;
+  }
   #found-rules #found-rules-order,
   #found-rules #found-rules-per-page {
     border: 1px solid #000;
+  }
+  #found-rules #found-rules-rules li {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
+  #found-rules #found-rules-rules li #found-rule-info {
+    max-width: 65%;
+    margin-left: 5px;
+  }
+  #found-rules #found-rules-rules li .ruleActions {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    margin-left: auto;
   }
 }
 #found-rules #found-rules-task-name {
@@ -2778,9 +3087,56 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   text-align: right;
   color: #888;
   font-size: 12.8px;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #found-rules .found-rules-controls {
+    -webkit-box-direction: reverse;
+    -moz-box-direction: reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+  }
 }
 #found-rules .found-rules-controls .paginator {
   float: left;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #found-rules .found-rules-controls .paginator {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #found-rules .found-rules-controls .paginator {
+    padding-top: 5px;
+  }
 }
 #found-rules .found-rules-controls label {
   display: inline-block;
@@ -2845,6 +3201,21 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     visibility: visible;
   }
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #found-rules ul li .ruleActions {
+    width: initial;
+    position: initial;
+    height: initial;
+  }
+  #found-rules ul li .ruleActions a {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin-bottom: 5px;
+  }
+}
 #found-rules ul li .ruleActions a.bk {
   background: transparent url("../images/sprite-icons.png") -19px -119px no-repeat;
 }
@@ -2853,6 +3224,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules ul li .ruleActions a.unmark {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #found-rules ul li .ruleActions a.unmark {
+    background: transparent url("../images/icon-stop-20.png") left center no-repeat;
+  }
 }
 #found-rules ul li .ruleActions a.unmark:hover {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
@@ -2904,6 +3280,33 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules ul li .ims >span .value {
   color: #7b0d2e;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #found-rules ul li .ims {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  #found-rules ul li .ims {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
 }
 #found-rules ul li.selected .rule {
   color: #4c8e0e;
@@ -3024,6 +3427,42 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   text-decoration: none;
   color: #888;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) and (min-width: 320px) and (max-width: 767px) {
+  #found-rules .found-rules-controls-wrapper {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+  }
+  #found-rules .found-rules-controls-wrapper label {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    padding: 5px 0;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) and (min-width: 320px) and (max-width: 450px) {
+  #found-rules #found-rules-rules li .ruleActions {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 #marked-rules-tabs {
   margin: 10px 0 0 10px;
   float: left;
@@ -3075,6 +3514,9 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  #marked-rules-tabs.ar-hidden {
+    display: none;
   }
 }
 #marked-rules-tabs .marked-rules-tab {
@@ -3207,6 +3649,7 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin: 0 0 0 10px;
   float: left;
   clear: left;
+  max-width: 985px;
 }
 #marked-rules .marked-rule {
   display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -3218,6 +3661,10 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #marked-rules {
     min-width: initial;
+    max-width: initial;
+  }
+  #marked-rules .marked-rule-info {
+    max-width: 65%;
   }
   #marked-rules .marked-rules-control-wrapper {
     display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -3249,6 +3696,54 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   #marked-rules .marked-rules-control-wrapper select {
     border: 1px solid #000;
   }
+  #marked-rules .marked-rules-tasks-content .minimize,
+  #marked-rules .marked-rules-base-content .minimize {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  #marked-rules .marked-rules-tasks-content .marked-rule,
+  #marked-rules .marked-rules-base-content .marked-rule {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  #marked-rules .marked-rules-tasks-content .marked-rule .ruleActions,
+  #marked-rules .marked-rules-base-content .marked-rule .ruleActions {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
 }
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   #marked-rules .marked-rules-control-wrapper {
@@ -3260,8 +3755,22 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     -ms-flex-direction: column;
     flex-direction: column;
   }
-  #marked-rules .ruleActions {
-    min-width: 100px;
+  #marked-rules.ar-hidden {
+    display: none;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  #marked-rules .marked-rules-tasks-content .marked-rule .ruleActions {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  #marked-rules .marked-rule-info {
+    max-width: 55%;
   }
 }
 #marked-rules h2 {
@@ -3282,14 +3791,6 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #marked-rules .marked-rules-base-content {
   display: none;
-}
-#marked-rules .maximize ul,
-#marked-rules .maximize .marked-rules-checkbox-controls,
-#marked-rules .maximize .marked-rules-controls {
-  display: none;
-}
-#marked-rules .maximize a.toggle span {
-  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
 }
 #marked-rules .marked-rules-empty {
   display: none;
@@ -3356,6 +3857,12 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     visibility: visible;
   }
 }
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules .marked-rules-task-name.ar-hidden a.rename-task,
+  #marked-rules .marked-rules-task-name.ar-hidden a.remove-task {
+    display: none;
+  }
+}
 #marked-rules .clearfix {
   clear: both;
 }
@@ -3369,27 +3876,23 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   text-align: right;
   color: #888;
   font-size: 12.8px;
-}
-@media only screen and (min-width: 320px) and (max-width: 1280px) {
-  #marked-rules .marked-rules-controls {
-    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-    display: -ms-flexbox /* TWEENER - IE 10 */;
-    display: -webkit-flex /* NEW - Chrome */;
-    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   #marked-rules .marked-rules-controls {
@@ -3400,6 +3903,23 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  #marked-rules .marked-rules-controls label:first-of-type {
+    padding-left: 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  #marked-rules .marked-rules-controls {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  #marked-rules .marked-rules-controls label:first-of-type {
+    padding-left: 0;
   }
 }
 #marked-rules .marked-rules-controls .paginator {
@@ -3469,8 +3989,8 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #marked-rules ul li input.marked-rule-checkbox {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     top: 4px;
   }
 }
@@ -3505,6 +4025,21 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 @media only screen and (min-width: 320px) and (max-width: 1280px) {
   #marked-rules ul li .ruleActions > a {
     visibility: visible;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules ul li .ruleActions {
+    width: initial;
+    position: initial;
+    height: initial;
+  }
+  #marked-rules ul li .ruleActions a {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    margin-bottom: 5px;
   }
 }
 #marked-rules ul li .ruleActions a.bk {
@@ -3549,6 +4084,33 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #marked-rules ul li .ims >span .value {
   color: #7b0d2e;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules ul li .ims {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  #marked-rules ul li .ims {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 #marked-rules ul li.loading .ruleActions {
   background: transparent url("../images/icon-loading-bw-20.gif") left center no-repeat;
 }
@@ -3564,6 +4126,22 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   padding-bottom: 10px;
   border-bottom: 2px solid #126499;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-multi-controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 #marked-rules .marked-rules-multi-controls .all {
   display: inline-block;
   position: relative;
@@ -3573,6 +4151,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   margin-right: 5px;
   cursor: pointer;
   background: transparent url("../images/icon-select-all.png") center center no-repeat;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-multi-controls .all {
+    position: initial;
+  }
 }
 #marked-rules .marked-rules-multi-controls .none {
   display: inline-block;
@@ -3584,6 +4167,11 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   cursor: pointer;
   background: transparent url("../images/icon-select-none.png") center center no-repeat;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-multi-controls .none {
+    position: initial;
+  }
+}
 #marked-rules .marked-rules-multi-controls .invert {
   display: inline-block;
   position: relative;
@@ -3594,8 +4182,55 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   cursor: pointer;
   background: transparent url("../images/icon-select-invert.png") center center no-repeat;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-multi-controls .invert {
+    position: initial;
+  }
+}
 #marked-rules .marked-rules-multi-controls .marked-rules-checkbox-controls {
   float: left;
+}
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-multi-controls .marked-rules-checkbox-controls {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    float: initial;
+    width: 100%;
+    padding-bottom: 5px;
+  }
+  #marked-rules .marked-rules-multi-controls .marked-rules-checkbox-controls .actions {
+    margin-left: auto;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #marked-rules .marked-rules-multi-controls .marked-rules-checkbox-controls {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  #marked-rules .marked-rules-multi-controls .marked-rules-checkbox-controls .actions {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    padding: 10px 0;
+  }
 }
 #marked-rules .marked-rules-multi-controls .actions {
   margin-left: 10px;
@@ -3629,6 +4264,15 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   float: right;
   margin-top: 3px;
 }
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  #marked-rules .marked-rules-multi-controls .task-actions {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  }
+}
 #marked-rules .marked-rules-multi-controls .task-actions >a {
   padding-left: 24px;
   height: 20px;
@@ -3661,45 +4305,13 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
   text-decoration: none;
   color: #888;
 }
-@media only screen and (min-width: 320px) and (max-width: 1280px) and (min-width: 320px) and (max-width: 1280px) {
-  #marked-rules .minimize {
-    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-    display: -ms-flexbox /* TWEENER - IE 10 */;
-    display: -webkit-flex /* NEW - Chrome */;
-    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  #marked-rules .marked-rule {
-    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-    display: -ms-flexbox /* TWEENER - IE 10 */;
-    display: -webkit-flex /* NEW - Chrome */;
-    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
-  #marked-rules .marked-rule .ruleActions {
-    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
-    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
-    display: -ms-flexbox /* TWEENER - IE 10 */;
-    display: -webkit-flex /* NEW - Chrome */;
-    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
-    -webkit-box-pack: end;
-    -moz-box-pack: end;
-    -webkit-justify-content: flex-end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-  }
+#marked-rules .maximize ul,
+#marked-rules .maximize .marked-rules-checkbox-controls,
+#marked-rules .maximize .marked-rules-controls {
+  display: none;
+}
+#marked-rules .maximize a.toggle span {
+  background: transparent url("../images/sprite-icons.png") -19px -169px no-repeat;
 }
 #createUserReport {
   float: right;
@@ -3760,6 +4372,17 @@ section#workplace {
     flex-direction: column;
     width: 100%;
     margin: 0;
+  }
+  section#workplace.ar-hidden {
+    max-width: 92px;
+  }
+  section#workplace.ar-hidden #content {
+    padding: 10px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  section#workplace {
+    width: initial;
   }
 }
 section #content {
