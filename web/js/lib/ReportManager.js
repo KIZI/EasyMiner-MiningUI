@@ -36,6 +36,16 @@ var ReportManager = new Class({
         window.open(this.$config.getKnowledgeBaseRuleEditorUrl(rulesetId),'bre-'+rulesetId);
     },
 
+    /**
+     * Function for loading ruleset in rule editor
+     * @param rulesetId
+     */
+    openKnowledgeExperiment: function(rulesetId){
+        if (confirm(this.$UIPainter.i18n.translate('Are you sure you want to use this rule set as the basis of a knowledge experiment?'))){
+          location.href=this.$config.getKnowledgeBaseKnowledgeExperimentUrl(rulesetId);
+        }
+    },
+
     createReport: function(taskId, taskName) {
         var report = this.initReport(taskId, taskName);
         this.saveReport(report);

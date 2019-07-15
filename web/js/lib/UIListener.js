@@ -1179,6 +1179,14 @@ var UIListener = new Class({
         this.ARBuilder.getReportManager().openRulesEditor(taskId);
       }.bind(this));
 
+      multiControls.getElements('.task-actions .knowledge-experiment').addEvent('click',function(event){
+        event.stop();
+        //odkaz není aktivní
+        if (event.target.hasClass('disabled')){return;}
+        //odkaz je aktivní, pokračujeme ve zpracování
+        this.ARBuilder.getReportManager().openKnowledgeExperiment(taskId);
+      }.bind(this));
+
       multiControls.getElements('.task-actions .model-tester').addEvent('click',function(event){
         event.stop();
         //odkaz není aktivní

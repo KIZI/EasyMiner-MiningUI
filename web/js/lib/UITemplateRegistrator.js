@@ -1017,10 +1017,16 @@ var UITemplateRegistrator = new Class({
             title:i18n.translate('Open ruleset in Rule editor')
           },i18n.translate('Rules editor')),
           a({
-              href:task.id,
-              class:'task-export',
-              rel:'ruleset',
-              title:i18n.translate('Show ruleset export options')
+            href:task.id,
+            class:'knowledge-experiment',
+            rel:'ruleset',
+            title:i18n.translate('Use this ruleset in knowledge experiment')
+          },i18n.translate('Knowledge experiment')),
+          a({
+            href:task.id,
+            class:'task-export',
+            rel:'ruleset',
+            title:i18n.translate('Show ruleset export options')
           },i18n.translate('Ruleset export'))
         );
       } else{
