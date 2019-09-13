@@ -137,7 +137,7 @@ var MarkedTask = new Class({
       }
 
       Object.each(data.rules, function (MRdata, MRid) {
-        this.rules[MRid] = new MarkedRule(MRid, MRdata, this);
+        this.rules[MRdata.id] = new MarkedRule(MRdata.id, MRdata, this);
       }.bind(this));
       if(data[type].rulesCount > 0){
         this.UIPainter.renderMarkedRules(this);

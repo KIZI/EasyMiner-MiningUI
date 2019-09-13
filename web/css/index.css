@@ -1771,10 +1771,12 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 #found-rules ul li .ruleActions a.unmark:hover {
   background: transparent url("../images/icon-stop-20.png") left center no-repeat;
 }
-#found-rules ul li .ruleActions a.kbAddPositive {
+#found-rules ul li .ruleActions a.kbAddPositive,
+#found-rules ul li .ruleActions a.kbAddAllPositive {
   background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
 }
-#found-rules ul li .ruleActions a.kbAddPositive:hover {
+#found-rules ul li .ruleActions a.kbAddPositive:hover,
+#found-rules ul li .ruleActions a.kbAddAllPositive:hover {
   background: transparent url("../images/icon-thumb-up-20-active.png") left center no-repeat;
 }
 #found-rules ul li .ruleActions a.kbRemovePositive {
@@ -1922,6 +1924,9 @@ section#active-rule #ar-action-box #start-mining-with-pruning-label input[type=c
 }
 #found-rules #found-rules-multi-controls .task-actions >a.mark-all {
   background: transparent url("../images/icon-ok-20.png") left center no-repeat;
+}
+#found-rules #found-rules-multi-controls .task-actions >a.kbAddAllPositive {
+  background: transparent url("../images/icon-thumb-up-20.png") left center no-repeat;
 }
 #found-rules #found-rules-multi-controls .task-actions >a.task-details {
   background: transparent url("../images/icon-goreport-20.png") left center no-repeat;

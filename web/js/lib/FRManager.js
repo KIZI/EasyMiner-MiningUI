@@ -142,7 +142,7 @@ var FRManager = new Class({
     }
 
     Object.each(data.rules, function (value, key) {
-      this.rules.push(new FoundRule(key, value, this.task));
+      this.rules.push(new FoundRule(value.id, value, this.task));
     }.bind(this));
 
     this.setMiningInProgress(data.task.state);
@@ -482,6 +482,17 @@ var FRManager = new Class({
     }.bind(this));
     urlIds=urlIds.join(',');
     this.buildFoundRulesRequest(selectedFoundRules,this.config.getKnowledgeBaseRemoveRulesUrl(this.getKBSelectedRuleSet(),urlIds,true));
+    this.AJAXBalancer.run();
+  },
+
+  KBAddAllRules: function (relation) {//FIXME
+    this.AJAXBalancer.stopAllRequests();
+    var urlIds=[];
+    Array.each(this.rules,function(foundRule){
+      urlIds.push(foundRule.$id);
+      foundRule.setLoading(true);
+    }.bind(this));
+    this.buildFoundRulesRequest(this.rules,this.config.getKBAddAllRulesUrl(this.getTaskId(),this.getKBSelectedRuleSet(), 'positive',urlIds));
     this.AJAXBalancer.run();
   }
 

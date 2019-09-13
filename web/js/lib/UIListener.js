@@ -929,6 +929,19 @@ var UIListener = new Class({
         this.checkFoundRulesSelectedCheckboxes();
       }.bind(this));
 
+      multiControls.getElements('.task-actions .kbAddAllPositive').addEvent('click',function(event){
+        event.stop();
+        //link is not active
+        if (event.target.hasClass('disabled')){return;}
+        //link is active, process it
+        var FRManager = this.ARBuilder.getFRManager();
+        FRManager.KBAddAllRules('positive');
+        $('found-rules-rules').getElements('.found-rule-checkbox').each(function(checkbox){
+          checkbox.checked=false;
+        });
+        this.checkFoundRulesSelectedCheckboxes();
+      }.bind(this));
+
       multiControls.getElements('.task-actions .task-details').addEvent('click',function(event){
         event.stop();
         //link is not active

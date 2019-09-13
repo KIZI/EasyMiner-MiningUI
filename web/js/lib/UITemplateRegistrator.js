@@ -899,6 +899,11 @@ var UITemplateRegistrator = new Class({
           },i18n.translate('Add all rules')),
           a({
             href:'#',
+            class:'kbAddAllPositive'+(FRManager.importInProgress?' disabled':''),
+            title:i18n.translate('Add all rules to Knowledge Base as interesting')
+          },i18n.translate('All interesting')),
+          a({
+            href:'#',
             class:'task-details'+(FRManager.importInProgress?' disabled':''),
             title:(FRManager.importInProgress?i18n.translate('Import of results is still in progress'):i18n.translate('Show task details'))
           },i18n.translate('Task details')),
