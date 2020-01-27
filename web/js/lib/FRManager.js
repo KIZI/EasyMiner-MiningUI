@@ -313,7 +313,7 @@ var FRManager = new Class({
     var result=[];
     if (this.rules.length>0){
       Array.each(this.rules,function(rule){
-        if (foundRulesIds.indexOf(rule.$id)>-1){
+        if (foundRulesIds.indexOf(rule.$id.toString())>-1){
           result.push(rule);
         }
       }.bind([foundRulesIds,result]));
