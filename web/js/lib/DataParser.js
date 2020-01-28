@@ -15,6 +15,8 @@ var DataParser = new Class({
   minerName: '',
   rulesetId: '',
   rulesetName: '',
+  breTestId: '',
+  breTestName: '',
   FLs: [],
   FGC: null,
 
@@ -75,6 +77,11 @@ var DataParser = new Class({
     this.minerName=data.miner_name;
 
     this.rulesetId=data.miner_ruleset.id;
+    this.rulesetName=data.miner_ruleset.name;
+    if (data.hasOwnProperty('bre_test')){
+      this.breTestId=data.bre_test.id;
+      this.breTestName=data.bre_test.name;
+    }
   },
 
   getDD: function () {

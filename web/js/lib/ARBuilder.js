@@ -118,6 +118,15 @@ var ARBuilder = new Class({
     this.$ARManager = new ARManager(this, this.$DD, this.getDefFL(), this.$miningManager, this.$ETreeManager, this.settings, this.UIPainter);
     this.$ETreeManager.setARManager(this.$ARManager);
 
+    if (this.dataParser.breTestId>0){
+      var warningMessage='Warning: There is an existing Rule editor experiment ';
+      if (this.dataParser.breTestName!=''){
+        warningMessage+=' ('+this.dataParser.breTestName+') ';
+      }
+      warningMessage+=' based on the Knowledge base rule set associated with this miner. Any change to knowledge base will affect this experiment as well.';
+      alert(warningMessage);
+    }
+
     this.UIPainter.createUI();
     this.$UIStructurePainter.resizeApplication();
 
